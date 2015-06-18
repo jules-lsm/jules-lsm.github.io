@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.4. Building and running JULES in parallel mode &mdash; Joint UK Land Environment Simulator (JULES) v3.4 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v3.4 User Guide" href="../index.html" />
+    <link rel="up" title="3. Building and running JULES" href="intro.html" />
+    <link rel="next" title="3.5. Automatic upgrading and GUI using Rose" href="rose.html" />
+    <link rel="prev" title="3.3. Running JULES" href="running-jules.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="rose.html" title="3.5. Automatic upgrading and GUI using Rose"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="running-jules.html" title="3.3. Running JULES"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" accesskey="U">3. Building and running JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="building-and-running-jules-in-parallel-mode">
+<h1>3.4. Building and running JULES in parallel mode<a class="headerlink" href="#building-and-running-jules-in-parallel-mode" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This section is for advanced users only.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Before reading this section, users should be familiar with how to build and run JULES in serial (i.e. non-parallel) mode (see <a class="reference internal" href="fcm.html"><em>Building JULES using FCM</em></a> and <a class="reference internal" href="running-jules.html"><em>Running JULES</em></a>).</p>
+</div>
+<div class="section" id="overview">
+<h2>3.4.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>From version 3.3 onwards, in order to reduce processing time, JULES is able to run multiple points in parallel. This parallel processing can use multiple cores on the same machine, a cluster of machines, or both. To achieve this, JULES uses <a class="reference external" href="http://en.wikipedia.org/wiki/Message_Passing_Interface">MPI (Message Passing Interface)</a>, a standardised message passing interface. MPI coordinates the running of multiple &#8216;tasks&#8217; in parallel, and provides mechanisms for these tasks to communicate with each other when required (e.g. for sharing results).</p>
+<p>JULES takes advantage of the parallel I/O features available in <a class="reference external" href="http://www.hdfgroup.org/HDF5/">HDF5</a>/<a class="reference external" href="http://www.unidata.ucar.edu/software/netcdf/">NetCDF4</a>, which themselves use MPI &#8216;under the hood&#8217;. These features enable multiple MPI tasks to read from and write to the same NetCDF file(s) at the same time.</p>
+<p>When running JULES in parallel, each MPI task can be thought of as its own independent version of JULES, with each task being responsible for a portion of the grid. Each task reads its portion of the input file(s), performs calculations on those points and outputs its portion of the output file(s). Tasks only communicate with each other in order to read and write dump files - this ensures that the dump files produced with different numbers of tasks are compatible with each other. This means that you can use a dump from a serial (i.e. non-parallel) run to (re-)start a parallel run, providing the overall model grids are the same (and vice versa).</p>
+<p>None of the namelists or namelist members are parallel-specific - the same <a class="reference internal" href="../namelists/contents.html"><em>JULES namelists</em></a> can be used to run JULES in serial or parallel mode, and the final results will be identical. The only difference is that, when compiled and run in parallel mode, JULES is able to utilise multiple cores and/or machines.</p>
+<p>To compile and run JULES in parallel, MPI-specific commands must be used. The configuration of the MPI tasks available to JULES (number of tasks, which machines to use, etc.) is specified at run-time using these commands (see <a class="reference internal" href="#running-jules-in-parallel-mode"><em>Running JULES in parallel mode</em></a>). JULES will then attempt to find a suitable decomposition of the grid depending on how many MPI tasks are made available to it.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>For running JULES at a single point, compiling and running JULES in parallel mode provides no advantage.</p>
+<p class="last">However, if JULES is already compiled in parallel mode, it is still possible to run a single point by simply specifying the number of MPI tasks to be 1.</p>
+</div>
+</div>
+<div class="section" id="required-software">
+<h2>3.4.2. Required software<a class="headerlink" href="#required-software" title="Permalink to this headline">¶</a></h2>
+<p>In order to build and run JULES in parallel mode, three pieces of software are required:</p>
+<ol class="arabic">
+<li><p class="first">A supported Fortran compiler (and associated C compiler). This will be referred to as the <em>underlying compiler</em>.</p>
+</li>
+<li><p class="first">An implementation of MPI compiled using that compiler.</p>
+<p>Several implementations of MPI are available, the most commonly used being <a class="reference external" href="http://www.mpich.org/">MPICH2</a> and <a class="reference external" href="http://www.open-mpi.org/">OpenMPI</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The <tt class="docutils literal"><span class="pre">bin</span></tt> directory of your MPI installation must be in your <tt class="docutils literal"><span class="pre">$PATH</span></tt> to allow FCM make to find the MPI utilities required to build JULES in parallel mode.</p>
+<p class="last">Specifically, FCM make must be able to find <tt class="docutils literal"><span class="pre">mpif90</span></tt>. <tt class="docutils literal"><span class="pre">mpif90</span></tt> is a wrapper around the <em>underlying compiler</em> (see above) that &#8216;injects&#8217; the MPI dependencies automatically.</p>
+</div>
+</li>
+<li><p class="first">A version of HDF5/NetCDF4 compiled <em>with parallel I/O enabled</em>, using the MPI implementation installed above.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is <em>not</em> the default way to compile NetCDF, and must be explicitly enabled. More information on how to do this can be found on the <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/docs/build_parallel.html">NetCDF website</a>.</p>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="building-jules-in-parallel-mode">
+<h2>3.4.3. Building JULES in parallel mode<a class="headerlink" href="#building-jules-in-parallel-mode" title="Permalink to this headline">¶</a></h2>
+<p>Building JULES in parallel mode uses the same FCM make configuration file as building in serial mode, i.e. <tt class="docutils literal"><span class="pre">etc/fcm-make/make.cfg</span></tt>. This means that the same environment variables used when building JULES in serial mode (see <a class="reference internal" href="fcm.html#fcm-make-environment-variables"><em>Environment variables used when building JULES using FCM make</em></a>), <em>plus one additional environment variable</em>, are used to determine how JULES should be built in parallel mode:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">JULES_COMPILER</span></tt></dt>
+<dd><p class="first">Used to select settings for the <em>underlying compiler</em>.</p>
+<p class="last">The permitted values are the same as those for building in serial mode.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_BUILD</span></tt></dt>
+<dd><p class="first">Used to select the type of build.</p>
+<p class="last">Again, the permitted values are the same as those for building in serial mode.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_NETCDF</span></tt></dt>
+<dd><p class="first">Indicates whether to use a dummy NetCDF library or a &#8216;real&#8217; NetCDF library.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">As when building in serial mode, this still defaults to <tt class="docutils literal"><span class="pre">dummy</span></tt> meaning a dummy NetCDF library will be used.</p>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_NETCDF_PATH</span></tt></dt>
+<dd><p class="first">Path to NetCDF installation.</p>
+<p>This sets <tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span> <span class="pre">=</span> <span class="pre">$JULES_NETCDF_PATH/include</span></tt> and <tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span> <span class="pre">=</span> <span class="pre">$JULES_NETCDF_PATH/lib</span></tt>. These can be overridden by setting the variables directly.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p>When compiled in parallel mode, NetCDF must be statically linked.</p>
+<p class="last">This means the compiler must be able to find all required library and include files (e.g. for NetCDF, HDF5, curl and zlib) in <tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span></tt>, <tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span></tt> or the default search path.</p>
+</div>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span></tt></dt>
+<dd>Path to NetCDF include directory (i.e. directory containing <tt class="docutils literal"><span class="pre">netcdf.mod</span></tt>, <tt class="docutils literal"><span class="pre">hdf5.h</span></tt>, etc.).</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span></tt></dt>
+<dd>Path to NetCDF library directory (i.e. directory containing <tt class="docutils literal"><span class="pre">libnetcdff.a</span></tt>, <tt class="docutils literal"><span class="pre">libnetcdf.a</span></tt>, <tt class="docutils literal"><span class="pre">libhdf5.a</span></tt>, etc.).</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_PARALLEL</span></tt></dt>
+<dd><p class="first">Type of parallelism to build with.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Permitted value</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">serial</span></tt></td>
+<td><strong>Default.</strong> Build JULES in serial mode.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">mpi</span></tt></td>
+<td>Build JULES in parallel mode with MPI.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<div class="section" id="example-of-building-jules-in-parallel-mode">
+<h3>3.4.3.1. Example of building JULES in parallel mode<a class="headerlink" href="#example-of-building-jules-in-parallel-mode" title="Permalink to this headline">¶</a></h3>
+<p>Here, we build a JULES executable with MPI enabled, using the Intel compiler as our underlying compiler:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">export </span><span class="nv">JULES_COMPILER</span><span class="o">=</span>intel
+<span class="nb">export </span><span class="nv">JULES_NETCDF</span><span class="o">=</span>actual
+<span class="nb">export </span><span class="nv">JULES_NETCDF_PATH</span><span class="o">=</span>/path/to/parallel/netcdf
+<span class="nb">export </span><span class="nv">JULES_PARALLEL</span><span class="o">=</span>mpi       
+
+fcm make -f etc/fcm-make/make.cfg
+</pre></div>
+</div>
+<p>This will create an MPI-enabled JULES executable at <tt class="docutils literal"><span class="pre">build/bin/jules.exe</span></tt>.</p>
+</div>
+</div>
+<div class="section" id="running-jules-in-parallel-mode">
+<span id="id1"></span><h2>3.4.4. Running JULES in parallel mode<a class="headerlink" href="#running-jules-in-parallel-mode" title="Permalink to this headline">¶</a></h2>
+<p>Once JULES has been compiled with MPI enabled, it can be run in parallel mode. To do this, the commands <tt class="docutils literal"><span class="pre">mpiexec</span></tt> and <tt class="docutils literal"><span class="pre">mpirun</span></tt> should be used. For example, to run JULES using 4 tasks on the current machine, with namelists in <tt class="docutils literal"><span class="pre">/path/to/namelist/dir</span></tt>, the following command could be used:</p>
+<div class="highlight-bash"><div class="highlight"><pre>mpirun -n 4 /path/to/jules.exe /path/to/namelist/dir
+</pre></div>
+</div>
+<p>Detailed discussion of <tt class="docutils literal"><span class="pre">mpiexec</span></tt> and <tt class="docutils literal"><span class="pre">mpirun</span></tt> is beyond the scope of this document - please refer to the documentation for your chosen MPI implementation for the available options and features.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">3. Building and running JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="jules-and-netcdf.html">3.1. JULES and NetCDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fcm.html">3.2. Building JULES using FCM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-jules.html">3.3. Running JULES</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">3.4. Building and running JULES in parallel mode</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rose.html">3.5. Automatic upgrading and GUI using Rose</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="running-jules.html"
+                        title="previous chapter">3.3. Running JULES</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="rose.html"
+                        title="next chapter">3.5. Automatic upgrading and GUI using Rose</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="rose.html" title="3.5. Automatic upgrading and GUI using Rose"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="running-jules.html" title="3.3. Running JULES"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" >3. Building and running JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

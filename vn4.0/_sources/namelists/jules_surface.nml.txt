@@ -1,0 +1,215 @@
+``jules_surface.nml``
+=====================
+
+
+This file sets the surface options. It contains one namelist called :nml:lst:`JULES_SURFACE`.
+
+
+
+``JULES_SURFACE`` namelist members
+----------------------------------
+
+.. nml:namelist:: JULES_SURFACE
+
+.. nml:member:: l_aggregate
+
+   :type: logical
+   :default: F
+
+   Switch controlling number of tiles for each gridbox.
+
+   This is used to set the number of surface energy balances that are solved for each gridbox (``ntiles``).
+
+   TRUE
+       Aggregate parameter values are used to solve a single energy balance per gridbox. This option sets ``ntiles = 1``.
+
+   FALSE
+       A separate energy balance is calculated for each surface type. This option sets ``ntiles = ntype``.
+
+
+.. nml:member:: i_aggregate_opt
+
+   :type: integer
+   :permitted: 0-1
+   :default: 0
+
+   Option for aggregating surface propeties to tiles:
+
+   0. Aggregate momentum roughness lengths and set the thermal roughness length as a given fraction of this (in practice the ratio of roughness lengths for the first surafce type).
+   1. Aggregate the thermal roughness lengths separately from the momentum roughness lengths using an analogous algorithm.
+
+   .. note::
+       This option is ignored unless :nml:mem:`l_aggregate` is true.
+
+
+.. nml:member:: l_epot_corr
+
+   :type: logical
+   :default: F
+
+   TRUE
+       Use correction to the calculation of potential evaporation.
+
+   FALSE
+       No effect.
+
+
+.. nml:member:: l_point_data
+
+   :type: logical
+   :default: F
+
+   Flag indicating if driving data are point or area-average values. This affects the treatment of precipitation input and how snow affects the albedo.
+
+   TRUE
+       Driving data are point data. Precipitation is not distributed in space (see FALSE below) and is all assumed to be large-scale in origin. The albedo formulation is suitable for a point.
+
+   FALSE
+       Driving data are area averages. The precipitation inputs are assumed to be exponentially distributed in space, as in UMDP25, and can include convective and large-scale components. The albedo formulation is suitable for a gridbox.
+       
+       
+.. nml:member:: l_land_ice_imp
+
+   :type: logical
+   :default: F
+   
+   Switch to control the use of implicit numerics to update land ice temperatures.
+   
+   TRUE
+       Use implicit numerics to update land ice temperatures.
+       
+   FALSE
+       Use explicit numerics to update land ice temperatures.
+
+
+.. nml:member:: l_anthrop_heat_src
+
+   :type: logical
+   :default: F
+
+   Switch for inclusion of anthropogenic contribution to the surface heat flux from urban tiles.
+
+   TRUE
+       Add anthropogenic effect.
+
+   FALSE
+       No effect.
+
+
+.. nml:member:: iscrntdiag
+
+   :type: integer
+   :permitted: 0 or 1
+   :default: 0
+
+   Switch controlling method for diagnosing screen temperature.
+
+   0. Use surface similarity theory.
+   1. Use surface similarity theory but allow decoupling in very stable conditions based on the quasi-equilibrium radiative solution.
+
+
+.. nml:group:: Surface parameters
+
+   .. nml:member:: hleaf
+
+      :type: real
+      :default: 5.7e4
+
+      Specific heat capacity of leaves (J K\ :sup:`-1` per kg carbon).
+      
+      See `Hadley Centre Technical Note 30 <http://www.metoffice.gov.uk/archive/hadley-centre-technical-note-30>`_ p6.
+
+
+   .. nml:member:: hwood
+
+      :type: real
+      :default: 1.1e4
+
+      Specific heat capacity of wood (J K\ :sup:`-1` per kg carbon).
+      
+      See `Hadley Centre Technical Note 30 <http://www.metoffice.gov.uk/archive/hadley-centre-technical-note-30>`_ p6.
+
+
+   .. nml:member:: beta1
+
+      :type: real
+      :default: 0.83
+
+      Coupling coefficient for co-limitation in photosynthesis model.
+
+      See Cox et al. (1999), Eq.61.
+
+
+   .. nml:member:: beta2
+
+      :type: real
+      :default: 0.93
+
+      Coupling coefficient for co-limitation in photosynthesis model.
+  
+      See Cox et al. (1999), Eq.61.
+
+
+   .. nml:member:: fwe_c3
+
+      :type: real
+      :default: 0.5
+
+      Constant in expression for limitation of photosynthesis by transport of products, for C3 plants.
+
+      See Cox et al. (1999) Eq.60.
+
+
+   .. nml:member:: fwe_c4
+
+      :type: real
+      :default: 20000.0
+
+      Constant in expression for limitation of photosynthesis by transport of products, for C4 plants.
+ 
+      See Cox et al. (1999) Eq.60.
+
+
+   .. nml:member:: q10_leaf
+
+      :type: real
+      :default: 2.0
+
+      Q10 factor for plant respiration.
+
+      See Cox et al. (1999) Eq.66.
+
+
+   .. nml:member:: q10_soil
+
+      :type: real
+      :default: 2.0
+
+      Q10 factor for soil respiration.
+
+      Only used if :nml:mem:`JULES_VEGETATION::l_q10` = TRUE.
+      
+      See `Hadley Centre Technical Note 24 <http://www.metoffice.gov.uk/archive/hadley-centre-technical-note-24>`_ Eq.17.
+
+
+   .. nml:member:: kaps
+
+      :type: real
+      :default: 0.5e-8
+
+      Specific soil respiration rate at 25 degC and optimum soil moisture (s\ :sup:`-1`).
+
+      Only used if not using TRIFFID (:nml:mem:`JULES_VEGETATION::l_triffid` = FALSE).
+      
+      See `Hadley Centre Technical Note 24 <http://www.metoffice.gov.uk/archive/hadley-centre-technical-note-24>`_ Eq.16.
+
+
+   .. nml:member:: kaps_roth
+
+      :type: real(4)
+      :default: 3.22e-7, 9.65e-9, 2.12e-8, 6.43e-10
+
+      Specific soil respiration rate for the RothC submodel for each soil carbon pool.
+
+      Only used if using the TRIFFID vegetation model (:nml:mem:`JULES_VEGETATION::l_triffid` = TRUE), in which case soil carbon is modelled using four pools (biomass, humus, decomposable plant material, resistant plant material).
+   
