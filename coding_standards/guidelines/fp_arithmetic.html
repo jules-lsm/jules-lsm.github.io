@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.4. Floating-point arithmetic &mdash; Fortran Coding Standards for JULES</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Fortran Coding Standards for JULES" href="../index.html" />
+    <link rel="up" title="2. Guidelines for Fortran code" href="index.html" />
+    <link rel="next" title="2.5. Further code guidance and best practices" href="best_practices.html" />
+    <link rel="prev" title="2.3. Fortran features" href="fortran_features.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="../index.html">
+          <span>Fortran Coding Standards for JULES</span></a></h1>
+        <h2 class="heading"><span>2.4. Floating-point arithmetic</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="fortran_features.html">2.3. Fortran features</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="best_practices.html">2.5. Further code guidance and best practices</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="floating-point-arithmetic">
+<h1>2.4. Floating-point arithmetic<a class="headerlink" href="#floating-point-arithmetic" title="Permalink to this headline">¶</a></h1>
+<p>When writing scientific code, it is important to understand the differences between normal arithmetic and the floating-point arithmetic used by computers. Due to the limited precision available to represent real numbers, many things that are true for normal arithmetic no longer hold in floating-point arithmetic. Special care must also be given to treating variables in a way that is physically realistic, not just mathematically correct. Failure to do so can result in a model that is over-sensitive to both changes in computing platform and small perturbations in initial conditions.</p>
+<div class="section" id="comparing-real-numbers">
+<h2>2.4.1. Comparing real numbers<a class="headerlink" href="#comparing-real-numbers" title="Permalink to this headline">¶</a></h2>
+<p>A common place for errors of this kind to arise is when comparing real numbers to each other. Consider the following code:</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">IF</span> <span class="p">(</span> <span class="nv">snow_tile</span> <span class="o">&gt;</span> <span class="mf">0.0</span> <span class="p">)</span> <span class="k">THEN</span>
+  <span class="c">! ...</span>
+<span class="k">ELSE</span>
+  <span class="c">! ...</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+<p>This code is meant to be modelling two different physical situations – the case where snow is present on a tile and the case where it is not. You may expect that a tile with no snow would have <tt class="docutils literal"><span class="pre">snow_tile</span></tt> set to 0. However, due to differences in compilers, optimisation options and floating-point rounding errors, <tt class="docutils literal"><span class="pre">snow_tile</span></tt> could end up being tiny (say 10<sup>-20</sup>) rather than 0. This snow amount is physically negligible, so we would want the model to behave as if there is no snow. This is not the case, however, since 10<sup>-20</sup> is greater than 0. This kind of unphysical branching can lead to significant errors.</p>
+<p>Other than avoiding this kind of branching <tt class="docutils literal"><span class="pre">IF</span></tt> statement entirely, there are two ways around this problem:</p>
+<ol class="arabic">
+<li><p class="first">Specify a physically realistic tolerance level, e.g.</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">IF</span> <span class="p">(</span> <span class="nv">snow_tile</span> <span class="o">&gt;</span> <span class="nv">tolerance</span> <span class="p">)</span> <span class="k">THEN</span>
+  <span class="c">! ...</span>
+<span class="k">ELSE</span>
+  <span class="c">! ...</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+<p>where <tt class="docutils literal"><span class="pre">tolerance</span></tt> is some small value greater than 0.</p>
+<p>One problem with this solution is that you may end up with several different tolerances defined in various places in the code. For this reason, <tt class="docutils literal"><span class="pre">tolerance</span></tt> should be obtained using the Fortran intrinsic functions <tt class="docutils literal"><span class="pre">EPSILON</span></tt> (<tt class="docutils literal"><span class="pre">EPSILON(X)</span></tt> returns a nearly negligible number relative to 1) or <tt class="docutils literal"><span class="pre">TINY</span></tt> (<tt class="docutils literal"><span class="pre">TINY(X)</span></tt> returns the smallest positive (non zero) number of the same type as <tt class="docutils literal"><span class="pre">X</span></tt> that the computer can represent) where possible. If the values provided by these intrinsic functions are inappropriate, the tolerance should be declared as a <tt class="docutils literal"><span class="pre">PARAMETER</span></tt> in the variable declarations section of the programming unit.</p>
+<p>When defining a value for tolerance, bear in mind that if the value is too large it could lead to problems with conservation of variables (e.g. water, energy, carbon).</p>
+</li>
+<li><p class="first">Set the variable in question to 0.0 whenever it makes sense physically, e.g.</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">IF</span> <span class="p">(</span> <span class="nv">snow_tile</span> <span class="nv">should</span> <span class="nv">be</span> <span class="mi">0</span> <span class="nv">physically</span> <span class="p">)</span> <span class="k">THEN</span>
+<span class="k">  </span><span class="nv">snow_tile</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">END IF</span>
+
+<span class="k">IF</span> <span class="p">(</span> <span class="nv">snow_tile</span> <span class="o">&gt;</span> <span class="mf">0.0</span> <span class="p">)</span> <span class="k">THEN</span>
+  <span class="c">! ...</span>
+<span class="k">ELSE</span>
+  <span class="c">! ...</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+<p>This solution avoids the problem of having several different tolerances defined in the code. However, depending on how the condition <tt class="docutils literal"><span class="pre">snow_tile</span> <span class="pre">should</span> <span class="pre">be</span> <span class="pre">0</span> <span class="pre">physically</span></tt> is defined, it could lead to problems with conservation of variables (in this case, water, due to loss of snow).</p>
+</li>
+</ol>
+<p>Which solution to use is highly dependent on the particular problem, and requires careful thought. In general, the 2nd solution is preferable, since it avoids having several different tolerances defined in the code.</p>
+<p>Although the above conversation focuses on comparing values to zero, the same concepts apply in the general case of comparing any real number to any other. For example:</p>
+<dl class="docutils">
+<dt>Common practice</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">IF</span> <span class="p">(</span> <span class="nv">real1</span> <span class="o">&gt;</span> <span class="nv">real2</span> <span class="p">)</span> <span class="k">THEN</span>
+  <span class="c">! ...</span>
+<span class="k">ELSE</span>
+  <span class="c">! ...</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+</dd>
+<dt>Better approach</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">IF</span> <span class="p">(</span> <span class="nv">real1</span> <span class="o">-</span> <span class="nv">real2</span> <span class="o">&gt;</span> <span class="nv">tolerance</span> <span class="p">)</span> <span class="k">THEN</span>
+  <span class="c">! ...</span>
+<span class="k">ELSE</span>
+  <span class="c">! ...</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>where, as above, tolerance is some suitably small number.</p>
+<p>The same concerns about rounding errors must also be considered when comparing two real numbers for equality, e.g.</p>
+<dl class="docutils">
+<dt>Common practice</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">IF</span> <span class="p">(</span> <span class="nv">real1</span> <span class="o">==</span> <span class="nv">real2</span> <span class="p">)</span> <span class="k">THEN</span>
+  <span class="c">! ...</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+</dd>
+<dt>Better approach</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre>IF ( ABS(real1 – real2) &lt; tolerance ) THEN
+  ! ...
+END IF
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>where, again, tolerance is some suitably small number.</p>
+<p>Such concerns with rounding errors do not apply to <tt class="docutils literal"><span class="pre">INTEGER</span></tt> and <tt class="docutils literal"><span class="pre">LOGICAL</span></tt> comparisons, hence the form <tt class="docutils literal"><span class="pre">value1</span> <span class="pre">==</span> <span class="pre">value2</span></tt> can be used for these.</p>
+</div>
+<div class="section" id="non-distributive-arithmetic">
+<h2>2.4.2. Non-distributive arithmetic<a class="headerlink" href="#non-distributive-arithmetic" title="Permalink to this headline">¶</a></h2>
+<p>Scientific programmers should also be aware that some algebraic identities that hold for normal arithmetic no longer hold in floating-point arithmetic, mainly due to rounding errors. In particular, unlike normal arithmetic, the order in which calculations are performed will affect the answer given. For example, the following statements are true for normal arithmetic, but do not hold in floating-point arithmetic:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">x</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="n">z</span>
+<span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span>
+<span class="n">x</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">/</span> <span class="n">z</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>This can lead to extremely subtle errors that are hard to spot, so developers should bear this in mind at all times. Trying to enforce the order of calculation using brackets will not necessarily solve this problem, since the compiler will make decisions for itself depending on optimisation options, etc.</p>
+<p>A more in depth discussion of these kinds of rounding errors can be found in the accompanying document <a class="reference download internal" href="../_downloads/MO_sensitivity_project.pdf"><tt class="xref download docutils literal"><span class="pre">Dealing</span> <span class="pre">with</span> <span class="pre">rounding</span> <span class="pre">issues</span></tt></a> from the Met Office UM perturbation sensitivity project. The document also includes some real world examples of rounding issues from the Met Office Unified Model.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="fortran_features.html">2.3. Fortran features</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="best_practices.html">2.5. Further code guidance and best practices</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+      &copy; Crown Copyright 2013, Met Office.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

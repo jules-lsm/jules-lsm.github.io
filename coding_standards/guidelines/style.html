@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.2. Style &mdash; Fortran Coding Standards for JULES</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Fortran Coding Standards for JULES" href="../index.html" />
+    <link rel="up" title="2. Guidelines for Fortran code" href="index.html" />
+    <link rel="next" title="2.3. Fortran features" href="fortran_features.html" />
+    <link rel="prev" title="2.1. Layout and formatting" href="layout_and_formatting.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="../index.html">
+          <span>Fortran Coding Standards for JULES</span></a></h1>
+        <h2 class="heading"><span>2.2. Style</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="layout_and_formatting.html">2.1. Layout and formatting</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fortran_features.html">2.3. Fortran features</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="style">
+<h1>2.2. Style<a class="headerlink" href="#style" title="Permalink to this headline">¶</a></h1>
+<p>The following is a list of recommended styles when you write code in Fortran.</p>
+<ul>
+<li><p class="first">New code should be written using Fortran 95 syntax. Avoid un-portable vendor/compiler extensions. Avoid Fortran 2003 features for the moment, as they will not become widely available in the near future (however, there is no harm in designing your code with the future in mind. For example, if there is a feature that is not in Fortran 95 and you know that it is in Fortran 2003, you may want to write your Fortran 95 code to make it easier for the future upgrade).</p>
+</li>
+<li><p class="first">Write your program in UK English, unless you have a very good reason for not doing so. Write your comments in simple UK English and name your program units and variables based on sensible UK English words. Always bear in mind that your code may be read by people who are not proficient English speakers.</p>
+</li>
+<li><p class="first">When naming your variables and program units, always keep in mind that Fortran is a case-insensitive language (e.g. <tt class="docutils literal"><span class="pre">EditOrExit</span></tt> is the same as <tt class="docutils literal"><span class="pre">EditorExit</span></tt>.)</p>
+</li>
+<li><p class="first">Use only characters in the Fortran character set. In particular, accent characters and tabs are not allowed in code, although they are usually OK in comments. If your editor inserts tabs automatically, you should configure it to switch off the functionality when you are editing Fortran source files.</p>
+</li>
+<li><p class="first">Although Fortran has no reserved keywords, you should avoid naming your program units and variables with names that match an intrinsic <tt class="docutils literal"><span class="pre">FUNCTION</span></tt> or <tt class="docutils literal"><span class="pre">SUBROUTINE</span></tt>. Similarly, you should avoid naming your program units and variables with names that match a keyword in a Fortran statement.</p>
+</li>
+<li><p class="first">Be generous with comments. State the reason for doing something, instead of repeating the Fortran logic in words.</p>
+</li>
+<li><p class="first">To improve readability, write your code using the ALL CAPS Fortran keywords approach. This is the style used in most of the examples in this document, where Fortran keywords and intrinsic procedures are written in ALL CAPS. The rest of the code is written in either lowercase with underscores or CamelCase. This approach has the advantage that Fortran keywords stand out.</p>
+</li>
+<li><p class="first">Use the new and clearer syntax for LOGICAL comparisons, i.e.:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">==</span></tt> instead of <tt class="docutils literal"><span class="pre">.EQ.</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">/=</span></tt> instead of <tt class="docutils literal"><span class="pre">.NE.</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&gt;</span></tt> instead of <tt class="docutils literal"><span class="pre">.GT.</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&lt;</span></tt> instead of <tt class="docutils literal"><span class="pre">.LT.</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&gt;=</span></tt> instead of <tt class="docutils literal"><span class="pre">.GE.</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">&lt;=</span></tt> instead of <tt class="docutils literal"><span class="pre">.LE.</span></tt></li>
+</ul>
+</li>
+<li><p class="first">Where appropriate, simplify your <tt class="docutils literal"><span class="pre">LOGICAL</span></tt> assignments, for example:</p>
+<dl class="docutils">
+<dt>Common practice</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">IF</span> <span class="p">(</span><span class="nv">my_var</span> <span class="o">==</span> <span class="nv">some_value</span><span class="p">)</span> <span class="k">THEN</span>
+<span class="k">  </span><span class="nv">something</span>      <span class="o">=</span> <span class="nb">.TRUE.</span>
+  <span class="nv">something_else</span> <span class="o">=</span> <span class="nb">.FALSE.</span>
+<span class="k">ELSE</span>
+<span class="k">  </span><span class="nv">something</span>      <span class="o">=</span> <span class="nb">.FALSE.</span>
+  <span class="nv">something_else</span> <span class="o">=</span> <span class="nb">.TRUE.</span>
+<span class="k">END IF</span>
+
+<span class="c">! ...</span>
+
+<span class="k">IF</span> <span class="p">(</span><span class="nv">something</span> <span class="ow">.EQV.</span> <span class="nb">.TRUE.</span><span class="p">)</span> <span class="k">THEN</span>
+<span class="k">  CALL </span><span class="nv">do_something</span><span class="p">()</span>
+  <span class="c">! ...</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+</dd>
+<dt>Better approach</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="nv">something</span>      <span class="o">=</span> <span class="p">(</span><span class="nv">my_var</span> <span class="o">==</span> <span class="nv">some_value</span><span class="p">)</span>
+<span class="nv">something_else</span> <span class="o">=</span> <span class="p">(</span><span class="nv">my_var</span> <span class="o">/=</span> <span class="nv">some_value</span><span class="p">)</span>
+
+<span class="c">! ...</span>
+
+<span class="k">IF</span> <span class="p">(</span><span class="nv">something</span><span class="p">)</span> <span class="k">THEN</span>
+<span class="k">  CALL </span><span class="nv">do_something</span><span class="p">()</span>
+  <span class="c">! ...</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">Positive logic is usually easier to understand. When using an <tt class="docutils literal"><span class="pre">IF-ELSE-END</span> <span class="pre">IF</span></tt> construct you should use positive logic in the <tt class="docutils literal"><span class="pre">IF</span></tt> test, provided that the positive and the negative blocks are about the same length. It may be more appropriate to use negative logic if the negative block is significantly longer than the positive block. For example:</p>
+<dl class="docutils">
+<dt>Common practice</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">IF</span> <span class="p">(</span><span class="nv">my_var</span> <span class="o">/=</span> <span class="nv">some_value</span><span class="p">)</span> <span class="k">THEN</span>
+<span class="k">  CALL </span><span class="nv">do_this</span><span class="p">()</span>
+<span class="k">ELSE</span>
+<span class="k">  CALL </span><span class="nv">do_that</span><span class="p">()</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+</dd>
+<dt>Better approach</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">IF</span> <span class="p">(</span><span class="nv">my_var</span> <span class="o">==</span> <span class="nv">some_value</span><span class="p">)</span> <span class="k">THEN</span>
+<span class="k">  CALL </span><span class="nv">do_that</span><span class="p">()</span>
+<span class="k">ELSE</span>
+<span class="k">  CALL </span><span class="nv">do_this</span><span class="p">()</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">To improve readability, you should always use the optional space to separate the following Fortran keywords:</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="k">ELSE IF       END DO           END FORALL   END FUNCTION</span>
+<span class="k">END IF        END INTERFACE    END MODULE   END PROGRAM</span>
+<span class="k">END SELECT    END SUBROUTINE   END TYPE     END WHERE</span>
+<span class="k">SELECT CASE</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">If you have a large or complex code block embedding other code blocks, you may consider naming some or all of them to improve readability.</p>
+</li>
+<li><p class="first">If you have a large or complex interface block or if you have one or more sub-program units in the <tt class="docutils literal"><span class="pre">CONTAINS</span></tt> section, you can improve readability by using the full version of the <tt class="docutils literal"><span class="pre">END</span></tt> statement (i.e. <tt class="docutils literal"><span class="pre">END</span> <span class="pre">SUBROUTINE</span> <span class="pre">&lt;name&gt;</span></tt> or <tt class="docutils literal"><span class="pre">END</span> <span class="pre">FUNCTION</span> <span class="pre">&lt;name&gt;</span></tt> instead of just <tt class="docutils literal"><span class="pre">END</span></tt>) at the end of each sub-program unit. For readability in general, the full version of the <tt class="docutils literal"><span class="pre">END</span></tt> statement is recommended over the simple <tt class="docutils literal"><span class="pre">END</span></tt>.</p>
+</li>
+<li><p class="first">Where possible, consider using <tt class="docutils literal"><span class="pre">CYCLE</span></tt>, <tt class="docutils literal"><span class="pre">EXIT</span></tt> or a <tt class="docutils literal"><span class="pre">WHERE</span></tt>-construct to simplify complicated DO-loops.</p>
+</li>
+<li><p class="first">When writing a <tt class="docutils literal"><span class="pre">REAL</span></tt> literal with an integer value, put a 0 after the decimal point (i.e. <tt class="docutils literal"><span class="pre">1.0</span></tt> as opposed to <tt class="docutils literal"><span class="pre">1.</span></tt>) to improve readability.</p>
+</li>
+<li><p class="first">Where reasonable and sensible to do so, you should try to match the names of dummy and actual arguments to a <tt class="docutils literal"><span class="pre">SUBROUTINE</span></tt> / <tt class="docutils literal"><span class="pre">FUNCTION</span></tt>.</p>
+</li>
+<li><p class="first">In an array assignment, it is recommended that you use array notations to improve readability. E.g.:</p>
+<dl class="docutils">
+<dt>Common practice</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="kt">INTEGER</span> <span class="kd">::</span> <span class="nv">array1</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="nv">array2</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="kt">INTEGER</span> <span class="kd">::</span> <span class="nv">scalar</span>
+
+<span class="c">! ...</span>
+
+<span class="nv">array1</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nv">array2</span> <span class="o">=</span> <span class="nv">array1</span> <span class="o">*</span> <span class="nv">scalar</span>
+</pre></div>
+</div>
+</dd>
+<dt>Better approach</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="kt">INTEGER</span> <span class="kd">::</span> <span class="nv">array1</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="nv">array2</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="kt">INTEGER</span> <span class="kd">::</span> <span class="nv">scalar</span>
+
+<span class="c">! ...</span>
+
+<span class="nv">array1</span><span class="p">(:,</span> <span class="p">:)</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nv">array2</span><span class="p">(:,</span> <span class="p">:)</span> <span class="o">=</span> <span class="nv">array1</span><span class="p">(:,</span> <span class="p">:)</span> <span class="o">*</span> <span class="nv">scalar</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">Where appropriate, use parentheses to improve readability. E.g.:</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="nv">a</span> <span class="o">=</span> <span class="p">(</span><span class="nv">b</span> <span class="o">*</span> <span class="nv">i</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nv">c</span> <span class="o">/</span> <span class="nv">n</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>is easier to read than</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="nv">a</span> <span class="o">=</span> <span class="nv">b</span> <span class="o">*</span> <span class="nv">i</span> <span class="o">+</span> <span class="nv">c</span> <span class="o">/</span> <span class="nv">n</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="layout_and_formatting.html">2.1. Layout and formatting</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="fortran_features.html">2.3. Fortran features</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+      &copy; Crown Copyright 2013, Met Office.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

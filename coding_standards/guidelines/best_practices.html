@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.5. Further code guidance and best practices &mdash; Fortran Coding Standards for JULES</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Fortran Coding Standards for JULES" href="../index.html" />
+    <link rel="up" title="2. Guidelines for Fortran code" href="index.html" />
+    <link rel="next" title="3. Standard code templates" href="../standard_code_templates/index.html" />
+    <link rel="prev" title="2.4. Floating-point arithmetic" href="fp_arithmetic.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="../index.html">
+          <span>Fortran Coding Standards for JULES</span></a></h1>
+        <h2 class="heading"><span>2.5. Further code guidance and best practices</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="fp_arithmetic.html">2.4. Floating-point arithmetic</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../standard_code_templates/index.html">3. Standard code templates</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="further-code-guidance-and-best-practices">
+<h1>2.5. Further code guidance and best practices<a class="headerlink" href="#further-code-guidance-and-best-practices" title="Permalink to this headline">¶</a></h1>
+<ul>
+<li><p class="first">Avoid the use of &#8216;magic numbers&#8217;. A &#8216;magic number&#8217; is a numeric constant that is hard wired into the code. These are very hard to maintain and obscure the function of the code. It is much better to assign the &#8216;magic number&#8217; to a variable or constant with a meaningful name and use this throughout the code. In many cases the variable may be best placed in a module. This ensures that all subroutines will use the correct value of the numeric constant and that alteration of it in one place will be propagated to all its occurrences. For example:</p>
+<dl class="docutils">
+<dt>Common practice</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">IF</span> <span class="p">(</span><span class="nv">ObsType</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="k">THEN</span>
+</pre></div>
+</div>
+</dd>
+<dt>Better approach</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="kt">INTEGER</span><span class="p">,</span> <span class="k">PARAMETER</span> <span class="kd">::</span> <span class="nv">SurfaceWind</span> <span class="o">=</span> <span class="mi">3</span> <span class="c">! No. for surface wind</span>
+
+<span class="c">! ...</span>
+
+<span class="k">IF</span> <span class="p">(</span><span class="nv">ObsType</span> <span class="o">==</span> <span class="nv">SurfaceWind</span><span class="p">)</span> <span class="k">THEN</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">Write well structured code making use of subroutines to separate specific subtasks. In particular all file I/O should be done through subroutines. This greatly facilitates the portability of the code. Subroutines should be kept reasonably short, but don&#8217;t forget there are start up overheads involved in calling an external subroutine, so they should do a reasonable amount of work.</p>
+</li>
+<li><p class="first">If you find yourself copying and pasting the same code, consider making it a <tt class="docutils literal"><span class="pre">SUBROUTINE</span></tt> or <tt class="docutils literal"><span class="pre">FUNCTION</span></tt> that can be called from the different places in the code.</p>
+</li>
+<li><p class="first">Any code that introduces new physics to JULES should have a switch to enable it to be turned off. This makes it possible to run the model in a configuration that is identical to the model before the new physics went in, in order to check that nothing unexpected has been broken.</p>
+</li>
+<li><p class="first">Code should be accompanied by technical documentation describing the physical processes that the additional code is intended to model and how this is achieved. Any equations used should be documented (in their continuous form where appropriate) along with the methods used to discretise these equations. In the case where new subroutines/functions have been added, a calling tree should be included. Any changes to the JULES control file should also be clearly documented.</p>
+</li>
+</ul>
+<p>The most important thing is to always bear in mind that somebody will have to maintain your code in the future. That person could even be you several years later! Make sure you comment code thoroughly and use some common sense where procedures are not clear from this document.</p>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="fp_arithmetic.html">2.4. Floating-point arithmetic</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../standard_code_templates/index.html">3. Standard code templates</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+      &copy; Crown Copyright 2013, Met Office.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

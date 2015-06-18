@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.1. Layout and formatting &mdash; Fortran Coding Standards for JULES</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Fortran Coding Standards for JULES" href="../index.html" />
+    <link rel="up" title="2. Guidelines for Fortran code" href="index.html" />
+    <link rel="next" title="2.2. Style" href="style.html" />
+    <link rel="prev" title="2. Guidelines for Fortran code" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="../index.html">
+          <span>Fortran Coding Standards for JULES</span></a></h1>
+        <h2 class="heading"><span>2.1. Layout and formatting</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">2. Guidelines for Fortran code</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="style.html">2.2. Style</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="layout-and-formatting">
+<h1>2.1. Layout and formatting<a class="headerlink" href="#layout-and-formatting" title="Permalink to this headline">¶</a></h1>
+<p>The following is a list of recommended practices for layout and formatting when you write code in Fortran.</p>
+<ul>
+<li><p class="first">Use the Fortran 90 free format syntax.</p>
+</li>
+<li><p class="first">Indent blocks by 2 characters. Where possible, comments should be indented with the code within a block.</p>
+</li>
+<li><p class="first">Use space and blank lines where appropriate to format your code to improve readability (use genuine spaces rather than tabs, as the tab character is not in the Fortran character set). For example:</p>
+<dl class="docutils">
+<dt>Common practice</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">DO </span><span class="nv">i</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="nv">n</span>
+  <span class="nv">a</span><span class="p">(</span><span class="nv">i</span><span class="p">)%</span><span class="nv">c</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="nv">i</span><span class="o">/</span><span class="nv">n</span>
+<span class="nv">ENDDO</span>
+<span class="k">IF</span><span class="p">(</span><span class="nv">this</span><span class="o">==</span><span class="nv">that</span><span class="p">)</span><span class="k">THEN</span>
+<span class="k">  </span><span class="nv">distance</span><span class="o">=</span><span class="mi">0</span>
+  <span class="nb">time</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">ENDIF</span>
+</pre></div>
+</div>
+</dd>
+<dt>Better approach</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="k">DO </span><span class="nv">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="nv">n</span>
+  <span class="nv">a</span><span class="p">(</span><span class="nv">i</span><span class="p">)%</span><span class="nv">c</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">*</span> <span class="nv">i</span> <span class="o">/</span> <span class="nv">n</span>
+<span class="k">END DO</span>
+
+<span class="k">IF</span> <span class="p">(</span><span class="nv">this</span> <span class="o">==</span> <span class="nv">that</span><span class="p">)</span> <span class="k">THEN</span>
+<span class="k">  </span><span class="nv">distance</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="nb">time</span>     <span class="o">=</span> <span class="mi">0</span>
+<span class="k">END IF</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">Try to confine your line width to 80 characters. This means that your code can be viewed easily in any editor on any screen, and can be printed easily on A4 paper.</p>
+</li>
+<li><p class="first">Line up your statements, where appropriate, to improve readability. For example:</p>
+<dl class="docutils">
+<dt>Common practice</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="kt">REAL</span><span class="p">,</span> <span class="k">INTENT</span><span class="p">(</span><span class="nv">IN</span><span class="p">)</span> <span class="kd">::</span> <span class="nv">my_in</span><span class="p">(:)</span>
+<span class="kt">REAL</span><span class="p">,</span> <span class="k">INTENT</span><span class="p">(</span><span class="nv">INOUT</span><span class="p">)</span> <span class="kd">::</span> <span class="nv">my_inout</span><span class="p">(:)</span>
+<span class="kt">REAL</span><span class="p">,</span> <span class="k">INTENT</span><span class="p">(</span><span class="nv">OUT</span><span class="p">)</span> <span class="kd">::</span> <span class="nv">my_out</span><span class="p">(:)</span>
+
+<span class="c">! ...</span>
+
+<span class="kt">CHARACTER</span><span class="p">(</span><span class="nb">LEN</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span> <span class="kd">::</span> <span class="nv">my_char</span>
+
+<span class="c">! ...</span>
+
+<span class="nv">my_char</span> <span class="o">=</span> <span class="s1">&#39;This is a very very very very very very &#39;</span> <span class="o">//</span> <span class="p">&amp;</span>
+   <span class="s1">&#39;very very very very very very very very very very &#39;</span> <span class="o">//</span> <span class="p">&amp;</span>
+   <span class="s1">&#39;long character assignment&#39;</span>
+</pre></div>
+</div>
+</dd>
+<dt>Better approach</dt>
+<dd><div class="first last highlight-fortran"><div class="highlight"><pre><span class="kt">REAL</span><span class="p">,</span> <span class="k">INTENT</span><span class="p">(</span><span class="nv">IN</span>   <span class="p">)</span> <span class="kd">::</span>    <span class="nv">my_in</span><span class="p">(:)</span>
+<span class="kt">REAL</span><span class="p">,</span> <span class="k">INTENT</span><span class="p">(</span><span class="nv">INOUT</span><span class="p">)</span> <span class="kd">::</span> <span class="nv">my_inout</span><span class="p">(:)</span>
+<span class="kt">REAL</span><span class="p">,</span> <span class="k">INTENT</span><span class="p">(</span>  <span class="nv">OUT</span><span class="p">)</span> <span class="kd">::</span>   <span class="nv">my_out</span><span class="p">(:)</span>
+
+<span class="c">! ...</span>
+
+<span class="kt">CHARACTER</span><span class="p">(</span><span class="nb">LEN</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span> <span class="kd">::</span> <span class="nv">my_char</span>
+
+<span class="c">! ...</span>
+
+<span class="nv">my_char</span>                                                 <span class="p">&amp;</span>
+    <span class="o">=</span>  <span class="s1">&#39;This is a very very very very very very very &#39;</span>  <span class="p">&amp;</span>
+    <span class="o">//</span> <span class="s1">&#39;very very very very very very very very very &#39;</span>  <span class="p">&amp;</span>
+    <span class="o">//</span> <span class="s1">&#39;long character assignment&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><p class="first">Short and simple Fortran statements are easier to read and understand than long and complex ones. Where possible, avoid using continuation lines in a statement.</p>
+</li>
+<li><p class="first">Avoid putting multiple statements on the same line. It is not good for readability.</p>
+</li>
+<li><p class="first">Each program unit (module, subroutine, function etc.) should follow a structure similar to the templates supplied in <a class="reference internal" href="../standard_code_templates/index.html"><em>Standard code templates</em></a>. The intended behaviour of the unit should be clearly described in the header.</p>
+</li>
+<li><p class="first">Comments should start with a single <tt class="docutils literal"><span class="pre">!</span></tt> at beginning of the line. A blank line should be left before (but not after) the comment line. The only exception is for one line comments which can be indented within the code or placed after the statement.</p>
+</li>
+<li><p class="first">Each subroutine, function and module should be in a separate file. Modules may be used to group related variables, subroutines and functions.</p>
+</li>
+</ul>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">2. Guidelines for Fortran code</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="style.html">2.2. Style</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+    <div class="footer">
+      &copy; Crown Copyright 2013, Met Office.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

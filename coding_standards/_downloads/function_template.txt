@@ -1,0 +1,46 @@
+< Appropriate copyright notice >
+
+FUNCTION < name >(< argument list>) RESULT(< return variable name >)
+
+  < Module imports >
+
+  IMPLICIT NONE
+
+!-----------------------------------------------------------------------------
+! Description:
+!   < Say what this function does >
+!
+! Method:
+!   < Say how it does it: include references to external documentation >
+!   < If this function is very complex, then include a "pseudo code"
+!     description of it to make its structure and method clear >
+!
+! Current Code Owner: < Name of person responsible for this code >
+!
+! Code Description:
+!   Language: Fortran 90.
+!   This code is written to JULES coding standards v1.
+!-----------------------------------------------------------------------------
+
+! Function arguments
+  < Arguments with INTENT(IN) >
+
+  
+! Return type
+  < Return variable type declaration >
+
+
+! Local constants
+  < Local parameters >
+
+
+! Local variables
+  < Local variables >
+
+
+!-----------------------------------------------------------------------------
+
+
+  < Executable code >
+
+END FUNCTION <name>

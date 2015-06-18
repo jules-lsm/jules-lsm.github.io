@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3. Standard code templates &mdash; Fortran Coding Standards for JULES</title>
+    
+    <link rel="stylesheet" href="../_static/haiku.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Fortran Coding Standards for JULES" href="../index.html" />
+    <link rel="prev" title="2.5. Further code guidance and best practices" href="../guidelines/best_practices.html" /> 
+  </head>
+  <body>
+      <div class="header"><h1 class="heading"><a href="../index.html">
+          <span>Fortran Coding Standards for JULES</span></a></h1>
+        <h2 class="heading"><span>3. Standard code templates</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="../guidelines/best_practices.html">2.5. Further code guidance and best practices</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="standard-code-templates">
+<h1>3. Standard code templates<a class="headerlink" href="#standard-code-templates" title="Permalink to this headline">¶</a></h1>
+<p>Some standard templates for copyright notices and code files are provided as text files with this document. When writing new code, these templates should be used as a guide for the structure of the new files.</p>
+<div class="section" id="code-templates">
+<h2>3.1. Code templates<a class="headerlink" href="#code-templates" title="Permalink to this headline">¶</a></h2>
+<p>Templates are provided for a <a class="reference download internal" href="../_downloads/subroutine_template.txt"><tt class="xref download docutils literal"><span class="pre">SUBROUTINE</span></tt></a>, a <a class="reference download internal" href="../_downloads/function_template.txt"><tt class="xref download docutils literal"><span class="pre">FUNCTION</span></tt></a> and a simple <a class="reference download internal" href="../_downloads/module_template.txt"><tt class="xref download docutils literal"><span class="pre">MODULE</span></tt></a>. Text in angle brackets provides placeholders for Fortran statements.</p>
+<div class="section" id="subroutine-template">
+<h3>3.1.1. <tt class="docutils literal"><span class="pre">SUBROUTINE</span></tt> template<a class="headerlink" href="#subroutine-template" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-fortran_template"><div class="highlight"><pre><span class="cs">&lt; Appropriate copyright notice &gt;</span>
+
+<span class="k">SUBROUTINE</span> <span class="cs">&lt; name &gt;</span><span class="p">(</span><span class="cs">&lt; argument list &gt;</span><span class="p">)</span>
+
+  <span class="cs">&lt; Module imports &gt;</span>
+
+  <span class="k">IMPLICIT NONE</span>
+
+<span class="c1">!-----------------------------------------------------------------------------</span>
+<span class="c1">! Description:</span>
+<span class="c1">!   </span><span class="cs">&lt; Say what this routine does &gt;</span>
+<span class="c1">!</span>
+<span class="c1">! Method:</span>
+<span class="c1">!   </span><span class="cs">&lt; Say how it does it: include references to external documentation &gt;</span>
+<span class="c1">!   </span><span class="cs">&lt; If this routine is very complex, then include a &quot;pseudo code&quot;</span>
+<span class="cs">!     description of it to make its structure and method clear &gt;</span>
+<span class="c1">!</span>
+<span class="c1">! Current Code Owner: </span><span class="cs">&lt; Name of person responsible for this code &gt;</span>
+<span class="c1">!</span>
+<span class="c1">! Code Description:</span>
+<span class="c1">!   Language: Fortran 90.</span>
+<span class="c1">!   This code is written to JULES coding standards v1.</span>
+<span class="c1">!-----------------------------------------------------------------------------</span>
+
+<span class="c1">! Subroutine arguments</span>
+  <span class="cs">&lt; Arguments with INTENT(IN   ) &gt;</span>
+  <span class="cs">&lt; Arguments with INTENT(INOUT) &gt;</span>
+  <span class="cs">&lt; Arguments with INTENT(  OUT) &gt;</span>
+
+
+<span class="c1">! Local constants</span>
+  <span class="cs">&lt; Local parameters &gt;</span>
+
+
+<span class="c1">! Local variables</span>
+  <span class="cs">&lt; Local variables &gt;</span>
+
+
+<span class="c1">!-----------------------------------------------------------------------------</span>
+
+
+  <span class="cs">&lt; Executable code &gt;</span>
+
+<span class="k">END SUBROUTINE</span> <span class="cs">&lt;name&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="function-template">
+<h3>3.1.2. <tt class="docutils literal"><span class="pre">FUNCTION</span></tt> template<a class="headerlink" href="#function-template" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-fortran_template"><div class="highlight"><pre><span class="cs">&lt; Appropriate copyright notice &gt;</span>
+
+<span class="k">FUNCTION</span> <span class="cs">&lt; name &gt;</span><span class="p">(</span><span class="cs">&lt; argument list&gt;</span><span class="p">)</span> <span class="k">RESULT</span><span class="p">(</span><span class="cs">&lt; return variable name &gt;</span><span class="p">)</span>
+
+  <span class="cs">&lt; Module imports &gt;</span>
+
+  <span class="k">IMPLICIT NONE</span>
+
+<span class="c1">!-----------------------------------------------------------------------------</span>
+<span class="c1">! Description:</span>
+<span class="c1">!   </span><span class="cs">&lt; Say what this function does &gt;</span>
+<span class="c1">!</span>
+<span class="c1">! Method:</span>
+<span class="c1">!   </span><span class="cs">&lt; Say how it does it: include references to external documentation &gt;</span>
+<span class="c1">!   </span><span class="cs">&lt; If this function is very complex, then include a &quot;pseudo code&quot;</span>
+<span class="cs">!     description of it to make its structure and method clear &gt;</span>
+<span class="c1">!</span>
+<span class="c1">! Current Code Owner: </span><span class="cs">&lt; Name of person responsible for this code &gt;</span>
+<span class="c1">!</span>
+<span class="c1">! Code Description:</span>
+<span class="c1">!   Language: Fortran 90.</span>
+<span class="c1">!   This code is written to JULES coding standards v1.</span>
+<span class="c1">!-----------------------------------------------------------------------------</span>
+
+<span class="c1">! Function arguments</span>
+  <span class="cs">&lt; Arguments with INTENT(IN) &gt;</span>
+
+  
+<span class="c1">! Return type</span>
+  <span class="cs">&lt; Return variable type declaration &gt;</span>
+
+
+<span class="c1">! Local constants</span>
+  <span class="cs">&lt; Local parameters &gt;</span>
+
+
+<span class="c1">! Local variables</span>
+  <span class="cs">&lt; Local variables &gt;</span>
+
+
+<span class="c1">!-----------------------------------------------------------------------------</span>
+
+
+  <span class="cs">&lt; Executable code &gt;</span>
+
+<span class="k">END FUNCTION</span> <span class="cs">&lt;name&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="module-template">
+<h3>3.1.3. <tt class="docutils literal"><span class="pre">MODULE</span></tt> template<a class="headerlink" href="#module-template" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-fortran_template"><div class="highlight"><pre><span class="cs">&lt; Appropriate copyright notice &gt;</span>
+
+<span class="k">MODULE</span> <span class="cs">&lt; name &gt;</span>
+
+  <span class="cs">&lt; Module imports &gt;</span>
+
+  <span class="k">IMPLICIT NONE</span>
+
+<span class="c1">!-----------------------------------------------------------------------------</span>
+<span class="c1">! Description:</span>
+<span class="c1">!   </span><span class="cs">&lt; Say what this module contains &gt;</span>
+<span class="c1">!</span>
+<span class="c1">! Current Code Owner: </span><span class="cs">&lt; Name of person responsible for this code &gt;</span>
+<span class="c1">!</span>
+<span class="c1">! Code Description:</span>
+<span class="c1">!   Language: Fortran 90.</span>
+<span class="c1">!   This code is written to JULES coding standards v1.</span>
+<span class="c1">!-----------------------------------------------------------------------------</span>
+
+  <span class="k">PRIVATE</span>  <span class="c">! Private scope by default</span>
+
+
+<span class="c1">! Module constants</span>
+  <span class="cs">&lt; Parameter declarations &gt;</span>
+
+
+<span class="c1">! Module variables</span>
+  <span class="cs">&lt; Variable declarations &gt;</span>
+
+
+<span class="c1">! Public members</span>
+  <span class="k">PUBLIC</span> <span class="kd">::</span> <span class="cs">&lt; Public members &gt;</span>
+
+
+<span class="k">CONTAINS</span>
+  
+  
+  <span class="cs">&lt; Any subroutines or functions, each following the appropriate</span>
+<span class="cs">    template (minus copyright notice) &gt;</span>
+
+<span class="k">END MODULE</span> <span class="cs">&lt;name&gt;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="copyright-notice">
+<h2>3.2. Copyright notice<a class="headerlink" href="#copyright-notice" title="Permalink to this headline">¶</a></h2>
+<p>Two different copyright notices are provided, one of which should be included at the top of each source file that you write. Met Office contributors should use the <a class="reference download internal" href="../_downloads/crown_copyright_notice.txt"><tt class="xref download docutils literal"><span class="pre">Crown</span> <span class="pre">Copyright</span> <span class="pre">notice</span></tt></a>, while other developers should use the <a class="reference download internal" href="../_downloads/consortium_member_copyright_notice.txt"><tt class="xref download docutils literal"><span class="pre">Consortium</span> <span class="pre">Member</span> <span class="pre">Copyright</span> <span class="pre">notice</span></tt></a>.</p>
+<div class="section" id="crown-copyright-notice">
+<h3>3.2.1. Crown Copyright Notice<a class="headerlink" href="#crown-copyright-notice" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-fortran_template"><div class="highlight"><pre><span class="c1">!******************************COPYRIGHT********************************************</span>
+<span class="c1">! (c) Crown copyright, Met Office </span><span class="cs">&lt; Year produced, e.g. 2008 &gt;</span><span class="c1">. All rights reserved.</span>
+<span class="c1">!</span>
+<span class="c1">! This routine has been licensed to the other JULES partners for use and </span>
+<span class="c1">! distribution under the JULES collaboration agreement, subject to the terms and </span>
+<span class="c1">! conditions set out therein.</span>
+<span class="c1">!</span>
+<span class="c1">! [Met Office Ref SC0237]</span>
+<span class="c1">!******************************COPYRIGHT********************************************</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="consortium-member-copyright-notice">
+<h3>3.2.2. Consortium Member Copyright Notice<a class="headerlink" href="#consortium-member-copyright-notice" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-fortran_template"><div class="highlight"><pre><span class="c1">!******************************COPYRIGHT********************************************</span>
+<span class="c1">! (c) </span><span class="cs">&lt; name of rights owner, e.g. University of xxx &gt;</span><span class="c1"> </span><span class="cs">&lt; Year produced, e.g. 2008 &gt;</span><span class="c1">.</span>
+<span class="c1">! All rights reserved.</span>
+<span class="c1">!</span>
+<span class="c1">! This routine has been licensed to the other JULES partners for use and</span>
+<span class="c1">! distribution under the JULES collaboration agreement, subject to the terms and</span>
+<span class="c1">! conditions set out therein.</span>
+<span class="c1">!</span>
+<span class="c1">! [Met Office Ref SC0237] </span>
+<span class="c1">!******************************COPYRIGHT********************************************</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="../guidelines/best_practices.html">2.5. Further code guidance and best practices</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        </p>
+
+      </div>
+
+    <div class="footer">
+      &copy; Crown Copyright 2013, Met Office.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

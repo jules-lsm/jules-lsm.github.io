@@ -1,0 +1,44 @@
+< Appropriate copyright notice >
+
+SUBROUTINE < name >(< argument list >)
+
+  < Module imports >
+
+  IMPLICIT NONE
+
+!-----------------------------------------------------------------------------
+! Description:
+!   < Say what this routine does >
+!
+! Method:
+!   < Say how it does it: include references to external documentation >
+!   < If this routine is very complex, then include a "pseudo code"
+!     description of it to make its structure and method clear >
+!
+! Current Code Owner: < Name of person responsible for this code >
+!
+! Code Description:
+!   Language: Fortran 90.
+!   This code is written to JULES coding standards v1.
+!-----------------------------------------------------------------------------
+
+! Subroutine arguments
+  < Arguments with INTENT(IN   ) >
+  < Arguments with INTENT(INOUT) >
+  < Arguments with INTENT(  OUT) >
+
+
+! Local constants
+  < Local parameters >
+
+
+! Local variables
+  < Local variables >
+
+
+!-----------------------------------------------------------------------------
+
+
+  < Executable code >
+
+END SUBROUTINE <name>
