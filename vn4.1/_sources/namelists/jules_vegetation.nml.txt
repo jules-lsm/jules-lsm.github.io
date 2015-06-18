@@ -1,0 +1,326 @@
+``jules_vegetation.nml``
+========================
+
+
+This file sets the vegetation options. It contains one namelist called :nml:lst:`JULES_VEGETATION`.
+
+
+
+``JULES_VEGETATION`` namelist members
+-------------------------------------
+
+.. nml:namelist:: JULES_VEGETATION
+
+.. nml:member:: l_q10
+
+   :type: logical
+   :default: T
+
+   Switch for use of Q10 approach when calculating soil respiration.
+
+   TRUE
+       Use Q10 approach.
+
+       .. note:: This is always used if TRIFFID is switched off (:nml:mem:`l_triffid` = FALSE) and was used in JULES2.0.
+
+   FALSE
+       Use the approach of the RothC model.
+      
+
+.. nml:member:: l_trait_phys
+
+   :type: logical
+   :default: F
+   
+   Switch for using trait-based physiology.
+
+   TRUE
+       Vcmax is calculated based on observed leaf traits. Leaf nitrogen (nmass: kgN kgLeaf-1) and leaf mass (LMA: kgLeaf m-2) can be based on observations from the TRY database. Vcmax (umol CO2 m-2 s-1) is based on linear regressions as in Kattge et al. 2009. Two additional parameters are needed: vint and vsl - the intercept and slope, respectively, that relate the leaf nitrogen to vcmax. Sigl is replaced with LMA (sigl=LMA*Cmass, where Cmass is the kgC/kgLeaf and is 0.4).
+
+   FALSE
+       Vcmax is calculated based on parameters nl0 (kgN kgC-1) and neff.
+       
+   .. note::
+      Trait based physiology is not currently compatible with the crop model.
+
+
+.. nml:member:: l_phenol
+
+   :type: logical
+   :default: F
+
+   Switch for vegetation phenology model.
+
+   TRUE
+       Use phenology model.
+
+   FALSE
+       Do not use phenology model.
+
+
+.. nml:member:: l_triffid
+
+   :type: logical
+   :default: F
+
+   Switch for dynamic vegetation model (TRIFFID) except for competition.
+
+   TRUE
+       Use TRIFFID. In this case soil carbon is modelled using four pools
+       (biomass, humus, decomposable plant material, resistant plant material).
+
+   FALSE
+       Do not use TRIFFID. A single soil carbon pool is used.
+
+
+.. nml:member:: l_veg_compete
+
+   :type: logical
+   :default: T
+
+   Switch for competing vegetation.
+   
+   Only used if :nml:mem:`l_triffid` = TRUE.
+
+   TRUE
+       TRIFFID will let the different PFTs compete against each other and modify the vegetation fractions.
+
+   FALSE
+       Vegetation fractions do not change.
+
+
+.. nml:member:: l_ht_compete
+    
+   :type: logical
+   :default: F
+
+   Only used if :nml:mem:`l_triffid` = TRUE.
+
+   TRUE
+      Use height-based vegetation competition.
+      
+      This allows for a generic number of PFTs, and is implemented by ``lotka_noeq_jls.F90`` and ``lotka_eq_jls.F90`` depending on the setting of :nml:mem:`l_trif_eq`.
+   
+   FALSE
+      Use the standard competition.
+      
+      This is hard-wired for 5 PFTs with co-competition for grasses and trees in ``lokta_jls.F90``.
+
+
+.. nml:member:: l_trif_eq
+
+   :type: logical
+   :default: T
+
+   Switch for equilibrium vegetation model (i.e., an equilibrium solution of TRIFFID).
+
+   Only used if :nml:mem:`l_triffid` = TRUE.
+
+   TRUE
+       Use equilibrium TRIFFID.
+
+   FALSE
+       Do not use equilibrium TRIFFID.
+
+
+.. nml:member:: phenol_period
+
+   :type: integer
+   :permitted: >= 1
+   :default: None
+
+   Period for calls to phenology model in *days*. Only relevant if :nml:mem:`l_phenol` = TRUE.
+
+
+.. nml:member:: triffid_period
+
+   :type: integer
+   :permitted: >= 1
+   :default: None
+
+   Period for calls to TRIFFID model in *days*. Only relevant if one of :nml:mem:`l_triffid` or :nml:mem:`l_trif_eq` is TRUE.
+   
+   
+.. nml:member:: l_bvoc_emis
+
+   :type: logical
+   :default: F
+   
+   Switch to enable calculation of BVOC emissions.
+   
+   TRUE
+       BVOC emissions diagnostics will be calculated.
+       
+   FALSE
+       BVOC emissions diagnostics will not be calculated.
+
+
+.. nml:member:: l_o3_damage
+
+   :type: logical
+   :default: F
+
+   Switch for ozone damage.
+
+   TRUE
+       Ozone damage is on.
+
+       .. note:: Ozone concentration in ppb must be prescribed in :doc:`prescribed_data.nml`.
+
+   FALSE
+       No effect.
+
+
+.. nml:member:: l_landuse
+
+   :type: logical
+   :default: F
+
+   Switch for using landuse change in conjunction with TRIFFID
+
+   Only used if :nml:mem:`l_triffid` = TRUE.
+
+   TRUE
+       Land use change is implemented within TRIFFID. Litter fluxes are split between soil and wood product pools. Requires additional prognostics covering the product pools and the agricultural fraction from the previous TRIFFID call. 
+       
+   FALSE
+       All litter fluxes enter the soil
+
+
+.. nml:member:: l_recon
+
+   :type: logical
+   :default: T
+
+   Switch for reconfiguring land fractions prior to TRIFFID call.
+
+   Only used if :nml:mem:`l_triffid` = TRUE.
+
+   TRUE
+       For soil points (land points with no ice) set vegetation fractions to their minimum values and reduce bare soil fraction accordingly.
+
+   FALSE
+       Do not apply the minimum vegation fractions. This is useful when some points are 100% lake and urban, in which case reconfiguration leads to a total tile fraction of greater than 1.
+
+
+.. nml:member:: l_prescsow
+
+   :type: logical
+   :default: F
+   
+   Switch that determines how crop sowing dates are defined. Only used if :nml:mem:`JULES_SURFACE_TYPES::ncpft` > 0.
+   
+   TRUE 
+       Sowing dates prescribed in :nml:lst:`JULES_CROP_PROPS` are used.
+
+   FALSE 
+       Sowing dates are determined by the model.  
+
+
+.. nml:member:: l_irrig_dmd
+
+   :type: logical
+   :default: F
+
+   Switch controlling the implementation of irrigation demand code. Tiles will be irrigated to critical point from an unconstrained water supply.
+
+   TRUE
+       Tiles are irrigated to critical point. 
+
+   FALSE
+       No effect.
+  
+
+.. nml:member:: irr_crop 
+
+   :type: integer
+   :permitted: 1 or 2
+   :default: 1
+
+   1. When to irrigate is determined from driving data according to Doell & Siebert (2002) method. 
+
+   2. When to irrigate is determined by maximum dvi across all tiles. Requires l_crop = T.
+       
+
+.. nml:member:: can_model
+
+   :type: integer
+   :permitted: 1-4
+   :default: 4
+
+   Choice of canopy model for vegetation:
+
+   1. No distinct canopy.
+   2. Radiative canopy with no heat capacity.
+   3. Radiative canopy with heat capacity. This option is deprecated, with 4 preferred.
+   4. As 3 but with a representation of snow beneath the canopy. This option is preferred to 3.
+
+   .. note::
+       :nml:mem:`can_model` = 1 does not mean that there is no vegetation canopy. It means that the surface is represented as a single entity, rather than having distinct surface and canopy levels for the purposes of radiative processes.
+
+
+.. nml:member:: can_rad_mod
+
+   :type: integer
+   :permitted: 1-5
+   :default: 4
+
+   Switch for treatment of canopy radiation.
+
+   1. A single canopy layer for which radiation absorption is calculated using Beer's law. Leaf-level photosynthesis is scaled to the canopy level using the 'big leaf' approach. Leaf nitrogen, photosynthetic capacity, i.e the Vcmax parameter, and leaf photosynthesis vary exponentially through the canopy with radiation.
+
+   2. Multi-layer approach for radiation interception following the 2-stream approach of Sellers et al. (1992). This approach takes into account leaf angle distribution, zenith angle, and differentiates absorption of direct and diffuse radiation. Leaf-level photosynthesis is calculated using a vertically-varying light-limited rate, and constant Rubisco and export velocities, consistent with the assumption of constant leaf N through the canopy. Canopy photosynthesis and conductance are calculated as the sum over all layers.
+
+   3. As 2, but photosynthesis calculated separately for sunlit and shaded leaves for the whole canopy (i.e. not at each layer). The definition of sunlit and shaded leaves is based on a threshold of absorbed radiation at each layer.
+
+   4. This is a modification of option 2. Instead of constant leaf N through the canopy, it has an exponential decline of leaf N with canopy height. Additionally includes inhibition of leaf respiration in the light.
+
+   5. This is an improvement of option 4, including:
+
+      * Sunfleck penetration though the canopy.
+      * Division of sunlit and shaded leaves within each canopy level.
+      * A modified version of inhibition of leaf respiration in the light.
+
+   .. note:: When using :nml:mem:`can_rad_mod` = 4 or 5, it is recommended to use driving data that contains direct and diffuse radiation separately rather than a constant diffuse fraction.
+
+   .. seealso:: Descriptions 1, 2 and 3 can be found in Jogireddy et al. (2006), and an application of option 4 can be found in Mercado et al. (2007) and all are described in Clark et al (2011).
+
+
+.. nml:member:: ilayers
+
+   :type: integer
+   :permitted: >= 0
+   :default: 10
+
+   Number of layers for canopy radiation model.
+
+   These layers are used for the calculations of radiation interception and photosynthesis.
+   
+
+.. nml:member:: frac_min
+
+   :type: real
+   :default: 1.0e-6
+
+   Minimum fraction that a PFT is allowed to cover if TRIFFID is used.
+
+
+.. nml:member:: frac_seed
+
+   :type: real
+   :default: 0.01
+
+   Seed fraction for TRIFFID.
+
+
+.. nml:member:: pow
+
+   :type: real
+   :default: 5.241e-4
+
+   Power in sigmodial function used to get competition coefficients.
+
+   See `Hadley Centre Technical Note 24 <http://www.metoffice.gov.uk/archive/hadley-centre-technical-note-24>`_ Eq.3.
+
+
+

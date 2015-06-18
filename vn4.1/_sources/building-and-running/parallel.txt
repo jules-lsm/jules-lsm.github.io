@@ -1,0 +1,129 @@
+Building and running JULES in parallel mode
+===========================================
+
+
+.. warning::
+   This section is for advanced users only.
+   
+.. note::
+   Before reading this section, users should be familiar with how to build and run JULES in serial (i.e. non-parallel) mode (see :doc:`fcm` and :doc:`running-jules`).
+   
+
+Overview
+--------
+
+From version 3.3 onwards, in order to reduce processing time, JULES is able to run multiple points in parallel. This parallel processing can use multiple cores on the same machine, a cluster of machines, or both. To achieve this, JULES uses `MPI (Message Passing Interface) <http://en.wikipedia.org/wiki/Message_Passing_Interface>`_, a standardised message passing interface. MPI coordinates the running of multiple 'tasks' in parallel, and provides mechanisms for these tasks to communicate with each other when required (e.g. for sharing results).
+
+JULES takes advantage of the parallel I/O features available in `HDF5 <http://www.hdfgroup.org/HDF5/>`_/`NetCDF4 <http://www.unidata.ucar.edu/software/netcdf/>`_, which themselves use MPI 'under the hood'. These features enable multiple MPI tasks to read from and write to the same NetCDF file(s) at the same time.
+
+When running JULES in parallel, each MPI task can be thought of as its own independent version of JULES, with each task being responsible for a portion of the grid. Each task reads its portion of the input file(s), performs calculations on those points and outputs its portion of the output file(s). Tasks only communicate with each other in order to read and write dump files - this ensures that the dump files produced with different numbers of tasks are compatible with each other. This means that you can use a dump from a serial (i.e. non-parallel) run to (re-)start a parallel run, providing the overall model grids are the same (and vice versa).
+
+None of the namelists or namelist members are parallel-specific - the same :doc:`JULES namelists </namelists/contents>` can be used to run JULES in serial or parallel mode, and the final results will be identical. The only difference is that, when compiled and run in parallel mode, JULES is able to utilise multiple cores and/or machines.
+
+To compile and run JULES in parallel, MPI-specific commands must be used. The configuration of the MPI tasks available to JULES (number of tasks, which machines to use, etc.) is specified at run-time using these commands (see :ref:`running-jules-in-parallel-mode`). JULES will then attempt to find a suitable decomposition of the grid depending on how many MPI tasks are made available to it.
+
+.. note::
+   For running JULES at a single point, compiling and running JULES in parallel mode provides no advantage.
+   
+   However, if JULES is already compiled in parallel mode, it is still possible to run a single point by simply specifying the number of MPI tasks to be 1.
+
+
+Required software
+-----------------
+
+In order to build and run JULES in parallel mode, three pieces of software are required:
+
+1. A supported Fortran compiler (and associated C compiler). This will be referred to as the *underlying compiler*.
+
+2. An implementation of MPI compiled using that compiler.
+
+   Several implementations of MPI are available, the most commonly used being `MPICH2 <http://www.mpich.org/>`_ and `OpenMPI <http://www.open-mpi.org/>`_.
+   
+   .. note::
+      The ``bin`` directory of your MPI installation must be in your ``$PATH`` to allow FCM make to find the MPI utilities required to build JULES in parallel mode.
+      
+      Specifically, FCM make must be able to find ``mpif90``. ``mpif90`` is a wrapper around the *underlying compiler* (see above) that 'injects' the MPI dependencies automatically.
+
+3. A version of HDF5/NetCDF4 compiled *with parallel I/O enabled*, using the MPI implementation installed above.
+
+   .. note:: This is *not* the default way to compile NetCDF, and must be explicitly enabled. More information on how to do this can be found on the `NetCDF website <https://www.unidata.ucar.edu/software/netcdf/docs/build_parallel.html>`_.
+   
+   
+Building JULES in parallel mode
+-------------------------------
+
+Building JULES in parallel mode uses the same FCM make configuration file as building in serial mode, i.e. ``etc/fcm-make/make.cfg``. This means that the same environment variables used when building JULES in serial mode (see :ref:`fcm-make-environment-variables`), *plus one additional environment variable*, are used to determine how JULES should be built in parallel mode:
+
+``JULES_COMPILER``
+    Used to select settings for the *underlying compiler*.
+    
+    The permitted values are the same as those for building in serial mode.
+    
+``JULES_BUILD``
+    Used to select the type of build.
+    
+    Again, the permitted values are the same as those for building in serial mode.
+    
+``JULES_NETCDF``
+    Indicates whether to use a dummy NetCDF library or a 'real' NetCDF library.
+    
+    .. note::
+       As when building in serial mode, this still defaults to ``dummy`` meaning a dummy NetCDF library will be used.
+       
+``JULES_NETCDF_PATH``
+    Path to NetCDF installation.
+    
+    This sets ``JULES_NETCDF_INC_PATH = $JULES_NETCDF_PATH/include`` and ``JULES_NETCDF_LIB_PATH = $JULES_NETCDF_PATH/lib``. These can be overridden by setting the variables directly.
+    
+    .. note::
+       When compiled in parallel mode, NetCDF must be statically linked.
+       
+       This means the compiler must be able to find all required library and include files (e.g. for NetCDF, HDF5, curl and zlib) in ``JULES_NETCDF_INC_PATH``, ``JULES_NETCDF_LIB_PATH`` or the default search path.
+    
+``JULES_NETCDF_INC_PATH``
+    Path to NetCDF include directory (i.e. directory containing ``netcdf.mod``, ``hdf5.h``, etc.).
+    
+``JULES_NETCDF_LIB_PATH``
+    Path to NetCDF library directory (i.e. directory containing ``libnetcdff.a``, ``libnetcdf.a``, ``libhdf5.a``, etc.).
+   
+``JULES_PARALLEL``
+    Type of parallelism to build with.
+    
+    +--------------------+--------------------------------------------------------------------------------+
+    | Permitted value    | Purpose                                                                        |
+    +====================+================================================================================+
+    | ``serial``         | **Default.** Build JULES in serial mode.                                       |
+    +--------------------+--------------------------------------------------------------------------------+
+    | ``mpi``            | Build JULES in parallel mode with MPI.                                         |
+    +--------------------+--------------------------------------------------------------------------------+
+    
+    
+Example of building JULES in parallel mode
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here, we build a JULES executable with MPI enabled, using the Intel compiler as our underlying compiler:
+
+.. code-block:: bash
+   
+   export JULES_COMPILER=intel
+   export JULES_NETCDF=actual
+   export JULES_NETCDF_PATH=/path/to/parallel/netcdf
+   export JULES_PARALLEL=mpi       
+   
+   fcm make -f etc/fcm-make/make.cfg
+   
+This will create an MPI-enabled JULES executable at ``build/bin/jules.exe``.
+
+
+.. _running-jules-in-parallel-mode:
+
+Running JULES in parallel mode
+------------------------------
+
+Once JULES has been compiled with MPI enabled, it can be run in parallel mode. To do this, the commands ``mpiexec`` and ``mpirun`` should be used. For example, to run JULES using 4 tasks on the current machine, with namelists in ``/path/to/namelist/dir``, the following command could be used:
+
+.. code-block:: bash
+
+   mpirun -n 4 /path/to/jules.exe /path/to/namelist/dir
+
+Detailed discussion of ``mpiexec`` and ``mpirun`` is beyond the scope of this document - please refer to the documentation for your chosen MPI implementation for the available options and features.

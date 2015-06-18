@@ -1,0 +1,984 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.12. ancillaries.nml &mdash; Joint UK Land Environment Simulator (JULES) v4.1 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.1 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.13. pft_params.nml" href="pft_params.nml.html" />
+    <link rel="prev" title="6.11. model_grid.nml" href="model_grid.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="pft_params.nml.html" title="6.13. pft_params.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_grid.nml.html" title="6.11. model_grid.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ancillaries-nml">
+<h1>6.12. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt><a class="headerlink" href="#ancillaries-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets up spatially varying ancillary values. It contains seven namelists - <a class="reference internal" href="#namelist-JULES_FRAC"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_FRAC</span></tt></a>, <a class="reference internal" href="#namelist-JULES_SOIL_PROPS"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_SOIL_PROPS</span></tt></a>, <a class="reference internal" href="#namelist-JULES_TOP"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_TOP</span></tt></a>, <a class="reference internal" href="#namelist-JULES_AGRIC"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_AGRIC</span></tt></a>, <a class="reference internal" href="#namelist-JULES_CROP_PROPS"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_CROP_PROPS</span></tt></a>, <a class="reference internal" href="#namelist-JULES_CO2"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_CO2</span></tt></a> and <a class="reference internal" href="#namelist-JULES_IRRIG"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_IRRIG</span></tt></a>.</p>
+<div class="section" id="namelist-JULES_FRAC">
+<span id="jules-frac-namelist-members"></span><h2>6.12.1. <tt class="docutils literal"><span class="pre">JULES_FRAC</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_FRAC" title="Permalink to this headline">¶</a></h2>
+<p>This namelist specifies the fraction of the land area in each gridbox that is covered by each of the surface types. If <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_veg_compete" title="JULES_VEGETATION::l_veg_compete"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_veg_compete</span></tt></a> = TRUE, then the fraction of each surface type is modelled and the initial state should be specified in <a class="reference internal" href="initial_conditions.nml.html#namelist-JULES_INITIAL"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_INITIAL</span></tt></a>. In all other cases, it must be read here.</p>
+<p>Note that all land points must be either soil points (indicated by values &gt; 0 of the saturated soil moisture content), or land ice points (indicated by the fractional coverage of the ice surface type - if used - being one). The fractional cover of the ice surface type in each gridbox must be either zero or one - there cannot be partial coverage of ice within a gridbox.</p>
+<p>If using either URBAN-2T or MORUSES then the total urban fraction should be entered in the <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_canyon</span></tt></a> or <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban" title="JULES_SURFACE_TYPES::urban"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban</span></tt></a> tile, whichever is specified. This is partitioned into canyon and roof fractions using the canyon fraction (W/R). The canyon fraction is set in <a class="reference internal" href="urban.nml.html"><em>urban.nml</em></a> and can either be prescribed by the user or calculated by an empirical formula.</p>
+<dl class="member">
+<dt id="JULES_FRAC::file">
+<tt class="descclassname">JULES_FRAC::</tt><tt class="descname">file</tt><a class="headerlink" href="#JULES_FRAC::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the file to read surface type fractional coverage data from.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_FRAC::frac_name">
+<tt class="descclassname">JULES_FRAC::</tt><tt class="descname">frac_name</tt><a class="headerlink" href="#JULES_FRAC::frac_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the variable containing the surface type fractional coverage data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is only used for NetCDF files.
+For ASCII files, the surface type fractional coverage data is expected to be the first (ideally only) variable in the file.</p>
+</div>
+<p>In the file, the variable must have a single levels dimension of size <tt class="docutils literal"><span class="pre">ntype</span></tt> called <a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::type_dim_name" title="JULES_INPUT_GRID::type_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">type_dim_name</span></tt></a>, and should not have a time dimension.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_SOIL_PROPS">
+<span id="jules-soil-props-namelist-members"></span><h2>6.12.2. <tt class="docutils literal"><span class="pre">JULES_SOIL_PROPS</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_SOIL_PROPS" title="Permalink to this headline">¶</a></h2>
+<p>This namelist specifies how spatially varying soil properties should be set.</p>
+<dl class="member">
+<dt id="JULES_SOIL_PROPS::const_z">
+<tt class="descclassname">JULES_SOIL_PROPS::</tt><tt class="descname">const_z</tt><a class="headerlink" href="#JULES_SOIL_PROPS::const_z" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch indicating if soil properties are to be uniform with depth.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Soil characteristics do not vary with depth.</dd>
+<dt>FALSE</dt>
+<dd>Soil characteristics vary with depth.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL_PROPS::file">
+<tt class="descclassname">JULES_SOIL_PROPS::</tt><tt class="descname">file</tt><a class="headerlink" href="#JULES_SOIL_PROPS::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The file to read soil properties from.</p>
+<p>If <a class="reference internal" href="#JULES_SOIL_PROPS::use_file" title="JULES_SOIL_PROPS::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> is FALSE for every variable, this will not be used.</p>
+<p>This file name can use <a class="reference internal" href="../input/file-name-templating.html"><em>variable name templating</em></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL_PROPS::nvars">
+<tt class="descclassname">JULES_SOIL_PROPS::</tt><tt class="descname">nvars</tt><a class="headerlink" href="#JULES_SOIL_PROPS::nvars" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of soil property variables that will be provided. At present, all variables are required for all runs.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL_PROPS::var">
+<tt class="descclassname">JULES_SOIL_PROPS::</tt><tt class="descname">var</tt><a class="headerlink" href="#JULES_SOIL_PROPS::var" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>List of soil variable names as recognised by JULES (see <a class="reference internal" href="#list-of-soil-params"><em>List of soil parameters</em></a>). Names are case sensitive.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, variable names must be in the order they appear in the file.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL_PROPS::use_file">
+<tt class="descclassname">JULES_SOIL_PROPS::</tt><tt class="descname">use_file</tt><a class="headerlink" href="#JULES_SOIL_PROPS::use_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_SOIL_PROPS::var" title="JULES_SOIL_PROPS::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a>, this indicates if it should be read from the specified file or whether a constant value is to be used.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>The variable will be read from the file.</dd>
+<dt>FALSE</dt>
+<dd>The variable will be set to a constant value everywhere using <a class="reference internal" href="#JULES_SOIL_PROPS::const_val" title="JULES_SOIL_PROPS::const_val"><tt class="xref nml nml-mem docutils literal"><span class="pre">const_val</span></tt></a> below.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL_PROPS::var_name">
+<tt class="descclassname">JULES_SOIL_PROPS::</tt><tt class="descname">var_name</tt><a class="headerlink" href="#JULES_SOIL_PROPS::var_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_SOIL_PROPS::var" title="JULES_SOIL_PROPS::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a> where <a class="reference internal" href="#JULES_SOIL_PROPS::use_file" title="JULES_SOIL_PROPS::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE, this is the name of the variable in the file containing the data.</p>
+<p>This is not used for variables where <a class="reference internal" href="#JULES_SOIL_PROPS::use_file" title="JULES_SOIL_PROPS::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE, but a placeholder must still be given.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this is not used - only the order in the file matters, as described above.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL_PROPS::tpl_name">
+<tt class="descclassname">JULES_SOIL_PROPS::</tt><tt class="descname">tpl_name</tt><a class="headerlink" href="#JULES_SOIL_PROPS::tpl_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_SOIL_PROPS::var" title="JULES_SOIL_PROPS::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a>, this is the string to substitute into the file name in place of the variable name substitution string.</p>
+<p>If the file name does not use variable name templating, this is not used.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL_PROPS::const_val">
+<tt class="descclassname">JULES_SOIL_PROPS::</tt><tt class="descname">const_val</tt><a class="headerlink" href="#JULES_SOIL_PROPS::const_val" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_SOIL_PROPS::var" title="JULES_SOIL_PROPS::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a> where <a class="reference internal" href="#JULES_SOIL_PROPS::use_file" title="JULES_SOIL_PROPS::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE, this is a constant value that the variable will be set to at every point in every layer.</p>
+<p>This is not used for variables where <a class="reference internal" href="#JULES_SOIL_PROPS::use_file" title="JULES_SOIL_PROPS::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE, but a placeholder must still be given.</p>
+</dd></dl>
+
+<div class="section" id="list-of-soil-parameters">
+<span id="list-of-soil-params"></span><h3>6.12.2.1. List of soil parameters<a class="headerlink" href="#list-of-soil-parameters" title="Permalink to this headline">¶</a></h3>
+<p>If <a class="reference internal" href="#JULES_SOIL_PROPS::const_z" title="JULES_SOIL_PROPS::const_z"><tt class="xref nml nml-mem docutils literal"><span class="pre">const_z</span></tt></a> = FALSE, variables read from file must have a single levels dimension of size <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><tt class="xref nml nml-mem docutils literal"><span class="pre">sm_levels</span></tt></a> called <a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::soil_dim_name" title="JULES_INPUT_GRID::soil_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_dim_name</span></tt></a>.</p>
+<p>If <a class="reference internal" href="#JULES_SOIL_PROPS::const_z" title="JULES_SOIL_PROPS::const_z"><tt class="xref nml nml-mem docutils literal"><span class="pre">const_z</span></tt></a> = TRUE, variables read from file must have no levels dimensions.</p>
+<p>In both cases, the variables must have no time dimension. Some examples of the setup of soil properties can be found in the <tt class="docutils literal"><span class="pre">examples</span></tt> directory.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">albsoil</span></tt></td>
+<td>Soil albedo. A single (averaged) waveband is used.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">b</span></tt></td>
+<td>Exponent in soil hydraulic characteristics.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">hcap</span></tt></td>
+<td>Dry heat capacity (J m<sup>-3</sup> K<sup>-1</sup>).</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">hcon</span></tt></td>
+<td>Dry thermal conductivity (W m<sup>-1</sup> K<sup>-1</sup>).</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">satcon</span></tt></td>
+<td>Hydraulic conductivity at saturation (kg m<sup>-2</sup> s<sup>-1</sup>).</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">sathh</span></tt></td>
+<td><p class="first">If <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::l_vg_soil" title="JULES_SOIL::l_vg_soil"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_vg_soil</span></tt></a> = TRUE (using van Genuchten model),
+sathh = 1 / α (m<sup>-1</sup>), where α is a parameter of the van Genuchten model.</p>
+<p class="last">If <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::l_vg_soil" title="JULES_SOIL::l_vg_soil"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_vg_soil</span></tt></a> = FALSE (using Brooks and Corey model), <tt class="docutils literal"><span class="pre">sathh</span></tt> is
+the absolute value of the soil matric suction at saturation (m). The suction at saturation is generally
+less than zero, but JULES uses the absolute value.</p>
+</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">sm_crit</span></tt></td>
+<td>Volumetric soil moisture content at the critical point (m<sup>3</sup> water per m<sup>3</sup> soil). The
+critical point is that at which soil moisture stress starts to restrict transpiration.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">sm_sat</span></tt></td>
+<td><p class="first">Volumetric soil moisture content at saturation (m<sup>3</sup> water per m<sup>3</sup> soil).</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p>This field is used to distinguish between soil points and land ice points.</p>
+<p class="last"><tt class="docutils literal"><span class="pre">sm_sat</span> <span class="pre">&gt;</span> <span class="pre">0</span></tt> indicates a soil point.</p>
+</div>
+</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">sm_wilt</span></tt></td>
+<td>Volumetric soil moisture content at the wilting point (m<sup>3</sup> water per m<sup>3</sup> soil). The
+wilting point is that at which soil moisture stress completely prevents transpiration.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="namelist-JULES_TOP">
+<span id="jules-top-namelist-members"></span><h2>6.12.3. <tt class="docutils literal"><span class="pre">JULES_TOP</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_TOP" title="Permalink to this headline">¶</a></h2>
+<p>This namelist reads spatially varying parameter values for the TOPMODEL-type parameterisation of runoff. The values are only used if <a class="reference internal" href="jules_hydrology.nml.html#JULES_HYDROLOGY::l_top" title="JULES_HYDROLOGY::l_top"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_top</span></tt></a> = TRUE. The description below is very brief. For further details, see the references under <a class="reference internal" href="jules_hydrology.nml.html#JULES_HYDROLOGY::l_top" title="JULES_HYDROLOGY::l_top"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_top</span></tt></a>.</p>
+<dl class="member">
+<dt id="JULES_TOP::file">
+<tt class="descclassname">JULES_TOP::</tt><tt class="descname">file</tt><a class="headerlink" href="#JULES_TOP::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The file to read TOPMODEL properties from.</p>
+<p>If <a class="reference internal" href="#JULES_TOP::use_file" title="JULES_TOP::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> is FALSE for every variable, this will not be used.</p>
+<p>This file name can use <a class="reference internal" href="../input/file-name-templating.html"><em>variable name templating</em></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TOP::nvars">
+<tt class="descclassname">JULES_TOP::</tt><tt class="descname">nvars</tt><a class="headerlink" href="#JULES_TOP::nvars" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of TOPMODEL property variables that will be provided. At present, all variables are required for runs using TOPMODEL.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TOP::var">
+<tt class="descclassname">JULES_TOP::</tt><tt class="descname">var</tt><a class="headerlink" href="#JULES_TOP::var" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>List of TOPMODEL variable names as recognised by JULES (see <a class="reference internal" href="#list-of-topmodel-params"><em>List of TOPMODEL parameters</em></a>). Names are case sensitive.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, variable names must be in the order they appear in the file.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TOP::use_file">
+<tt class="descclassname">JULES_TOP::</tt><tt class="descname">use_file</tt><a class="headerlink" href="#JULES_TOP::use_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_TOP::var" title="JULES_TOP::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a>, this indicates if it should be read from the specified file or whether a constant value is to be used.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>The variable will be read from the file.</dd>
+<dt>FALSE</dt>
+<dd>The variable will be set to a constant value everywhere using <a class="reference internal" href="#JULES_TOP::const_val" title="JULES_TOP::const_val"><tt class="xref nml nml-mem docutils literal"><span class="pre">const_val</span></tt></a> below.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TOP::var_name">
+<tt class="descclassname">JULES_TOP::</tt><tt class="descname">var_name</tt><a class="headerlink" href="#JULES_TOP::var_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_TOP::var" title="JULES_TOP::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a> where <a class="reference internal" href="#JULES_TOP::use_file" title="JULES_TOP::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE, this is the name of the variable in the file containing the data.</p>
+<p>This is not used for variables where <a class="reference internal" href="#JULES_TOP::use_file" title="JULES_TOP::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE, but a placeholder must still be given.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this is not used - only the order in the file matters, as described above.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TOP::tpl_name">
+<tt class="descclassname">JULES_TOP::</tt><tt class="descname">tpl_name</tt><a class="headerlink" href="#JULES_TOP::tpl_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_TOP::var" title="JULES_TOP::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a>, this is the string to substitute into the file name in place of the variable name substitution string.</p>
+<p>If the file name does not use variable name templating, this is not used.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TOP::const_val">
+<tt class="descclassname">JULES_TOP::</tt><tt class="descname">const_val</tt><a class="headerlink" href="#JULES_TOP::const_val" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_TOP::var" title="JULES_TOP::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a> where <a class="reference internal" href="#JULES_TOP::use_file" title="JULES_TOP::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE, this is a constant value that the variable will be set to at every point in every layer.</p>
+<p>This is not used for variables where <a class="reference internal" href="#JULES_TOP::use_file" title="JULES_TOP::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE, but a placeholder must still be given.</p>
+</dd></dl>
+
+<div class="section" id="list-of-topmodel-parameters">
+<span id="list-of-topmodel-params"></span><h3>6.12.3.1. List of TOPMODEL parameters<a class="headerlink" href="#list-of-topmodel-parameters" title="Permalink to this headline">¶</a></h3>
+<p>All of the TOPMODEL variables listed below are expected to have no levels dimensions and no time dimension.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">fexp</span></tt></td>
+<td>Decay factor describing how the saturated hydraulic conductivity decreases with depth below the standard
+soil column (m<sup>-1</sup>).</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">ti_mean</span></tt></td>
+<td>Mean value of the topographic index in each gridbox.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ti_sig</span></tt></td>
+<td>Standard deviation of the topographic index in each gridbox.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="namelist-JULES_AGRIC">
+<span id="jules-agric-namelist-members"></span><h2>6.12.4. <tt class="docutils literal"><span class="pre">JULES_AGRIC</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_AGRIC" title="Permalink to this headline">¶</a></h2>
+<p>If the TRIFFID vegetation model is used, the fractional area of agricultural land in each gridbox is specified using this namelist. Otherwise, the values in this namelist are not used.</p>
+<dl class="member">
+<dt id="JULES_AGRIC::zero_agric">
+<tt class="descclassname">JULES_AGRIC::</tt><tt class="descname">zero_agric</tt><a class="headerlink" href="#JULES_AGRIC::zero_agric" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Switch used to simplify the initialisation of agricultural fraction.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Set agricultural fraction at all points to zero.</dd>
+<dt>FALSE</dt>
+<dd>Set agricultural fraction using specified data.</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-used-if-nml-mem-zero-agric-false-and-the-input-grid-consists-of-a-single-location admonition">
+<p class="first admonition-title">Used if <a class="reference internal" href="#JULES_AGRIC::zero_agric" title="JULES_AGRIC::zero_agric"><tt class="xref nml nml-mem docutils literal"><span class="pre">zero_agric</span></tt></a> = FALSE and the input grid consists of a single location</p>
+<dl class="last member">
+<dt id="JULES_AGRIC::frac_agr">
+<tt class="descclassname">JULES_AGRIC::</tt><tt class="descname">frac_agr</tt><a class="headerlink" href="#JULES_AGRIC::frac_agr" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The agricultural fraction for the single location.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-used-if-nml-mem-zero-agric-false-and-the-input-grid-consists-of-more-than-one-location admonition">
+<p class="first admonition-title">Used if <a class="reference internal" href="#JULES_AGRIC::zero_agric" title="JULES_AGRIC::zero_agric"><tt class="xref nml nml-mem docutils literal"><span class="pre">zero_agric</span></tt></a> = FALSE and the input grid consists of more than one location</p>
+<dl class="member">
+<dt id="JULES_AGRIC::file">
+<tt class="descclassname">JULES_AGRIC::</tt><tt class="descname">file</tt><a class="headerlink" href="#JULES_AGRIC::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the file to read agricultural fraction data from.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_AGRIC::agric_name">
+<tt class="descclassname">JULES_AGRIC::</tt><tt class="descname">agric_name</tt><a class="headerlink" href="#JULES_AGRIC::agric_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the variable containing the agricultural fraction data.</p>
+<p>In the file, the variable must have no levels dimensions and no time dimension.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="namelist-JULES_CROP_PROPS">
+<span id="jules-crop-props-namelist-members"></span><h2>6.12.5. <tt class="docutils literal"><span class="pre">JULES_CROP_PROPS</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_CROP_PROPS" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_CROP_PROPS::file">
+<tt class="descclassname">JULES_CROP_PROPS::</tt><tt class="descname">file</tt><a class="headerlink" href="#JULES_CROP_PROPS::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The file from which crop properties are read.</p>
+<p>If <a class="reference internal" href="#JULES_CROP_PROPS::use_file" title="JULES_CROP_PROPS::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> is FALSE for every variable, this will not be used.</p>
+<p>This file name can use <a class="reference internal" href="../input/file-name-templating.html"><em>variable name templating</em></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROP_PROPS::nvars">
+<tt class="descclassname">JULES_CROP_PROPS::</tt><tt class="descname">nvars</tt><a class="headerlink" href="#JULES_CROP_PROPS::nvars" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of crop property variables that will be provided.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROP_PROPS::var">
+<tt class="descclassname">JULES_CROP_PROPS::</tt><tt class="descname">var</tt><a class="headerlink" href="#JULES_CROP_PROPS::var" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>List of variable names for spatially-varying crop properties as recognised by JULES (see <a class="reference internal" href="#list-of-spatially-varying-crop-properties"><em>List of spatially-varying crop properties</em></a>). Names are case sensitive.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, variable names must be in the order they appear in the file.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROP_PROPS::use_file">
+<tt class="descclassname">JULES_CROP_PROPS::</tt><tt class="descname">use_file</tt><a class="headerlink" href="#JULES_CROP_PROPS::use_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_CROP_PROPS::var" title="JULES_CROP_PROPS::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a>, this indicates if it should be read from the specified file or whether a constant value is to be used.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>The variable will be read from the file.</dd>
+<dt>FALSE</dt>
+<dd>The variable will be set to a constant value everywhere using <a class="reference internal" href="#JULES_CROP_PROPS::const_val" title="JULES_CROP_PROPS::const_val"><tt class="xref nml nml-mem docutils literal"><span class="pre">const_val</span></tt></a> below.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROP_PROPS::var_name">
+<tt class="descclassname">JULES_CROP_PROPS::</tt><tt class="descname">var_name</tt><a class="headerlink" href="#JULES_CROP_PROPS::var_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_CROP_PROPS::var" title="JULES_CROP_PROPS::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a> where <a class="reference internal" href="#JULES_CROP_PROPS::use_file" title="JULES_CROP_PROPS::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE, this is the name of the variable in the file containing the data.</p>
+<p>This is not used for variables where <a class="reference internal" href="#JULES_CROP_PROPS::use_file" title="JULES_CROP_PROPS::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE, but a placeholder must still be given.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this is not used - only the order in the file matters, as described above.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROP_PROPS::tpl_name">
+<tt class="descclassname">JULES_CROP_PROPS::</tt><tt class="descname">tpl_name</tt><a class="headerlink" href="#JULES_CROP_PROPS::tpl_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_CROP_PROPS::var" title="JULES_CROP_PROPS::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a>, this is the string to substitute into the file name in place of the variable name substitution string.</p>
+<p>If the file name does not use variable name templating, this is not used.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROP_PROPS::const_val">
+<tt class="descclassname">JULES_CROP_PROPS::</tt><tt class="descname">const_val</tt><a class="headerlink" href="#JULES_CROP_PROPS::const_val" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_CROP_PROPS::var" title="JULES_CROP_PROPS::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a> where <a class="reference internal" href="#JULES_CROP_PROPS::use_file" title="JULES_CROP_PROPS::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE, this is a constant value that the variable will be set to at every point in every layer.</p>
+<p>This is not used for variables where <a class="reference internal" href="#JULES_CROP_PROPS::use_file" title="JULES_CROP_PROPS::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE, but a placeholder must still be given.</p>
+</dd></dl>
+
+<div class="section" id="list-of-spatially-varying-crop-properties">
+<span id="id1"></span><h3>6.12.5.1. List of spatially-varying crop properties<a class="headerlink" href="#list-of-spatially-varying-crop-properties" title="Permalink to this headline">¶</a></h3>
+<p>All of the crop variables listed below are expected to have a single levels dimension of size <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><tt class="xref nml nml-mem docutils literal"><span class="pre">ncpft</span></tt></a> called <a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::cpft_dim_name" title="JULES_INPUT_GRID::cpft_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">cpft_dim_name</span></tt></a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">cropsowdate</span></tt></td>
+<td><p class="first">The sowing date for each crop.</p>
+<p>The sowing date should be a real number, with <tt class="docutils literal"><span class="pre">0</span> <span class="pre">&lt;</span> <span class="pre">nint(sowing_date)</span> <span class="pre">&lt;</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">days</span> <span class="pre">in</span> <span class="pre">year</span></tt>.
+For example, for a 365 day year, sow_date = 1.0 is Jan 1st and sow_date = 365.0 is Dec 31st.</p>
+<p>If a crop requires two sowing dates per year, it should be treated as two separate crops with identical
+parameters apart from the sowing date.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only required if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_prescsow" title="JULES_VEGETATION::l_prescsow"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_prescsow</span></tt></a> = TRUE.</p>
+</div>
+</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">cropttveg</span></tt></td>
+<td>Thermal time between emergence and flowering (deg Cd).</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">cropttrep</span></tt></td>
+<td>Thermal time between flowering and maturity/harvest (deg Cd).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="namelist-JULES_CO2">
+<span id="jules-co2-namelist-members"></span><h2>6.12.6. <tt class="docutils literal"><span class="pre">JULES_CO2</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_CO2" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_CO2::co2_mmr">
+<tt class="descclassname">JULES_CO2::</tt><tt class="descname">co2_mmr</tt><a class="headerlink" href="#JULES_CO2::co2_mmr" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">5.241e-4</td>
+</tr>
+</tbody>
+</table>
+<p>Concentration of atmospheric CO2, expressed as a mass mixing ratio.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_IRRIG">
+<span id="jules-irrig-namelist-members"></span><h2>6.12.7. <tt class="docutils literal"><span class="pre">JULES_IRRIG</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_IRRIG" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_IRRIG::frac_irrig_all_tiles">
+<tt class="descclassname">JULES_IRRIG::</tt><tt class="descname">frac_irrig_all_tiles</tt><a class="headerlink" href="#JULES_IRRIG::frac_irrig_all_tiles" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>If T, then irrigation fraction is applied to all tiles, and F, it is applied only to the tiles specified in <a class="reference internal" href="#JULES_IRRIG::irrigtiles" title="JULES_IRRIG::irrigtiles"><tt class="xref nml nml-mem docutils literal"><span class="pre">irrigtiles</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_IRRIG::nirrtile">
+<tt class="descclassname">JULES_IRRIG::</tt><tt class="descname">nirrtile</tt><a class="headerlink" href="#JULES_IRRIG::nirrtile" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The number of tile types to be irrigated. Only used if <a class="reference internal" href="#JULES_IRRIG::frac_irrig_all_tiles" title="JULES_IRRIG::frac_irrig_all_tiles"><tt class="xref nml nml-mem docutils literal"><span class="pre">frac_irrig_all_tiles</span></tt></a> = F.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_IRRIG::irrigtiles">
+<tt class="descclassname">JULES_IRRIG::</tt><tt class="descname">irrigtiles</tt><a class="headerlink" href="#JULES_IRRIG::irrigtiles" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer(nirrtile)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Indices of the tiles to be irrigated. Only used if <a class="reference internal" href="#JULES_IRRIG::frac_irrig_all_tiles" title="JULES_IRRIG::frac_irrig_all_tiles"><tt class="xref nml nml-mem docutils literal"><span class="pre">frac_irrig_all_tiles</span></tt></a> = F.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_IRRIG::read_file">
+<tt class="descclassname">JULES_IRRIG::</tt><tt class="descname">read_file</tt><a class="headerlink" href="#JULES_IRRIG::read_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Indicates if irrigated fraction is to be read from file.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Irrigated fraction is read from the file specified in <a class="reference internal" href="#JULES_IRRIG::file" title="JULES_IRRIG::file"><tt class="xref nml nml-mem docutils literal"><span class="pre">file</span></tt></a>.</dd>
+<dt>FALSE</dt>
+<dd>Irrigated fraction is set to the constant value specified in <a class="reference internal" href="#JULES_IRRIG::const_frac_irr" title="JULES_IRRIG::const_frac_irr"><tt class="xref nml nml-mem docutils literal"><span class="pre">const_frac_irr</span></tt></a>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_IRRIG::file">
+<tt class="descclassname">JULES_IRRIG::</tt><tt class="descname">file</tt><a class="headerlink" href="#JULES_IRRIG::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The file from which irrigation fractions are read, including path.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_IRRIG::var_name">
+<tt class="descclassname">JULES_IRRIG::</tt><tt class="descname">var_name</tt><a class="headerlink" href="#JULES_IRRIG::var_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the variable containing the irrigated fraction data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is only used for NetCDF files.
+For ASCII files, the irrigated fraction data is expected to be the first (ideally only) variable in the file.</p>
+</div>
+<p>In the file, the variable must have no levels or time dimensions.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_IRRIG::const_frac_irr">
+<tt class="descclassname">JULES_IRRIG::</tt><tt class="descname">const_frac_irr</tt><a class="headerlink" href="#JULES_IRRIG::const_frac_irr" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">none</td>
+</tr>
+</tbody>
+</table>
+<p>The constant irrigated fraction to be applied to all grid points.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.nml.html">6.2. <tt class="docutils literal"><span class="pre">logging.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface_types.nml.html">6.3. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface.nml.html">6.4. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_radiation.nml.html">6.5. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_hydrology.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_vegetation.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_snow.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.10. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.11. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.12. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.13. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.14. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crop_params.nml.html">6.15. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.16. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.17. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.18. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.19. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.20. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.21. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.22. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="model_grid.nml.html"
+                        title="previous chapter">6.11. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pft_params.nml.html"
+                        title="next chapter">6.13. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="pft_params.nml.html" title="6.13. pft_params.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_grid.nml.html" title="6.11. model_grid.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

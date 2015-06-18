@@ -1,0 +1,340 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.3. jules_surface_types.nml &mdash; Joint UK Land Environment Simulator (JULES) v4.1 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.1 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.4. jules_surface.nml" href="jules_surface.nml.html" />
+    <link rel="prev" title="6.2. logging.nml" href="logging.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_surface.nml.html" title="6.4. jules_surface.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="logging.nml.html" title="6.2. logging.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jules-surface-types-nml">
+<h1>6.3. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt><a class="headerlink" href="#jules-surface-types-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file configures the surface types used by JULES. It contains one namelist called <a class="reference internal" href="#namelist-JULES_SURFACE_TYPES"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_SURFACE_TYPES</span></tt></a>.</p>
+<div class="section" id="namelist-JULES_SURFACE_TYPES">
+<span id="jules-surface-types-namelist-members"></span><h2>6.3.1. <tt class="docutils literal"><span class="pre">JULES_SURFACE_TYPES</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_SURFACE_TYPES" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_SURFACE_TYPES::npft">
+<tt class="descclassname">JULES_SURFACE_TYPES::</tt><tt class="descname">npft</tt><a class="headerlink" href="#JULES_SURFACE_TYPES::npft" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">-32768</td>
+</tr>
+</tbody>
+</table>
+<p>The number of plant functional types to be modelled.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE_TYPES::ncpft">
+<tt class="descclassname">JULES_SURFACE_TYPES::</tt><tt class="descname">ncpft</tt><a class="headerlink" href="#JULES_SURFACE_TYPES::ncpft" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&lt; npft</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of crop plant functional types to be modelled.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE_TYPES::nnvg">
+<tt class="descclassname">JULES_SURFACE_TYPES::</tt><tt class="descname">nnvg</tt><a class="headerlink" href="#JULES_SURFACE_TYPES::nnvg" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">-32768</td>
+</tr>
+</tbody>
+</table>
+<p>The number of non-plant surface types to be modelled.</p>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The total number of surface types to be modelled is called <tt class="docutils literal"><span class="pre">ntype</span></tt>, and is given by <tt class="docutils literal"><span class="pre">ntype</span> <span class="pre">=</span> <span class="pre">npft</span> <span class="pre">+</span> <span class="pre">nnvg</span></tt>.</p>
+<p>In the standard setup, JULES models 5 vegetation types and 4 non-vegetation types (<tt class="docutils literal"><span class="pre">npft</span> <span class="pre">=</span> <span class="pre">5</span></tt>, <tt class="docutils literal"><span class="pre">nnvg</span> <span class="pre">=</span> <span class="pre">4</span></tt>). However, the model domain need not contain all 9 types, e.g. the domain could consist of a single point with 100% grass. The amount of each type in the domain is normally set in <a class="reference internal" href="ancillaries.nml.html#namelist-JULES_FRAC"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_FRAC</span></tt></a>.</p>
+<p class="last">If the crop model is active (i.e. <tt class="docutils literal"><span class="pre">ncpft</span></tt> &gt; 0), then <tt class="docutils literal"><span class="pre">nnpft</span> <span class="pre">=</span> <span class="pre">npft</span> <span class="pre">-</span> <span class="pre">ncpft</span></tt> where <tt class="docutils literal"><span class="pre">nnpft</span></tt> is the number of natural PFTs.</p>
+</div>
+<dl class="member">
+<dt id="JULES_SURFACE_TYPES::urban">
+<tt class="descclassname">JULES_SURFACE_TYPES::</tt><tt class="descname">urban</tt><a class="headerlink" href="#JULES_SURFACE_TYPES::urban" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">-32768</td>
+</tr>
+</tbody>
+</table>
+<p>Index of the urban surface type.</p>
+<p>A negative value indicates no urban surface type.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE_TYPES::lake">
+<tt class="descclassname">JULES_SURFACE_TYPES::</tt><tt class="descname">lake</tt><a class="headerlink" href="#JULES_SURFACE_TYPES::lake" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">-32768</td>
+</tr>
+</tbody>
+</table>
+<p>Index of the lake surface type.</p>
+<p>A negative value indicates no lake surface type.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE_TYPES::soil">
+<tt class="descclassname">JULES_SURFACE_TYPES::</tt><tt class="descname">soil</tt><a class="headerlink" href="#JULES_SURFACE_TYPES::soil" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">-32768</td>
+</tr>
+</tbody>
+</table>
+<p>Index of the soil surface type.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A soil surface type must be given.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE_TYPES::ice">
+<tt class="descclassname">JULES_SURFACE_TYPES::</tt><tt class="descname">ice</tt><a class="headerlink" href="#JULES_SURFACE_TYPES::ice" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">-32768</td>
+</tr>
+</tbody>
+</table>
+<p>Index of the ice surface type.</p>
+<p>A negative value indicates no ice surface type.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE_TYPES::urban_canyon">
+<tt class="descclassname">JULES_SURFACE_TYPES::</tt><tt class="descname">urban_canyon</tt><a class="headerlink" href="#JULES_SURFACE_TYPES::urban_canyon" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">-32768</td>
+</tr>
+</tbody>
+</table>
+<p>Index of the urban canyon surface type.</p>
+<p>A negative value indicates no urban canyon surface type.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE_TYPES::urban_roof">
+<tt class="descclassname">JULES_SURFACE_TYPES::</tt><tt class="descname">urban_roof</tt><a class="headerlink" href="#JULES_SURFACE_TYPES::urban_roof" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">-32768</td>
+</tr>
+</tbody>
+</table>
+<p>Index of the urban roof surface type.</p>
+<p>A negative value indicates no urban roof surface type.</p>
+</dd></dl>
+
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The values of <a class="reference internal" href="#JULES_SURFACE_TYPES::urban" title="JULES_SURFACE_TYPES::urban"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban</span></tt></a>, <a class="reference internal" href="#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_canyon</span></tt></a> and <a class="reference internal" href="#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_roof</span></tt></a> are used to determine what urban scheme to use.</p>
+<ul class="simple">
+<li>At most one of <a class="reference internal" href="#JULES_SURFACE_TYPES::urban" title="JULES_SURFACE_TYPES::urban"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban</span></tt></a> and <a class="reference internal" href="#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_canyon</span></tt></a> can be given.</li>
+<li>If <a class="reference internal" href="#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_roof</span></tt></a> is present, then JULES will use one of the 2-tile urban schemes (and so either <a class="reference internal" href="#JULES_SURFACE_TYPES::urban" title="JULES_SURFACE_TYPES::urban"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban</span></tt></a> or <a class="reference internal" href="#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_canyon</span></tt></a> must be present, and will represent the urban canyon surface type).</li>
+<li>If <a class="reference internal" href="#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_roof</span></tt></a> is not present, <a class="reference internal" href="#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_canyon</span></tt></a> cannot be given and, if present, <a class="reference internal" href="#JULES_SURFACE_TYPES::urban" title="JULES_SURFACE_TYPES::urban"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban</span></tt></a> is used as the single urban surface type.</li>
+</ul>
+<p class="last">When giving urban fraction data (see <a class="reference internal" href="ancillaries.nml.html#namelist-JULES_FRAC"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_FRAC</span></tt></a>), total urban fraction should be given in the <a class="reference internal" href="#JULES_SURFACE_TYPES::urban" title="JULES_SURFACE_TYPES::urban"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban</span></tt></a> or <a class="reference internal" href="#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_canyon</span></tt></a> tile, whichever is present. This is partitioned internally into roof and canyon.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.nml.html">6.2. <tt class="docutils literal"><span class="pre">logging.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.3. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface.nml.html">6.4. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_radiation.nml.html">6.5. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_hydrology.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_vegetation.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_snow.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.10. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.11. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.12. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.13. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.14. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crop_params.nml.html">6.15. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.16. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.17. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.18. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.19. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.20. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.21. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.22. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="logging.nml.html"
+                        title="previous chapter">6.2. <tt class="docutils literal docutils literal"><span class="pre">logging.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jules_surface.nml.html"
+                        title="next chapter">6.4. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">jules_surface.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_surface.nml.html" title="6.4. jules_surface.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="logging.nml.html" title="6.2. logging.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>
