@@ -1,0 +1,621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.17. urban.nml &mdash; Joint UK Land Environment Simulator (JULES) v4.2 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.2 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.18. fire.nml" href="fire.nml.html" />
+    <link rel="prev" title="6.16. triffid_params.nml" href="triffid_params.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="fire.nml.html" title="6.18. fire.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="triffid_params.nml.html" title="6.16. triffid_params.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.2 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="urban-nml">
+<h1>6.17. <tt class="docutils literal"><span class="pre">urban.nml</span></tt><a class="headerlink" href="#urban-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains three namelists called <a class="reference internal" href="#namelist-URBAN_SWITCHES"><tt class="xref nml nml-lst docutils literal"><span class="pre">URBAN_SWITCHES</span></tt></a>, <a class="reference internal" href="#namelist-URBAN2T_PARAM"><tt class="xref nml nml-lst docutils literal"><span class="pre">URBAN2T_PARAM</span></tt></a> and <a class="reference internal" href="#namelist-URBAN_PROPERTIES"><tt class="xref nml nml-lst docutils literal"><span class="pre">URBAN_PROPERTIES</span></tt></a>.</p>
+<p>This section reads in model configuration choices, geometry &amp; material characteristics data for the urban schemes URBAN-2T and MORUSES. Both these schemes must have an <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_roof</span></tt></a> tile and an <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_canyon</span></tt></a> tile. Values from this section are only used if either of the two-tile urban schemes are enabled by specifying an <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_roof</span></tt></a> tile.</p>
+<p>For parameters that MORUSES does not parameterise, and for any MORUSES parametrisations that are turned off, values from <a class="reference internal" href="nveg_params.nml.html"><em>nveg_params.nml</em></a> will be used. See the switches below for more information.</p>
+<p>Further information on MORUSES, including references, can be found in the technical documentation and under <a class="reference internal" href="#URBAN_SWITCHES::l_moruses" title="URBAN_SWITCHES::l_moruses"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_moruses</span></tt></a>.</p>
+<div class="section" id="namelist-URBAN_SWITCHES">
+<span id="urban-switches-namelist-members"></span><h2>6.17.1. <tt class="docutils literal"><span class="pre">URBAN_SWITCHES</span></tt> namelist members<a class="headerlink" href="#namelist-URBAN_SWITCHES" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="URBAN_SWITCHES::l_moruses">
+<tt class="descclassname">URBAN_SWITCHES::</tt><tt class="descname">l_moruses</tt><a class="headerlink" href="#URBAN_SWITCHES::l_moruses" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not used unless an <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_roof</span></tt></a> tile is present.</p>
+</div>
+<p>Switch for turning on MORUSES.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use MORUSES parameterisations.</dd>
+<dt>FALSE</dt>
+<dd>Do not use MORUSES parameterisations. Use urban tile parameters, set in <a class="reference internal" href="nveg_params.nml.html"><em>nveg_params.nml</em></a>, instead.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Porson, A., et al. (2010), Implementation of a new urban energy budget scheme in the MetUM. Part I: Description and idealized simulations, Quarterly Journal of the Royal Meteorological Society, 136: 1514-1529. doi: 10.1002/qj.668</li>
+<li>Porson, A., et al. (2010), Implementation of a new urban energy budget scheme into MetUM. Part II: Validation against observations and model Intercomparison, Quarterly Journal of the Royal Meteorological Society, 136: 1530-1542. doi: 10.1002/qj.572</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_SWITCHES::l_urban_empirical">
+<tt class="descclassname">URBAN_SWITCHES::</tt><tt class="descname">l_urban_empirical</tt><a class="headerlink" href="#URBAN_SWITCHES::l_urban_empirical" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to use empirical relationships for urban geometry, based on total urban fraction. Dimensions calculated are W/R, H/W &amp; H.</p>
+<p>URBAN-2T uses W/R only.</p>
+<p>Used in calculation of the canyon and roof fractions and also to distribute anthropogenic heat between roof and canyon if <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_anthrop_heat_src" title="JULES_SURFACE::l_anthrop_heat_src"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_anthrop_heat_src</span></tt></a> = TRUE.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use empirical relationships for urban geometry.</dd>
+<dt>FALSE</dt>
+<dd>Appropriate data needs to be supplied instead.</dd>
+</dl>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">These are only valid for high resolutions (~1 km).</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Bohnenstengel SI, Evans S, Clark P, Belcher SE (2010). Simulations of the London urban heat island, Quarterly Journal of the Royal Meteorological Society (submitted)</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_SWITCHES::l_moruses_macdonald">
+<tt class="descclassname">URBAN_SWITCHES::</tt><tt class="descname">l_moruses_macdonald</tt><a class="headerlink" href="#URBAN_SWITCHES::l_moruses_macdonald" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>MORUSES switch for using MacDonald et al. (1998) to calculate effective roughness length of urban areas and displacement height from urban geometry.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use MacDonald et al. (1998) formulations.</dd>
+<dt>FALSE</dt>
+<dd>Appropriate data needs to be supplied instead.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If <a class="reference internal" href="#URBAN_SWITCHES::l_urban_empirical" title="URBAN_SWITCHES::l_urban_empirical"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_urban_empirical</span></tt></a> = TRUE then <a class="reference internal" href="#URBAN_SWITCHES::l_moruses_macdonald" title="URBAN_SWITCHES::l_moruses_macdonald"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_moruses_macdonald</span></tt></a> = TRUE, which the code enforces.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Macdonald RW, Griffiths RF, Hall D. 1998. An improved method for the estimation of surface roughness of obstacle arrays. Atmos. Env. 32: 1857-1864</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_SWITCHES::l_moruses_albedo">
+<tt class="descclassname">URBAN_SWITCHES::</tt><tt class="descname">l_moruses_albedo</tt><a class="headerlink" href="#URBAN_SWITCHES::l_moruses_albedo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>MORUSES switch for effective canyon albedo parameterisation.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use MORUSES parameterisation. Requires that <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_cosz" title="JULES_RADIATION::l_cosz"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_cosz</span></tt></a> = TRUE, which the code automatically enables.</dd>
+<dt>FALSE</dt>
+<dd>The canyon albedo is taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::albsnf_nvg_io" title="JULES_NVEGPARM::albsnf_nvg_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">albsnf_nvg_io</span></tt></a> and <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::albsnc_nvg_io" title="JULES_NVEGPARM::albsnc_nvg_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">albsnc_nvg_io</span></tt></a>.</dd>
+</dl>
+<p>In all cases, the roof albedo is taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::albsnf_nvg_io" title="JULES_NVEGPARM::albsnf_nvg_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">albsnf_nvg_io</span></tt></a> and <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::albsnc_nvg_io" title="JULES_NVEGPARM::albsnc_nvg_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">albsnc_nvg_io</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_SWITCHES::l_moruses_emissivity">
+<tt class="descclassname">URBAN_SWITCHES::</tt><tt class="descname">l_moruses_emissivity</tt><a class="headerlink" href="#URBAN_SWITCHES::l_moruses_emissivity" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>MORUSES switch for effective canyon emissivity parameterisation.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use MORUSES parameterisation.</dd>
+<dt>FALSE</dt>
+<dd>The canyon emmissivity is taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::emis_nvg_io" title="JULES_NVEGPARM::emis_nvg_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">emis_nvg_io</span></tt></a>.</dd>
+</dl>
+<p>In all cases, the roof emissivity is taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::emis_nvg_io" title="JULES_NVEGPARM::emis_nvg_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">emis_nvg_io</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_SWITCHES::l_moruses_rough">
+<tt class="descclassname">URBAN_SWITCHES::</tt><tt class="descname">l_moruses_rough</tt><a class="headerlink" href="#URBAN_SWITCHES::l_moruses_rough" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>MORUSES switch for effective roughness length for heat parameterisation.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use MORUSES parameterisation for canyon and roof.</dd>
+<dt>FALSE</dt>
+<dd>Values for canyon and roof are taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::z0_nvg_io" title="JULES_NVEGPARM::z0_nvg_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">z0_nvg_io</span></tt></a> and <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::z0hm_nvg_io" title="JULES_NVEGPARM::z0hm_nvg_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">z0hm_nvg_io</span></tt></a>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_SWITCHES::l_moruses_storage">
+<tt class="descclassname">URBAN_SWITCHES::</tt><tt class="descname">l_moruses_storage</tt><a class="headerlink" href="#URBAN_SWITCHES::l_moruses_storage" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>MORUSES switch for thermal inertia and coupling with underlying soil parameterisation.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use MORUSES parameterisation.</dd>
+<dt>FALSE</dt>
+<dd>Values are taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::ch_nvg_io" title="JULES_NVEGPARM::ch_nvg_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">ch_nvg_io</span></tt></a> and <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::vf_nvg_io" title="JULES_NVEGPARM::vf_nvg_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">vf_nvg_io</span></tt></a>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_SWITCHES::l_moruses_storage_thin">
+<tt class="descclassname">URBAN_SWITCHES::</tt><tt class="descname">l_moruses_storage_thin</tt><a class="headerlink" href="#URBAN_SWITCHES::l_moruses_storage_thin" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>MORUSES switch to use a thin roof to simulate the effects of insulation.</p>
+<p>Only used if <a class="reference internal" href="#URBAN_SWITCHES::l_moruses_storage" title="URBAN_SWITCHES::l_moruses_storage"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_moruses_storage</span></tt></a> = TRUE.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use thin, insulated roof.</dd>
+<dt>FALSE</dt>
+<dd>Use damping depth diffusivity of roofing materials.</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-URBAN2T_PARAM">
+<span id="urban2t-param-namelist-members"></span><h2>6.17.2. <tt class="docutils literal"><span class="pre">URBAN2T_PARAM</span></tt> namelist members<a class="headerlink" href="#namelist-URBAN2T_PARAM" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="URBAN2T_PARAM::anthrop_heat_scale">
+<tt class="descclassname">URBAN2T_PARAM::</tt><tt class="descname">anthrop_heat_scale</tt><a class="headerlink" href="#URBAN2T_PARAM::anthrop_heat_scale" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Distribution scaling factor, which allows the anthropogenic heat flux to be spread between the <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_canyon</span></tt></a> and <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><tt class="xref nml nml-mem docutils literal"><span class="pre">urban_roof</span></tt></a> tiles such that:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">H_roof</span> <span class="pre">=</span> <span class="pre">anthrop_heat_scale</span> <span class="pre">x</span> <span class="pre">H_canyon</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">H_canyon</span> <span class="pre">x</span> <span class="pre">(W/R)</span> <span class="pre">+</span> <span class="pre">H_roof</span> <span class="pre">x</span> <span class="pre">(</span> <span class="pre">1.0</span> <span class="pre">-</span> <span class="pre">W/R</span> <span class="pre">)</span> <span class="pre">=</span> <span class="pre">anthrop_heat</span></tt></li>
+</ul>
+<p>Has a value between 0.0 and 1.0 where the extremes correspond to:</p>
+<ul class="simple">
+<li>0.0 = all released within the canyon.</li>
+<li>1.0 = evenly spread between canyon and roof.</li>
+</ul>
+<p>Only used if <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_anthrop_heat_src" title="JULES_SURFACE::l_anthrop_heat_src"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_anthrop_heat_src</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-URBAN_PROPERTIES">
+<span id="urban-properties-namelist-members"></span><h2>6.17.3. <tt class="docutils literal"><span class="pre">URBAN_PROPERTIES</span></tt> namelist members<a class="headerlink" href="#namelist-URBAN_PROPERTIES" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="URBAN_PROPERTIES::file">
+<tt class="descclassname">URBAN_PROPERTIES::</tt><tt class="descname">file</tt><a class="headerlink" href="#URBAN_PROPERTIES::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The file to read urban properties from.</p>
+<p>If <a class="reference internal" href="#URBAN_PROPERTIES::use_file" title="URBAN_PROPERTIES::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> (see below) is FALSE for every variable, this will not be used.</p>
+<p>This file name can use <a class="reference internal" href="../input/file-name-templating.html"><em>variable name templating</em></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_PROPERTIES::nvars">
+<tt class="descclassname">URBAN_PROPERTIES::</tt><tt class="descname">nvars</tt><a class="headerlink" href="#URBAN_PROPERTIES::nvars" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of urban property variables that will be provided.</p>
+<p>The required variables depend on whether MORUSES is used or not:</p>
+<ul class="simple">
+<li>If MORUSES is on, all variables must be given. However, depending on the configuration of MORUSES, not all given variables will be used. Those that will not be used could be set to constant values to avoid setting them from file.</li>
+<li>If MORUSES is <em>not</em> on, only <tt class="docutils literal"><span class="pre">wrr</span></tt> is required.</li>
+</ul>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_PROPERTIES::var">
+<tt class="descclassname">URBAN_PROPERTIES::</tt><tt class="descname">var</tt><a class="headerlink" href="#URBAN_PROPERTIES::var" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>List of urban property variable names as recognised by JULES (see <a class="reference internal" href="#list-of-urban-properties"><em>List of urban properties</em></a>). Names are case sensitive.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, variable names must be in the order they appear in the file.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_PROPERTIES::use_file">
+<tt class="descclassname">URBAN_PROPERTIES::</tt><tt class="descname">use_file</tt><a class="headerlink" href="#URBAN_PROPERTIES::use_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#URBAN_PROPERTIES::var" title="URBAN_PROPERTIES::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a>, this indicates if it should be read from the specified file or whether a constant value is to be used.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>The variable will be read from the file.</dd>
+<dt>FALSE</dt>
+<dd>The variable will be set to a constant value everywhere using <a class="reference internal" href="#URBAN_PROPERTIES::const_val" title="URBAN_PROPERTIES::const_val"><tt class="xref nml nml-mem docutils literal"><span class="pre">const_val</span></tt></a> below.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_PROPERTIES::var_name">
+<tt class="descclassname">URBAN_PROPERTIES::</tt><tt class="descname">var_name</tt><a class="headerlink" href="#URBAN_PROPERTIES::var_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#URBAN_PROPERTIES::var" title="URBAN_PROPERTIES::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a> where <a class="reference internal" href="#URBAN_PROPERTIES::use_file" title="URBAN_PROPERTIES::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE, this is the name of the variable in the file containing the data.</p>
+<p>This is not used for variables where <a class="reference internal" href="#URBAN_PROPERTIES::use_file" title="URBAN_PROPERTIES::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE, but a placeholder must still be given.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this is not used - only the order in the file matters, as described above.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_PROPERTIES::tpl_name">
+<tt class="descclassname">URBAN_PROPERTIES::</tt><tt class="descname">tpl_name</tt><a class="headerlink" href="#URBAN_PROPERTIES::tpl_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#URBAN_PROPERTIES::var" title="URBAN_PROPERTIES::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a>, this is the string to substitute into the file name in place of the variable name substitution string.</p>
+<p>If the file name does not use variable name templating, this is not used.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="URBAN_PROPERTIES::const_val">
+<tt class="descclassname">URBAN_PROPERTIES::</tt><tt class="descname">const_val</tt><a class="headerlink" href="#URBAN_PROPERTIES::const_val" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#URBAN_PROPERTIES::var" title="URBAN_PROPERTIES::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a> where <a class="reference internal" href="#URBAN_PROPERTIES::use_file" title="URBAN_PROPERTIES::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE, this is a constant value that the variable will be set to at every point in every layer.</p>
+<p>This is not used for variables where <a class="reference internal" href="#URBAN_PROPERTIES::use_file" title="URBAN_PROPERTIES::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE, but a placeholder must still be given.</p>
+</dd></dl>
+
+<div class="section" id="list-of-urban-properties">
+<span id="id1"></span><h3>6.17.3.1. List of urban properties<a class="headerlink" href="#list-of-urban-properties" title="Permalink to this headline">¶</a></h3>
+<p>All of the urban property variables listed below are expected to have no levels dimensions and no time dimension.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="25%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Variable name</th>
+<th class="head">Decription <a class="footnote-reference" href="#id3" id="id2">[*]</a></th>
+<th class="head">Notes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">wrr</span></tt></td>
+<td>Repeating width ratio (or canyon
+fraction, W/R)</td>
+<td>If <a class="reference internal" href="#URBAN_SWITCHES::l_urban_empirical" title="URBAN_SWITCHES::l_urban_empirical"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_urban_empirical</span></tt></a> = TRUE then this is updated with
+calculated values.</td>
+</tr>
+<tr class="row-odd"><td colspan="3"><strong>The following apply to MORUSES only</strong></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">hwr</span></tt></td>
+<td>Height-to-width ratio (H/W)</td>
+<td>See for <tt class="docutils literal"><span class="pre">wrr</span></tt> above.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">hgt</span></tt></td>
+<td>Building height (H)</td>
+<td>See for <tt class="docutils literal"><span class="pre">wrr</span></tt> above.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ztm</span></tt></td>
+<td>Effective roughness length of
+urban areas</td>
+<td>If <a class="reference internal" href="#URBAN_SWITCHES::l_moruses_macdonald" title="URBAN_SWITCHES::l_moruses_macdonald"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_moruses_macdonald</span></tt></a> = TRUE (or
+<a class="reference internal" href="#URBAN_SWITCHES::l_urban_empirical" title="URBAN_SWITCHES::l_urban_empirical"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_urban_empirical</span></tt></a> = TRUE), then this is updated with
+calculated values.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">disp</span></tt></td>
+<td>Displacement height</td>
+<td>See for <tt class="docutils literal"><span class="pre">ztm</span></tt> above.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">albwl</span></tt></td>
+<td>Wall albedo</td>
+<td>Data only used if <a class="reference internal" href="#URBAN_SWITCHES::l_moruses_albedo" title="URBAN_SWITCHES::l_moruses_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_moruses_albedo</span></tt></a> = TRUE.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">albrd</span></tt></td>
+<td>Road albedo</td>
+<td>See for <tt class="docutils literal"><span class="pre">albwl</span></tt> above.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">emisw</span></tt></td>
+<td>Wall emissivity</td>
+<td>Data only used if <a class="reference internal" href="#URBAN_SWITCHES::l_moruses_emissivity" title="URBAN_SWITCHES::l_moruses_emissivity"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_moruses_emissivity</span></tt></a> = TRUE.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">emisr</span></tt></td>
+<td>Road emissivity</td>
+<td>See for <tt class="docutils literal"><span class="pre">emisw</span></tt> above.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id3" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id2">[*]</a></td><td>For more information on the urban geometry used please see the JULES technical documentation.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface_types.nml.html">6.2. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface.nml.html">6.3. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_radiation.nml.html">6.4. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_hydrology.nml.html">6.5. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_vegetation.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_snow.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_rivers.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.10. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.11. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.12. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.13. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.14. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crop_params.nml.html">6.15. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.16. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.17. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fire.nml.html">6.18. <tt class="docutils literal"><span class="pre">fire.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.19. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.20. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.21. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.22. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.23. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="triffid_params.nml.html"
+                        title="previous chapter">6.16. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">triffid_params.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fire.nml.html"
+                        title="next chapter">6.18. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">fire.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="fire.nml.html" title="6.18. fire.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="triffid_params.nml.html" title="6.16. triffid_params.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.2 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2015.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

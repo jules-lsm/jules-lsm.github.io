@@ -1,0 +1,90 @@
+``jules_radiation.nml``
+=======================
+
+
+This file sets the radiation options. It contains one namelist called :nml:lst:`JULES_RADIATION`.
+
+
+
+``JULES_RADIATION`` namelist members
+-------------------------------------
+
+.. nml:namelist:: JULES_RADIATION
+
+.. nml:member:: l_cosz
+
+   :type: logical
+   :default: T
+
+   Switch for calculation of solar zenith angle. For land points, this switch is only relevant if :nml:mem:`l_spec_albedo` = TRUE.
+
+   TRUE
+       Calculate zenith angle.
+
+   FALSE
+       Assume constant zenith angle of zero, meaning sun is directly overhead.
+       
+
+.. nml:member:: l_spec_albedo
+
+   :type: logical
+   :default: F
+
+   Switch for albedo model.
+
+   TRUE
+       Use spectral albedo with VIS and NIR components.
+
+   FALSE
+       Use a single (averaged) waveband albedo.
+       
+       
+.. nml:member:: l_spec_alb_bs
+
+   :type: logical
+   :default: F
+
+   Switch for albedo model, when spectral albedo is being used.
+
+   Requires :nml:mem:`l_spec_albedo` = TRUE.
+
+   TRUE
+       Produces a single albedo for use by both the direct and diffuse beams (a 'blue' sky albedo). This currently copies the diffuse beam albedo for the direct beam.
+
+   FALSE
+       Produces both a direct ('black' sky) and a diffuse ('white' sky) albedo.
+       
+       
+.. nml:member:: l_snow_albedo
+
+   :type: logical
+   :default: F
+
+   Switch for using prognostic snow properties in model albedo.
+   
+   Requires :nml:mem:`l_spec_albedo` = TRUE.
+   
+   TRUE
+       Use prognostic snow properties for albedo.
+
+   FALSE
+       Calculate albedo of snow using only snow depth.
+       
+       
+.. nml:member:: l_albedo_obs
+
+   :type: logical
+   :default: F
+
+   Switch for applying a scaling factor to the albedo values, on tiles, so that the resultant aggregate albedo matches observations.
+   
+   TRUE
+       Scale the albedo values on tiles.
+       
+       .. note:: Observed albedo(s) must be prescribed in :doc:`prescribed_data.nml`.
+
+   FALSE
+       Do not scale the albedo values on tiles.
+
+
+      

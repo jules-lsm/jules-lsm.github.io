@@ -1,0 +1,181 @@
+``crop_params.nml``
+===================
+
+
+This file contains a single namelist called :nml:lst:`JULES_CROPPARM` that sets time- and space-invariant parameters for each crop type.
+
+
+``JULES_CROPPARM`` namelist members
+-----------------------------------
+
+.. nml:namelist:: JULES_CROPPARM
+
+This namelist reads the values of parameters for each of the crop functional types. These parameters are a function of crop pft only.  These parameters are only required if :nml:mem:`JULES_SURFACE_TYPES::ncpft` > 0.  The crop pfts should be in the same order as in :doc:`pft_params.nml`. 
+
+
+.. nml:member:: t_bse_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Base temperature (K).
+
+
+.. nml:member:: t_opt_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Optimum temperature (K).
+
+
+.. nml:member:: tmax_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Maximum temperature (K).
+
+
+.. nml:member:: tt_emr_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Thermal time between sowing and emergence (deg Cd).
+
+
+.. nml:member:: crit_pp_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Critical photoperiod (hours).         
+
+
+.. nml:member:: pp_sens_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Sensitivity of development rate to photoperiod (hours\ :sup:`-1`).
+
+
+.. nml:member:: rt_dir_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Coefficient determining relative growth of roots vertically and horizontally.
+
+  
+.. nml:member:: alpha1_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Coefficient for determining partitioning.
+   
+   
+.. nml:member:: alpha2_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Coefficient for determining partitioning.
+   
+
+.. nml:member:: alpha3_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Coefficient for determining partitioning.
+
+
+.. nml:member:: beta1_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Coefficient for determining partitioning.
+
+   
+.. nml:member:: beta2_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Coefficient for determining partitioning.
+   
+   
+.. nml:member:: beta3_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Coefficient for determining partitioning.
+
+
+.. nml:member:: gamma_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Coefficient for determining specific leaf area (m\ :sup:`2` kg\ :sup:`-1`).
+   
+   
+.. nml:member:: delta_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Coefficient for determining specific leaf area (m\ :sup:`2` kg\ :sup:`-1`).
+   
+   
+.. nml:member:: remob_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Remobilisation factor. Fraction of stem growth partitioned to RESERVEC.
+
+
+.. nml:member:: cfrac_s_io
+
+   :type: real(npft)
+   :default: None
+
+   Carbon fraction of dry matter for stems.
+
+
+.. nml:member:: cfrac_r_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Carbon fraction of dry matter for roots.
+
+
+.. nml:member:: cfrac_l_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Carbon fraction of dry matter for leaves.
+
+
+.. nml:member:: allo1_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Allometric coefficient relating STEMC to CANHT.
+
+
+.. nml:member:: allo2_io
+
+   :type: real(ncpft)
+   :default: None
+
+   Allometric coefficient relating STEMC to CANHT.

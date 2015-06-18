@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2. Overview of JULES &mdash; Joint UK Land Environment Simulator (JULES) v4.2 User Guide</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '4.2',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.2 User Guide" href="index.html" />
+    <link rel="next" title="3. Building and running JULES" href="building-and-running/intro.html" />
+    <link rel="prev" title="1.11. JULES version 2.0 Release Notes" href="release_notes/JULES2-0.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="building-and-running/intro.html" title="3. Building and running JULES"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="release_notes/JULES2-0.html" title="1.11. JULES version 2.0 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Joint UK Land Environment Simulator (JULES) v4.2 User Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="overview-of-jules">
+<h1>2. Overview of JULES<a class="headerlink" href="#overview-of-jules" title="Permalink to this headline">¶</a></h1>
+<p>This section provides a brief overview of JULES, largely so as to provide background information and introduce terms used in the rest of the manual. Further details on the science and process descriptions contained in JULES can be found at the <a class="reference external" href="http://jules.jchmr.org/">JULES website</a> and in the two <a class="reference external" href="https://jules.jchmr.org/community/publications">JULES description papers</a> (Best et al, 2011, GMD and Clark et al, 2011, GMD).</p>
+<p>For both gridded and single point runs, JULES views each gridbox as consisting of a number of surface types. The fractional area of each surface type is either prescribed by the user or modelled by the TRIFFID sub-model. Each surface type is represented by a tile, and a separate energy balance is calculated for each tile. The gridbox average energy balance is found by weighting the values from each tile. In its standard form, JULES recognises nine surface types: broadleaf trees, needleleaf trees, C3 (temperate) grass, C4 (tropical) grass, shrubs, urban, inland water, bare soil and ice. These 9 types are modelled as 9 tiles. A land gridbox is either any mixture of the first 8 surface types, or is land ice. Note that, from version 2.0, one is not limited to these 9 standard surface types (unless running TRIFFID).</p>
+<p>Soil processes are modelled in several layers, but all tiles lie over and interact with the same soil column. Each gridbox requires meteorological driving variables (such as air temperature) and variables that describe the soil properties at that location. It is also possible to prescribe certain characteristics of the vegetation, such as Leaf Area Index, to vary between gridboxes.</p>
+<p>JULES can be run for any number of gridboxes from one upwards. The number of gridboxes is limited by the availability of computing power and suitable input data. When run on a grid, JULES models the average state of the land surface within the area of the gridbox and most quantities are taken to be homogeneous within the gridbox (with options to include subgrid-scale variability of a few, such as rainfall). In that case, the input data are also area averages. JULES can also be run &#8220;at a point&#8221;, with inputs that are taken to represent conditions at that point - this configuration might be used when field measurements of meteorological conditions are available.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="release_notes/JULES2-0.html"
+                        title="previous chapter">1.11. JULES version 2.0 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="building-and-running/intro.html"
+                        title="next chapter">3. Building and running JULES</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="building-and-running/intro.html" title="3. Building and running JULES"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="release_notes/JULES2-0.html" title="1.11. JULES version 2.0 Release Notes"
+             >previous</a> |</li>
+        <li><a href="index.html">Joint UK Land Environment Simulator (JULES) v4.2 User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2015.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

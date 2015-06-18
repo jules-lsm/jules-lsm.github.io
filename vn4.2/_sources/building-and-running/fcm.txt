@@ -1,0 +1,145 @@
+Building JULES using FCM
+========================
+
+FCM is a code management and build system developed by the Met Office with a particular focus on simplifying the process of building large Fortran programs. In this section, we will be using the build tool - FCM make.
+
+As part of the build process, FCM make will analyse the dependencies of every Fortran file and automatically compile them in the correct order.
+
+FCM make must be given a configuration file that it uses to determine how to build the source code. Extensive documentation on FCM make configuration files is `available online <http://collab.metoffice.gov.uk/twiki/pub/Support/FCM/doc/user_guide/make.html>`_.
+
+Help pages for the FCM make command itself (rather than the configuration file) can be accessed using the command:
+
+.. code-block:: bash
+
+    fcm help make
+    
+The FCM configuration file for building JULES is ``etc/fcm-make/make.cfg``. This file uses the environment variables below to determine the compiler settings and NetCDF settings to use.
+
+Running FCM make with this configuration file will create 4 new directories in your JULES root directory (i.e. the directory containing ``docs``, ``src`` etc.):
+
+``.fcm-make``
+    Used by FCM to store information about the build process.
+
+``extract``
+    Contains a copy of the code that FCM will build.
+
+``preprocess``
+    Contains the code after preprocessing but before compilation.
+
+``build``
+    Contains the results of the compilation.
+  
+The JULES executable will be produced at ``build/bin/jules.exe``.
+
+
+.. _fcm-make-environment-variables:
+
+Environment variables used when building JULES using FCM make
+-------------------------------------------------------------
+
+``JULES_COMPILER``
+    Used to select compiler specific settings.
+    
+    +--------------------+--------------------------------------------------------------------------------+
+    | Permitted value    | Purpose                                                                        |
+    +====================+================================================================================+
+    | ``gfortran``       | **Default.** Use settings for the `GNU Fortran compiler`_.                     |
+    +--------------------+--------------------------------------------------------------------------------+
+    | ``intel``          | Use settings for the `Intel Fortran compiler`_.                                |
+    +--------------------+--------------------------------------------------------------------------------+
+    | ``nag``            | Use settings for the `NAGWare compiler`_.                                      |
+    +--------------------+--------------------------------------------------------------------------------+
+    | ``pgf``            | Use settings for the `Portland Group compiler`_.                               |
+    +--------------------+--------------------------------------------------------------------------------+
+
+``JULES_BUILD``
+    Used to select the type of build.
+
+    +--------------------+--------------------------------------------------------------------------------+
+    | Permitted value    | Purpose                                                                        |
+    +====================+================================================================================+
+    | ``normal``         | **Default.** Compile JULES normally.                                           |
+    +--------------------+--------------------------------------------------------------------------------+
+    | ``debug``          | Compile JULES with debug flags.                                                |
+    +--------------------+--------------------------------------------------------------------------------+
+    | ``fast``           | Compile JULES with optimisation flags for faster execution.                    |
+    +--------------------+--------------------------------------------------------------------------------+
+
+``JULES_NETCDF``
+    Indicates whether to use a dummy NetCDF library or a 'real' NetCDF library.
+    
+    +--------------------+--------------------------------------------------------------------------------+
+    | Permitted value    | Purpose                                                                        |
+    +====================+================================================================================+
+    | ``dummy``          | **Default.** Use a dummy NetCDF library.                                       |
+    +--------------------+--------------------------------------------------------------------------------+
+    | ``actual``         | Use a 'real' NetCDF library.                                                   |
+    |                    |                                                                                |
+    |                    | The NetCDF installation to use is specified using one of:                      |
+    |                    |                                                                                |
+    |                    | * ``JULES_NETCDF_PATH``                                                        |
+    |                    | * ``JULES_NETCDF_INC_PATH`` and ``JULES_NETCDF_LIB_PATH``                      |
+    +--------------------+--------------------------------------------------------------------------------+
+
+``JULES_NETCDF_PATH``
+    Path to NetCDF installation.
+    
+    This sets ``JULES_NETCDF_INC_PATH = $JULES_NETCDF_PATH/include`` and ``JULES_NETCDF_LIB_PATH = $JULES_NETCDF_PATH/lib``. These can be overridden by setting the variables directly.
+    
+``JULES_NETCDF_INC_PATH``
+    Path to NetCDF include directory (i.e. directory containing ``netcdf.mod``).
+    
+``JULES_NETCDF_LIB_PATH``
+    Path to NetCDF library directory (i.e. directory containing ``libnetcdff.a`` and ``libnetcdf.a``).
+
+
+Example FCM make commands
+-------------------------
+
+To create a normal JULES executable without NetCDF using the GFortran compiler (taking advantage of the default values for the environment variables):
+
+.. code-block:: bash
+
+    fcm make -f etc/fcm-make/make.cfg
+
+To create a fast JULES executable with NetCDF using the Intel compiler:
+
+.. code-block:: bash
+
+    export JULES_COMPILER=intel
+    export JULES_BUILD=fast
+    export JULES_NETCDF=actual
+    export JULES_NETCDF_PATH=/usr/local/lib  # Replace this with the correct path
+    fcm make -f etc/fcm-make/make.cfg
+
+
+Tips for effective use of FCM make (Unix-like systems only)
+-----------------------------------------------------------
+
+To check the current values of the environment variables JULES will use to build, use the command:
+
+.. code-block:: bash
+
+    env | grep JULES
+
+If you always use the same compilation options for JULES, consider adding the export lines to the ``.profile`` file in your ``$HOME`` directory. Commands in the ``.profile`` file are automatically executed in any shell that you open, so defining environment variables there ensures your build environment remains consistent across shells and restarts of your computer. The definitions can still be overridden on the command line if required. For example, to always create a fast JULES executable with NetCDF using the Intel compiler (as above), add the following lines to your ``.profile``:
+
+.. code-block:: bash
+
+    export JULES_COMPILER=intel
+    export JULES_BUILD=fast
+    export JULES_NETCDF=actual
+    export JULES_NETCDF_PATH=/usr/local/lib
+
+Then to build JULES with those settings, run:
+
+.. code-block:: bash
+
+    fcm make -f etc/fcm-make/make.cfg
+
+    
+
+.. _GNU Fortran compiler: http://www.gnu.org/software/gcc/fortran/
+.. _Intel Fortran compiler: http://software.intel.com/en-us/articles/fortran-compilers/
+.. _NAGWare compiler: http://www.nag.co.uk/nagware/np.asp
+.. _Portland Group compiler: http://www.pgroup.com/
