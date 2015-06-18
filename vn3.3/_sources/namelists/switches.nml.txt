@@ -1,0 +1,464 @@
+``switches.nml``
+================
+
+
+This file sets up the switches that control model behaviour. It contains a single namelist named :nml:lst:`JULES_SWITCHES`.
+
+
+``JULES_SWITCHES`` namelist members
+-----------------------------------
+
+.. nml:namelist:: JULES_SWITCHES
+
+.. nml:member:: l_aggregate
+
+   :type: logical
+   :default: F
+
+   Switch controlling number of tiles for each gridbox.
+
+   This is used to set the number of surface energy balances that are solved for each gridbox (``ntiles``).
+
+   TRUE
+       Aggregate parameter values are used to solve a single energy balance per gridbox. This option sets ``ntiles = 1``.
+
+   FALSE
+       A separate energy balance is calculated for each surface type. This option sets ``ntiles = ntype``.
+
+
+.. nml:member:: can_model
+
+   :type: integer
+   :permitted: 1-4
+   :default: 4
+
+   Choice of canopy model for vegetation:
+
+   1. No canopy.
+   2. Radiative canopy with no heat capacity.
+   3. Radiative canopy with heat capacity. This option is deprecated, with 4 preferred.
+   4. As 3 but with a representation of snow beneath the canopy. This option is preferred to 3.
+
+   .. note::
+       :nml:mem:`can_model` = 1 does not mean that there is no vegetation canopy. It means that the surface is represented as a single entity, rather than having distinct surface and canopy levels for the purposes of radiative processes.
+
+
+.. nml:member:: can_rad_mod
+
+   :type: integer
+   :permitted: 1-5
+   :default: 4
+
+   Switch for treatment of canopy radiation.
+
+   1. A single canopy layer for which radiation absorption is calculated using Beer's law. Leaf-level photosynthesis is scaled to the canopy level using the 'big leaf' approach. Leaf nitrogen, photosynthetic capacity, i.e the Vcmax parameter, and leaf photosynthesis vary exponentially through the canopy with radiation.
+
+   2. Multi-layer approach for radiation interception following the 2-stream approach of Sellers et al. (1992). This approach takes into account leaf angle distribution, zenith angle, and differentiates absorption of direct and diffuse radiation. Leaf-level photosynthesis is calculated using a vertically-varying light-limited rate, and constant Rubisco and export velocities, consistent with the assumption of constant leaf N through the canopy. Canopy photosynthesis and conductance are calculated as the sum over all layers.
+
+   3. As 2, but photosynthesis calculated separately for sunlit and shaded leaves for the whole canopy (i.e. not at each layer). The definition of sunlit and shaded leaves is based on a threshold of absorbed radiation at each layer.
+
+   4. This is a modification of option 2. Instead of constant leaf N through the canopy, it has an exponential decline of leaf N with canopy height. Additionally includes inhibition of leaf respiration in the light.
+
+   5. This is an improvement of option 4, including:
+
+      * Sunfleck penetration though the canopy.
+      * Division of sunlit and shaded leaves within each canopy level.
+      * A modified version of inhibition of leaf respiration in the light.
+
+   .. note:: When using :nml:mem:`can_rad_mod` = 4 or 5, it is recommended to use driving data that contains direct and diffuse radiation separately rather than a constant diffuse fraction.
+
+   .. seealso:: Descriptions 1, 2 and 3 can be found in Jogireddy et al. (2006), and an application of option 4 can be found in Mercado et al. (2007) and all are described in Clark et al (2011).
+
+
+.. nml:member:: ilayers
+
+   :type: integer
+   :permitted: >= 0
+   :default: 10
+
+   Number of layers for canopy radiation model.
+
+   These layers are used for the calculations of radiation interception and photosynthesis.
+
+   Only used if :nml:mem:`can_rad_mod` is 2 or 3.
+
+
+.. nml:member:: l_cosz
+
+   :type: logical
+   :default: T
+
+   Switch for calculation of solar zenith angle. For land points, this switch is only relevant if :nml:mem:`l_spec_albedo` = TRUE.
+
+   TRUE
+       Calculate zenith angle.
+
+   FALSE
+       Assume constant zenith angle of zero, meaning sun is directly overhead.
+
+
+.. nml:member:: l_spec_albedo
+
+   :type: logical
+   :default: T
+
+   Switch for albedo model.
+
+   TRUE
+       Use spectral albedo.
+
+   FALSE
+       Use a single (averaged) waveband albedo.
+       
+       
+.. nml:member:: l_snow_albedo
+
+   :type: logical
+   :default: T
+
+   Switch for using prognostic snow properties in model albedo.
+   
+   Requires :nml:mem:`l_spec_albedo` = TRUE.
+   
+   TRUE
+       Use prognostic snow properties for albedo.
+
+   FALSE
+       Calculate albedo of snow using only snow depth.
+       
+       
+.. nml:member:: l_albedo_obs
+
+   :type: logical
+   :default: F
+
+   Switch for applying a scaling factor to the albedo values, on tiles, so that the resultant aggregate albedo matches observations.
+   
+   TRUE
+       Scale the albedo values on tiles.
+       
+       .. note:: Observed albedo(s) must be prescribed in :doc:`prescribed_data.nml`.
+
+   FALSE
+       Do not scale the albedo values on tiles.
+
+
+.. nml:member:: l_phenol
+
+   :type: logical
+   :default: F
+
+   Switch for vegetation phenology model.
+
+   TRUE
+       Use phenology model.
+
+   FALSE
+       Do not use phenology model.
+
+
+.. nml:member:: l_triffid
+
+   :type: logical
+   :default: F
+
+   Switch for dynamic vegetation model (TRIFFID) except for competition.
+
+   TRUE
+       Use TRIFFID. In this case soil carbon is modelled using four pools
+       (biomass, humus, decomposable plant material, resistant plant material).
+
+   FALSE
+       Do not use TRIFFID. A single soil carbon pool is used.
+
+
+.. nml:member:: l_veg_compete
+
+   :type: logical
+   :default: T
+
+   Switch for competing vegetation.
+   
+   Only used if :nml:mem:`l_triffid` = TRUE.
+
+   TRUE
+       TRIFFID will let the different PFTs compete against each other and modify the vegetation fractions.
+
+   FALSE
+       Vegetation fractions do not change.
+
+
+.. nml:member:: l_trif_eq
+
+   :type: logical
+   :default: T
+
+   Switch for equilibrium vegetation model (i.e., an equilibrium solution of TRIFFID).
+
+   Only used if :nml:mem:`l_triffid` = TRUE.
+
+   TRUE
+       Use equilibrium TRIFFID.
+
+   FALSE
+       Do not use equilibrium TRIFFID.
+
+
+.. nml:member:: l_top
+
+   :type: logical
+   :default: F
+
+   Switch for a TOPMODEL-type model of runoff production.
+
+   TRUE
+       Use a TOPMODEL-type scheme. This is based on Gedney and Cox (2003); see also Clark and Gedney (2008).
+
+   FALSE
+       No TOPMODEL scheme.
+
+   .. seealso::
+      References:
+
+      * Gedney, N. and P.M.Cox, 2003 , The sensitivity of global climate model simulations to the representation of soil moisture heterogeneity, J. Hydrometeorology, 4, 1265-1275.
+      * Clark and Gedney, 2008, Representing the effects of subgrid variability of soil moisture on runoff generation in a land surface model, Journal of Geophysical Research - Atmospheres, 113, D10111, doi:10.1029/2007JD008940.
+
+
+.. nml:member:: l_pdm
+
+   :type: logical
+   :default: F
+
+   Switch for a PDM-type model of runoff production.
+
+   PDM is the Probability Distributed Model (Moore, 1985), implemented in JULES following Clark and Gedney (2008).
+
+   TRUE
+       Use a PDM scheme.
+
+   FALSE
+       No PDM scheme.
+
+   .. seealso::
+      References:
+   
+      * Moore, R. J. (1985), The probability-distributed principle and runoff production at point and basin scales, Hydrol. Sci. J., 30, 273-297.
+      * Clark and Gedney, 2008, Representing the effects of subgrid variability of soil moisture on runoff generation in a land surface model, Journal of Geophysical Research - Atmospheres, 113, D10111, doi:10.1029/2007JD008940.
+
+
+.. nml:member:: l_anthrop_heat_src
+
+   :type: logical
+   :default: F
+
+   Switch for inclusion of anthropogenic contribution to the surface heat flux from urban tiles.
+
+   TRUE
+       Add anthropogenic effect.
+
+   FALSE
+       No effect.
+
+
+.. nml:member:: l_o3_damage
+
+   :type: logical
+   :default: F
+
+   Switch for ozone damage.
+
+   TRUE
+       Ozone damage is on.
+
+       .. note:: Ozone concentration in ppb must be prescribed in :doc:`prescribed_data.nml`.
+
+   FALSE
+       No effect.
+
+
+.. nml:member:: l_imogen
+
+   :type: logical
+   :default: F
+
+   Switch for IMOGEN.
+
+   TRUE
+       IMOGEN is used to generate driving data.
+
+   FALSE
+       No effect.
+
+
+.. nml:member:: l_epot_corr
+
+   :type: logical
+   :default: T
+
+   TRUE
+       Use correction to the calculation of potential evaporation.
+
+   FALSE
+       No effect.
+
+
+.. nml:member:: l_snowdep_surf
+
+   :type: logical
+   :default: F
+
+   TRUE
+       Use equivalent canopy snow depth for surface calculations on tiles with a snow canopy.
+
+   FALSE
+       No effect.
+
+
+.. nml:member:: Iscrntdiag
+
+   :type: integer
+   :permitted: 0 or 1
+   :default: 0
+
+   Switch controlling method for diagnosing screen temperature.
+
+   0. Use surface similarity theory.
+   1. Use surface similarity theory but allow decoupling in very stable conditions based on the quasi-equilibrium radiative solution.
+
+
+.. nml:member:: l_360
+
+   :type: logical
+   :default: F
+
+   Switch indicating use of 360 day years.
+
+   TRUE
+       Each year consists of 360 days. This is sometimes used for idealised
+       experiments.
+
+   FALSE
+       Each year consists of 365 or 366 days.
+
+
+.. nml:member:: l_q10
+
+   :type: logical
+   :default: T
+
+   Switch for use of Q10 approach when calculating soil respiration.
+
+   TRUE
+       Use Q10 approach.
+
+       .. note:: This is always used if TRIFFID is switched off (:nml:mem:`l_triffid` = FALSE) and was used in JULES2.0.
+
+   FALSE
+       Use the approach of the RothC model.
+
+
+.. nml:member:: l_soil_sat_down
+
+   :type: logical
+   :default: F
+
+   Switch for dealing with supersaturated soil layers. If a soil layer becomes supersaturated, the water in excess of saturation will be put into the layer below or above according to this switch.
+
+   TRUE
+       Any excess is put into the layer below. Any excess from the bottom
+       layer becomes subsurface runoff.
+
+   FALSE
+       Any excess is put into the layer above. Any excess from the top layer becomes surface runoff. This option was used in JULES2.0.
+
+
+.. nml:member:: l_vg_soil
+
+   :type: logical
+   :default: F
+
+   Switch for van Genuchten soil hydraulic model.
+
+   TRUE
+       Use van Genuchten model.
+
+   FALSE
+       Use Brooks and Corey model [*]_.
+
+   .. seealso::
+      References:
+   
+      * Brooks, R.H. and A.T. Corey, 1964, Hydraulic properties of porous media. Colorado State University Hydrology Papers 3.
+      * van Genuchten, M.T., 1980, A Closed-form Equation for Predicting the Hydraulic Conductivity of Unsaturated Soils. Soil Science Society of America Journal, 44:892-898.
+
+
+.. nml:member:: soilhc_method
+
+   :type: integer
+   :permitted: 1 or 2
+   :default: 1
+
+   Switch for soil thermal conductivity model.
+
+   1. Use approach of Cox et al (1999), as in JULES2.0.
+   2. Use approach of Johansen (1975).
+
+
+.. nml:member:: l_point_data
+
+   :type: logical
+   :default: F
+
+   Flag indicating if driving data are point or area-average values. This affects the treatment of precipitation input and how snow affects the albedo.
+
+   TRUE
+       Driving data are point data. Precipitation is not distributed in space (see FALSE below) and is all assumed to be large-scale in origin. The albedo formulation is suitable for a point.
+
+   FALSE
+       Driving data are area averages. The precipitation inputs are assumed to be exponentially distributed in space, as in UMDP25, and can include convective and large-scale components. The albedo formulation is suitable for a gridbox.
+       
+       
+.. nml:member:: l_dpsids_dsdz
+
+   :type: logical
+   :default: F
+
+   Switch to calculate vertical gradient of soil suction with the assumption of linearity only for fractional saturation (consistent with the calculation of hydraulic conductivity).
+   
+   
+.. nml:member:: l_land_ice_imp
+
+   :type: logical
+   :default: F
+   
+   Switch to control the use of implicit numerics to update land ice temperatures.
+   
+   TRUE
+       Use implicit numerics to update land ice temperatures.
+       
+   FALSE
+       Use explicit numerics to update land ice temperatures.
+   
+   
+.. nml:member:: l_bvoc_emis
+
+   :type: logical
+   :default: F
+   
+   Switch to enable calculation of BVOC emissions.
+   
+   TRUE
+       BVOC emissions diagnostics will be calculated.
+       
+   FALSE
+       BVOC emissions diagnostics will not be calculated.
+   
+
+
+.. rubric:: Footnotes
+
+.. [*] In the JULES2.0 User Manual this was described as the 'Clapp and Hornberger' model and the JULES code still refers to 'Clapp and Hornberger' rather than 'Brooks and Corey'. In fact there are important differences between these two hydraulic models (Toby Marthews, pers comm.). There has been confusion in the literature and in past documentation of MOSES/JULES, resulting in these differences often being ignored, but JULES uses the Brooks and Corey model. Hopefully this confusion will be removed from future releases.
+
+       Reference: Clapp, R.B. and G.M.Hornberger, 1978, Empirical Equations for Some Soil Hydraulic Properties. Water Resources Research 14:601-604.
+
+

@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.5. JULES version 2.2 Release Notes &mdash; Joint UK Land Environment Simulator (JULES) v3.3 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v3.3 User Guide" href="../index.html" />
+    <link rel="up" title="1. Release notes for JULES" href="contents.html" />
+    <link rel="next" title="1.6. JULES version 2.1 Release Notes" href="JULES2-1.html" />
+    <link rel="prev" title="1.4. JULES version 3.0 Release Notes" href="JULES3-0.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES2-1.html" title="1.6. JULES version 2.1 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-0.html" title="1.4. JULES version 3.0 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.3 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jules-version-2-2-release-notes">
+<h1>1.5. JULES version 2.2 Release Notes<a class="headerlink" href="#jules-version-2-2-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>Along with fixes for known bugs, the changes made for version 2.2 mostly consist of several small additions to the science code. Changes to the control code have mostly been limited to bug-fixes.</p>
+<ul class="simple">
+<li>New options for treatment of urban tiles - inclusion of the Met Office Reading Urban Surface Exchange Scheme (MORUSES) and a simple two tile urban scheme.</li>
+<li>Effects of ozone damage on stomata from Stephen Sitch at the University of Leeds.</li>
+<li>New treatment of direct/diffuse radiation in the canopy from Lina Mercado at CEH.</li>
+<li>A new switch allows the competing vegetation portion of TRIFFID to be switched on and off independently of the rest of TRIFFID (i.e. it is now possible to use the RothC soil carbon without having changing vegetation fractions).</li>
+</ul>
+<p>There have also been changes made to the way JULES is compiled, due to the re-integration with the Met Office Unified Model. The Unified Model uses preprocessor directives to compile different versions of routines depending on the selected science options. For compatibility with this system, JULES will now require a compiler with a preprocessor. This should not be noticed by the majority of users - most modern compilers include a preprocessor and the Makefile deals with setting up the appropriate preprocessor options.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">1. Release notes for JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="JULES3-3.html">1.1. JULES version 3.3 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-2.html">1.2. JULES version 3.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-1.html">1.3. JULES version 3.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-0.html">1.4. JULES version 3.0 Release Notes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">1.5. JULES version 2.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES2-1.html">1.6. JULES version 2.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES2-0.html">1.7. JULES version 2.0 Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES3-0.html"
+                        title="previous chapter">1.4. JULES version 3.0 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES2-1.html"
+                        title="next chapter">1.6. JULES version 2.1 Release Notes</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES2-1.html" title="1.6. JULES version 2.1 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-0.html" title="1.4. JULES version 3.0 Release Notes"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.3 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >1. Release notes for JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

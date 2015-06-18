@@ -1,0 +1,554 @@
+``pft_params.nml``
+==================
+
+
+This file contains a single namelist called :nml:lst:`JULES_PFTPARM` that sets time-and space-invariant parameters for plant functional types.
+
+``JULES_PFTPARM`` namelist members
+----------------------------------
+
+.. nml:namelist:: JULES_PFTPARM
+
+This namelist reads the values of parameters for each of the plant functional types (PFTs). These parameters are a function of PFT only. Parameters that also vary with time and location can be prescribed in :doc:`prescribed_data.nml`. Parameters that are only required if the dynamic vegetation (TRIFFID) or phenology sections are requested are read separately in :doc:`triffid_params.nml`. Every member must be given a value for every run.
+
+The files given in the examples directory are a good starting point for setting up any JULES run, and in the majority of cases can be left untouched.
+
+HCTN24 and 30 refer to Hadley Centre technical notes 24 and 30, available from `the Met Office Library <http://www.metoffice.gov.uk/learning/library/publications/science/climate-science/hadley-centre-technical-note>`_.
+
+
+.. nml:member:: pftname_io
+
+   :type: character(npft)
+   :default: None
+
+   Name of each PFT. These names are for the user's convenience, and do not have any special significance within JULES.
+
+
+.. nml:member:: canht_ft_io
+
+   :type: real(npft)
+   :default: None
+
+   The height of each PFT (m), also known as the canopy height.
+
+   The value read here is only used if TRIFFID is not active (:nml:mem:`JULES_SWITCHES::l_triffid` = FALSE).
+
+   .. note:: If TRIFFID is active, canopy height is a prognostic variable and its initial value is read in :doc:`initial_conditions.nml`.
+
+
+.. nml:member:: lai_io
+
+   :type: real(npft)
+   :default: None
+
+   The leaf area index (LAI) of each PFT.
+
+   The value read here is only used if phenology is not active (:nml:mem:`JULES_SWITCHES::l_phenol` = FALSE).
+
+   .. note:: If phenology is active, LAI is a prognostic variable and its initial value is read in :doc:`initial_conditions.nml`.
+
+
+.. nml:member:: c3_io
+
+   :type: integer(npft)
+   :default: None
+
+   Flag indicating whether PFT is C3 type.
+
+   0. Not C3 (i.e. C4).
+
+   1. C3.
+
+
+.. nml:member:: orient_io
+
+   :type: integer(npft)
+   :default: None
+
+   Flag indicating leaf angle distribution.
+
+   0. Spherical.
+
+   1. Horizontal.
+
+
+.. nml:member:: a_wl_io
+
+   :type: real(npft)
+   :default: None
+
+   Allometric coefficient relating the target woody biomass to the leaf area index (kg carbon m\ :sup:`-2`).
+
+
+.. nml:member:: a_ws_io
+
+   :type: real(npft)
+   :default: None
+
+   Woody biomass as a multiple of live stem biomass.
+
+
+.. nml:member:: albsnc_max_io
+
+   :type: real(npft)
+   :default: None
+
+   Snow-covered albedo for large leaf area index.
+
+   Only used if :nml:mem:`JULES_SWITCHES::l_spec_albedo` = FALSE. See HCTN30 Eq.2.
+
+
+.. nml:member:: albsnc_min_io
+
+   :type: real(npft)
+   :default: None
+
+   Snow-covered albedo for zero leaf area index.
+
+   Only used if :nml:mem:`JULES_SWITCHES::l_spec_albedo` = FALSE. See HCTN30 Eq.2.
+
+
+.. nml:member:: albsnf_max_io
+
+   :type: real(npft)
+   :default: None
+
+   Snow-free albedo for large LAI.
+
+   Only used if :nml:mem:`JULES_SWITCHES::l_spec_albedo` = FALSE. See HCTN30 Eq.1.
+   
+   
+.. nml:member:: albsnf_maxu_io
+
+   :type: real(npft)
+   :default: None
+
+   Upper bound for the snow-free albedo for large LAI, when scaled to match input obs.
+   
+   Only used if :nml:mem:`JULES_SWITCHES::l_spec_albedo` = FALSE and :nml:mem:`JULES_SWITCHES::l_albedo_obs` = TRUE.
+   
+   
+.. nml:member:: albsnf_maxl_io
+
+   :type: real(npft)
+   :default: None
+
+   Lower bound for the snow-free albedo for large LAI, when scaled to match input obs.
+   
+   Only used if :nml:mem:`JULES_SWITCHES::l_spec_albedo` = FALSE and :nml:mem:`JULES_SWITCHES::l_albedo_obs` = TRUE.
+
+
+.. nml:member:: alpha_io
+
+   :type: real(npft)
+   :default: None
+
+   Quantum efficiency (mol CO\ :sub:`2` per mol PAR photons).
+
+
+.. nml:member:: alnir_io
+
+   :type: real(npft)
+   :default: None
+
+   Leaf reflection coefficient for NIR. See HCTN30 Table 3.
+   
+   Used when :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+   
+   
+.. nml:member:: alniru_io
+
+   :type: real(npft)
+   :default: None
+
+   Upper limit for the leaf reflection coefficient for NIR, when :nml:mem:`JULES_SWITCHES::l_albedo_obs` = TRUE and :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+   
+   
+.. nml:member:: alnirl_io
+
+   :type: real(npft)
+   :default: None
+
+   Lower limit for the leaf reflection coefficient for NIR, when :nml:mem:`JULES_SWITCHES::l_albedo_obs` = TRUE and :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+
+
+.. nml:member:: alpar_io
+
+   :type: real(npft)
+   :default: None
+
+   Leaf reflection coefficient for VIS (photosyntehtically active radiation). See HCTN30 Table 3.
+   
+   Used when :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+   
+   
+.. nml:member:: alparu_io
+
+   :type: real(npft)
+   :default: None
+
+   Upper limit for the leaf reflection coefficient for VIS, when :nml:mem:`JULES_SWITCHES::l_albedo_obs` = TRUE and :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+   
+   
+.. nml:member:: alparl_io
+
+   :type: real(npft)
+   :default: None
+
+   Lower limit for the leaf reflection coefficient for VIS, when :nml:mem:`JULES_SWITCHES::l_albedo_obs` = TRUE and :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+
+
+.. nml:member:: b_wl_io
+
+   :type: real(npft)
+   :default: None
+
+   Allometric exponent relating the target woody biomass to the leaf area index. This is 5/3 in HCTN24 Eq.8.
+
+
+.. nml:member:: catch0_io
+
+   :type: real(npft)
+   :default: None
+
+   Minimum canopy capacity (kg m\ :sup:`-2`).
+
+   This is the minimum amount of water that can be held on the canopy. See HCTN30 p7.
+
+
+.. nml:member:: dcatch_dlai_io
+
+   :type: real(npft)
+   :default: None
+
+   Rate of change of canopy capacity with LAI (kg m\ :sup:`-2`).
+
+   Canopy capacity is calculated as ``catch0 + dcatch_dlai*lai``. See HCTN30 p7.
+
+
+.. nml:member:: dgl_dm_io
+
+   :type: real(npft)
+   :default: None
+
+   Rate of change of leaf turnover rate with moisture availability.
+
+
+.. nml:member:: dgl_dt_io
+
+   :type: real(npft)
+   :default: None
+
+   Rate of change of leaf turnover rate with temperature (K\ :sup:`-1`).
+
+   This is 9 in HCTN24 Eq.10.
+
+
+.. nml:member:: dqcrit_io
+
+   :type: real(npft)
+   :default: None
+
+   Critical humidity deficit (kg H\ :sub:`2`\ O per kg air).
+
+
+.. nml:member:: dz0v_dh_io
+
+   :type: real(npft)
+   :default: None
+
+   Rate of change of vegetation roughness length for momentum with height.
+
+   Roughness length is calculated as ``dz0v_dh * canht_ft``. See HCTN30 p5.
+
+
+.. nml:member:: eta_sl_io
+
+   :type: real(npft)
+   :default: None
+
+   Live stemwood coefficient (kg C/m/LAI).
+
+
+.. nml:member:: fd_io
+
+   :type: real(npft)
+   :default: None
+
+   Scale factor for dark respiration. See HCTN 24 Eq. 56.
+
+
+.. nml:member:: fsmc_of_io
+
+   :type: real(npft)
+   :default: None
+
+   Moisture availability below which leaves are dropped.
+
+
+.. nml:member:: f0_io
+
+   :type: real(npft)
+   :default: None
+
+   ``CI / CA`` for ``DQ = 0``. See HCTN 24 Eq. 32.
+   
+   
+.. nml:member:: g_leaf_0_io
+
+   :type: real(npft)
+   :default: None
+
+   Minimum turnover rate for leaves (/360days).
+
+
+.. nml:member:: glmin_io
+
+   :type: real(npft)
+   :default: None
+
+   Minimum leaf conductance for H\ :sub:`2`O (m s\ :sup:`-1`).
+
+
+.. nml:member:: infil_f_io
+
+   :type: real(npft)
+   :default: None
+
+   Infiltration enhancement factor.
+
+   The maximum infiltration rate defined by the soil parameters for the whole gridbox may be modified for each PFT to account for tile-dependent factors, such as macro-pores related to vegetation roots.
+
+   See HCTN30 p14 for full details.
+
+
+.. nml:member:: kext_io
+
+   :type: real(npft)
+   :default: None
+
+   Light extinction coefficient - used with Beer's Law for light absorption through tile canopies. See HCTN30 Eq.3.
+
+
+.. nml:member:: kpar_io
+
+   :type: real(npft)
+   :default: None
+
+   PAR Extinction coefficient (m\ :sup:`2` leaf / m\ :sup:`2` ground).
+
+
+.. nml:member:: neff_io
+
+   :type: real(npft)
+   :default: None
+
+   Scale factor relating V\ :sub:`cmax` with leaf nitrogen concentration. See HCTN 24 Eq. 51.
+
+
+.. nml:member:: nl0_io
+
+   :type: real(npft)
+   :default: None
+
+   Top leaf nitrogen concentration (kg N/kg C).
+
+
+.. nml:member:: nr_nl_io
+
+   :type: real(npft)
+   :default: None
+
+   Ratio of root nitrogen concentration to leaf nitrogen concentration.
+
+
+.. nml:member:: ns_nl_io
+
+   :type: real(npft)
+   :default: None
+
+   Ratio of stem nitrogen concentration to leaf nitrogen concentration.
+
+
+.. nml:member:: omega_io
+
+   :type: real(npft)
+   :default: None
+
+   Leaf scattering coefficient for PAR.
+   
+   Used when :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+   
+   
+.. nml:member:: omegau_io
+
+   :type: real(npft)
+   :default: None
+
+   Upper limit for the leaf scattering coefficient for PAR, when :nml:mem:`JULES_SWITCHES::l_albedo_obs` = TRUE and :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+   
+   
+.. nml:member:: omegal_io
+
+   :type: real(npft)
+   :default: None
+
+   Lower limit for the leaf scattering coefficient for PAR, when :nml:mem:`JULES_SWITCHES::l_albedo_obs` = TRUE and :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+
+
+.. nml:member:: omnir_io
+
+   :type: real(npft)
+   :default: None
+
+   Leaf scattering coefficient for NIR.
+   
+   Used when :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+   
+   
+.. nml:member:: omniru_io
+
+   :type: real(npft)
+   :default: None
+
+   Upper limit for the leaf scattering coefficient for NIR, when :nml:mem:`JULES_SWITCHES::l_albedo_obs` = TRUE and :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+   
+
+.. nml:member:: omnirl_io
+
+   :type: real(npft)
+   :default: None
+
+   Lower limit for the leaf scattering coefficient for NIR, when :nml:mem:`JULES_SWITCHES::l_albedo_obs` = TRUE and :nml:mem:`JULES_SWITCHES::l_spec_albedo` = TRUE.
+
+
+.. nml:member:: r_grow_io
+
+   :type: real(npft)
+   :default: None
+
+   Growth respiration fraction.
+
+
+.. nml:member:: rootd_ft_io
+
+   :type: real(npft)
+   :default: None
+
+   Root depth (m).
+
+   An exponential distribution with depth is assumed, with e-folding depth ``rootd_ft``. Note that this means that generally some of the roots exist at depths greater than ``rootd_ft``. See HCTN30 Eq.32.
+
+
+.. nml:member:: sigl_io
+
+   :type: real(npft)
+   :default: None
+
+   Specific density of leaf carbon (kg C/m\ :sup:`2` leaf).
+
+
+.. nml:member:: tleaf_of_io
+
+   :type: real(npft)
+   :default: None
+
+   Temperature below which leaves are dropped (K).
+
+
+.. nml:member:: tlow_io
+
+   :type: real(npft)
+   :default: None
+
+   Lower temperature for photosynthesis (deg C).
+
+
+.. nml:member:: tupp_io
+
+   :type: real(npft)
+   :default: None
+
+   Upper temperature for photosynthesis (deg C).
+
+
+.. nml:member:: emis_pft_io
+
+   :type: real(npft)
+   :default: None
+
+   Surface emissivity.
+
+
+.. nml:member:: z0hm_pft_io
+
+   :type: real(npft)
+   :default: None
+
+   Ratio of the roughness length for heat to the roughness length for momentum.
+
+   This is generally assumed to be 0.1. See HCTN30 p6. Note that this is the ratio of the roughness length for heat to that for momentum. It does not alter the roughness length for momentum, which is calculated using :nml:mem:`canht_ft_io` and :nml:mem:`dz0v_dh_io`.
+   
+   
+.. nml:member:: z0hm_classic_pft_io
+
+   :type: real(npft)
+   :default: None
+   
+   Ratio of the roughness length for heat to the roughness length for momentum *for the CLASSIC aerosol scheme only*.
+   
+   .. note:: This makes no difference to the model when running standalone, and is only required to keep the standalone and UM interfaces consistent.
+
+
+.. nml:member:: fl_o3_ct_io
+
+   :type: real(npft)
+   :default: None
+
+   Critical flux of O3 to vegetation (mmol m\ :sup:`-2` s\ :sup:`-1`).
+
+
+.. nml:member:: dfp_dcuo_io
+
+   :type: real(npft)
+   :default: None
+
+   Fractional reduction of photosynthesis with the cumulative uptake of O3 by leaves (mmol m\ :sup:`-2`).
+
+
+.. nml:member:: ief_io
+
+   :type: real(npft)
+   :default: None
+
+   Isoprene Emission Factor (\ |mu|\ g g\ :sup:`-1` h\ :sup:`-1`).
+
+
+.. nml:member:: tef_io
+
+   :type: real(npft)
+   :default: None
+
+   Monoterpene Emission Factor (\ |mu|\ g g\ :sup:`-1` h\ :sup:`-1`).
+
+
+.. nml:member:: mef_io
+
+   :type: real(npft)
+   :default: None
+
+   Methanol Emission Factor (\ |mu|\ g g\ :sup:`-1` h\ :sup:`-1`).
+
+
+.. nml:member:: aef_io
+
+   :type: real(npft)
+   :default: None
+
+   Acetone Emission Factor (\ |mu|\ g g\ :sup:`-1` h\ :sup:`-1`).
+
+
+.. |mu| unicode:: &#x03BC; .. u
+
+
+

@@ -1,0 +1,865 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.3. switches.nml &mdash; Joint UK Land Environment Simulator (JULES) v3.3 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v3.3 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.4. model_levels.nml" href="model_levels.nml.html" />
+    <link rel="prev" title="6.2. logging.nml" href="logging.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="model_levels.nml.html" title="6.4. model_levels.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="logging.nml.html" title="6.2. logging.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.3 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="switches-nml">
+<h1>6.3. <tt class="docutils literal"><span class="pre">switches.nml</span></tt><a class="headerlink" href="#switches-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets up the switches that control model behaviour. It contains a single namelist named <a class="reference internal" href="#namelist-JULES_SWITCHES"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_SWITCHES</span></tt></a>.</p>
+<div class="section" id="namelist-JULES_SWITCHES">
+<span id="jules-switches-namelist-members"></span><h2>6.3.1. <tt class="docutils literal"><span class="pre">JULES_SWITCHES</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_SWITCHES" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_SWITCHES::l_aggregate">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_aggregate</tt><a class="headerlink" href="#JULES_SWITCHES::l_aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch controlling number of tiles for each gridbox.</p>
+<p>This is used to set the number of surface energy balances that are solved for each gridbox (<tt class="docutils literal"><span class="pre">ntiles</span></tt>).</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Aggregate parameter values are used to solve a single energy balance per gridbox. This option sets <tt class="docutils literal"><span class="pre">ntiles</span> <span class="pre">=</span> <span class="pre">1</span></tt>.</dd>
+<dt>FALSE</dt>
+<dd>A separate energy balance is calculated for each surface type. This option sets <tt class="docutils literal"><span class="pre">ntiles</span> <span class="pre">=</span> <span class="pre">ntype</span></tt>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::can_model">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">can_model</tt><a class="headerlink" href="#JULES_SWITCHES::can_model" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">1-4</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">4</td>
+</tr>
+</tbody>
+</table>
+<p>Choice of canopy model for vegetation:</p>
+<ol class="arabic simple">
+<li>No canopy.</li>
+<li>Radiative canopy with no heat capacity.</li>
+<li>Radiative canopy with heat capacity. This option is deprecated, with 4 preferred.</li>
+<li>As 3 but with a representation of snow beneath the canopy. This option is preferred to 3.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference internal" href="#JULES_SWITCHES::can_model" title="JULES_SWITCHES::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> = 1 does not mean that there is no vegetation canopy. It means that the surface is represented as a single entity, rather than having distinct surface and canopy levels for the purposes of radiative processes.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::can_rad_mod">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">can_rad_mod</tt><a class="headerlink" href="#JULES_SWITCHES::can_rad_mod" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">1-5</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">4</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for treatment of canopy radiation.</p>
+<ol class="arabic simple">
+<li>A single canopy layer for which radiation absorption is calculated using Beer&#8217;s law. Leaf-level photosynthesis is scaled to the canopy level using the &#8216;big leaf&#8217; approach. Leaf nitrogen, photosynthetic capacity, i.e the Vcmax parameter, and leaf photosynthesis vary exponentially through the canopy with radiation.</li>
+<li>Multi-layer approach for radiation interception following the 2-stream approach of Sellers et al. (1992). This approach takes into account leaf angle distribution, zenith angle, and differentiates absorption of direct and diffuse radiation. Leaf-level photosynthesis is calculated using a vertically-varying light-limited rate, and constant Rubisco and export velocities, consistent with the assumption of constant leaf N through the canopy. Canopy photosynthesis and conductance are calculated as the sum over all layers.</li>
+<li>As 2, but photosynthesis calculated separately for sunlit and shaded leaves for the whole canopy (i.e. not at each layer). The definition of sunlit and shaded leaves is based on a threshold of absorbed radiation at each layer.</li>
+<li>This is a modification of option 2. Instead of constant leaf N through the canopy, it has an exponential decline of leaf N with canopy height. Additionally includes inhibition of leaf respiration in the light.</li>
+<li>This is an improvement of option 4, including:<ul>
+<li>Sunfleck penetration though the canopy.</li>
+<li>Division of sunlit and shaded leaves within each canopy level.</li>
+<li>A modified version of inhibition of leaf respiration in the light.</li>
+</ul>
+</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When using <a class="reference internal" href="#JULES_SWITCHES::can_rad_mod" title="JULES_SWITCHES::can_rad_mod"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_rad_mod</span></tt></a> = 4 or 5, it is recommended to use driving data that contains direct and diffuse radiation separately rather than a constant diffuse fraction.</p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Descriptions 1, 2 and 3 can be found in Jogireddy et al. (2006), and an application of option 4 can be found in Mercado et al. (2007) and all are described in Clark et al (2011).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::ilayers">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">ilayers</tt><a class="headerlink" href="#JULES_SWITCHES::ilayers" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">10</td>
+</tr>
+</tbody>
+</table>
+<p>Number of layers for canopy radiation model.</p>
+<p>These layers are used for the calculations of radiation interception and photosynthesis.</p>
+<p>Only used if <a class="reference internal" href="#JULES_SWITCHES::can_rad_mod" title="JULES_SWITCHES::can_rad_mod"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_rad_mod</span></tt></a> is 2 or 3.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_cosz">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_cosz</tt><a class="headerlink" href="#JULES_SWITCHES::l_cosz" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for calculation of solar zenith angle. For land points, this switch is only relevant if <a class="reference internal" href="#JULES_SWITCHES::l_spec_albedo" title="JULES_SWITCHES::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Calculate zenith angle.</dd>
+<dt>FALSE</dt>
+<dd>Assume constant zenith angle of zero, meaning sun is directly overhead.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_spec_albedo">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_spec_albedo</tt><a class="headerlink" href="#JULES_SWITCHES::l_spec_albedo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for albedo model.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use spectral albedo.</dd>
+<dt>FALSE</dt>
+<dd>Use a single (averaged) waveband albedo.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_snow_albedo">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_snow_albedo</tt><a class="headerlink" href="#JULES_SWITCHES::l_snow_albedo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for using prognostic snow properties in model albedo.</p>
+<p>Requires <a class="reference internal" href="#JULES_SWITCHES::l_spec_albedo" title="JULES_SWITCHES::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use prognostic snow properties for albedo.</dd>
+<dt>FALSE</dt>
+<dd>Calculate albedo of snow using only snow depth.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_albedo_obs">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_albedo_obs</tt><a class="headerlink" href="#JULES_SWITCHES::l_albedo_obs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for applying a scaling factor to the albedo values, on tiles, so that the resultant aggregate albedo matches observations.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd><p class="first">Scale the albedo values on tiles.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Observed albedo(s) must be prescribed in <a class="reference internal" href="prescribed_data.nml.html"><em>prescribed_data.nml</em></a>.</p>
+</div>
+</dd>
+<dt>FALSE</dt>
+<dd>Do not scale the albedo values on tiles.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_phenol">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_phenol</tt><a class="headerlink" href="#JULES_SWITCHES::l_phenol" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for vegetation phenology model.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use phenology model.</dd>
+<dt>FALSE</dt>
+<dd>Do not use phenology model.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_triffid">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_triffid</tt><a class="headerlink" href="#JULES_SWITCHES::l_triffid" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for dynamic vegetation model (TRIFFID) except for competition.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use TRIFFID. In this case soil carbon is modelled using four pools
+(biomass, humus, decomposable plant material, resistant plant material).</dd>
+<dt>FALSE</dt>
+<dd>Do not use TRIFFID. A single soil carbon pool is used.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_veg_compete">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_veg_compete</tt><a class="headerlink" href="#JULES_SWITCHES::l_veg_compete" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for competing vegetation.</p>
+<p>Only used if <a class="reference internal" href="#JULES_SWITCHES::l_triffid" title="JULES_SWITCHES::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = TRUE.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>TRIFFID will let the different PFTs compete against each other and modify the vegetation fractions.</dd>
+<dt>FALSE</dt>
+<dd>Vegetation fractions do not change.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_trif_eq">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_trif_eq</tt><a class="headerlink" href="#JULES_SWITCHES::l_trif_eq" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for equilibrium vegetation model (i.e., an equilibrium solution of TRIFFID).</p>
+<p>Only used if <a class="reference internal" href="#JULES_SWITCHES::l_triffid" title="JULES_SWITCHES::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = TRUE.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use equilibrium TRIFFID.</dd>
+<dt>FALSE</dt>
+<dd>Do not use equilibrium TRIFFID.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_top">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_top</tt><a class="headerlink" href="#JULES_SWITCHES::l_top" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for a TOPMODEL-type model of runoff production.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use a TOPMODEL-type scheme. This is based on Gedney and Cox (2003); see also Clark and Gedney (2008).</dd>
+<dt>FALSE</dt>
+<dd>No TOPMODEL scheme.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Gedney, N. and P.M.Cox, 2003 , The sensitivity of global climate model simulations to the representation of soil moisture heterogeneity, J. Hydrometeorology, 4, 1265-1275.</li>
+<li>Clark and Gedney, 2008, Representing the effects of subgrid variability of soil moisture on runoff generation in a land surface model, Journal of Geophysical Research - Atmospheres, 113, D10111, doi:10.1029/2007JD008940.</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_pdm">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_pdm</tt><a class="headerlink" href="#JULES_SWITCHES::l_pdm" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for a PDM-type model of runoff production.</p>
+<p>PDM is the Probability Distributed Model (Moore, 1985), implemented in JULES following Clark and Gedney (2008).</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use a PDM scheme.</dd>
+<dt>FALSE</dt>
+<dd>No PDM scheme.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Moore, R. J. (1985), The probability-distributed principle and runoff production at point and basin scales, Hydrol. Sci. J., 30, 273-297.</li>
+<li>Clark and Gedney, 2008, Representing the effects of subgrid variability of soil moisture on runoff generation in a land surface model, Journal of Geophysical Research - Atmospheres, 113, D10111, doi:10.1029/2007JD008940.</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_anthrop_heat_src">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_anthrop_heat_src</tt><a class="headerlink" href="#JULES_SWITCHES::l_anthrop_heat_src" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for inclusion of anthropogenic contribution to the surface heat flux from urban tiles.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Add anthropogenic effect.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_o3_damage">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_o3_damage</tt><a class="headerlink" href="#JULES_SWITCHES::l_o3_damage" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for ozone damage.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd><p class="first">Ozone damage is on.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Ozone concentration in ppb must be prescribed in <a class="reference internal" href="prescribed_data.nml.html"><em>prescribed_data.nml</em></a>.</p>
+</div>
+</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_imogen">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_imogen</tt><a class="headerlink" href="#JULES_SWITCHES::l_imogen" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for IMOGEN.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>IMOGEN is used to generate driving data.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_epot_corr">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_epot_corr</tt><a class="headerlink" href="#JULES_SWITCHES::l_epot_corr" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use correction to the calculation of potential evaporation.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_snowdep_surf">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_snowdep_surf</tt><a class="headerlink" href="#JULES_SWITCHES::l_snowdep_surf" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use equivalent canopy snow depth for surface calculations on tiles with a snow canopy.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::Iscrntdiag">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">Iscrntdiag</tt><a class="headerlink" href="#JULES_SWITCHES::Iscrntdiag" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0 or 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Switch controlling method for diagnosing screen temperature.</p>
+<ol class="arabic simple" start="0">
+<li>Use surface similarity theory.</li>
+<li>Use surface similarity theory but allow decoupling in very stable conditions based on the quasi-equilibrium radiative solution.</li>
+</ol>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_360">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_360</tt><a class="headerlink" href="#JULES_SWITCHES::l_360" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch indicating use of 360 day years.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Each year consists of 360 days. This is sometimes used for idealised
+experiments.</dd>
+<dt>FALSE</dt>
+<dd>Each year consists of 365 or 366 days.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_q10">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_q10</tt><a class="headerlink" href="#JULES_SWITCHES::l_q10" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for use of Q10 approach when calculating soil respiration.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd><p class="first">Use Q10 approach.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This is always used if TRIFFID is switched off (<a class="reference internal" href="#JULES_SWITCHES::l_triffid" title="JULES_SWITCHES::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = FALSE) and was used in JULES2.0.</p>
+</div>
+</dd>
+<dt>FALSE</dt>
+<dd>Use the approach of the RothC model.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_soil_sat_down">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_soil_sat_down</tt><a class="headerlink" href="#JULES_SWITCHES::l_soil_sat_down" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for dealing with supersaturated soil layers. If a soil layer becomes supersaturated, the water in excess of saturation will be put into the layer below or above according to this switch.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Any excess is put into the layer below. Any excess from the bottom
+layer becomes subsurface runoff.</dd>
+<dt>FALSE</dt>
+<dd>Any excess is put into the layer above. Any excess from the top layer becomes surface runoff. This option was used in JULES2.0.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_vg_soil">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_vg_soil</tt><a class="headerlink" href="#JULES_SWITCHES::l_vg_soil" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for van Genuchten soil hydraulic model.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use van Genuchten model.</dd>
+<dt>FALSE</dt>
+<dd>Use Brooks and Corey model <a class="footnote-reference" href="#id2" id="id1">[*]</a>.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Brooks, R.H. and A.T. Corey, 1964, Hydraulic properties of porous media. Colorado State University Hydrology Papers 3.</li>
+<li>van Genuchten, M.T., 1980, A Closed-form Equation for Predicting the Hydraulic Conductivity of Unsaturated Soils. Soil Science Society of America Journal, 44:892-898.</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::soilhc_method">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">soilhc_method</tt><a class="headerlink" href="#JULES_SWITCHES::soilhc_method" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">1 or 2</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">1</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for soil thermal conductivity model.</p>
+<ol class="arabic simple">
+<li>Use approach of Cox et al (1999), as in JULES2.0.</li>
+<li>Use approach of Johansen (1975).</li>
+</ol>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_point_data">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_point_data</tt><a class="headerlink" href="#JULES_SWITCHES::l_point_data" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Flag indicating if driving data are point or area-average values. This affects the treatment of precipitation input and how snow affects the albedo.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Driving data are point data. Precipitation is not distributed in space (see FALSE below) and is all assumed to be large-scale in origin. The albedo formulation is suitable for a point.</dd>
+<dt>FALSE</dt>
+<dd>Driving data are area averages. The precipitation inputs are assumed to be exponentially distributed in space, as in UMDP25, and can include convective and large-scale components. The albedo formulation is suitable for a gridbox.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_dpsids_dsdz">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_dpsids_dsdz</tt><a class="headerlink" href="#JULES_SWITCHES::l_dpsids_dsdz" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to calculate vertical gradient of soil suction with the assumption of linearity only for fractional saturation (consistent with the calculation of hydraulic conductivity).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_land_ice_imp">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_land_ice_imp</tt><a class="headerlink" href="#JULES_SWITCHES::l_land_ice_imp" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to control the use of implicit numerics to update land ice temperatures.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use implicit numerics to update land ice temperatures.</dd>
+<dt>FALSE</dt>
+<dd>Use explicit numerics to update land ice temperatures.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SWITCHES::l_bvoc_emis">
+<tt class="descclassname">JULES_SWITCHES::</tt><tt class="descname">l_bvoc_emis</tt><a class="headerlink" href="#JULES_SWITCHES::l_bvoc_emis" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to enable calculation of BVOC emissions.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>BVOC emissions diagnostics will be calculated.</dd>
+<dt>FALSE</dt>
+<dd>BVOC emissions diagnostics will not be calculated.</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[*]</a></td><td><p class="first">In the JULES2.0 User Manual this was described as the &#8216;Clapp and Hornberger&#8217; model and the JULES code still refers to &#8216;Clapp and Hornberger&#8217; rather than &#8216;Brooks and Corey&#8217;. In fact there are important differences between these two hydraulic models (Toby Marthews, pers comm.). There has been confusion in the literature and in past documentation of MOSES/JULES, resulting in these differences often being ignored, but JULES uses the Brooks and Corey model. Hopefully this confusion will be removed from future releases.</p>
+<p class="last">Reference: Clapp, R.B. and G.M.Hornberger, 1978, Empirical Equations for Some Soil Hydraulic Properties. Water Resources Research 14:601-604.</p>
+</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.nml.html">6.2. <tt class="docutils literal"><span class="pre">logging.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.3. <tt class="docutils literal"><span class="pre">switches.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_levels.nml.html">6.4. <tt class="docutils literal"><span class="pre">model_levels.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.5. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.6. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.7. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.8. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.9. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.10. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="snow_params.nml.html">6.11. <tt class="docutils literal"><span class="pre">snow_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc_params.nml.html">6.12. <tt class="docutils literal"><span class="pre">misc_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.13. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.14. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.15. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.16. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.17. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.18. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="logging.nml.html"
+                        title="previous chapter">6.2. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">logging.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="model_levels.nml.html"
+                        title="next chapter">6.4. <tt class="docutils literal docutils literal docutils literal"><span class="pre">model_levels.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="model_levels.nml.html" title="6.4. model_levels.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="logging.nml.html" title="6.2. logging.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.3 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

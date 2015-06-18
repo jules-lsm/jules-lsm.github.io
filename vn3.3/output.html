@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5. JULES output &mdash; Joint UK Land Environment Simulator (JULES) v3.3 User Guide</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '3.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v3.3 User Guide" href="index.html" />
+    <link rel="next" title="6. The JULES namelist files" href="namelists/contents.html" />
+    <link rel="prev" title="4.5. Temporal interpolation" href="input/temporal-interpolation.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="namelists/contents.html" title="6. The JULES namelist files"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="input/temporal-interpolation.html" title="4.5. Temporal interpolation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Joint UK Land Environment Simulator (JULES) v3.3 User Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jules-output">
+<h1>5. JULES output<a class="headerlink" href="#jules-output" title="Permalink to this headline">¶</a></h1>
+<p>JULES separates output into one or more output &#8216;profiles&#8217;. Within each profile, all variables selected for output are written to the same file with the same frequency (also referred to as the &#8216;output period&#8217;). The output period can be any multiple of the model timestep, including calendar months or years.</p>
+<p>All output is provided on the model grid only. Each output file contains the latitude and longitude of each point to allow the points to be located in a grid if desired (e.g. for visualisation). Output files also contain two time related variables to locate the values in time (this is described in more detail <a class="reference external" href="#associating-output-values-with-the-correct-time">below</a>).</p>
+<p>JULES is capable of performing three different types of time-processing - snapshot (instantaneous) values, time averages and time accumulations. Snapshots are instantaneous values produced during the first model timestep of each output period. Time averages and accumulations are calculated over the output period. Each output variable is annotated with a <a class="reference external" href="http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/ch07s03.html">CF convention <tt class="docutils literal"><span class="pre">cell_methods</span></tt> attribute</a> to indicate whether it is a snapshot value (<tt class="docutils literal"><span class="pre">time</span> <span class="pre">:</span> <span class="pre">point</span></tt>), time average (<tt class="docutils literal"><span class="pre">time</span> <span class="pre">:</span> <span class="pre">mean</span></tt>) or time accumulation (<tt class="docutils literal"><span class="pre">time</span> <span class="pre">:</span> <span class="pre">sum</span></tt>).</p>
+<p>Each profile can be considered as a separate data stream. By using more than one profile the user can, for example:</p>
+<ul class="simple">
+<li>Output one set of variables to one file, and other variables to another file.</li>
+<li>Write instantaneous values to one file, and time-averaged values to another.</li>
+<li>Write low-frequency output throughout the run to one file, and high-frequency output from a smaller part of the run (e.g. a &#8216;special observation period&#8217;) to another file.</li>
+</ul>
+<p>All output files will be NetCDF if JULES is compiled with &#8216;proper&#8217; NetCDF libraries (see <a class="reference internal" href="building-and-running/building-jules.html"><em>Building JULES</em></a>). Otherwise all output will be in columnar ASCII files.</p>
+<div class="section" id="associating-output-values-with-the-correct-time">
+<h2>5.1. Associating output values with the correct time<a class="headerlink" href="#associating-output-values-with-the-correct-time" title="Permalink to this headline">¶</a></h2>
+<p>JULES output files contain two time related variables to allow model output to be associated with the correct model time:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">time</span></tt></dt>
+<dd>For each output period, this variable contains the time of the start of the output period. This is the time that any snapshot values apply at.</dd>
+<dt><tt class="docutils literal"><span class="pre">time_bounds</span></tt></dt>
+<dd><p class="first">For each output period, this variable contains two values - the start and end of the output period. The output period is then the half-open interval given by:</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="nv">time_bounds</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">time</span> <span class="o">&lt;</span> <span class="nv">time_bounds</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="last">This is the interval that means and accumulations are calculated over.</p>
+</dd>
+</dl>
+<p>During each model timestep, JULES has two distinct places where it captures values for output. A variable is either captured at the start of the timestep (i.e. before any science code has run) or at the end of the timestep (i.e. after all the science code). In general, JULES captures &#8216;state&#8217; variables (e.g. temperature, snow mass, soil moisture) at the start of the timestep, and fluxes (or rates) at the end of the timestep (e.g. GPP, evaporation). There are a few small exceptions to this. The point at which each output variable is captured is given in <a class="reference internal" href="output-variables.html"><em>JULES Output variables</em></a>.</p>
+<p>This means that in output files, snapshot data at a particular time is:</p>
+<ul class="simple">
+<li>The state of the model at the beginning of the model timestep that started at that time.</li>
+<li>The fluxes that evolve from that state over that model timestep.</li>
+</ul>
+<p>The distinction becomes less important for means and accumulations, but it is still worth bearing in mind at what point in the timestep values are captured for a particular variable.</p>
+</div>
+<div class="section" id="dump-files">
+<h2>5.2. Dump files<a class="headerlink" href="#dump-files" title="Permalink to this headline">¶</a></h2>
+<p>JULES writes dump files (a snapshot of the current model state) at several points during a run. These can be used to restart the model from that point if desired. The times that dump files are written are:</p>
+<ul class="simple">
+<li>After initialisation is complete, immediately before the start of the run (initial state).</li>
+<li>Before starting each cycle of spin-up.</li>
+<li>Before starting the main run.</li>
+<li>At the end of the run (final state).</li>
+<li>At the start of each calendar year.</li>
+</ul>
+<p>Each dump is marked with the model date and time that it was produced.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">5. JULES output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#associating-output-values-with-the-correct-time">5.1. Associating output values with the correct time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dump-files">5.2. Dump files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="input/temporal-interpolation.html"
+                        title="previous chapter">4.5. Temporal interpolation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="namelists/contents.html"
+                        title="next chapter">6. The JULES namelist files</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="namelists/contents.html" title="6. The JULES namelist files"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="input/temporal-interpolation.html" title="4.5. Temporal interpolation"
+             >previous</a> |</li>
+        <li><a href="index.html">Joint UK Land Environment Simulator (JULES) v3.3 User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>
