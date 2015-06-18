@@ -1,0 +1,236 @@
+``misc_params.nml``
+===================
+
+
+This file contains five namelists called :nml:lst:`JULES_SURF_PARAM`, :nml:lst:`JULES_CSMIN`, :nml:lst:`JULES_AERO`, :nml:lst:`JULES_SEED` and :nml:lst:`JULES_SIGM` that are used to set various parameters not set elsewhere.
+
+HCTN24 and 30 refer to Hadley Centre technical notes 24 and 30, available from `the Met Office Library <http://www.metoffice.gov.uk/learning/library/publications/science/climate-science/hadley-centre-technical-note>`_.
+
+
+``JULES_SURF_PARAM`` namelist members
+-------------------------------------
+
+.. nml:namelist:: JULES_SURF_PARAM
+
+
+.. nml:member:: hleaf
+
+   :type: real
+   :default: 5.7e4
+
+   Specific heat capacity of leaves (J K\ :sup:`-1` per kg carbon).
+
+   See HCTN30 p6.
+
+
+.. nml:member:: hwood
+
+   :type: real
+   :default: 1.1e4
+
+   Specific heat capacity of wood (J K\ :sup:`-1` per kg carbon).
+
+   See HCTN30 p6.
+
+
+.. nml:member:: beta1
+
+   :type: real
+   :default: 0.83
+
+   Coupling coefficient for co-limitation in photosynthesis model.
+
+   See Cox et al. (1999), Eq.61.
+
+
+.. nml:member:: beta2
+
+   :type: real
+   :default: 0.93
+
+   Coupling coefficient for co-limitation in photosynthesis model.
+
+   See Cox et al. (1999), Eq.61.
+
+
+.. nml:member:: fwe_c3
+
+   :type: real
+   :default: 0.5
+
+   Constant in expression for limitation of photosynthesis by transport of products, for C3 plants.
+
+   See Cox et al. (1999) Eq.60.
+
+
+.. nml:member:: fwe_c4
+
+   :type: real
+   :default: 20000.0
+
+   Constant in expression for limitation of photosynthesis by transport of products, for C4 plants.
+
+   See Cox et al. (1999) Eq.60.
+
+
+.. nml:member:: q10_leaf
+
+   :type: real
+   :default: 2.0
+
+   Q10 factor for plant respiration.
+
+   See Cox et al. (1999) Eq.66.
+
+
+.. nml:member:: q10_soil
+
+   :type: real
+   :default: 2.0
+
+   Q10 factor for soil respiration.
+
+   Only used if :nml:mem:`JULES_SWITCHES::l_q10` = TRUE. See HCTN24 Eq.17.
+
+
+.. nml:member:: kaps
+
+   :type: real
+   :default: 0.5e-8
+
+   Specific soil respiration rate at 25 degC and optimum soil moisture (s\ :sup:`-1`).
+
+   Only used if not using TRIFFID (:nml:mem:`JULES_SWITCHES::l_triffid` = FALSE). See HCTN24 Eq.16.
+
+
+.. nml:member:: kaps_roth
+
+   :type: real(4)
+   :default: 3.22e-7, 9.65e-9, 2.12e-8, 6.43e-10
+
+   Specific soil respiration rate for the RothC submodel for each soil carbon pool.
+
+   Only used if using the TRIFFID vegetation model (:nml:mem:`JULES_SWITCHES::l_triffid` = TRUE), in which case soil carbon is modelled using four pools (biomass, humus, decomposable plant material, resistant plant material).
+   
+   
+.. nml:member:: z0miz
+
+   :type: real
+   :default: 1.0e-1
+   
+   Roughness length for heat, moisture and momentum over the Marginal Ice Zone (m).
+
+
+.. nml:member:: z0sice
+
+   :type: real
+   :default: 3.0e-3
+   
+   Roughness length for heat, moisture and momentum over sea-ice (m).
+
+
+.. nml:member:: z0h_z0m_miz
+
+   :type: real
+   :default: 1.0
+   
+   Ratio of thermal to momentum roughness lengths for marginal ice.
+
+
+.. nml:member:: z0h_z0m_sice
+
+   :type: real
+   :default: 1.0
+   
+   Ratio of thermal to momentum roughness lengths for sea ice.
+
+
+.. nml:member:: emis_sea
+
+   :type: real
+   :default: 1.0
+
+   Emissivity of open sea.
+
+
+.. nml:member:: emis_sice
+
+   :type: real
+   :default: 1.0
+   
+   Emissivity of sea-ice.
+
+
+
+``JULES_CSMIN`` namelist members
+--------------------------------
+
+.. nml:namelist:: JULES_CSMIN
+
+
+.. nml:member:: cs_min
+
+   :type: real
+   :default: 1.0e-6
+
+   Minimum allowed soil carbon (kg m\ :sup:`-2`).
+
+
+
+
+``JULES_AERO`` namelist members
+-------------------------------
+
+.. nml:namelist:: JULES_AERO
+
+
+.. nml:member:: co2_mmr
+
+   :type: real
+   :default: 5.241e-4
+
+   Concentration of atmospheric CO2, expressed as a mass mixing ratio.
+
+
+
+
+``JULES_SEED`` namelist members
+-------------------------------
+
+.. nml:namelist:: JULES_SEED
+
+
+.. nml:member:: frac_min
+
+   :type: real
+   :default: 1.0e-6
+
+   Minimum fraction that a PFT is allowed to cover if TRIFFID is used.
+
+
+.. nml:member:: frac_seed
+
+   :type: real
+   :default: 0.01
+
+   Seed fraction for TRIFFID.
+
+
+
+
+``JULES_SIGM`` namelist members
+-------------------------------
+
+.. nml:namelist:: JULES_SIGM
+
+
+.. nml:member:: pow
+
+   :type: real
+   :default: 5.241e-4
+
+   Power in sigmodial function used to get competition coefficients.
+
+   See HCTN24 Eq.3.
+
+

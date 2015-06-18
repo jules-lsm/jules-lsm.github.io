@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.2.2. Building JULES using make &mdash; Joint UK Land Environment Simulator (JULES) v3.4 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v3.4 User Guide" href="../index.html" />
+    <link rel="up" title="3.2. Building JULES" href="building-jules.html" />
+    <link rel="next" title="3.3. Running JULES" href="running-jules.html" />
+    <link rel="prev" title="3.2.1. Building JULES using FCM" href="fcm.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="running-jules.html" title="3.3. Running JULES"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fcm.html" title="3.2.1. Building JULES using FCM"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" >3. Building and running JULES</a> &raquo;</li>
+          <li><a href="building-jules.html" accesskey="U">3.2. Building JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="building-jules-using-make">
+<h1>3.2.2. Building JULES using make<a class="headerlink" href="#building-jules-using-make" title="Permalink to this headline">¶</a></h1>
+<p>The <tt class="docutils literal"><span class="pre">Makefile</span></tt> supplied with the JULES code should be compliant with most versions of make, but is only guaranteed to work with GNU Make.</p>
+<p>The JULES <tt class="docutils literal"><span class="pre">Makefile</span></tt> uses architecture- and compiler-specific variables that must be set by the user to the appropriate values for their system. Architecture-specific variables, such as the remove command and archiving utility to use, are specified in <tt class="docutils literal"><span class="pre">Makefile.common.mk</span></tt>. Compiler-specific variables are given in files named <tt class="docutils literal"><span class="pre">Makefile.comp.*</span></tt>. These files are provided for a number of common compilers, e.g. <tt class="docutils literal"><span class="pre">Makefile.comp.gfortran</span></tt>. To use a compiler for which a file has not been provided, the user should replace the <tt class="docutils literal"><span class="pre">&#64;&#64;</span></tt> strings in the blank compiler file <tt class="docutils literal"><span class="pre">Makefile.comp.misc</span></tt> with values appropriate to their compiler.</p>
+<p>Once the <tt class="docutils literal"><span class="pre">Makefile</span></tt> is set up for the user&#8217;s system, JULES is built by issuing a <tt class="docutils literal"><span class="pre">make</span></tt> command at the command prompt while in the directory containing the <tt class="docutils literal"><span class="pre">Makefile</span></tt>. The user must specify some options to make that will determine how JULES is built - valid values for these options are given below, and additional information is given in the comments at the head of the <tt class="docutils literal"><span class="pre">Makefile</span></tt>.</p>
+<p>Running make will produce a JULES executable (either <tt class="docutils literal"><span class="pre">jules.exe</span></tt>, <tt class="docutils literal"><span class="pre">jules_debug.exe</span></tt> or <tt class="docutils literal"><span class="pre">jules_fast.exe</span></tt> depending on the value of <tt class="docutils literal"><span class="pre">BUILD</span></tt>) in the JULES root directory, i.e. the directory containing <tt class="docutils literal"><span class="pre">Makefile</span></tt>, <tt class="docutils literal"><span class="pre">src</span></tt>, etc.</p>
+<div class="section" id="options-that-can-be-passed-to-make-when-building-jules">
+<h2>3.2.2.1. Options that can be passed to make when building JULES<a class="headerlink" href="#options-that-can-be-passed-to-make-when-building-jules" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">COMPILER</span></tt></dt>
+<dd><p class="first">Determines which version of <tt class="docutils literal"><span class="pre">Makefile.comp.*</span></tt> to use for compiler specific options.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Permitted values</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">gfortran</span></tt></td>
+<td>Use options for the <a class="reference external" href="http://www.gnu.org/software/gcc/fortran/">GNU Fortran compiler</a>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">intel</span></tt></td>
+<td>Use options for the <a class="reference external" href="http://software.intel.com/en-us/articles/fortran-compilers/">Intel Fortran compiler</a>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">nag</span></tt></td>
+<td>Use options for the <a class="reference external" href="http://www.nag.co.uk/nagware/np.asp">NAGWare compiler</a>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">pgf</span></tt></td>
+<td>Use options for the <a class="reference external" href="http://www.pgroup.com/">Portland Group compiler</a>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">g95</span></tt></td>
+<td>Use options for the <a class="reference external" href="http://www.g95.org/">G95 compiler</a>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">sun</span></tt></td>
+<td>Use options for the <a class="reference external" href="http://www.oracle.com/us/products/servers-storage/solaris/studio/overview/index.html">Oracle (previously Sun) Studio compiler</a>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">misc</span></tt></td>
+<td>Use options for an unsupported compiler.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">BUILD</span></tt></dt>
+<dd><p class="first">Allows different compiler flags to be used without changing the <tt class="docutils literal"><span class="pre">Makefile</span></tt> s.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Permitted values</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">run</span></tt></td>
+<td><strong>Default.</strong>  Compile JULES normally.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">debug</span></tt></td>
+<td>Switch on compiler debug flags.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">fast</span></tt></td>
+<td>Switch on compiler optimisation flags for faster execution.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">CDFDUMMY</span></tt></dt>
+<dd><p class="first">Determines whether to use a &#8216;real&#8217; NetCDF library or the dummy NetCDF library provided with JULES.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="20%" />
+<col width="80%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Permitted values</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">true</span></tt></td>
+<td>Use the dummy NetCDF library provided with JULES.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">false</span></tt></td>
+<td><strong>Default.</strong> Use a &#8216;real&#8217; NetCDF library.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">CDF_LIB_PATH</span></tt></dt>
+<dd><div class="first admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only used if <tt class="docutils literal"><span class="pre">CDFDUMMY=false</span></tt>.</p>
+</div>
+<p class="last">The NetCDF library path (see <a class="reference internal" href="jules-and-netcdf.html"><em>JULES and NetCDF</em></a>).</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">CDF_MOD_PATH</span></tt></dt>
+<dd><div class="first admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Only used if <tt class="docutils literal"><span class="pre">CDFDUMMY=false</span></tt>.</p>
+</div>
+<p class="last">The NetCDF include path (see <a class="reference internal" href="jules-and-netcdf.html"><em>JULES and NetCDF</em></a>).</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="example-make-commands">
+<h2>3.2.2.2. Example make commands<a class="headerlink" href="#example-make-commands" title="Permalink to this headline">¶</a></h2>
+<p>To create a normal JULES executable without NetCDF using the GFortran compiler:</p>
+<div class="highlight-bash"><div class="highlight"><pre>make <span class="nv">COMPILER</span><span class="o">=</span>gfortran <span class="nv">BUILD</span><span class="o">=</span>run <span class="nv">CDFDUMMY</span><span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>To create a fast JULES executable with the Intel compiler using a NetCDF library:</p>
+<div class="highlight-bash"><div class="highlight"><pre>make <span class="nv">COMPILER</span><span class="o">=</span>intel <span class="nv">BUILD</span><span class="o">=</span>fast <span class="nv">CDF_LIB_PATH</span><span class="o">=</span>/path/to/netcdf/lib <span class="nv">CDF_MOD_PATH</span><span class="o">=</span>/path/to/netcdf/include
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">3. Building and running JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="jules-and-netcdf.html">3.1. JULES and NetCDF</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="building-jules.html">3.2. Building JULES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-jules.html">3.3. Running JULES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel.html">3.4. Building and running JULES in parallel mode</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fcm.html"
+                        title="previous chapter">3.2.1. Building JULES using FCM</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="running-jules.html"
+                        title="next chapter">3.3. Running JULES</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="running-jules.html" title="3.3. Running JULES"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fcm.html" title="3.2.1. Building JULES using FCM"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" >3. Building and running JULES</a> &raquo;</li>
+          <li><a href="building-jules.html" >3.2. Building JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

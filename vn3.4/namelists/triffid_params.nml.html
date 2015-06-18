@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.10. triffid_params.nml &mdash; Joint UK Land Environment Simulator (JULES) v3.4 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v3.4 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.11. snow_params.nml" href="snow_params.nml.html" />
+    <link rel="prev" title="6.9. nveg_params.nml" href="nveg_params.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="snow_params.nml.html" title="6.11. snow_params.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.9. nveg_params.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="triffid-params-nml">
+<h1>6.10. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt><a class="headerlink" href="#triffid-params-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains a single namelist called <a class="reference internal" href="#namelist-JULES_TRIFFID"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_TRIFFID</span></tt></a> that sets parameters relevant to the TRIFFID submodel.</p>
+<div class="section" id="namelist-JULES_TRIFFID">
+<span id="jules-triffid-namelist-members"></span><h2>6.10.1. <tt class="docutils literal"><span class="pre">JULES_TRIFFID</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_TRIFFID" title="Permalink to this headline">¶</a></h2>
+<p>This namelist is used to read PFT parameters that are only needed by the dynamic vegetation model (TRIFFID). Values are not used if TRIFFID is not selected.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Where a quantity is said to have units of &#8220;/360days&#8221;, this means that it is an amount per 360 days.</p>
+</div>
+<dl class="member">
+<dt id="JULES_TRIFFID::crop_io">
+<tt class="descclassname">JULES_TRIFFID::</tt><tt class="descname">crop_io</tt><a class="headerlink" href="#JULES_TRIFFID::crop_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0 or 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Flag indicating whether the PFT is a crop.</p>
+<p>Only crop PFTs are allowed to grow in the agricultural area.</p>
+<ol class="arabic simple" start="0">
+<li>Not a crop.</li>
+<li>A crop.</li>
+</ol>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TRIFFID::g_area_io">
+<tt class="descclassname">JULES_TRIFFID::</tt><tt class="descname">g_area_io</tt><a class="headerlink" href="#JULES_TRIFFID::g_area_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Disturbance rate (/360days).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TRIFFID::g_grow_io">
+<tt class="descclassname">JULES_TRIFFID::</tt><tt class="descname">g_grow_io</tt><a class="headerlink" href="#JULES_TRIFFID::g_grow_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Rate of leaf growth (/360days).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TRIFFID::g_root_io">
+<tt class="descclassname">JULES_TRIFFID::</tt><tt class="descname">g_root_io</tt><a class="headerlink" href="#JULES_TRIFFID::g_root_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Turnover rate for root biomass (/360days).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TRIFFID::g_wood_io">
+<tt class="descclassname">JULES_TRIFFID::</tt><tt class="descname">g_wood_io</tt><a class="headerlink" href="#JULES_TRIFFID::g_wood_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Turnover rate for woody biomass (/360days).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TRIFFID::lai_max_io">
+<tt class="descclassname">JULES_TRIFFID::</tt><tt class="descname">lai_max_io</tt><a class="headerlink" href="#JULES_TRIFFID::lai_max_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum LAI.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TRIFFID::lai_min_io">
+<tt class="descclassname">JULES_TRIFFID::</tt><tt class="descname">lai_min_io</tt><a class="headerlink" href="#JULES_TRIFFID::lai_min_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum LAI.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.nml.html">6.2. <tt class="docutils literal"><span class="pre">logging.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="switches.nml.html">6.3. <tt class="docutils literal"><span class="pre">switches.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_levels.nml.html">6.4. <tt class="docutils literal"><span class="pre">model_levels.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.5. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.6. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.7. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.8. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.9. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.10. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="snow_params.nml.html">6.11. <tt class="docutils literal"><span class="pre">snow_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc_params.nml.html">6.12. <tt class="docutils literal"><span class="pre">misc_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.13. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.14. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.15. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.16. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.17. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.18. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nveg_params.nml.html"
+                        title="previous chapter">6.9. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">nveg_params.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="snow_params.nml.html"
+                        title="next chapter">6.11. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">snow_params.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="snow_params.nml.html" title="6.11. snow_params.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.9. nveg_params.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

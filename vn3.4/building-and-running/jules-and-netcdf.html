@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.1. JULES and NetCDF &mdash; Joint UK Land Environment Simulator (JULES) v3.4 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v3.4 User Guide" href="../index.html" />
+    <link rel="up" title="3. Building and running JULES" href="intro.html" />
+    <link rel="next" title="3.2. Building JULES" href="building-jules.html" />
+    <link rel="prev" title="3. Building and running JULES" href="intro.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="building-jules.html" title="3.2. Building JULES"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="3. Building and running JULES"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" accesskey="U">3. Building and running JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jules-and-netcdf">
+<h1>3.1. JULES and NetCDF<a class="headerlink" href="#jules-and-netcdf" title="Permalink to this headline">¶</a></h1>
+<p>JULES can be built with or without the NetCDF libraries, however building JULES without NetCDF limits the functionality of JULES.</p>
+<p>If JULES is built without NetCDF libraries, it will use a dummy NetCDF library which allows the program to build but provides no functionality. Any attempt to use NetCDF files as input with this option will result in a runtime error. All input files must be columnar ASCII, meaning that the user is restricted to running at a single point only. Output files will automatically use a columnar ASCII format with headers. File formats are discussed in more details in <a class="reference internal" href="../input/overview.html"><em>Input files for JULES</em></a>.</p>
+<p>To build JULES with NetCDF, it must be told where to find the NetCDF library files. JULES needs two pieces of information - the directory containing the NetCDF archive files, <tt class="docutils literal"><span class="pre">netcdf.a</span></tt> and <tt class="docutils literal"><span class="pre">netcdff.a</span></tt> (the <em>&#8216;NetCDF library path&#8217;</em>), and the directory containing the NetCDF Fortran 90 module file, <tt class="docutils literal"><span class="pre">netcdf.mod</span></tt> (the <em>&#8216;NetCDF include path&#8217;</em>). In a standard NetCDF install, these are often <tt class="docutils literal"><span class="pre">/usr/lib</span></tt> and <tt class="docutils literal"><span class="pre">/usr/include</span></tt> or <tt class="docutils literal"><span class="pre">/usr/local/lib</span></tt> and <tt class="docutils literal"><span class="pre">/usr/local/include</span></tt> respectively.</p>
+<p>If the <tt class="docutils literal"><span class="pre">nc-config</span></tt> program is installed on your system (run <tt class="docutils literal"><span class="pre">which</span> <span class="pre">nc-config</span></tt> to find out), this can be used to determine values for the NetCDF library path (<tt class="docutils literal"><span class="pre">nc-config</span> <span class="pre">--flibs</span></tt>) and NetCDF include path (<tt class="docutils literal"><span class="pre">nc-config</span> <span class="pre">--includedir</span></tt>). When JULES is built with NetCDF, users can supply either ASCII or NetCDF input files, and all output will be NetCDF.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">3. Building and running JULES</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">3.1. JULES and NetCDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-jules.html">3.2. Building JULES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-jules.html">3.3. Running JULES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parallel.html">3.4. Building and running JULES in parallel mode</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="previous chapter">3. Building and running JULES</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="building-jules.html"
+                        title="next chapter">3.2. Building JULES</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="building-jules.html" title="3.2. Building JULES"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="3. Building and running JULES"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" >3. Building and running JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

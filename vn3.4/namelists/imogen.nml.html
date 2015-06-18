@@ -1,0 +1,615 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.14. imogen.nml &mdash; Joint UK Land Environment Simulator (JULES) v3.4 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v3.4 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.15. drive.nml" href="drive.nml.html" />
+    <link rel="prev" title="6.13. urban.nml" href="urban.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="drive.nml.html" title="6.15. drive.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="urban.nml.html" title="6.13. urban.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="imogen-nml">
+<h1>6.14. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt><a class="headerlink" href="#imogen-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains two namelists called <a class="reference internal" href="#namelist-IMOGEN_RUN_LIST"><tt class="xref nml nml-lst docutils literal"><span class="pre">IMOGEN_RUN_LIST</span></tt></a> and <a class="reference internal" href="#namelist-IMOGEN_ANLG_VALS_LIST"><tt class="xref nml nml-lst docutils literal"><span class="pre">IMOGEN_ANLG_VALS_LIST</span></tt></a>. Values from this section are only used if IMOGEN is enabled (i.e. <a class="reference internal" href="switches.nml.html#JULES_SWITCHES::l_imogen" title="JULES_SWITCHES::l_imogen"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_imogen</span></tt></a> = TRUE).</p>
+<p>A full IMOGEN experiment consists of three JULES runs, called spin_eq, spin_dyn and tran. Each run is started from the final dump of the previous run. The first two runs behave like an extended spin-up for the full transient run, and as such runs with IMOGEN must have no spin-up (i.e. <a class="reference internal" href="timesteps.nml.html#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><tt class="xref nml nml-mem docutils literal"><span class="pre">max_spinup_cycles</span></tt></a> = 0).</p>
+<p>Since IMOGEN calculates the forcing for an entire year at once, an IMOGEN run must have a start time of 00:00:00 on the 1st of January for some year.</p>
+<p>IMOGEN is currently restricted to run only on the HadCM3LC grid, i.e. there are 96 x 56 grid cells where each cell has size 3.75 degrees longitude by 2.5 degrees latitude with no Antarctica. This means that:</p>
+<ul class="simple">
+<li><a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::nx" title="JULES_INPUT_GRID::nx"><tt class="xref nml nml-mem docutils literal"><span class="pre">nx</span></tt></a> = 96 and <a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::ny" title="JULES_INPUT_GRID::ny"><tt class="xref nml nml-mem docutils literal"><span class="pre">ny</span></tt></a> = 56.</li>
+<li>The file <tt class="docutils literal"><span class="pre">examples/imogen/data/jules/grid_info.nc</span></tt> should be used to set up the correct latitude, longitude and land fraction, as in the given example.</li>
+</ul>
+<p>IMOGEN also uses its own I/O, so it expects IMOGEN specific files in a different format to JULES - this may change in the future. An example of setting up IMOGEN is provided in <tt class="docutils literal"><span class="pre">examples/imogen</span></tt> - this should be used as a guide if creating new files for IMOGEN.</p>
+<div class="section" id="namelist-IMOGEN_RUN_LIST">
+<span id="imogen-run-list-namelist-members"></span><h2>6.14.1. <tt class="docutils literal"><span class="pre">IMOGEN_RUN_LIST</span></tt> namelist members<a class="headerlink" href="#namelist-IMOGEN_RUN_LIST" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::co2_init_ppmv">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">co2_init_ppmv</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::co2_init_ppmv" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">286.085</td>
+</tr>
+</tbody>
+</table>
+<p>Initial CO2 concentration (ppmv).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::file_scen_emits">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">file_scen_emits</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::file_scen_emits" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>If used, file containing CO2 emissions.</p>
+<p>This file is expected to be in a specific format - see the IMOGEN example.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::file_non_co2_vals">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">file_non_co2_vals</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::file_non_co2_vals" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>If used, file containing non-CO2 values.</p>
+<p>This file is expected to be in a specific format - see the IMOGEN example.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::file_scen_co2_ppmv">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">file_scen_co2_ppmv</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::file_scen_co2_ppmv" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>If used, file containing CO2 values.</p>
+<p>This file is expected to be in a specific format - see the IMOGEN example.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::anlg">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">anlg</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::anlg" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>If TRUE, then use the GCM analogue model.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::anom">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">anom</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::anom" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>If TRUE, then incorporate anomalies.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::c_emissions">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">c_emissions</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::c_emissions" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>If TRUE, CO2 concentration is calculated.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::include_co2">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">include_co2</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::include_co2" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>If TRUE, include adjustments to CO2 values.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::include_non_co2">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">include_non_co2</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::include_non_co2" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>If TRUE, include adjustments to non-CO2 values.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::land_feed">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">land_feed</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::land_feed" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>If TRUE, include land feedbacks on atmospheric CO2.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::ocean_feed">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">ocean_feed</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::ocean_feed" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>If TRUE, include ocean feedbacks on atmospheric CO2.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::nyr_emiss">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">nyr_emiss</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::nyr_emiss" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">241</td>
+</tr>
+</tbody>
+</table>
+<p>Number of years of emission data in file.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::file_points_order">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">file_points_order</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::file_points_order" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>File containing the mapping of IMOGEN global grid points onto IMOGEN land points (different from the JULES land points).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::initialise_from_dump">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">initialise_from_dump</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::initialise_from_dump" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Indicates how the IMOGEN prognostic variables will be initialised.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use a dump file (specified in <a class="reference internal" href="#IMOGEN_RUN_LIST::dump_file" title="IMOGEN_RUN_LIST::dump_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">dump_file</span></tt></a> below) from a previous run with IMOGEN to initialise the IMOGEN prognostics.</dd>
+<dt>FALSE</dt>
+<dd>IMOGEN will handle the initialisation of its prognostics internally.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_RUN_LIST::dump_file">
+<tt class="descclassname">IMOGEN_RUN_LIST::</tt><tt class="descname">dump_file</tt><a class="headerlink" href="#IMOGEN_RUN_LIST::dump_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the dump file to initialise from.</p>
+<p>Only used if <a class="reference internal" href="#IMOGEN_RUN_LIST::initialise_from_dump" title="IMOGEN_RUN_LIST::initialise_from_dump"><tt class="xref nml nml-mem docutils literal"><span class="pre">initialise_from_dump</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-IMOGEN_ANLG_VALS_LIST">
+<span id="imogen-anlg-vals-list-namelist-members"></span><h2>6.14.2. <tt class="docutils literal"><span class="pre">IMOGEN_ANLG_VALS_LIST</span></tt> namelist members<a class="headerlink" href="#namelist-IMOGEN_ANLG_VALS_LIST" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::q2co2">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">q2co2</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::q2co2" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">3.74</td>
+</tr>
+</tbody>
+</table>
+<p>Radiative forcing due to doubling CO2 (W m<sup>-2</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::f_ocean">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">f_ocean</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::f_ocean" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.711</td>
+</tr>
+</tbody>
+</table>
+<p>Fractional coverage of the ocean.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::kappa_o">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">kappa_o</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::kappa_o" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">383.8</td>
+</tr>
+</tbody>
+</table>
+<p>Ocean eddy diffusivity (W m<sup>-1</sup> K<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::lambda_l">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">lambda_l</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::lambda_l" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.52</td>
+</tr>
+</tbody>
+</table>
+<p>Inverse of climate sensitivity over land (W m<sup>-2</sup> K<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::lambda_o">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">lambda_o</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::lambda_o" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.75</td>
+</tr>
+</tbody>
+</table>
+<p>Inverse of climate sensitivity over ocean (W m<sup>-2</sup> K<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::mu">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">mu</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::mu" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.87</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of land to ocean temperature anomalies.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::t_ocean_init">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">t_ocean_init</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::t_ocean_init" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">289.28</td>
+</tr>
+</tbody>
+</table>
+<p>Initial ocean temperature (K).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::nyr_non_co2">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">nyr_non_co2</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::nyr_non_co2" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">21</td>
+</tr>
+</tbody>
+</table>
+<p>Number of years for which non-co2 forcing is prescribed.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::dir_patt">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">dir_patt</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::dir_patt" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Directory containing the patterns.</p>
+<p>Files in this directory are expected to be in a specific format - see the IMOGEN example.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::dir_clim">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">dir_clim</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::dir_clim" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Directory containing initialising climatology.</p>
+<p>Files in this directory are expected to be in a specific format - see the IMOGEN example.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::dir_anom">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">dir_anom</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::dir_anom" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Directory containing prescribed anomalies.</p>
+<p>Files in this directory are expected to be in a specific format - see the IMOGEN example.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="IMOGEN_ANLG_VALS_LIST::file_non_co2">
+<tt class="descclassname">IMOGEN_ANLG_VALS_LIST::</tt><tt class="descname">file_non_co2</tt><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::file_non_co2" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>If true, then non-CO2 radiative forcings are contained within a file.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.nml.html">6.2. <tt class="docutils literal"><span class="pre">logging.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="switches.nml.html">6.3. <tt class="docutils literal"><span class="pre">switches.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_levels.nml.html">6.4. <tt class="docutils literal"><span class="pre">model_levels.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.5. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.6. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.7. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.8. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.9. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.10. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="snow_params.nml.html">6.11. <tt class="docutils literal"><span class="pre">snow_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="misc_params.nml.html">6.12. <tt class="docutils literal"><span class="pre">misc_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.13. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.14. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.15. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.16. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.17. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.18. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="urban.nml.html"
+                        title="previous chapter">6.13. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="drive.nml.html"
+                        title="next chapter">6.15. <tt class="docutils literal docutils literal docutils literal"><span class="pre">drive.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="drive.nml.html" title="6.15. drive.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="urban.nml.html" title="6.13. urban.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

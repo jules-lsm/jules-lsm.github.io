@@ -1,0 +1,519 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.12. misc_params.nml &mdash; Joint UK Land Environment Simulator (JULES) v3.4 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '3.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v3.4 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.13. urban.nml" href="urban.nml.html" />
+    <link rel="prev" title="6.11. snow_params.nml" href="snow_params.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="urban.nml.html" title="6.13. urban.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="snow_params.nml.html" title="6.11. snow_params.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="misc-params-nml">
+<h1>6.12. <tt class="docutils literal"><span class="pre">misc_params.nml</span></tt><a class="headerlink" href="#misc-params-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains five namelists called <a class="reference internal" href="#namelist-JULES_SURF_PARAM"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_SURF_PARAM</span></tt></a>, <a class="reference internal" href="#namelist-JULES_CSMIN"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_CSMIN</span></tt></a>, <a class="reference internal" href="#namelist-JULES_AERO"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_AERO</span></tt></a>, <a class="reference internal" href="#namelist-JULES_SEED"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_SEED</span></tt></a> and <a class="reference internal" href="#namelist-JULES_SIGM"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_SIGM</span></tt></a> that are used to set various parameters not set elsewhere.</p>
+<p>HCTN24 and 30 refer to Hadley Centre technical notes 24 and 30, available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science/hadley-centre-technical-note">the Met Office Library</a>.</p>
+<div class="section" id="namelist-JULES_SURF_PARAM">
+<span id="jules-surf-param-namelist-members"></span><h2>6.12.1. <tt class="docutils literal"><span class="pre">JULES_SURF_PARAM</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_SURF_PARAM" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_SURF_PARAM::hleaf">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">hleaf</tt><a class="headerlink" href="#JULES_SURF_PARAM::hleaf" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">5.7e4</td>
+</tr>
+</tbody>
+</table>
+<p>Specific heat capacity of leaves (J K<sup>-1</sup> per kg carbon).</p>
+<p>See HCTN30 p6.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::hwood">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">hwood</tt><a class="headerlink" href="#JULES_SURF_PARAM::hwood" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.1e4</td>
+</tr>
+</tbody>
+</table>
+<p>Specific heat capacity of wood (J K<sup>-1</sup> per kg carbon).</p>
+<p>See HCTN30 p6.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::beta1">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">beta1</tt><a class="headerlink" href="#JULES_SURF_PARAM::beta1" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.83</td>
+</tr>
+</tbody>
+</table>
+<p>Coupling coefficient for co-limitation in photosynthesis model.</p>
+<p>See Cox et al. (1999), Eq.61.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::beta2">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">beta2</tt><a class="headerlink" href="#JULES_SURF_PARAM::beta2" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.93</td>
+</tr>
+</tbody>
+</table>
+<p>Coupling coefficient for co-limitation in photosynthesis model.</p>
+<p>See Cox et al. (1999), Eq.61.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::fwe_c3">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">fwe_c3</tt><a class="headerlink" href="#JULES_SURF_PARAM::fwe_c3" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.5</td>
+</tr>
+</tbody>
+</table>
+<p>Constant in expression for limitation of photosynthesis by transport of products, for C3 plants.</p>
+<p>See Cox et al. (1999) Eq.60.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::fwe_c4">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">fwe_c4</tt><a class="headerlink" href="#JULES_SURF_PARAM::fwe_c4" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">20000.0</td>
+</tr>
+</tbody>
+</table>
+<p>Constant in expression for limitation of photosynthesis by transport of products, for C4 plants.</p>
+<p>See Cox et al. (1999) Eq.60.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::q10_leaf">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">q10_leaf</tt><a class="headerlink" href="#JULES_SURF_PARAM::q10_leaf" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">2.0</td>
+</tr>
+</tbody>
+</table>
+<p>Q10 factor for plant respiration.</p>
+<p>See Cox et al. (1999) Eq.66.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::q10_soil">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">q10_soil</tt><a class="headerlink" href="#JULES_SURF_PARAM::q10_soil" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">2.0</td>
+</tr>
+</tbody>
+</table>
+<p>Q10 factor for soil respiration.</p>
+<p>Only used if <a class="reference internal" href="switches.nml.html#JULES_SWITCHES::l_q10" title="JULES_SWITCHES::l_q10"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_q10</span></tt></a> = TRUE. See HCTN24 Eq.17.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::kaps">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">kaps</tt><a class="headerlink" href="#JULES_SURF_PARAM::kaps" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.5e-8</td>
+</tr>
+</tbody>
+</table>
+<p>Specific soil respiration rate at 25 degC and optimum soil moisture (s<sup>-1</sup>).</p>
+<p>Only used if not using TRIFFID (<a class="reference internal" href="switches.nml.html#JULES_SWITCHES::l_triffid" title="JULES_SWITCHES::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = FALSE). See HCTN24 Eq.16.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::kaps_roth">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">kaps_roth</tt><a class="headerlink" href="#JULES_SURF_PARAM::kaps_roth" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(4)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">3.22e-7, 9.65e-9, 2.12e-8, 6.43e-10</td>
+</tr>
+</tbody>
+</table>
+<p>Specific soil respiration rate for the RothC submodel for each soil carbon pool.</p>
+<p>Only used if using the TRIFFID vegetation model (<a class="reference internal" href="switches.nml.html#JULES_SWITCHES::l_triffid" title="JULES_SWITCHES::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = TRUE), in which case soil carbon is modelled using four pools (biomass, humus, decomposable plant material, resistant plant material).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::z0miz">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">z0miz</tt><a class="headerlink" href="#JULES_SURF_PARAM::z0miz" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0e-1</td>
+</tr>
+</tbody>
+</table>
+<p>Roughness length for heat, moisture and momentum over the Marginal Ice Zone (m).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::z0sice">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">z0sice</tt><a class="headerlink" href="#JULES_SURF_PARAM::z0sice" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">3.0e-3</td>
+</tr>
+</tbody>
+</table>
+<p>Roughness length for heat, moisture and momentum over sea-ice (m).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::z0h_z0m_miz">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">z0h_z0m_miz</tt><a class="headerlink" href="#JULES_SURF_PARAM::z0h_z0m_miz" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of thermal to momentum roughness lengths for marginal ice.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::z0h_z0m_sice">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">z0h_z0m_sice</tt><a class="headerlink" href="#JULES_SURF_PARAM::z0h_z0m_sice" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of thermal to momentum roughness lengths for sea ice.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::emis_sea">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">emis_sea</tt><a class="headerlink" href="#JULES_SURF_PARAM::emis_sea" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Emissivity of open sea.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURF_PARAM::emis_sice">
+<tt class="descclassname">JULES_SURF_PARAM::</tt><tt class="descname">emis_sice</tt><a class="headerlink" href="#JULES_SURF_PARAM::emis_sice" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Emissivity of sea-ice.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_CSMIN">
+<span id="jules-csmin-namelist-members"></span><h2>6.12.2. <tt class="docutils literal"><span class="pre">JULES_CSMIN</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_CSMIN" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_CSMIN::cs_min">
+<tt class="descclassname">JULES_CSMIN::</tt><tt class="descname">cs_min</tt><a class="headerlink" href="#JULES_CSMIN::cs_min" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0e-6</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum allowed soil carbon (kg m<sup>-2</sup>).</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_AERO">
+<span id="jules-aero-namelist-members"></span><h2>6.12.3. <tt class="docutils literal"><span class="pre">JULES_AERO</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_AERO" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_AERO::co2_mmr">
+<tt class="descclassname">JULES_AERO::</tt><tt class="descname">co2_mmr</tt><a class="headerlink" href="#JULES_AERO::co2_mmr" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">5.241e-4</td>
+</tr>
+</tbody>
+</table>
+<p>Concentration of atmospheric CO2, expressed as a mass mixing ratio.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_SEED">
+<span id="jules-seed-namelist-members"></span><h2>6.12.4. <tt class="docutils literal"><span class="pre">JULES_SEED</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_SEED" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_SEED::frac_min">
+<tt class="descclassname">JULES_SEED::</tt><tt class="descname">frac_min</tt><a class="headerlink" href="#JULES_SEED::frac_min" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0e-6</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum fraction that a PFT is allowed to cover if TRIFFID is used.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SEED::frac_seed">
+<tt class="descclassname">JULES_SEED::</tt><tt class="descname">frac_seed</tt><a class="headerlink" href="#JULES_SEED::frac_seed" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.01</td>
+</tr>
+</tbody>
+</table>
+<p>Seed fraction for TRIFFID.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_SIGM">
+<span id="jules-sigm-namelist-members"></span><h2>6.12.5. <tt class="docutils literal"><span class="pre">JULES_SIGM</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_SIGM" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_SIGM::pow">
+<tt class="descclassname">JULES_SIGM::</tt><tt class="descname">pow</tt><a class="headerlink" href="#JULES_SIGM::pow" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">5.241e-4</td>
+</tr>
+</tbody>
+</table>
+<p>Power in sigmodial function used to get competition coefficients.</p>
+<p>See HCTN24 Eq.3.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logging.nml.html">6.2. <tt class="docutils literal"><span class="pre">logging.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="switches.nml.html">6.3. <tt class="docutils literal"><span class="pre">switches.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_levels.nml.html">6.4. <tt class="docutils literal"><span class="pre">model_levels.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.5. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.6. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.7. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.8. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.9. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.10. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="snow_params.nml.html">6.11. <tt class="docutils literal"><span class="pre">snow_params.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.12. <tt class="docutils literal"><span class="pre">misc_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.13. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.14. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.15. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.16. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.17. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.18. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="snow_params.nml.html"
+                        title="previous chapter">6.11. <tt class="docutils literal"><span class="pre">snow_params.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="urban.nml.html"
+                        title="next chapter">6.13. <tt class="docutils literal docutils literal"><span class="pre">urban.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="urban.nml.html" title="6.13. urban.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="snow_params.nml.html" title="6.11. snow_params.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v3.4 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2013.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>
