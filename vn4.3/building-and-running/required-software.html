@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.2. Required software &mdash; Joint UK Land Environment Simulator (JULES) v4.3 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.3',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.3 User Guide" href="../index.html" />
+    <link rel="up" title="3. Building and running JULES" href="intro.html" />
+    <link rel="next" title="3.3. Building JULES using FCM" href="fcm.html" />
+    <link rel="prev" title="3.1. Considerations" href="considerations.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="fcm.html" title="3.3. Building JULES using FCM"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="considerations.html" title="3.1. Considerations"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.3 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" accesskey="U">3. Building and running JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="required-software">
+<h1>3.2. Required software<a class="headerlink" href="#required-software" title="Permalink to this headline">¶</a></h1>
+<p>Building a JULES executable requires FCM and one of the supported Fortran compilers (see <a class="reference internal" href="fcm.html"><em>Building JULES using FCM</em></a>). The Fortran 90 NetCDF interface library is required to use gridded data (i.e. data for more than a single location).</p>
+<p>To be able to automatically upgrade namelists between JULES versions or use a GUI to configure JULES runs, Rose is required.</p>
+<p>All of this software is freely available:</p>
+<ul class="simple">
+<li>GFortran, the GNU GCC Fortran compiler - <a class="reference external" href="http://www.gnu.org/software/gcc/fortran">http://www.gnu.org/software/gcc/fortran</a></li>
+<li>FCM - <a class="reference external" href="http://www.metoffice.gov.uk/research/collaboration/fcm">http://www.metoffice.gov.uk/research/collaboration/fcm</a></li>
+<li>Rose - <a class="reference external" href="http://www.metoffice.gov.uk/research/collaboration/rose">http://www.metoffice.gov.uk/research/collaboration/rose</a></li>
+<li>NetCDF libraries - <a class="reference external" href="http://www.unidata.ucar.edu/software/netcdf">http://www.unidata.ucar.edu/software/netcdf</a></li>
+</ul>
+<p>JULES has only been tested on Linux but, given a suitable Fortran compiler, should run on any Unix-like system with minimal changes. The recommended way to attempt to run JULES on Windows is via the Linux compatability layer <a class="reference external" href="http://www.cygwin.com/">Cygwin</a>, although this is untested.</p>
+<div class="section" id="building-jules-with-netcdf">
+<h2>3.2.1. Building JULES with NetCDF<a class="headerlink" href="#building-jules-with-netcdf" title="Permalink to this headline">¶</a></h2>
+<p>To build JULES with NetCDF, it must be told where to find the NetCDF library files. JULES needs two pieces of information - the directory containing the NetCDF archive files, <tt class="docutils literal"><span class="pre">netcdf.a</span></tt> and <tt class="docutils literal"><span class="pre">netcdff.a</span></tt> (the <em>&#8216;NetCDF library path&#8217;</em>), and the directory containing the NetCDF Fortran 90 module file, <tt class="docutils literal"><span class="pre">netcdf.mod</span></tt> (the <em>&#8216;NetCDF include path&#8217;</em>). In a standard NetCDF install, these are often <tt class="docutils literal"><span class="pre">/usr/lib</span></tt> and <tt class="docutils literal"><span class="pre">/usr/include</span></tt> or <tt class="docutils literal"><span class="pre">/usr/local/lib</span></tt> and <tt class="docutils literal"><span class="pre">/usr/local/include</span></tt> respectively.</p>
+<p>If the <tt class="docutils literal"><span class="pre">nc-config</span></tt> program is installed on your system (run <tt class="docutils literal"><span class="pre">which</span> <span class="pre">nc-config</span></tt> to find out), this can be used to determine values for the NetCDF library path (<tt class="docutils literal"><span class="pre">nc-config</span> <span class="pre">--flibs</span></tt>) and NetCDF include path (<tt class="docutils literal"><span class="pre">nc-config</span> <span class="pre">--includedir</span></tt>). When JULES is built with NetCDF, users can supply either ASCII or NetCDF input files, and all output will be NetCDF.</p>
+</div>
+<div class="section" id="building-and-running-jules-with-mpi">
+<h2>3.2.2. Building and running JULES with MPI<a class="headerlink" href="#building-and-running-jules-with-mpi" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">For advanced users only</p>
+</div>
+<p>In order to build and run JULES with MPI, additional software is required:</p>
+<ol class="arabic">
+<li><p class="first">An implementation of MPI compiled using the same compiler you will be using to compile JULES. Several implementations of MPI are available, the most commonly used being <a class="reference external" href="http://www.mpich.org/">MPICH2</a> and <a class="reference external" href="http://www.open-mpi.org/">OpenMPI</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <tt class="docutils literal"><span class="pre">bin</span></tt> directory of your MPI installation must be in your <tt class="docutils literal"><span class="pre">$PATH</span></tt></p>
+</div>
+</li>
+<li><p class="first">A version of HDF5/NetCDF4 compiled <em>with parallel I/O enabled</em>, using the MPI implementation installed above. This is <em>not</em> the default way to compile NetCDF, and must be explicitly enabled. More information on how to do this can be found on the <a class="reference external" href="https://www.unidata.ucar.edu/software/netcdf/docs/build_parallel.html">NetCDF website</a>.</p>
+</li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">3. Building and running JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="considerations.html">3.1. Considerations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">3.2. Required software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fcm.html">3.3. Building JULES using FCM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-jules.html">3.4. Running JULES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rose.html">3.5. Automatic upgrading and GUI using Rose</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="considerations.html"
+                        title="previous chapter">3.1. Considerations</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fcm.html"
+                        title="next chapter">3.3. Building JULES using FCM</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="fcm.html" title="3.3. Building JULES using FCM"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="considerations.html" title="3.1. Considerations"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.3 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" >3. Building and running JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2015.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>
