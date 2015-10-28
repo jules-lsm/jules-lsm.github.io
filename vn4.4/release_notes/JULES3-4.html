@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.6. JULES version 3.4 Release Notes &mdash; Joint UK Land Environment Simulator (JULES) v4.4 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.4 User Guide" href="../index.html" />
+    <link rel="up" title="1. Release notes for JULES" href="contents.html" />
+    <link rel="next" title="1.7. JULES version 3.3 Release Notes" href="JULES3-3.html" />
+    <link rel="prev" title="1.5. JULES version 4.0 Release Notes" href="JULES4-0.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES3-3.html" title="1.7. JULES version 3.3 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-0.html" title="1.5. JULES version 4.0 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.4 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jules-version-3-4-release-notes">
+<h1>1.6. JULES version 3.4 Release Notes<a class="headerlink" href="#jules-version-3-4-release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="changes-to-semantics-of-output">
+<h2>1.6.1. Changes to semantics of output<a class="headerlink" href="#changes-to-semantics-of-output" title="Permalink to this headline">¶</a></h2>
+<p>The output semantics used since JULES vn3.2 (i.e. state variables captured at the start of a timestep, flux variables captured at the end) were confusing some users. The semi-implicit scheme in JULES is designed so that the state and fluxes at the end of a timestep are consistent with each other, but under the previous semantics these were staggered by one timestep in output files.</p>
+<p>All variables are now captured at the end of a timestep, so state and flux variables at a particular timestep in output files will be consistent with each other. A new option has been added to request the output of initial state, however very few users will have a use for this. It is still the case that the value in the <tt class="docutils literal"><span class="pre">time</span></tt> variable can be used to place snapshot data in time, and the values in <tt class="docutils literal"><span class="pre">time_bounds</span></tt> represent the interval over which a mean or accumulation applies.</p>
+<p>More details can be found at <a class="reference internal" href="../output.html"><em>JULES output</em></a>.</p>
+</div>
+<div class="section" id="input-and-or-output-of-variables-with-multiple-levels-dimensions-has-been-improved">
+<h2>1.6.2. Input and/or output of variables with multiple &#8216;levels&#8217; dimensions has been improved<a class="headerlink" href="#input-and-or-output-of-variables-with-multiple-levels-dimensions-has-been-improved" title="Permalink to this headline">¶</a></h2>
+<p>In previous versions of JULES since vn3.1, variables could only be input or output with a single &#8216;levels&#8217; dimension. In particular, this caused problems with variables in the new snow scheme, which have two &#8216;levels&#8217; dimensions on top of the grid dimensions (tiles and snow levels). This led to compromises being made with the snow layer variables:</p>
+<ul class="simple">
+<li>It was only possible to initialise the snow layer variables using a constant value, from a previous dump or using <a class="reference internal" href="../namelists/initial_conditions.nml.html#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a></li>
+<li>In output files, the snow layer variables were represented using a separate variable for each tile</li>
+</ul>
+<p>This problem is solved in JULES vn3.4 - it is now possible to input and output variables with multiple &#8216;levels&#8217; dimensions (there is not even a restriction to two &#8216;levels&#8217; dimensions). This means that both compromises for snow layer variables detailed above have been removed.</p>
+</div>
+<div class="section" id="streamlined-process-for-adding-new-variables-for-input-and-or-output">
+<h2>1.6.3. Streamlined process for adding new variables for input and/or output<a class="headerlink" href="#streamlined-process-for-adding-new-variables-for-input-and-or-output" title="Permalink to this headline">¶</a></h2>
+<p>Although fairly simple, the process for adding a new variable for input and/or output in JULES vn3.1 - vn3.3 required several edits to be made, and hence provided many opportunities to make mistakes. This process is simplified in JULES vn3.4 to require fewer edits. More details can be found at <a class="reference internal" href="../code/io.html#implementing-new-variables-for-input-and-output"><em>Implementing new variables for input and output</em></a>.</p>
+</div>
+<div class="section" id="other-changes">
+<h2>1.6.4. Other changes<a class="headerlink" href="#other-changes" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Tidying of boundary layer code</dt>
+<dd>Some small changes have been made to tidy up some of the boundary layer code (i.e. routines in <tt class="docutils literal"><span class="pre">src/science/surface</span></tt>) - this is mostly removing unused variables and tidying up subroutine argument lists.</dd>
+<dt>OpenMP related changes</dt>
+<dd>Some <a class="reference external" href="http://en.wikipedia.org/wiki/OpenMP">OpenMP</a> directives have been added to certain loops. OpenMP is a form of shared-memory parallelism in which the user inserts directives (specially formatted code comments) providing information that allows the compiler to parallelise sections of code (in particular loops) without worrying about corrupting data. It is used in the UM, but is currently not enabled when compiling JULES standalone.</dd>
+</dl>
+</div>
+<div class="section" id="bugs-fixed">
+<h2>1.6.5. Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Output (including dump files) not correctly generated for the last spin-up cycle when spin-up fails and <a class="reference internal" href="../namelists/timesteps.nml.html#JULES_SPINUP::terminate_on_spinup_fail" title="JULES_SPINUP::terminate_on_spinup_fail"><tt class="xref nml nml-mem docutils literal"><span class="pre">terminate_on_spinup_fail</span></tt></a> = TRUE</li>
+<li><tt class="docutils literal"><span class="pre">lw_net</span></tt> diagnostic does not include the contribution from the reflected incoming longwave if the emissivity is less than zero</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">1. Release notes for JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="JULES4-4.html">1.1. JULES version 4.4 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-3.html">1.2. JULES version 4.3 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-2.html">1.3. JULES version 4.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-1.html">1.4. JULES version 4.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-0.html">1.5. JULES version 4.0 Release Notes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">1.6. JULES version 3.4 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-3.html">1.7. JULES version 3.3 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-2.html">1.8. JULES version 3.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-1.html">1.9. JULES version 3.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-0.html">1.10. JULES version 3.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES2-2.html">1.11. JULES version 2.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES2-1.html">1.12. JULES version 2.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES2-0.html">1.13. JULES version 2.0 Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES4-0.html"
+                        title="previous chapter">1.5. JULES version 4.0 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES3-3.html"
+                        title="next chapter">1.7. JULES version 3.3 Release Notes</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES3-3.html" title="1.7. JULES version 3.3 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-0.html" title="1.5. JULES version 4.0 Release Notes"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.4 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >1. Release notes for JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2015.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

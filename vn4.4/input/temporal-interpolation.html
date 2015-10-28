@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.5. Temporal interpolation &mdash; Joint UK Land Environment Simulator (JULES) v4.4 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.4 User Guide" href="../index.html" />
+    <link rel="up" title="4. Input files for JULES" href="overview.html" />
+    <link rel="next" title="5. JULES output" href="../output.html" />
+    <link rel="prev" title="4.4. File name templating" href="file-name-templating.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="../output.html" title="5. JULES output"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="file-name-templating.html" title="4.4. File name templating"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.4 User Guide</a> &raquo;</li>
+          <li><a href="overview.html" accesskey="U">4. Input files for JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="temporal-interpolation">
+<h1>4.5. Temporal interpolation<a class="headerlink" href="#temporal-interpolation" title="Permalink to this headline">¶</a></h1>
+<p>Time-varying data as inputs into JULES are provided in two types - instantaneous states (e.g. air temperature, surface pressure, lai) or fluxes (e.g. radiation, precipitation). Because the data are on discrete timesteps, the value of an instantaneous variable applies at the timestamp (e.g. air temperature at 0800). However, values of the fluxes represent averages over the data timestep (e.g. 3-hour average rates). Different datasets supply the data as averages over the previous data timestep (backwards average) or the next data timestep (forwards average).</p>
+<p>In order for the numerics to remain stable, it is recommended to run JULES with a model timestep of 1 hour or shorter. If the data timestep is longer than the model timestep, interpolation is required. How interpolation is performed for a particular variable depends on whether the variable is an instantaneous state or a flux.</p>
+<div class="section" id="interpolation-flags">
+<h2>4.5.1. Interpolation flags<a class="headerlink" href="#interpolation-flags" title="Permalink to this headline">¶</a></h2>
+<p>When JULES needs to know what type of interpolation to use for a variable, the following flags are used.</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">i</span></tt></dt>
+<dd><p class="first">Linear interpolation from the data timestep to the model timestep.</p>
+<p class="last">For instantaneous data (e.g. air temperature, surface pressure), this is almost always the flag that should be used.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">nb</span></tt>, <tt class="docutils literal"><span class="pre">nc</span></tt> and <tt class="docutils literal"><span class="pre">nf</span></tt></dt>
+<dd><p class="first">Values will be held constant with time for all model timesteps associated with a particular data timestep.</p>
+<p>One of these flags should be used for flux variables that are <em>discontinuous</em> by nature, e.g. precipitation.</p>
+<p class="last"><tt class="docutils literal"><span class="pre">nb</span></tt> should be used if the dataset uses backwards average values, <tt class="docutils literal"><span class="pre">nf</span></tt> should be used if the data set uses forwards average values and <tt class="docutils literal"><span class="pre">nc</span></tt> should be used if the dataset uses centred average values (this is quite rare).</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">b</span></tt>, <tt class="docutils literal"><span class="pre">c</span></tt> and <tt class="docutils literal"><span class="pre">f</span></tt></dt>
+<dd><p class="first">Data is interpolated using a simplified version of the Sheng and Zwiers (1998) <a class="footnote-reference" href="#id2" id="id1">[1]</a> method that conserves the period means of the data.</p>
+<p>One of these flags should be used for flux variables that are <em>continuous</em> in nature, e.g. radiation.</p>
+<p>In order to ensure conservation of the average, these flags should be used only if the data period is an even multiple of the model timestep (i.e., if <tt class="docutils literal"><span class="pre">data_period</span> <span class="pre">=</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">n</span> <span class="pre">*</span> <span class="pre">timestep_len;</span> <span class="pre">n</span> <span class="pre">=</span> <span class="pre">1,</span> <span class="pre">2,</span> <span class="pre">3,</span> <span class="pre">...</span></tt>). The curve-fitting process tends to produce occasional values near turning points that fall outside the range of the input values.</p>
+<p class="last">Similar to above, <tt class="docutils literal"><span class="pre">b</span></tt> should be used if the dataset uses backwards average values, <tt class="docutils literal"><span class="pre">f</span></tt> should be used if the data set uses forwards average values and <tt class="docutils literal"><span class="pre">c</span></tt> should be used if the dataset uses centred average values.</p>
+</dd>
+</dl>
+<p>In order to perform interpolation, JULES may require input data for one or two data timesteps that fall before or after the times for the integration:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Flag</th>
+<th class="head">Extra data timesteps required</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">nf</span></tt></td>
+<td>Only requires data that falls within the integration times</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">i</span></tt>, <tt class="docutils literal"><span class="pre">nb</span></tt>, <tt class="docutils literal"><span class="pre">nc</span></tt></td>
+<td>Requires one data timestep beyond the end of the integration</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">nb</span></tt></td>
+<td>Requires two data timesteps beyond the end of the integration</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">nf</span></tt></td>
+<td>Requires one data timestep before the start and one data timestep beyond the end of the integration</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">nc</span></tt></td>
+<td>Requires one data timestep before the start and two data timesteps beyond the end of the integration</td>
+</tr>
+</tbody>
+</table>
+<p>Also, note that for centred data (flags <tt class="docutils literal"><span class="pre">c</span></tt> and <tt class="docutils literal"><span class="pre">nc</span></tt>) the time of the data should be given as that at the start of the averaging period, rather than the centre, e.g. the 3-hour average over 06H to 09H, centred at 07:30H, should be treated as having timestamp 06H.</p>
+<div class="figure">
+<img alt="Examples of JULES interpolation modes" src="../_images/interp_examples.png" />
+<p class="caption">Examples of data interpolated with <tt class="docutils literal"><span class="pre">i</span></tt>, <tt class="docutils literal"><span class="pre">nb</span></tt>, <tt class="docutils literal"><span class="pre">nf</span></tt>, <tt class="docutils literal"><span class="pre">b</span></tt> and <tt class="docutils literal"><span class="pre">f</span></tt>, plotted against the data they are derived from</p>
+</div>
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>Sheng and Zwiers (1998) An improved scheme for time-dependent boundary conditions in atmospheric general circulation models, Climate Dynamics, 14, 609-613.</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="overview.html">4. Input files for JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="principles.html">4.1. General principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ascii.html">4.2. ASCII files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html">4.3. NetCDF files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file-name-templating.html">4.4. File name templating</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">4.5. Temporal interpolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="file-name-templating.html"
+                        title="previous chapter">4.4. File name templating</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../output.html"
+                        title="next chapter">5. JULES output</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="../output.html" title="5. JULES output"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="file-name-templating.html" title="4.4. File name templating"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.4 User Guide</a> &raquo;</li>
+          <li><a href="overview.html" >4. Input files for JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2015.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,130 @@
+``jules_hydrology.nml``
+=======================
+
+
+This file sets the hydrology options. It contains one namelist called :nml:lst:`JULES_HYDROLOGY`.
+
+
+
+``JULES_HYDROLOGY`` namelist members
+-------------------------------------
+
+.. nml:namelist:: JULES_HYDROLOGY
+
+.. nml:member:: l_top
+
+   :type: logical
+   :default: F
+
+   Switch for a TOPMODEL-type model of runoff production.
+
+   TRUE
+       Use a TOPMODEL-type scheme. This is based on Gedney and Cox (2003); see also Clark and Gedney (2008).
+
+   FALSE
+       No TOPMODEL scheme.
+
+   .. seealso::
+      References:
+
+      * Gedney, N. and P.M.Cox, 2003 , The sensitivity of global climate model simulations to the representation of soil moisture heterogeneity, J. Hydrometeorology, 4, 1265-1275.
+      * Clark and Gedney, 2008, Representing the effects of subgrid variability of soil moisture on runoff generation in a land surface model, Journal of Geophysical Research - Atmospheres, 113, D10111, doi:10.1029/2007JD008940.
+
+
+.. nml:member:: l_pdm
+
+   :type: logical
+   :default: F
+
+   Switch for a PDM-type model of runoff production.
+
+   PDM is the Probability Distributed Model (Moore, 1985), implemented in JULES following Clark and Gedney (2008).
+
+   TRUE
+       Use a PDM scheme.
+
+   FALSE
+       No PDM scheme.
+
+   .. seealso::
+      References:
+   
+      * Moore, R. J. (1985), The probability-distributed principle and runoff production at point and basin scales, Hydrol. Sci. J., 30, 273-297.
+      * Clark and Gedney, 2008, Representing the effects of subgrid variability of soil moisture on runoff generation in a land surface model, Journal of Geophysical Research - Atmospheres, 113, D10111, doi:10.1029/2007JD008940.
+      
+      
+
+.. nml:group:: Only used if :nml:mem:`l_pdm` = TRUE
+
+   .. nml:member:: dz_pdm
+
+      :type: real
+      :default: 1.0
+
+      The depth of soil considered by PDM (m).
+
+      A value of ~1m can be used.
+
+
+   .. nml:member:: b_pdm
+
+      :type: real
+      :default: 1.0
+
+      Shape factor for the pdf.
+      
+      
+.. nml:group:: Only used if :nml:mem:`l_top` = TRUE
+
+   .. nml:member:: zw_max
+
+      :type: real
+      :default: 6.0
+
+      The maximum allowed depth to the water table (m).
+
+      This is the depth to the bottom of an additional layer below the :nml:mem:`JULES_SOIL::sm_levels` soil layers and hence should be set to a value greater than ``SUM(dzsoil)``.
+
+
+   .. nml:member:: ti_max
+
+      :type: real
+      :default: 10.0
+
+      The maximum possible value of the topographic index.
+
+
+   .. nml:member:: ti_wetl
+
+      :type: real
+      :default: 1.5
+
+      A calibration parameter used in the calculation of the wetland fraction.
+
+      It is used to increment the "critical" value of the topographic index that is used to calculate the saturated fraction of the gridbox. It excludes locations with large values of the topographic index from the wetland fraction.
+   
+      See Gedney and Cox (2003).
+
+
+   .. nml:member:: l_wetland_unfrozen
+
+      :type: logical
+      :default: F
+
+   TRUE
+      Treat the calculations of wetland and surface saturation fractions more like those of an unfrozen soil.
+
+   FALSE
+       Use standard wetland and surface saturation fraction calculations.
+
+
+   .. nml:member:: l_wetland_ch4_npp
+
+      :type: logical
+      :default: F
+
+   TRUE
+      Wetland methane emissions calculated using grid box mean NPP as "substrate" 
+
+   FALSE
+       Wetland methane emissions calculated using soil carbon as "substrate" (default)
