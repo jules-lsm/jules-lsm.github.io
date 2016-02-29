@@ -1,0 +1,441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.3. Building JULES using FCM &mdash; Joint UK Land Environment Simulator (JULES) v4.5 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.5',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.5 User Guide" href="../index.html" />
+    <link rel="up" title="3. Building and running JULES" href="intro.html" />
+    <link rel="next" title="3.4. Running JULES" href="running-jules.html" />
+    <link rel="prev" title="3.2. Required software" href="required-software.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="running-jules.html" title="3.4. Running JULES"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="required-software.html" title="3.2. Required software"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.5 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" accesskey="U">3. Building and running JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="building-jules-using-fcm">
+<h1>3.3. Building JULES using FCM<a class="headerlink" href="#building-jules-using-fcm" title="Permalink to this headline">¶</a></h1>
+<p>FCM is a code management and build system developed by the Met Office with a particular focus on simplifying the process of building large Fortran programs. In this section, we will be using the build tool - FCM make.</p>
+<p>As part of the build process, FCM make will analyse the dependencies of every Fortran file and automatically compile them in the correct order.</p>
+<p>FCM make must be given a configuration file that it uses to determine how to build the source code. Extensive documentation on FCM make configuration files is <a class="reference external" href="http://collab.metoffice.gov.uk/twiki/pub/Support/FCM/doc/user_guide/make.html">available online</a>.</p>
+<p>Help pages for the FCM make command itself (rather than the configuration file) can be accessed using the command:</p>
+<div class="highlight-bash"><div class="highlight"><pre>fcm <span class="nb">help </span>make
+</pre></div>
+</div>
+<p>The FCM configuration file for building JULES is <tt class="docutils literal"><span class="pre">etc/fcm-make/make.cfg</span></tt>. This file uses the environment variables below to determine the settings to use when compiling JULES.</p>
+<p>Running FCM make with this configuration file will create some files and directories in the specified build directory (see the <tt class="docutils literal"><span class="pre">-C</span></tt> option of <tt class="docutils literal"><span class="pre">fcm</span> <span class="pre">make</span></tt>; defaults to the current working directory). The JULES executable will be produced in the specified build directory at <tt class="docutils literal"><span class="pre">build/bin/jules.exe</span></tt>.</p>
+<div class="section" id="environment-variables-used-when-building-jules-using-fcm-make">
+<span id="fcm-make-environment-variables"></span><h2>3.3.1. Environment variables used when building JULES using FCM make<a class="headerlink" href="#environment-variables-used-when-building-jules-using-fcm-make" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">JULES_PLATFORM</span></tt></dt>
+<dd><p class="first">Used to select settings for a pre-defined platform.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you have many users using the same platform to run JULES, you may want to contribute a suitable platform configuration.</p>
+</div>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Permitted value</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">custom</span></tt></td>
+<td><strong>Default.</strong> Use a custom configuration entirely determined by the other environment
+variables.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">vm</span></tt></td>
+<td><p class="first">Use settings for the <a class="reference external" href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine">JULES development virtual machine</a>.</p>
+<p>Overrides settings for <tt class="docutils literal"><span class="pre">JULES_REMOTE</span> <span class="pre">(local)</span></tt>, <tt class="docutils literal"><span class="pre">JULES_COMPILER</span> <span class="pre">(gfortran)</span></tt>,
+<tt class="docutils literal"><span class="pre">JULES_MPI</span> <span class="pre">(nompi)</span></tt>, <tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span> <span class="pre">(/usr/include)</span></tt> and
+<tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span> <span class="pre">(/usr/lib)</span></tt>.</p>
+<p class="last"><tt class="docutils literal"><span class="pre">JULES_BUILD</span></tt>, <tt class="docutils literal"><span class="pre">JULES_OMP</span></tt> and <tt class="docutils literal"><span class="pre">JULES_NETCDF</span></tt> will still affect the build.</p>
+</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">meto-linux-gfortran</span></tt></td>
+<td><p class="first">Use settings for the GFortran compiler on Met Office Linux systems.</p>
+<p>Overrides settings for <tt class="docutils literal"><span class="pre">JULES_COMPILER</span> <span class="pre">(gfortran)</span></tt>, <tt class="docutils literal"><span class="pre">JULES_MPI</span> <span class="pre">(nompi)</span></tt>,
+<tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span> <span class="pre">(/usr/local/sci/include)</span></tt> and
+<tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span> <span class="pre">(/usr/local/sci/lib)</span></tt>.</p>
+<p class="last"><tt class="docutils literal"><span class="pre">JULES_REMOTE</span></tt>, <tt class="docutils literal"><span class="pre">JULES_BUILD</span></tt>, <tt class="docutils literal"><span class="pre">JULES_OMP</span></tt> and <tt class="docutils literal"><span class="pre">JULES_NETCDF</span></tt> will still
+affect the build.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">meto-linux-intel-nompi</span></tt></td>
+<td><p class="first">Use settings for the Intel compiler <em>without</em> MPI on Met Office Linux systems.</p>
+<p>Overrides settings for <tt class="docutils literal"><span class="pre">JULES_COMPILER</span> <span class="pre">(intel)</span></tt>, <tt class="docutils literal"><span class="pre">JULES_MPI</span> <span class="pre">(nompi)</span></tt>,
+<tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span> <span class="pre">(/project/ukmo/rhel6/netcdf4/ifort_composerxe/include)</span></tt>
+and <tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span> <span class="pre">(/project/ukmo/rhel6/netcdf4/ifort_composerxe/lib)</span></tt>.</p>
+<p class="last"><tt class="docutils literal"><span class="pre">JULES_REMOTE</span></tt>, <tt class="docutils literal"><span class="pre">JULES_BUILD</span></tt>, <tt class="docutils literal"><span class="pre">JULES_OMP</span></tt> and <tt class="docutils literal"><span class="pre">JULES_NETCDF</span></tt> will still
+affect the build.</p>
+</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">meto-linux-intel-mpi</span></tt></td>
+<td><p class="first">Use settings for the Intel compiler <em>with</em> MPI on Met Office Linux systems.</p>
+<p>Overrides settings for <tt class="docutils literal"><span class="pre">JULES_COMPILER</span> <span class="pre">(intel)</span></tt>, <tt class="docutils literal"><span class="pre">JULES_MPI</span> <span class="pre">(mpi)</span></tt>,
+<tt class="docutils literal"><span class="pre">JULES_NETCDF</span> <span class="pre">(netcdf)</span></tt>,
+<tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span> <span class="pre">(/net/home/ih0100/hadmq/utils/x86_64/include)</span></tt> and
+<tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span> <span class="pre">(/net/home/ih0100/hadmq/utils/x86_64/lib)</span></tt>.</p>
+<p class="last"><tt class="docutils literal"><span class="pre">JULES_REMOTE</span></tt>, <tt class="docutils literal"><span class="pre">JULES_BUILD</span></tt> and <tt class="docutils literal"><span class="pre">JULES_OMP</span></tt> will still affect the build.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">meto-xc40-cce</span></tt></td>
+<td><p class="first">Use settings for the Cray Compiler Environment on the Met Office Cray XC40 system.</p>
+<p>Overrides settings for <tt class="docutils literal"><span class="pre">JULES_REMOTE</span> <span class="pre">(remote)</span></tt>, <tt class="docutils literal"><span class="pre">JULES_REMOTE_HOST</span> <span class="pre">(xcdl00)</span></tt>,
+<tt class="docutils literal"><span class="pre">JULES_COMPILER</span> <span class="pre">(cray)</span></tt>, <tt class="docutils literal"><span class="pre">JULES_MPI</span> <span class="pre">(mpi)</span></tt>, <tt class="docutils literal"><span class="pre">JULES_NETCDF</span> <span class="pre">(netcdf)</span></tt>,
+<tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span></tt> and <tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span></tt> (set by loading the
+<tt class="docutils literal"><span class="pre">cray-netcdf-hdf5parallel</span></tt> module).</p>
+<p class="last"><tt class="docutils literal"><span class="pre">JULES_REMOTE_PATH</span></tt>, <tt class="docutils literal"><span class="pre">JULES_BUILD</span></tt> and <tt class="docutils literal"><span class="pre">JULES_OMP</span></tt> will still affect the build.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_REMOTE</span></tt>, <tt class="docutils literal"><span class="pre">JULES_REMOTE_HOST</span></tt>, <tt class="docutils literal"><span class="pre">JULES_REMOTE_PATH</span></tt></dt>
+<dd><div class="first admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Advanced users only</p>
+</div>
+<p>Used to determine whether the build will happen on a local or remote machine.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Permitted value</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">local</span></tt></td>
+<td><strong>Default.</strong> All compilation occurs on the local machine.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">remote</span></tt></td>
+<td><p class="first">Code is extracted on the local machine and mirrored to
+<tt class="docutils literal"><span class="pre">${JULES_REMOTE_HOST}&#64;${JULES_REMOTE_PATH}</span></tt>, where <tt class="docutils literal"><span class="pre">JULES_REMOTE_HOST</span></tt> is
+the name of the remote machine and <tt class="docutils literal"><span class="pre">JULES_REMOTE_PATH</span></tt> is the path on the
+remote machine.</p>
+<p class="last">The compilation can then be completed on the remote machine. See below for an
+example.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_COMPILER</span></tt></dt>
+<dd><p class="first">Used to select compiler specific settings.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Permitted value</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">gfortran</span></tt></td>
+<td><strong>Default.</strong> Use settings for the <a class="reference external" href="http://www.gnu.org/software/gcc/fortran/">GNU Fortran compiler</a>.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">intel</span></tt></td>
+<td>Use settings for the <a class="reference external" href="http://software.intel.com/en-us/articles/fortran-compilers/">Intel Fortran compiler</a>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">cray</span></tt></td>
+<td>Use settings for the <a class="reference external" href="http://docs.cray.com/cgi-bin/craydoc.cgi?mode=SiteMap;f=xc_sitemap">Cray Compiler Environment</a>.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_BUILD</span></tt></dt>
+<dd><p class="first">Used to select the type of build.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Permitted value</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">normal</span></tt></td>
+<td><strong>Default.</strong> Compile JULES normally.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">debug</span></tt></td>
+<td>Compile JULES with additional settings for debugging.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">fast</span></tt></td>
+<td>Compile JULES with additional settings for faster execution.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_OMP</span></tt></dt>
+<dd><p class="first">Used to determine whether to build with OpenMP or not.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Permitted value</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">noomp</span></tt></td>
+<td><strong>Default.</strong> Compile JULES with OpenMP off.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">omp</span></tt></td>
+<td>Compile JULES with OpenMP on.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_MPI</span></tt></dt>
+<dd><p class="first">Used to determine whether to build with MPI enabled or not.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Permitted value</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">nompi</span></tt></td>
+<td><strong>Default.</strong> Compile JULES without MPI support.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">mpi</span></tt></td>
+<td>Compile JULES with MPI support.</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_NETCDF</span></tt></dt>
+<dd><p class="first">Indicates whether to use a dummy NetCDF library or a &#8216;real&#8217; NetCDF library.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="17%" />
+<col width="83%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Permitted value</th>
+<th class="head">Purpose</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">nonetcdf</span></tt></td>
+<td><strong>Default.</strong> Use a dummy NetCDF library.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">netcdf</span></tt></td>
+<td><p class="first">Use a &#8216;real&#8217; NetCDF library.</p>
+<p>The NetCDF installation to use is specified using one of:</p>
+<ul class="last simple">
+<li><tt class="docutils literal"><span class="pre">JULES_NETCDF_PATH</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span></tt> and <tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span></tt></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_NETCDF_PATH</span></tt></dt>
+<dd><p class="first">Path to NetCDF installation.</p>
+<p class="last">This sets <tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span> <span class="pre">=</span> <span class="pre">$JULES_NETCDF_PATH/include</span></tt> and <tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span> <span class="pre">=</span> <span class="pre">$JULES_NETCDF_PATH/lib</span></tt>. These can be overridden by setting the variables directly.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span></tt></dt>
+<dd>Path to NetCDF include directory (i.e. directory containing <tt class="docutils literal"><span class="pre">netcdf.mod</span></tt>).</dd>
+<dt><tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span></tt></dt>
+<dd>Path to NetCDF library directory (i.e. directory containing <tt class="docutils literal"><span class="pre">libnetcdff.a</span></tt> and <tt class="docutils literal"><span class="pre">libnetcdf.a</span></tt>).</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When compiled in parallel mode, NetCDF must be statically linked. This means the compiler must be able to find all required library and include files (i.e. for NetCDF, HDF5, curl and zlib) in <tt class="docutils literal"><span class="pre">JULES_NETCDF_INC_PATH</span></tt>, <tt class="docutils literal"><span class="pre">JULES_NETCDF_LIB_PATH</span></tt> or the default search path.</p>
+</div>
+</div>
+<div class="section" id="example-fcm-make-commands">
+<h2>3.3.2. Example FCM make commands<a class="headerlink" href="#example-fcm-make-commands" title="Permalink to this headline">¶</a></h2>
+<p>To create a normal JULES executable without NetCDF using the GFortran compiler (taking advantage of the default values for the environment variables):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>fcm make -j 2 -f etc/fcm-make/make.cfg --new
+</pre></div>
+</div>
+<p>To create a fast JULES executable with NetCDF using the Intel compiler:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_COMPILER</span><span class="o">=</span>intel
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_BUILD</span><span class="o">=</span>fast
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_NETCDF</span><span class="o">=</span>netcdf
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_NETCDF_PATH</span><span class="o">=</span>/path/to/netcdf  <span class="c"># Replace this with the correct path</span>
+<span class="nv">$ </span>fcm make -j 2 -f etc/fcm-make/make.cfg --new
+</pre></div>
+</div>
+<p>To create a fast JULES executable with NetCDF using the GFortran compiler on a Met Office Linux system (making use of the platform setting):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_PLATFORM</span><span class="o">=</span>meto-linux-gfortran
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_BUILD</span><span class="o">=</span>fast
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_NETCDF</span><span class="o">=</span>netcdf  <span class="c"># Note that we don&#39;t need to specify paths</span>
+<span class="nv">$ </span>fcm make -j 2 -f etc/fcm-make/make.cfg --new
+</pre></div>
+</div>
+<p>To create a normal JULES executable with NetCDF and OpenMP using the Intel compiler on a remote machine:</p>
+<div class="highlight-bash"><div class="highlight"><pre>localhost <span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_REMOTE</span><span class="o">=</span>remote
+localhost <span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_REMOTE_HOST</span><span class="o">=</span>my-host
+localhost <span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_REMOTE_PATH</span><span class="o">=</span>/path/on/remote/host
+localhost <span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_COMPILER</span><span class="o">=</span>intel
+localhost <span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_OMP</span><span class="o">=</span>omp
+localhost <span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_NETCDF</span><span class="o">=</span>netcdf
+localhost <span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_NETCDF_PATH</span><span class="o">=</span>/path/to/netcdf  <span class="c"># Replace this with the path ON THE REMOTE MACHINE</span>
+localhost <span class="nv">$ </span>fcm make -f etc/fcm-make/make.cfg --new  <span class="c"># This does the extract and mirror steps</span>
+localhost <span class="nv">$ </span>ssh -Y my-host
+my-host <span class="nv">$ </span><span class="nb">cd</span> /path/on/remote/host
+my-host <span class="nv">$ </span>fcm make -j 4 --new  <span class="c"># This does the preprocess and build steps</span>
+</pre></div>
+</div>
+<p>To create a normal JULES executable with MPI enabled, using the Intel compiler:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_COMPILER</span><span class="o">=</span>intel
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_MPI</span><span class="o">=</span>mpi
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_NETCDF</span><span class="o">=</span>netcdf  <span class="c"># We have to use NetCDF for distributed simulations</span>
+<span class="nv">$ </span><span class="nb">export </span><span class="nv">JULES_NETCDF_PATH</span><span class="o">=</span>/path/to/parallel/netcdf  <span class="c"># NetCDF must be compiled with parallel I/O enabled</span>
+<span class="nv">$ </span>fcm make -j 2 -f etc/fcm-make/make.cfg --new
+</pre></div>
+</div>
+</div>
+<div class="section" id="tips-for-effective-use-of-fcm-make">
+<h2>3.3.3. Tips for effective use of FCM make<a class="headerlink" href="#tips-for-effective-use-of-fcm-make" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>To check the current values of the environment variables JULES will use to build, use the command <tt class="docutils literal"><span class="pre">env</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">JULES</span></tt></li>
+<li>If you always use the same compilation options for JULES, consider adding the export lines to the <tt class="docutils literal"><span class="pre">.profile</span></tt> file in your <tt class="docutils literal"><span class="pre">$HOME</span></tt> directory. Commands in the <tt class="docutils literal"><span class="pre">.profile</span></tt> file are automatically executed in any shell that you open, so defining environment variables there ensures your build environment remains consistent across shells and restarts of your computer. The definitions can still be overridden on the command line if required.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">3. Building and running JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="considerations.html">3.1. Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="required-software.html">3.2. Required software</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">3.3. Building JULES using FCM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-jules.html">3.4. Running JULES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rose.html">3.5. Automatic upgrading and GUI using Rose</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="required-software.html"
+                        title="previous chapter">3.2. Required software</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="running-jules.html"
+                        title="next chapter">3.4. Running JULES</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="running-jules.html" title="3.4. Running JULES"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="required-software.html" title="3.2. Required software"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.5 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" >3. Building and running JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2016.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

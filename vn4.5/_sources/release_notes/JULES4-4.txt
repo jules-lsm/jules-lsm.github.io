@@ -1,0 +1,43 @@
+JULES version 4.4 Release Notes
+===============================
+
+
+The JULES vn4.4 release consists of 31 tickets from 17 authors across 35 commits. Two further tickets were removed from the release due to issues.
+
+Full details of the tickets committed for JULES vn4.4 can be found on the `JULES shared repository Trac system <https://code.metoffice.gov.uk/trac/jules/query?resolution=fixed&milestone=JULES+v4.4+release>`_.
+
+Science changes
+---------------
+
+ * Add an option to set tile elevations to have absolute values above sea-level
+ * Adjustment to downward longwave radiation for elevated tiles
+ * JULES Nitrogen for UKESM
+ * Use bare soil momentum roughness length, if supplied as an ancillary field
+ * Add the irrigation supply code from JIM to the JULES trunk
+ * improvements to rivers_type='trip','rfm': storage in dump and partial parallelisation
+ * modify ch4 emissions from wetlands
+ * Allow landuse with variable number of PFTs
+ * Enable BVOCs and TRAITS together.
+ * Change multi-layer snow indices of first layer
+
+Technical changes
+-----------------
+
+ * JULES fcm-make configs updated to be incompatible with FCM 2015.07.0 and later
+ * Rose-stem support for alternative Rose, Cylc and FCM versions
+ * Addition of OpenMP directives to some JULES code.
+ * Code coverage metrics for rose-stem suite
+ * Prep for JULES memory duplication
+ * remove snow_grnd_gb from closures benchmark test
+
+
+Bugs fixed
+----------
+
+ * Remove factor of 0.5 from snow albedo temperature dependence
+ * Fix a bug in the Nitrogen Scheme for the implicit update of soil respiration when the soil C pool is exhausted.
+ * Fix drift in vegetation fractions
+ * Scaling bug in Taux
+ * bug fix for between season irrig_water
+ * Met Office VM: fix for update-jules-scripts file for JULES 4.3
+ * JULES namelist broadcasts are out of sync
