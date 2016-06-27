@@ -1,0 +1,57 @@
+JULES version 4.6 Release Notes
+===============================
+
+
+The JULES vn4.6 release consists of 43 tickets from 22 authors across 52 commits.
+
+Full details of the tickets committed for JULES vn4.6 can be found on the `JULES shared repository Trac system <https://code.metoffice.gov.uk/trac/jules/query?resolution=fixed&milestone=JULES+v4.6+release>`_.
+
+Science changes
+---------------
+
+ * Multiple ice tiles in a gridbox to simulate snowpacks at different elevations
+ * Snowpack physics for UKESM icesheet
+ * Link whole plant maintenance respiration to soil moisture stress
+ * Reading in clay content of soil for soil carbon decomposition model
+ * Improved climate downscaling physics for ice elevation tiles
+ * calculate FAO Penman-Monteith evapotranspiration for reference crop
+ * Respiring Stem Fraction
+ * Diagnostic Form Drag for Sea ice
+ * Calculation of new sea ice variables required for CMIP6
+ * Implement a canopy clumping factor
+ * Allow for Non-istropic scattering in plant canopies
+ * Investigate improvements to soil moisture stress on vegetation
+ * Improve parametrisation of crop leaf senescence
+ * Add new crop harvest diagnostics
+ * FLake beneath multi-layer snow
+
+Technical changes
+-----------------
+
+ * JULES-C-1p1 Regression Tests
+ * Remove the UM_FLAKE CPP macro
+ * Move sorp and n_inorg_turnover to namelist to enable user input.
+ * VM rose stem bug fixed.
+ * Add support for rose-stem on MONSooN
+ * Move some of the hard-wired crop parameters to JULES_CROPPARM
+ * Remove UM descent.h include file and put values into JULES module descent.F90
+ * Fix race conditions and improve OpenMP DEFAULTs
+ * Modularise and header refactor science/snow
+
+Bugs fixed
+----------
+
+ * Fix GC3 tstar_sice bug
+ * Correcting canopy nitrogen profiles
+ * Reinstate missing veg parms, for trait initialisation.
+ * Soil respiration bug resolved
+ * Correct mistake in merging of crop PFT changes
+ * N Diagnostic Bug fixed to avoid runtime crashes
+ * Bug fix to calculation of dust deposition exchange coefficient
+ * Bug Fix - CH4 wetland emission correction with TRIFFID on
+ * Fix aerodynamic resistance diagnostic (UM diag)
+
+Documentation updates
+----------
+Coding standards, and documentation can be viewed on the 'github page <http://jules-lsm.github.io/>_'.
+
