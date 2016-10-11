@@ -1,0 +1,546 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.10. timesteps.nml &mdash; Joint UK Land Environment Simulator (JULES) v4.6 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.6 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.11. model_grid.nml" href="model_grid.nml.html" />
+    <link rel="prev" title="6.9. jules_rivers.nml" href="jules_rivers.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="model_grid.nml.html" title="6.11. model_grid.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_rivers.nml.html" title="6.9. jules_rivers.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.6 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="timesteps-nml">
+<h1>6.10. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt><a class="headerlink" href="#timesteps-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets the start and end time of the run. It can also be used to specify an optional spin-up procedure. It contains two namelists called <a class="reference internal" href="#namelist-JULES_TIME"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_TIME</span></tt></a> and <a class="reference internal" href="#namelist-JULES_SPINUP"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_SPINUP</span></tt></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It is recommended that all times use Greenwich Mean Time (GMT or UTC), not local time. The use of GMT is essential if certain options are set.</p>
+</div>
+<div class="section" id="namelist-JULES_TIME">
+<span id="jules-time-namelist-members"></span><h2>6.10.1. <tt class="docutils literal"><span class="pre">JULES_TIME</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_TIME" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_TIME::l_360">
+<tt class="descclassname">JULES_TIME::</tt><tt class="descname">l_360</tt><a class="headerlink" href="#JULES_TIME::l_360" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch indicating use of 360 day years.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Each year consists of 360 days. This is sometimes used for idealised experiments.</dd>
+<dt>FALSE</dt>
+<dd>Each year consists of 365 or 366 days.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TIME::l_leap">
+<tt class="descclassname">JULES_TIME::</tt><tt class="descname">l_leap</tt><a class="headerlink" href="#JULES_TIME::l_leap" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Switch indicating whether the calendar has leap years. This flag is not used if l_360=T.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Leap years are modelled i.e. each year consists of 365 or 366 days.</dd>
+<dt>FALSE</dt>
+<dd>Each year consists of 365 days.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TIME::timestep_len">
+<tt class="descclassname">JULES_TIME::</tt><tt class="descname">timestep_len</tt><a class="headerlink" href="#JULES_TIME::timestep_len" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Model timestep length in seconds.</p>
+<p>Typically, 30 or 60 minutes is chosen, depending on the driving data available.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If the timestep is too long, the model becomes numerically unstable.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TIME::main_run_start">
+<tt class="descclassname">JULES_TIME::</tt><tt class="descname">main_run_start</tt><a class="headerlink" href="#JULES_TIME::main_run_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="JULES_TIME::main_run_end">
+<tt class="descclassname">JULES_TIME::</tt><tt class="descname">main_run_end</tt><a class="headerlink" href="#JULES_TIME::main_run_end" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The start and end times for the integration.</p>
+<p>Each run of JULES consists of an optional spin-up period and the &#8216;main run&#8217; that follows the spin-up. See below for more about the specification of the spin-up. These variables specify the start and end times for the &#8216;main run&#8217;.</p>
+<p>The times must be given in the format:</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="s2">&quot;yyyy-mm-dd hh:mm:ss&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_TIME::print_step">
+<tt class="descclassname">JULES_TIME::</tt><tt class="descname">print_step</tt><a class="headerlink" href="#JULES_TIME::print_step" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">1</td>
+</tr>
+</tbody>
+</table>
+<p>Number of timesteps between printing timestep information to screen, i.e. if <a class="reference internal" href="#JULES_TIME::print_step" title="JULES_TIME::print_step"><tt class="xref nml nml-mem docutils literal"><span class="pre">print_step</span></tt></a> = 48, then the timestep start time will only be printed every 48 timesteps.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_SPINUP">
+<span id="jules-spinup-namelist-members"></span><h2>6.10.2. <tt class="docutils literal"><span class="pre">JULES_SPINUP</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_SPINUP" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_SPINUP::max_spinup_cycles">
+<tt class="descclassname">JULES_SPINUP::</tt><tt class="descname">max_spinup_cycles</tt><a class="headerlink" href="#JULES_SPINUP::max_spinup_cycles" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The maximum number of times the spin-up period is to be repeated:</p>
+<dl class="docutils">
+<dt>0</dt>
+<dd>No spin-up.</dd>
+<dt>&gt; 0</dt>
+<dd>At least 1 and at most <a class="reference internal" href="#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><tt class="xref nml nml-mem docutils literal"><span class="pre">max_spinup_cycles</span></tt></a> repetitions of spin-up are used.</dd>
+</dl>
+<p>After each repetition, the model tests whether the selected variables have changed by more than a specified amount over the last repetition (see <a class="reference internal" href="#JULES_SPINUP::tolerance" title="JULES_SPINUP::tolerance"><tt class="xref nml nml-mem docutils literal"><span class="pre">tolerance</span></tt></a> below).</p>
+<p>If the change is less than this amount, the model is considered to have spun up and the model moves on to the main run.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SPINUP::spinup_start">
+<tt class="descclassname">JULES_SPINUP::</tt><tt class="descname">spinup_start</tt><a class="headerlink" href="#JULES_SPINUP::spinup_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="JULES_SPINUP::spinup_end">
+<tt class="descclassname">JULES_SPINUP::</tt><tt class="descname">spinup_end</tt><a class="headerlink" href="#JULES_SPINUP::spinup_end" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Only used if <a class="reference internal" href="#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><tt class="xref nml nml-mem docutils literal"><span class="pre">max_spinup_cycles</span></tt></a> &gt; 0.</p>
+<p>The start and end times for each cycle of spin-up.</p>
+<p>The times must be given in the format:</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="s2">&quot;yyyy-mm-dd hh:mm:ss&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SPINUP::terminate_on_spinup_fail">
+<tt class="descclassname">JULES_SPINUP::</tt><tt class="descname">terminate_on_spinup_fail</tt><a class="headerlink" href="#JULES_SPINUP::terminate_on_spinup_fail" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Only used if <a class="reference internal" href="#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><tt class="xref nml nml-mem docutils literal"><span class="pre">max_spinup_cycles</span></tt></a> &gt; 0.</p>
+<p>Switch controlling behaviour if the model does not pass the spin-up test after <a class="reference internal" href="#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><tt class="xref nml nml-mem docutils literal"><span class="pre">max_spinup_cycles</span></tt></a> of spin-up.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>End the run if model has not spun up.</dd>
+<dt>FALSE</dt>
+<dd>Continue the run regardless.</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-variables-used-to-specify-spin-up-conditions admonition">
+<p class="first admonition-title">Variables used to specify spin-up conditions</p>
+<dl class="member">
+<dt id="JULES_SPINUP::nvars">
+<tt class="descclassname">JULES_SPINUP::</tt><tt class="descname">nvars</tt><a class="headerlink" href="#JULES_SPINUP::nvars" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Only used if <a class="reference internal" href="#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><tt class="xref nml nml-mem docutils literal"><span class="pre">max_spinup_cycles</span></tt></a> &gt; 0.</p>
+<p>The number of variables to use to assess if the model has spun up.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SPINUP::var">
+<tt class="descclassname">JULES_SPINUP::</tt><tt class="descname">var</tt><a class="headerlink" href="#JULES_SPINUP::var" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Only used if <a class="reference internal" href="#JULES_SPINUP::nvars" title="JULES_SPINUP::nvars"><tt class="xref nml nml-mem docutils literal"><span class="pre">nvars</span></tt></a> &gt; 0.</p>
+<p>List of variables to be used to determine if the model has spun up. Spin-up can be assessed in terms of soil temperature and soil moisture.</p>
+<p>Possible values are:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">smcl</span></tt></dt>
+<dd>Moisture content of each soil layer (kg m<sup>-2</sup>).</dd>
+<dt><tt class="docutils literal"><span class="pre">t_soil</span></tt></dt>
+<dd>Temperature of each soil layer (K).</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SPINUP::use_percent">
+<tt class="descclassname">JULES_SPINUP::</tt><tt class="descname">use_percent</tt><a class="headerlink" href="#JULES_SPINUP::use_percent" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Only used if <a class="reference internal" href="#JULES_SPINUP::nvars" title="JULES_SPINUP::nvars"><tt class="xref nml nml-mem docutils literal"><span class="pre">nvars</span></tt></a> &gt; 0.</p>
+<p>Indicates whether the tolerance for each variable is expressed as a percentage.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Tolerance is a percentage.</dd>
+<dt>FALSE</dt>
+<dd>Tolerance is an absolute value.</dd>
+</dl>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_SPINUP::tolerance">
+<tt class="descclassname">JULES_SPINUP::</tt><tt class="descname">tolerance</tt><a class="headerlink" href="#JULES_SPINUP::tolerance" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Only used if <a class="reference internal" href="#JULES_SPINUP::nvars" title="JULES_SPINUP::nvars"><tt class="xref nml nml-mem docutils literal"><span class="pre">nvars</span></tt></a> &gt; 0.</p>
+<p>Tolerance for spin-up test for each variable.</p>
+<p>For each spin-up variable, this is the maximum allowed change over a spin-up cycle if the variable is to be considered as spun-up.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="note-on-time-conventions">
+<h2>6.10.3. Note on time conventions<a class="headerlink" href="#note-on-time-conventions" title="Permalink to this headline">¶</a></h2>
+<p>When specifying start times (e.g. <a class="reference internal" href="#JULES_TIME::main_run_start" title="JULES_TIME::main_run_start"><tt class="xref nml nml-mem docutils literal"><span class="pre">main_run_start</span></tt></a>, <a class="reference internal" href="#JULES_SPINUP::spinup_start" title="JULES_SPINUP::spinup_start"><tt class="xref nml nml-mem docutils literal"><span class="pre">spinup_start</span></tt></a>), the time is taken to be the <em>start of the first timestep</em>. When specifying end times (e.g. <a class="reference internal" href="#JULES_TIME::main_run_end" title="JULES_TIME::main_run_end"><tt class="xref nml nml-mem docutils literal"><span class="pre">main_run_end</span></tt></a>, <a class="reference internal" href="#JULES_SPINUP::spinup_end" title="JULES_SPINUP::spinup_end"><tt class="xref nml nml-mem docutils literal"><span class="pre">spinup_end</span></tt></a>), the time is taken to be the <em>end of the last timestep</em>. Take the following setup:</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_TIME</span>
+  <span class="nv">timestep_len</span>   <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
+  <span class="nv">main_run_start</span> <span class="o">=</span> <span class="s2">&quot;1997-01-01 00:00:00&quot;</span><span class="p">,</span>
+  <span class="nv">main_run_end</span>   <span class="o">=</span> <span class="s2">&quot;1998-01-01 00:00:00&quot;</span><span class="p">,</span>
+
+  <span class="c1"># ...</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>With this setup, exactly one whole year of timesteps will be run. The first model timestep begins at 1997-01-01 00:00:00, the second at 1997-01-01 01:00:00 etc. The final model timestep begins at 1997-12-31 23:00:00 and ends at 1998-01-01 00:00:00. No processing occurs for any times in 1998.</p>
+</div>
+<div class="section" id="note-on-solar-zenith-angle">
+<h2>6.10.4. Note on solar zenith angle<a class="headerlink" href="#note-on-solar-zenith-angle" title="Permalink to this headline">¶</a></h2>
+<p>If a run requires that the solar zenith angle be calculated (<a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_cosz" title="JULES_RADIATION::l_cosz"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_cosz</span></tt></a> = TRUE), then times must be in Greenwich Mean Time (UTC), so that the code can calculate the zenith angle at each location and time.</p>
+<p>If <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_cosz" title="JULES_RADIATION::l_cosz"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_cosz</span></tt></a> = FALSE, the user might prefer to use local time, particularly if this is used for input or validation data, as the timestamp on model output will then match that on the other data. However the use of local time is not recommended as if the user later switches to <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_cosz" title="JULES_RADIATION::l_cosz"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_cosz</span></tt></a> = TRUE without adjusting the time values, the model results will be in error.</p>
+</div>
+<div class="section" id="examples">
+<h2>6.10.5. Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-run-without-spin-up">
+<h3>6.10.5.1. A run without spin-up<a class="headerlink" href="#a-run-without-spin-up" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_TIME</span>
+  <span class="nv">timestep_len</span>   <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
+  <span class="nv">main_run_start</span> <span class="o">=</span> <span class="s2">&quot;1997-01-01 00:00:00&quot;</span><span class="p">,</span>
+  <span class="nv">main_run_end</span>   <span class="o">=</span> <span class="s2">&quot;1999-01-01 01:00:00&quot;</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_SPINUP</span>
+  <span class="nv">max_spinup_cycles</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>This specifies a run with a timestep length of one hour. The run will begin at midnight on 1st January 1997 and end at 01:00 GMT on 1st January 1999. <a class="reference internal" href="#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><tt class="xref nml nml-mem docutils literal"><span class="pre">max_spinup_cycles</span></tt></a> = 0 means there is no spin-up.</p>
+</div>
+<div class="section" id="a-run-with-spin-up-over-a-period-that-immediately-precedes-the-main-run">
+<h3>6.10.5.2. A run with spin-up over a period that immediately precedes the main run<a class="headerlink" href="#a-run-with-spin-up-over-a-period-that-immediately-precedes-the-main-run" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_TIME</span>
+  <span class="nv">timestep_len</span>   <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
+  <span class="nv">main_run_start</span> <span class="o">=</span> <span class="s2">&quot;1997-01-01 00:00:00&quot;</span><span class="p">,</span>
+  <span class="nv">main_run_end</span>   <span class="o">=</span> <span class="s2">&quot;1999-01-01 01:00:00&quot;</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_SPINUP</span>
+  <span class="nv">max_spinup_cycles</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="nv">spinup_start</span>      <span class="o">=</span> <span class="s2">&quot;1996-01-01 00:00:00&quot;</span><span class="p">,</span>
+  <span class="nv">spinup_end</span>        <span class="o">=</span> <span class="s2">&quot;1997-01-01 00:00:00&quot;</span>
+
+  <span class="c1"># &lt;spinup variable specification&gt;</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>This specifies a spin-up period from midnight on 1st January 1996 to midnight on 1st January 1997. This spin-up will be repeated up to 5 times, before the main run from midnight on 1st January 1997 until 01:00 GMT on 1st January 1999.</p>
+</div>
+<div class="section" id="a-run-with-spin-up-over-a-period-that-overlaps-the-main-run">
+<h3>6.10.5.3. A run with spin-up over a period that overlaps the main run<a class="headerlink" href="#a-run-with-spin-up-over-a-period-that-overlaps-the-main-run" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_TIME</span>
+  <span class="nv">timestep_len</span>   <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
+  <span class="nv">main_run_start</span> <span class="o">=</span> <span class="s2">&quot;1997-01-01 00:00:00&quot;</span><span class="p">,</span>
+  <span class="nv">main_run_end</span>   <span class="o">=</span> <span class="s2">&quot;1999-01-01 01:00:00&quot;</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_SPINUP</span>
+  <span class="nv">max_spinup_cycles</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="nv">spinup_start</span>      <span class="o">=</span> <span class="s2">&quot;1997-01-01 00:00:00&quot;</span><span class="p">,</span>
+  <span class="nv">spinup_end</span>        <span class="o">=</span> <span class="s2">&quot;1998-01-01 00:00:00&quot;</span>
+
+  <span class="c1"># &lt;spinup variable specification&gt;</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>This specifies a spin-up period from midnight on 1st January 1997 to midnight on 1st January 1998. This spin-up will be repeated up to 5 times, before the main run from midnight on 1st January 1997 until 01:00 GMT on 1st January 1999.</p>
+</div>
+<div class="section" id="example-of-specifying-requirements-for-spin-up">
+<h3>6.10.5.4. Example of specifying requirements for spin-up<a class="headerlink" href="#example-of-specifying-requirements-for-spin-up" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_SPINUP</span>
+  <span class="c1"># &lt;spinup time specification&gt;</span>
+
+  <span class="nv">terminate_on_spinup_fail</span> <span class="o">=</span> <span class="ss">T</span><span class="p">,</span>
+
+  <span class="nv">nvars</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="nv">var</span>         <span class="o">=</span> <span class="s2">&quot;smcl&quot;</span>  <span class="s2">&quot;t_soil&quot;</span><span class="p">,</span>
+  <span class="nv">use_percent</span> <span class="o">=</span>     <span class="ss">F</span>         <span class="ss">T</span> <span class="p">,</span>
+  <span class="nv">tolerance</span>   <span class="o">=</span>   <span class="mf">1.0</span>       <span class="mf">0.1</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>With this setup, <a class="reference internal" href="#JULES_SPINUP::terminate_on_spinup_fail" title="JULES_SPINUP::terminate_on_spinup_fail"><tt class="xref nml nml-mem docutils literal"><span class="pre">terminate_on_spinup_fail</span></tt></a> = TRUE means that if the spin-up has not &#8216;converged&#8217; after <a class="reference internal" href="#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><tt class="xref nml nml-mem docutils literal"><span class="pre">max_spinup_cycles</span></tt></a> cycles, the run will end. Convergence is measured using the moisture content and temperature of each soil layer. At every point and in every layer, soil moisture must change by less than 1 kg m<sup>-2</sup>, while soil temperature must change by less than 0.1%.</p>
+</div>
+</div>
+<div class="section" id="notes-on-spin-up">
+<h2>6.10.6. Notes on spin-up<a class="headerlink" href="#notes-on-spin-up" title="Permalink to this headline">¶</a></h2>
+<p>Spin-up is assessed using the difference between instantaneous values at the end of consecutive cycles of spin-up. For example, if the spin-up period is from 2005-01-01 00:00:00 to 2006-01-01 00:00:00 then every time the model gets to the end of 2005 the spin-up variables are compared with their value at the end of the previous cycle. The model is considered spun-up when <em>all</em> the spin-up variables are spun-up at <em>all</em> points. A spin-up variable is considered spun-up if, at each point, the absolute value of the change (percentage change if <a class="reference internal" href="#JULES_SPINUP::use_percent" title="JULES_SPINUP::use_percent"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_percent</span></tt></a> = TRUE) over the spin-up cycle is less than or equal to the given tolerance.</p>
+<p>At present the analysis of whether the model has spun up or not is limited to aspects of the &#8216;physical&#8217; state of the system, and does not explicitly consider carbon stores, making it less useful for runs with interactive vegetation (the equilibrium mode of TRIFFID is designed to spin-up TRIFFID) or prognostic soil carbon.</p>
+<p>During the spin-up phase of a run, JULES provides the correct driving data (for example, meteorological data) as the model time &#8216;cycles&#8217; round over the spin-up period. Consider the case of a spin-up from 2005-01-01 00:00:00 to 2006-01-01 00:00:00. At or near the end of 31st December 2005 during the spin-up, the driving data will start to adjust to the values for 1st January 2005. The calculated driving data may vary slightly between the start or end of the first cycle and similar times in later cycles, because of the need to match the data at the end of each cycle to that at the start of the next cycle. When the main run begins after a period of spin-up, the driving data is reset to the start of the main run - no effort is made to adjust the data for a smooth transition. Generally this does not cause a problem.</p>
+<p>Depending upon the details of the input data and any temporal interpolation, the driving data may vary rapidly at the end of a cycle of spin-up, causing an extreme response from the model. In most cases the model will adjust, possibly with large heat fluxes over a few hours, but the user should be aware that unusual behaviour near the end/start of a spin-up cycle may be the result of this adjustment. Consider the case of a spin-up from 2005-01-01 00:00:00 to 2006-01-01 00:00:00. At or near the end of 31st December 2005 during the spin-up, the driving data will start to adjust to the values for 1st January 2005, which could be very different from conditions on 31st December 2005. The length of time over which the driving data adjust depends on the frequency of the data, and the choice of temporal interpolation. For example, with 3-hourly data that is interpolated onto a one hour timestep, the adjustment will take place over 3 hours. However, hourly data and an hourly timestep will force an instantaneous adjustment at the start of 1st January 2005.</p>
+<p>Although <a class="reference internal" href="#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><tt class="xref nml nml-mem docutils literal"><span class="pre">max_spinup_cycles</span></tt></a> specifies the maximum number of spin-up cycles, some of which might not be used if the model is considered to have spun up earlier, it is possible to specify the exact number of cycles that will be performed. This can be done by demanding an impossible level of convergence by setting <a class="reference internal" href="#JULES_SPINUP::tolerance" title="JULES_SPINUP::tolerance"><tt class="xref nml nml-mem docutils literal"><span class="pre">tolerance</span></tt></a> &lt; 0 (remember that <a class="reference internal" href="#JULES_SPINUP::tolerance" title="JULES_SPINUP::tolerance"><tt class="xref nml nml-mem docutils literal"><span class="pre">tolerance</span></tt></a> is compared with the absolute change over a cycle) and setting <a class="reference internal" href="#JULES_SPINUP::terminate_on_spinup_fail" title="JULES_SPINUP::terminate_on_spinup_fail"><tt class="xref nml nml-mem docutils literal"><span class="pre">terminate_on_spinup_fail</span></tt></a> = FALSE so that the integration continues when spin-up is judged to have failed after <a class="reference internal" href="#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><tt class="xref nml nml-mem docutils literal"><span class="pre">max_spinup_cycles</span></tt></a> cycles.</p>
+<p>Although it is expected that a spin-up phase will be followed by the main run in the same integration, it is possible to do the spin-up and main run in separate integrations. This can be done by demanding an impossible level of convergence by setting <a class="reference internal" href="#JULES_SPINUP::tolerance" title="JULES_SPINUP::tolerance"><tt class="xref nml nml-mem docutils literal"><span class="pre">tolerance</span></tt></a> &lt; 0 and setting <a class="reference internal" href="#JULES_SPINUP::terminate_on_spinup_fail" title="JULES_SPINUP::terminate_on_spinup_fail"><tt class="xref nml nml-mem docutils literal"><span class="pre">terminate_on_spinup_fail</span></tt></a> = TRUE so that the integration stops when spin-up is judged to have failed. The final state of the model, after <a class="reference internal" href="#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><tt class="xref nml nml-mem docutils literal"><span class="pre">max_spinup_cycles</span></tt></a> cycles of spin-up, will be written to the final dump, and a subsequent simulation can be started from this dump.</p>
+<p>A limitation of the current code is that it cannot cope with a spin-up cycle that is short in comparison to the period of any input data. For example, a spin-up cycle of 1 day cannot use 10-day vegetation data. The code will likely run but the evolution of the vegetation data will probably not be what the user intended! However, it is unlikely that a user would want to try such a run.</p>
+<p>Occasionally, the model fails to diagnose a spun up state when in fact the integration has reached a quasi-steady state that is not detected by the procedure of assessing spin-up through comparison of instantaneous values at the end of consecutive cycles of spin-up. An example of this is &#8216;period-2&#8217; behaviour, where the model state repeats itself over a period of 2 cycles. Such behaviour should be apparent in the model output during spin-up, and the user can opt to repeat the integration over a given number of spin-up cycles, and not to wait for a spun-up state to be diagnosed.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface_types.nml.html">6.2. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface.nml.html">6.3. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_radiation.nml.html">6.4. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_hydrology.nml.html">6.5. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_vegetation.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_snow.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_rivers.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.10. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.11. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.12. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.13. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.14. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crop_params.nml.html">6.15. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.16. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.17. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fire.nml.html">6.18. <tt class="docutils literal"><span class="pre">fire.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.19. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.20. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.21. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.22. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.23. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="jules_rivers.nml.html"
+                        title="previous chapter">6.9. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="model_grid.nml.html"
+                        title="next chapter">6.11. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">model_grid.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="model_grid.nml.html" title="6.11. model_grid.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_rivers.nml.html" title="6.9. jules_rivers.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.6 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2016.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,1244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.11. model_grid.nml &mdash; Joint UK Land Environment Simulator (JULES) v4.6 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.6',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.6 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.12. ancillaries.nml" href="ancillaries.nml.html" />
+    <link rel="prev" title="6.10. timesteps.nml" href="timesteps.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="ancillaries.nml.html" title="6.12. ancillaries.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="timesteps.nml.html" title="6.10. timesteps.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.6 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="model-grid-nml">
+<h1>6.11. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt><a class="headerlink" href="#model-grid-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets up the grid configuration for the run. It contains six namelists - <a class="reference internal" href="#namelist-JULES_INPUT_GRID"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_INPUT_GRID</span></tt></a>, <a class="reference internal" href="#namelist-JULES_LATLON"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_LATLON</span></tt></a>, <a class="reference internal" href="#namelist-JULES_LAND_FRAC"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_LAND_FRAC</span></tt></a>, <a class="reference internal" href="#namelist-JULES_MODEL_GRID"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_MODEL_GRID</span></tt></a>, <a class="reference internal" href="#namelist-JULES_SURF_HGT"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_SURF_HGT</span></tt></a> and <a class="reference internal" href="#namelist-JULES_Z_LAND"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_Z_LAND</span></tt></a></p>
+<p>Each run of JULES involves two grids: the input grid and the model grid. The input grid is the grid on which all input data are held. The model grid is the set of points on which the model is run. The model grid is the grid of points that will be processed by JULES, and is a subset of the input grid.</p>
+<p>As discussed in <a class="reference internal" href="../input/principles.html"><em>General principles</em></a>, the input grid consists of three pieces of information:</p>
+<ol class="arabic simple">
+<li>Whether the grid is 1D or 2D.</li>
+<li>The size of each dimension.</li>
+<li>The name of each dimension in the input file(s).</li>
+</ol>
+<p>The latitude, longitude and land fraction of each point are then read in on the full input grid as specified by the namelists. A subset of the input grid to use as the model grid can then be specified in various ways described below (e.g. land points only, all points within certain latitude/longitude bounds).</p>
+<p>In most cases, the model grid will be represented internally as a vector of points, even when the input grid is 2D. Numerically, this makes no difference. The only time that the model grid will be 2D is when the input grid is 2D, <a class="reference internal" href="#JULES_MODEL_GRID::force_1d_grid" title="JULES_MODEL_GRID::force_1d_grid"><tt class="xref nml nml-mem docutils literal"><span class="pre">force_1d_grid</span></tt></a> = F and the model grid is a contiguous rectangular subsection of the input grid.</p>
+<div class="section" id="namelist-JULES_INPUT_GRID">
+<span id="jules-input-grid-namelist-members"></span><h2>6.11.1. <tt class="docutils literal"><span class="pre">JULES_INPUT_GRID</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_INPUT_GRID" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The dimension names specified in this namelist will be used for all input files.</p>
+</div>
+<dl class="member">
+<dt id="JULES_INPUT_GRID::grid_is_1d">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">grid_is_1d</tt><a class="headerlink" href="#JULES_INPUT_GRID::grid_is_1d" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Indicates if the input grid is 1D or 2D.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Variables have one grid dimension in the input file(s) - a points dimensions (e.g. a vector of land points with grid dimension &#8220;land&#8221;).</dd>
+<dt>FALSE</dt>
+<dd>Variables have two grid dimensions in the input file(s) - an x and a y dimension.</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-only-used-when-nml-mem-grid-is-1d-true admonition">
+<p class="first admonition-title">Only used when <a class="reference internal" href="#JULES_INPUT_GRID::grid_is_1d" title="JULES_INPUT_GRID::grid_is_1d"><tt class="xref nml nml-mem docutils literal"><span class="pre">grid_is_1d</span></tt></a> = TRUE</p>
+<dl class="member">
+<dt id="JULES_INPUT_GRID::grid_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">grid_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::grid_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;land&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the single grid dimension.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_INPUT_GRID::npoints">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">npoints</tt><a class="headerlink" href="#JULES_INPUT_GRID::npoints" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The size of the single grid dimension.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-only-used-when-nml-mem-grid-is-1d-false admonition">
+<p class="first admonition-title">Only used when <a class="reference internal" href="#JULES_INPUT_GRID::grid_is_1d" title="JULES_INPUT_GRID::grid_is_1d"><tt class="xref nml nml-mem docutils literal"><span class="pre">grid_is_1d</span></tt></a> = FALSE</p>
+<dl class="member">
+<dt id="JULES_INPUT_GRID::x_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">x_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::x_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;x&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the x dimension.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it  should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INPUT_GRID::y_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">y_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::y_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;y&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the y dimension.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INPUT_GRID::nx">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">nx</tt><a class="headerlink" href="#JULES_INPUT_GRID::nx" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The size of the x dimension.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_INPUT_GRID::ny">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">ny</tt><a class="headerlink" href="#JULES_INPUT_GRID::ny" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The size of the y dimension.</p>
+</dd></dl>
+
+</div>
+<dl class="member">
+<dt id="JULES_INPUT_GRID::time_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">time_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::time_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;time&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the time dimension in any input files containing time varying data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INPUT_GRID::pft_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">pft_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::pft_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;pft&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The dimension name used when variables have an additional dimension of size <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::npft" title="JULES_SURFACE_TYPES::npft"><tt class="xref nml nml-mem docutils literal"><span class="pre">npft</span></tt></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INPUT_GRID::cpft_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">cpft_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::cpft_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;cpft&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The dimension name used when variables have an additional dimension of size <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><tt class="xref nml nml-mem docutils literal"><span class="pre">ncpft</span></tt></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INPUT_GRID::nvg_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">nvg_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::nvg_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;nvg&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The dimension name used when variables have an additional dimension of size  <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::nnvg" title="JULES_SURFACE_TYPES::nnvg"><tt class="xref nml nml-mem docutils literal"><span class="pre">nnvg</span></tt></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INPUT_GRID::type_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">type_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::type_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;type&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The dimension name used when variables have an additional dimension of size  <tt class="docutils literal"><span class="pre">ntype</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INPUT_GRID::tile_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">tile_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::tile_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;tile&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The dimension name used when variables have an additional dimension of size  <tt class="docutils literal"><span class="pre">ntiles</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INPUT_GRID::soil_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">soil_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::soil_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;soil&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The dimension name used when variables have an additional dimension of size  <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><tt class="xref nml nml-mem docutils literal"><span class="pre">sm_levels</span></tt></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INPUT_GRID::snow_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">snow_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::snow_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;snow&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The dimension name used when variables have an additional dimension of size  <a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INPUT_GRID::scpool_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">scpool_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::scpool_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;scpool&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The dimension name used when variables have an additional dimension of size  <tt class="docutils literal"><span class="pre">dim_cs1</span></tt>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INPUT_GRID::bedrock_dim_name">
+<tt class="descclassname">JULES_INPUT_GRID::</tt><tt class="descname">bedrock_dim_name</tt><a class="headerlink" href="#JULES_INPUT_GRID::bedrock_dim_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8220;bedrock&#8221;</td>
+</tr>
+</tbody>
+</table>
+<p>The dimension name used when variables have an additional dimension of size  <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::ns_deep" title="JULES_SOIL::ns_deep"><tt class="xref nml nml-mem docutils literal"><span class="pre">ns_deep</span></tt></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_LATLON">
+<span id="jules-latlon-namelist-members"></span><h2>6.11.2. <tt class="docutils literal"><span class="pre">JULES_LATLON</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_LATLON" title="Permalink to this headline">¶</a></h2>
+<div class="admonition-used-when-input-grid-consists-of-a-single-location-1d-and-nml-mem-jules-input-grid-npoints-1-or-2d-and-nml-mem-jules-input-grid-nx-nml-mem-jules-input-grid-ny-1 admonition">
+<p class="first admonition-title">Used when input grid consists of a single location (1D and <a class="reference internal" href="#JULES_INPUT_GRID::npoints" title="JULES_INPUT_GRID::npoints"><tt class="xref nml nml-mem docutils literal"><span class="pre">npoints</span></tt></a> = 1 or 2D and <a class="reference internal" href="#JULES_INPUT_GRID::nx" title="JULES_INPUT_GRID::nx"><tt class="xref nml nml-mem docutils literal"><span class="pre">nx</span></tt></a> = <a class="reference internal" href="#JULES_INPUT_GRID::ny" title="JULES_INPUT_GRID::ny"><tt class="xref nml nml-mem docutils literal"><span class="pre">ny</span></tt></a> = 1</p>
+<dl class="member">
+<dt id="JULES_LATLON::latitude">
+<tt class="descclassname">JULES_LATLON::</tt><tt class="descname">latitude</tt><a class="headerlink" href="#JULES_LATLON::latitude" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The latitude of the single grid location.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_LATLON::longitude">
+<tt class="descclassname">JULES_LATLON::</tt><tt class="descname">longitude</tt><a class="headerlink" href="#JULES_LATLON::longitude" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The longitude of the single grid location.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-used-for-any-input-grid-with-more-than-a-single-location admonition">
+<p class="first admonition-title">Used for any input grid with more than a single location</p>
+<dl class="member">
+<dt id="JULES_LATLON::file">
+<tt class="descclassname">JULES_LATLON::</tt><tt class="descname">file</tt><a class="headerlink" href="#JULES_LATLON::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the file to read latitude and longitude from.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_LATLON::lat_name">
+<tt class="descclassname">JULES_LATLON::</tt><tt class="descname">lat_name</tt><a class="headerlink" href="#JULES_LATLON::lat_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the variable containing the latitude data.</p>
+<p>In the file, the variable must have no levels dimensions and no time dimension.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_LATLON::lon_name">
+<tt class="descclassname">JULES_LATLON::</tt><tt class="descname">lon_name</tt><a class="headerlink" href="#JULES_LATLON::lon_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the variable containing the longitude data.</p>
+<p>In the file, the variable must have no levels dimensions and no time dimension.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="namelist-JULES_LAND_FRAC">
+<span id="jules-land-frac-namelist-members"></span><h2>6.11.3. <tt class="docutils literal"><span class="pre">JULES_LAND_FRAC</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_LAND_FRAC" title="Permalink to this headline">¶</a></h2>
+<p>Land fraction is the fraction of each gridbox that is land. Currently, JULES considers any gridbox with land fraction &gt; 0 to be 100% land, and all others to be 100% sea (or sea-ice). Land fraction data can be used to select only land points from the full input grid (see below).</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">When the input grid consists of a single location (1D and <a class="reference internal" href="#JULES_INPUT_GRID::npoints" title="JULES_INPUT_GRID::npoints"><tt class="xref nml nml-mem docutils literal"><span class="pre">npoints</span></tt></a> = 1 or 2D and <a class="reference internal" href="#JULES_INPUT_GRID::nx" title="JULES_INPUT_GRID::nx"><tt class="xref nml nml-mem docutils literal"><span class="pre">nx</span></tt></a> = <a class="reference internal" href="#JULES_INPUT_GRID::ny" title="JULES_INPUT_GRID::ny"><tt class="xref nml nml-mem docutils literal"><span class="pre">ny</span></tt></a> = 1), that single location is assumed to be 100% land.</p>
+</div>
+<p>For any input grid with more than a single location, the following are used:</p>
+<dl class="member">
+<dt id="JULES_LAND_FRAC::file">
+<tt class="descclassname">JULES_LAND_FRAC::</tt><tt class="descname">file</tt><a class="headerlink" href="#JULES_LAND_FRAC::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the file to read land fraction data from.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_LAND_FRAC::land_frac_name">
+<tt class="descclassname">JULES_LAND_FRAC::</tt><tt class="descname">land_frac_name</tt><a class="headerlink" href="#JULES_LAND_FRAC::land_frac_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the variable containing the land fraction data.</p>
+<p>In the file, the variable must have no levels dimensions and no time dimension.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_MODEL_GRID">
+<span id="jules-model-grid-namelist-members"></span><h2>6.11.4. <tt class="docutils literal"><span class="pre">JULES_MODEL_GRID</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_MODEL_GRID" title="Permalink to this headline">¶</a></h2>
+<p>Members of this namelist are used to select the points to be modelled from the input grid. This can be done in various ways (see the <a class="reference internal" href="#grid-examples"><em>Examples</em></a>).</p>
+<dl class="member">
+<dt id="JULES_MODEL_GRID::land_only">
+<tt class="descclassname">JULES_MODEL_GRID::</tt><tt class="descname">land_only</tt><a class="headerlink" href="#JULES_MODEL_GRID::land_only" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE                                                                        </dt>
+<dd>Model land points only (from the points that are selected with other options).</dd>
+<dt>FALSE</dt>
+<dd>Model all selected points.</dd>
+</dl>
+<p>If <a class="reference internal" href="#JULES_MODEL_GRID::use_subgrid" title="JULES_MODEL_GRID::use_subgrid"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_subgrid</span></tt></a> = FALSE (see below), the land points will be extracted from the full input grid.</p>
+<p>If <a class="reference internal" href="#JULES_MODEL_GRID::use_subgrid" title="JULES_MODEL_GRID::use_subgrid"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_subgrid</span></tt></a> = TRUE, then the subgrid extraction takes place first, and the land points will be extracted from the specified subgrid.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_MODEL_GRID::force_1d_grid">
+<tt class="descclassname">JULES_MODEL_GRID::</tt><tt class="descname">force_1d_grid</tt><a class="headerlink" href="#JULES_MODEL_GRID::force_1d_grid" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE                                                                        </dt>
+<dd>Force the model grid to be 1D, even if it would otherwise have been 2D.</dd>
+<dt>FALSE</dt>
+<dd>The model grid takes its default shape.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_MODEL_GRID::use_subgrid">
+<tt class="descclassname">JULES_MODEL_GRID::</tt><tt class="descname">use_subgrid</tt><a class="headerlink" href="#JULES_MODEL_GRID::use_subgrid" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE                                                                        </dt>
+<dd>The model grid is a subset of the full input grid, specified using some valid combination of the options below.</dd>
+<dt>FALSE</dt>
+<dd>The model grid is the full input grid.</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-only-used-if-nml-mem-use-subgrid-true admonition">
+<p class="first admonition-title">Only used if <a class="reference internal" href="#JULES_MODEL_GRID::use_subgrid" title="JULES_MODEL_GRID::use_subgrid"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_subgrid</span></tt></a> = TRUE</p>
+<dl class="member">
+<dt id="JULES_MODEL_GRID::latlon_region">
+<tt class="descclassname">JULES_MODEL_GRID::</tt><tt class="descname">latlon_region</tt><a class="headerlink" href="#JULES_MODEL_GRID::latlon_region" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE                                                                        </dt>
+<dd>Subset of points to model will be selected using latitude and longitude bounds.</dd>
+<dt>FALSE</dt>
+<dd>Subset of points to model will be selected using a list of latitude and longitude for each point.</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-only-used-if-nml-mem-latlon-region-true admonition">
+<p class="first admonition-title">Only used if <a class="reference internal" href="#JULES_MODEL_GRID::latlon_region" title="JULES_MODEL_GRID::latlon_region"><tt class="xref nml nml-mem docutils literal"><span class="pre">latlon_region</span></tt></a> = TRUE</p>
+<dl class="member">
+<dt id="JULES_MODEL_GRID::lat_bounds">
+<tt class="descclassname">JULES_MODEL_GRID::</tt><tt class="descname">lat_bounds</tt><a class="headerlink" href="#JULES_MODEL_GRID::lat_bounds" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(2)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The lower and upper bounds (in that order) for the latitude to use. The model grid will only contain points where <tt class="docutils literal"><span class="pre">lat_bounds(1)</span> <span class="pre">&lt;=</span> <span class="pre">latitude</span> <span class="pre">&lt;=</span> <span class="pre">lat_bounds(2)</span></tt>.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_MODEL_GRID::lon_bounds">
+<tt class="descclassname">JULES_MODEL_GRID::</tt><tt class="descname">lon_bounds</tt><a class="headerlink" href="#JULES_MODEL_GRID::lon_bounds" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(2)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The lower and upper bounds (in that order) for the longitude to use. The model grid will only contain points where <tt class="docutils literal"><span class="pre">lon_bounds(1)</span> <span class="pre">&lt;=</span> <span class="pre">longitude</span> <span class="pre">&lt;=</span> <span class="pre">lon_bounds(2)</span></tt>.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-only-used-if-nml-mem-latlon-region-false last admonition">
+<p class="first admonition-title">Only used if <a class="reference internal" href="#JULES_MODEL_GRID::latlon_region" title="JULES_MODEL_GRID::latlon_region"><tt class="xref nml nml-mem docutils literal"><span class="pre">latlon_region</span></tt></a> = FALSE</p>
+<dl class="member">
+<dt id="JULES_MODEL_GRID::npoints">
+<tt class="descclassname">JULES_MODEL_GRID::</tt><tt class="descname">npoints</tt><a class="headerlink" href="#JULES_MODEL_GRID::npoints" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of points to model.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_MODEL_GRID::points_file">
+<tt class="descclassname">JULES_MODEL_GRID::</tt><tt class="descname">points_file</tt><a class="headerlink" href="#JULES_MODEL_GRID::points_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the file containing the latitude and longitude for each point.</p>
+<p>Each line in the file should contain the latitude and longitude (in that  order) for a point.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+<div class="section" id="namelist-JULES_SURF_HGT">
+<span id="jules-surf-hgt-namelist-members"></span><h2>6.11.5. <tt class="docutils literal"><span class="pre">JULES_SURF_HGT</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_SURF_HGT" title="Permalink to this headline">¶</a></h2>
+<p>This namelist sets the elevation of each surface tile. Elevations can either be <em>relative to the gridbox mean</em> or <em>have constant elevation bands above sea-level</em>.</p>
+<p>If tile elevations are set relative to the gridbox mean, then the gridbox mean elevation is not required. The gridbox mean elevation is implicit in the near-surface meteorological data that are provided (higher locations will tend to be colder, have lower pressure, etc.). The elevation of each tile is used to alter the values of the air temperature and humidity (and possibly downwelling longwave, see <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_elev_lw_down" title="JULES_SURFACE::l_elev_lw_down"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_elev_lw_down</span></tt></a>) over that tile relative to the surface.</p>
+<p>If any tile uses absolute heights (i.e. <a class="reference internal" href="#JULES_SURF_HGT::l_elev_absolute_height" title="JULES_SURF_HGT::l_elev_absolute_height"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_elev_absolute_height</span></tt></a> has at least one element that is .true.), then the gridbox mean elevation must also be supplied. This is read in from the optional <a class="reference internal" href="#namelist-JULES_Z_LAND"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_Z_LAND</span></tt></a> namelist which is described below. The model calculates elevations relative to the gridbox mean by taking the difference between the absolute elevation and the gridbox mean.</p>
+<p>If any tile uses absolute heights, then tile heights are set constant across a domain, regardless of whether each tile&#8217;s height is specified as a relative offset or absolute. This makes it simple to set zero-offset heights for tiles that should not be considered in the elevation bands. It is no longer possible to have spatially varying tile heights if this option is used.</p>
+<dl class="member">
+<dt id="JULES_SURF_HGT::zero_height">
+<tt class="descclassname">JULES_SURF_HGT::</tt><tt class="descname">zero_height</tt><a class="headerlink" href="#JULES_SURF_HGT::zero_height" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Switch used to simplify the initialisation of tile elevation.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_aggregate" title="JULES_SURFACE::l_aggregate"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_aggregate</span></tt></a> = TRUE, this switch is also set to TRUE.</p>
+</div>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Set all tile elevations to zero. This is a very common configuration.</dd>
+<dt>FALSE</dt>
+<dd>Set tile heights using specified data.</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-only-used-if-nml-mem-zero-height-false admonition">
+<p class="first admonition-title">Only used if <a class="reference internal" href="#JULES_SURF_HGT::zero_height" title="JULES_SURF_HGT::zero_height"><tt class="xref nml nml-mem docutils literal"><span class="pre">zero_height</span></tt></a> = FALSE</p>
+<dl class="member">
+<dt id="JULES_SURF_HGT::l_elev_absolute_height">
+<tt class="descclassname">JULES_SURF_HGT::</tt><tt class="descname">l_elev_absolute_height</tt><a class="headerlink" href="#JULES_SURF_HGT::l_elev_absolute_height" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical(ntiles)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE                                                                    </dt>
+<dd>Tile heights have absolute values above sea-level. If this option is used, then the elevation of the forcing data must also be provided (see <a class="reference internal" href="#namelist-JULES_Z_LAND"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_Z_LAND</span></tt></a> namelist below).</dd>
+<dt>FALSE</dt>
+<dd>Tile heights are relative to the gridbox mean.</dd>
+</dl>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_SURF_HGT::use_file">
+<tt class="descclassname">JULES_SURF_HGT::</tt><tt class="descname">use_file</tt><a class="headerlink" href="#JULES_SURF_HGT::use_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>This indicates if tile heights relative to the gridbox mean should be read from a specified file or namelist.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>The variable will be read from a file if the input grid consists of more than location.</dd>
+<dt>FALSE</dt>
+<dd>The variable will be read from a namelist if the input grid is for a single location.</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="admonition-only-used-if-nml-mem-use-file-true admonition">
+<p class="first admonition-title">Only used if <a class="reference internal" href="#JULES_SURF_HGT::use_file" title="JULES_SURF_HGT::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE</p>
+<dl class="member">
+<dt id="JULES_SURF_HGT::file">
+<tt class="descclassname">JULES_SURF_HGT::</tt><tt class="descname">file</tt><a class="headerlink" href="#JULES_SURF_HGT::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the file containing tile heights relative to the gridbox mean.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_SURF_HGT::surf_hgt_name">
+<tt class="descclassname">JULES_SURF_HGT::</tt><tt class="descname">surf_hgt_name</tt><a class="headerlink" href="#JULES_SURF_HGT::surf_hgt_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the variable containing tile heights relative to the gridbox mean. In the file, the variable must have a single levels dimension of size <tt class="docutils literal"><span class="pre">ntiles</span></tt> called <a class="reference internal" href="#JULES_INPUT_GRID::tile_dim_name" title="JULES_INPUT_GRID::tile_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">tile_dim_name</span></tt></a>.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-only-used-if-nml-mem-use-file-false admonition">
+<p class="first admonition-title">Only used if <a class="reference internal" href="#JULES_SURF_HGT::use_file" title="JULES_SURF_HGT::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE</p>
+<dl class="last member">
+<dt id="JULES_SURF_HGT::surf_hgt_io">
+<tt class="descclassname">JULES_SURF_HGT::</tt><tt class="descname">surf_hgt_io</tt><a class="headerlink" href="#JULES_SURF_HGT::surf_hgt_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ntiles)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Tile heights relative to the gridbox mean for a single location.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="jules-z-land-namelist-members">
+<h2>6.11.6. <tt class="docutils literal"><span class="pre">JULES_Z_LAND</span></tt> namelist members<a class="headerlink" href="#jules-z-land-namelist-members" title="Permalink to this headline">¶</a></h2>
+<p>This is an optional namelist and only used if any tile has <a class="reference internal" href="#JULES_SURF_HGT::l_elev_absolute_height" title="JULES_SURF_HGT::l_elev_absolute_height"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_elev_absolute_height</span></tt></a> = TRUE. The namelist sets values for the elevation bands and reads the elevation of the forcing data.</p>
+<span class="target" id="namelist-JULES_Z_LAND"></span><dl class="member">
+<dt id="JULES_Z_LAND::surf_hgt_band">
+<tt class="descclassname">JULES_Z_LAND::</tt><tt class="descname">surf_hgt_band</tt><a class="headerlink" href="#JULES_Z_LAND::surf_hgt_band" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ntiles)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Spatially invariant elevation bands for each tile. These may be relative to the gridbox mean or absolute elevations above sea-level depending on <a class="reference internal" href="#JULES_SURF_HGT::l_elev_absolute_height" title="JULES_SURF_HGT::l_elev_absolute_height"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_elev_absolute_height</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_Z_LAND::use_file">
+<tt class="descclassname">JULES_Z_LAND::</tt><tt class="descname">use_file</tt><a class="headerlink" href="#JULES_Z_LAND::use_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>This indicates if the elevation of the forcing data should be read from a file or from a namelist.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>The variable will be read from a file if the input grid consists of more than location.</dd>
+<dt>FALSE</dt>
+<dd>The variable will be read from a namelist if the input grid is for a single location.</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-used-if-nml-mem-jules-z-land-use-file-true admonition">
+<p class="first admonition-title">Used if <a class="reference internal" href="#JULES_Z_LAND::use_file" title="JULES_Z_LAND::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE </p>
+<dl class="member">
+<dt id="JULES_Z_LAND::file">
+<tt class="descclassname">JULES_Z_LAND::</tt><tt class="descname">file</tt><a class="headerlink" href="#JULES_Z_LAND::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the file containing the elevation of the forcing data.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_Z_LAND::z_land_name">
+<tt class="descclassname">JULES_Z_LAND::</tt><tt class="descname">z_land_name</tt><a class="headerlink" href="#JULES_Z_LAND::z_land_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the variable containing the elevation of the forcing data. In the file, the variable must have no level dimensions and no time dimensions.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-used-if-nml-mem-jules-z-land-use-file-false admonition">
+<p class="first admonition-title">Used if <a class="reference internal" href="#JULES_Z_LAND::use_file" title="JULES_Z_LAND::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE </p>
+<dl class="last member">
+<dt id="JULES_Z_LAND::z_land_io">
+<tt class="descclassname">JULES_Z_LAND::</tt><tt class="descname">z_land_io</tt><a class="headerlink" href="#JULES_Z_LAND::z_land_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Elevation of the forcing data for a single location.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="example">
+<h3>6.11.6.1. Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h3>
+<p>The following gives an example of how you would set up the namelists to use elevation bands above sea-level.</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_SURF_HGT</span>
+
+ <span class="nv">zero_height</span>            <span class="o">=</span> <span class="ss">.false.</span><span class="p">,</span>
+
+ <span class="c1"># No elevation correction to tiles 1 to 6, use elevation bands for tiles 7 to 9</span>
+ <span class="nv">l_elev_absolute_height</span> <span class="o">=</span> <span class="mi">6</span><span class="err">*</span><span class="ss">.false.</span><span class="p">,</span> <span class="mi">3</span><span class="err">*</span> <span class="ss">.true.</span><span class="p">,</span>
+
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_Z_LAND</span>
+
+ <span class="c1"># Set values for the elevation bands. </span>
+ <span class="nv">surf_hgt_band</span>          <span class="o">=</span> <span class="mi">6</span><span class="err">*</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1000.0</span><span class="p">,</span> <span class="mf">2000.0</span><span class="p">,</span> <span class="mf">3000.0</span><span class="p">,</span>
+
+ <span class="c1"># Read the WFDEI forcing data elevation from a file</span>
+ <span class="nv">use_file</span>               <span class="o">=</span> <span class="ss">.true.</span><span class="p">,</span>
+ <span class="nv">file</span>                   <span class="o">=</span> <span class="s1">&#39;WFDEI-elevation.nc&#39;</span><span class="p">,</span>
+ <span class="nv">z_land_name</span>            <span class="o">=</span> <span class="s1">&#39;elevation&#39;</span>
+
+<span class="nn">/</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="examples">
+<span id="grid-examples"></span><h2>6.11.7. Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ascii-data-at-a-single-location">
+<h3>6.11.7.1. ASCII data at a single location<a class="headerlink" href="#ascii-data-at-a-single-location" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_INPUT_GRID</span>
+  <span class="nv">nx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nv">ny</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_LATLON</span>
+  <span class="nv">latitude</span>  <span class="o">=</span> <span class="mf">52.168</span><span class="p">,</span>
+  <span class="nv">longitude</span> <span class="o">=</span> <span class="mf">5.744</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_LAND_FRAC</span> <span class="nn">/</span>
+
+<span class="nn">&amp;JULES_MODEL_GRID</span> <span class="nn">/</span>
+
+<span class="nn">&amp;JULES_SURF_HGT</span>
+  <span class="nv">zero_height</span> <span class="o">=</span> <span class="ss">T</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><a class="reference internal" href="#namelist-JULES_INPUT_GRID"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_INPUT_GRID</span></tt></a></dt>
+<dd>The default value of <a class="reference internal" href="#JULES_INPUT_GRID::grid_is_1d" title="JULES_INPUT_GRID::grid_is_1d"><tt class="xref nml nml-mem docutils literal"><span class="pre">grid_is_1d</span></tt></a>, FALSE, is used. This means the user has to specify the extents, <a class="reference internal" href="#JULES_INPUT_GRID::nx" title="JULES_INPUT_GRID::nx"><tt class="xref nml nml-mem docutils literal"><span class="pre">nx</span></tt></a> and <a class="reference internal" href="#JULES_INPUT_GRID::ny" title="JULES_INPUT_GRID::ny"><tt class="xref nml nml-mem docutils literal"><span class="pre">ny</span></tt></a>, of the input grid. Since all the input data is ASCII, no dimension names are required.</dd>
+<dt><a class="reference internal" href="#namelist-JULES_LATLON"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_LATLON</span></tt></a></dt>
+<dd>The latitude and longitude of the single location are specified directly in the namelist.</dd>
+<dt><a class="reference internal" href="#namelist-JULES_LAND_FRAC"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_LAND_FRAC</span></tt></a></dt>
+<dd>The land fraction at the single location is assumed to be 100%, so nothing is required.</dd>
+<dt><a class="reference internal" href="#namelist-JULES_MODEL_GRID"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_MODEL_GRID</span></tt></a></dt>
+<dd>Use default options to select the model grid (i.e. land points only from the full input grid). In this case, this leaves the single location as the model grid.</dd>
+</dl>
+</div>
+<div class="section" id="examples-of-gridded-runs">
+<h3>6.11.7.2. Examples of gridded runs<a class="headerlink" href="#examples-of-gridded-runs" title="Permalink to this headline">¶</a></h3>
+<p>All the examples in this section assume gridded NetCDF data.</p>
+<div class="section" id="specifying-a-1d-input-grid">
+<h4>6.11.7.2.1. Specifying a 1D input grid<a class="headerlink" href="#specifying-a-1d-input-grid" title="Permalink to this headline">¶</a></h4>
+<p>In this example, input files contain data on a vector of land points. The land points dimension is called &#8220;land&#8221;. The time dimension for time-varying variables is called &#8220;time&#8221;. The default dimension names are used for all additional dimensions (e.g. pft, tile).</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_INPUT_GRID</span>
+  <span class="nv">grid_is_1D</span> <span class="o">=</span> <span class="ss">T</span><span class="p">,</span>
+  
+  <span class="nv">npoints</span> <span class="o">=</span> <span class="mi">15238</span><span class="p">,</span>
+  <span class="nv">grid_dim_name</span> <span class="o">=</span> <span class="s2">&quot;land&quot;</span><span class="p">,</span>
+  
+  <span class="nv">time_dim_name</span> <span class="o">=</span> <span class="s2">&quot;time&quot;</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specifying-a-2d-input-grid">
+<h4>6.11.7.2.2. Specifying a 2D input grid<a class="headerlink" href="#specifying-a-2d-input-grid" title="Permalink to this headline">¶</a></h4>
+<p>In this example, input files contain data on a 2D latitude/longitude grid. The x dimension is called &#8220;lon&#8221; and the y dimension is called &#8220;lat&#8221;. The time dimension for time-varying variables is called &#8220;time&#8221;. Variables with an extra tiles dimension use the dimension name &#8220;pseudo&#8221; for that dimension. All other additional dimensions use their default names.</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_INPUT_GRID</span>
+  <span class="nv">grid_is_1D</span> <span class="o">=</span> <span class="ss">F</span><span class="p">,</span>
+
+  <span class="nv">nx</span> <span class="o">=</span> <span class="mi">96</span><span class="p">,</span>
+  <span class="nv">ny</span> <span class="o">=</span> <span class="mi">56</span><span class="p">,</span>
+
+  <span class="nv">x_dim_name</span> <span class="o">=</span> <span class="s2">&quot;lon&quot;</span><span class="p">,</span>
+  <span class="nv">y_dim_name</span> <span class="o">=</span> <span class="s2">&quot;lat&quot;</span><span class="p">,</span>
+
+  <span class="nv">tile_dim_name</span> <span class="o">=</span> <span class="s2">&quot;pseudo&quot;</span><span class="p">,</span>
+
+  <span class="nv">time_dim_name</span> <span class="o">=</span> <span class="s2">&quot;time&quot;</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specifying-a-subgrid-using-a-given-range-of-latitude-and-longitude">
+<h4>6.11.7.2.3. Specifying a subgrid using a given range of latitude and longitude<a class="headerlink" href="#specifying-a-subgrid-using-a-given-range-of-latitude-and-longitude" title="Permalink to this headline">¶</a></h4>
+<p>This can be used with either a 1D or 2D input grid.</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_LATLON</span>
+  <span class="nv">file</span> <span class="o">=</span> <span class="s1">&#39;lat_lon.nc&#39;</span><span class="p">,</span>
+  
+  <span class="nv">lat_name</span> <span class="o">=</span> <span class="s1">&#39;latitude&#39;</span><span class="p">,</span>
+  <span class="nv">lon_name</span> <span class="o">=</span> <span class="s1">&#39;longitude&#39;</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_LAND_FRAC</span>
+  <span class="nv">file</span> <span class="o">=</span> <span class="s1">&#39;land_mask.nc&#39;</span><span class="p">,</span>
+
+  <span class="nv">land_frac_name</span> <span class="o">=</span> <span class="s1">&#39;land_frac&#39;</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_MODEL_GRID</span>
+  <span class="nv">land_only</span> <span class="o">=</span> <span class="ss">F</span><span class="p">,</span>
+
+  <span class="nv">use_subgrid</span> <span class="o">=</span> <span class="ss">T</span><span class="p">,</span>
+
+  <span class="nv">latlon_region</span> <span class="o">=</span> <span class="ss">T</span><span class="p">,</span>
+
+  <span class="nv">lat_bounds</span> <span class="o">=</span> <span class="mf">55.0</span>  <span class="mf">57.0</span><span class="p">,</span>
+  <span class="nv">lon_bounds</span> <span class="o">=</span> <span class="mf">-5.0</span>  <span class="mf">-3.0</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>This setup reads latitude, longitude and land fraction for each gridbox in the full input grid (1D or 2D) from the named variables in the specified files.</p>
+<p>In <a class="reference internal" href="#namelist-JULES_MODEL_GRID"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_MODEL_GRID</span></tt></a>, <a class="reference internal" href="#JULES_MODEL_GRID::use_subgrid" title="JULES_MODEL_GRID::use_subgrid"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_subgrid</span></tt></a> indicates that a subset of the input grid will be selected as the model grid. <a class="reference internal" href="#JULES_MODEL_GRID::latlon_region" title="JULES_MODEL_GRID::latlon_region"><tt class="xref nml nml-mem docutils literal"><span class="pre">latlon_region</span></tt></a> then indicates that latitude and longitude bounds will be used to select the subgrid. <a class="reference internal" href="#JULES_MODEL_GRID::land_only" title="JULES_MODEL_GRID::land_only"><tt class="xref nml nml-mem docutils literal"><span class="pre">land_only</span></tt></a> = FALSE means that sea and sea-ice points will remain in the model grid if any are selected. The model grid will then be a vector containing the selected points (those that fall within the latitude/longitude bounds), even if those points could be used to form a rectangular region.</p>
+</div>
+<div class="section" id="specifying-a-subgrid-using-a-list-of-points">
+<h4>6.11.7.2.4. Specifying a subgrid using a list of points<a class="headerlink" href="#specifying-a-subgrid-using-a-list-of-points" title="Permalink to this headline">¶</a></h4>
+<p>This can be used with either a 1D or 2D input grid.</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_LATLON</span>
+  <span class="nv">file</span> <span class="o">=</span> <span class="s1">&#39;lat_lon.nc&#39;</span><span class="p">,</span>
+
+  <span class="nv">lat_name</span> <span class="o">=</span> <span class="s1">&#39;latitude&#39;</span><span class="p">,</span>
+  <span class="nv">lon_name</span> <span class="o">=</span> <span class="s1">&#39;longitude&#39;</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_LAND_FRAC</span>
+  <span class="nv">file</span> <span class="o">=</span> <span class="s1">&#39;land_mask.nc&#39;</span><span class="p">,</span>
+
+  <span class="nv">land_frac_name</span> <span class="o">=</span> <span class="s1">&#39;land_frac&#39;</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_MODEL_GRID</span>
+  <span class="nv">use_subgrid</span> <span class="o">=</span> <span class="ss">T</span><span class="p">,</span>
+
+  <span class="nv">latlon_region</span> <span class="o">=</span> <span class="ss">F</span><span class="p">,</span>
+
+  <span class="nv">npoints</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="nv">points_file</span> <span class="o">=</span> <span class="s1">&#39;points.txt&#39;</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>This setup reads latitude, longitude and land fraction for each gridbox in the full input grid (1D or 2D) from the named variables in the specified files.</p>
+<p>In <a class="reference internal" href="#namelist-JULES_MODEL_GRID"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_MODEL_GRID</span></tt></a>, <a class="reference internal" href="#JULES_MODEL_GRID::use_subgrid" title="JULES_MODEL_GRID::use_subgrid"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_subgrid</span></tt></a> indicates that a subset of the input grid will be selected as the model grid. <a class="reference internal" href="#JULES_MODEL_GRID::latlon_region" title="JULES_MODEL_GRID::latlon_region"><tt class="xref nml nml-mem docutils literal"><span class="pre">latlon_region</span></tt></a> then indicates that a list of latitudes and longitudes will be used to select the subgrid. <a class="reference internal" href="#JULES_MODEL_GRID::land_only" title="JULES_MODEL_GRID::land_only"><tt class="xref nml nml-mem docutils literal"><span class="pre">land_only</span></tt></a> is not given, meaning it takes its default value, TRUE. This means that any sea or sea-ice points specified in the list of points will be discarded. The model grid will then be a vector
+containing the selected points (those with the given latitude/longitude).</p>
+<p>Assuming that the input grid is a 1 degree grid and the latitude and longitude are given at the centre of the gridbox, <tt class="docutils literal"><span class="pre">points.txt</span></tt> should look like the following:</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="mf">55.5</span>  <span class="mf">-4.5</span>
+<span class="mf">55.5</span>  <span class="mf">-3.5</span>
+<span class="mf">56.5</span>  <span class="mf">-4.5</span>
+<span class="mf">56.5</span>  <span class="mf">-3.5</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-only-configuration-that-yields-a-2d-model-grid">
+<h4>6.11.7.2.5. The only configuration that yields a 2D model grid<a class="headerlink" href="#the-only-configuration-that-yields-a-2d-model-grid" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_INPUT_GRID</span>
+  <span class="nv">grid_is_1d</span> <span class="o">=</span> <span class="ss">F</span><span class="p">,</span>
+
+  <span class="nv">nx</span> <span class="o">=</span> <span class="mi">96</span><span class="p">,</span>
+  <span class="nv">ny</span> <span class="o">=</span> <span class="mi">56</span><span class="p">,</span>
+  
+  <span class="c1"># ...</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_LATLON</span>
+  <span class="c1"># &lt;specified from file&gt;</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_LAND_FRAC</span>
+  <span class="c1"># &lt;specified from file&gt;</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_MODEL_GRID</span>
+  <span class="nv">land_only</span> <span class="o">=</span> <span class="ss">F</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>In general, the only configuration that yields a 2D model grid is:</p>
+<ul class="simple">
+<li>2D input grid</li>
+<li>The model grid is the full input grid, including any non-land points</li>
+</ul>
+<p>If the input grid is a 2D region where every point is land (i.e. not the whole globe), then <a class="reference internal" href="#JULES_MODEL_GRID::land_only" title="JULES_MODEL_GRID::land_only"><tt class="xref nml nml-mem docutils literal"><span class="pre">land_only</span></tt></a> = TRUE would also yield a 2D model grid. If any options are set that mean some points from the input grid are not modeled, the model grid will be a vector of points. Computationally, this makes no difference.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface_types.nml.html">6.2. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface.nml.html">6.3. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_radiation.nml.html">6.4. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_hydrology.nml.html">6.5. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_vegetation.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_snow.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_rivers.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.10. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.11. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.12. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.13. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.14. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crop_params.nml.html">6.15. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.16. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.17. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fire.nml.html">6.18. <tt class="docutils literal"><span class="pre">fire.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.19. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.20. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.21. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.22. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.23. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="timesteps.nml.html"
+                        title="previous chapter">6.10. <tt class="docutils literal docutils literal"><span class="pre">timesteps.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ancillaries.nml.html"
+                        title="next chapter">6.12. <tt class="docutils literal docutils literal docutils literal"><span class="pre">ancillaries.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="ancillaries.nml.html" title="6.12. ancillaries.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="timesteps.nml.html" title="6.10. timesteps.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.6 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2016.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>
