@@ -1,0 +1,304 @@
+``jules_surface.nml``
+=====================
+
+
+This file sets the surface options. It contains one namelist called :nml:lst:`JULES_SURFACE`.
+
+
+
+``JULES_SURFACE`` namelist members
+----------------------------------
+
+.. nml:namelist:: JULES_SURFACE
+
+.. nml:member:: l_aggregate
+
+   :type: logical
+   :default: F
+
+   Switch controlling number of tiles for each gridbox.
+
+   This is used to set the number of surface energy balances that are solved for each gridbox (``ntiles``).
+
+   TRUE
+       Aggregate parameter values are used to solve a single energy balance per gridbox. This option sets ``ntiles = 1``.
+
+   FALSE
+       A separate energy balance is calculated for each surface type. This option sets ``ntiles = ntype``.
+
+
+.. nml:member:: i_aggregate_opt
+
+   :type: integer
+   :permitted: 0-1
+   :default: 0
+
+   Option for aggregating surface propeties to tiles:
+
+   0. Aggregate momentum roughness lengths and set the thermal roughness length as a given fraction of this (in practice the ratio of roughness lengths for the first surafce type).
+   1. Aggregate the thermal roughness lengths separately from the momentum roughness lengths using an analogous algorithm.
+
+   .. note::
+       This option is ignored unless :nml:mem:`l_aggregate` is true.
+
+
+.. nml:member:: l_epot_corr
+
+   :type: logical
+   :default: F
+
+   TRUE
+       Use correction to the calculation of potential evaporation.
+
+   FALSE
+       No effect.
+
+
+.. nml:member:: l_point_data
+
+   :type: logical
+   :default: F
+
+   Flag indicating if driving data are point or area-average values. This affects the treatment of precipitation input and how snow affects the albedo.
+
+   TRUE
+       Driving data are point data. Precipitation is not distributed in space (see FALSE below) and is all assumed to be large-scale in origin. The albedo formulation is suitable for a point.
+
+   FALSE
+       Driving data are area averages. The precipitation inputs are assumed to be exponentially distributed in space, as in UMDP25, and can include convective and large-scale components. The albedo formulation is suitable for a gridbox.
+       
+       
+.. nml:member:: l_land_ice_imp
+
+   :type: logical
+   :default: F
+   
+   Switch to control the use of implicit numerics to update land ice temperatures.
+   
+   TRUE
+       Use implicit numerics to update land ice temperatures.
+       
+   FALSE
+       Use explicit numerics to update land ice temperatures.
+
+
+.. nml:member:: l_anthrop_heat_src
+
+   :type: logical
+   :default: F
+
+   Switch for inclusion of anthropogenic contribution to the surface heat flux from urban tiles.
+
+   TRUE
+       Add anthropogenic effect.
+
+   FALSE
+       No effect.
+
+
+.. nml:member:: iscrntdiag
+
+   :type: integer
+   :permitted: 0 or 1
+   :default: 0
+
+   Switch controlling method for diagnosing screen temperature.
+
+   0. Use surface similarity theory.
+   1. Use surface similarity theory but allow decoupling in very stable conditions based on the quasi-equilibrium radiative solution.
+
+.. nml:member:: l_elev_lw_down
+
+      :type: logical
+      :default: false
+
+      If tiles are set to be at an elevation offset from the gridbox mean altitude (see :nml:lst:`JULES_SURF_HGT`) this switch controls
+      whether downwelling longwave radiation is adjusted along with surface air temperature and relative humidity.
+
+      If true, the downwelling longwave for each tile not at the gridbox mean height is adjusted by an amount 
+      proportional to the fourth power of the adjustment that has been made to the surface air temperature. The adjustments are then
+      scaled such that the sum over all tiles conserves the gridbox mean energy in the original forcing.
+
+   
+.. nml:member:: l_elev_land_ice
+
+      :type: logical
+      :default: false
+
+      Allows multiple ice tiles to exist in an ice gridbox, usually with each representing a different elevation (:nml:lst:`JULES_SURF_HGT`)
+      band on the ice so that a sub-gridscale surface mass balance term (a strong function of altitude) can be derived for forcing icesheet/glacier models. 
+      When enabled, ice tiles in a gridbox do not use the usual (gridbox mean) JULES soil/ice subsurface model, but each tile has an independent
+      single layer bedrock-type solid ice boundary condition under the snowpack.
+
+      In addition, when selected, dense snowpacks on ice gridboxes are parameterised to behave more like firn in two ways. 
+      1) The meltwater-holding capacity of snow layers reduces as a linear function of their density, becoming zero 
+      above the pore-closure density of 850 kg/m^2 so as to restrict retention of melt within the snowpack. 
+      2) Where the top few centimetres of the pack has a density appropriate to firn/bare ice
+      and the grain-size physics otherwise used for snow albedo become less appropriate, 
+      surface albedo becomes a function of density, tending towards that of bare ice as density increases 
+      (see :nml:mem:`JULES_SNOW::rho_firn_albedo`, :nml:mem:`JULES_SNOW::amax`, :nml:mem:`JULES_SNOW::aicemax`).
+      
+      If this scheme is enabled, a depth for the bedrock layer must be provided (:nml:mem:`JULES_SOIL::dzsoil_elev`) and the new tile numbers
+      must be specified (:nml:lst:`JULES_SURFACE_TYPES`) as type elev_ice. The total number of non-vegetated tiles, and their surface properties
+      (:nml:lst:`JULES_NVEGPARM`, usually set to be the same as the normal ice tile) must be set accordingly, as with any tile.
+
+
+.. nml:member:: l_layeredC
+
+   :type: logical
+   :default: F
+
+   Switch for using the layered soil carbon model, currently only relevant if TRIFFID is switched on (:nml:mem:`JULES_VEGETATION::l_triffid` = FALSE). Using the approach of Burke et al.(2016). Two parameters can be defined for this model - :nml:mem:`JULES_SURFACE::tau_resp`, :nml:mem:`JULES_SURFACE::tau_lit`
+
+   Layered soil nitrogen is also available if the nitrogen cycle is switched on (:nml:mem:`JULES_VEGETATION::l_nitrogen` = TRUE), but this is a highly experimental version which needs further evaluation and so should be used with extreme caution. One additional parameter is required for layered soil nitrogen  - :nml:mem:`JULES_SURFACE::diff_n_pft`
+
+   TRUE
+      The number of layers in the soil carbon model is set to the total number of soil layers.
+
+   FALSE
+        There are no specific layers in the soil carbon model.
+
+   .. seealso::
+      References:
+   
+      * Burke et al (2016). A vertical representation of soil carbon for the UKESM Earth System Model with a focus on permafrost regions. Geoscientific Model Development Discussion
+
+
+.. nml:group:: Surface parameters
+
+   .. nml:member:: hleaf
+
+      :type: real
+      :default: 5.7e4
+
+      Specific heat capacity of leaves (J K\ :sup:`-1` per kg carbon).
+      
+      See `Hadley Centre Technical Note 30 <http://www.metoffice.gov.uk/archive/hadley-centre-technical-note-30>`_ p6.
+
+
+   .. nml:member:: hwood
+
+      :type: real
+      :default: 1.1e4
+
+      Specific heat capacity of wood (J K\ :sup:`-1` per kg carbon).
+      
+      See `Hadley Centre Technical Note 30 <http://www.metoffice.gov.uk/archive/hadley-centre-technical-note-30>`_ p6.
+
+
+   .. nml:member:: beta1
+
+      :type: real
+      :default: 0.83
+
+      Coupling coefficient for co-limitation in photosynthesis model.
+
+      See Cox et al. (1999), Eq.61.
+
+
+   .. nml:member:: beta2
+
+      :type: real
+      :default: 0.93
+
+      Coupling coefficient for co-limitation in photosynthesis model.
+  
+      See Cox et al. (1999), Eq.61.
+
+
+   .. nml:member:: fwe_c3
+
+      :type: real
+      :default: 0.5
+
+      Constant in expression for limitation of photosynthesis by transport of products, for C3 plants.
+
+      See Cox et al. (1999) Eq.60.
+
+
+   .. nml:member:: fwe_c4
+
+      :type: real
+      :default: 20000.0
+
+      Constant in expression for limitation of photosynthesis by transport of products, for C4 plants.
+ 
+      See Cox et al. (1999) Eq.60.
+
+
+   .. nml:member:: q10_soil
+
+      :type: real
+      :default: 2.0
+
+      Q10 factor for soil respiration.
+
+      Only used if :nml:mem:`JULES_VEGETATION::l_q10` = TRUE.
+      
+      See `Hadley Centre Technical Note 24 <http://www.metoffice.gov.uk/archive/hadley-centre-technical-note-24>`_ Eq.17.
+
+
+   .. nml:member:: kaps
+
+      :type: real
+      :default: 0.5e-8
+
+      Specific soil respiration rate at 25 degC and optimum soil moisture (s\ :sup:`-1`).
+
+      Only used if not using TRIFFID (:nml:mem:`JULES_VEGETATION::l_triffid` = FALSE).
+      
+      See `Hadley Centre Technical Note 24 <http://www.metoffice.gov.uk/archive/hadley-centre-technical-note-24>`_ Eq.16.
+
+
+   .. nml:member:: kaps_roth
+
+      :type: real(4)
+      :default: 3.22e-7, 9.65e-9, 2.12e-8, 6.43e-10
+
+      Specific soil respiration rate for the RothC submodel for each soil carbon pool.
+
+      Only used if using the TRIFFID vegetation model (:nml:mem:`JULES_VEGETATION::l_triffid` = TRUE), in which case soil carbon is modelled using four pools (biomass, humus, decomposable plant material, resistant plant material).
+   
+   .. nml:member:: sorp
+
+      :type: real
+      :default: 10.0
+
+      Parameter controlling the leaching of inorganic N through the soil profile. A factor of 1 means that in a timestep all the inorganic N is available for leaching. The default value of 10 means that 10% of inorganic N is available for leaching.
+      
+   .. nml:member:: n_inorg_turnover
+
+      :type: real
+      :default: 1.0
+
+      Parameter controlling the lifetime of the inorganic N pool. A value of 1 implies the whole pool will turnover in 360 days.
+
+   .. nml:member:: tau_resp
+
+      :type: real
+      :default: 2.0
+
+      Parameter controlling decay of respiration with depth (m-1). Only used with layered soil carbon (:nml:mem:`JULES_SURFACE::l_layeredC` = TRUE).
+
+   .. nml:member:: tau_lit
+
+      :type: real
+      :default: 5.0
+
+      Parameter controlling the decay of litter with depth (m-1). Only used with layered soil carbon (:nml:mem:`JULES_SURFACE::l_layeredC` = TRUE).
+
+   .. nml:member:: diff_n_pft
+
+      :type: real
+      :default: 100.0
+
+      Parameter controlling the rate of re-filling of the available inorganic nitrogen pool (1/360 days). Only used with layered soil carbon and nitrogen scheme (:nml:mem:`JULES_SURFACE::l_layeredC` = TRUE and :nml:mem:`JULES_VEGETATION::l_nitrogen` = TRUE).
+
+   .. nml:member:: bio_hum_cn
+
+      :type: real
+      :default: 10.0
+
+      Parameter controlling ratio of C to N for BIO and HUM pools.
+
+

@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>9.1. I/O framework &mdash; Joint UK Land Environment Simulator (JULES) v4.7 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.7 User Guide" href="../index.html" />
+    <link rel="up" title="9. Aspects of the code" href="contents.html" />
+    <link rel="next" title="9.2. Known limitations of the code" href="known-limitations.html" />
+    <link rel="prev" title="9. Aspects of the code" href="contents.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="known-limitations.html" title="9.2. Known limitations of the code"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="contents.html" title="9. Aspects of the code"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.7 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">9. Aspects of the code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="i-o-framework">
+<h1>9.1. I/O framework<a class="headerlink" href="#i-o-framework" title="Permalink to this headline">¶</a></h1>
+<p>JULES version 3.1 saw a complete rewrite of the I/O code to use a more modular and flexible structure. This section attempts to give a brief description of the low-level I/O framework, and explains how to make some commonly required changes.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This section requires a good knowledge of Fortran.</p>
+</div>
+<div class="section" id="overview">
+<h2>9.1.1. Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>The JULES I/O code is comprised of several &#8216;layers&#8217; with clearly defined responsibilities that communicate with each other, as shown in the figure <a class="reference internal" href="#figure-modular-structure"><em>Modular structure of the JULES I/O code</em></a> (the relevant Fortran modules for each layer are also given). The blocks in orange are the JULES specific pieces of code - in theory, the rest of the code could be used with other models if different implementations of these modules were provided.</p>
+<div class="figure" id="figure-modular-structure">
+<img alt="Modular structure of the JULES I/O code" src="../_images/io_modular_structure.png" />
+<p class="caption">Modular structure of the JULES I/O code</p>
+</div>
+<p>The core component in the I/O framework is the common file handling API. This layer provides a common interface for different file formats that is then used by the rest of the code. The drivers for ASCII and NetCDF files implement this interface. The interface is based around the concepts of dimensions and variables, much like NetCDF (except that nothing is inferred from metadata - all information about variables and dimensions must be prescribed), but adds the concept of a &#8220;record&#8221; to that:</p>
+<dl class="docutils">
+<dt>Dimension</dt>
+<dd><p class="first">A file has one or more dimensions. Each regular dimension has a name and a size.</p>
+<p class="last">One dimension is special, and is referred to as the record dimension. It has a name but has no defined size. A typical use of the record dimension is to represent time.</p>
+</dd>
+<dt>Variable</dt>
+<dd>A file has one or more variables. The size of each variable is defined using the dimensions previously defined in the file. Each variable can opt to use the record dimension or not - if a variable uses the record dimension it must be the last dimension that the variable has.</dd>
+<dt>Record</dt>
+<dd><p class="first">A record is the collection of all variables at a certain value of the record dimension. The figure <a class="reference internal" href="#figure-records-in-file"><em>Records in a file</em></a> gives an example of this:</p>
+<div class="figure" id="figure-records-in-file">
+<img alt="Records in a file" src="../_images/records_in_file.png" />
+<p class="caption">Records in a file</p>
+</div>
+<p>In the figure, each variable has dimensions x, y and n, where n is the record dimension. Each green box represents the (2D plane of) values of a variable for a certain value of n. A record is then the collection of all variables at a certain value of n.</p>
+<p class="last">A good analogy is the lines in an ASCII file, where each column represents a variable and each line is a record (in fact, this is a generalisation to multiple dimensions of that exact concept).</p>
+</dd>
+</dl>
+<p>Files keep track of the record they are currently pointing at (it is the responsibility of the file-type drivers to do this in the way that best suits the file format they implement). When a file receives a read or write request for a particular variable, the values are read from or written to the current record.</p>
+<p>The record abstraction also allows two useful operations - seek and advance. When a file receives an instruction to seek to a particular record, it sets its internal pointer so that read/write requests access the given record (a use of this within JULES is looping the input files round spin-up cycles). An advance instruction just moves the internal pointer on to the next record.</p>
+<p>The routines in <tt class="docutils literal"><span class="pre">file_mod</span></tt> define the interface that each file-type driver must implement, and are responsible for deciding which driver to defer to. Support for a file format is provided by implementing this interface and declaring the implementation in <tt class="docutils literal"><span class="pre">file_mod</span></tt>. This is discussed in further detail in <a class="reference internal" href="#implementing-a-new-file-format"><em>Implementing a new file format</em></a>.</p>
+<p>The gridded file API then imposes the concept of reading and writing cubes of gridded data (i.e. x and y dimensions for the grid, plus zero or more &#8216;levels&#8217; dimensions) on top of the common file handling API. The underlying files may have a 1D or 2D grid (see <a class="reference internal" href="../input/overview.html"><em>Input files for JULES</em></a>), and this layer handles the grid dimensions transparently. It is this layer that handles the extraction of a subgrid from a larger grid (see <tt class="docutils literal"><span class="pre">file_gridded_read_var</span></tt> and <tt class="docutils literal"><span class="pre">file_gridded_write_var</span></tt>).</p>
+<p>The time series file API builds on the gridded file API by explicitly presenting the record dimension as a time dimension. It provides an interface that allows users to treat multiple files (e.g. monthly files, yearly files) as if they were a single file (i.e. seek and advance will automatically open and close files if required).</p>
+<p>The input and output layers interact with the model via an interface provided by <tt class="docutils literal"><span class="pre">model_interface_mod</span></tt>. <tt class="docutils literal"><span class="pre">model_interface_mod</span></tt> allows the input and output layers to read values from and write values to the internal model variables. This is discussed in more detail in <a class="reference internal" href="#implementing-new-variables-for-input-and-output"><em>Implementing new variables for input and output</em></a>. The input and output layers use the time series file API to read from and write to file.</p>
+<p>This should provide a reasonable introduction to the JULES I/O framework, but looking at the code is the best way to learn about it.</p>
+</div>
+<div class="section" id="implementing-new-variables-for-input-and-output">
+<span id="id1"></span><h2>9.1.2. Implementing new variables for input and output<a class="headerlink" href="#implementing-new-variables-for-input-and-output" title="Permalink to this headline">¶</a></h2>
+<p>The only I/O code that needs to be modified to add new variables for input and output is in <tt class="docutils literal"><span class="pre">model_interface_mod</span></tt> (the routines in <tt class="docutils literal"><span class="pre">src/io/model_interface</span></tt>). All interaction between the I/O code and the model happens in this module (apart from reading and writing dump files).</p>
+<p>Before adding any code to <tt class="docutils literal"><span class="pre">model_interface_mod</span></tt>, the variable the user wishes to make available for input and/or output must be accessible to <tt class="docutils literal"><span class="pre">model_interface_mod</span></tt>. This is usually accomplished by placing the variable in a module and importing the module into <tt class="docutils literal"><span class="pre">model_interface_mod</span></tt> where required, e.g.:</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">! Declare the variable in a module</span>
+<span class="k">MODULE </span><span class="nv">my_module</span>
+
+  <span class="kt">REAL</span><span class="p">,</span> <span class="k">ALLOCATABLE</span> <span class="kd">::</span> <span class="nv">my_var</span><span class="p">(:)</span>
+  
+  <span class="c">! ...</span>
+<span class="k">END MODULE </span><span class="nv">my_module</span>
+
+
+<span class="c">! ... Later, in model_interface_mod</span>
+<span class="k">USE </span><span class="nv">my_module</span><span class="p">,</span> <span class="nv">ONLY</span> <span class="p">:</span> <span class="nv">my_var</span>
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">model_interface_mod</span></tt> contains several routines:</p>
+<ul class="simple">
+<li>Two routines that populate and extract data from the relevant model variables. These are <tt class="docutils literal"><span class="pre">populate_var</span></tt> and <tt class="docutils literal"><span class="pre">extract_var</span></tt> respectively.</li>
+<li>Routines that provide various pieces of information (e.g. string identifiers, number and size of &#8216;levels&#8217; dimensions) about the available variables to the input and output layers. Internally, a metadata array that contains information about the available variables is used to implement these &#8216;information providing&#8217; routines.</li>
+</ul>
+<p>In most cases, the following edits will be sufficient to add a variable for input and/or output:</p>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">model_interface_mod.F90</span></tt></dt>
+<dd><div class="first admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Required for both input and output variables.</p>
+</div>
+<p class="last">Increment the constant <tt class="docutils literal"><span class="pre">N_VARS</span></tt>. This <tt class="docutils literal"><span class="pre">PARAMETER</span></tt> indicates how many elements are in the metadata array. If you forget to do this, the module will fail to compile.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">populate_var.inc</span></tt></dt>
+<dd><div class="first admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Required for input variables only.</p>
+</div>
+<p class="last"><tt class="docutils literal"><span class="pre">populate_var</span></tt> takes a variable identifier and a cube of data on the full model grid, and populates the associated model variable using that data. This is done using a <tt class="docutils literal"><span class="pre">SELECT</span></tt> statement, to which a case must be added for the new variable.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">extract_var.inc</span></tt></dt>
+<dd><div class="first admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Required for output variables only.</p>
+</div>
+<p class="last"><tt class="docutils literal"><span class="pre">extract_var</span></tt> takes a variable identifier, extracts the values from the associated model variable, and returns those values as a cube of data on the full model grid. This is done using a <tt class="docutils literal"><span class="pre">SELECT</span></tt> statement, to which a case must be added for the new variable.</p>
+</dd>
+<dt><tt class="docutils literal"><span class="pre">variable_metadata.inc</span></tt></dt>
+<dd><div class="first admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Required for both input and output variables.</p>
+</div>
+<p>This file contains the <tt class="docutils literal"><span class="pre">DATA</span></tt> definition for the variable metadata array. The metadata array contains objects of the derived type <tt class="docutils literal"><span class="pre">var_metadata</span></tt>, which is defined in <tt class="docutils literal"><span class="pre">model_interface_mod.F90</span></tt>. A typical entry in this array will look something like:</p>
+<div class="highlight-fortran"><div class="highlight"><pre><span class="c">!-----------------------------------------------------------------------------</span>
+<span class="c">! Metadata for latitude</span>
+<span class="c">!-----------------------------------------------------------------------------</span>
+  <span class="nv">var_metadata</span><span class="p">(</span>                                                               <span class="p">&amp;</span>
+<span class="c">! String identifier</span>
+    <span class="s1">&#39;latitude&#39;</span><span class="p">,</span>                                                               <span class="p">&amp;</span>
+<span class="c">! Variable type</span>
+    <span class="nv">VAR_TYPE_SURFACE</span><span class="p">,</span>                                                         <span class="p">&amp;</span>
+<span class="c">! Long name</span>
+    <span class="s2">&quot;Gridbox latitude&quot;</span><span class="p">,</span>                                                       <span class="p">&amp;</span>
+<span class="c">! Units</span>
+    <span class="s2">&quot;degrees&quot;</span>                                                                 <span class="p">&amp;</span>
+  <span class="p">)</span>                                                                           <span class="p">&amp;</span>
+</pre></div>
+</div>
+<p>This allows us to define all the static information about a variable in one place:</p>
+<dl class="last docutils">
+<dt>String identifier</dt>
+<dd>This is the name used to identify the variable in namelists (as seen elsewhere in the User Guide)</dd>
+<dt>Variable type</dt>
+<dd><p class="first">This indicates the number and size of the &#8216;levels&#8217; dimensions for the variable. Currently, the following types are available:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="82%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Type</th>
+<th class="head">Number and size of &#8216;levels&#8217; dimension(s)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">VAR_TYPE_SURFACE</span></tt></td>
+<td>No levels dimension</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">VAR_TYPE_PFT</span></tt></td>
+<td>Single levels dimension of size <a class="reference internal" href="../namelists/jules_surface_types.nml.html#JULES_SURFACE_TYPES::npft" title="JULES_SURFACE_TYPES::npft"><tt class="xref nml nml-mem docutils literal"><span class="pre">npft</span></tt></a></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">VAR_TYPE_NVG</span></tt></td>
+<td>Single levels dimension of size <a class="reference internal" href="../namelists/jules_surface_types.nml.html#JULES_SURFACE_TYPES::nnvg" title="JULES_SURFACE_TYPES::nnvg"><tt class="xref nml nml-mem docutils literal"><span class="pre">nnvg</span></tt></a></td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">VAR_TYPE_TYPE</span></tt></td>
+<td>Single levels dimension of size <tt class="docutils literal"><span class="pre">ntype</span></tt> (<a class="reference internal" href="../namelists/jules_surface_types.nml.html#JULES_SURFACE_TYPES::npft" title="JULES_SURFACE_TYPES::npft"><tt class="xref nml nml-mem docutils literal"><span class="pre">npft</span></tt></a> +
+<a class="reference internal" href="../namelists/jules_surface_types.nml.html#JULES_SURFACE_TYPES::nnvg" title="JULES_SURFACE_TYPES::nnvg"><tt class="xref nml nml-mem docutils literal"><span class="pre">nnvg</span></tt></a>)</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">VAR_TYPE_TILE</span></tt></td>
+<td>Single levels dimension of size <tt class="docutils literal"><span class="pre">ntiles</span></tt> (1 if <a class="reference internal" href="../namelists/jules_surface.nml.html#JULES_SURFACE::l_aggregate" title="JULES_SURFACE::l_aggregate"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_aggregate</span></tt></a> = TRUE,
+<tt class="docutils literal"><span class="pre">ntype</span></tt> otherwise)</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">VAR_TYPE_SOIL</span></tt></td>
+<td>Single levels dimension of size <a class="reference internal" href="../namelists/jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><tt class="xref nml nml-mem docutils literal"><span class="pre">sm_levels</span></tt></a></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">VAR_TYPE_SCPOOL</span></tt></td>
+<td>Single levels dimension of size <tt class="docutils literal"><span class="pre">dim_cs1</span></tt> (number of soil carbon pools, i.e. 4 if
+<a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = TRUE, 1 otherwise)</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">VAR_TYPE_SNOW</span></tt></td>
+<td>Two levels dimensions: the first of size <tt class="docutils literal"><span class="pre">ntiles</span></tt> and the second of size
+<a class="reference internal" href="../namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a></td>
+</tr>
+</tbody>
+</table>
+<p>Adding a new type is a relatively simple procedure:</p>
+<ol class="last arabic simple">
+<li>A new <tt class="docutils literal"><span class="pre">PARAMETER</span></tt> must be added for the type in <tt class="docutils literal"><span class="pre">model_interface_mod.F90</span></tt></li>
+<li>A new <tt class="docutils literal"><span class="pre">CASE</span></tt> must be added to the <tt class="docutils literal"><span class="pre">SELECT</span></tt> statement in <tt class="docutils literal"><span class="pre">get_var_levs_dims.inc</span></tt> that correctly returns the number, names and sizes of the levels dimensions.</li>
+</ol>
+</dd>
+<dt>Long name</dt>
+<dd>This is the name used in the <tt class="docutils literal"><span class="pre">long_name</span></tt> attribute for the variable in output files.</dd>
+<dt>Units</dt>
+<dd>This is the units given in the <tt class="docutils literal"><span class="pre">units</span></tt> attribute for the variable in output files.</dd>
+</dl>
+</dd>
+</dl>
+<p><tt class="docutils literal"><span class="pre">map_from_land</span></tt> and <tt class="docutils literal"><span class="pre">map_to_land</span></tt> are provided as utilities for use with variables that are defined on land points only. <tt class="docutils literal"><span class="pre">tiles_to_gbm</span></tt> is used to provide gridbox mean diagnostics for model variables that have one value per surface tile.</p>
+<p>As always, the best way to go about implementing new variables for input and output is to follow the examples that are already there.</p>
+</div>
+<div class="section" id="implementing-a-new-file-format">
+<span id="id2"></span><h2>9.1.3. Implementing a new file format<a class="headerlink" href="#implementing-a-new-file-format" title="Permalink to this headline">¶</a></h2>
+<p>To understand how to implement a new file format, it first helps to understand how the common file handling layer works under the hood.</p>
+<p>Each of the routines in <tt class="docutils literal"><span class="pre">file_mod</span></tt> (see files in <tt class="docutils literal"><span class="pre">src/io/file_handling/core</span></tt>) takes a <tt class="docutils literal"><span class="pre">file_handle</span></tt> as its first argument. The <tt class="docutils literal"><span class="pre">file_handle</span></tt> is a Fortran derived type that contains a flag indicating the format of the file it represents, and each of the routines in <tt class="docutils literal"><span class="pre">file_mod</span></tt> contains a <tt class="docutils literal"><span class="pre">SELECT</span></tt> statement that defers to the correct implementation of the routine based on that flag.</p>
+<p><tt class="docutils literal"><span class="pre">file_handles</span></tt> are created in <tt class="docutils literal"><span class="pre">file_open</span></tt>. Each file format implementation defines a list of recognised file extensions, and the appropriate file opening routine is deferred to by comparing the extension of the given file name to the recognised extensions for each file format.</p>
+<p>To implement a new file format, an implementation of each of the routines in <tt class="docutils literal"><span class="pre">file_mod</span></tt> must first be provided (the implementations for ASCII and NetCDF formats should be used as a reference). A new <tt class="docutils literal"><span class="pre">CASE</span></tt> deferring to the new implementation should then be added to the <tt class="docutils literal"><span class="pre">SELECT</span></tt> statement in each of the routines in <tt class="docutils literal"><span class="pre">file_mod</span></tt>. The recognised file extensions for the new format should also be added to the checks in <tt class="docutils literal"><span class="pre">file_open</span></tt> to allow the new the file opening routine to be called.</p>
+<p>Implementations of these routines for ASCII and NetCDF file formats are given in <tt class="docutils literal"><span class="pre">driver_ascii</span></tt> (see <tt class="docutils literal"><span class="pre">src/io/file_handling/core/drivers/ascii</span></tt>) and <tt class="docutils literal"><span class="pre">driver_ncdf</span></tt> (see <tt class="docutils literal"><span class="pre">src/io/file_handling/core/drivers/ncdf</span></tt>) respectively. These should be used as examples of how to implement a file format.</p>
+<p>These two file formats suffer from opposite problems when implementing the concepts of dimensions, variables and records. For NetCDF, the concepts of dimensions and variables already exist, but the idea of a record has to be imposed. For ASCII, the concept of a record is a natural fit (think lines in a file), but the concepts of dimensions and variables have to be imposed. Between them, these implementations should provide sufficient examples of how to implement a new file format.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">9. Aspects of the code</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">9.1. I/O framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="known-limitations.html">9.2. Known limitations of the code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="contents.html"
+                        title="previous chapter">9. Aspects of the code</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="known-limitations.html"
+                        title="next chapter">9.2. Known limitations of the code</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="known-limitations.html" title="9.2. Known limitations of the code"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="contents.html" title="9. Aspects of the code"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.7 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >9. Aspects of the code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2016.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>
