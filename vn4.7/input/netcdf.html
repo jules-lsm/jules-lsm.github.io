@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.3. NetCDF files &mdash; Joint UK Land Environment Simulator (JULES) v4.7 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.7 User Guide" href="../index.html" />
+    <link rel="up" title="4. Input files for JULES" href="overview.html" />
+    <link rel="next" title="4.4. File name templating" href="file-name-templating.html" />
+    <link rel="prev" title="4.2. ASCII files" href="ascii.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="file-name-templating.html" title="4.4. File name templating"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ascii.html" title="4.2. ASCII files"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.7 User Guide</a> &raquo;</li>
+          <li><a href="overview.html" accesskey="U">4. Input files for JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="netcdf-files">
+<h1>4.3. NetCDF files<a class="headerlink" href="#netcdf-files" title="Permalink to this headline">¶</a></h1>
+<p>For gridded data, NetCDF is the only supported format. Although ASCII files can be used for data at a single location, NetCDF is also the preferred format for such data (due to the reasons discussed in <a class="reference internal" href="overview.html"><em>Input files for JULES</em></a>). Files are not expected to use specific dimension or variable names - these are specified via the <a class="reference internal" href="../namelists/contents.html"><em>JULES namelists</em></a>. The only expectations placed on NetCDF input are:</p>
+<ul class="simple">
+<li>All input files use the same grid.</li>
+<li>All input files use the same dimension names (for grid dimensions, any additional dimensions and the time dimension).</li>
+<li>The dimensions for each variable appear in the correct order - <tt class="docutils literal"><span class="pre">(points,</span> <span class="pre">z1,</span> <span class="pre">z2,</span> <span class="pre">...,</span> <span class="pre">t)</span></tt> for a 1D grid and <tt class="docutils literal"><span class="pre">(x,</span> <span class="pre">y,</span> <span class="pre">z1,</span> <span class="pre">z2,</span> <span class="pre">...,</span> <span class="pre">t)</span></tt> for a 2D grid, where the <tt class="docutils literal"><span class="pre">z1,</span> <span class="pre">z2,</span> <span class="pre">...</span></tt> (levels) and <tt class="docutils literal"><span class="pre">t</span></tt> (time) dimensions are only present when the variable and context in which the variable is being used require them.</li>
+<li>If using NetCDF for data at a single location, the grid dimensions are still expected to exist with size 1.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="overview.html">4. Input files for JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="principles.html">4.1. General principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ascii.html">4.2. ASCII files</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">4.3. NetCDF files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file-name-templating.html">4.4. File name templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="temporal-interpolation.html">4.5. Temporal interpolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ascii.html"
+                        title="previous chapter">4.2. ASCII files</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="file-name-templating.html"
+                        title="next chapter">4.4. File name templating</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="file-name-templating.html" title="4.4. File name templating"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ascii.html" title="4.2. ASCII files"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.7 User Guide</a> &raquo;</li>
+          <li><a href="overview.html" >4. Input files for JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2016.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

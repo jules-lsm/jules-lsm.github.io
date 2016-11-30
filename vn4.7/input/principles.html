@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.1. General principles &mdash; Joint UK Land Environment Simulator (JULES) v4.7 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.7 User Guide" href="../index.html" />
+    <link rel="up" title="4. Input files for JULES" href="overview.html" />
+    <link rel="next" title="4.2. ASCII files" href="ascii.html" />
+    <link rel="prev" title="4. Input files for JULES" href="overview.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="ascii.html" title="4.2. ASCII files"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="4. Input files for JULES"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.7 User Guide</a> &raquo;</li>
+          <li><a href="overview.html" accesskey="U">4. Input files for JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="general-principles">
+<h1>4.1. General principles<a class="headerlink" href="#general-principles" title="Permalink to this headline">¶</a></h1>
+<p>JULES supports the input and output of gridded data on both 1D (e.g. vector of land points) and 2D (e.g. latitude/longitude) grids, with zero or more additional &#8216;levels&#8217; dimensions (e.g. for soil layers). A 2D grid is the usual way to think about gridded data, i.e. with x and y dimensions; however a 1D grid can be more flexible and space-efficient. An example of a 1D grid is a land-points-only grid (as used in the GSWP2 and WATCH datasets). In this case, these data are supplied as a vector of land points, which avoids storing information about sea and sea-ice points that are not being processed.</p>
+<p>In JULES, the input grid is comprised of the following information:</p>
+<ol class="arabic simple">
+<li>Whether the grid is 1D or 2D (ASCII or NetCDF).</li>
+<li>The size of each grid dimension (ASCII or NetCDF).</li>
+<li>The name of each dimension in the file(s) (NetCDF only).</li>
+</ol>
+<p>The input grid is specified by the user in the namelist <a class="reference internal" href="../namelists/model_grid.nml.html#namelist-JULES_INPUT_GRID"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_INPUT_GRID</span></tt></a>. The model grid is then constructed by selecting the desired points from this input grid, the default being that only the land points in the input grid will be processed. All output is on the model grid.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">All input data must use the same grid, including any ancillaries and initial conditions.</p>
+</div>
+<p>JULES infers the format of input files from the file extension. The recognised file extensions are:</p>
+<dl class="docutils">
+<dt>ASCII files</dt>
+<dd><tt class="docutils literal"><span class="pre">.asc</span></tt>, <tt class="docutils literal"><span class="pre">.txt</span></tt> and <tt class="docutils literal"><span class="pre">.dat</span></tt></dd>
+<dt>NetCDF files</dt>
+<dd><tt class="docutils literal"><span class="pre">.nc</span></tt> and <tt class="docutils literal"><span class="pre">.cdf</span></tt></dd>
+</dl>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="overview.html">4. Input files for JULES</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">4.1. General principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ascii.html">4.2. ASCII files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html">4.3. NetCDF files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file-name-templating.html">4.4. File name templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="temporal-interpolation.html">4.5. Temporal interpolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="overview.html"
+                        title="previous chapter">4. Input files for JULES</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ascii.html"
+                        title="next chapter">4.2. ASCII files</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="ascii.html" title="4.2. ASCII files"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="4. Input files for JULES"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.7 User Guide</a> &raquo;</li>
+          <li><a href="overview.html" >4. Input files for JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2016.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

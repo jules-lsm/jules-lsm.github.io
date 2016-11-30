@@ -1,0 +1,187 @@
+``jules_rivers.nml``
+====================
+
+This file sets the river routing options. It contains one namelist called :nml:lst:`JULES_RIVERS`.
+
+.. warning::
+   The river routing code in JULES is still in development, and is available in this release to support beta testing activities.
+    
+   Users should ensure that results are as expected, and provide feedback where deficiencies are identified.
+
+
+.. warning::
+   River routing is not currently available in standalone JULES in parallel mode if :nml:mem:`JULES_RIVERS::rivers_type` is ``um_rfm`` or ``um_trip``. If these settings are required, please run in serial mode instead.
+
+
+
+``JULES_RIVERS`` namelist members
+---------------------------------
+
+.. nml:namelist:: JULES_RIVERS
+
+.. nml:member:: l_rivers
+
+   :type: logical
+   :default: F
+
+   Switch for enabling river routing.
+
+   TRUE
+       Use the river routing algorithm specified by :nml:mem:`rivers_type` to route runoff along river pathways.
+
+   FALSE
+       No river routing.
+
+
+.. nml:member:: rivers_type
+
+   :type: character
+   :default: rfm
+
+   Switch to select the river routing algorithm to use for river routing.
+
+   ``rfm``
+       Use a standalone JULES implementation of the RFM kinematic wave model (see Dadson and Bell (2010), Bell et al. (2007)).
+       
+       For standalone applications, this option should be preferred over all others if possible.
+
+   ``um_rfm``
+       Use an implementation of the RFM kinematic wave model as currently implemented in the Met Office Unified Model.
+       
+       This option is provided to support the transition of river routing configurations using the Unified Model to ``rfm``.
+
+   ``trip``
+       Use a standalone JULES implementation of the linear TRIP model (see Oki et al. (1999)).
+       
+       This option should be preferred to ``um_trip``.
+
+   ``um_trip``
+       Use an implementation of the TRIP linear model as currently implemented in the Met Office Unified Model.
+       
+       This option is provided to support the transition of river routing configurations using the Unified Model to ``trip`` (and ultimately to ``rfm``).
+   
+
+.. nml:member:: rivers_timestep
+
+   :type: integer
+   :permitted: > 0
+   :default: -32768
+
+   The number of model timesteps per routing timestep.
+   
+   For example, :nml:mem:`rivers_timestep` = 5 means that runoff will be accumulated for 5 model timesteps before being routed on the 5th timestep.
+
+
+.. warning::
+   The river routing parameter values can be highly dependent on model resolution, so care is required by the user to ensure that appropriate values are selected, tested and adjusted as required.
+   
+   Suggested values for global and high-resolution runs are listed below, however these should be treated as a starting point.
+   
+   Values for some typical configurations are included in the ``jules_riversparm`` module. 
+
+
+.. nml:group:: RFM parameters - used if :nml:mem:`rivers_type` = ``rfm`` or ``um_rfm``
+
+   .. nml:member:: cland
+
+      :type: real
+      :default: 0.2
+      :suggested: 0.2 (global), 0.4 (high-resolution)
+
+      The land wave speed (m s\ :sup:`-1`). See Bell et al. (2007).
+
+
+   .. nml:member:: criver
+
+      :type: real
+      :default: 0.62
+      :suggested: 0.62 (global), 0.5 (high-resolution)
+
+      The river wave speed (m s\ :sup:`-1`). See Bell et al. (2007).
+
+
+   .. nml:member:: cbland
+
+      :type: real
+      :permitted: <= :nml:mem:`cland`
+      :default: 0.1
+      :suggested: 0.1 (global), 0.05 (high-resolution)
+      
+      The subsurface land wave speed (m s\ :sup:`-1`). See Bell et al. (2007).
+
+
+   .. nml:member:: cbriver
+
+      :type: real
+      :permitted: <= :nml:mem:`criver`
+      :default: 0.15
+      :suggested: 0.15 (global), 0.05 (high-resolution)
+
+      The subsurface river wave speed (m s\ :sup:`-1`). See Bell et al. (2007).
+
+
+   .. nml:member:: retl
+
+      :type: real
+      :permitted: 0-1
+      :default: 0.0
+
+      The (resolution dependent) land return flow fraction. See Bell et al. (2007).
+      
+
+   .. nml:member:: retr
+
+      :type: real
+      :permitted: 0-1
+      :default: 0.005
+      :suggested: 0.005 (global), 0.005 (high-resolution)
+
+      The (resolution dependent) river return flow fraction. See Bell et al. (2007).
+
+
+   .. nml:member:: a_thresh
+
+      :type: integer
+      :default: 1
+      :suggested: 1 (global), ~10 (high-resolution)
+
+      The threshold drainage area (specified in number of cells) draining to a gridbox, above which the gridbox is considered to be a river point. This is resolution dependent.
+      
+      Remaining points are treated as land (drainage area = 0) or sea (drainage area < 0). See Bell et al. (2007).
+
+
+   .. nml:member:: runoff_factor
+
+      :type: real
+      :default: 1.0
+
+      A runoff volume factor used in the ``um_rfm`` implementation. **It is highly recommended that this is set to 1.0 (i.e. no runoff adjustment).**
+ 
+ 
+.. nml:group:: TRIP parameters - used if :nml:mem:`rivers_type` = ``trip`` or ``um_trip``
+
+   .. nml:member:: rivers_speed
+
+      :type: real
+      :default: 0.4
+
+      The effective river velocity (m s\ :sup:`-1`). See Oki et al. (1999).
+   
+   
+   .. nml:member:: rivers_meander
+
+      :type: real
+      :default: 1.4
+
+      The ratio of the actual to calculated river lengths in a river routing gridbox. See Oki et al. (1999).
+      
+      
+.. seealso::
+   References:
+   
+      * Bell, V.A. et al. (2007) Development of a high resolution grid-based river flow model for use with regional climate model output. Hydrology and Earth System Sciences. 11 532-549
+      * Dadson, S.J. and Bell, V.A. (2010) Comparison of Grid-2-Grid and TRIP runoff routing schemes. Centre for Ecology & Hydrology Internal Report http://nora.nerc.ac.uk/10890/1/dadson_etal_2010_g2gtrip.pdf
+      * Dadson S.J. et al. (2011) Evaluation of a grid-based river flow model configured for use in a regional climate model. Journal of Hydrology. 411 238-250
+      * Falloon, P.D. et al (2007) New global river routing scheme in the Unified Model. Hadley Centre Technical Note 72 http://www.metoffice.gov.uk/media/pdf/6/m/HCTN_72_v2.pdf
+      * Jones R., Dadson, S. and Bell, V.A. (2007) Report on European grid-based river-flow modelling for application to Regional Climate Models. Met Office Hadley Centre deliverable report.
+      * Oki, T., et al (1999) Assessment of annual runoff from land surface models using Total Runoff Integrating Pathways (TRIP). Journal of the Meteorological Society of Japan. 77 235-255

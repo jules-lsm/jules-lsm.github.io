@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.5. jules_hydrology.nml &mdash; Joint UK Land Environment Simulator (JULES) v4.7 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.7',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.7 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.6. jules_soil.nml" href="jules_soil.nml.html" />
+    <link rel="prev" title="6.4. jules_radiation.nml" href="jules_radiation.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_soil.nml.html" title="6.6. jules_soil.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_radiation.nml.html" title="6.4. jules_radiation.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.7 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jules-hydrology-nml">
+<h1>6.5. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt><a class="headerlink" href="#jules-hydrology-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets the hydrology options. It contains one namelist called <a class="reference internal" href="#namelist-JULES_HYDROLOGY"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_HYDROLOGY</span></tt></a>.</p>
+<div class="section" id="namelist-JULES_HYDROLOGY">
+<span id="jules-hydrology-namelist-members"></span><h2>6.5.1. <tt class="docutils literal"><span class="pre">JULES_HYDROLOGY</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_HYDROLOGY" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_HYDROLOGY::l_top">
+<tt class="descclassname">JULES_HYDROLOGY::</tt><tt class="descname">l_top</tt><a class="headerlink" href="#JULES_HYDROLOGY::l_top" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for a TOPMODEL-type model of runoff production.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use a TOPMODEL-type scheme. This is based on Gedney and Cox (2003); see also Clark and Gedney (2008).</dd>
+<dt>FALSE</dt>
+<dd>No TOPMODEL scheme.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Gedney, N. and P.M.Cox, 2003 , The sensitivity of global climate model simulations to the representation of soil moisture heterogeneity, J. Hydrometeorology, 4, 1265-1275.</li>
+<li>Clark and Gedney, 2008, Representing the effects of subgrid variability of soil moisture on runoff generation in a land surface model, Journal of Geophysical Research - Atmospheres, 113, D10111, doi:10.1029/2007JD008940.</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_HYDROLOGY::l_pdm">
+<tt class="descclassname">JULES_HYDROLOGY::</tt><tt class="descname">l_pdm</tt><a class="headerlink" href="#JULES_HYDROLOGY::l_pdm" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for a PDM-type model of runoff production.</p>
+<p>PDM is the Probability Distributed Model (Moore, 1985), implemented in JULES following Clark and Gedney (2008).</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use a PDM scheme.</dd>
+<dt>FALSE</dt>
+<dd>No PDM scheme.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Moore, R. J. (1985), The probability-distributed principle and runoff production at point and basin scales, Hydrol. Sci. J., 30, 273-297.</li>
+<li>Clark and Gedney, 2008, Representing the effects of subgrid variability of soil moisture on runoff generation in a land surface model, Journal of Geophysical Research - Atmospheres, 113, D10111, doi:10.1029/2007JD008940.</li>
+</ul>
+</div>
+</dd></dl>
+
+<div class="admonition-only-used-if-nml-mem-l-pdm-true admonition">
+<p class="first admonition-title">Only used if <a class="reference internal" href="#JULES_HYDROLOGY::l_pdm" title="JULES_HYDROLOGY::l_pdm"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_pdm</span></tt></a> = TRUE</p>
+<dl class="member">
+<dt id="JULES_HYDROLOGY::dz_pdm">
+<tt class="descclassname">JULES_HYDROLOGY::</tt><tt class="descname">dz_pdm</tt><a class="headerlink" href="#JULES_HYDROLOGY::dz_pdm" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The depth of soil considered by PDM (m).</p>
+<p>A value of ~1m can be used.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_HYDROLOGY::b_pdm">
+<tt class="descclassname">JULES_HYDROLOGY::</tt><tt class="descname">b_pdm</tt><a class="headerlink" href="#JULES_HYDROLOGY::b_pdm" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Shape factor for the pdf.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-only-used-if-nml-mem-l-top-true admonition">
+<p class="first admonition-title">Only used if <a class="reference internal" href="#JULES_HYDROLOGY::l_top" title="JULES_HYDROLOGY::l_top"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_top</span></tt></a> = TRUE</p>
+<dl class="member">
+<dt id="JULES_HYDROLOGY::zw_max">
+<tt class="descclassname">JULES_HYDROLOGY::</tt><tt class="descname">zw_max</tt><a class="headerlink" href="#JULES_HYDROLOGY::zw_max" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">6.0</td>
+</tr>
+</tbody>
+</table>
+<p>The maximum allowed depth to the water table (m).</p>
+<p>This is the depth to the bottom of an additional layer below the <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><tt class="xref nml nml-mem docutils literal"><span class="pre">sm_levels</span></tt></a> soil layers and hence should be set to a value greater than <tt class="docutils literal"><span class="pre">SUM(dzsoil)</span></tt>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_HYDROLOGY::ti_max">
+<tt class="descclassname">JULES_HYDROLOGY::</tt><tt class="descname">ti_max</tt><a class="headerlink" href="#JULES_HYDROLOGY::ti_max" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">10.0</td>
+</tr>
+</tbody>
+</table>
+<p>The maximum possible value of the topographic index.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_HYDROLOGY::ti_wetl">
+<tt class="descclassname">JULES_HYDROLOGY::</tt><tt class="descname">ti_wetl</tt><a class="headerlink" href="#JULES_HYDROLOGY::ti_wetl" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.5</td>
+</tr>
+</tbody>
+</table>
+<p>A calibration parameter used in the calculation of the wetland fraction.</p>
+<p>It is used to increment the &#8220;critical&#8221; value of the topographic index that is used to calculate the saturated fraction of the gridbox. It excludes locations with large values of the topographic index from the wetland fraction.</p>
+<p>See Gedney and Cox (2003).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_HYDROLOGY::nfita">
+<tt class="descclassname">JULES_HYDROLOGY::</tt><tt class="descname">nfita</tt><a class="headerlink" href="#JULES_HYDROLOGY::nfita" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">20</td>
+</tr>
+</tbody>
+</table>
+<p>The number of values tried when fitting wetland and saturation fractions to water table depth in the initialisation.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_HYDROLOGY::l_wetland_unfrozen">
+<tt class="descclassname">JULES_HYDROLOGY::</tt><tt class="descname">l_wetland_unfrozen</tt><a class="headerlink" href="#JULES_HYDROLOGY::l_wetland_unfrozen" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Treat the calculations of wetland and surface saturation fractions more like those of an unfrozen soil.</dd>
+<dt>FALSE</dt>
+<dd>Use standard wetland and surface saturation fraction calculations.</dd>
+</dl>
+<dl class="member">
+<dt id="JULES_HYDROLOGY::l_wetland_ch4_npp">
+<tt class="descclassname">JULES_HYDROLOGY::</tt><tt class="descname">l_wetland_ch4_npp</tt><a class="headerlink" href="#JULES_HYDROLOGY::l_wetland_ch4_npp" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="last docutils">
+<dt>TRUE</dt>
+<dd>Wetland methane emissions calculated using grid box mean NPP as &#8220;substrate&#8221;</dd>
+<dt>FALSE</dt>
+<dd>Wetland methane emissions calculated using soil carbon as &#8220;substrate&#8221; (default)</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface_types.nml.html">6.2. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface.nml.html">6.3. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_radiation.nml.html">6.4. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.5. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_vegetation.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_snow.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_rivers.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.10. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.11. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.12. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.13. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.14. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crop_params.nml.html">6.15. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.16. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.17. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fire.nml.html">6.18. <tt class="docutils literal"><span class="pre">fire.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.19. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.20. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.21. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.22. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.23. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="jules_radiation.nml.html"
+                        title="previous chapter">6.4. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jules_soil.nml.html"
+                        title="next chapter">6.6. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_soil.nml.html" title="6.6. jules_soil.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_radiation.nml.html" title="6.4. jules_radiation.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.7 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2016.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>
