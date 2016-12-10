@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="JULES Rose Tutorial" />
+        <meta name="author" content="JULES System Manager" />
+        <link rel="icon" href="jules_logo.png" />
+        <title>JULES Rose beginner</title>
+        <!-- Bootstrap core CSS -->
+        <link href="../etc/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+        <!-- Bootstrap theme -->
+        <link href="../etc/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" />
+        <!-- Custom styles for this template -->
+        <link href="general_theme.css" rel="stylesheet" />
+</head>
+dy>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">JULES Beginner</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <!-- Add link to Homepage to training when created -->
+                        <li class="active"><a href="#">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Beginner material <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Beginner Tutorials</li>
+                                <li><a href="#bgj">Background of JULES</a></li>
+                                <li><a href="#bgrc">Background of Rose (in fact Cylc)</a></li>
+                                <li><a href="#bgmosrs">Background of MOSRS</a></li>
+                                <li><a href="#subvc">Subversion</a></li>
+                                <li><a href="#jrsuites">JULES Rose suites</a></li>
+                                <li><a href="#jrstem">JULES Rose stem</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Beginner Practical's</li>
+                                <li><a href="#Pracs">Practicals</a></li>
+                                <li><a href="#P1">Practical 1</a></li>
+                                <li><a href="#P2">Practical 2</a></li>
+                                <li><a href="#P3">Practical 3</a></li>
+                                <li><a href="#P4">Practical 4</a></li>
+                                <li><a href="#P5">Practical 5</a></li>
+                                <li><a href="#P6">Practical 6</a></li>
+                            </ul>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other material <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Quizzes</li>
+                                <li><a href="beginner_quiz.html">Beginner Quiz</a></li>
+
+                                <li><a href="intermediate_quiz.html">Intermediate Quiz</a></li>
+                                <li><a href="advanced_quiz.html">Advanced Quiz</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Tutorials and practical's</li>
+                                <li><a href="jr_intermediate.html">Intermediate</a></li>
+                                <li><a href="jr_advanced.html">Advanced</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Help/info</li>
+                                <li><a href="jr_glossary.html">Glossary List</a></li>
+                                <li><a href="jr_links.html">Links</a></li>
+                                <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container theme-showcase" role="main">
+        <div class="jumbotron">
+            <h1>Beginners background guide to JULES, Rose/Cylc, MOSRS, JULES with Rose, version control (Subversion/FCM), running JULES rose suites and rose stem </h1>
+            <p>This aims to explain the importance of:
+            <ul>
+                <li><a href="#bgj">Background of JULES</a></li>
+                <li><a href="#bgrc">Background of Rose (in fact Cylc)</a></li>
+                <li><a href="#bgmosrs">Background of MOSRS</a></li>
+                <li><a href="#subvc">Subversion</a></li>
+                <li><a href="#jrsuites">JULES Rose suites</a></li>
+                <li><a href="#jrstem">JULES Rose stem</a></li>
+            </ul>
+            </p>
+        </div>
+        <div class="well">
+            <ul>
+                Pre-requisites
+                <li>Have requested for access to JULES from the <a href="https://jules.jchmr.org/">jchmr website</a>.</li>
+                <li>Have therefore got a Met Office Science Repository Service account and can access <a href="https://code.metoffice.gov.uk/trac/jules">JULES MOSRS webpages</a>.</li>
+               <li>Have Rose, Cylc, FCM, keywords set up on the machine you are working on or are using the VM. <a href="https://github.com/metomi/metomi-vms">GitHub VM webpages</a> and the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine">guidance</a> from the JULES MOSRS web pages.</li>
+            </ul>
+        </div>
+        <div class="well">
+            First let's do the Beginner Quiz to see how much you already know and what we
+            will need to focus on in this section, note there are no right or wrong answers
+            for the first five questions.
+        </div>
+        <div class="container">
+            <p><a class="btn btn-lg btn-success" href="beginner_quiz.html" role="button">Beginner Quiz</a></p>
+        </div>
+        <br/>
+        <h1><a id="bgj">Background of JULES</a></h1>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h2>What is JULES?</h2>
+            </div>
+            <div class="well">
+               JULES is the Joint UK Land Environment Simulation model, it is a community Land Surface Model (LSM). 
+               The model can be used as a standalone model.
+               It is also part of the Met Office weather and climate prediction models where it is used in the couple between the land and the atmopshere as part of the Met Office Unified Model (UM).
+            </div>
+            <div class="page-header">
+                <h2>Why use JULES?</h2>
+            </div>
+            <div class="well">
+               JULES is used in the UK and worldwide for weather, climate and science research.
+               JULES is used by meteorological services, universities, institutions and centres.
+              JULES produces world class science and research.
+              The code is hosted on the MOSRS which works with version control to provide a repository for all to access and browse.
+             Version control allows for accountablilty, traceability and reproduceabilty.
+             <p>Can you think of a scenerio when you version control would be advantagous in your current job/activity? Describe it.</p>
+             <p>Describe how you share work now with collegues, could this be improved? How?</p>
+            </div>
+        </ul>
+        <br/>
+        <h1><a id="bgrc">Background of Rose (in fact Cylc)</a></h1>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h2>What is Cylc?</h2>
+            </div>
+            <div class="well">
+                Cylc is an intellegent workflow scheduling system that was created by Hilary Oliver at NWIA New Zealand.
+                The <a href="https://cylc.github.io/cylc/documentation.html">documentation</a> descibes it in more detail.
+               In summary:
+               "Cylc was developed for the EcoConnect Forecasting System at NIWA (National Institute of Water and Atmospheric Research, New Zealand)."
+               "Environmental forecasting suites generate forecast products from a potentially large group of interdependent scientific models and associated data processing tasks."
+               Cylc is now not just used for forecasting models but for scheduling tasks on computers by people all over the world.
+               Monterey - US Naval Research Laboratory use it for scheduling tasks on there computer systems.
+                This is growing collaboration with people around the world, at p
+resent there are 17 contributors, 11 of which are not Met Office UK.
+                The code is hosted on GitHub at <a href="https://github.com/cylc/cylc">cylc/cylc</a>.
+            </div>
+            <div class="page-header">
+                <h2>What is Rose?</h2>
+            </div>
+            <div class="well">
+                Rose is a wrapper to Cylc.
+                It was developed when the Met Office saw the potential power of Cylc and that it coud be made more user friendly but adding some additional functions around Cylc in the form of Rose.
+                The Met Office wanted to work with NIWA to develop both Cylc and Rose for forecasting.
+                This is growing collaboration with people around the world, at present there are 17 contributors, 4 of which are not Met Office UK.
+                The code is hosted on GitHub at <a href="https://github.com/metomi/rose">metomi/rose</a>.
+                The <a href="http://metomi.github.io/rose/doc/rose.html">Rose documentation</a> can be useful for background reading and a more detailed explaination for how the infrastructure works.
+            </div>
+            <div class="page-header">
+                <h2>Why used Rose/Cylc?</h2>
+            </div>
+            <div class="well">
+                Rose/Cylc provides a user friendly interface for JULES suites and allows them to be scheduled in the most efficent way using Cylc's clever algorithum (code).
+                This means you just provide the order that you would like to run things in and it does the rest for you, submitting them once the dependancies have been meet.
+                Rose/Cylc provides a user friendly interface for JULES code development with tests to check that your development has not broken someone else or some other code.
+                Rose suites can be shared via the MOSRS using the "u-repository" and therefore you can choise an existing suite (bunch of tasks with the dependancies, inputs, outputs, all collected in one place) or adapt and existing suite for your own needs and run it to get your data.
+               You can run bash, python, R, IDL scripts/tasks all as part of the suite, which means once it is set up you can run the suite and get on with a cuppa or some other work!
+               Rose can retrieve data, archive data, remove data, plot data etc if you give it the correct tasks and tell it what the dependancies are.
+               Rose means that you can run many suites with slightly different setting using the same base suite one straight after the other without having to wait for the first one to finish before running the next.
+               Rose is meant to make your life easier so if it not try to figure out why and make it help.
+               What work/activity/research that you are doing do you think you could use Rose/Cycl for?
+            </div>
+            <div class="page-header">
+                <h2>Who uses Rose/Cylc?</h2>
+            </div>
+            <div class="well">
+                Met Office, UK
+                </br>
+                Bureau of Meteorology, Australia
+                </br>
+                NIWA, NZ
+                </br>
+                Indian Met Service
+                </br>
+                Polish Met Service
+                </br>
+                CSIRO, Australia
+                </br>
+                ARC Centre of Excellence for Climate Systems Science, Australia
+                </br>
+                SAWS, South Africa
+                </br>
+                Korean Met Service, South Korea
+                </br>
+                Singapore Met Sevice
+                </br>
+                NCAS Computational Modelling Services, UK
+                </br>
+                557th, American Air Force
+                </br>
+                Exeter University, Astrophysics Dept. Exo-planets.
+                </br>
+                ...the JULES community, on JASMIN, VM and at their location.
+            </div>
+        </ul>
+        <br/>
+        <h1><a id="bgmosrs">Background of MOSRS</a></h1>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h2>Why was MOSRS set up?</h2>
+            </div>
+            <div class="well">
+                To have a location for sharing repositories, Rose suites, information and collaborating on code.
+            </div>
+            <div class="page-header">
+                <h2>Who uses MOSRS?</h2>
+            </div>
+            <div class="well">
+                See the list above. 
+            </div>
+            <div class="page-header">
+                <h2>Why should I use MOSRS?</h2>
+            </div>
+            <div class="well">
+                The <a href="https://code.metoffice.gov.uk/trac/jules">JULES</a> pages are there to help you with your science.
+                If something is missing report it to jules-support@metoffice.gov.uk and get it added.
+                You can collaborate on the pages.
+                You can look for support on the pages.
+                Guidance, suggested Rose suites, Trac tickets, code release infor and so mcuh more are on the pages.
+            </div>
+        </ul>
+        <br/>
+        <h1><a id="subvc">Subversion</a></h1>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h2>What is Subversion?</h2>
+            </div>
+            <div class="well">
+                <h4>Key Features of Subversion:</h4>
+                <li>It is an incremental change tracking system.</li>
+                <li>We can explore the changes at each change and recall a version using its 
+                    revision number.
+                </li>
+                <li>It takes snapshots of the directory tree vs time and records only the incremental changes.
+                </li>
+                <li>A working copy, which is in fact, a local copy of a particular version of 
+                    the repository is availiable for users to freely work on.
+                    Note managing the version control of the working copy and communicating 
+                    changes is the responsibility of the user.
+                </li>
+                <li>Using copy-modify-merge allows each user of the repository to have their 
+                    own personal working copy and they can work simultaneously and independently 
+                    to modify their personal copies which can then be merged together later. 
+                    Note it is the humans' reponsibility to merge the files correctly and 
+                    resolve any conflicts by manually.
+                    This may mean choosing the correct file after discussions with any others 
+                    editing the repository.
+                </li>
+                <li>Each change committed to the repository creates a new state of the 
+                    filesystem tree (snapshot).
+                    This is called a revision number.
+                </li>
+                <li>The revision number is applied to the entire repository tree and not 
+                    individual files and is therefore also known as the Global Revision Number.
+                    For example: at revision number N then a file may be the same as it was at 
+                    revision number M but a <strong>different</strong> file was changed 
+                    between the two revisions.
+                </li>
+            </div>
+            <div class="page-header">
+                <h2>Why use Subversion?</h2>
+            </div>
+            <div class="well">
+                Any good version control system provides helpful tools to allow users to;   
+                <ul>
+                    <li>share work and encourage collaboration,</li>
+                    <li>track the progression and incremental changes to versions/revisions of 
+                        work,
+                    </li>
+                    <li>allow multiple flavours of the some work to investigate the impact of a 
+                        change,
+                    </li>
+                    <li>traceability of work, for example what version of the work was used and
+                        when,
+                    </li>
+                    <li>to revert a change,</li>
+                    <li>branch from a version,</li>
+                    <li>merge in changes</li>
+                    <li>and so much more.</li>
+                </ul>
+            </div>
+            <div class="page-header">
+                <h2>How can I use Subversion?</h2>
+            </div>
+            <div class="well">
+                There is a draft tutorial on the <a href="http://jules-lsm.github.io/tutorial/bg_info/tutorial/fcm_fundamentals.html">JULES GitHub</a> pages.
+                When the offical version is released it will be removed and this section will point to the offical version.
+                <li>It is recommended that you use <code>FCM</code>, which is a wrapper to Subversion, it has some additional user friendly functionality.</li>
+            </div>
+        </ul>
+        <br/>
+        <h1><a id="jrsuites">JULES Rose suites</a></h1>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h2>What are JULES Rose suites?</h2>
+            </div>
+            <div class="well">
+                These are suites created by the community for research and developing and testing new science.
+                A selection of examples can can be found on the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESWithRose#StandardRosesuites-Pleaseaddyourownheretohelpothers">JULESstandard suites</a> page and on the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/ConfigurationsInfo#Configurations">JULES configurations</a> page.
+            </div>
+        </ul>
+        <br/>
+        <h1><a id="jrstem">JULES Rose stem</a></h1>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h2>What is JULES Rose stem?</h2>
+            </div>
+            <div class="well">
+                This is a testing system that checks to make sure that any code changes do not break any existing science that has a test.
+                More tests are being added to provide robusness to the system.
+                Rose stem is part of the JULES code and can be run by anyone that has a copy of the code.
+            </div>
+        </ul>
+        <br/>
+        <h1><a id="Pracs">Practicals</a></h1>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h2><a id="P1">Practical 1</a></h2>
+            </div>
+            <div class="well">
+
+            </div>
+        </ul>
+        <br/>
+        <ul>
+            <div class="page-header">
+                <h2><a id="P2">Practical 2</a></h2>
+            </div>
+            <div class="well">
+
+            </div>
+        </ul>
+        <br/>
+        <ul>
+            <div class="page-header">
+                <h2><a id="P3">Practical 3</a></h2>
+            </div>
+            <div class="well">
+
+            </div>
+        </ul>
+        <br/>
+        <ul>
+            <div class="page-header">
+                <h2><a id="P4">Practical 4</a></h2>
+            </div>
+            <div class="well">
+
+            </div>
+        </ul>
+        <br/>
+        <ul>
+            <div class="page-header">
+                <h2><a id="P5">Practical 5</a></h2>
+            </div>
+            <div class="well">
+
+            </div>
+        </ul>
+        <br/>
+        <ul>
+            <div class="page-header">
+                <h2><a id="P6">Practical 6</a></h2>
+            </div>
+            <div class="well">
+
+            </div>
+        </ul>
+
+       </div>
+
+        <br/>
+        <div class="container">
+        <div class="well">
+        Now lets do the Intermediate Quiz to see how much you already know and what we
+        will need to focus on in the next section.
+        Don't worry if you don't know all the answers yet, we will learning more in the next tutorial.
+        </div>
+        <p><a class="btn btn-lg btn-success" href="intermediate_quiz.html" role="button">Intermediate Quiz</a></p>
+        </div>
+        <br/>
+        <div class="container">
+        </div>
+        <hr/>
+        <div class="container-fluid text-center">
+        <div class="row">
+        <div class="col-md-12">
+        <address><small>
+        &copy; British Crown Copyright 2006-17
+        <a href="http://www.metoffice.gov.uk">Met Office</a>.<br />
+        This document is released under the British <a href=
+            "http://www.nationalarchives.gov.uk/doc/open-government-licence/" rel=
+            "license">Open Government Licence</a>.<br />
+        </small>
+        </address>
+        </div>
+        </div>
+        </div>
+        <!-- Bootstrap core JavaScript
+            ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="./js/vendor/jquery.min.js"><\/script>')</script>
+        <script src="../etc/bootstrap/js/bootstrap.min.js"></script>
+        <script src="./js/docs.min.js"></script>
+        <script LANGUAGE="JavaScript">
+            update = new Date(document.lastModified);
+            theMonth = update.getMonth() + 1;
+            theDate = update.getDate();
+            theYear = update.getFullYear();
+            theHour = update.getHours();
+            theMin = update.getMinutes();
+            theSec = update.getSeconds();
+            document.write("<strong> Last Modified:</strong> " + theYear + "-" + theMonth + "-" + theDate + "T" + theHour + ":" + theMin + ":" + theSec + "Z");
+                
+        </script>
+        </div>
+    </body>
+</html>
+
