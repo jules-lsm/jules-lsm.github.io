@@ -467,13 +467,16 @@ fcm add - for adding a file or directory to the repository
 fcm bc - for creating a branch, can also use 'fcm branch-create'
 fcm bd - for deleting a branch, can also use 'fcm branch-delete'
 fcm bls - for listing the branches assocated with the repository, as default 
-          this is only your branches, there are options to list others branches
+          this is only your branches, the '-a' option to list all other branches
+          the '--user=kerryday' to list user kerryday's branches
 fcm cf - for resolving text conflicts after a merge
 fcm ci - for checking in a change to the repository
 fcm co - for checking out a from the repository
 fcm info - for getting info on the directory that you are working in
 fcm merge - for merging in a branch
-fcm rm - for removing a file or directory from the repository
+fcm rm - for removing a file or directory from the repository, option -c to 
+         force it to remove the file from the repository even if it is missing
+         from the directory
 fcm revert - for reverting a file or directory which has not been 
              checked in/commited to the repository yet.
 fcm st - for checking teh status of the repository, VERY IMPORTANT, more later
@@ -506,7 +509,7 @@ fcm up - for updating the respository
                    <div class="panel-body">
                         <div class="row">
                            <pre>
-                           nner.html <font color=green>
+                           <font color=green>
 Usage:
         1. fcm add --check [PATH ...]
 
@@ -557,8 +560,102 @@ Global options_
                 </div>
             </div>
             <br/>
-            More on fcm st
-            <p>HERE</p> 
+            <p>More on fcm st</p>
+            The command <code>fcm st</code> is a very powerful command and one which 
+            should be used frequently to aid with our use of FCM.
+            <br/>
+            <code>fcm st</code> returns the status of the local/working copy files and 
+            directories.
+            <br/>
+            <br/>
+            Now we will look at the most common returned statuses including the meaning 
+            of them and the implications on the repository.
+            <br/>
+            <br/>
+            Information on the status of the file or directory is given in the first seven
+            columns.
+            <ol>
+            <li><sup>st</sup> column - added/deleted/changed
+            <br/>
+            Below is the list of the statuses, what do you think they could mean?
+            <pre>
+            ' '
+            'A'
+            'C'
+            'D'
+            'I'
+            'M'
+            'R'
+            'X'
+            '?'
+            '!' 
+            '~'
+            </pre>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+            <span class="glyphicon"></span>
+            Answers
+            </a>
+            </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+            <ol>
+            <pre>
+            <font color="green">
+            ' ' no modifications </font> - there have been no changes to the file or 
+            directory when compared to the committed/checked-in repository version.
+            <font color="green">
+            'A' Added </font>- A file or directory has been add to the repository, 
+            generally no action needs to be taken.
+            <font color="green">
+            'C' Conflicted </font>- There are conflicts. These must be resolved before the 
+            changes can be committed to the repository. This is covered later.
+            <font color="green">
+            'D' Deleted </font>- A file or directory has been deleted from the repository, 
+            generally no action needs to be taken.
+            <font color="green">
+            'I' Ignored </font>- This item is ignored by then repository, it has been 
+            assigned the ignore flag, using the <font color="red">svn:ignore</font> property. 
+            For Example: <font color="red">fcm propset svn:ignore "&lt;FILENAME&gt;" .</font> 
+            <font color="green">
+            'M' Modified </font>- A file or directory has been modified compared to the 
+            committed/checked-in repository version.
+            <font color="green">
+            'R' Replaced </font>- A file or directory has been replaced in your working 
+            copy. 
+            This means the file was scheduled for deletion, and then a new file with the 
+            same name was scheduled for addition in its place. 
+            Replaced itemscan lead to complications. 
+            <font color="green">
+            'X' an unversioned directory created by an externals definition </font>- This 
+            is a marker as with 'I'.
+            <font color="green">
+            '?' item is not under version control </font> - This may be an item that you 
+            want to add to the repository. You do not have to, you may want to keep it
+            outside of the repository because it is big or always changing. However, 
+            remember that without adding it if the repository is checked out then the
+            check out will not include this item.
+            <font color="green">
+            '!' item is missing (removed by non-svn command) or incomplete </font> - this
+            item may have been deleted by a non-FCM command, you can solve this by using
+            <samp>fcm rm -c &lt;FILE/DIRNAME&gt;</samp>
+            <font color="green">
+            '~' item is versioned as one kind of object (file, directory, link), but has 
+            been replaced by a different kind of object. </font> - 
+            </pre>
+            </ol>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            <p>For information on the other columns please refer to the <a href="http://jules-lsm.github.io/tutorial/bg_info/tutorial/fcm_essentials.html#st">FCM tutorial</a>.</p>
+            <p>In the following practicals we will be using the FCM commands.</p>
             </div>
         </ul>
         <br/>
@@ -567,7 +664,7 @@ Global options_
                 <h2><a id="P3">Practical 3 - Checkout the code</a></h2>
             </div>
             <div class="well">
-
+HERE
             </div>
         </ul>
         <br/>
