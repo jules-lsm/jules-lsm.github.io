@@ -46,12 +46,12 @@ dy>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Beginner Practical's</li>
                                 <li><a href="#Pracs">Practicals</a></li>
-                                <li><a href="#P1">Practical 1</a></li>
-                                <li><a href="#P2">Practical 2</a></li>
-                                <li><a href="#P3">Practical 3</a></li>
-                                <li><a href="#P4">Practical 4</a></li>
-                                <li><a href="#P5">Practical 5</a></li>
-                                <li><a href="#P6">Practical 6</a></li>
+                                <li><a href="#P1">Practical 1 - Background</a></li>
+                                <li><a href="#P2">Practical 2 - Basic FCM</a></li>
+                                <li><a href="#P3">Practical 3 - Checkout code</a></li>
+                                <li><a href="#P4">Practical 4 -Checkout a suite </a></li>
+                                <li><a href="#P5">Practical 5 - JULES Rose</a></li>
+                                <li><a href="#P6">Practical 6 - Running a suite</a></li>
                             </ul>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other material <span class="caret"></span></a>
@@ -208,6 +208,17 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
                 </br>
                 ...the JULES community, on JASMIN, VM and at their location.
             </div>
+            <div class="page-header">
+                <h2>What are the advantages to using Rose/Cylc?</h2>
+            </div>
+            <div class="well">
+                <ul>
+                    <li>All the files are text files therefore you can search them using <code>grep</code></li>
+                    <li>There are lots of Graphical User Interfaces (GUI's) to help mke the user experience better and it easier to make changes and run suites.</li>
+                    <li>Easy to add/remove/change: namelists, values etc</li>
+                    <li>Can you think of any other things that it may or could be useful to have Rose make developing code and running suites (models/simulations) easier?
+                </ul>
+            </div>
         </ul>
         <br/>
         <h1><a id="bgmosrs">Background of MOSRS</a></h1>
@@ -336,7 +347,224 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
         <p>
         <ul>
             <div class="page-header">
-                <h2><a id="P1">Practical 1</a></h2>
+                <h2><a id="P1">Practical 1 - Backgroud</a></h2>
+            </div>
+            <div class="well">
+            <p>Lets firstly check some set-up:</p>
+            <pre>
+            rosie hello
+            # this should return something like this:
+            <font color="blue">
+            https://code.metoffice.gov.uk/rosie/u/hello: Hello kerryday
+            </font>
+            rose --version
+            cylc --version
+            fcm --version
+            # these should return something like this:
+            <font color="blue">
+            Rose 2016.11.1 (/net/home/.../rose-2016.11.1)
+            6.11.2
+            FCM 2016.12.0 (/net/home/.../fcm-2016.12.0)
+            </font>
+            # hopefully they are the latest versions of the systems.
+            fcm keyword-print
+            # or short-hand: fcm kp
+            # this should return all of the keywords that you and the site have set-up, a sample of mine are:
+            <font color="blue">
+            location{primary}[jules.x] = https://code.metoffice.gov.uk/svn/jules/main
+            location{primary}[jules_doc.x] = https://code.metoffice.gov.uk/svn/jules/doc
+            </font>
+            </pre>
+            <p>What are Keywords and why do we need them set-up?</p>
+            <p>Keywords can be considerd to be like short-hand or short-cuts to our full URL's.
+            <br>
+             Keywords can be defined in the FCM keyword configuration file (i.e. 
+             <samp>$FCM/etc/fcm/keyword.cfg</samp> and 
+             <samp>$HOME/.metomi/fcm/keyword.cfg</samp>).
+             <br>
+            For <strong>example</strong> in our <samp>.cfg</samp> file in our $HOME
+            directory we can define a keyword as follows:
+            <pre>        location{primary}[jules.x] = https://code.metoffice.gov.uk/svn/jules/main
+            </pre>
+            now we can abbreviate the URL as in the following examples:
+            <pre>        # fcm ls https://code.metoffice.gov.uk/svn/jules/main
+            fcm ls fcm:jules.x
+            </pre>
+            There are two main advantages for using URL keywords, what do you think they 
+            could be?
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <span class="glyphicon"></span>
+            Answers
+            </a>
+            </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+            <ol>
+            <font color="green">
+            <li>They are shorter and easier to remember.</li>
+            <li>If the repository needs to be moved then only the keyword definitions need 
+            to be updated (although any working copies you have will still need to be 
+            relocated by issuing a <code>fcm switch --relocate</code> command).
+            </li>
+            </font>
+            </ol>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br>
+
+
+            </div>
+        </ul>
+        <br/>
+        <ul>
+            <div class="page-header">
+                <h2><a id="P2">Practical 2 -Basic FCM</a></h2>
+            </div>
+            <div class="well">
+            <p>There are some very basic FCM commands that we need to know to work effectively.</p>
+            <pre>
+            fcm add
+            fcm bc
+            fcm bd
+            fcm bls
+            fcm cf
+            fcm ci
+            fcm co
+            fcm info
+            fcm merge
+            fcm rm
+            fcm revert
+            fcm st
+            fcm sw
+            fcm up
+            </pre>
+            Do you know what any of them do?
+            <br/>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+fcm add - for adding a file or directory to the repository
+fcm bc - for creating a branch, can also use 'fcm branch-create'
+fcm bd - for deleting a branch, can also use 'fcm branch-delete'
+fcm bls - for listing the branches assocated with the repository, as default 
+          this is only your branches, there are options to list others branches
+fcm cf - for resolving text conflicts after a merge
+fcm ci - for checking in a change to the repository
+fcm co - for checking out a from the repository
+fcm info - for getting info on the directory that you are working in
+fcm merge - for merging in a branch
+fcm rm - for removing a file or directory from the repository
+fcm revert - for reverting a file or directory which has not been 
+             checked in/commited to the repository yet.
+fcm st - for checking teh status of the repository, VERY IMPORTANT, more later
+fcm sw - for switching branches, don't often done for code but great for suites
+fcm up - for updating the respository
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            fcm <command> --help
+            <br/>
+            # will return the help to the screen, for example
+            <br/>
+            fcm add --help
+            <br/>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        <span class="glyphicon"></span>
+                        Answer
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                           <pre>
+                           nner.html <font color=green>
+Usage:
+        1. fcm add --check [PATH ...]
+
+Options:
+    --check, -c
+        Check for any files or directories reported by "svn status" as not
+        under version control and add them.
+
+    For other options, see output of "svn help add".
+
+add: Put files and directories under version control, scheduling
+them for addition to repository.  They will be added in next commit.
+usage: add PATH...
+
+Valid options:
+  --targets ARG            : pass contents of file ARG as additional args
+  -N [--non-recursive]     : obsolete; try --depth=files or --depth=immediates
+  --depth ARG              : limit operation by depth ARG ('empty', 'files',
+                             'immediates', or 'infinity')
+  -q [--quiet]             : print nothing, or only summary information
+  --force                  : force operation to run
+  --no-ignore              : disregard default and svn:ignore and
+                             svn:global-ignores property ignores
+  --auto-props             : enable automatic properties
+  --no-auto-props          : disable automatic properties
+  --parents                : add intermediate parents
+
+Global options_
+  --username ARG           : specify a username ARG
+  --password ARG           : specify a password ARG
+  --no-auth-cache          : do not cache authentication tokens
+  --non-interactive        : do no interactive prompting (default is to prompt
+                             only if standard input is a terminal device)
+  --force-interactive      : do interactive prompting even if standard input
+                             is not a terminal device
+  --trust-server-cert      : accept SSL server certificates from unknown
+                             certificate authorities without prompting (but only
+                             with '--non-interactive')
+  --config-dir ARG         : read user configuration files from directory ARG
+  --config-option ARG      : set user configuration option in the format:
+                                 FILE:SECTION:OPTION=[VALUE]
+                             For example:
+                                 servers:global:http-library=serf
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            More on fcm st
+            <p>HERE</p> 
+            </div>
+        </ul>
+        <br/>
+        <ul>
+            <div class="page-header">
+                <h2><a id="P3">Practical 3 - Checkout the code</a></h2>
             </div>
             <div class="well">
 
@@ -345,7 +573,7 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
         <br/>
         <ul>
             <div class="page-header">
-                <h2><a id="P2">Practical 2</a></h2>
+                <h2><a id="P4">Practical 4 - Checkout a suite</a></h2>
             </div>
             <div class="well">
 
@@ -354,7 +582,7 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
         <br/>
         <ul>
             <div class="page-header">
-                <h2><a id="P3">Practical 3</a></h2>
+                <h2><a id="P5">Practical 5 - JULES Rose</a></h2>
             </div>
             <div class="well">
 
@@ -363,25 +591,7 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
         <br/>
         <ul>
             <div class="page-header">
-                <h2><a id="P4">Practical 4</a></h2>
-            </div>
-            <div class="well">
-
-            </div>
-        </ul>
-        <br/>
-        <ul>
-            <div class="page-header">
-                <h2><a id="P5">Practical 5</a></h2>
-            </div>
-            <div class="well">
-
-            </div>
-        </ul>
-        <br/>
-        <ul>
-            <div class="page-header">
-                <h2><a id="P6">Practical 6</a></h2>
+                <h2><a id="P6">Practical 6 - Running a suite</a></h2>
             </div>
             <div class="well">
 
