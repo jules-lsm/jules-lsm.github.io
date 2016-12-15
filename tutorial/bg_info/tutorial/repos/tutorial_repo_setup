@@ -24,10 +24,6 @@
 
 set -eu
 
-fuction finally() {
-    rm -fr ${WORK_DIR}
-}
-
 function setup() {
     cd
     mkdir ${HOME}/fcm_tutorial
@@ -35,44 +31,70 @@ function setup() {
     svnadmin create repository
 }
 
-function setup_repos_fundamentals(REPOS_DIR) {
-    svn mkdir ${REPOS_DIR}fundamentals -q -m 'New project fundamentals'
-    svn mkdir ${REPOS_DIR}fundamentals/trunk -q -m 'New folder fundamentals/trunk'
-    svn mkdir ${REPOS_DIR}fundamentals/branches -q -m 'New folder fundamentals/branches'
-    svn co ${REPOS_DIR}fundamentals/trunk ~/my_fcm_tutorial/fundamentals/trunk -q
+function setup_repos_fundamentals() {
+    fcm project-create fundamentals ${REPO_DIR} --non-interactive
+    svn co ${REPO_DIR}fundamentals/trunk ~/my_fcm_tutorial/fundamentals --non-interactive -q
 }
 
 
-function setup_repos_essentialsI(REPOS_DIR) {
-    svn mkdir ${REPOS_DIR}essentialsI -q -m 'New project essentialsI'
-    svn mkdir ${REPOS_DIR}essentialsI/trunk -q -m 'New folder essentialsI/trunk'
-    svn mkdir ${REPOS_DIR}essentialsI/branches -q -m 'New folder essentialsI/branches'
+function setup_repos_essentialsI() {
+    fcm project-create essentialsI ${REPO_DIR} --non-interactive 
 }
 
-function setup_repos_essentialsII(REPOS_DIR) {
-    svn mkdir ${REPOS_DIR}essentialsII -q -m 'New project essentialsII'
-    svn mkdir ${REPOS_DIR}essentialsII/trunk -q -m 'New folder essentialsII/trunk'
-    svn mkdir ${REPOS_DIR}essentialsII/branches -q -m 'New folder essentialsII/branches'
+function setup_repos_essentialsII() {
+    fcm project-create essentialsII ${REPO_DIR} --non-interactive
     mkdir -p ~/my_fcm_tutorial/essentialsII
-    svn co ${REPOS_DIR}essentialsII/trunk ~/my_fcm_tutorial/essentialsII -q
+    svn co ${REPO_DIR}essentialsII/trunk ~/my_fcm_tutorial/essentialsII --non-interactive -q
 }
 
-function setup_repos_essentialsIII(REPOS_DIR) {
-    svn mkdir ${REPOS_DIR}essentialsIII -q -m 'New project essentialsIII'
-    svn mkdir ${REPOS_DIR}essentialsIII/trunk -q -m 'New folder essentialsIII/trunk'
-    svn mkdir ${REPOS_DIR}essentialsIII/branches -q -m 'New folder essentialsIII/branches'
+function setup_repos_essentialsIII() {
+    fcm project-create essentialsIII ${REPO_DIR} --non-interactive
     mkdir -p ~/my_fcm_tutorial/essentialsIII
-    svn co ${REPOS_DIR}essentialsIII/trunk ~/my_fcm_tutorial/essentialsIII/trunk -q
- #   svn co ${REPOS_DIR}essentialsIII/branches ~/my_fcm_tutorial/essentialsIII/branches -q
+    svn co ${REPO_DIR}essentialsIII/trunk ~/my_fcm_tutorial/essentialsIII --non-interactive -q
 }
 
-function setup_repos_specifics(REPOS_DIR) {
-    svn mkdir ${REPOS_DIR}specifics -q -m 'New project specifics'
-    svn mkdir ${REPOS_DIR}specifics/trunk -q -m 'New folder specifics/trunk'
-    svn mkdir ${REPOS_DIR}specifics/branches -q -m 'New folder specifics/branches'
+function setup_repos_specifics() {
+    fcm project-create specifics ${REPO_DIR} --non-interactive 
     mkdir -p ~/my_fcm_tutorial/specifics
-    svn co ${REPOS_DIR}specifics/trunk ~/my_fcm_tutorial/specifics/trunk -q
- #   svn co ${REPOS_DIR}specifics/branches ~/my_fcm_tutorial/specifics/branches -q
+    svn co ${REPO_DIR}/specifics/trunk ~/my_fcm_tutorial/specifics --non-interactive -q
+}
+
+function branch-create-co() {
+    fcm bc ${BRANCH_NAME} fcm:${REPO_NAME}_tr --non-interactive
+}
+
+function keywords() {
+#REPO_NAME, REPO_DIR, PROJECT) {
+  if [[ ${PROJECT} == "essentialsIII" ]]; then 
+
+    echo If you do not have a "~/.metomi/fcm/" directory it will now be created.
+    if [[ ! -e ~/.metomi/fcm/ ]]; then
+        mkdir -p ~/.metomi/fcm
+    fi
+
+    if [[ -e ~/.metomi/fcm/keyword.cfg ]]; then
+         echo Copying your original ~/.metomi/fcm/keyword.cfg file to ~/.metomi/fcm/keyword_orig_*.cfg
+         if [[ -e ~/.metomi/fcm/keyword_orig*.cfg ]]; then
+             LAST=$( ls -t ~/.metomi/fcm/keyword_orig* | head -1 | sed -e 's/keyword_orig_ *\([0-9]*\)/\1/' | sed -e 's/\(\.cfg\)*$//g')
+             NEW_LAST=$((${LAST}+1))
+             mv  ~/.metomi/fcm/keyword.cfg  ~/.metomi/fcm/keyword_orig${NEW_LAST}.cfg
+             echo Your original keyword.cfg has been moved to keyword_orig${NEW_LAST}.cfg as a backup.
+         else
+             mv  ~/.metomi/fcm/keyword.cfg  ~/.metomi/fcm/keyword_orig1.cfg
+             echo Your original keyword.cfg has been moved to keyword_orig1.cfg as a backup.
+         fi
+    fi
+
+    echo If you do not have a "~/.metomi/fcm/keyword.cfg" file it will now be created.
+    if [[ ! -e ~/.metomi/fcm/keyword.cfg ]]; then
+         touch ~/.metomi/fcm/keyword.cfg
+    fi
+  fi
+    if grep -Fq "[${REPO_NAME}]" ~/.metomi/fcm/keyword.cfg ; then
+        echo keyword exists
+    else
+        echo "location{primary}[${REPO_NAME}] = ${REPO_DIR}${PROJECT}" >> ~/.metomi/fcm/keyword.cfg
+    fi
 }
 
 # ------------------------------------------------------------------------------
@@ -82,21 +104,16 @@ function setup_repos_specifics(REPOS_DIR) {
 #
 # ------------------------------------------------------------------------------
 
-REPOS_DIR=${REPOS_DIR}
+REPO_DIR=file:///${HOME}/fcm_tutorial/repository/
+REPO_DIR2=${HOME}/fcm_tutorial/repository/
 
-WORK_DIR=$(mktemp -d)
-
-trap `finally` EXIT
-trap `finally` ERR
-
-if [[ ! -e ${HOME}/fcm_tutorial/repository ]]; then
+if [[ ! -e ${REPO_DIR2} ]]; then
     setup
 fi
 
 if [[ ! -e ~/my_fcm_tutorial/fundamentals ]];then
-    setup_repos_fundamentals(REPOS_DIR)
+    setup_repos_fundamentals ${REPO_DIR}
 fi
-
 
 
 # ------------------------------------------------------------------------------
@@ -113,7 +130,7 @@ if svn ls file://${HOME}/fcm_tutorial/repository/essentialsI > /dev/null 2>&1; t
     svn delete -q -m "delete" file://${HOME}/fcm_tutorial/repository/essentialsI
 fi
 
-setup_repos_essentialsI(REPOS_DIR)
+setup_repos_essentialsI ${REPO_DIR}
 
 
 # ------------------------------------------------------------------------------
@@ -130,7 +147,7 @@ if svn ls file://${HOME}/fcm_tutorial/repository/essentialsII > /dev/null 2>&1; 
     svn delete -q -m "delete" file://${HOME}/fcm_tutorial/repository/essentialsII
 fi
 
-setup_repos_essentialsII(REPOS_DIR)
+setup_repos_essentialsII ${REPO_DIR}
 
 
 # ------------------------------------------------------------------------------
@@ -147,173 +164,161 @@ if svn ls file://${HOME}/fcm_tutorial/repository/essentialsIII > /dev/null 2>&1;
     svn delete -q -m "delete" file://${HOME}/fcm_tutorial/repository/essentialsIII
 fi
 
-setup_repos_essentialsIII(REPOS_DIR)
+setup_repos_essentialsIII ${REPO_DIR}
 
 # Now populate the trunk copy with some files and directories
 
-cd ~/my_fcm_tutorial/essentialsIII/trunk
-svn mkdir etc lib
-echo "Some text to test that this works
-and some more to try to figure out what
-I can really do!" > etc/my_test_text.txt
+PROJECT=essentialsIII
+REPO_NAME=fcm_esiii
+TEST_DIR=${HOME}/fcm_tutorial/repository/${PROJECT}
+REPOS_URL="file://${TEST_DIR}"
+ROOT_URL=${REPOS_URL}
+ROOT_PATH=${REPOS_URL}
 
-echo "This part of the fcm tutorial will
+cd ~/my_fcm_tutorial/${PROJECT}
+
+svn mkdir etc lib
+cat > etc/my_test_text.txt << EOF
+Some text to test that this works
+and some more to try to figure out what
+I can really do!
+EOF
+
+cat > etc/fcm_stuff.txt << EOF
+This part of the fcm tutorial will
 discuss the commands bls, bdel, up, 
 revert, merge --reverse, and the more
-complicated statuses." > etc/fcm_stuff.txt
+complicated statuses.
+EOF
 
-echo "#!/usr/bin/env python
-print ${USER}" > lib/my_python.py
+cat > lib/my_python.py << EOF
+#!/usr/bin/env python
+print ${USER}
+EOF
 
-echo "This text file is to be updated and ..." > update_branch.txt
+cat > update_branch.txt << EOF
+This text file is to be updated and ...
+EOF
 
-echo "This text file is for the revert demo." > revert.txt
+cat > revert.txt << EOF
+This text file is for the revert demo.
+EOF
 
-echo "This text file is for the merge reverse
-and it is one sentence long." > merge_reverse.txt
+cat > merge_reverse.txt << EOF
+This text file is for the merge reverse
+and it is one sentence long."
+EOF
 
-echo "This file will be used to create a 
-replacement issue." > statusesR.txt
+cat > statusesR.txt << EOF
+This file will be used to create a 
+replacement issue.
+EOF
 
-echo "This file will be used to create a 
-text conflict issue." > statusesC_text.txt
+cat > statusesC_text.txt << EOF
+This file will be used to create a 
+text conflict issue.
+EOF
 
-echo "This file will be used to create a 
-tree conflict issue." > etc/statusesC_tree.txt
+cat > etc/statusesC_tree.txt << EOF
+This file will be used to create a 
+tree conflict issue.
+EOF
 
 svn add -q etc/my_test_text.txt etc/fcm_stuff.txt lib/my_python.py
 svn add -q update_branch.txt revert.txt merge_reverse.txt statusesR.txt 
 svn add -q statusesC_text.txt etc/statusesC_tree.txt
-svn ci -m "These changes to the trunk are for setting up a trunk repository so that it has all the files and directories that are needed for the EssentialsIII tutorial section."
+svn ci -m "Setting up the Essentials III tutorial.
+These changes are for setting up a project so that it has all the files and directories that are needed for the EssentialsIII tutorial section."
+svn up
  
-
-# Add fcm keywords
-if [[ ! -e ~/.metomi/fcm/ ]]; then
-    mkdir -p ~/.metomi/fcm
-fi
-
-if [[ ! -e ~/.metomi/fcm/keyword.cfg ]]; then
-     touch ~/.metomi/fcm/keyword.cfg
-fi
-
-if grep -Fq "fcm_esIII" ~/.metomi/fcm/keyword.cfg ; then
-    echo keyword exists
-else
-    echo "location{primary}[fcm_esIII] = ${REPOS_DIR}essentialsIII" >> ~/.metomi/fcm/keyword.cfg
-fi
+# Add keywords
+keywords ${REPO_NAME} ${REPO_DIR2} ${PROJECT}
 
 # Branching
-PROJECT=essentialsIII
-TEST_DIR=${HOME}/fcm_tutorial/repository/$PROJECT
-WORK_DIR=${HOME}/my_fcm_tutorial/$PROJECT
-REPOS_URL="file://$TEST_DIR"
-ROOT_URL=$REPOS_URL
-ROOT_PATH=$REPOS_URL
-
-cd ${HOME}/my_fcm_tutorial/$PROJECT/trunk/
-svn info > ${WORK_DIR/}tmp.txt
-REV=$(grep "^Revision: " ${WORK_DIR}/tmp.txt | cut -d' ' -f2)
-
-cd ${HOME}/fcm_tutorial/repository/
+REV=$(svn info | grep Revision | sed -e 's/Revision: *\([0-9]*\)/\1/')
 
 # Branch branch_update
 BRANCH_NAME="branch_update"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-# svn bc branch_update fcm:fcm_esIII_tr
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
-svn co -q $ROOT_URL/branches/dev/${USER}/branch_update ${WORK_DIR}/branch_update
-
-# svn bc branch_update2 fcm:fcm_esIII_tr
-svn co -q $ROOT_URL/branches/dev/${USER}/branch_update ${WORK_DIR}/branch_update2
-# Make a change to the repository so we can update
-cd ${WORK_DIR}/branch_update2
-echo "... here is the rest of it." >> update_branch.txt
+# Branch branch_update2
+BRANCH_NAME="branch_update2"
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
+fcm sw -q fcm:${REPO_NAME}/branches/dev/${USER}/r${REV}_${BRANCH_NAME}
+cat >> update_branch.txt << EOF
+... here is the rest of it.
+EOF
 svn ci -m "This change to the trunk so that we can make an update."
-
+fcm sw trunk -q
 
 # Branch branch_revert
 BRANCH_NAME="branch_revert"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/branch_revert ${WORK_DIR}/branch_revert
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Branch branch_delete
 BRANCH_NAME="branch_delete"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/branch_delete ${WORK_DIR}/branch_delete
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Branch branch_merge_reverse
 BRANCH_NAME="branch_merge_reverse"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/branch_merge_reverse ${WORK_DIR}/branch_merge_reverse
-
-# Populate branch_merge_reverse with multiple commits
-cd ${WORK_DIR}/branch_merge_reverse
-echo "This is the second sentence." >> merge_reverse.txt
-svn ci -m "This change to branch, branch_merge_reverse, is for setting up the branch, merge_reverse so that is has multiple commits, this is commit 1."
-echo "The third sentence." >> merge_reverse.txt
-svn ci -m "This change to branch, branch_merge_reverse, is for setting up the branch, merge_reverse so that is has multiple commits, this is commit 2."
-echo "Finally the forth sentence." >> merge_reverse.txt
-svn ci -m "This change to branch, branch_merge_reverse, is for setting up the branch, merge_reverse so that is has multiple commits, this is commit 3."
+branch-create-co ${BRANCH_NAME} ${REV} ${REPO_NAME}
+fcm sw -q fcm:${REPO_NAME}_br/dev/${USER}/r${REV}_${BRANCH_NAME}
+cat >> merge_reverse.txt << EOF
+This is the second sentence.
+EOF
+svn ci -m "branch_merge_reverse change, multiple commits, commit 1."
+cat >> merge_reverse.txt << EOF
+The third sentence.
+EOF
+svn ci -m "branch_merge_reverse change, multiple commits, commit 2."
+cat >> merge_reverse.txt << EOF
+Finally the forth sentence.
+EOF
+svn ci -m "branch_merge_reverse change, multiple commits, commit 3."
+fcm sw trunk -q
 
 # Branch branch_replacement
 BRANCH_NAME="branch_replacement"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/branch_replacement ${WORK_DIR}/branch_replacement
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Branch branch_conflict_text
 BRANCH_NAME="branch_conflict_text"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/branch_conflict_text ${WORK_DIR}/branch_conflict_text
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Branch branch_conflict_text2
 BRANCH_NAME="branch_conflict_text2"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/branch_conflict_text2 ${WORK_DIR}/branch_conflict_text2
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Branch branch_conflict_tree
 BRANCH_NAME="branch_conflict_tree"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/branch_conflict_tree ${WORK_DIR}/branch_conflict_tree
-
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 # Populate branch_conflict_tree with a tree conflict for a merge
-cd ${WORK_DIR}/branch_conflict_tree
+fcm sw -q fcm:${REPO_NAME}_br/dev/${USER}/r${REV}_${BRANCH_NAME}
 svn mkdir utils
-echo "merge, update, revert, bls, branch-list" > utils/tool_list.txt
+cat >> utils/tool_list.txt << EOF
+merge, update, revert, bls, branch-list
+EOF
 svn add utils/tool_list.txt
-svn ci -m "This change to branch, branch_conflict_tree, is for creating a tree conflict(      C) status with the new branch when this branch is merged into the new."
+svn ci -m "branch_conflict_tree change, create a tree conflict(      C) status."
+fcm sw trunk
 
 # Branch branch_conflict_tree2
 BRANCH_NAME="branch_conflict_tree2"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/branch_conflict_tree2 ${WORK_DIR}/branch_conflict_tree2
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Populate branch_conflict_tree2 with a tree conflict for a merge
-cd ${WORK_DIR}/branch_conflict_tree2
+fcm sw -q fcm:${REPO_NAME}_br/dev/${USER}/r${REV}_${BRANCH_NAME}
 svn mkdir utils
-echo "merge, update, revert, bls, text conflict" > utils/tool_list.txt
-echo "binfo" >> utils/tool_list.txt
+cat >> utils/tool_list.txt << EOF
+merge, update, revert, bls, text conflict
+EOF
+cat >> utils/tool_list.txt << EOF
+binfo
+EOF
 svn add utils/tool_list.txt
-svn ci -m "This change to the branch_conflict_tree2 for creating a tree conflict(      C) status with the branch, branch_conflict_tree when the branch is merged into branch_conflict_tree2."
+svn ci -m "branch_conflict_tree2 change create a tree conflict(      C) status."
 svn up
-
+fcm sw trunk
 
 # ------------------------------------------------------------------------------
 #
@@ -333,196 +338,174 @@ fi
 setup_repos_specifics
 
 REPOS=${HOME}/fcm_tutorial/repository
-cat <<EOF >$REPOS/hooks/pre-revprop-change
+cat <<EOF >${REPOS}/hooks/pre-revprop-change
 #!/bin/sh
 exit 0
 EOF
-chmod 755 $REPOS/hooks/pre-revprop-change
+chmod 755 ${REPOS}/hooks/pre-revprop-change
 
 # Now populate the trunk copy with some files and directories
 
-cd ~/my_fcm_tutorial/specifics/trunk
-fcm mkdir lib
+PROJECT=specifics
+REPO_NAME=fcm_sp
+TEST_DIR=${HOME}/fcm_tutorial/repository/${PROJECT}
+REPOS_URL="file://${TEST_DIR}"
+ROOT_URL=${REPOS_URL}
+ROOT_PATH=${REPOS_URL}
+
+cd ~/my_fcm_tutorial/${PROJECT}
+
+svn mkdir lib
 # change for propset exe
-echo "/usr/bin/env python
-print 'Hello world' " > lib/my_hello_script.py
+cat > lib/my_hello_script.py << EOF
+/usr/bin/env python
+print 'Hello world'
+EOF
 svn add lib/my_hello_script.py
-svn ci -m "Change made to correct the properties on my_hello_script.py using propset svn:executable ON"
+svn ci -m "Change properties of my_hello_script.py, demo propset svn:executable ON"
 # change for propset ign
-echo "In theory this is a data file that will keep growing 
+cat > ever_growing_file.dat << EOF 
+In theory this is a data file that will keep growing 
 during the life of the repository so we do not want to commit
-it to the repository and we just want to ignore it!" > ever_growing_file.dat
+it to the repository and we just want to ignore it!
+EOF
 svn add ever_growing_file.dat
-svn ci -m "Change made to provide a .dat file that we would want to ignore using propset svn:ignore"
+svn ci -m "Change .dat file, demo propset svn:ignore"
 # change for propdel exe
-echo "/usr/bin/env python
-print Read me only, please don't execute this file " > lib/readme_only.py
+cat > lib/readme_only.py << EOF
+/usr/bin/env python
+print Read me only, please don't execute this file 
+EOF
 chmod 755 lib/readme_only.py
 svn add lib/readme_only.py
-svn ci -m "Change made to correct the properties on readme_only.py using propdel svn:executable"
+svn ci -m "Change properties of readme_only.py, demo propdel svn:executable"
 # change for propedit
-fcm mkdir etc
+svn mkdir etc
 svn ci -m "Adding the etd/ directory."
-echo "In the following example, the branch in the working copy has had a 
-deletion of a file." > tree_conflict.txt
+cat > tree_conflict.txt << EOF
+In the following example, the branch in the working copy has had a 
+deletion of a file.
+EOF
 svn add tree_conflict.txt
-svn ci "A tree conflict from deleting a file and then merging in a branch which has the file not deleted but modified."
-echo "Our final change to the trunk!" > etc/readme.txt
+svn ci "Create a tree conflict, delete then merge."
+cat > etc/readme.txt << EOF
+Our final change to the trunk!
+EOF
 svn add etc/readme.txt
-svn ci -m "These changes to the trunk are for setting up a trunk repository so that it has all the files and directories that are needed for the Specifics tutorial section."
+svn ci -m "Setup trunk for Specifics tutorial section."
+svn up
  
-
 # Add fcm keywords
-if [[ ! -e ~/.metomi/fcm/ ]]; then
-    mkdir -p ~/.metomi/fcm
-fi
-
-if [[ ! -e ~/.metomi/fcm/keyword.cfg ]]; then
-     touch ~/.metomi/fcm/keyword.cfg
-fi
-
-if grep -Fq "fcm_spe" ~/.metomi/fcm/keyword.cfg ; then
-    echo keyword exists
-else
-    echo "location{primary}[fcm_spe] = ${REPOS_DIR}specifics" >> ~/.metomi/fcm/keyword.cfg
-fi
+keywords ${REPO_NAME} ${REPO_DIR2} ${PROJECT}
 
 # Branching
-PROJECT=specifics
-TEST_DIR=${HOME}/fcm_tutorial/repository/$PROJECT
-WORK_DIR=${HOME}/my_fcm_tutorial/$PROJECT
-REPOS_URL="file://$TEST_DIR"
-ROOT_URL=$REPOS_URL
-ROOT_PATH=$REPOS_URL
-
-cd ${HOME}/my_fcm_tutorial/$PROJECT/trunk/
-svn info > ${WORK_DIR}/tmp.txt
-REV=$(grep "^Revision: " ${WORK_DIR}/tmp.txt | cut -d' ' -f2)
-
-cd ${HOME}/fcm_tutorial/repository/
-
+REV=$(svn info | grep Revision | sed -e 's/Revision: *\([0-9]*\)/\1/')
 
 # Branch branch_merge_custom
 BRANCH_NAME="branch_merge_custom"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} ${WORK_DIR}/${BRANCH_NAME}
-
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Branch branch_propset_exe
 BRANCH_NAME="branch_propset_exe"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} ${WORK_DIR}/${BRANCH_NAME}
-
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Branch branch_propset_ign
 BRANCH_NAME="branch_propset_ign"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} ${WORK_DIR}/${BRANCH_NAME}
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Branch branch_propdel
 BRANCH_NAME="branch_propdel"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} ${WORK_DIR}/${BRANCH_NAME}
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Branch branch_propedit
 BRANCH_NAME="branch_propedit"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} ${WORK_DIR}/${BRANCH_NAME}
-
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Branch branch_resolve
 BRANCH_NAME="branch_resolve"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} ${WORK_DIR}/${BRANCH_NAME}
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
-
-cd ${WORK_DIR}/${BRANCH_NAME}
+fcm sw -q fcm:${REPO_NAME}_br/dev/${USER}/r${REV}_${BRANCH_NAME}
 svn mkdir lib/utility/
-echo "more merge, propset|del|edit, xxdiff, resolve, Trac, browse, tickets,
-branch-diff -t,  text conflict" > lib/utility/tool_list.txt
-echo "conflicts, tree conflicts." >> lib/utility/tool_list.txt
+cat >> lib/utility/tool_list.txt << EOF
+more merge, propset|del|edit, xxdiff, resolve, Trac, browse, tickets,
+branch-diff -t,  text conflict
+EOF
+cat >> lib/utility/tool_list.txt << EOF
+conflicts, tree conflicts.
+EOF
 svn add lib/utility/tool_list.txt
-svn ci -m "This change to the ${BRANCH_NAME} for creating a test conflict(      C) status with the branch, branch_conflict_tree when the branch is merged into ${BRANCH_NAME}."
+svn ci -m "Create a test conflict(      C) status with this branch."
 svn up
-
+fcm sw trunk
 
 # Branch branch_conflict_tree
 BRANCH_NAME="branch_conflict_tree"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} ${WORK_DIR}/${BRANCH_NAME}
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Populate branch_conflict_tree with a tree conflict for a merge
-cd ${WORK_DIR}/${BRANCH_NAME}
+fcm sw -q fcm:${REPO_NAME}_br/dev/${USER}/r${REV}_${BRANCH_NAME}
 svn mkdir lib/utility/
-echo "more merge, propset|del|edit, xxdiff, resolve, Trac, browse, tickets,
-branch-diff -t,  text conflict" > lib/utility/tool_list.txt
+cat >> lib/utility/tool_list.txt << EOF
+more merge, propset|del|edit, xxdiff, resolve, Trac, browse, tickets,
+branch-diff -t,  text conflict
+EOF
 svn add lib/utility/tool_list.txt
-svn ci -m "This change to branch, ${BRANCH_NAME}, is for creating a tree conflict(      C) status with the new branch when this branch is merged into the new."
+svn ci -m "Creating a tree conflict(      C) status with this branch."
 svn delete tree_conflict.txt
-svn ci -m "Deleting the tree_conflict.txt file to make a tree conflict with branch_conflict_tree2."
+svn ci -m "Creating a tree conflict with branch_conflict_tree2."
+fcm sw trunk
 
 # Branch branch_conflict_tree2
 BRANCH_NAME="branch_conflict_tree2"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} ${WORK_DIR}/${BRANCH_NAME}
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 # Populate branch_conflict_tree2 with a tree conflict for a merge
-cd ${WORK_DIR}/${BRANCH_NAME}
+fcm sw -q fcm:${REPO_NAME}_br/dev/${USER}/r${REV}_${BRANCH_NAME}
 # Modifying the tree_conflict.txt file.
-echo "The branch that is being merged in has subsequently 
+cat >> tree_conflict.txt << EOF
+The branch that is being merged in has subsequently 
 modified the file, which means that you may want to incorporate these changes. 
-A tree conflict is therefore flagged up." >> tree_conflict.txt
-svn ci -m "This change to the ${BRANCH_NAME} for creating a tree conflict(      C) status with the branch, branch_conflict_tree when the branch is merged into ${BRANCH_NAME}."
+A tree conflict is therefore flagged up.
+EOF
+svn ci -m "Create a tree conflict(      C) status with this branch."
 svn up
-
-cd ${WORK_DIR}/trunk
 # Add multiple commits for the merge --custom --revision example
-svn mkdir etc
 svn ci -m "Adding the etc/ directory."
-echo "Rock bands that are awesome in my opinon:
+cat >> etc/amazing_rock.txt << EOF
+Rock bands that are awesome in my opinon:
 Shinedown, Reckless Love, Romeos Daughter, Vega, 21 Octayne,
-Ozone, Avantasia, Black Star Rising, Blood Red Saints..." > etc/amazing_rock.txt
+Ozone, Avantasia, Black Star Rising, Blood Red Saints...
+EOF
 svn add etc/amazing_rock.txt
 svn ci -m "Adding a list of the rock bands that I enjoy."
-echo "...Metallica, Bon Jovi, Whitesnake, Def Leppard, Danger Danger, 
-Guns and Roses, Blue Tears, Newman, Queen, Aerosmith" >> etc/amazing_rock.txt
+cat >> etc/amazing_rock.txt << EOF
+...Metallica, Bon Jovi, Whitesnake, Def Leppard, Danger Danger, 
+Guns and Roses, Blue Tears, Newman, Queen, Aerosmith
+EOF
 svn ci -m "This list is endless but it needed some amazing oldies."
-echo "My fav 90's pop:
-Take Take, Spice Girls, Boyzone, Westlife, East 17, Boyz2Men" > etc/90s_pop.txt
+cat >> etc/90s_pop.txt << EOF
+My fav 90's pop:
+Take Take, Spice Girls, Boyzone, Westlife, East 17, Boyz2Men
+EOF
 svn add etc/90s_pop.txt
 svn ci -m "Adding a list of my fav 90's pop bands."
-echo "Okay I really did not like these, sorry!" >> etc/90s_pop.txt
+cat >> etc/90s_pop.txt << EOF
+Okay I really did not like these, sorry!
+EOF
 svn ci -m "Adding a honest comment to the file etc/90s_pop.txt."
-echo "Dare, Heat, Heart, Robin Beck, Meat Loaf, Iron Maiden
+cat >> etc/amazing_rock.txt << EOF
+Dare, Heat, Heart, Robin Beck, Meat Loaf, Iron Maiden
 Bryan Adams, Soul Assylum, Pink Floyd, The Jam, Rock Sugar, 
-Rolling Stones..." >> etc/amazing_rock.txt
+Rolling Stones...
+EOF
 svn ci -m "Adding more to the list of amazing rock bands."
 svn up
+fcm sw trunk
 
-cd ${HOME}/fcm_tutorial/repository/
 # Branch branch_merge_custom2
 BRANCH_NAME="branch_merge_custom2"
-MESSAGE=$(echo -e "Created $ROOT_PATH/branches/dev/${USER}/${BRANCH_NAME} from /trunk@$REV.")
-svn copy -q --parents $ROOT_URL/trunk $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} \
-                -m "Made a branch ${MESSAGE}"
-svn co -q $ROOT_URL/branches/dev/${USER}/${BRANCH_NAME} ${WORK_DIR}/${BRANCH_NAME}
-
+branch-create-co ${BRANCH_NAME} ${REPO_NAME}
 
 exit
 
