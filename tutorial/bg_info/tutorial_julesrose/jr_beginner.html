@@ -79,7 +79,7 @@ dy>
         </nav>
         <div class="container theme-showcase" role="main">
         <div class="jumbotron">
-            <h1>Beginners background guide to JULES, Rose/Cylc, MOSRS, JULES with Rose, version control (Subversion/FCM), running JULES rose suites and rose stem </h1>
+            <h1>JULES beginners background guide</h1>
             <p>This aims to explain the importance of:
             <ul>
                 <li><a href="#bgj">Background of JULES</a></li>
@@ -679,6 +679,39 @@ Global options_
              <ol>
                  <li>Create a directory at <code>~/jules/</code></li>
                  <li>Checkout the trunk at vn4.7 (or the latest <a href="https://code.metoffice.gov.uk/trac/jules#ReleaseSchedule">release</a>)</li>
+                 <p>We want to run the "rose-stem" suite now, but firstly what is the rose-stem suite and why do we want to run it?</p>
+            <br/>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+Rose-stem is a collection of tests in a suite.
+It is used to test as much of the code and science as possible.
+This means developers can prove that any change does not break other code and
+or science and is bit compatiable with the previous run checking Known Good
+Output (KGO).
+Rose-stem can test on different platforms and with different compliers.
+Ideally all sites will have their own rose-stem tests that they run, preferably,
+weekly.
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
                 <li>Change to the <code>~/jules/trunk/</code> directory and run all of the <code>rose stem</code> tests making sure that the suite is a "new" run using the command <code>rose stem --new --group=all</code></li>
             <br/>
             <div class="panel-group" id="accordion">
@@ -721,18 +754,18 @@ rose stem --new --group=all
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
                         <span class="glyphicon"></span>
                         Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseSix" class="panel-collapse collapse">
+                <div id="collapseSeven" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
                             <font color=blue>
-&gt rose stem --group=all --new
+&gt; rose stem --group=all --new
 [INFO] Source tree /net/home/.../jules/trunk added as branch
 [INFO] chdir: /net/home/.../jules/trunk/rose-stem/
 [INFO] Will run suite from /net/home/.../jules/trunk/rose-stem
@@ -742,17 +775,17 @@ rose stem --new --group=all
 [INFO] delete: /data/.../cylc-run/trunk/work/
 [INFO] create: /home/.../cylc-run/trunk
 [INFO] create: log.20161212T145319Z
-[INFO] symlink: log.20161212T145319Z &lt= log
+[INFO] symlink: log.20161212T145319Z &lt;= log
 [INFO] create: log/suite
 [INFO] create: log/rose-conf
-[INFO] symlink: rose-conf/20161212T145319-run.conf &lt= log/rose-suite-run.conf
-[INFO] symlink: rose-conf/20161212T145319-run.version &lt= log/rose-suite-run.version
+[INFO] symlink: rose-conf/20161212T145319-run.conf &lt;= log/rose-suite-run.conf
+[INFO] symlink: rose-conf/20161212T145319-run.version &lt;= log/rose-suite-run.version
 [INFO] create: /net/data/.../cylc-run/trunk/share
-[INFO] symlink: /net/data/.../cylc-run/trunk/share &lt= share
+[INFO] symlink: /net/data/.../cylc-run/trunk/share &lt;= share
 [INFO] create: /net/data/.../cylc-run/trunk/share/data
-[INFO] symlink: data &lt= share/cycle
+[INFO] symlink: data &lt;= share/cycle
 [INFO] create: /net/data/.../cylc-run/trunk/work
-[INFO] symlink: /net/data/.../cylc-run/trunk/work &lt= work
+[INFO] symlink: /net/data/.../cylc-run/trunk/work &lt;= work
 [INFO] export CYLC_VERSION=6.11.2
 [INFO] export ROSE_ORIG_HOST=eld661
 [INFO] export ROSE_VERSION=2016.11.1
@@ -771,23 +804,23 @@ rose stem --new --group=all
 [INFO] install: suite.rc
 [INFO] 0 suite(s) unregistered.
 [INFO] REGISTER trunk: /home/.../cylc-run/trunk
-[INFO] symlink: /home/.../cylc-run/trunk &lt= /home/.../.cylc/trunk
+[INFO] symlink: /home/.../cylc-run/trunk &lt;= /home/.../.cylc/trunk
 [INFO] WARNING: deprecated items were automatically upgraded in 'suite definition':
-[INFO]  * (6.11.0) [cylc][event hooks][shutdown handler] -&gt [cylc][events][shutdown handler] - value unchanged
+[INFO]  * (6.11.0) [cylc][event hooks][shutdown handler] -&gt; [cylc][events][shutdown handler] - value unchanged
 [INFO]  * (6.11.0) [cylc][event hooks] - value unchanged
-[INFO]  * (6.11.0) [runtime][root][event hooks][submission timeout handler] -&gt [runtime][root][events][submission timeout handler] - value unchanged
-[INFO]  * (6.11.0) [runtime][root][event hooks][submission timeout handler] -&gt [runtime][root][events][submission timeout handler] - value unchanged
-[INFO]  * (6.11.0) [runtime][root][event hooks][retry handler] -&gt [runtime][root][events][retry handler] - value unchanged
-[INFO]  * (6.11.0) [runtime][root][event hooks][execution timeout] -&gt [runtime][root][events][execution timeout] - value unchanged
-[INFO]  * (6.11.0) [runtime][root][event hooks][submission timeout] -&gt [runtime][root][events][submission timeout] - value unchanged
-[INFO]  * (6.11.0) [runtime][root][event hooks][execution timeout handler] -&gt [runtime][root][events][execution timeout handler] - value unchanged
-[INFO]  * (6.11.0) [runtime][root][event hooks][submission failed handler] -&gt [runtime][root][events][submission failed handler] - value unchanged
-[INFO]  * (6.11.0) [runtime][root][event hooks][succeeded handler] -&gt [runtime][root][events][succeeded handler] - value unchanged
-[INFO]  * (6.11.0) [runtime][root][event hooks][failed handler] -&gt [runtime][root][events][failed handler] - value unchanged
-[INFO]  * (6.11.0) [runtime][LINUX][job submission][method] -&gt [runtime][LINUX][job][batch system] - value unchanged
-[INFO]  * (6.11.0) [runtime][METO_LINUX_COMPUTE][job submission][method] -&gt [runtime][METO_LINUX_COMPUTE][job][batch system] - value unchanged
-[INFO]  * (6.11.0) [runtime][METO_LINUX_NETCDF_COMPARISON][job submission][method] -&gt [runtime][METO_LINUX_NETCDF_COMPARISON][job][batch system] - value unchanged
-[INFO]  * (6.11.0) [runtime][METO_XC40][job submission][method] -&gt [runtime][METO_XC40][job][batch system] - value unchanged
+[INFO]  * (6.11.0) [runtime][root][event hooks][submission timeout handler] -&gt; [runtime][root][events][submission timeout handler] - value unchanged
+[INFO]  * (6.11.0) [runtime][root][event hooks][submission timeout handler] -&gt; [runtime][root][events][submission timeout handler] - value unchanged
+[INFO]  * (6.11.0) [runtime][root][event hooks][retry handler] -&gt; [runtime][root][events][retry handler] - value unchanged
+[INFO]  * (6.11.0) [runtime][root][event hooks][execution timeout] -&gt; [runtime][root][events][execution timeout] - value unchanged
+[INFO]  * (6.11.0) [runtime][root][event hooks][submission timeout] -&gt; [runtime][root][events][submission timeout] - value unchanged
+[INFO]  * (6.11.0) [runtime][root][event hooks][execution timeout handler] -&gt; [runtime][root][events][execution timeout handler] - value unchanged
+[INFO]  * (6.11.0) [runtime][root][event hooks][submission failed handler] -&gt; [runtime][root][events][submission failed handler] - value unchanged
+[INFO]  * (6.11.0) [runtime][root][event hooks][succeeded handler] -&gt; [runtime][root][events][succeeded handler] - value unchanged
+[INFO]  * (6.11.0) [runtime][root][event hooks][failed handler] -&gt; [runtime][root][events][failed handler] - value unchanged
+[INFO]  * (6.11.0) [runtime][LINUX][job submission][method] -&gt; [runtime][LINUX][job][batch system] - value unchanged
+[INFO]  * (6.11.0) [runtime][METO_LINUX_COMPUTE][job submission][method] -&gt; [runtime][METO_LINUX_COMPUTE][job][batch system] - value unchanged
+[INFO]  * (6.11.0) [runtime][METO_LINUX_NETCDF_COMPARISON][job submission][method] -&gt; [runtime][METO_LINUX_NETCDF_COMPARISON][job][batch system] - value unchanged
+[INFO]  * (6.11.0) [runtime][METO_XC40][job submission][method] -&gt; [runtime][METO_XC40][job][batch system] - value unchanged
 [INFO] 2016-12-12T14:53:24Z WARNING - task "fcm_make_meto_linux_intel_omp_nompi" not used in the graph.
 [INFO] 2016-12-12T14:53:24Z WARNING - task "METO_XC40_CORES_8" not used in the graph.
 [INFO] 2016-12-12T14:53:24Z WARNING - task "METO_XC40_OMPTHREADS_8" not used in the graph.
@@ -815,6 +848,117 @@ rose stem --new --group=all
 [INFO]  * ssh xxxcylcxx.metoffice.gov.uk "pgrep -a -P 1 -fu $USER 'cylc-r.* \btrunk\b'"
 [INFO] 
                             </font>
+Note that the "WARNINGS", are just warnings and will not cause problems with 
+running the tests.
+Your output will look different as it will have the paths complete and may or
+may not have so many locations to delete any previous run's data from.
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+           Now lets explore the GUI's.
+           <h3>The cylc gcylc GUI</h3>
+           <p>This should have opened up on your screen as a result of running
+              the last command.</p>
+           <p>It is the suite specific Graphical User Interface for monitoring 
+              the progress of your specific suite.</p>
+           <p>Note you can have multiple uniques gcylc's open for different 
+              suites.</p>
+           <p>Your rose-stem gcycl GUI should look like this:</p>
+           <img src="rose_stem_gcylc.png" width="90%" id="rsg1"/>
+           </br>
+           <p>Lets look at the image and try to understand it.</p>
+           <h4>Key points from the gcylc GUI</h4>
+           <ol>
+           <li>The square coloured blocks - theses are the currect states of the tasks
+           </br><img src="task_filtering.png" width="35%" id="tf"/></li>
+           <li>The "F" inside the square blocks - this denotes that it is a 
+           family of tasks</li>
+           <li>Here the Family GSWP2 and METO_LINUX_GFORTRAN_GSWP2 are expanded
+           using the arrows beside them and we can see that all eight members 
+           of the family are in a waiting state and the full names of the task.</li>
+           <li>When a task has run you can look at its standard output via the 
+           GUI by right clicking on the task name.
+           For example, fcm_make_meto_xc40_cce-omp:
+           </br><img src="gcylc_investigate.png" width="90%" id="cg_invest"/>
+           </br>Then you can look at the standard out, err and interact with
+           the task.</li>
+           <li>We can pause or stop the suite using the buttons at the top left
+           of the gcycl GUI or by selecting the <code>Control</code> tab
+           </br><img src="stop_suite.png" width="90%" id="ss"/>
+           </br><img src="stop_suite_daemon.png" width="35%" id="ssd"/>
+           </br>Note in the last image in the top taskbar it says:
+           <code>Stop Suite Daemon vn4p7</code> this means that this panel 
+           can be used to stop the suite at the location it is running using 
+           the suite daemon.
+           Which is the computer program that runs as a background process.</li>
+           There are many other functions that we will learn about through the
+           tutorial but these are the basics.
+           </ol>
+            <br/>
+            Questions the on gcycl GUI
+            <ol>
+            <li>How can you find the error of a task?</li>
+            <li>In the image above in 5. what is the state of the 
+            fcm_make_meto_xce40_cce_debug task, what two ways do you know from
+            the GUI?</li>
+            <li>In the image above in 5. what is the state of the 
+            METO_LINUX_BUILD family?</li>
+            <li>In the image above in 5. what is the state of the
+            KGO_CHECK family?</li>
+            <li>What does KGO stand for? (Answer is not in the GUI.)</li>
+            <li>What two ways could you pause a suite?</li>
+            <li>Why do you think that you may want to kill a suite and how 
+            would you do so?</li>
+            </ol>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseEight" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+<ol>
+<li>How can you find the error of a task?</li>
+<font color=green>
+Right click on the task, select 'View', select 'job stderr'.
+</font>
+<li>In the image above in 5. what is the state of the 
+fcm_make_meto_xce40_cce_debug task, what two ways do you know from the GUI?</li>
+<font color=green>
+succeeded, it is a grey square and the 'state' column say 'succeeded'.
+</font>
+<li>In the image above in 5. what is the state of the METO_LINUX_BUILD family?</li>
+<font color=green>
+running
+</font>
+<li>In the image above in 5. what is the state of the KGO_CHECK family?</li>
+<font color=green>
+waiting
+</font>
+<li>What does KGO stand for? (Answer is not in the GUI.)</li>
+<font color=green>
+Known Good Output
+</font>
+<li>What two ways could you pause a suite?</li>
+<font color=green>
+Pause button on the top left or 'Control' and select 'Hold Suite (pause)'
+</font>
+<li>Why do you think that you may want to kill a suite and how would you do so?</li>
+<font color=green>
+There are mainly reasons, for example it failed and you need to fix the error.
+'Control' tab, select 'Stop Suite', select 'Stop after killing active tasks'
+</font>
+</ol>
                             </pre>
                         </div>
                     </div>
@@ -822,10 +966,24 @@ rose stem --new --group=all
             </div>
             <br/>
 
-
+            <h4>What if you do not have access to a GUI?</h4>
+            <p>There is a command line equlivant, it is not as elegant: </p>
+            <code>cylc scan -c</code>
+            <p>It should produce something like this:</p>
+            </br><img src="cylc_scan_c.png" id="csc"/>
+            </br>
+            <h4>What if you accidenetly close the gcycl GUI?</h4>
+            <p>You can reopen it using:</p>
+            <code>cylc gui vn4p7 #where vn4p7 is the suite id</code>
+            </br>OR
+            <p>You can use the cylc gscan GUI</p>
+            <code>cylc gscan &amp; #&amp; background the task so you can still use your terminal</code>
+            </br>
+            </br><img src="cylc_gscan.png" id="cgscan"/>
+            </br>
+            <p>Now you can double click on the suite id of the suite that you
+            want to open and the gcylc GUI of that will appear.</p>
 HERE
-
-            <br/>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -851,8 +1009,33 @@ HERE
             <br/>
 
     </div>
+        <br/>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+# make the directory ~/jules/ and the path that may be required.
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
         </ul>
         <br/>
+
         <ul>
             <div class="page-header">
                 <h2><a id="P4">Practical 4 - Checkout a suite</a></h2>
