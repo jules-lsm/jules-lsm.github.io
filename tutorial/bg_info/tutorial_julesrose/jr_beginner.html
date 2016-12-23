@@ -70,6 +70,7 @@ dy>
                                 <li><a href="jr_glossary.html">Glossary List</a></li>
                                 <li><a href="jr_links.html">Links</a></li>
                                 <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
+                                <li><a href="jr_structures.html">JULES structures</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -99,6 +100,37 @@ dy>
                <li>Have Rose, Cylc, FCM, keywords set up on the machine you are working on or are using the VM. <a href="https://github.com/metomi/metomi-vms">GitHub VM webpages</a> and the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine">guidance</a> from the JULES MOSRS web pages.</li>
             </ul>
         </div>
+      <div class="well">
+      <h2>How to use the tutorial</h2>
+      <p>
+      This tutorial has been designed to be used as a teach yourself guide to
+      JULES-Rose.
+      </p>
+      <p>
+      Ideally the tutorial would be used in the following order:
+      <ul>
+      <li><a href="jr_beginners.html">Beginners tutorial and practicals</a>
+      , pre-quiz section - this can be considered the starting point.</li>
+      <li><a href="beginners_quiz.html">Beginners quiz</a> - a quiz to
+      help you consider how you view your present understanding.</li>
+      <li><a href="jr_beginners.html">Beginners tutorial and practicals</a>
+      , post-quiz section - background, basic principles and some best working
+       practices, introducing FCM, Rose, Cylc, rose-stem etc.</li>
+      <li><a href="intermediate_quiz.html">Intermediate quiz</a> - introducing
+      the concepts that you will be encountering in the Intermediate section.</li>
+      <li><a href="jr_intermediate.html">Intermediate tutorial and practicals</a>
+      - this section is intended to provide the intermediate users information
+      on using JULES-Rose.</li>
+      <li><a href="advanced_quiz.html">Advanced quiz</a> - introducing the
+      concepts that you will be encountering in the Advanced section.</li>
+      <li><a href="jr_advnaced.html">Advanced tutorial and practicals</a>
+      this section is intended for advanced uses of JULES-Rose and covers
+      higher level development of code and suites.</li>
+      </ul>
+      The design of the tutorial does mean that the user can just access the
+      parts of the tutorial that they wish.
+      </p>
+      </div>
         <div class="well">
             First let's do the Beginner Quiz to see how much you already know and what we
             will need to focus on in this section, note there are no right or wrong answers
@@ -1022,7 +1054,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
                "Suite List" button.
                This then provides a list of the owners suites that they have 
                run and or are running.</p>
-            <img src="images/rose_bush2.png" width="85%" id="rb2"/>
+            <img src="images/rose_bush2.png" width="65%" id="rb2"/>
             </br>
             </br>
             <p>At the Met Office the suite level page looks like the image
@@ -1064,36 +1096,84 @@ There are mainly reasons, for example it failed and you need to fix the error.
             <p>Using the "Display Options" button to search for tasks by...
             </br>
             ...name (using the Task Name Glob) which means you can search for 
-            part of a name, for example *linux*
+            part of a name, for example <code>*linux*</code>
             </br>
-            ...task status (using the Select by Job  Status drop down box),
-            allowing you to search by the status for example searching for
-            Failed tasks is often very helpful
+            ...specifying the number of Entries/Page is helpful for both very 
+            large suites, especially when combined with other options
             </br>
             ...the Sort Order drop down is a useful option for example looking
             at the first failed task
             </br>
             ...you can combine options
             </br>
-            ...remeber to use the "update" button to apply your requested
+            ...remember to use the "update" button to apply your requested
              Display Options.
             </p>
             <img src="images/rose_bush7.png" width="85%" id="rb7"/>
             </br>
             </br>
-
-HEREHERE
+            <p>The "Display Options" also includes a very useful function of
+               being able to look at jobs via their task status.</p> 
+            <p>This can be done by selecting the Job Status drop down box.</p>
+            <p>You can then search by the status of the task.</p>
+            <p>For example searching for all Failed tasks is often very helpful.
+            </p>
             <img src="images/rose_bush8.png" width="85%" id="rb8"/>
             </br>
             </br>
             <p>Cycles List</p>
+            <p>The Cycles List tab at the top is useful for looking at the
+               suite dependant on its cycle.</p>
+            <p>As you can see below this functionality is not that useful for
+               rose stem suites.</p>
             <img src="images/rose_bush6.png" width="85%" id="rb6"/>
             </br>
-
-
+            </br>
             <h4>The cylc-run directory</h4>
-
-HERE
+            <p>A third place that we can look look at the logs for a suite is
+               in the <code>cylc-run</code> directory.</p>
+            <p>This directory is created by Cylc at the time that the run is 
+               started, it is populated by Cylc.</p>
+            <p>The cylc-run directory is the location where the information, 
+               logs and data are sent to.</p>
+            <p>The directory structure often looks like this:</p>
+            <pre>
+app                    include               suite.rc
+bin                    log                   suite.rc.processed
+cylc-suite-env         log.20161223T075541Z  trac.log
+cylc-suite-private.db  meta                  work
+cylc-suite-public.db   passphrase
+cylc-suite.db          share
+           </pre>
+           <p>The <code>log*/</code> directories are where all of the logs are 
+              located.</p>
+           <p>The <code>log/suite/</code> is where the suite logs are found.</p>
+           <p>The <code>log/job/1/</code> is where the logs for each task is
+              found.
+              This includes the <code>job stderr, job stdout</code>.</p>
+           <p>The <code>work/1/</code> directory is where the output for each
+              task is, but note if <code>HOUSEKEEPING</code> is run then these
+              may be deleted (housekept).</p>
+           <p>The <code>share/</code> directory is where any shared data or
+              cycle specific data is stored.</p>
+           <p>Note rose-stem is not a cycling suite so there is only 
+              <code>1</code> cycle, which is also why the directories above 
+              have a <code>1</code> in there path.</p>
+           <p>The <code>trac.log</code> is only produced for rose-stem suites.
+           </p>
+           <p>The <code>trac.log</code> is created once the suite has stopped
+              and is required for code development evidence in the
+              TicketSummary, more on this later.</p>
+           <p>The <code>app</code>, <code>bin</code>, <code>suite.rc</code>,
+              <code>include</code> and <code>meta</code> are all the same as 
+              are be found in the <code>rose-stem/</code> directory.</p>
+           <p>The <code>suite.rc.processed</code> is the suite.rc but with any
+              <code>Jinja2</code>, explained later, expanded fully, with all
+              variables and loops expanded.</p>
+           <p>The <code>cylc-suite*</code> files are database files for Rose
+              Bush etc.</p>
+           <p>The <code>passphase</code> is a communications level file.</p>
+           </br> 
             <h3> Test your understanding</h3>
             </br><img src="images/warning_tri.png" id="warning"/>
             <p>Explain the following from the image above (moving left to right):</p>
@@ -1122,7 +1202,7 @@ HERE
                    <div class="panel-body">
                         <div class="row">
             <ol>
-            <li>What does the filled gray square represent?</li>
+            <li>What does the filled grey square represent?</li>
             <font color=green>Succeeded tasks.</font>
             <li>What does the hollow purple square represent?</li>
             <font color=green>Filtered tasks.</font>
@@ -1144,81 +1224,325 @@ HERE
                 </div>
             </div>
             <br/>
+            <p>General questions on gcylc, rose bush etc.</p>
+            <ol>
+                <li>What three ways can you find the job stderr for a task?</li>
+                <li>In the gcylc GUI what does a <code>F</code> inside a 
+                    coloured square mean?</li>
+                <li>What two things in the gcylc GUI inform you of the state of
+                    a task? </li>
+                <li>How could you Stop a suite (all three ways)?</li>
+                <li>How could you open a closed gcylc GUI (both ways)?</li>
+                <li>How could you open Rose Bush from command line?</li>
+                <li>In Rose Bush how can you see only the Failed tasks?</li>
 
+            </ol>   
         <br/>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
                         <span class="glyphicon"></span>
                         Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseFive" class="panel-collapse collapse">
+                <div id="collapseTen" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
-                            <font color=green>
-# make the directory ~/jules/ and the path that may be required.
-                            </font>
+            <ol>
+<li>What three ways can you find the job stderr for a task?</li>
+<font color=green>In the gcylc GUI by right clicking on the task, select View, select job stderr.
+In Rose Bush.
+In the cylc-run/log/job/1/ directory.</font>
+<li>In the gcylc GUI what does a <code>F</code> inside a
+coloured square mean?</li>
+<font color=green>It is a family of tasks.</font>
+<li>What two things in the gcylc GUI inform you of the state of
+a task? </li>
+<font color=green>The colour of the square.
+The state column.</font>
+<li>How could you Stop a suite (all three ways)?</li>
+<font color=green>Stop button at the top left.
+Right click a task and Stop (but this would only stop that task).
+Select Control and then Stop.</font>
+<li>How could you open a closed gcylc GUI (both ways)?</li>
+<font color=green>cylc gscan and then double click on the desired suite id.
+rose sgc --name=SUITE_ID</font>
+<li>How could you open Rose Bush from command line?</li>
+<font color=green>rose slv</font>
+<li>In Rose Bush how can you see only the Failed tasks?</li>
+<font color=green>Display Options, Select by Job Status, failed.</font>
+ </ol>
                             </pre>
                         </div>
                     </div>
                 </div>
             </div>
             <br/>
+            <h3>Tasks</h3>
+            <ol>
+            <li>
+            <p>Now we know some of the more regulary used functionailty of the
+               gcycl GUI we should let our rose stem suite run.</p>
+            <p>Release the suite using the <code>Play</code> button on the top
+               left of the gcylc GUI.</p>
+            <p>Have a look around the gcylc GUI and find some of the functions
+               discussed above, but <strong>DO NOT Stop</strong> the suite as 
+               we want to prove that the JULES trunk code is successful!</p>
+            </li>
+            <li>
+            <p>Bring up <code>Rose Bush</code> and have a look around, note 
+               you can access Rose Bush while the suite is running.</p>
+            </li>
+            </ol>
+            <h3>Tickets</h3>
+            <p>A brief description and dicsussion on tickets</p>
+            </br>
+            <p>Even if you never have any intention of making a ticket which 
+               you hope resolve tiets can be used to highlight bugs, when 
+               something has been broken, or areas of development.
+               Therefore it is helpful to understand them, their uses, how to
+               create a ticket and or just keep any eye on tickets that may
+               be of interest to the science that you are working on.</p>
+            </br>
+            <p>JULES code is part of the MOSRS, as part of the system there is
+               a Trac system.
+            <h4>Trac</h4>
+            <p>Trac is a wiki system which we can use for organizing knowledge
+               and information in a way that FCM can interact with.</p>
+            <p>A brief summary on Trac:</p>
+            <ul>
+            <li>It is a flexible issue tracker.</li>
+            <li>It provides a roadmap feature for managing project release,
+                including a record of all changes included in the release.</li>
+            <li>It has a built-in wiki.</li>
+            <li>It lets us use a browser for viewing the repositories, where
+                we can browse the code and files, examine revision logs and 
+                changesets.</li>
+           <li>It provides a timeline view with summaries of changes to.</li>
+           <li>It provides a flexible ticket workflow, supporting the
+               review process.</li>
+           </ul>
+           <h4>Trac Tickets</h4>
+           <p>From the JULES MOSRS <a href="https://code.metoffice.gov.uk/trac/jules">homepage</a>
+              select <code>View Tickets</code> if you are the <code>Owner</code>
+              of any tickets this will bring them up for you to see.</p>
+             <img src="images/trac_wiki.png" width="95%" id="trac"/>
+             </br>
+             <p>Some important points from this page</p>
+             <ol>
+                 <li>RSS Feeds - you can sign up for RSS feeds to recieve feeds
+                     on a ticket or a owner</li>
+                 <li>You can add and remove Filters, try removing the Owner and 
+                     adding a Milestone</li>
+                 <li>You can add and remove Columns, try adding Owner and 
+                     remove Priority
+                 </li>
+                 <p>Click the Update button so see your selection, it should
+                    look similar to the image below:</p>
+                 <img src="images/trac_wiki2.png" width="95%" id="trac2"/>
+            </ol>
+           </br>
+            <p>To create a New Ticket, select the New Ticket button at the top 
+               right of the page and fill in the details.
+               The Description will need a link to the branch before it is
+               passed for review.
+               For example <code>[log:main/dev/kerryday/vn4.7_new_tests vn4.7_new_tests]</code>
+               and a Ticket Summary page <code>[wiki:ticket/###/TicketSummary ticket summary]</code>
+              These make it easier for the reviewer.</p>
+              <p>If you are only reporting a bug then please fill in as much as
+                 possible with evidence and try to find a suitbale person to
+                 do the work if you are not able and Cc the JULES System Manger.
+              </p>
 
+            <h3>Creating a branch and testing the new code in it</h3>
+            <p>Please refer to the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">Working Practices for JULES development</a>.
+            </br>
+            <p>Here we will make a basic change to the JULES code and test it
+               with the rose stem test battery of tests.</p>
+            <p>We know that the JULES code passes all the tests from running it
+               earlier, we will make a branch for your change and see if the 
+               branch change does not create failures.</p>
+           <h4>Creating a Branch</h4>
+           <p>Creating a branch from the latest code release of JULES:</p>
+           <p><code>cd ~jules</code>
+           <p><code>fcm bc tutorial_bc_rosestem fcm:jules.x_tr@vn4.7</code>
+           </br>please insert the most recent version number.
+           </br><code>bc</code> - means <code>branch-create</code>
+           </br>"tutorial_bc_rosestem" will be the name of the branch.</p>
+           <p>If you do not have keywords set-up you will have to use the URL:
+           <code>fcm bc tutorial_bc_rosestem https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.7</code></p> 
+           <p>This will bring up a text editor window for you to add your
+              commit message about the branch.</p>
+           <p>If you do not have text editor as default or wish to change the
+              default you can use, for example:
+              <code>export SVN_EDITOR=vim</code></p>
+           <p>The editor window should look like this:
+           <pre>
+
+--Add your commit message ABOVE - do not alter this line or those below--
+--FCM message (will be inserted automatically)--
+Created /main/branches/dev/kerryday/vn4.7_tutorial_bc_rosestem from /main/trunk@5320.
+--Change summary (not part of commit message)--
+A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/kerryday/vn4.7_tutorial_bc_rosestem
+</pre>
+           Add a comment to the top of it and then close, save it and accept
+           the change.
+           </p>
+           <p>This should return text like the following:</p>
+           <pre>
+<font color=blue>
+[info] Source: https://code.metoffice.gov.uk/svn/jules/main/trunk@5320 (5320)
+[info] vim: starting commit message editor...
+Change summary:
+--------------------------------------------------------------------------------
+A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/kerryday/vn4.7_tutorial_bc_rosestem
+--------------------------------------------------------------------------------
+Commit message is as follows:
+--------------------------------------------------------------------------------
+Created /main/branches/dev/kerryday/vn4.7_tutorial_bc_rosestem from /main/trunk@5320.
+--------------------------------------------------------------------------------
+Create the branch?
+Enter "y" or "n" (or just press &lt;return&gt; for "n") y
+Committed revision ####.
+[info] Created: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/kerryday/vn4.7_tutorial_bc_rosestem
+</font>
+           </pre>
+           <h4>Working on the Branch</h4>
+           <p>There are two different ways of working on a branch, for code
+              development I use the first and for suite development I use the
+              second. Both have different merits and are given below.</p>
+          <ol>
+          <li>Check out a copy to a new directory.
+             </br>
+             <p>For example: <code>fcm co fcm:jules.x_br/dev/USERNAME/BRANCH_NAME</code> and then move to that directory.</li>
+          <li>Switch to the branch from within the directory of trunk@vn4.7.
+             </br>
+             <p>For example: <code>fcm sw fcm:jules.x_br/dev/USERNAME/BRANCH_NAME</code>.</li>
+          </ol>
+          <p>Here we will use the first method (later we will use the second).</p>
+          </br>
+          <pre>
+cd ~jules/
+fcm co fcm:jules.x_br/dev/USERNAME/vn4.7_tutorial_bc_rosestem
+cd vn4.7_tutorial_bc_rosestem
+</pre>
+           <p>HELPFUL HINT: if you forget your branch name you can list them using:</p>
+          <pre>
+fcm bls
+</pre>
+          <p>Now check the information for the directory of the repository that
+             you are presently in (very helpful when using switch) and the 
+             status</p>
+<pre>
+fcm info
+<font color=blue>
+Path: .
+Working Copy Root Path: /USER/jules/vn4.7_tutorial_bc_rosestem
+URL: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/USERNAME/vn4.7_tutorial_bc_rosestem
+Relative URL: ^/main/branches/dev/USERNAME/vn4.7_tutorial_bc_rosestem
+Repository Root: https://code.metoffice.gov.uk/svn/jules
+Repository UUID: ac5b6c67-d81e-4bef-bedc-f37a4dd2bd0a
+Revision: 1222
+Node Kind: directory
+Schedule: normal
+Last Changed Author: USERNAME
+Last Changed Rev: 1234
+Last Changed Date: 2030-12-01 09:21:40 +0000 (Mon, 01 Dec 2030)
+
+</font>
+fcm st
+
+# returns nothing as there are no local/working copy changes in the directory.
+</pre>
+            </br>
+            <p>Make a basic change to the branch:</p>
+            Note we are not keeping this change so it is not important
+            what it is.
+           <pre>
+cd ~jules/vn4.7_tutorial_bc_rosestem/
+fcm st
+
+#this returns nothing
+cd rose-stem/
+# edit the rose-suite.conf, change HOUSEKEEPING to false, save and close the file
+fcm st
+<font color=blue>M       rose-suite.conf</font>
+# we have decided that we did not want to change that, so lets revert it using
+# fcm.
+fcm revert rose-suite.conf
+fcm st
+
+# this returns nothing as we have reverted the uncommitted change that we made
+# in our local/working directory.
+          </pre>
+            <p>The <code>fcm revert</code> command is very helpful if you want 
+               to revert, one, a few or all local changes.
+               See <code>fcm revert --help</code> for more options.</p>
+            </br>
+           <p>Now to make a change that we want to keep and test:</p>
+           <pre>
+cd ~jules/vn4.7_tutorial_bc_rosestem/
+# move to the sourse directory of the JULES code
+cd src/snow
+# edit tridag.F90 ln 68 to be this:
+  gamm(n) = c(n-1) / beta_2
+# save and close the file
+           </pre> 
+           <h4>Test the change</h4>
+           <ol>
+           <li>Run rose stem</li>
+           <li>Look at the appropriate logs to provide evidence of success or
+               failure</li>
+           <li>What three methods can you use to find the answer for 2.?</li>
+           <li>Which do you prefer and why?</li>
+           </ol>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">
                         <span class="glyphicon"></span>
                         Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseFive" class="panel-collapse collapse">
+                <div id="collapseEleven" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
                             <font color=green>
-# make the directory ~/jules/ and the path that may be required.
+Example failures and sucesses:
+Fails - fcm_make_meto_linux_gfortran_omp
+Fails - fcm_make_meto_linux_gfortran_debug
+Fails - fcm_make_meto_xc40_cee_debug
+Fails - fcm_make_meto_xc40_cee_omp
+Fails - fcm_make_meto_linux_intel_debug_noomp_nompi
+Fails - fcm_make_meto_linux_intel_noomp_mpi
+Succeed - fcm_make_meto_xc40_cce_omp
+Succeed - fcm_make_meto_xc40_cce_debug
                             </font>
                             </pre>
+                            <img src="images/fail_rs.png" width="95%" id="fail1"/>
+                            <p>job stderr states IMPLICIT NONE....for data object "BETA_2"</p>
+                           <p>Which is the change we made.</p>
+                           <p>Now revert the change using FCM</p>
+                           </br>
+                          <p>The three methods are the gcycl GUI, Rose Bush and the cylc-run/ directory.</p>
                         </div>
                     </div>
                 </div>
             </div>
             <br/>
-
-            <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                        <span class="glyphicon"></span>
-                        Answers
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse">
-                   <div class="panel-body">
-                        <div class="row">
-                            <pre>
-                            <font color=green>
-# make the directory ~/jules/ and the path that may be required.
-                            </font>
-                            </pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br/>
-
-
+            <p>You should have reverted that change if you are following this 
+               tutorial, make sure there are no local changes by using 
+               <code>fcm st</code> if there are chnages please revert them.</p>
+            </br>
+            <p><strong>In the intermediate tutorial we will add a new variable, 
+               a new module etc.</strong></p>
         </ul>
         <br/>
 
@@ -1227,6 +1551,59 @@ HERE
                 <h2><a id="P4">Practical 4 - Checkout a suite</a></h2>
             </div>
             <div class="well">
+Rose Edit
+
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+# make the directory ~/jules/ and the path that may be required.
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+# make the directory ~/jules/ and the path that may be required.
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+
+
+
 
             </div>
         </ul>
@@ -1237,6 +1614,55 @@ HERE
             </div>
             <div class="well">
 
+
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+# make the directory ~/jules/ and the path that may be required.
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+# make the directory ~/jules/ and the path that may be required.
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
             </div>
         </ul>
         <br/>
@@ -1245,6 +1671,57 @@ HERE
                 <h2><a id="P6">Practical 6 - Running a suite</a></h2>
             </div>
             <div class="well">
+
+
+
+
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+# make the directory ~/jules/ and the path that may be required.
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+# make the directory ~/jules/ and the path that may be required.
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
 
             </div>
         </ul>
