@@ -50,8 +50,8 @@ dy>
                                 <li><a href="#P2">Practical 2 - Basic FCM</a></li>
                                 <li><a href="#P3">Practical 3 - Checkout code</a></li>
                                 <li><a href="#P4">Practical 4 -Checkout a suite </a></li>
-                                <li><a href="#P5">Practical 5 - JULES Rose</a></li>
-                                <li><a href="#P6">Practical 6 - Running a suite</a></li>
+                                <li><a href="#P5">Practical 5 - Change Ancillaries</a></li>
+                                <li><a href="#P6">Practical 6 - Change Radiation Model</a></li>
                             </ul>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other material <span class="caret"></span></a>
@@ -382,6 +382,9 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
                 <h2><a id="P1">Practical 1 - Background</a></h2>
             </div>
             <div class="well">
+            <h3>Practical 1 will cover:</h3>
+            <p>Checking your set-up.</p>
+            </br>
             <p>Lets firstly check some set-up:</p>
             <pre>
             rosie hello
@@ -461,6 +464,10 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
                 <h2><a id="P2">Practical 2 -Basic FCM</a></h2>
             </div>
             <div class="well">
+            <h3>Practical 2 will cover:</h3>
+            <p>Basic FCM commands that you will need for the tutorial and 
+               version control.</p>
+            </br>
             <p>There are some very basic FCM commands that we need to know to work effectively.</p>
             <pre>
             fcm add
@@ -696,6 +703,14 @@ Global options_
                 <h2><a id="P3">Practical 3 - Checkout the code</a></h2>
             </div>
             <div class="well">
+            <h3>Practical 3 will cover:</h3>
+               <p>JULES rose-stem testing, for testing the JULES code.</p>
+               <p>The gcylc GUI and helpful Rose and Cylc commands.</p>
+               <p>Using the gcylc GUI, Rose Bush and the cylc-run directory.</p>
+               <p>Using basic FCM commands.</p>
+               <p>The basics of Trac pages and Tickets.</p>
+               <p>Creating a branch and testing a basic change.</p>
+            </br>
             <p>We will now checkout the JULES code from the MOSRS repository.</p>
             <p>This will allow us to;</p>
                 <ul>
@@ -744,7 +759,8 @@ weekly.
             </div>
             <br/>
 
-                <li>Change to the <code>~/jules/trunk/</code> directory and run all of the <code>rose stem</code> tests making sure that the suite is a "new" run using the command <code>rose stem --new --group=all</code></li>
+                <li>Change to the <code>~/jules/trunk/</code> directory and run all of the <code>rose stem</code> tests making sure that the suite is a "new" run using the command <code>rose stem --new --group=all</code>
+<strong> if you do not have an HPC account please use --group=linux</strong> on the VM use --group=all</li>
             <br/>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
@@ -771,7 +787,7 @@ fcm co fcm:jules.x_tr@vn4.7
 fcm co https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.7
 # change to the directory ~/jules/trunk/
 cd ~/jules/trunk/
-# run all of the rose stem tests (--group=all) and make sure it is a new run (--new)
+# run all (or linux) of the rose stem tests (--group=all or linux) and make sure it is a new run (--new)
 rose stem --new --group=all -- --hold
                             </font>
                             </pre>
@@ -1539,10 +1555,22 @@ Succeed - fcm_make_meto_xc40_cce_debug
             <br/>
             <p>You should have reverted that change if you are following this 
                tutorial, make sure there are no local changes by using 
-               <code>fcm st</code> if there are chnages please revert them.</p>
+               <code>fcm st</code> if there are changes please revert them.</p>
             </br>
             <p><strong>In the intermediate tutorial we will add a new variable, 
                a new module etc.</strong></p>
+            </br>
+            <h3>What have we covered in Practical 3?</h3>
+               <p>In this section we introduced JULES rose-stem testing, for 
+                  testing the JULES code.</p>
+               <p>The cgylc GUI and helpful Rose and Cylc commands.</p>
+               <p>How to debug you failures using the gcylc GUI, Rose Bush or
+                  the cylc-run directory.</p>
+               <p>Using basic FCM commands.</p>
+               <p>The basics of Trac pages and Tickets.</p>
+               <p>Creating a branch, making a change then reverting it, testing
+                  a change, finding the error and correcting it.</p>
+
         </ul>
         <br/>
 
@@ -1551,24 +1579,101 @@ Succeed - fcm_make_meto_xc40_cce_debug
                 <h2><a id="P4">Practical 4 - Checkout a suite</a></h2>
             </div>
             <div class="well">
-Rose Edit
+               <h3>In Practical 4 we will cover:</h3>
+                  <p>Checking out a JULES-Rose suite.</p>
+                  <p>JULES-Rose suite structure.</p>
+                  <p>Using Rosie Go.</p>
+                  <p>Explore Rose Edit.</p>
+                  <p>Run the JULES-Rose suite</p>
+               </br>
+               <p>In this practical we will use two different methods, command
+                  line and GUI's for all of the tasks.</p>
+               <p>Please try both and then chose which you prefer, but remember,
+                  you can mix and match and always change your mind!</p>
+               </br>
+               <h3>Check out a JULES-Rose suite</h3>
+               <p>We are going to checkout the JULES-Rose suite, u-ai828.</p>
+               <p>It is one from the MOSRS, the <code>u</code> refers to the
+                  suite being part of the MOSRS Rosie Repository.</p>
+               <p><code>ai828</code> is a unique "number" assigned by the Rosie
+                  Repository to the suite.
+                  The "number" is incremental, no two suites can have the 
+                  same number, also you cannot choose the number.</p>
+               <pre>
+rosie checkout u-ai828
+<font color=blue>
+[INFO] u-ai828: local copy created at /USER/roses/u-ai828
+</font>
+</pre>
+               </br>
+               <h3>JULES-Rose suite structure</h3>
+               <p>The suite structure is similar for all suites.</p>
+               <pre>
+cd /USER/roses/u-ai828
+ls
+<font color=blue>
+app  meta  rose-suite.conf  rose-suite.info  suite.rc
+</font>
+</pre>
+               <p>The suite only contains plain text files, so all of the 
+                  contents can be read with a text editor.</p>
+               <p>The <code>app/</code> and the <code>meta</code> are 
+                  directories.
+                  The <code>rose-suite.conf</code>, <code>rose-suite.info</code>
+                  and the <code>suite.rc</code> are text files.</p>
+              <ol>
+                  <li>The <code>rose-suite.info</code> file contains information
+                      on the suite that is searchable in Rosie Go (see below).
+                  </li>
+                  <li>The <code>rose-suite.conf</code> is where you should find
+                      all of the variables that you may have to change.</li>
+                  <li>The <code>suite.rc</code> is the Runtime Configuration
+                      file for the suite.
+                      It contains the <code>graph</code> section for the running
+                      order of the tasks in the suite.
+                      The task names and the environment variables that they
+                      need which may be from the <code>rose-suite.conf</code>.
+                      Directives, Submission Methods, etc.
+                      In this file there is not just Python code but Jinja2, 
+                      a templating language in Python, don't worry we will
+                      discuss it when we need to make changes.</li>
+                    <li>The <code>app/</code> directory contains the 
+                        Applications, for example <code>fcm_make</code> and the
+                        <code>jules</code> app's with their 
+                        <code>rose-app.conf</code> configurations files.</li>
+                    <li>The <code>meta/</code> directory contains the
+                        metadata for the suite, which helps you to understand
+                        the values and parameters in the suite.</li>
+               </ol>
+               </br>
+               <p>Some suites have more directories, some contain data.</p>
+               <p>There is some data in this suite, can you find it?
+                  It is Loobos data.</p>
 
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">
                         <span class="glyphicon"></span>
                         Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseFive" class="panel-collapse collapse">
+                <div id="collapseTwelve" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
                             <font color=green>
-# make the directory ~/jules/ and the path that may be required.
+grep -ril loobos * | more
+                            </font>
+                            <font color=blue>
+app/jules/file/Loobos_1997.dat
+app/jules/rose-app.conf
+rose-suite.info
+                            </font>
+                            <font color=green>
+app/jules/file/Loobos_1997.dat
                             </font>
                             </pre>
                         </div>
@@ -1576,23 +1681,57 @@ Rose Edit
                 </div>
             </div>
             <br/>
-
+            <p>We will go into each file in detail as we interact with them
+               below in the practicals.</p>
+               </br>
+               <p>The command line technique is great if you know the suite ID 
+                  that you wish to checkout.
+                  But if you do not know or cannot remember the suite ID we
+                  can look it up based on the information in the 
+                  <code>rose-suite.info</code> file using Rosie Go</p>
+               <h3>Rosie Go</h3>
+               <p>Rosie Go is the suite browser GUI</p>
+               <p>First lets check your set-up, open your
+                   <code>.metomi/rose.conf</code> file, it should include 
+                   similar to the following outout.</p>
+<pre>
+<font color=blue>
+[rosie-id]
+prefix-username.u=MOSRS_USERNAME
+prefixes-ws-default=u
+</font>
+</pre>
+                <p>Now we can open Rosie Go by:</p>
+<pre>
+cd
+rosie go &amp;
+</pre>
+               </br>
+               <img src="images/rosie_go.png" width="95%" id="rgo"/>
+               </br>
+               <p>Search for all of the user "kerryday"'s suites using the 
+                  search box at the top far right of the Rosie Go GUI.</p>
+               <p>Hover your mouse over each of the icons on the far left of
+                  the Rosie Go GUI and find out what each of the images mean.</p
+>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen">
                         <span class="glyphicon"></span>
                         Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseFive" class="panel-collapse collapse">
+                <div id="collapseThirteen" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
                             <font color=green>
-# make the directory ~/jules/ and the path that may be required.
+House - Local copy
+Double backwards arrow - Local copy at older revision
+Notepad and pen - Local copy (modified)
                             </font>
                             </pre>
                         </div>
@@ -1600,38 +1739,221 @@ Rose Edit
                 </div>
             </div>
             <br/>
+               <p>You can search for anything that may be in the
+                  <code>rose-suite.info</code> file and not just a user.</p>
+               <p>Right click on the suite that you are interested in.</p>
+               <img src="images/rosie_go2.png" width="95%" id="rgo2"/>
+               <p>Note that the <code>Checkout Suite</code> option is greyed
+                  out, this is because we already have a copy.
+                  However if we want we can chose to 
+                  <code>Delete Working Copy</code> and then 
+                  <code>Checkout Suite</code> to prove it works the same as
+                  command line.</p>
+               </br>
+               <p>Notice we can do many other things from the Rosie Go GUI.</p>
+               <p>Next we will use it to open <code>Rose Edit</code>.<p/>
+               <h3>Rose Edit</h3>
+               <p>There are three ways to open Rose Edit:
+                  <ol>
+                     <li>Command line
+<pre>
+cd /USER/roses/u-ai828
+rose edit
+</pre>
+</li>
+                     <li>Rosie Go GUI - double click on the suite of interest.</li>
+                     <li>Rosie Go GUI - right click on the suite of interest 
+                         and select <code>Edit Suite</code></li>
+                    </p>
+                    <img src="images/rose_edit.png" width="95%" id="red"/>
+                    </br>
+                    <p>Click OK on both of the Error messages.
+                       They are only warnings as the suite uses Jinja2 variables
+                       from the rose-suite.conf file that Rose Edit has not
+                       expanded.</p>
+                    <p>Click on the different items in the <code>Index</code>
+                       on the left hand side of the panel of the Rose Edit GUI.
+                       What do you notice about the intems in the Index?</p>
+                    </br>
+                    <img src="images/rose_edit2.png" width="95%" id="red2"/>
+                    </br>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFourteen" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+They are the same as in the command line directory.
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+                    <p>Do not worry if you accidently change something in this
+                       suite, as you are not the owner you cannot commit your
+                       change back to the repository, so take a look around.
+                       More on changes and saving in Practical 5.</p>
+                    </br>
+                    <p>Now we are going to run the suite.</p>
+                    </br>
+               <h3>Run a JULES-Rose Suite</h3>
+               <p><strong>IF USING THE VM PLEASE USE SUITE ID u-ai829</strong> 
+               and change the path of to the JULES code in the 
+               <code>rose-suite.conf</code> to point to your vagrant file
+               location of the JULES vn4.7 code, for example, /home/vagrant/jules/vn4.7/trunk/</p>
+               <p>There are three ways to run the suite:
+                  <ol>
+                     <li>Command line
+<pre>
+cd /USER/roses/u-ai828
+rose suite-run
+</pre>
+</li>
+                     <li>Rosie Go GUI - click on the suite that you want to run,
+                         then click on the "Play" button in the top of the GUI,
+                         its says <code>Run Suite</code> when you hover over it.
+                    </li>
+                    <li>Rose Edit GUI - click on the "Play" button in the top 
+                        left of the GUI, its says <code>Run Suite</code> when
+                         you hover over it.
+                    </li>
+                </ol>
+              </p>
+                   <p>The gcylc GUI should look like the images below.</p>
+                    <img src="images/rose_suite1.png" width="95%" id="rs1"/>
+                    </br>
+                    </br>
+                    <img src="images/rose_suite2.png" width="95%" id="rs2"/>
+                    </br>
+                    </br>
+                    <p>The gcylc GUI clears if the suite is successful.
+                    With the message <code>stopped with 'succeeded'</code></p>
+                    <img src="images/rose_suite3.png" width="95%" id="rs3"/>
+                    </br>
+                    <ol>
+                    <li>How can you find out how long each task took to run?</li>
+                    <li>How long did the fcm_make task take?</li>
+                    <li>How long did the jules task take?</li>
+                    </ol>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFifteen" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                    <ol>
+<li>How can you find out how long each task took to run?</li>
+                            <font color=green>
+Rose Bush
+                            </font>
+<li>How long did the fcm_make task take?</li>
+                            <font color=green>
+About 2 mins
+                            </font>
+<li>How long did the jules task take?</li>
+                            <font color=green>
+About 15 seconds
+                            </font>
+                    </ol>
 
-
-
-
-
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <h3>Congratulations you have successfully run your first JULES-Rose Suite.</h3>
             </div>
         </ul>
         <br/>
         <ul>
             <div class="page-header">
-                <h2><a id="P5">Practical 5 - JULES Rose</a></h2>
+                <h2><a id="P5">Practical 5 - Changing the Soil Ancillaries</a></h2>
             </div>
             <div class="well">
-
-
+               <h3>In Practical 5 we will cover:</h3>
+                  <p>Copying a JULES-Rose suite, edit the rose-suite.info.</p>
+                  <p>Change the output period, output directory location etc.</p>
+                  <p>Change the spinup.</p>
+                  <p>Change the soil properties.</p>
+                  <p>Running the suite with a different name</p>
+               </br>
+                <h4>Intro and background</h4>
+                  <p>This practical changes the soil ancillaries corresponding
+                     to a different soil type.</p>
+                </br>
+                <p>Soil ancillaries have an important effect on hydrology and
+                   thermodynamics.
+                   They affect sensible and latent heat fluxes that are passed
+                   back to the atmosphere.
+                  </p>
+                  <p>The paper by <a href="http://onlinelibrary.wiley.com/doi/10.1029/WR020i006p00682/pdf">Cosby et. al. (1984)</a> defines a range of distinct soil types.
+                   The relevant parameters for a few soil types are:</p>  
+<pre>
+Sand
+'b','sathh','satcon','sm_sat','sm_crit','sm_wilt','hcap','hcon','albsoil'
+3.295,0.04983,0.02455,0.3732,0.1039,0.03264,1.341E+06,0.3329,0.17
+</br>
+Loam
+'b','sathh','satcon','sm_sat','sm_crit','sm_wilt','hcap','hcon','albsoil'
+5.797,0.2383,0.004749,0.4373,0.277,0.1434,1.225E+06,0.2491,0.17
+</br>
+Clay
+'b','sathh','satcon','sm_sat','sm_crit','sm_wilt','hcap','hcon','albsoil'
+12.14,0.2864,0.001432,0.4523,0.3692,0.2696,1.244E+06,0.2192,0.17
+</pre>
+                  </br>
+                <h3>Copy u-ai828 and edit the rose-suite.info</h3>
+                <p>Chose one of the following two options to create your copy
+                   of the suite.</p>
+                <ol>
+                <li>command line?</li>
+                <li>Rosie Go</li>
+                </ol>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen">
                         <span class="glyphicon"></span>
                         Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseFive" class="panel-collapse collapse">
+                <div id="collapseSixteen" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
-                            <font color=green>
-# make the directory ~/jules/ and the path that may be required.
-                            </font>
+                <ol>
+<li>At command line?</li>
+<font color=green>rosie copy u-ai828
+# This open the rose-suite.info file in a text editor, change the description 
+# to include the soil type you will change.</font>
+<li>Via Rosie Go</li>
+<font color=green>rosie go &amp;
+# search u-ai828
+# right click, select copy, select FORWARD, change the description to include
+# the soil type you will change, click OK.</font>
+                </ol>
                             </pre>
                         </div>
                     </div>
@@ -1639,39 +1961,139 @@ Rose Edit
             </div>
             <br/>
 
-            <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                        <span class="glyphicon"></span>
-                        Answers
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse">
-                   <div class="panel-body">
-                        <div class="row">
-                            <pre>
-                            <font color=green>
-# make the directory ~/jules/ and the path that may be required.
-                            </font>
-                            </pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br/>
+                  <h4>Hints and Tips for using Rose Edit for making changes</h4>
+                  <ul>
+                 <li>The gear-wheel icon near the variable name is clickable, with several useful functions, including taking you to the documentation.</li>
+                  <li>If you can't see the variable you want, try right-clicking to add latent variable.</li>
+                  </li>To alter the soil ancillaries, you can enter the data into the Rose Edit GUI manually.</li>
+                  </ul>
+                  <p>The following instructions are for changes at command line,
+                     but will also help with changes in the Rose Edit GUI.</p>
+                  <h3>Change the output period, output directory location etc.</h3>
+                  <ol>
+                  <li>Change the output period to be daily (86400 seconds).
+                  <p>In the <code>app/jules/rose-app.conf</code> file change</p> 
+<pre>
+[namelist:jules_output_profile(1)]
+output_period=86400
+</pre>
+</li>
+                  <li>Ensure that gridbox mean sensible heat flux, latent heat flux and surface temperature are output.
+                  <p<a href="http://jules-lsm.github.io/vn4.7/output-variables.html">JULES Output variables</a></p>
+<pre>
+ftl_gb 	Gridbox surface sensible heat flux (W m-2)
+latent_heat 	Gridbox surface latent heat flux (W m-2)
+tstar_gb 	Gridbox surface temperature (K)
+</pre>
+<p>Check these variables are present in the <code>app/jules/rose-app.conf</code>
+ file in the <code>[namelist:jules_output_profile(1)]</code> section and if 
+not add them.</p>
 
+</li>
+                  <li>Change the output directory name, create the relevant directory, change the run ID.
+                  <p> In the <code>app/jules/rose-app.conf</code> file change
+<pre>
+[file:./sand/output]
+mode=mkdir
+source=
+
+[namelist:jules_output]
+output_dir='./sand/output'
+run_id='sand'
+</pre>
+</li>
+</ol>
+                  <h3>Change the spinup.</h3>
+                  <p>In the <code>app/jules/rose-app.conf</code> file change</p 
+<pre>
+[namelist:jules_spinup]
+max_spinup_cycles=10
+nvars=1
+spinup_end='1977-12-31 23:00:00'
+spinup_start='1996-12-31 23:00:00'
+terminate_on_spinup_fail=.false.
+tolerance=5.0
+use_percent=.true.
+var='smcl'
+</pre>
+                  <h3>Change the soil properties.</h3>
+                  <p>In the <code>app/jules/rose-app.conf</code> file change</p> 
+<pre>
+[namelist:jules_soil_props]
+const_val=3.295,0.04983,0.02455,0.3732,0.1039,0.03264,1341000.0,
+         =0.3329,0.17
+</pre>
+                  <p>Open the Rose Edit GUI after you have made your changes to so that the metadata checks for mistakes.</p>
+
+                  <strong>COMMIT your changes</strong> using <code>fcm ci</code>
+
+                  <h3>Running the suite with a different name to the suite ID.</h3>
+<pre>
+rose suite-run --new --name=sand_&lt;SUITE_ID&gt;
+</pre>
+                 <p>Check your output at:</p>
+<code>/USER/cylc-run/sand_&lt;SUITE_ID&gt;/work/1/jules/sand/output/</code>
+</br>
+                 <h3>Creating the other soil suites</h3>
+                 <p>We have several options now.</p>
+                 <ol>
+                 <li>Copy your recent suite, &lt;SUITE_ID&gt; using 
+                    <code>rosie copy &lt;SUITE_ID&gt;</code> and get a new suite
+                    and new suite ID for you changes and commit it. </li>
+                 <li>Create a branch from the current suite and the use 
+                     <code>fcm sw &lt;BRANCH_NAME&gt;</code>, remember to 
+                     commit your changes and to check where you are with
+                     <code>fcm info</code>.
+                     </br>
+                     <p>Run your new soil type using:
+<pre>
+rose suite-run --new --name=&lt;SOIL_TYPE&gt;_&lt;SUITE_ID&gt;
+</pre>
+</p>
+                     </br>
+                     To switch back to the original use <code>fcm sw trunk</code>
+                     you can check your branch names using <code>fcm bls</code></li>
+                 </ol>
+                 </br>
+                 <p>The first is the simplest, but I personally prefer the
+                    second as it groups them suites together.</p>
+                 </br>
+                 <p>An examples of how the Rosie Repository Trac pages look follow:</p>
+                 <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a>
+</br>
+                    <img src="images/rosie_trac1.png" width="70%" id="rrt1"/>
+                    <p>Select sand_prac5</p>
+                    <img src="images/rosie_trac2.png" width="75%" id="rrt2"/>
+                    <p>Click on the "Revision Log"</p>
+                    <img src="images/rosie_trac3.png" width="75%" id="rs2"/>
+                    <p>Click on "View Changes" and then View Differences "side by side" and update</p>
+                    <img src="images/rosie_trac4.png" width="95%" id="rs2"/>
+
+                 <h3>Questions</h3>
+                 <ol>
+                 <li>What effect do the different soil types have on the model
+                     fluxes and the model state?</li>
+                 <li>Is there any seasonal variation in the results?
+                     Is this what you expected?</li>
+                 <li>How important is getting the right soil type for the
+                     evolution of the model?</li>
+                 </ol>
+            <br/>
+            <p> Note: The differences may only be small between the output for the different suite set-ups.
+</br>
+When plotting the differences the small difference may not be observable by eye with some plotting packages. For example it has been noted that ncview does not appear to display differences clearly by eye but MatLab does.</p>
             </div>
         </ul>
         <br/>
         <ul>
             <div class="page-header">
-                <h2><a id="P6">Practical 6 - Running a suite</a></h2>
+                <h2><a id="P6">Practical 6 - Changing Canopy Radiation Model</a></h2>
             </div>
             <div class="well">
-
+               <h3>In Practical 6 we will cover:</h3>
+                  <p>Check.</p>
+               </br>
+<a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESRosePractical#EffectofchangingCanopyRadiationModel">next bit</a>
 
 
 
