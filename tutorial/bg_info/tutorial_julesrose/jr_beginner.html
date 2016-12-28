@@ -2065,9 +2065,9 @@ rose suite-run --new --name=&lt;SOIL_TYPE&gt;_&lt;SUITE_ID&gt;
                     <p>Select sand_prac5</p>
                     <img src="images/rosie_trac2.png" width="75%" id="rrt2"/>
                     <p>Click on the "Revision Log"</p>
-                    <img src="images/rosie_trac3.png" width="75%" id="rs2"/>
+                    <img src="images/rosie_trac3.png" width="75%" id="rrt3"/>
                     <p>Click on "View Changes" and then View Differences "side by side" and update</p>
-                    <img src="images/rosie_trac4.png" width="95%" id="rs2"/>
+                    <img src="images/rosie_trac4.png" width="95%" id="rrt4"/>
 
                  <h3>Questions</h3>
                  <ol>
@@ -2079,9 +2079,34 @@ rose suite-run --new --name=&lt;SOIL_TYPE&gt;_&lt;SUITE_ID&gt;
                      evolution of the model?</li>
                  </ol>
             <br/>
-            <p> Note: The differences may only be small between the output for the different suite set-ups.
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen">
+                        <span class="glyphicon"></span>
+                        Note
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSeventeen" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+<p> Note: The differences may only be small between the output for the different
+suite set-ups.
 </br>
-When plotting the differences the small difference may not be observable by eye with some plotting packages. For example it has been noted that ncview does not appear to display differences clearly by eye but MatLab does.</p>
+When plotting the differences the small difference may not be observable by eye 
+with some plotting packages.
+For example it has been noted that ncview does not appear to display differences
+clearly by eye but MatLab and Iris display the difference.</p>
+<p><a href="http://scitools.org.uk/iris/">Iris</a> is an open-source Python library for Meteorology and Climatology.</p>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
             </div>
         </ul>
         <br/>
@@ -2091,9 +2116,363 @@ When plotting the differences the small difference may not be observable by eye 
             </div>
             <div class="well">
                <h3>In Practical 6 we will cover:</h3>
-                  <p>Check.</p>
+                  <p>Changing canopy the radiation model configurations</p>
+                  <p>Changing the JULES-Rose suite design to run JULES for multiple configurations</p>
+                  <p>Add optional configurations files to the JULES-Rose suite</p>
+                  <p>Run the suite</p>
+                  <p>Questions</p>
+                  <p>Adding plots</p>
                </br>
-<a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESRosePractical#EffectofchangingCanopyRadiationModel">next bit</a>
+               <p>
+               In Practical 5 we copied the suite three times, sand, loam and clay.
+               Each had its own suite id and we ran each suite to get the results.
+               However, this is not the most effect way of running the suite to
+               get the data as each time it run the <code>fcm_make</code> task.
+              </p>
+              </br>
+              <p>This time we want to run the suite for six different model configurations.
+                 Each is only a one line change, it would be a waste of resource
+                 to have six different suites and run each so we will used the 
+                 functionality of Rose to make this more efficient.
+            </p>
+            <p>Cylc/Rose will schedule the jules tasks to run simulatously
+               which will reduce the running time of your suite.</p>
+            <h3>Changing canopy the radiation model configurations</h3>
+               <p>Information on the options in JULES for calculating the effect
+                  of the vegetation canopy on radation is in the <a href="http://jules-lsm.github.io/vn4.7/namelists/jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod">documentation.</a></p>
+              In summary, in the <code>jules</code> application configuration
+              file <code>SUITE_ID/app/jules/rose-app.conf</code> the namelist 
+              <code>jules_vegetation</code> has an option <code>can_rad_mod</code>.
+              </p>
+              <p>
+              What is the default set to in <code>u-ai828/u-ai829</code>? 
+              What two ways can you find the value?
+              </p>
+
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseEighteen" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+[namelist:jules_vegetation]
+can_rad_mod=4
+
+command line, view the file u-ai828/app/jules/rose-app.conf
+rose edit -&gt; jules &gt; namelist &gt; jules_vegetation <code>can_rad_mod</code>
+                            </font>
+<img src="images/rose_edit_rad.png" width="95%" id="rer"/>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <h3>Changing the JULES-Rose suite design to run JULES for multiple configurations</h3>
+            <p>To change the suite design we have to edit the text files in the
+               suite using a text editor.</p>
+            <p>First we must either copy <code>u-ai828/u-ai829</code> or create
+               a branch of <code>u-ai828/u-ai829</code> and then switch to it.
+            </p>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseNinteen">
+                        <span class="glyphicon"></span>
+                        Methods
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseNinteen" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+rosie copy u-ai828
+
+OR (my preferred method, but it is a personal preference)
+
+cd /USER/roses/u-ai828
+fcm bc canranmod
+fcm sw canranmod
+#or fcm sw https://code.metoffice.gov.uk/svn/roses-u/a/i/8/2/8/canradmod
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <p>Now we can make changes to the suite.</p>
+            <p>
+            <ol>
+            <li>We need to edit the <code>rose-suite.conf</code> file to 
+                include a list of the different radation models.
+                For Example 
+<pre>
+CANRADMOD=['canradmod_1', 'canradmod_2', 'canradmod_3', 'canradmod_4', 'canradmod_5', 'canradmod_6']
+</pre></li>
+            <li>We need to change the <code>graph</code> section in the
+                <code>suite.rc</code> to loop through the list in the
+                <code>rose-suite.conf</code>. For Example
+<pre>
+        graph = """
+                {% for crm in CANRADMOD %}
+                    fcm_make => jules_{{crm}}
+                {% endfor %}
+                """
+</pre>
+            This looks like Python but is actually Jinja2, more on this in
+            the Intermediate tutorial.</li>
+            <li>We need to change the <code>jules</code> task in the
+                <code>suite.rc</code> to loop through the list in the
+                <code>rose-suite.conf</code> and for it to use the optional
+                configuration file with the two line change. For Example
+<pre>
+{% for crm in CANRADMOD %}
+    [[jules_{{crm}}]]
+        inherit = None, SPICE
+        script = "mkdir -p output ; rose task-run --path= --path=share/fcm_make/build/bin --app-key=jules --opt-conf-key={{crm}}"
+ ...    
+ ...        --ntasks={{ OMP_NUM_THREADS * MPI_NUM_TASKS}}
+{% endfor %}
+</pre>
+            The optional configuration file is selected by the suite using the
+            <code>--opt-conf-key={{crm}}</code> syntax/code, also Jinja2.</li>
+            <h3>Add optional configurations files to the JULES-Rose suite</h3>
+            <li>We need to add an <code>opt</code> folder to the jules app.</li>
+            <li>We need to populate the <code>SUITE_ID/app/jules/opt/</code>
+                with the 6 different <code>rose-app-???.conf</code> files.
+                For Example <code>rose-app-canradmod_1.conf</code>
+</br>
+</br>
+<pre>
+[namelist:jules_vegetation]
+can_rad_mod=1
+</pre>
+              </li>
+              </ol>
+              </p>
+              <p>We need to save our changes before running the suite.</p>
+              <p>How can we check what our changes are and then commit them to
+                 the repository?</p>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwenty">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwenty" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+fcm st
+                            </font>
+                            <font color=blue>
+?       app/jules/opt
+M       rose-suite.conf
+M       suite.rc
+                            </font>
+                            <font color=green>
+fcm add app/jules/opt
+                            </font>
+                            <font color=blue>
+A         app/jules/opt
+A         app/jules/opt/rose-app-canradmod_1.conf
+A         app/jules/opt/rose-app-canradmod_2.conf
+A         app/jules/opt/rose-app-canradmod_3.conf
+A         app/jules/opt/rose-app-canradmod_4.conf
+A         app/jules/opt/rose-app-canradmod_5.conf
+A         app/jules/opt/rose-app-canradmod_6.conf
+                            </font>
+                            <font color=green>
+fcm st
+                            </font>
+                            <font color=blue>
+A       app/jules/opt
+A       app/jules/opt/rose-app-canradmod_1.conf
+A       app/jules/opt/rose-app-canradmod_2.conf
+A       app/jules/opt/rose-app-canradmod_3.conf
+A       app/jules/opt/rose-app-canradmod_4.conf
+A       app/jules/opt/rose-app-canradmod_5.conf
+A       app/jules/opt/rose-app-canradmod_6.conf
+M       rose-suite.conf
+M       suite.rc
+                            </font>
+                            <font color=green>
+fcm ci
+# Add your commit message, save, close and "y" to commit
+                            </font>
+                            <font color=blue>
+[info] vim: starting commit message editor...
+Change summary:
+--------------------------------------------------------------------------------
+[Root   : https://code.metoffice.gov.uk/svn/roses-u]
+[Project: a/i/8/2/8]
+[Branch : rad_models_prac6]
+[Sub-dir: ]
+
+A       app/jules/opt
+A       app/jules/opt/rose-app-canradmod_1.conf
+A       app/jules/opt/rose-app-canradmod_2.conf
+A       app/jules/opt/rose-app-canradmod_3.conf
+A       app/jules/opt/rose-app-canradmod_4.conf
+A       app/jules/opt/rose-app-canradmod_5.conf
+A       app/jules/opt/rose-app-canradmod_6.conf
+M       rose-suite.conf
+M       suite.rc
+--------------------------------------------------------------------------------
+Commit message is as follows:
+--------------------------------------------------------------------------------
+Added looping for canradmod's.
+--------------------------------------------------------------------------------
+Would you like to commit this change?
+Enter "y" or "n" (or just press <return> for "n"): y
+Adding         app/jules/opt
+Adding         app/jules/opt/rose-app-canradmod_1.conf
+Adding         app/jules/opt/rose-app-canradmod_2.conf
+Adding         app/jules/opt/rose-app-canradmod_3.conf
+Adding         app/jules/opt/rose-app-canradmod_4.conf
+Adding         app/jules/opt/rose-app-canradmod_5.conf
+Adding         app/jules/opt/rose-app-canradmod_6.conf
+Sending        rose-suite.conf
+Sending        suite.rc
+Transmitting file data ........
+Committed revision 28232.
+Updating '.':
+At revision 28232
+                            </font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <h3>Run the suite</h3>
+            <code>rose suite-run --name=canradmod6 --new</code>
+            <img src="images/canradmod_p6.png" width="95%" id="rs_p6"/>
+            </br>
+            <h3>Questions</h3>
+            <ol>
+              <li>Where is the output for each of the jules canradmod setting?</li>
+              <li>What was the effect of changing canradmod?</li>
+              <li>How useful was this approach of changing model settings? 
+                  What types of experiments would it be useful for?</li>
+              <li>Look at the changes via <code>rose edit</code> what is different?</li>
+            </ol>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyOne">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwentyOne" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+            <ol>
+<li>Where is the output for each of the jules canradmod setting?</li>
+<font color=green>
+ls ~/cylc-run/canradmod_p6/work/1/jules_canradmod_1/output
+jules_canradmod_1.all.nc
+jules_canradmod_1.dump.19961231.82800.nc
+jules_canradmod_1.dump.19970101.0.nc
+jules_canradmod_1.dump.19971231.82800.nc
+</font>     
+<li>What was the effect of changing canradmod?</li>
+<font color=green>
+Changed the Gridbox total soil moisture in column.
+</font>
+<li>How useful was this approach of changing model settings? 
+What types of experiments would it be useful for?</li>
+<font color=green>
+Faster runs, multi-option runs including times as well as variables, lots.
+</font>
+ <li>Look at the changes via <code>rose edit</code> what is different?</li>
+<img src="images/rose_edit_rad2.png" width="95%" id="rer"/>
+<font color=green>
+A pad of paper and a hand with a pointing finger on the paper are next to the 
+can_rad_mod option in the namelist.
+This means that there are optional configurations, if you click on the icon
+it displays the optional configurations, note there is none for canradmod_4 as
+it is the same as the defautl option.
+</font>
+            </ol>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+
+            <h3>Adding plots</h3>
+            <p>You may want to do some plotting of the data and you can add this
+               to be part of your suite.</p>
+            <p>Here we will see how to do this using a Python Iris script.</p>
+<pre>
+# switch to the trunk
+fcm sw trunk
+# Create a new branch for the plotting suite
+fcm bc canradmod_plots
+# switch to the new plotting branch
+fcm sw canradmod_plots
+# merge in the canradmod branch ready for the plotting
+fcm merge canradmod
+# commit the changes
+fcm ci
+# now we can add the plotting.
+</pre>
+            <h4>Changes that need to be made are:</h4>
+            <ol>
+            <li>suite.rc, graphing, task added, Family added</li>
+            <li>Add bin/ directory with Python script, make sure it is excutable</li>
+            </ol>
+            <p>Below is the Python scrpit that was written to run with the 
+               suite.</p>
+<pre>
+
+</pre>
+       HEREHERE
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyTwo">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwentyTwo" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+add stuff here
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
 
 
 
@@ -2121,29 +2500,6 @@ When plotting the differences the small difference may not be observable by eye 
             </div>
             <br/>
 
-            <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                        <span class="glyphicon"></span>
-                        Answers
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse">
-                   <div class="panel-body">
-                        <div class="row">
-                            <pre>
-                            <font color=green>
-# make the directory ~/jules/ and the path that may be required.
-                            </font>
-                            </pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br/>
 
             </div>
         </ul>
