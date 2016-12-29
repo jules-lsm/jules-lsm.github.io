@@ -41,8 +41,8 @@ dy>
                                 <li><a href="#bgrc">Background of Rose (in fact Cylc)</a></li>
                                 <li><a href="#bgmosrs">Background of MOSRS</a></li>
                                 <li><a href="#subvc">Subversion</a></li>
-                                <li><a href="#jrsuites">JULES Rose suites</a></li>
                                 <li><a href="#jrstem">JULES Rose stem</a></li>
+                                <li><a href="#jrsuites">JULES Rose suites</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Beginner Practical's</li>
                                 <li><a href="#Pracs">Practicals</a></li>
@@ -51,7 +51,7 @@ dy>
                                 <li><a href="#P3">Practical 3 - Checkout code</a></li>
                                 <li><a href="#P4">Practical 4 -Checkout a suite </a></li>
                                 <li><a href="#P5">Practical 5 - Change Ancillaries</a></li>
-                                <li><a href="#P6">Practical 6 - Change Radiation Model</a></li>
+                                <li><a href="#P6">Practical 6 - Change Radiation Model and Plotting</a></li>
                             </ul>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other material <span class="caret"></span></a>
@@ -87,8 +87,8 @@ dy>
                 <li><a href="#bgrc">Background of Rose (in fact Cylc)</a></li>
                 <li><a href="#bgmosrs">Background of MOSRS</a></li>
                 <li><a href="#subvc">Subversion</a></li>
-                <li><a href="#jrsuites">JULES Rose suites</a></li>
                 <li><a href="#jrstem">JULES Rose stem</a></li>
+                <li><a href="#jrsuites">JULES Rose suites</a></li>
             </ul>
             </p>
         </div>
@@ -2112,7 +2112,7 @@ clearly by eye but MatLab and Iris display the difference.</p>
         <br/>
         <ul>
             <div class="page-header">
-                <h2><a id="P6">Practical 6 - Changing Canopy Radiation Model</a></h2>
+                <h2><a id="P6">Practical 6 - Changing Canopy Radiation Model and Plotting</a></h2>
             </div>
             <div class="well">
                <h3>In Practical 6 we will cover:</h3>
@@ -2445,12 +2445,124 @@ fcm ci
             <li>suite.rc, graphing, task added, Family added</li>
             <li>Add bin/ directory with Python script, make sure it is excutable</li>
             </ol>
-            <p>Below is the Python scrpit that was written to run with the 
+            <p>Below is the Python script that was written to run with the 
                suite.</p>
 <pre>
+#!/usr/bin/env python2.7
 
+'''
+Script plot_crm.py to plot the 6 different canopy radiation model options.
+Created by Kerry Smout-Day 28/12/2016
+'''
+
+import matplotlib as mlp
+
+mlp.use('Agg')
+
+import iris
+import iris.quickplot as qplt
+
+import matplotlib.pyplot as plt
+
+import argparse
+import os
+
+iris.FUTURE.netcdf_promote=True
+
+
+curr_var=["Gridbox surface latent heat flux", "Gridbox surface sensible heat flux", "Gridbox total soil moisture in column", "Gridbox surface temperature", "Gridbox soil moisture availability factor (beta)"]
+
+filename=["latent_heat_flux_tseries.png", "sensible_heat_flux_tseries.png", "tot_soil_moisture_tseries.png", "surface_temperature_tseries.png", "soil_moisture_availability_factor_tseries.png"]
+
+
+def load_and_squeeze(filename):
+    """Loads files into iris cubelists and removes singleton dimensions"""
+    clist          = iris.load(filename)
+    squeezed_clist = iris.cube.CubeList()
+    for cube in clist:
+      squeezed_clist.append(iris.util.squeeze(cube))
+    return squeezed_clist
+
+
+def data_retrieve():
+    """Adds the data to a dictionary for handling and plotting."""
+    suite_path = os.path.expanduser('~/cylc-run/')
+    files = {}
+    for crm in CANRADMOD:
+        filecalled = "jules_" + crm + ".all.nc"
+        foldername = "work/1/jules_" + crm
+        file_path = os.path.join(suite_path, CYLC_SUITE_NAME, foldername, "output/", filecalled)
+        files[crm] = load_and_squeeze(file_path)
+    plot_data(files, curr_var, filename)
+
+
+def plot_data(files, curr_var, filename):
+    """Plots and saves the data."""
+    x=0
+    for var in curr_var:
+        for crm in CANRADMOD:
+            qplt.plot((files[crm]).extract(var)[0], label = crm)
+        plt.legend()
+        savefile = filename[x]
+        plt.savefig(savefile)
+        x += 1
+        plt.close()
+
+
+if __name__ == '__main__':
+    """Takes the arguments from the suite for us in the analysis."""
+    # Initialise the command line parser
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--suite', help='suite name', required=True)
+    # canradmod is a list of strings of 1 or more arguments.
+    parser.add_argument('--canradmod', nargs='+', type=str, help='different models', required=True)
+#
+    #Parser the command line.
+    args = parser.parse_args()
+    CYLC_SUITE_NAME = args.suite
+    CANRADMOD = args.canradmod
+
+    data_retrieve()
 </pre>
-       HEREHERE
+                    <p>Other changes have been made to the following files:</p>
+                <ol>
+                <li><code>rose-suite.conf</code></li>
+<img src="images/prac6_trac1.png" width="95%" id="p6_tp1"/>
+                 <p>Here CANRADMOD" has been added so that the list in the correct format for the Python plotting.</p>
+                <li><code>suite.rc</code></li>
+<img src="images/prac6_trac2.png" width="95%" id="p6_t2"/>
+                <p>Here the family <code>[[JULES]]</code> has been added and
+                  then used in the <code>graph</code> section for the
+                  dependancy of the <code>jules</code> tasks must all 
+                  succeed before the plotting task <code>plot_crm</code> can
+                  run.
+                  All <code>jules</code> task now inherit the <code>JULES</code>
+                  family for this to happen.
+                  A new task of <code>[[plot_crm]]</code> has been added, it                      runs the script <code>plot_crm.py</code> with the arguments
+                  <code>CYLC_SUITE_NAME</code> a variable assigned at run time,                   it will use the optional name if provided and 
+                  <code>CANRADMOD2</code>, the list of models in the required
+                 format.</p>
+                </ol>
+                <p>The <a href="https://code.metoffice.gov.uk/trac/roses-u/changeset?reponame=&new=28241%40a%2Fi%2F8%2F2%2F8%2Frad_model_prac6_plot&old=28234%40a%2Fi%2F8%2F2%2F8%2Frad_model_prac6_plot">revision Log of the changes</a> after adding the different models is provided in the link.</p>
+                </br>
+                <h4>Some new things from running this suite in the gcylc GUI</h4>
+                <p>The image below shows two <code>Views</code> the "Graph" view
+                   in the top section of the gcylc GUI, View 1, and the "Text"
+                   view in the bottom section as View 2.</p>
+                <p>One other thing to notice in the Graph View is that the JULES
+                   family is grouped together, to un-group it select the second
+                   button after the Views button to expand the family.</p>
+<img src="images/prac6_plots2.png" width="85%" id="p6_p1"/>
+                 </br>
+                 </br>
+                <p>The image below show the JULES family expanded.
+                   We can see all of the dependancies clearly. </p>
+<img src="images/prac6_plots1.png" width="85%" id="p6_p2"/>
+                 </br>
+                 </br>
+                 <p>In the image below, what are the states of each task?<p>
+<img src="images/prac6_plots3.png" width="85%" id="p6_p3"/>
+                 </br>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -2465,33 +2577,11 @@ fcm ci
                    <div class="panel-body">
                         <div class="row">
                             <pre>
-add stuff here
-                            </pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br/>
-
-
-
-
-            <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                        <span class="glyphicon"></span>
-                        Answers
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse">
-                   <div class="panel-body">
-                        <div class="row">
-                            <pre>
                             <font color=green>
-# make the directory ~/jules/ and the path that may be required.
+fcm_make - succeeded
+jules_canradmod_1/2/3/5/6 - running
+jules_canradmod_4 - submitted
+plot_crm - waiting
                             </font>
                             </pre>
                         </div>
@@ -2500,6 +2590,46 @@ add stuff here
             </div>
             <br/>
 
+            </br>
+            <h3>
+            Now try to create the suite and run the suite.
+            </h3>
+            Where are the plots that are created? (Clue where the output is.)
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyThree">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwentyThree" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+/USER/cylc-run/practical6_test2/work/1/plot_crm/
+latent_heat_flux_tseries.png                   surface_temperature_tseries.png
+sensible_heat_flux_tseries.png                 tot_soil_moisture_tseries.png
+soil_moisture_availability_factor_tseries.png
+</font>
+<img src="images/latent_heat_flux_tseries.png" width="95%" id="p6_lh"/>
+<img src="images/sensible_heat_flux_tseries.png" width="95%" id="p6_sh"/>
+<img src="images/soil_moisture_availability_factor_tseries.png" width="95%" id="p6_sm"/>
+<img src="images/surface_temperature_tseries.png" width="95%" id="p6_st"/>
+<img src="images/tot_soil_moisture_tseries.png" width="95%" id="p6_tsm"/>
+
+
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <h3>Congratulation you have completed the Beginners Tutorial!</h3>
 
             </div>
         </ul>
