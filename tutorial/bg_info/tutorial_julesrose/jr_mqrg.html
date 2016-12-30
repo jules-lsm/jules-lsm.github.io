@@ -5,10 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="JULES Rose Tutorial">
+        <meta name="description" content="JULES-Rose Tutorial">
         <meta name="author" content="JULES System Manager">
         <link rel="icon" href="jules_logo.png">
-        <title>JULES Rose My Quick Reference Guide</title>
+        <title>JULES-Rose My Quick Reference Guide</title>
         <!-- Bootstrap core CSS -->
         <link href="../etc/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- Bootstrap theme -->
@@ -27,7 +27,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">JULES Rose My Quick Reference Guide</a>
+                    <a class="navbar-brand" href="#">JULES-Rose My Quick Reference Guide</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -74,14 +74,23 @@
         <div class="container theme-showcase" role="main">
             <div class="jumbotron">
                 <h2>My Quick Reference Guide</h2>
-                <br>
+                </br>
+                <h3>JULES-Rose</h3>
+                </br>
+                Here are sets of commands that are commonly used.
+                <ul>
+                    <li><a href="#R1">rose stem</a></li>
+                    <li><a href="#R2">rose suite-run</a></li>
+                </ul>
+                </br>
+                <h3>FCM</h3>
+                </br>
                 Here are sets of commands that are commonly used and the order that they are they are usually issued in.
                 <ul>
                     <li><a href="#S1">Committing local/working copy</a></li>
                     <li><a href="#S2">Updating a local/working copy</a></li>
                     <li><a href="#S3">Using a keyword to check the log</a></li>
                     <li><a href="#S4">Checkout the trunk and create a branch</a></li>
-                    <li><a href="#S5">Creating a branch of a branch</a></li>
                     <li><a href="#S6">Reverting an uncommitted change</a></li>
                     <li><a href="#S7">Reverting a committed change</a></li>
                     <li><a href="#S8">Merging a local/working copy</a></li>
@@ -89,6 +98,105 @@
                     <li><a href="#S10">Text conflicts and accepting the working copy</a></li>
                 </ul>
             </div>
+
+            <br/>
+            <br/>
+            <h1><a id="R1">rose stem</a></h1>
+            <div class="well">
+                <pre>
+# use the desired version number i.e. vn4p7/vn4.7
+mkdir -p ~jules/vn#p#/
+cd ~jules/vn#p#
+# checkout the trunk at vn#.#
+fcm co fcm:jules.x_tr@vn#.#
+# or not using the keywords
+fcm co https://code.metoffice.gov.uk/svn/jules/main/trunk@vn#.#
+cd trunk
+# run the rose stem tests
+rose stem --new
+# create a branch for development on of the JULES code
+fcm bc &lt;BRANCH_NAME&gt; fcm:jules.x_tr@vn#.#
+cd ~jules/vn#p#
+# list the branches that you own
+fcm bls
+# checkout your new branch
+fcm co fcm:jules.x_br/dev/&lt;USER&lt;/&lt;BRANCH_NAME&gt;
+# change to that directory
+cd ~jules/vn#p#/&lt;BRANCH_NAME&gt;
+# check the info on the branch
+fcm info
+# make some changes
+# check the status of the local copy compared to the repository
+fcm st
+# if this returns a "?" then you have locally add files or directories, use:
+#  "fcm add &lt;FILENAME&gt;" to add them to the repository
+# if this returns a "!" then you have locally removed files or directories, use:
+#  "fcm rm -c &lt;FILENAME&gt;" to remove them from the repository
+# now commit your changes to the repository
+fcm ci
+# run the rose stem tests on your changed JULES code
+rose stem --new
+# copy the "trac.log" into the TicketSummary for the ticket as evidence for
+#  the review process.
+cd ~cylc-run/&lt;BRANCH_NAME&gt;
+# open the file for copying with a preferred editor
+gvim trac.log
+                </pre>
+            </div>
+             <br/>
+
+            <br/>
+            <h1><a id="R2">rose suite-run</a></h1>
+            <div class="well">
+                <pre>
+# checkout a suite that you want to base your experiments on
+rosie checkout &lt;SUITE_ID&gt;
+cd ~roses/&lt;SUITE_ID&gt;
+rose suite-run
+# if the suite is what is needed then copy to make changes to and to be the owner
+rosie copy &lt;SUITE_ID&gt;
+cd ~roses/&lt;NEW_SUITE_ID&gt;
+# make change so it is what is required
+# check the status of the local copy compared to the repository
+fcm st
+# if this returns a "?" then you have locally add files or directories, use:
+#  "fcm add &lt;FILENAME&gt;" to add them to the repository
+# if this returns a "!" then you have locally removed files or directories, use:
+#  "fcm rm -c &lt;FILENAME&gt;" to remove them from the repository
+# now commit your changes to the repository, then the repository is the same as
+#  the experiment that was run
+fcm ci
+rose suite-run
+# more changes are needed but for tracebility create a branch
+fcm bc &lt;BRANCH_NAME&gt;
+# list all branches
+fcm bls
+# switch to the branch
+fcm sw &lt;BRANCH_NAME&gt;
+# check the info to prove that it is the branch
+fcm info
+# make some changes
+# check the status of the local copy compared to the repository
+fcm st
+# if this returns a "?" then you have locally add files or directories, use:
+#  "fcm add &lt;FILENAME&gt;" to add them to the repository
+# if this returns a "!" then you have locally removed files or directories, use:
+#  "fcm rm -c &lt;FILENAME&gt;" to remove them from the repository
+# now commit your changes to the repository
+fcm ci
+# run the rose suite to run the configuration changes made
+rose suite-run --new --name=&lt;DIFFERENT_NAME&gt;
+# check the output
+cd ~cylc-run/&lt;DIFFERENT_NAME&gt;/work/1/&lt;TASK_NAME&gt;/output
+# this output can be compared with the output from the original &lt;NEW_SUITE_ID&gt;
+cd ~cylc-run/&lt;NEW_SUITE_ID&gt;/work/1/&lt;TASK_NAME&gt;/output
+# the orginal suite which is not needed can be deleted
+#  make sure you only delete the required files (cylc-run and local copy)  by answering carefully
+rosie delete &lt;SUITE_ID&gt;
+                </pre>
+            </div>
+             <br/>
+
             <br/>
             <h1><a id="S1">Committing local/working copy</a></h1>
             <div class="well">
@@ -127,10 +235,11 @@ fcm ci
                 <pre>
 # set-up your keyword.
 cd ~/.metomi/fcm/
-# edit the <samp>keyword.cfg</samp> file, for example (using the expanded variable for $HOME):
-location{primary}[fcm_esIII] = file:////$HOME/fcm_tutorial/repository/essentialsIII
+# edit the <samp>keyword.cfg</samp> file, for example:
+location{primary}[jules.x] = https://code.metoffice.gov.uk/svn/jules/main
+location{primary}[jules_doc.x] = https://code.metoffice.gov.uk/svn/jules/doc
 # check the log of the local/working copy.
-fcm log fcm:fcm_esIII
+fcm log fcm:jules.x
 </pre>
             </div>
             <br/>
@@ -140,7 +249,7 @@ fcm log fcm:fcm_esIII
 # checkout the trunk with the URL.
 fcm co URL &lt;LOCATION OF WORKING/LOCAL COPY&gt;
 # checkout the trunk with the keyword if it is set-up.
-fcm co fcm:fcm_esIII_tr &lt;LOCATION OF WORKING/LOCAL COPY&gt;
+fcm co fcm:jules.x_tr &lt;LOCATION OF WORKING/LOCAL COPY&gt;
 # create a branch of the trunk.
 fcm bc &lt;NAME OF BRANCH&gt;
 #
@@ -158,30 +267,6 @@ fcm bc &lt;NAME OF BRANCH&gt;
 # checkout the branch
 fcm co &lt;BRANCH_URL&gt; &lt;LOCATION OF WORKING/LOCAL COPY OF BRANCH&gt;
 cd &lt;LOCATION OF WORKING/LOCAL COPY OF BRANCH&gt;
-</pre>
-            </div>
-            <br/>
-            <h1><a id="S5">Creating a branch of a branch</a></h1>
-            <div class="well">
-                <pre>
-fcm info
-# if you are in the trunk and need to switch to the branch do so.
-fcm sw &lt;NAME OF BRANCH&gt;
-# or if you checked it out
-cd &lt;LOCATION OF WORKING/LOCAL COPY OF BRANCH&gt;
-fcm info
-fcm st
-# commit any changes if needed.
-fcm ci
-# check for updates from the repository.
-fcm st -u
-# update the local/working copy of needed.
-fcm update
-# now create the branch of the branch.
-fcm bc --bob  &lt;NAME OF BRANCH OF BRANCH&gt;
-# if you want to branch from a different revision and not the HEAD.
-fcm bc --bob BRANCH_URL@REV &lt;NAME OF BRANCH OF BRANCH&gt; 
-# either switch to the branch or check it out and move to it.
 </pre>
             </div>
             <br/>
