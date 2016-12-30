@@ -5,10 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <meta name="description" content="JULES Rose Tutorial" />
+        <meta name="description" content="JULES-Rose Tutorial" />
         <meta name="author" content="JULES System Manager" />
         <link rel="icon" href="jules_logo.png" />
-        <title>JULES Rose beginner</title>
+        <title>JULES-Rose intermediate</title>
         <!-- Bootstrap core CSS -->
         <link href="../etc/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
         <!-- Bootstrap theme -->
@@ -37,15 +37,20 @@ dy>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Intermediate material <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Intermediate Tutorials</li>
-                                <li><a href="#vc">Why use version control</a></li>
-                                <li><a href="#subvc">Subversion</a></li>
-                                <li><a href="#scens">scenarios</a></li>
-                                <li><a href="#cfg">configuration</a></li>
+                                <li><a href="#bjrstem">Basics of JULES rose stem</a></li>
+                                <li><a href="#bcode">Basics of Coding -UMDP3, Reviewing</a></li>
+                                <li><a href="#bjrsuite">Running a basic JULES-Rose suite</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Intermediate Practical's</li>
-                                <li><a href="#orepo">own repository</a></li>
-                                <li><a href="#trepo">tutorial repositories</a></li>
-                            </ul>
+                                <li><a href="#Pracs">Practicals</a></li>
+                                <li><a href="#fjre">Further JULES Rose Edit</a></li>
+                                <li><a href="#fjrsuite">Further JULES-Rose suites - duration, domain</a></li>
+                                <li><a href="#fjrstem">Further JULES rose stem - namelists, modules</a></li>
+                                <li><a href="#ticks">More on Tickets - Populating</a></li>
+                                <li><a href="#hot">HoT branches and merging branch into it</a></li>
+                                <li><a href="#umj">UM-JULES</a></li>
+                                <li><a href="#md">Metadata</a></li>
+                                <li><a href="#upmac">Running the upgrade macros</a></li>                            </ul>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other material <span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -74,17 +79,38 @@ dy>
         <div class="container theme-showcase" role="main">
         <div class="jumbotron">
             <h1>Intermediate JULES-Rose Tutorial</h1>
-            <p>This aims to explain the importance of:
+            <p>This tutorial and practicals aim to cover the following topics:
             <ul>
-                <li><a href="#vc">Using version control</a></li>
-                <li><a href="#subvc">The basics of Subversion and where to learn more</a></li>
-                <li><a href="#scens">Scenarios</a></li>
-                <li><a href="#cfg">General configuration</a></li>
-                <li><a href="#orepo">Setting-up your own repository</a></li>
-                <li><a href="#trepo">Setting-up the tutorial repositories</a></li>
+                <li><a href="#bjrstem">Basics of JULES rose stem</a></li>
+                <li><a href="#bcode">Basics of Coding -UMDP3, Reviewing</a></li>
+                <li><a href="#bjrsuite">Running a basic JULES-Rose suite</a></li>
+                <li><a href="#fjre">Further JULES Rose Edit</a></li>
+                <li><a href="#fjrsuite">Further JULES-Rose suites - duration, domain</a></li>
+                <li><a href="#fjrstem">Further JULES rose stem - namelists, modules</a></li>
+                <li><a href="#ticks">More on Tickets - Populating</a></li>
+                <li><a href="#hot">HoT branches and merging branch into it</a></li>
+                <li><a href="#umj">UM-JULES</a></li>
+                <li><a href="#md">Metadata</a></li>
+                <li><a href="#upmac">Running the upgrade macros</a></li>
             </ul>
             </p>
         </div>
+        <div class="well">
+            <p>It is expected that you have:
+            <ul>
+            <li>Completed the <a href="jr_beginner.html">Beginner Tutorial</a>.</li>
+            </ul>
+            </p>
+            <p>
+            OR have:
+            <ul>
+            <li>Experience running rose stem and JULES-Rose suites.</li>
+            <li>Made basic changes to JULES-Rose suites.</li>
+            <li>Experience with basic FCM commands.</li>
+            </ul>
+            </p>
+        </div>
+
         <div class="well">
             First let's do the Intermediate Quiz to see how much you already know and what we
             will need to focus on in this section, note there are no right or wrong answers
@@ -95,6 +121,304 @@ dy>
         </div>
         <br/>
 
+        <h2><a id="bjrstem">Basics of JULES rose stem</a></h2>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h3>What is JULES rose stem?</h3>
+            </div>
+            <div class="well">
+               <p>This is the test battery/suite of regression tests that code development changesets must be tested on.</p>
+               <p>JULES needs to pass all of the tests for code to accepted on the trunk.</p>
+               <p>Use the command <code>rose stem --group-all</code> to test all.</p>
+               <p>Note for quick preliminary testing use <code>--group=loobos</code>.</code>
+               </br>
+               </br>
+               <h4>Running rose stem</h4>
+               <p>The following is an example/reminder of how to run rose stem.
+                  Use it to help with the practicals.</p>
+<pre>
+# Checkout the code to run rose stem test for
+mkdir -p ~/jules/vn4p7
+cd ~/jules/vn4p7
+fcm co fcm:jules.x_tr@vn4.7
+cd ~/jules/vn4p7/trunk
+rose stem --group=all --new --name=my_vn4p7tr_test
+</pre>
+            <h4>Questions</h4>
+            <ol>
+                <li>What are the three ways for looking at the job stderr?</li>
+                <li>Where\What is the evidence for the Ticket Summary?</li>
+                <li>What does KGO mean?</li>
+                <li>When is it acceptable to have a failure in the KGO?</li>
+            </ol>
+            <br/>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+
+<ol>
+<li>What are the three ways for looking at the job stderr?</li>
+<font color=green>In the gcylc GUI by right clicking on the task, select View, select job stderr.
+In Rose Bush.
+In the cylc-run/&lt;SUITE_NAME&gt;/log/job/1/&lt;TASK_NAME&gt;/NN directory.
+</font>
+<li>Where\What is the evidence for the Ticket Summary?</li>
+<font color=green>The cylc-run/&lt;SUITE_NAME&gt;/trac.log file</font>
+<li>What does KGO mean?</li>
+<font color=green>Known Good Output</font>
+<li>When is it acceptable to have a failure in the KGO?</li>
+<font color=green>For example, when a bug has been identified and fixed, when the code has been improved.
+These changes have to be justified usually with plots and approved by the code owner and Sci/tech Reviewer.</font>
+</ol>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            </div>
+        </ul>
+
+        <h2><a id="bcode">Basics of Coding -UMDP3, Reviewing</a></h2>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h3>Why are their coding standards and reviewing?</h3>
+            </div>
+            <div class="well">
+               <p>Coding standards provide quailty assurance and help provide a consistient interface for development.</p>
+               <p>Using coding standards and following the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">working practices</a> and the <a href="https://code.metoffice.gov.uk/doc/um/vn10.6/papers/umdp_003.pdf">UMDP3</a> software standards aims to provide high quailty code.</p>
+                <p>It is known that not all of the current JULES code meets the standards and it is being constantly improved/developed to achieve this goal.</p>
+                <p>No new code is allowed on the trunk unless it meets the coding standards.</p>
+                </br>
+                <p>Reviewing is a very important process, not only must code meet the coding standards and pass the regression testing (rose stem) it must also go through a two stage review process.
+                 <ul><li>Stage one is the Sci/Tech Review - code must be approved by the appropriate module owner(s) and reviewed Scientifically/Technically by a specialist in the area whom has not been involved in the development of the code.</li>
+                 <li>Stage two is the Code Review - the code must meet the coding standards and be as efficient as possible.
+                     At present the code reviewer is either Kerry Smout-Day (JULES System Manager) or a member of the UM Systems Team.</li></ul></p> 
+            <br/>
+            </div>
+        </ul>
+
+
+        <h2><a id="bjrsuite">Basics of JULES rose suite</a></h2>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h3>How are JULES-Rose suites run?</h3>
+            </div>
+            <div class="well">
+               <p>JULES-Rose suite can be run in two ways:</p>
+               <ol>
+               <li>At command line</li>
+<pre>
+# first checkout the suite if there is not already have a local copy
+rosie checkout &lt;SUITE_ID&gt;
+# change to the directory of the local copy
+cd ~roses/&lt;SUITE_ID&gt;
+rose suite-run --new #--name=&lt;DIFFERENT_NAME_IF_REQUIRED&gt;
+</pre>
+            <li>Via Rose Edit</li>
+<pre>
+# first checkout the suite if there is not already have a local copy
+rosie checkout &lt;SUITE_ID&gt;
+# change to the directory of the local copy
+cd ~roses/&lt;SUITE_ID&gt;
+# open rose edit for the suite
+rose edit
+# now press the play button to run the suite
+</pre>
+            <li>Via rosie go</li>
+<pre>
+rosie go
+# select the suite to run and double click
+# this opens rose edit
+# now press the play button to run the suite
+</pre>
+            </ol>
+
+            <p>
+            <ol>
+            <li>How can you reopen the gcylc GUI if accidently closed?</li>
+            <li>What does the gcylc GUI going blank usually mean?</li>
+            <li>What does a red square mean?</li>
+            <li>What does a grey square mean?</li>
+            <li>What does a green square mean?</li>
+            <li>Where is the output of a task usually located?</li>
+            </ol>
+            </p>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+<ol>
+<li>How can you reopen the gcylc GUI if accidently closed?</li>
+<font color=green>Two ways,
+<code>cylc gscan</code> then double click on the name of the suite to open the gcylc GUI for,
+or
+<code>cylc sgc --name=&lt;SUITE_NAME&gt;</code></font>
+<li>What does the gcylc GUI going blank usually mean?</li>
+<font color=green>If there is "Stopped wth succeeded" in the bottom left then it is finished</font>
+<li>What does a red square mean?</li>
+<font color=green>The task has failed</font>
+<li>What does a grey square mean?</li>
+<font color=green>The task has succeeded</font>
+<li>What does a green square mean?</li>
+<font color=green>The task is running</font>
+<li>Where is the output of a task usually located?</li>
+<font color=green>In the cylc-run/&lt;SUITE_NAME&gt;/work/1/&lt;TASK_NAME&gt;/output/ directory</font>
+</ol>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+            </div>
+            <div class="page-header">
+                <h3>Who creates JULES-Rose suites?</h3>
+            </div>
+            <div class="well">
+               <p>There are some example suites that can be found on the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESWithRose#StandardRosesuites-Pleaseaddyourownheretohelpothers">JULES MOSRS pages</a></p>
+               <p>Some have been developed for the JULES-Rose tutorials:
+              <ul><li> Beginner Practical 5 and 6 - <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a> MetO Suite, <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/9">u-ai829</a> VM Suite.
+               </li>
+               </ul>
+               </p>
+               <p>Anyone can create JULES-Rose suites, but it is often best to start from a suite that is similar to the one that is desired for a given experiment.</p>
+               <p>Use ideas from others, it will save time.</p>
+            <br/>
+            </div>
+        </ul>
+
+        <h1><a id="Pracs">Practicals</a></h1>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h2><a id="fjre">Practical 1 - Further JULES Rose Edit</a></h2>
+            </div>
+            <div class="well">
+            <h3>Practical 1 will cover:</h3>
+            <p>Checking your set-up.</p>
+            </br>
+
+
+            </div>
+         </ul>
+
+        <ul>
+            <div class="page-header">
+                <h2><a id="fjrsuite">Practical 2 - Further JULES-Rose suites - duration, domain</a></h2>
+            </div>
+            <div class="well">
+            <h3>Practical 2 will cover:</h3>
+            <p>Checking your set-up.</p>
+            </br>
+
+
+            </div>
+         </ul>
+
+        <ul>
+            <div class="page-header">
+                <h2><a id="fjrstem">Practical 3 - Further JULES rose stem - namelists, modules</a></h2>
+            </div>
+            <div class="well">
+            <h3>Practical 3 will cover:</h3>
+            <p>Checking your set-up.</p>
+            </br>
+
+
+            </div>
+         </ul>
+
+        <ul>
+            <div class="page-header">
+                <h2><a id="ticks">Practical 4 - More on Tickets - Populating</a></h2>
+            </div>
+            <div class="well">
+            <h3>Practical 4 will cover:</h3>
+            <p>Checking your set-up.</p>
+            </br>
+
+
+            </div>
+         </ul>
+
+        <ul>
+            <div class="page-header">
+                <h2><a id="hot">Practical 5 - HoT branches and merging branch into it</a></h2>
+            </div>
+            <div class="well">
+            <h3>Practical 5 will cover:</h3>
+            <p>Checking your set-up.</p>
+            </br>
+
+
+            </div>
+         </ul>
+
+
+        <ul>
+            <div class="page-header">
+                <h2><a id="umj">Practical 6 - UM-JULES</a></h2>
+            </div>
+            <div class="well">
+            <h3>Practical 6 will cover:</h3>
+            <p>Checking your set-up.</p>
+            </br>
+
+
+            </div>
+         </ul>
+
+        <ul>
+            <div class="page-header">
+                <h2><a id="md">Practical 7 - Metadata</a></h2>
+            </div>
+            <div class="well">
+            <h3>Practical 7 will cover:</h3>
+            <p>Checking your set-up.</p>
+            </br>
+
+
+            </div>
+         </ul>
+
+        <ul>
+            <div class="page-header">
+                <h2><a id="upmac">Practical 8 - Running the upgrade macros</a></h2>
+            </div>
+            <div class="well">
+            <h3>Practical 8 will cover:</h3>
+            <p>Checking your set-up.</p>
+            </br>
+
+
+            </div>
+         </ul>
 
 
 
