@@ -530,15 +530,15 @@ M       rose-suite.conf
                 </br> <img src="images/rose_edit_meta2.png" width="80%" id="rem2"/>
                 <p>An example of different formats for presenting options with
                    metadata.<p/>
-                </br> <img src="images/rose_edit_meta4.png" width="80%" id="rem2"/>            
+                </br> <img src="images/rose_edit_meta4.png" width="80%" id="rem3"/>            
 
                <p>Select a variable and then right click, <code>Info</code>.
-                </br> <img src="images/rose_edit_meta3.png" width="80%" id="rem2"/>
+                </br> <img src="images/rose_edit_meta3.png" width="80%" id="rem4"/>
                <p>From the image above you can see thatt he date has to have 
                   the correct format.</p>
                 <p>Changing it to be incorrectly formatted provides a hover-over
                    error, as been in the image below.</p>
-                </br> <img src="images/rose_edit_meta5.png" width="80%" id="rem2"/>
+                </br> <img src="images/rose_edit_meta5.png" width="80%" id="rem5"/>
 
             </div>
          </ul>
@@ -549,13 +549,66 @@ M       rose-suite.conf
             </div>
             <div class="well">
             <h3>Practical 2 will cover:</h3>
-            <p>HEREHERE.</p>
+            <p>Running a JULES-Rose suite.</p>
+            <p>Changing the JULES-Rose suite to run for a different duration.</p>
+            <p>Changing the JULES-Rose suite to run for a different domain.</p>
             </br>
+            <h3>Running a JULES-Rose suite</h3>
 
+            </br>
+           <h3>Changing the JULES-Rose suite to run for a different duration</h3>
+HEREHERE
+            </br>
+            <h3>Changing the JULES-Rose suite to run for a different domain</h3>
+            <p>In JULES there are two ways to change the domain:
+            <ol>
+            <li>Changing the namelist <code>jules_latlon</code> and uses a 
+                single site.</li>
+            <li>Changing the namelist  <code>jules_model_grid</code> and uses a
+                gridbox domain.</li>
+            </ol>
+            </p>
+            <p>The first requires all of the <code>Model grid</code> variables 
+               in the <code>Grid configuration</code> to be <code>false</code>.
+               Latitude and Longitude must be defined and the Input grid should
+               be false and 1 x 1.
+               u-ai828 with the metadata specified has this set-up.</p>
+            <img src="images/rose_edit_dom1.png" width="80%" id="red1"/>
+            </br>
+            </br>
+            <p>The second requires <code>Input grid</code> to be true and the
+               other four variables defined.
+               <code>Latitude and longitude</code> set to Latitude/Longitude
+               including the ancil file location for the dataset.
+               <code>Land fraction</code> needs the ancil file location and
+               the name of the land fraction data.
+               <code>Model grid</code> has the sub grid set to true and the
+               boundaries to the lat and long of the domain.
+               To see an example with the second type of set-up see the 
+               JULES-Rose suite u-ai509 with the metatdata specified as above.</p>
+            <img src="images/rose_edit_dom2.png" width="80%" id="red2"/>
+            </br>
+            <p>The suite u-ai828 requires Loobos data which is included within
+               the suite.</p>
+            </br>
+            <p>The suite u-ai509 require GWSP2 data which is very big but part
+               of the VM install-jules-* extra scripts so can be run on the VM
+               if the data is available, note this suite take a while to run,
+               about 25 mins.</p>
+            <p>Change both suites:</p>
+              <ul>
+              <li>The first to run for a different site, Latitude 53.32 and 
+                  Longitude 0.0.</li>
+              <li>The second to run over the gridbox lat 53.5 55.5, long -1.0 1.0.</li>
+              <li>The second again but to run globally (use u-ah270 for help),
+                  note running this will take a very long time so you may want
+                  to only run it for 1 month and not a year.</li>
+              </ul></p>
 
+             
             </div>
          </ul>
-
+HEREHERE.
         <ul>
             <div class="page-header">
                 <h2><a id="fjrstem">Practical 3 - Further JULES rose stem - namelists, modules</a></h2>
