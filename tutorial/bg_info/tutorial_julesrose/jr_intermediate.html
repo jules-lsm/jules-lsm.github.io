@@ -303,7 +303,7 @@ or
             <div class="well">
                <p>There are some example suites that can be found on the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESWithRose#StandardRosesuites-Pleaseaddyourownheretohelpothers">JULES MOSRS pages</a></p>
                <p>Some have been developed for the JULES-Rose tutorials:
-              <ul><li> Beginner Practical 5 and 6 - <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a> MetO Suite, <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/9">u-ai829</a> VM Suite.
+              <ul><li> Beginner Practical 5 and 6 - <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a> MetO Suite, <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/9">u-ai829</a> VM Suite,  <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/4/3">u-ai843</a> JASMIN Suite.
                </li>
                </ul>
                </p>
@@ -321,9 +321,224 @@ or
             </div>
             <div class="well">
             <h3>Practical 1 will cover:</h3>
-            <p>Checking your set-up.</p>
+            <p>Make a change in Rose Edit and save it.</p>
+            <p>Search for an item in a namelist.</p>
+            <p>Make changes and undo the last one, save and commit changes.</p>
+            <p>Open the suite.rc to make changes and Other files.</p>
+            <p>View Ignored Variables and Latent Pages.</p>
+            <p>Rose Bush via Rose Edit.</p>
+            <p>Metadata and errors.</p>
             </br>
+            <p>A greater understanding and familarity of Rose Edit will provide
+               a section of techniques for making changes to JULES-Rose suites 
+               allowing the user to choose their preferred method.</p>
+            <h3>Make a change in Rose Edit and save it</h3>
+            <p>Open Rose Edit for the suite u-ai828<p>
+            <br/>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                        <span class="glyphicon"></span>
+                        How To
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+# checkout the suite either using rosie go or command line
 
+rosie go
+# search for u-ai828
+# double click on it to check it out, this checks it out locally and opens Rose Edit
+
+# at command line
+rosie checkout u-ai828
+cd ~/roses/u-ai828
+rose edit 
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <p>Change the <code>WALLTIME</code> in the suite conf -&gt; Runtime configuration from 180 to 160.</p>
+            <p>The <code>WALLTIME</code> should have changed colour from black
+               to blue.
+               There should be blue dots next to suite conf and Runtime 
+               configuration.</p>
+            <p>To save the change click on a different index, for example 
+               fcm_make, then click <code>Check and save</code> the third 
+               icon from the left of the Rose Edit GUI, which is "Abc" 
+               underlined in a green wavy line.</p>
+            <p>Confirmation that the change has been made can be seen by the
+               blue dots disappearing and the writing changing back to black.</p>
+            </br>
+            <h3>Search for an item in a namelist</h3>
+                <p>In the icon panel of the Rose Edit GUI there is a blank box 
+                   and an icon on binoculars next to it.
+                   This is the search box and button.<p/>
+                <p>Search <code>output</code>, press the search button until
+                   all of the files with output are found.</p>
+                </br><img src="images/rose_edit_search.png" width="80%" id="res"/>
+            </br>
+            <h3>Make changes and undo the last one, save and commit changes</h3>
+            <p>Make some other changes:
+              <ul>
+              <li>Change can_rad_mod from 4 to 1.</li>
+              <li>Change the location of the output from './output' to './tester/output'
+              <p>What is the full path location that the new output directory would located?</p></li>
+              <li>Change <code>JULES_OMP</code> to omp.</li>
+              </ul>
+              <p>Save the changes.</p>
+              <p>How do you know that the changes are saved?</p>
+            <br/>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                        <span class="glyphicon"></span>
+                        How To and Answer
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+Search "can_rad_mod"
+It is located in jules -&gt; namelist -&gt; jules_vegetation the second box down.
+Search "output"
+It is located in jules -&gt; namelist -&gt; jules_output the second box down, output_dir.
+Search "JULES_OMP"
+It is located in fcm -&gt; env the third box down.
+<font color=green>The blue dots and text go.</font>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <p>Now undo the last change as we are not running with omp.
+               This is done my using the <code>Undo</code> button.
+               In the Rose Edit GUI this is the 6th icon button from the left 
+               and is a yellow backward curving arrow.</p>
+            <p>This and the green backward curving arrow directly to the right
+               can be used to undo and redo changes in the order that they
+               were made.</p>
+            <p>Save the changes so there are only the three changes in total,
+               WALLCLOCK, can_rad_mod and output_dir.</p>
+            <p>Select the <code>Tools</code> tab, select <code>Launch Terminal</code>.
+               This opens a terminal with at the suite directory path.
+               Now check for local changes <code>fcm st</code>.</p>
+<pre>
+M       app/fcm_make/rose-app.conf
+M       app/jules/rose-app.conf
+M       rose-suite.conf
+</pre>
+             <p>To commit them to the repository <code>fcm ci</code> add a 
+                comment, save, close and except.</p>
+             <p>To revert all the changes before they are committed, close the 
+                Rose Edit GUI, <code>fcm revert * -R</code>.</p>
+             <p><strong>Remember you can only commit changes if you are the suite owner as defined in the rose-suite.info file.</strong></p>
+            </br>
+            <h3>Open the suite.rc to make changes and Other files</h3>
+                <p>Open Rose Edit again.</p>
+                <p>Click on <code> suite conf</code>, the right hand panel will
+                   display <code>Other files</code>, double click on the 
+                   file <code>suite.rc</code>.</p>
+                </br>
+                <p>Other files - </p>
+                <p>There are other files, for example the Loobos data files 
+                   are included in this suite.</p>
+                <p>Find them located via clicking on <code>jules</code> the 
+                   right hand panel displays <code>meta</code> and 
+                    <code>Other files</code> at the bottom of it.</p>
+                </br><img src="images/rose_edit_other.png" width="85%" id="reo"/>
+
+            </br>
+            <h3>View Ignored Variables/Pages and Latent Pages</h3>
+                <p>Some variable and pages are hidden from users as the default.
+                   These are known as <code>Ignored</code> Variable and Pages.</p>
+                <p>We may want to see them in the Rose Edit GUI, they can be 
+                   made viewable by: selecting the <code>View</code> tab and
+                   then selecting <code>View Ignored Variables</code>,
+                   <code>View Ignored Pages</code> and 
+                   <code>View Latent Pages</code>.</p>
+                 <p>With <code>View Ignored Variables</code> selected click on
+                    the fcm_make &gt; env section, it should now display three
+                    greyed out variables, which have the <code>!!</code> in
+                    front of them.
+                    This is how you would see then in a text editor, they are 
+                    not used which is why they were not displayed.</p>
+                 <p>With <code>View Ignored Pages</code> selected click on
+                    the jules &gt; namelist, it should now display additional
+                    namelists, which have the <code>!!</code> in
+                    front of them.
+                    There should be nine.
+                    Click on one it should display:
+                    <img src="images/rose_edit_ignore.png" width="80%" id="rei"/></p>
+                 <p>The <code>Latent Pages</code> are not often required, only
+                    the poll one may be useful at a later date.
+                    They show the possible other know of pages that could be 
+                    populated.</p>
+ 
+            </br>
+            <h3>Rose Bush via Rose Edit</h3>
+                <p>If the suite has been run, which it was via Rose Edit in
+                   the Beginner Tutorial, or do it now.
+                   It takes about 10 minutes, use the <code>Play</code> icon
+                   button.
+                   <p>Then Rose Bush, the web brower output page can be invoked.</p>
+                      <p>Either - </p>
+                      <p>Select the <code>Tools</code> tab and then select
+                      <code>View Output</code></p>
+                      <p>or</p>
+                      <p>Select the <code>View Output</code> folder icon, the 
+                      13th from the left.<p>
+                      <p>Try one of the techniques.</p> 
+
+            </br>
+            <h3>Metadata and errors</h3>
+                <p>If a change is made which does not comply with the metadata
+                   Rose Edit provides warnings.</p>
+                <p>Note that selecting an invalid value for <code>MPI_NUM_TASKS</code>
+                   provides a warning triangle and a red cog next to the 
+                   offending variable, see the image below.</p>
+                </br> <img src="images/rose_edit_warning.png" width="80%" id="rew"/>
+                </br>
+                <p>The important thing that we have to remember here is that
+                   the Rose Edit can only be as good as the metadata that it is
+                   provided with.
+                   Therefore if we can improve the metadate for a suite then we
+                   should.</p>
+                </br>
+                <p>This suite works correctly at runtime, but does not use the
+                   metadata in Rose Edit as it is not correctly specified for
+                   Rose Edit.
+                   To do this point it to the copy of the trunk, for example:
+                   <code>/project/jules/vn4.7/trunk/</code> to the front of
+                   both of the paths for fcm_make and jules metadata.</p>
+               <p>Save and check the changes.</p>
+               <p>Now the metadata is enabled we can see all of the information
+                  on the variables.</p>
+                </br> <img src="images/rose_edit_meta.png" width="80%" id="rem"/>
+                </br> <img src="images/rose_edit_meta2.png" width="80%" id="rem2"/>
+                <p>An example of different formats for presenting options with
+                   metadata.<p/>
+                </br> <img src="images/rose_edit_meta4.png" width="80%" id="rem2"/>            
+
+               <p>Select a variable and then right click, <code>Info</code>.
+                </br> <img src="images/rose_edit_meta3.png" width="80%" id="rem2"/>
+               <p>From the image above you can see thatt he date has to have 
+                  the correct format.</p>
+                <p>Changing it to be incorrectly formatted provides a hover-over
+                   error, as been in the image below.</p>
+                </br> <img src="images/rose_edit_meta5.png" width="80%" id="rem2"/>
 
             </div>
          </ul>
@@ -334,7 +549,7 @@ or
             </div>
             <div class="well">
             <h3>Practical 2 will cover:</h3>
-            <p>Checking your set-up.</p>
+            <p>HEREHERE.</p>
             </br>
 
 
