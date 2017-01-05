@@ -470,17 +470,18 @@ M       rose-suite.conf
                    <code>View Ignored Pages</code> and 
                    <code>View Latent Pages</code>.</p>
                  <p>With <code>View Ignored Variables</code> selected click on
-                    the fcm_make &gt; env section, it should now display three
+                    the fcm_make -&gt; env section, it should now display three
                     greyed out variables, which have the <code>!!</code> in
                     front of them.
                     This is how you would see then in a text editor, they are 
                     not used which is why they were not displayed.</p>
                  <p>With <code>View Ignored Pages</code> selected click on
-                    the jules &gt; namelist, it should now display additional
+                    the jules -&gt; namelist, it should now display additional
                     namelists, which have the <code>!!</code> in
                     front of them.
                     There should be nine.
                     Click on one it should display:
+                    </br>
                     <img src="images/rose_edit_ignore.png" width="80%" id="rei"/></p>
                  <p>The <code>Latent Pages</code> are not often required, only
                     the poll one may be useful at a later date.
@@ -556,7 +557,126 @@ M       rose-suite.conf
             <h3>Running a JULES-Rose suite</h3>
 
             </br>
-           <h3>Changing the JULES-Rose suite to run for a different duration</h3>
+           <h3>Changing the JULES-Rose suite to run for a different durations</h
+3>
+           </br>
+           </br>
+           <h4><strong>For this section please use the JULES-Rose suite u-ai???</strong></h4>
+           </br>
+           <h4>Different time period</h4>
+           <p>This is a simple change to the jules app, changing the 
+              <code>app/jules/rose-app.conf</code> file:
+<pre>
+[namelist:jules_time]
+main_run_end='2012-01-01 01:00:00'
+main_run_start='2011-01-01 01:00:00'
+</pre>
+          </p>
+          <p>However, if this is something that you wish to change regulary 
+             then it would be best to add variables to the <code>rose-suite.conf</code>
+             file and pass them to the jules app as described below:</p>
+           <p>In the <code>rose-suite.conf</code> file:
+<pre>
+MAIN_RUN_END='2012-01-01 01:00:00'
+MAIN_RUN_START='2011-01-01 01:00:00' 
+</pre>
+           </p>
+           <p>In the <code>suite.rc</code> file:
+<pre>
+     [[jules]]
+         [[[environment]]]
+             ...
+             main_run_end   = {{ MAIN_RUN_END }}
+             main_run_start = {{ MAIN_RUN_START }}
+</pre> 
+           </p>
+           <p>In the <code>app/jules/rose-app.conf</code>:
+<pre>
+[env]
+main_run_end=${main_run_end}
+main_run_start=${main_run_start}
+
+[namelist:jules_time]
+main_run_end=${main_run_end}
+main_run_start=${main_run_start}
+</pre>
+         </p>
+           </br>
+           <h4>Yearly</h4>
+           <p>We are going to update our suite to run JULES for a year at a time.
+              This is because not all computers allow for tasks (jobs) to run
+              for greater than a three hour wallclock limit. 
+              Therefore some model runs, for example global data over 100's,
+              may need to be split up into yearly JULES tasks so the computers
+              will allow the model to not timeout.</p>
+           </br>
+           <p>We are going to make changes very similar to the canradmod changes
+              in the Beginner course Practical 6 where we supplied a list of
+              different canradmod settings to run jules for different optional
+              configurations.
+           </p>
+           <p>This suite is slightly different in it design as the first time
+              that JULES is run it will use driving data and from then onwards
+              it will use the previous years data as its driving data. 
+           </p>
+           <p>Changes to the <code>rose-suite.conf</code> file:
+<pre>
+YEARS=["2011","2012","2013","2014","2015"]
+WALLTIME=4320
+</pre>
+           </p>
+           <p>Changes to the <code>suite.rc</code> file:
+<pre>
+graph = """
+          fcm_make =&gt;\
+          {% for year in YEARS %}
+              jules_{{year}} =&gt;\
+          {% endfor %}
+        """
+
+{% for year in YEARS %}
+    [[jules_{{year}}]]
+        inherit = SPICE
+        {% if year == YEARS[0] %}
+            script = rose task-run --app-key=jules
+        {% else %}
+            script = rose task-run --app-key=jules -O dump #Note - upper o not zero
+        {% end if %}
+        env-script = year_next=$(({{year}}+1))
+        [[[environment]]]
+        ...
+...         year={{year}}
+            year_next={{year_next}}
+</pre>
+           </p>
+           <p>Changes to the <code>app/jules/</code> files and directory:
+              Add an <code>opt/</code> directory.</p>
+           <p>Add a file <code>rose-app-dump.conf</code> to the opt/ directory:
+<pre>
+[namelist:jules_initial]
+dump_file=.true.
+file='/scratch/kerryday/ukv_rfm_output_ukv_jules_rfm_spice.dump.${year}0101.0nc'
+</pre>
+           </p>
+           <p>Changes to the app/jules/rose-app.conf file:
+<pre>
+[env]
+year=${year}
+year_next=${year_next}
+
+[namelist:jules_initial]
+dump_file=.false.
+file='/data/nwp1/hashton/breo_ukv_jules_data/init/initial_2010110100_9tiles.nc'
+
+[namelist:jules_time]
+main_run_end='${year_next}-01-01 01:00:00'
+main_run_start='${year}-01-01 01:00:00'
+</pre>
+           </p>
+           <p>These are all of the changes that would need to be made.<p/>
+           </br>
+           <h4>Monthly</h4>
+
 HEREHERE
             </br>
             <h3>Changing the JULES-Rose suite to run for a different domain</h3>
@@ -572,7 +692,8 @@ HEREHERE
                in the <code>Grid configuration</code> to be <code>false</code>.
                Latitude and Longitude must be defined and the Input grid should
                be false and 1 x 1.
-               u-ai828 with the metadata specified has this set-up.</p>
+               u-ai828 (or u-ai829 for VM or u-ai843 for JASMIN) with 
+               the metadata specified has this set-up.</p>
             <img src="images/rose_edit_dom1.png" width="80%" id="red1"/>
             </br>
             </br>

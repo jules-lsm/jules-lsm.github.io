@@ -87,8 +87,15 @@
                 <li>rose sgc</li>
                 <li>rose slv</li>
                 <li>rose stem</li>
+                <li>rose stem --new</li>
+                <li>rose stem --new -S HOUSEKEEPING=false --source=.</li>
                 <li>rose suite-run</li>
+                <li>rose suite-run -i #(to install only to check dependencies - development only)</li>
+                <li>rose suite-run -- --mode=simulation --hold #(for suite design development only)</li>
+                <li>rose suite-run --new</li>
+                <li>rose suite-run --new --name=&lt;NEW_NAME&gt;</li>
                 <li>rose suite-shutdown</li>
+                <li>rose suite-shutdown --name=&lt;SUITE_NAME&gt; -- --now #(forces the suite to shutdown now and not wait)</li>
                 <li>rosie checkout</li>
                 <li>rosie copy</li>
                 <li>rosie delete</li>
@@ -107,8 +114,9 @@
                 <li>cylc gscan</li>
                 <li>cylc gui</li>
                 <li>cylc scan -c</li>
+                <li>cylc view -g -j &lt;SUITE_ID&gt;</li>
                 <li>gcylc</li>
-
+                <li>tail -f &lt;full/path/to/cylc-run/SUITE_ID/&gt;log/suite/log #(so you can follow the progress of the suite without a GUI)</li>
                 </ul>
                 </br>
                 </br>
