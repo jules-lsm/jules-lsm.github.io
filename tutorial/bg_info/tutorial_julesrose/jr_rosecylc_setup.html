@@ -121,7 +121,8 @@ location{primary}[jules_doc.x] = https://code.metoffice.gov.uk/svn/jules/doc
 <li>Set-up - rose configuration
 </br>
 create the file <code>ROSE_PATH=/path/to/rose/; $ROSE_PATH/etc/rose.conf</code>
-something like this:
+something like this (this is similar to the VM file and will need adjusting 
+for your site):
 <pre>
 [rose-config-edit]
 icon-path-scehduler=/path/to/cylc/images/icon.png
@@ -158,19 +159,20 @@ prefixes-ws-default=u tmp
 You will need a site <code>.cfg</code> to be stored in <code>$JULES_trunk/etc/fcm-make/platform/???.cfg</code> file which should be something like this:
 <pre>
 ################################################################################
-# This platform file should be used when building on the JULES CEH Linux 
-# CEHwl1
+# This platform file should be used when building on the JULES ??? Linux 
+# ?????
 #
 # It makes sure that the compiler is gfortran, that MPI is off (since the
 # default NetCDF installation does not support MPI), and that the NetCDF paths
 # are correctly set up should the user switch NetCDF on
 ################################################################################
 
-# Override any of the input variables that we need to for the CEH Linux 
-# CEHwl1
+# Override any of the input variables that we need to for the ??? Linux 
+# ?????
 $JULES_REMOTE = local
 $JULES_COMPILER = gfortran
 $JULES_MPI = nompi
+$JULES_NETCDF = netcdf
 $JULES_NETCDF_INC_PATH = /usr/lib64/gfortran/modules
 $JULES_NETCDF_LIB_PATH = /usr/lib64
 
@@ -178,10 +180,20 @@ $JULES_NETCDF_LIB_PATH = /usr/lib64
 # platform configuration to set the variables
 include = $HERE/custom.cfg
 </pre>
-</li>
-	</ol>
-
 	</br>
+
+                <p>Please create a branch and add your site ???.cfg file to the
+                   <code>$JULES_trunk/etc/fcm-make/platform/</code> directory.
+                   This need so to be a ticket and then it can be reviewed by
+                   the JULES sysem manager so that it can be be part of the next
+                   JULES version code release for all your site to use.
+                   Therefore each user will not need there own version of the
+                   file.</p>
+                <p>For further help email <a href="mailto:Jules-Support@metoffice.gov.uk?Subject=JULES%20Tutorial%20Support">JULES Support</a>.</p>
+</li>
+        </ol>
+
+
                 </br>
 </div>
                 <h2>MOSRS password caching</h2>
@@ -268,11 +280,11 @@ store-plaintext-passwords = no
                <li>cd $ROSESTEM_DATA</li>
                <li>KGO_DIR=$ROSESTEM_DATA/rose-stem-kgo/vn4.7 #where 4.7 needs to be the appropriate JUELS version number</li>
                <li>mkdir -p $KGO_DIR</li>
-               <li>#Copy across the data all except GSWP2 driving data</li>
+               #Copy across the data all except GSWP2 driving data
                <li>wget --user=ext_jules --password=&lt;SEE LINK ABOVE&gt; ftp://ftp.metoffice.gov.uk/benchmarking/benchmark.data.tar.gz</li>
                <li>tar -xvzf benchmark.data.tar.gz</li>
                <li>rm benchmark.data.tar.gz</li>
-               <li>#Copy across the GSWP2 driving data</li>
+               #Copy across the GSWP2 driving data
                <li>cd gswp2</li>
                <li>wget --user=ext_jules --password=&lt;SEE LINK ABOVE&gt;  ftp://ftp.metoffice.gov.uk/benchmarking/benchmark_gswp2_data.tar.xz</li>
                <li>tar -xvJf benchmark_gswp2_data.tar.xz #Note this may take a short while.</li>
@@ -289,11 +301,15 @@ store-plaintext-passwords = no
                     <li>
                      JULES_TRUNK=&lt;path/to/jules/vn4.7/trunk&gt; #replace vn4.7 with the appropriate JULES version number</li>
                      <li>cd $JULES_TRUNK</li>
-                     <li>#This suite will fail, but do it anyway as we need to create the KGO</li>
-                     <li>rose stem --group=all --source=. -S HOUSEKEEPING=false --new</li>
+                     #This suite will fail, but do it anyway as we need to create the KGO
+                     <li><code>rose stem --group=all --source=. -S HOUSEKEEPING=false --new</code></li>
                      <li>cd ~/cylc-run/trunk</li>
                      <li>cp work/1/loobos_*/output/* $KGO_DIR</li>
                      <li>cp work/1/gswp2_*/output/* $KGO_DIR</li>
+                     </br>
+                     <p>Now rose stem should be configured for your site and 
+                         compliers.</p>
+                     <li>Test rose stem <code>rose stem --group=all --source=. --new</code> You should have no failures this time.</li>
                 </ol>
             </div>
             </div>
