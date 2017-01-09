@@ -299,13 +299,17 @@ store-plaintext-passwords = no
                 </br>
                 <ol>
                     <li>
-                     JULES_TRUNK=&lt;path/to/jules/vn4.7/trunk&gt; #replace vn4.7 with the appropriate JULES version number</li>
+                     KGO_DIR=&lt;path/to/jules/rose-stem-kgo/&gt;</li>
+<li>                     VN=vn4.7_t??? #replace with the appropriate KGO version
+</li>
+<li>                     mkdir -p $KGO_DIR/$VN</li>
+<li>                     JULES_TRUNK=&lt;path/to/jules/vn4.7/trunk&gt; #replace vn4.7 with the appropriate JULES version number</li>
                      <li>cd $JULES_TRUNK</li>
                      #This suite will fail, but do it anyway as we need to create the KGO
                      <li><code>rose stem --group=all --source=. -S HOUSEKEEPING=false --new</code></li>
                      <li>cd ~/cylc-run/trunk</li>
-                     <li>cp work/1/loobos_*/output/* $KGO_DIR</li>
-                     <li>cp work/1/gswp2_*/output/* $KGO_DIR</li>
+                     <li>cp work/1/loobos_*/output/* $KGO_DIR/$VN</li>
+                     <li>cp work/1/gswp2_*/output/* $KGO_DIR/$VN</li>
                      </br>
                      <p>Now rose stem should be configured for your site and 
                          compliers.</p>

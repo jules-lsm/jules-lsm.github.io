@@ -551,35 +551,35 @@ M       rose-suite.conf
             </div>
             <div class="well">
             <h3>Practical 2 will cover:</h3>
-            <p>Running a JULES-Rose suite.</p>
             <p>Changing the JULES-Rose suite to run for a different duration.</p>
             <p>Changing the JULES-Rose suite to run for a different domain.</p>
             </br>
-            <h3>Running a JULES-Rose suite</h3>
-
-            </br>
-           <h3>Changing the JULES-Rose suite to run for a different durations</h
-3>
+           <h3>Changing the JULES-Rose suite to run for a different durations</h3>
            </br>
+           <h4><strong>For this section please use the JULES-Rose suite u-aj012</strong></h4>
            </br>
-           <h4><strong>For this section please use the JULES-Rose suite u-ai???</strong></h4>
+           <p>For the VM use u-aj013 and for JASMIN use u-aj014.</p>
            </br>
-           <h4>Different time period</h4>
+           <p>The suite uses GSWP2 data for one month.</p>
+           </br>
+           <h4>Different time period - one off method</h4>
            <p>This is a simple change to the jules app, changing the 
               <code>app/jules/rose-app.conf</code> file:
 <pre>
 [namelist:jules_time]
-main_run_end='2012-01-01 01:00:00'
-main_run_start='2011-01-01 01:00:00'
+main_run_end='1982-07-07 03:00:00'
+main_run_start='1982-07-01 03:00:00'
 </pre>
           </p>
+          </br>
+           <h4>Different time period - flexible method</h4>
           <p>However, if this is something that you wish to change regulary 
              then it would be best to add variables to the <code>rose-suite.conf</code>
              file and pass them to the jules app as described below:</p>
            <p>In the <code>rose-suite.conf</code> file:
 <pre>
-MAIN_RUN_END='2012-01-01 01:00:00'
-MAIN_RUN_START='2011-01-01 01:00:00' 
+MAIN_RUN_END='1982-07-07 03:00:00'
+MAIN_RUN_START='1982-07-01 03:00:00' 
 </pre>
            </p>
            <p>In the <code>suite.rc</code> file:
@@ -603,13 +603,43 @@ main_run_start=${main_run_start}
 </pre>
          </p>
            </br>
-           <h4>Yearly</h4>
-           <p>We are going to update our suite to run JULES for a year at a time.
+           <p>As we are using a different time which is within the driving data
+              date range we do not have to change the namelist:jules_drive.</p>
+           <p>If we are to change the dates to a different month or year then 
+              we must change:
+<pre>
+[namelist:jules_drive]
+data_end='1982-07-31 23:59:59'
+data_start='1982-07-01 03:00:00'
+file='$GSWP2_INSTALL_DIR/drive/%vv/%vv198207.nc'
+</pre>
+             This may include sourcing more or different data, for example:
+<pre>      
+[namelist:jules_drive]
+data_end='1986-03-31 23:59:59'
+data_start='1986-03-01 03:00:00'
+file='$GSWP2_INSTALL_DIR/drive/%vv/%vv198603.nc'
+</pre>
+               OR
+<pre>      
+[namelist:jules_drive]
+data_end='1996-01-01 03:00:00'
+data_start='1982-07-01 03:00:00'
+file='drive_file.txt'
+</pre>
+          </p>
+          </br>
+          <p>To add flexibility to the suite use the second option for the drive
+             data as we have access to all of the files. </p>
+           </br>
+           <h4>Yearly or Monthly</h4>
+           <p>We are going to update our suite to run JULES for a year or a
+              month at a time.
               This is because not all computers allow for tasks (jobs) to run
               for greater than a three hour wallclock limit. 
               Therefore some model runs, for example global data over 100's,
-              may need to be split up into yearly JULES tasks so the computers
-              will allow the model to not timeout.</p>
+              may need to be split up into yearly/monthly JULES tasks so the
+              computers will allow the model to not timeout.</p>
            </br>
            <p>We are going to make changes very similar to the canradmod changes
               in the Beginner course Practical 6 where we supplied a list of
@@ -620,6 +650,13 @@ main_run_start=${main_run_start}
               that JULES is run it will use driving data and from then onwards
               it will use the previous years data as its driving data. 
            </p>
+           </br>
+           <p>This is first example is an example of yearly, but as it takes a
+              while we not run it.
+              The second example is monthly and we will impliment monthly and 
+              run it.</p>
+           <br>
+           <strong>Yearly Example only</strong>
            <p>Changes to the <code>rose-suite.conf</code> file:
 <pre>
 YEARS=["2011","2012","2013","2014","2015"]
@@ -633,30 +670,38 @@ graph = """
           {% for year in YEARS %}
               jules_{{year}} =&gt;\
           {% endfor %}
+          housekeep
         """
 
 {% for year in YEARS %}
     [[jules_{{year}}]]
         inherit = SPICE
         {% if year == YEARS[0] %}
-            script = rose task-run --app-key=jules
+            script = "mkdir -p output ; rose task-run --app-key=jules --path= --path=share/fcm_make/build/bin"
         {% else %}
-            script = rose task-run --app-key=jules -O dump #Note - upper o not zero
-        {% end if %}
+            script = "mkdir -p output ; rose task-run --app-key=jules -O dump --path= --path=share/fcm_make/build/bin"
+          #Note - upper o not zero
+        {% endif %}
         env-script = year_next=$(({{year}}+1))
         [[[environment]]]
         ...
 ...         year={{year}}
-            year_next={{year_next}}
+            year_next=${year_next}
+{% endfor %}
+
+    [[housekeep]]
+        scrpit = echo "Success!"
 </pre>
            </p>
            <p>Changes to the <code>app/jules/</code> files and directory:
               Add an <code>opt/</code> directory.</p>
+
+           </br>
            <p>Add a file <code>rose-app-dump.conf</code> to the opt/ directory:
 <pre>
 [namelist:jules_initial]
 dump_file=.true.
-file='/scratch/kerryday/ukv_rfm_output_ukv_jules_rfm_spice.dump.${year}0101.0nc'
+file='${CYLC_TASK_WORK_DIR}/output/gl6_notop_gswp2.dump.${year}0101.10800nc'
 </pre>
            </p>
            <p>Changes to the app/jules/rose-app.conf file:
@@ -665,20 +710,92 @@ file='/scratch/kerryday/ukv_rfm_output_ukv_jules_rfm_spice.dump.${year}0101.0nc'
 year=${year}
 year_next=${year_next}
 
-[namelist:jules_initial]
-dump_file=.false.
-file='/data/nwp1/hashton/breo_ukv_jules_data/init/initial_2010110100_9tiles.nc'
-
 [namelist:jules_time]
 main_run_end='${year_next}-01-01 01:00:00'
 main_run_start='${year}-01-01 01:00:00'
+
+[namelist:jules_drive]
+data_end='${year_next}-01-31 23:59:59'
+data_start='${year}-01-01 03:00:00'
+file='drive_file.txt
 </pre>
            </p>
            <p>These are all of the changes that would need to be made.<p/>
            </br>
-           <h4>Monthly</h4>
+           <strong>Monthly Example to do and run</strong>
+           <p>Changes to the <code>rose-suite.conf</code> file:
+<pre>
+MONTHS=["07","08","09","10","11"]
+YEAR="1985"
+</pre>
+           </p>
+           <p>Changes to the <code>suite.rc</code> file:
+<pre>
+graph = """
+          fcm_make =&gt;\
+          {% for month in MONTHS %}
+              jules_{{"%0.2d" % month|int}} =&gt;\
+          {% endfor %}
+          housekeep
+        """
 
-HEREHERE
+{% for month in MONTHS %}
+    [[jules_{{"%0.2d" % month|int}}]]
+        inherit = SPICE
+        {% if month == MONTHS[0] %}
+            script = "mkdir -p output ; rose task-run --app-key=jules --path= --path=share/fcm_make/build/bin"
+        {% else %}
+            script = "mkdir -p output ; rose task-run --app-key=jules -O dump --path= --path=share/fcm_make/build/bin"
+                      #Note - upper o not zero
+        {% endif %}
+        env-script = """ month_next='{{ "%0.2d" % (month|int + 1)}}' """
+        [[[environment]]]
+        ...
+...         month={{"%0.2d" % month|int}}
+            month_next=${month_next}
+            year={{ YEAR }}
+{% endfor %}
+
+    [[housekeep]]
+        scrpit = echo "Success!"
+</pre>
+           </p>
+           <p>Changes to the <code>app/jules/</code> files and directory:
+              Add an <code>opt/</code> directory.</p>
+
+           </br>
+           <p>Add a file <code>rose-app-dump.conf</code> to the opt/ directory:
+<pre>
+[namelist:jules_initial]
+dump_file=.true.
+file='${CYLC_TASK_WORK_DIR}/output/gl6_notop_gswp2.dump.${year}${month}01.10800nc'
+</pre>
+           </p>
+           <p>Changes to the app/jules/rose-app.conf file:
+<pre>
+[env]
+year=${year}
+month=${month}
+month_next=${month_next}
+
+[namelist:jules_time]
+main_run_end='${year}-${month_next}-01 01:00:00'
+main_run_start='${year}-${month}-01 01:00:00'
+
+[namelist:jules_drive]
+data_end='1996-01-01 03:00:00'
+data_start='1982-07-01 03:00:00'
+file='drive_file.txt'
+nfiles=162
+read_list=.true.
+</pre>
+           </p>
+           <p>Now run the suite...
+             ...look at the job.out for each task and check that the suite ran
+             as you expected.</p>
+           </br>
+           <p>A branch was created for this suite it is called "duration_ly_prac2", it has been fully tested and it can be used for comparison.</p>
+           </br>
             </br>
             <h3>Changing the JULES-Rose suite to run for a different domain</h3>
             <p>In JULES there are two ways to change the domain:
@@ -693,8 +810,9 @@ HEREHERE
                in the <code>Grid configuration</code> to be <code>false</code>.
                Latitude and Longitude must be defined and the Input grid should
                be false and 1 x 1.
-               u-ai828 (or u-ai829 for VM or u-ai843 for JASMIN) with 
-               the metadata specified has this set-up.</p>
+               u-ai828 (or u-ai829 for VM or u-ai843 for JASMIN, or u-ai844
+               for remote JASMIN from your desktop) with the metadata specified
+               has this set-up.</p>
             <img src="images/rose_edit_dom1.png" width="80%" id="red1"/>
             </br>
             </br>
@@ -713,10 +831,15 @@ HEREHERE
             <p>The suite u-ai828 requires Loobos data which is included within
                the suite.</p>
             </br>
-            <p>The suite u-ai509 require GWSP2 data which is very big but part
-               of the VM install-jules-* extra scripts so can be run on the VM
-               if the data is available, note this suite take a while to run,
-               about 25 mins.</p>
+            <p>The suite u-ai509 (u-ai510 for VM or u-ai511 for JASMIN) require
+               GWSP2 data which is very big but part of the VM install-jules-* 
+               extra scripts so can be run on the VM
+               if the data is available.
+               Note this suite takes a while to run, about 25 mins.</p>
+            <p>For a much faster running suite use u-aj012 (u-aj013 for VM or 
+               u-aj014 for JASMIN + remoteJAMSIN), it is the same as
+               u-ai509 but runs for only 1 month and not 1 year and therefore
+               takes about 5 minutes to run.</p>
             <p>Change both suites:</p>
               <ul>
               <li>The first to run for a different site, Latitude 53.32 and 
@@ -724,20 +847,27 @@ HEREHERE
               <li>The second to run over the gridbox lat 53.5 55.5, long -1.0 1.0.</li>
               <li>The second again but to run globally (use u-ah270 for help),
                   note running this will take a very long time so you may want
-                  to only run it for 1 month and not a year.</li>
+                  to use u-ai511 for testing.</li>
               </ul></p>
 
              
             </div>
          </ul>
-HEREHERE.
         <ul>
             <div class="page-header">
                 <h2><a id="fjrstem">Practical 3 - Further JULES rose stem - namelists, modules</a></h2>
             </div>
             <div class="well">
             <h3>Practical 3 will cover:</h3>
-            <p>Checking your set-up.</p>
+            <p>Add a namelist to rose stem.</p>
+            <p>Add a new module to rose stem.</p>
+           </br>
+            <h4>Add a namelist to rose stem.</h4>
+           </br>
+            <h4>Add a new module to rose stem.</h4>
+           </br>
+
+HEREHER
             </br>
 
 
@@ -750,10 +880,90 @@ HEREHERE.
             </div>
             <div class="well">
             <h3>Practical 4 will cover:</h3>
-            <p>Checking your set-up.</p>
+            <p>Creating a ticket.</p>
+            <p>Filling in the empty ticket.</p>
+            <p>Creating the Ticket Summary.</p>
+            <p>Filling in the Ticket Summary.</p>
+            <p>Adding the <code>trac.log output.</code></p>
+            <p>The review process.</p>
             </br>
+            <h4>Creating a ticket</h4>
+            <p>Anyone can create a ticket to highlight an area of the JULES code
+               that need development.</p>
+            <p>Ideally you will also want and be able to resolve the ticket, or
+               know someone that can.</p>
+            </br>
+            <p>First login to the <a href="https://code.metoffice.gov.uk/trac/jules/">JULES MOSRS trac wiki</a>.
+            <p>Either select the <code>New Ticket</code> tab at the top right
+                of the page or use the link: 
+             <a href="https://code.metoffice.gov.uk/trac/jules/newticket">Create a ticket</a></p>
+            </br>
+            <img src="images/new_ticket.png" width="80%" id="red2"/>
+            </br>
+            <h4>Filling in the empty ticket</h4>
+            <p>Complete the <code>Summary</code> section, Chose the appropriate
+            <code>Type</code> and only change the <code>Milestone</code> to the
+            upcoming JULES code release if you think that you will complete it
+            in time.</p>
+            <p>The <code>Description</code> should be a clear and concise
+               explanation of the problem and the proposed solution.
+               There also needs to be a link to the branch and the Ticket
+               Summary page.
+               These can be created in preparation for the change even if they
+               are not 100% ready, for example:
+<pre>
+[log:main/dev/user/branch_name branch_name]
+[wiki:ticket/###/TicketSummary Ticket Summary]
+</pre>
+             The ### will be replaced by the ticket number once the ticket is 
+             created.
+</p>
+            <p>Create the ticket using the <code>Create ticket</code> button.
+            </br>
+            <h4>Creating the Ticket Summary</h4>
+            <p>Clicking on the <code>Ticket Summay?</code> link will allow you
+             to create the page.</p>
+            <p>This opens a new page which displays:
+<pre>
+The page ticket/###/TicketSummary does not exist. You can create it here.
 
+You could also create the same page higher in the hierarchy:
 
+    TicketSummary?
+"Create this page"  Using the template: "(blank page)"
+</pre>
+             Choose the option <code>Ticketsummary</code> not the (blank page),
+             then select the button "Creat this page".
+             This will create the Ticket Summary page for you to fill in.</p>
+            </br>
+            <h4>Filling in the Ticket Summary</h4>
+            <p>You much be logged in to edit the TIcket Summary page.</p>
+            <p>Go to the bottom of the page and select the button 
+               <code>Edit this page</code>.
+               Fill in all of the sections that you can at the time.</p>
+            </br>
+            <h4>Adding the <code>trac.log</code></h4>
+            <p>After you have made your code change and are happy with it you
+               have to run the JULES rose stem tests for your branch.</p>
+            <p>More detail on rose stem have been discussed earlier in these
+               tutorials.</p>
+            <p>Once rose stem has commpleted then the <code>trac.log</code> can
+               be copied to the Ticket Summary.</p>
+           <p>The location of the trac.log: <code>~/cylc-run/&lt;BRANCH_NAME&gt;/trac.log</code>.</p>
+            </br>
+            <h4>The review process</h4>
+            <p>You must have code owner approval for your change before it is 
+               reviewed.</p>
+            <p>You will need to find a sci/tech reviewer and the JULES System
+               Manger will code review your change.</p>
+            <p>Please email people that you think may be willing to sci/tech 
+               review your change to ask for a review before you assign it to
+               them.</p>
+            <p>Note anoyone that has contributed to the branch cannot review the
+               branch.</p>
+           <p>Once the sci/tech review is done they should sign it off and 
+              assign it to the JULES system manager for the code review.</p>
+            </br>
             </div>
          </ul>
 
