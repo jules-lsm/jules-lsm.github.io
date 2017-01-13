@@ -61,8 +61,8 @@
         <div class="container theme-showcase" role="main">
             <div class="jumbotron">
                 <h2>Glossary list of JULES words</h2>
-                <br/>
-                <br/>
+                </br>
+                </br>
                 <ul>
                 <li>Ancillaries - datasets of fields at the resolution of the model, such as orography, soil moisture, etc.</li>
                 <li>Benchmarking - A way of evaluating the and comparing changes.</li>
@@ -75,14 +75,14 @@
 
                 
                 </ul>
-                <br/>
-                <br/>
+                </br>
+                </br>
                 <h2>Glossary list of Rose commands</h2>
-                <br/>
+                </br>
                 <strong>To find out more about each command use the help, for example:
                 <code>rose &lt;COMMAND&gt; --help</code> </strong>
-                <br/>
-                <br/>
+                </br>
+                </br>
                 <ul>
                 <li>rose edit</li>
                 <li>rose sgc</li>
@@ -103,14 +103,14 @@
                 <li>rosie go</li>
 
                 </ul>
-                <br/>               
-                <br/>
+                </br>               
+                </br>
                 <h2>Glossary list of Cylc commands</h2>
-                <br/>
+                </br>
                 <strong>To find out more about each command use the help, for example:
                 <code>cylc &lt;COMMAND&gt; --help</code> </strong>
-                <br/>
-                <br/>
+                </br>
+                </br>
                 <ul>
                 <li>cylc gscan</li>
                 <li>cylc gui</li>
@@ -119,14 +119,14 @@
                 <li>gcylc</li>
                 <li>tail -f &lt;full/path/to/cylc-run/SUITE_ID/&gt;log/suite/log #(so you can follow the progress of the suite without a GUI)</li>
                 </ul>
-                <br/>
-                <br/>
+                </br>
+                </br>
                 <h2>Glossary list of FCM commands</h2>
-                <br/>
+                </br>
                 <strong>To find out more about each command use the help, for example:
                 <code>fcm &lt;COMMAND&gt; --help</code> </strong>
-                <br/>
-                <br/>
+                </br>
+                </br>
                 <ul>
                     <li>
                         fcm add
@@ -236,8 +236,8 @@
                 </ul>
             </div>
             <a href="https://github.com/metomi/fcm/blob/master/CHANGES.md">FCM change log</a>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <div class="container">
             </div>
             <hr/>

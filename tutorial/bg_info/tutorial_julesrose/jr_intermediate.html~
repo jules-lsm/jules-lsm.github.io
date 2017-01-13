@@ -133,8 +133,8 @@
                <p>JULES needs to pass all of the tests for code to accepted on the trunk.</p>
                <p>Use the command <code>rose stem --group-all</code> to test all.</p>
                <p>Note for quick preliminary testing use <code>--group=loobos</code>.</code>
-               <br/>
-               <br/>
+               </br>
+               </br>
                <h4>Running rose stem</h4>
                <p>The following is an example/reminder of how to run rose stem.
                   Use it to help with the practicals.</p>
@@ -203,7 +203,7 @@ These changes have to be justified usually with plots and approved by the code o
                <p>Using coding standards and following the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">working practices</a> and the <a href="https://code.metoffice.gov.uk/doc/um/vn10.6/papers/umdp_003.pdf">UMDP3</a> software standards aims to provide high quailty code.</p>
                 <p>It is known that not all of the current JULES code meets the standards and it is being constantly improved/developed to achieve this goal.</p>
                 <p>No new code is allowed on the trunk unless it meets the coding standards.</p>
-                <br/>
+                </br>
                 <p>Reviewing is a very important process, not only must code meet the coding standards and pass the regression testing (rose stem) it must also go through a two stage review process.
                  <ul><li>Stage one is the Sci/Tech Review - code must be approved by the appropriate module owner(s) and reviewed Scientifically/Technically by a specialist in the area whom has not been involved in the development of the code.</li>
                  <li>Stage two is the Code Review - the code must meet the coding standards and be as efficient as possible.
@@ -329,7 +329,7 @@ or
             <p>View Ignored Variables and Latent Pages.</p>
             <p>Rose Bush via Rose Edit.</p>
             <p>Metadata and errors.</p>
-            <br/>
+            </br>
             <p>A greater understanding and familarity of Rose Edit will provide
                a section of techniques for making changes to JULES-Rose suites 
                allowing the user to choose their preferred method.</p>
@@ -377,15 +377,15 @@ rose edit
                underlined in a green wavy line.</p>
             <p>Confirmation that the change has been made can be seen by the
                blue dots disappearing and the writing changing back to black.</p>
-            <br/>
+            </br>
             <h3>Search for an item in a namelist</h3>
                 <p>In the icon panel of the Rose Edit GUI there is a blank box 
                    and an icon on binoculars next to it.
                    This is the search box and button.<p/>
                 <p>Search <code>output</code>, press the search button until
                    all of the files with output are found.</p>
-                <br/><img src="images/rose_edit_search.png" width="80%" id="res"/>
-            <br/>
+                </br><img src="images/rose_edit_search.png" width="80%" id="res"/>
+            </br>
             <h3>Make changes and undo the last one, save and commit changes</h3>
             <p>Make some other changes:
               <ul>
@@ -446,22 +446,22 @@ M       rose-suite.conf
              <p>To revert all the changes before they are committed, close the 
                 Rose Edit GUI, <code>fcm revert * -R</code>.</p>
              <p><strong>Remember you can only commit changes if you are the suite owner as defined in the rose-suite.info file.</strong></p>
-            <br/>
+            </br>
             <h3>Open the suite.rc to make changes and Other files</h3>
                 <p>Open Rose Edit again.</p>
                 <p>Click on <code> suite conf</code>, the right hand panel will
                    display <code>Other files</code>, double click on the 
                    file <code>suite.rc</code>.</p>
-                <br/>
+                </br>
                 <p>Other files - </p>
                 <p>There are other files, for example the Loobos data files 
                    are included in this suite.</p>
                 <p>Find them located via clicking on <code>jules</code> the 
                    right hand panel displays <code>meta</code> and 
                     <code>Other files</code> at the bottom of it.</p>
-                <br/><img src="images/rose_edit_other.png" width="85%" id="reo"/>
+                </br><img src="images/rose_edit_other.png" width="85%" id="reo"/>
 
-            <br/>
+            </br>
             <h3>View Ignored Variables/Pages and Latent Pages</h3>
                 <p>Some variable and pages are hidden from users as the default.
                    These are known as <code>Ignored</code> Variable and Pages.</p>
@@ -482,14 +482,14 @@ M       rose-suite.conf
                     front of them.
                     There should be nine.
                     Click on one it should display:
-                    <br/>
+                    </br>
                     <img src="images/rose_edit_ignore.png" width="80%" id="rei"/></p>
                  <p>The <code>Latent Pages</code> are not often required, only
                     the poll one may be useful at a later date.
                     They show the possible other know of pages that could be 
                     populated.</p>
  
-            <br/>
+            </br>
             <h3>Rose Bush via Rose Edit</h3>
                 <p>If the suite has been run, which it was via Rose Edit in
                    the Beginner Tutorial, or do it now.
@@ -504,21 +504,21 @@ M       rose-suite.conf
                       13th from the left.<p>
                       <p>Try one of the techniques.</p> 
 
-            <br/>
+            </br>
             <h3>Metadata and errors</h3>
                 <p>If a change is made which does not comply with the metadata
                    Rose Edit provides warnings.</p>
                 <p>Note that selecting an invalid value for <code>MPI_NUM_TASKS</code>
                    provides a warning triangle and a red cog next to the 
                    offending variable, see the image below.</p>
-                <br/> <img src="images/rose_edit_warning.png" width="80%" id="rew"/>
-                <br/>
+                </br> <img src="images/rose_edit_warning.png" width="80%" id="rew"/>
+                </br>
                 <p>The important thing that we have to remember here is that
                    the Rose Edit can only be as good as the metadata that it is
                    provided with.
                    Therefore if we can improve the metadate for a suite then we
                    should.</p>
-                <br/>
+                </br>
                 <p>This suite works correctly at runtime, but does not use the
                    metadata in Rose Edit as it is not correctly specified for
                    Rose Edit.
@@ -528,19 +528,19 @@ M       rose-suite.conf
                <p>Save and check the changes.</p>
                <p>Now the metadata is enabled we can see all of the information
                   on the variables.</p>
-                <br/> <img src="images/rose_edit_meta.png" width="80%" id="rem"/>
-                <br/> <img src="images/rose_edit_meta2.png" width="80%" id="rem2"/>
+                </br> <img src="images/rose_edit_meta.png" width="80%" id="rem"/>
+                </br> <img src="images/rose_edit_meta2.png" width="80%" id="rem2"/>
                 <p>An example of different formats for presenting options with
                    metadata.<p/>
-                <br/> <img src="images/rose_edit_meta4.png" width="80%" id="rem3"/>            
+                </br> <img src="images/rose_edit_meta4.png" width="80%" id="rem3"/>            
 
                <p>Select a variable and then right click, <code>Info</code>.
-                <br/> <img src="images/rose_edit_meta3.png" width="80%" id="rem4"/>
+                </br> <img src="images/rose_edit_meta3.png" width="80%" id="rem4"/>
                <p>From the image above you can see thatt he date has to have 
                   the correct format.</p>
                 <p>Changing it to be incorrectly formatted provides a hover-over
                    error, as been in the image below.</p>
-                <br/> <img src="images/rose_edit_meta5.png" width="80%" id="rem5"/>
+                </br> <img src="images/rose_edit_meta5.png" width="80%" id="rem5"/>
 
             </div>
          </ul>
@@ -553,15 +553,15 @@ M       rose-suite.conf
             <h3>Practical 2 will cover:</h3>
             <p>Changing the JULES-Rose suite to run for a different duration.</p>
             <p>Changing the JULES-Rose suite to run for a different domain.</p>
-            <br/>
+            </br>
            <h3>Changing the JULES-Rose suite to run for a different durations</h3>
-           <br/>
+           </br>
            <h4><strong>For this section please use the JULES-Rose suite u-aj012</strong></h4>
-           <br/>
+           </br>
            <p>For the VM use u-aj013 and for JASMIN use u-aj014.</p>
-           <br/>
+           </br>
            <p>The suite uses GSWP2 data for one month.</p>
-           <br/>
+           </br>
            <h4>Different time period - one off method</h4>
            <p>This is a simple change to the jules app, changing the 
               <code>app/jules/rose-app.conf</code> file:
@@ -571,7 +571,7 @@ main_run_end='1982-07-07 03:00:00'
 main_run_start='1982-07-01 03:00:00'
 </pre>
           </p>
-          <br/>
+          </br>
            <h4>Different time period - flexible method</h4>
           <p>However, if this is something that you wish to change regulary 
              then it would be best to add variables to the <code>rose-suite.conf</code>
@@ -602,7 +602,7 @@ main_run_end=${main_run_end}
 main_run_start=${main_run_start}
 </pre>
          </p>
-           <br/>
+           </br>
            <p>As we are using a different time which is within the driving data
               date range we do not have to change the namelist:jules_drive.</p>
            <p>If we are to change the dates to a different month or year then 
@@ -628,10 +628,10 @@ data_start='1982-07-01 03:00:00'
 file='drive_file.txt'
 </pre>
           </p>
-          <br/>
+          </br>
           <p>To add flexibility to the suite use the second option for the drive
              data as we have access to all of the files. </p>
-           <br/>
+           </br>
            <h4>Yearly or Monthly</h4>
            <p>We are going to update our suite to run JULES for a year or a
               month at a time.
@@ -640,7 +640,7 @@ file='drive_file.txt'
               Therefore some model runs, for example global data over 100's,
               may need to be split up into yearly/monthly JULES tasks so the
               computers will allow the model to not timeout.</p>
-           <br/>
+           </br>
            <p>We are going to make changes very similar to the canradmod changes
               in the Beginner course Practical 6 where we supplied a list of
               different canradmod settings to run jules for different optional
@@ -650,7 +650,7 @@ file='drive_file.txt'
               that JULES is run it will use driving data and from then onwards
               it will use the previous years data as its driving data. 
            </p>
-           <br/>
+           </br>
            <p>This is first example is an example of yearly, but as it takes a
               while we not run it.
               The second example is monthly and we will impliment monthly and 
@@ -696,7 +696,7 @@ graph = """
            <p>Changes to the <code>app/jules/</code> files and directory:
               Add an <code>opt/</code> directory.</p>
 
-           <br/>
+           </br>
            <p>Add a file <code>rose-app-dump.conf</code> to the opt/ directory:
 <pre>
 [namelist:jules_initial]
@@ -721,7 +721,7 @@ file='drive_file.txt
 </pre>
            </p>
            <p>These are all of the changes that would need to be made.<p/>
-           <br/>
+           </br>
            <strong>Monthly Example to do and run</strong>
            <p>Changes to the <code>rose-suite.conf</code> file:
 <pre>
@@ -763,7 +763,7 @@ graph = """
            <p>Changes to the <code>app/jules/</code> files and directory:
               Add an <code>opt/</code> directory.</p>
 
-           <br/>
+           </br>
            <p>Add a file <code>rose-app-dump.conf</code> to the opt/ directory:
 <pre>
 [namelist:jules_initial]
@@ -793,10 +793,10 @@ read_list=.true.
            <p>Now run the suite...
              ...look at the job.out for each task and check that the suite ran
              as you expected.</p>
-           <br/>
+           </br>
            <p>A branch was created for this suite it is called "duration_ly_prac2", it has been fully tested and it can be used for comparison.</p>
-           <br/>
-            <br/>
+           </br>
+            </br>
             <h3>Changing the JULES-Rose suite to run for a different domain</h3>
             <p>In JULES there are two ways to change the domain:
             <ol>
@@ -814,8 +814,8 @@ read_list=.true.
                for remote JASMIN from your desktop) with the metadata specified
                has this set-up.</p>
             <img src="images/rose_edit_dom1.png" width="80%" id="red1"/>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <p>The second requires <code>Input grid</code> to be true and the
                other four variables defined.
                <code>Latitude and longitude</code> set to Latitude/Longitude
@@ -827,10 +827,10 @@ read_list=.true.
                To see an example with the second type of set-up see the 
                JULES-Rose suite u-ai509 with the metatdata specified as above.</p>
             <img src="images/rose_edit_dom2.png" width="80%" id="red2"/>
-            <br/>
+            </br>
             <p>The suite u-ai828 requires Loobos data which is included within
                the suite.</p>
-            <br/>
+            </br>
             <p>The suite u-ai509 (u-ai510 for VM or u-ai511 for JASMIN) require
                GWSP2 data which is very big but part of the VM install-jules-* 
                extra scripts so can be run on the VM
@@ -861,17 +861,17 @@ read_list=.true.
             <h3>Practical 3 will cover:</h3>
             <p>Add a namelist to rose stem.</p>
             <p>Add a new module to rose stem.</p>
-           <br/>
+           </br>
             <h4>Add a namelist to rose stem.</h4>
-           <br/>
+           </br>
             <h4>Add a new module to rose stem.</h4>
-           <br/>
+           </br>
 
 HEREHER
-            <br/>
+            </br>
             <br/>
 
-            <h3>Congratulations you have completed the Intermediate Tutorial!</h3>
+            <h3>Congratulation you have completed the Intermediate Tutorial!</h3>
 
 
             </div>
@@ -890,27 +890,27 @@ HEREHER
             <p>Filling in the Ticket Summary.</p>
             <p>Adding the <code>trac.log output.</code></p>
             <p>The review process.</p>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <h4>Why create a ticket?</h4>
             <p>There is something that needs improving in the JULES code.</p>
             <p>You have cretaed a branch that you wish to go on the JULES code 
                trunk for everyone to benfit from.
                Firstly make sure that you ahve followed all of the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">working practices</a>.
-            <br/>
+            </br>
             <h4>Creating a ticket</h4>
             <p>Anyone can create a ticket to highlight an area of the JULES code
                that need development.</p>
             <p>Ideally you will also want and be able to resolve the ticket, or
                know someone that can.</p>
-            <br/>
+            </br>
             <p>First login to the <a href="https://code.metoffice.gov.uk/trac/jules/">JULES MOSRS trac wiki</a>.
             <p>Either select the <code>New Ticket</code> tab at the top right
                 of the page or use the link: 
              <a href="https://code.metoffice.gov.uk/trac/jules/newticket">Create a ticket</a></p>
-            <br/>
+            </br>
             <img src="images/new_ticket.png" width="80%" id="red2"/>
-            <br/>
+            </br>
             <h4>Filling in the empty ticket</h4>
             <p>Complete the <code>Summary</code> section, Chose the appropriate
             <code>Type</code> and only change the <code>Milestone</code> to the
@@ -930,7 +930,7 @@ HEREHER
              created.
 </p>
             <p>Create the ticket using the <code>Create ticket</code> button.
-            <br/>
+            </br>
             <h4>Creating the Ticket Summary</h4>
             <p>Clicking on the <code>Ticket Summay?</code> link will allow you
              to create the page.</p>
@@ -946,13 +946,13 @@ You could also create the same page higher in the hierarchy:
              Choose the option <code>Ticketsummary</code> not the (blank page),
              then select the button "Creat this page".
              This will create the Ticket Summary page for you to fill in.</p>
-            <br/>
+            </br>
             <h4>Filling in the Ticket Summary</h4>
             <p>You much be logged in to edit the TIcket Summary page.</p>
             <p>Go to the bottom of the page and select the button 
                <code>Edit this page</code>.
                Fill in all of the sections that you can at the time.</p>
-            <br/>
+            </br>
             <h4>Adding the <code>trac.log</code></h4>
             <p>After you have made your code change and are happy with it you
                have to run the JULES rose stem tests for your branch.</p>
@@ -961,7 +961,7 @@ You could also create the same page higher in the hierarchy:
             <p>Once rose stem has commpleted then the <code>trac.log</code> can
                be copied to the Ticket Summary.</p>
            <p>The location of the trac.log: <code>~/cylc-run/&lt;BRANCH_NAME&gt;/trac.log</code>.</p>
-            <br/>
+            </br>
             <h4>The review process</h4>
             <p>You must have code owner approval for your change before it is 
                reviewed.</p>
@@ -979,7 +979,7 @@ You could also create the same page higher in the hierarchy:
               Checking if the change will cause issues on the trunk, if the 
               testing was sufficient, and if the appropriate permissions and
               standards have been achieved.</p>
-            <br/>
+            </br>
             </div>
          </ul>
 
@@ -992,52 +992,16 @@ You could also create the same page higher in the hierarchy:
             <p>Why do we need to create HoT branches.</p>
             <p>Creating a HoT branch.</p>
             <p>Merging in our original branch to the HoT branch.</p>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <h4>Why do we need to create HoT branches</h4>
-            <p>Branches should be created from the current JULES code release 
-               version.
-               A HoT branch is either requested or required if the present 
-               branch may either cause conflicts with the <code>HEAD</code> of
-               the trunk or they need to include the new code from the 
-               <code>HEAD</code> to check that it does not break the latest
-               <code>HEAD</code> of the trunk.</p>
-            <br/>
+            </br>
             <h4>Creating a HoT branch</h4>
-            <p>Below are the instructions for creating a HoT Branch, please 
-follow them and create your own HoT.</p>
-<pre>
-# Create a branch from the JULES code repository at the head of the current trunk.
-# Note there is no "@"
-#  and there is not a version keyword or revsion given after the "@".
-fcm bc &gt;HOT_BRANCH_NAME&lt; fcm:jules.x_tr
-# Add a comment to the commit message, include the ticket number if you have one. 
-# Check out the HoT branch.
-fcm co fcm:jules.x_br/dev/&gt;USERNAME&lt;/&gt;HOT_BRANCH_NAME&lt; 
-</pre>
-            <br/>
+            </br>
             <h4>Merging in our original branch to the HoT branch</h4>
-            <p>Now we have a HoT we can merge our orginal branch into and then 
-               check the difference using FCM.
-               When we are happy with the code merge we can run all of our 
-               JULES rose stem tests for the Ticket Summary for the 
-               <code>trac.log</code> to be include in.</p>
-            <p>Please follow the following instructions to include your
-               original branch in the HoT branch tat you have just created.</p>
-<pre>
-# Move to the HoT branch directory.
-cd &gt;HOT_BRANCH_NAME&lt;/
-# Merge your branch to the HoT branch.
-fcm merge fcm:jules.x_br/dev/&gt;USERNAME&lt;/&gt;BRANCH_NAME&lt;
-# Check the merge
-fcm diff -g
-# Once happy commmit the changes to the HoT branch.
-fcm ci
-# Add a suitable comment.
-</pre>
-            <br/>
+            </br>
 
-            <br/>
+            </br>
 
             </div>
          </ul>
@@ -1053,19 +1017,19 @@ fcm ci
             <p>How do we run UM-JULES rose stem?</p>
             <p>Where should the evidence go?</p>
             <p>What if there are failures?</p>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <h4>When and Why do we need to do a UM-JULES rose stem test?</h4>
-            <br/>
+            </br>
             <h4>How do we run UM-JULES rose stem?</h4>
-            <br/>
+            </br>
             <h4>Where should the evidence go?</h4>
-            <br/>
+            </br>
             <h4>What if there are failures?</h4>
-            <br/>
+            </br>
 
 
-            <br/>
+            </br>
 
             </div>
          </ul>
@@ -1079,16 +1043,16 @@ fcm ci
             <p>What is the metadata for?</p>
             <p>How do I create metadata?</p>
             <p>How do I test metadata?</p>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <h4>What is the metadata for?</h4>
-            <br/>
+            </br>
             <h4>How do I create metadata?</h4>
-            <br/>
+            </br>
             <h4>How do I test metadata?</h4>
-            <br/>
+            </br>
 
-            <br/>
+            </br>
 
             </div>
          </ul>
@@ -1101,14 +1065,14 @@ fcm ci
             <h3>Practical 8 will cover:</h3>
             <p>How to run an upgrade macro.</p>
             <p>How to create an upgrade macro.</p>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <h4>How to run an upgrade macro.</h4>
-            <br/>
+            </br>
             <h4>How to create an upgrade macro.</h4>
-            <br/>
+            </br>
 
-            <br/>
+            </br>
 
             </div>
          </ul>

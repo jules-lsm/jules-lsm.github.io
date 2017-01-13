@@ -216,29 +216,29 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
                 Met Office, UK
                 <br/>
                 Bureau of Meteorology, Australia
-                <br/>
+                </br>
                 NIWA, NZ
-                <br/>
+                </br>
                 Indian Met Service
-                <br/>
+                </br>
                 Polish Met Service
-                <br/>
+                </br>
                 CSIRO, Australia
-                <br/>
+                </br>
                 ARC Centre of Excellence for Climate Systems Science, Australia
-                <br/>
+                </br>
                 SAWS, South Africa
-                <br/>
+                </br>
                 Korean Met Service, South Korea
-                <br/>
+                </br>
                 Singapore Met Service
-                <br/>
+                </br>
                 NCAS Computational Modelling Services, UK
-                <br/>
+                </br>
                 557th, American Air Force
-                <br/>
+                </br>
                 Exeter University, Astrophysics Dept. Exo-planets.
-                <br/>
+                </br>
                 ...the JULES community, on JASMIN, VM and at their location.
             </div>
             <div class="page-header">
@@ -385,7 +385,7 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
             <div class="well">
             <h3>Practical 1 will cover:</h3>
             <p>Checking your set-up.</p>
-            <br/>
+            </br>
             <p>Lets firstly check some set-up:</p>
             <pre>
             rosie hello
@@ -468,7 +468,7 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
             <h3>Practical 2 will cover:</h3>
             <p>Basic FCM commands that you will need for the tutorial and 
                version control.</p>
-            <br/>
+            </br>
             <p>There are some very basic FCM commands that we need to know to work effectively.</p>
             <pre>
             fcm add
@@ -711,7 +711,7 @@ Global options_
                <p>Using basic FCM commands.</p>
                <p>The basics of Trac pages and Tickets.</p>
                <p>Creating a branch and testing a basic change.</p>
-            <br/>
+            </br>
             <p>We will now checkout the JULES code from the MOSRS repository.</p>
             <p>This will allow us to;</p>
                 <ul>
@@ -920,7 +920,7 @@ may not have so many locations to delete any previous run's data from.
               suites.</p>
            <p>Your rose-stem gcylc GUI should look like this:</p>
            <img src="images/gcylc_hold.png" width="60%" id="cghold"/>
-           <br/>
+           </br>
            <p>We will discuss the gcylc GUI before we release (play/run) the 
               suite.<p>
            <p>Lets look at an image of a running gcylc GUI and try to 
@@ -929,7 +929,7 @@ may not have so many locations to delete any previous run's data from.
            <h4>Key points from the gcylc GUI</h4>
            <ol>
            <li>The square coloured blocks - theses are the current states of the tasks
-           <br/><img src="images/task_filtering.png" width="35%" id="tf"/></li>
+           </br><img src="images/task_filtering.png" width="35%" id="tf"/></li>
            <li>The "F" inside the square blocks - this denotes that it is a 
            family of tasks</li>
            <li>Here the Family GSWP2 and METO_LINUX_GFORTRAN_GSWP2 are expanded
@@ -938,14 +938,14 @@ may not have so many locations to delete any previous run's data from.
            <li>When a task has run you can look at its standard output via the 
            GUI by right clicking on the task name.
            For example, fcm_make_meto_xc40_cce-omp:
-           <br/><img src="images/gcylc_investigate.png" width="90%" id="cg_invest"/>
-           <br/>Then you can look at the standard out, err and interact with
+           </br><img src="images/gcylc_investigate.png" width="90%" id="cg_invest"/>
+           </br>Then you can look at the standard out, err and interact with
            the task.</li>
            <li>We can pause or stop the suite using the buttons at the top left
            of the gcylc GUI or by selecting the <code>Control</code> tab
-           <br/><img src="images/stop_suite.png" width="90%" id="ss"/>
-           <br/><img src="images/stop_suite_daemon.png" width="35%" id="ssd"/>
-           <br/>Note in the last image in the top taskbar it says:
+           </br><img src="images/stop_suite.png" width="90%" id="ss"/>
+           </br><img src="images/stop_suite_daemon.png" width="35%" id="ssd"/>
+           </br>Note in the last image in the top taskbar it says:
            <code>Stop Suite Daemon vn4p7</code> this means that this panel 
            can be used to stop the suite at the location it is running using 
            the suite daemon.
@@ -1026,24 +1026,24 @@ There are mainly reasons, for example it failed and you need to fix the error.
             <p>There is a command line equivalent, it is not as elegant: </p>
             <code>cylc scan -c</code>
             <p>It should produce something like this:</p>
-            <br/><img src="images/cylc_scan_c.png" id="csc"/>
-            <br/>
+            </br><img src="images/cylc_scan_c.png" id="csc"/>
+            </br>
             <h4>What if you accidently close the gcylc GUI?</h4>
             <p>You can reopen it using:</p>
             <code>cylc gui vn4p7 #where vn4p7 is the suite id</code>
-            <br/>OR
+            </br>OR
             <p>You can use the cylc gscan GUI</p>
             <code>cylc gscan &amp; #&amp; background the task so you can still use your terminal</code>
-            <br/>
-            <br/><img src="images/cylc_gscan.png" id="cgscan"/>
-            <br/>
+            </br>
+            </br><img src="images/cylc_gscan.png" id="cgscan"/>
+            </br>
             <p>Now you can double click on the suite id of the suite that you
             want to open and the gcylc GUI of that will appear.</p>
-            <br/>OR
+            </br>OR
             <p>You can use Rose to open the gcylc GUI</p>
             <code>rose suite-gcontrol --name=SUITE-NAME</code> Or the shorthand
             <code> rose sgc --name=SUITE-NAME</code>
-            <br/>
+            </br>
             <h4>How else could we look at the output from the suite?</h4>
             <p>We already know that we can use the gcylc GUI to look at the 
                job stderr/out by <strong>right click</strong> on a task and
@@ -1055,7 +1055,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
             <img src="images/warning_tri.png" id="warning"/>
             <p>Double clicking on it will open up an information box with any
                errors from the log of the suite.</p>
-            <br/>
+            </br>
             <h4>Other ways of looking at information from the suite:</h4>
             <p>We can, if it is set-up look at the information in a web 
                browser.</p>
@@ -1063,8 +1063,8 @@ There are mainly reasons, for example it failed and you need to fix the error.
             <p>At the Met Office the top level page looks like the image
                below.</p>
             <img src="images/rose_bush1.png" width="85%" id="rb1"/>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <p>At the Met Office the second level page looks like the image
                below.
                This was reached by completing the "User Id" and selecting the
@@ -1072,22 +1072,22 @@ There are mainly reasons, for example it failed and you need to fix the error.
                This then provides a list of the owners suites that they have 
                run and or are running.</p>
             <img src="images/rose_bush2.png" width="65%" id="rb2"/>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <p>At the Met Office the suite level page looks like the image
                below.
                The suite was selected by clicking on the "task jobs list" 
                associated with the desired suite name.</p>
             <img src="images/rose_bush3.png" width="85%" id="rb3"/>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <p>On the VM the suite level page looks like the image below.</p>
             <img src="images/vm_rose_bush.png" width="85%"id="vmrb"/>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <p>The last two images are equivalent run on two different
                sites/systems.</p>
-            <br/>
+            </br>
             <p>Depending on your site set-up there are different ways of 
                accessing rose bush.
                As can be seen in the above two images.
@@ -1097,38 +1097,38 @@ There are mainly reasons, for example it failed and you need to fix the error.
                suite.</p>
             <p><code>rose slv</code> or <code>rose suite-log --view</code> you
                can also add the option of the <code>--name=SUITE_NAME</code>
-           <br/>
+           </br>
            <h4>More on Rose Bush</h4>
-            <br/>
+            </br>
             <p>The location of the log for the suite err and out which can be 
             very helpful when debugging a suite.</p>
             <img src="images/rose_bush4.png" width="85%" id="rb4"/>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <p>The location of the log for the Rose and other files, this can 
             be helpful.</p>
             <img src="images/rose_bush5.png" width="85%" id="rb5"/>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <p>Using the "Display Options" button to search for tasks by...
-            <br/>
+            </br>
             ...name (using the Task Name Glob) which means you can search for 
             part of a name, for example <code>*linux*</code>
-            <br/>
+            </br>
             ...specifying the number of Entries/Page is helpful for both very 
             large suites, especially when combined with other options
-            <br/>
+            </br>
             ...the Sort Order drop down is a useful option for example looking
             at the first failed task
-            <br/>
+            </br>
             ...you can combine options
-            <br/>
+            </br>
             ...remember to use the "update" button to apply your requested
              Display Options.
             </p>
             <img src="images/rose_bush7.png" width="85%" id="rb7"/>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <p>The "Display Options" also includes a very useful function of
                being able to look at jobs via their task status.</p> 
             <p>This can be done by selecting the Job Status drop down box.</p>
@@ -1136,16 +1136,16 @@ There are mainly reasons, for example it failed and you need to fix the error.
             <p>For example searching for all Failed tasks is often very helpful.
             </p>
             <img src="images/rose_bush8.png" width="85%" id="rb8"/>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <p>Cycles List</p>
             <p>The Cycles List tab at the top is useful for looking at the
                suite dependant on its cycle.</p>
             <p>As you can see below this functionality is not that useful for
                rose stem suites.</p>
             <img src="images/rose_bush6.png" width="85%" id="rb6"/>
-            <br/>
-            <br/>
+            </br>
+            </br>
             <h4>The cylc-run directory</h4>
             <p>A third place that we can look at the logs for a suite is
                in the <code>cylc-run</code> directory.</p>
@@ -1190,9 +1190,9 @@ cylc-suite.db          share
            <p>The <code>cylc-suite*</code> files are database files for Rose
               Bush etc.</p>
            <p>The <code>passphase</code> is a communications level file.</p>
-           <br/> 
+           </br> 
             <h3> Test your understanding</h3>
-            <br/><img src="images/warning_tri.png" id="warning"/>
+            </br><img src="images/warning_tri.png" id="warning"/>
             <p>Explain the following from the image above (moving left to right):</p>
             <ol>
             <li>What does the filled gray square represent?</li>
@@ -1298,7 +1298,7 @@ rose sgc --name=SUITE_ID</font>
                     </div>
                 </div>
             </div>
-            <br/>
+            </br>
             <h3>Tasks</h3>
             <ol>
             <li>
@@ -1317,14 +1317,14 @@ rose sgc --name=SUITE_ID</font>
             </ol>
             <h3>Tickets</h3>
             <p>A brief description and discussion on tickets</p>
-            <br/>
+            </br>
             <p>Even if you never have any intention of making a ticket which 
                you hope resolve tickets can be used to highlight bugs, when 
                something has been broken, or areas of development.
                Therefore it is helpful to understand them, their uses, how to
                create a ticket and or just keep any eye on tickets that may
                be of interest to the science that you are working on.</p>
-            <br/>
+            </br>
             <p>JULES code is part of the MOSRS, as part of the system there is
                a Trac system.
             <h4>Trac</h4>
@@ -1348,7 +1348,7 @@ rose sgc --name=SUITE_ID</font>
               select <code>View Tickets</code> if you are the <code>Owner</code>
               of any tickets this will bring them up for you to see.</p>
              <img src="images/trac_wiki.png" width="95%" id="trac"/>
-             <br/>
+             </br>
              <p>Some important points from this page</p>
              <ol>
                  <li>RSS Feeds - you can sign up for RSS feeds to receive feeds
@@ -1362,7 +1362,7 @@ rose sgc --name=SUITE_ID</font>
                     look similar to the image below:</p>
                  <img src="images/trac_wiki2.png" width="95%" id="trac2"/>
             </ol>
-           <br/>
+           </br>
             <p>To create a New Ticket, select the New Ticket button at the top 
                right of the page and fill in the details.
                The Description will need a link to the branch before it is
@@ -1377,7 +1377,7 @@ rose sgc --name=SUITE_ID</font>
 
             <h3>Creating a branch and testing the new code in it</h3>
             <p>Please refer to the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">Working Practices for JULES development</a>.
-            <br/>
+            </br>
             <p>Here we will make a basic change to the JULES code and test it
                with the rose stem test battery of tests.</p>
             <p>We know that the JULES code passes all the tests from running it
@@ -1387,9 +1387,9 @@ rose sgc --name=SUITE_ID</font>
            <p>Creating a branch from the latest code release of JULES:</p>
            <p><code>cd ~jules</code>
            <p><code>fcm bc tutorial_bc_rosestem fcm:jules.x_tr@vn4.7</code>
-           <br/>please insert the most recent version number.
-           <br/><code>bc</code> - means <code>branch-create</code>
-           <br/>"tutorial_bc_rosestem" will be the name of the branch.</p>
+           </br>please insert the most recent version number.
+           </br><code>bc</code> - means <code>branch-create</code>
+           </br>"tutorial_bc_rosestem" will be the name of the branch.</p>
            <p>If you do not have keywords set-up you will have to use the URL:
            <code>fcm bc tutorial_bc_rosestem https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.7</code></p> 
            <p>This will bring up a text editor window for you to add your
@@ -1434,14 +1434,14 @@ Committed revision ####.
               second. Both have different merits and are given below.</p>
           <ol>
           <li>Check out a copy to a new directory.
-             <br/>
+             </br>
              <p>For example: <code>fcm co fcm:jules.x_br/dev/USERNAME/BRANCH_NAME</code> and then move to that directory.</li>
           <li>Switch to the branch from within the directory of trunk@vn4.7.
-             <br/>
+             </br>
              <p>For example: <code>fcm sw fcm:jules.x_br/dev/USERNAME/BRANCH_NAME</code>.</li>
           </ol>
           <p>Here we will use the first method (later we will use the second).</p>
-          <br/>
+          </br>
           <pre>
 cd ~jules/
 fcm co fcm:jules.x_br/dev/USERNAME/vn4.7_tutorial_bc_rosestem
@@ -1475,7 +1475,7 @@ fcm st
 
 # returns nothing as there are no local/working copy changes in the directory.
 </pre>
-            <br/>
+            </br>
             <p>Make a basic change to the branch:</p>
             Note we are not keeping this change so it is not important
             what it is.
@@ -1499,7 +1499,7 @@ fcm st
             <p>The <code>fcm revert</code> command is very helpful if you want 
                to revert, one, a few or all local changes.
                See <code>fcm revert --help</code> for more options.</p>
-            <br/>
+            </br>
            <p>Now to make a change that we want to keep and test:</p>
            <pre>
 cd ~jules/vn4.7_tutorial_bc_rosestem/
@@ -1547,7 +1547,7 @@ Succeed - fcm_make_meto_xc40_cce_debug
                             <p>job stderr states IMPLICIT NONE....for data object "BETA_2"</p>
                            <p>Which is the change we made.</p>
                            <p>Now revert the change using FCM</p>
-                           <br/>
+                           </br>
                           <p>The three methods are the gcylc GUI, Rose Bush and the cylc-run/ directory.</p>
                         </div>
                     </div>
@@ -1557,10 +1557,10 @@ Succeed - fcm_make_meto_xc40_cce_debug
             <p>You should have reverted that change if you are following this 
                tutorial, make sure there are no local changes by using 
                <code>fcm st</code> if there are changes please revert them.</p>
-            <br/>
+            </br>
             <p><strong>In the intermediate tutorial we will add a new variable, 
                a new module etc.</strong></p>
-            <br/>
+            </br>
             <h3>What have we covered in Practical 3?</h3>
                <p>In this section we introduced JULES rose-stem testing, for 
                   testing the JULES code.</p>
@@ -1586,12 +1586,12 @@ Succeed - fcm_make_meto_xc40_cce_debug
                   <p>Using Rosie Go.</p>
                   <p>Explore Rose Edit.</p>
                   <p>Run the JULES-Rose suite</p>
-               <br/>
+               </br>
                <p>In this practical we will use two different methods, command
                   line and GUI's for all of the tasks.</p>
                <p>Please try both and then chose which you prefer, but remember,
                   you can mix and match and always change your mind!</p>
-               <br/>
+               </br>
                <h3>Check out a JULES-Rose suite</h3>
                <p>We are going to checkout the JULES-Rose suite, u-ai828.</p>
                <p>It is one from the MOSRS, the <code>u</code> refers to the
@@ -1606,7 +1606,7 @@ rosie checkout u-ai828
 [INFO] u-ai828: local copy created at /USER/roses/u-ai828
 </font>
 </pre>
-               <br/>
+               </br>
                <h3>JULES-Rose suite structure</h3>
                <p>The suite structure is similar for all suites.</p>
                <pre>
@@ -1646,7 +1646,7 @@ app  meta  rose-suite.conf  rose-suite.info  suite.rc
                         metadata for the suite, which helps you to understand
                         the values and parameters in the suite.</li>
                </ol>
-               <br/>
+               </br>
                <p>Some suites have more directories, some contain data.</p>
                <p>There is some data in this suite, can you find it?
                   It is Loobos data.</p>
@@ -1684,7 +1684,7 @@ app/jules/file/Loobos_1997.dat
             <br/>
             <p>We will go into each file in detail as we interact with them
                below in the practicals.</p>
-               <br/>
+               </br>
                <p>The command line technique is great if you know the suite ID 
                   that you wish to checkout.
                   But if you do not know or cannot remember the suite ID we
@@ -1707,9 +1707,9 @@ prefixes-ws-default=u
 cd
 rosie go &amp;
 </pre>
-               <br/>
+               </br>
                <img src="images/rosie_go.png" width="95%" id="rgo"/>
-               <br/>
+               </br>
                <p>Search for all of the user "kerryday"'s suites using the 
                   search box at the top far right of the Rosie Go GUI.</p>
                <p>Hover your mouse over each of the icons on the far left of
@@ -1750,7 +1750,7 @@ Notepad and pen - Local copy (modified)
                   <code>Delete Working Copy</code> and then 
                   <code>Checkout Suite</code> to prove it works the same as
                   command line.</p>
-               <br/>
+               </br>
                <p>Notice we can do many other things from the Rosie Go GUI.</p>
                <p>Next we will use it to open <code>Rose Edit</code>.<p/>
                <h3>Rose Edit</h3>
@@ -1767,7 +1767,7 @@ rose edit
                          and select <code>Edit Suite</code></li>
                     </p>
                     <img src="images/rose_edit.png" width="95%" id="red"/>
-                    <br/>
+                    </br>
                     <p>Click OK on both of the Error messages.
                        They are only warnings as the suite uses Jinja2 variables
                        from the rose-suite.conf file that Rose Edit has not
@@ -1775,9 +1775,9 @@ rose edit
                     <p>Click on the different items in the <code>Index</code>
                        on the left hand side of the panel of the Rose Edit GUI.
                        What do you notice about the items in the Index?</p>
-                    <br/>
+                    </br>
                     <img src="images/rose_edit2.png" width="95%" id="red2"/>
-                    <br/>
+                    </br>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -1805,9 +1805,9 @@ They are the same as in the command line directory.
                        suite, as you are not the owner you cannot commit your
                        change back to the repository, so take a look around.
                        More on changes and saving in Practical 5.</p>
-                    <br/>
+                    </br>
                     <p>Now we are going to run the suite.</p>
-                    <br/>
+                    </br>
                <h3>Run a JULES-Rose Suite</h3>
                <p><strong>IF USING THE VM PLEASE USE SUITE ID u-ai829</strong> 
                and change the path of to the JULES code in the 
@@ -1833,15 +1833,15 @@ rose suite-run
               </p>
                    <p>The gcylc GUI should look like the images below.</p>
                     <img src="images/rose_suite1.png" width="95%" id="rs1"/>
-                    <br/>
-                    <br/>
+                    </br>
+                    </br>
                     <img src="images/rose_suite2.png" width="95%" id="rs2"/>
-                    <br/>
-                    <br/>
+                    </br>
+                    </br>
                     <p>The gcylc GUI clears if the suite is successful.
                     With the message <code>stopped with 'succeeded'</code></p>
                     <img src="images/rose_suite3.png" width="95%" id="rs3"/>
-                    <br/>
+                    </br>
                     <ol>
                     <li>How can you find out how long each task took to run?</li>
                     <li>How long did the fcm_make task take?</li>
@@ -1897,11 +1897,11 @@ About 15 seconds
                   <p>Change the spinup.</p>
                   <p>Change the soil properties.</p>
                   <p>Running the suite with a different name</p>
-               <br/>
+               </br>
                 <h4>Intro and background</h4>
                   <p>This practical changes the soil ancillaries corresponding
                      to a different soil type.</p>
-                <br/>
+                </br>
                 <p>Soil ancillaries have an important effect on hydrology and
                    thermodynamics.
                    They affect sensible and latent heat fluxes that are passed
@@ -1913,16 +1913,16 @@ About 15 seconds
 Sand
 'b','sathh','satcon','sm_sat','sm_crit','sm_wilt','hcap','hcon','albsoil'
 3.295,0.04983,0.02455,0.3732,0.1039,0.03264,1.341E+06,0.3329,0.17
-<br/>
+</br>
 Loam
 'b','sathh','satcon','sm_sat','sm_crit','sm_wilt','hcap','hcon','albsoil'
 5.797,0.2383,0.004749,0.4373,0.277,0.1434,1.225E+06,0.2491,0.17
-<br/>
+</br>
 Clay
 'b','sathh','satcon','sm_sat','sm_crit','sm_wilt','hcap','hcon','albsoil'
 12.14,0.2864,0.001432,0.4523,0.3692,0.2696,1.244E+06,0.2192,0.17
 </pre>
-                  <br/>
+                  </br>
                 <h3>Copy u-ai828 and edit the rose-suite.info</h3>
                 <p>Chose one of the following two options to create your copy
                    of the suite.</p>
@@ -2034,7 +2034,7 @@ rose suite-run --new --name=sand_&lt;SUITE_ID&gt;
 </pre>
                  <p>Check your output at:</p>
 <code>/USER/cylc-run/sand_&lt;SUITE_ID&gt;/work/1/jules/sand/output/</code>
-<br/>
+</br>
                  <h3>Creating the other soil suites</h3>
                  <p>We have several options now.</p>
                  <ol>
@@ -2045,23 +2045,23 @@ rose suite-run --new --name=sand_&lt;SUITE_ID&gt;
                      <code>fcm sw &lt;BRANCH_NAME&gt;</code>, remember to 
                      commit your changes and to check where you are with
                      <code>fcm info</code>.
-                     <br/>
+                     </br>
                      <p>Run your new soil type using:
 <pre>
 rose suite-run --new --name=&lt;SOIL_TYPE&gt;_&lt;SUITE_ID&gt;
 </pre>
 </p>
-                     <br/>
+                     </br>
                      To switch back to the original use <code>fcm sw trunk</code>
                      you can check your branch names using <code>fcm bls</code></li>
                  </ol>
-                 <br/>
+                 </br>
                  <p>The first is the simplest, but I personally prefer the
                     second as it groups them suites together.</p>
-                 <br/>
+                 </br>
                  <p>An examples of how the Rosie Repository Trac pages look follow:</p>
                  <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a>
-<br/>
+</br>
                     <img src="images/rosie_trac1.png" width="70%" id="rrt1"/>
                     <p>Select sand_prac5</p>
                     <img src="images/rosie_trac2.png" width="75%" id="rrt2"/>
@@ -2096,7 +2096,7 @@ rose suite-run --new --name=&lt;SOIL_TYPE&gt;_&lt;SUITE_ID&gt;
                             <pre>
 <p> Note: The differences may only be small between the output for the different
 suite set-ups.
-<br/>
+</br>
 When plotting the differences the small difference may not be observable by eye 
 with some plotting packages.
 For example it has been noted that ncview does not appear to display differences
@@ -2123,14 +2123,14 @@ clearly by eye but MatLab and Iris display the difference.</p>
                   <p>Run the suite</p>
                   <p>Questions</p>
                   <p>Adding plots</p>
-               <br/>
+               </br>
                <p>
                In Practical 5 we copied the suite three times, sand, loam and clay.
                Each had its own suite id and we ran each suite to get the results.
                However, this is not the most effect way of running the suite to
                get the data as each time it run the <code>fcm_make</code> task.
               </p>
-              <br/>
+              </br>
               <p>This time we want to run the suite for six different model configurations.
                  Each is only a one line change, it would be a waste of resource
                  to have six different suites and run each so we will used the 
@@ -2253,8 +2253,8 @@ CANRADMOD=['canradmod_1', 'canradmod_2', 'canradmod_3', 'canradmod_4', 'canradmo
             <li>We need to populate the <code>SUITE_ID/app/jules/opt/</code>
                 with the 6 different <code>rose-app-???.conf</code> files.
                 For Example <code>rose-app-canradmod_1.conf</code>
-<br/>
-<br/>
+</br>
+</br>
 <pre>
 [namelist:jules_vegetation]
 can_rad_mod=1
@@ -2365,7 +2365,7 @@ At revision 28232
             <h3>Run the suite</h3>
             <code>rose suite-run --name=canradmod6 --new</code>
             <img src="images/canradmod_p6.png" width="95%" id="rs_p6"/>
-            <br/>
+            </br>
             <h3>Questions</h3>
             <ol>
               <li>Where is the output for each of the jules canradmod setting?</li>
@@ -2545,7 +2545,7 @@ if __name__ == '__main__':
                  format.</p>
                 </ol>
                 <p>The <a href="https://code.metoffice.gov.uk/trac/roses-u/changeset?reponame=&new=28241%40a%2Fi%2F8%2F2%2F8%2Frad_model_prac6_plot&old=28234%40a%2Fi%2F8%2F2%2F8%2Frad_model_prac6_plot">revision Log of the changes</a> after adding the different models is provided in the link.</p>
-                <br/>
+                </br>
                 <h4>Some new things from running this suite in the gcylc GUI</h4>
                 <p>The image below shows two <code>Views</code> the "Graph" view
                    in the top section of the gcylc GUI, View 1, and the "Text"
@@ -2554,16 +2554,16 @@ if __name__ == '__main__':
                    family is grouped together, to un-group it select the second
                    button after the Views button to expand the family.</p>
 <img src="images/prac6_plots2.png" width="85%" id="p6_p1"/>
-                 <br/>
-                 <br/>
+                 </br>
+                 </br>
                 <p>The image below show the JULES family expanded.
                    We can see all of the dependencies clearly. </p>
 <img src="images/prac6_plots1.png" width="85%" id="p6_p2"/>
-                 <br/>
-                 <br/>
+                 </br>
+                 </br>
                  <p>In the image below, what are the states of each task?<p>
 <img src="images/prac6_plots3.png" width="85%" id="p6_p3"/>
-                 <br/>
+                 </br>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -2591,7 +2591,7 @@ plot_crm - waiting
             </div>
             <br/>
 
-            <br/>
+            </br>
             <h3>
             Now try to create the suite and run the suite.
             </h3>
@@ -2630,7 +2630,7 @@ soil_moisture_availability_factor_tseries.png
             </div>
             <br/>
 
-            <h3>Congratulations you have completed the Beginners Tutorial!</h3>
+            <h3>Congratulation you have completed the Beginners Tutorial!</h3>
 
             </div>
         </ul>

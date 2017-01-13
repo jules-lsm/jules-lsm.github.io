@@ -75,17 +75,17 @@
         <div class="container theme-showcase" role="main">
             <div class="jumbotron">
                 <h2>My Quick Reference Guide</h2>
-                <br/>
+                </br>
                 <h3>JULES-Rose</h3>
-                <br/>
+                </br>
                 Here are sets of commands that are commonly used.
                 <ul>
                     <li><a href="#R1">rose stem</a></li>
                     <li><a href="#R2">rose suite-run</a></li>
                 </ul>
-                <br/>
+                </br>
                 <h3>FCM</h3>
-                <br/>
+                </br>
                 Here are sets of commands that are commonly used and the order that they are they are usually issued in.
                 <ul>
                     <li><a href="#S1">Committing local/working copy</a></li>

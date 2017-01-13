@@ -64,53 +64,53 @@
             </div>
                 <h2>Rose/Cylc site install</h2>
             <div class="well">
-                <br/>
+                </br>
                <p> <strong>Your need root access and this should ideally be done centrally.</strong></p>
-                <br/>
+                </br>
                 <ol>
                 <li> sudo yum install python-cherrypy python-jinja2 python-requests python-simplejson python-sqlalchemy python-pyro subversion subversion-perl perl-Config-IniFiles perl-DBD-SQLite perl-Tk perl-XML-Parser perl-Time-Piece xxdiff rsync diffutils trac
 </li>
-<br/>
+</br>
 <li>sudo yum install graphviz graphviz-devel
 </li>
-<br/>
+</br>
 <li>sudo easy_install pygraphviz [pyro]
-<br/>
+</br>
    Note that python-graphviz from repository may not work, must use pygraphviz
 </li>
 
-<br/>
+</br>
 <li>Install Cylc
 Untar release file and once in cylc directory run
-<br/>
+</br>
 PATH=$PWD/bin:$PATH make
-<br/>
+</br>
 Need to make sure conf/global.rc is correctly set up if required
 </li>
 
-<br/>
+</br>
 <li>Install Rose 
 Untar release file and once in rose directory run
-<br/>
+</br>
 PATH=$PWD/bin:$PATH
-<br/>
+</br>
 Need to make sure etc/rose.conf file is correctly set up
 </li>
-<br/>
+</br>
 
 <li>Install FCM 
 Untar release file and once in fcm directory run
-<br/>
+</br>
 PATH=$PWD/bin:$PATH
-<br/>
+</br>
 Need to make sure files in etc/fcm are correctly set up
 </li>
-<br/>
+</br>
 <li>Put all software in PATH
 </li>
-<br/>
+</br>
 <li>Set-up - Keywords
-<br/>
+</br>
 create the file: <code>FCM_PATH=/path/to/fcm/; $FCM_PATH/etc/keywords.cfg</code>
 Populate it with the JULES keywords given below:
 <pre>
@@ -119,7 +119,7 @@ location{primary}[jules_doc.x] = https://code.metoffice.gov.uk/svn/jules/doc
 </pre>
 </li>
 <li>Set-up - rose configuration
-<br/>
+</br>
 create the file <code>ROSE_PATH=/path/to/rose/; $ROSE_PATH/etc/rose.conf</code>
 something like this (this is similar to the VM file and will need adjusting 
 for your site):
@@ -180,7 +180,7 @@ $JULES_NETCDF_LIB_PATH = /usr/lib64
 # platform configuration to set the variables
 include = $HERE/custom.cfg
 </pre>
-	<br/>
+	</br>
 
                 <p>Please create a branch and add your site ???.cfg file to the
                    <code>$JULES_trunk/etc/fcm-make/platform/</code> directory.
@@ -194,11 +194,11 @@ include = $HERE/custom.cfg
         </ol>
 
 
-                <br/>
+                </br>
 </div>
                 <h2>MOSRS password caching</h2>
             <div class="well">
-                <br/>
+                </br>
                 <a href="https://code.metoffice.gov.uk/trac/home/wiki/FAQ#ConfiguringSubversionaccess">Configuring MOSRS access</a>
                  <p>You need to configure your <code>~/.subversion/servers</code> file as follows:
 <pre>
@@ -215,7 +215,7 @@ store-plaintext-passwords = no
 <strong>Your user name should be a single word in lower case.</strong></p>
 
 
-                <br/>
+                </br>
                 <a href="https://code.metoffice.gov.uk/trac/home/wiki/AuthenticationCaching#AuthenticationCaching">How to cache your password</a>
                 <p>Please ensure that you comment out or remove any blank setting for password-stores in your <code>~/.subversion/config</code> file, for example, after commenting out the line, your file may look like this:
 <pre>
@@ -224,7 +224,7 @@ store-plaintext-passwords = no
 #password-stores =
 </pre>
                 </p>
-                <br/>
+                </br>
                 <a href="https://code.metoffice.gov.uk/trac/home/wiki/AuthenticationCaching/GnomeKeyring#AuthenticationCachingUsingGNOMEKeyring">Using GNOME keyring</a>
                 <p> Set up a new login keyring as follows:
 
@@ -236,28 +236,28 @@ store-plaintext-passwords = no
                 <li>Enter your <strong>desktop password</strong> and then select <code>Create</code>.</li>
                  </ul>
                  </p>
-                <br/>
+                </br>
                 <p>Once you have done this you should see a <code>login</code> keyring listed under the <code>Passwords</code> tab and if you right click on the key the <code>Unlock</code> menu should be grayed out.</p>
-                <br/>
+                </br>
                 <p>Exit seahouse by closing the window.</p>
-                <br/>
+                </br>
                 <p>Cache your password</p>
                 <p>Run this command upto three times: <code>svn info https://code.metoffice.gov.uk/svn/test</code>
-               <br/> You'll be asked for your <code>Science Repository Service password</code> the first and maybe the second time. The third time, it should not prompt you.</p>  
-                <br/>
+               </br> You'll be asked for your <code>Science Repository Service password</code> the first and maybe the second time. The third time, it should not prompt you.</p>  
+                </br>
                <p>You then need to run the corresponding rosie command: <code>rosie hello --prefix=u</code>
-                <br/>This will prompt for your username (your <code>Science Repository Service username</code>) and your <code>Science Repository Service password</code>.
+                </br>This will prompt for your username (your <code>Science Repository Service username</code>) and your <code>Science Repository Service password</code>.
              The password will then be cached in GNOME keyring for later use.
              Your username will get automatically saved in your <code>~/.metomi/rose.conf</code> file.</p> 
-                <br/>
+                </br>
                 <a href="https://code.metoffice.gov.uk/trac/home/wiki/AuthenticationCaching/GpgAgent#AuthenticationCachingUsinggpg-agent">Using gpg-agent</a>
-                <br/>
+                </br>
                 <p>gpg-agent versions known to work: 2.0.14 (and probably later versions).</p>
                 <p>Install the scripts <a href="https://code.metoffice.gov.uk/trac/home/attachment/wiki/AuthenticationCaching/GpgAgent/mosrs-setup-gpg-agent">mosrs-setup-gpg-agent</a> and <a href="https://code.metoffice.gov.uk/trac/home/attachment/wiki/AuthenticationCaching/GpgAgent/mosrs-cache-password">mosrs-cache-password</a> in a directory which is included in your <code>$PATH</code>. 
                    The contents may need adapting to your local setup (in particular the path to <code>gpg-preset-passphrase</code> in <code>mosrs-cache-password</code>).</p>
                 <p>You then simply need to run the following prior to any work requiring access to the repositories: <code>. mosrs-setup-gpg-agent</code></p>
                 <p>This will prompt for your password and test that your password had been cached successfully.</p>
-                <br/>
+                </br>
                 <p>If you want this to run automatically when you first login, add the following to the end of your <code>.bashrc</code> file (assuming that bash is your default shell):
 <pre>
 [[ "$-" != *i* ]] &amp;&amp; return # Stop here if not running interactively
@@ -265,14 +265,14 @@ store-plaintext-passwords = no
 </pre>
 </p>
                 <p> Note that the cached password is configured to expire after 12 hours. Simply run the command <code>mosrs-cache-password</code> to re-cache it if this happens.</p>
-                <br/>               
-                <br/>
+                </br>               
+                </br>
 </div>
                 <h2>Data retrieval</h2>
             <div class="well">
-                <br/>
+                </br>
                 <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine#JULES-specificinstructions">FTP password is</a>
-                <br/>
+                </br>
                 <ol>
                 <li>Choose a location for your ~25GB of data to be saved to be
                      accessed by all:
@@ -290,13 +290,13 @@ store-plaintext-passwords = no
                <li>tar -xvJf benchmark_gswp2_data.tar.xz #Note this may take a short while.</li>
                <li>rm benchmark_gswp2_data.tar.xz</li>
                 </ol>
-                <br/>
-                <br/>
+                </br>
+                </br>
 </div>
                 <h2>Creating site KGO</h2>
             <div class="well">
-                <br/>
-                <br/>
+                </br>
+                </br>
                 <ol>
                     <li>
                      KGO_DIR=&lt;path/to/jules/rose-stem-kgo/&gt;</li>
@@ -310,7 +310,7 @@ store-plaintext-passwords = no
                      <li>cd ~/cylc-run/trunk</li>
                      <li>cp work/1/loobos_*/output/* $KGO_DIR/$VN</li>
                      <li>cp work/1/gswp2_*/output/* $KGO_DIR/$VN</li>
-                     <br/>
+                     </br>
                      <p>Now rose stem should be configured for your site and 
                          compliers.</p>
                      <li>Test rose stem <code>rose stem --group=all --source=. --new</code> You should have no failures this time.</li>
@@ -318,8 +318,8 @@ store-plaintext-passwords = no
             </div>
             </div>
 
-            <br/>
-            <br/>
+            </br>
+            </br>
             <hr/>
             <div class="container-fluid text-center">
                 <div class="row">
