@@ -99,6 +99,7 @@
         <div class="well">
             <p>It is expected that you have:
             <ul>
+            <li>Completed the <a href="http://metomi.github.io/rose/doc/rose.html">Rose User Guide</a>.</li>
             <li>Completed the <a href="jr_beginner.html">Beginner Tutorial</a>.</li>
             </ul>
             </p>
@@ -113,9 +114,8 @@
         </div>
 
         <div class="well">
-            First let's do the Intermediate Quiz to see how much you already know and what we
-            will need to focus on in this section, note there are no right or wrong answers
-            for the first five questions.
+            First let's do the Intermediate Quiz to see how much you already
+            know and what we will need to focus on in this section.
         </div>
         <div class="container">
             <p><a class="btn btn-lg btn-success" href="intermediate_quiz.html" role="button">Intermediate Quiz</a></p>
@@ -862,9 +862,128 @@ read_list=.true.
             <p>Add a namelist to rose stem.</p>
             <p>Add a new module to rose stem.</p>
            <br/>
-            <h4>Add a namelist to rose stem.</h4>
+            <h4>Add a namelist to rose stem</h4>
+            <ol>
+            <p>A new namelist will always change the following files:
+                <li>rose-meta/jules-standalone/HEAD/rose-meta.conf</li>
+                <li>rose-meta/jules-standalone/versions.py</li>
+            </p>
+            <p>It will change a control file for the appropriate module in:
+                <li>src/control/shared/???_mod.F90</li>
+            </p>
+            <p>It will also require changes to the relevant science schemes 
+               i.e. in:
+               <li>src/science/&lt;scheme&gt;/&lt;routine&gt;.F90</li>
+            </p>
+            </ol>
+            <br/>
+           <p>Lets add a namelist.</p>
+           <p>This is an example of how to add a namelist which is taken from
+              a namelist being added for JULES vn4.7 code release:</p>
+           <ol>
+               <li>Create a branch the JULES code from the trunk at vn4.6, 
+                   include tutorial in its name</li>
+               <li>Checkout the branch</li>
+               <li>Add the following namelist to the rose-meta.conf
+<pre>
+[namelist:jules_surface=bio_hum_CN]
+ns=namelist/Science settings/Surface options/Parameters
+description=Bio and Hum Soil Carbon pools CN ratio
+url=http://jules-lsm.github.io/vn4.6/namelists/jules_surface.nml.html#JULES_SURFACE::bio_hum_cn
+type=real
+range=0.01:
+sort-key=m
+</pre>
+</li>
+               <li>Edit the versions.py file to include your metadata and the 
+                  original template, use <code>vn4.6_t000</code> and
+<pre>
+self.add_setting(config, ["namelist:jules_surface", "bio_hum_cn"], "10.0")
+</pre>
+</li>
+               <li>To </code>src/control/shared/jules_surface_mod.F90</code>
+                   add (~ln 275):
+<pre>
+! Parameters for soil respiration.
+bio_hum_CN = 10.0
+! Soil Bio and Hum CN ratio parameter
+</pre>
+                 add (~ln 290):
+<pre>
+! Parameters
+bio_hum_CN
+</pre>
+                 add (~ln 465)
+<pre>
+WRITE(lineBuffer, *) '  bio_hum_CN = ', bio_hum_CN
+CALL jules_print('jules_surface', lineBuffer)
+</pre>           
+                 (~ln 505) increase the number to 12
+<pre>
+INTEGER, PARAMETER :: n_real = 11 + 4
+</pre>
+                 add (~ln 530, 575, 610)
+<pre>
+REAL :: bio_hum_CN
+my_nml % bio_hum_cn         = bio_hum_cn
+bio_hum_CN         = my_nml % bio_hum_CN       
+</pre>
+</li>
+               <li>rc/initialisation/standalone/initial_conditions/init_ic.inc
+               add <code>bio_hum_cn</code> to the correct USE,
+               add <code>ns_pool_gb, cs_pool_gb</code> to the correct USE
+               add (~ln 470)
+<pre>
+!-------------------------------------------------------------------------------
+! Initialise soil bio and hum pools from soil carbon
+!-------------------------------------------------------------------------------
+  IF (l_triffid ) THEN
+    ns_pool_gb(:,3) = cs_pool_gb(:,3) / bio_hum_cn
+    ns_pool_gb(:,4) = cs_pool_gb(:,4) / bio_hum_cn
+  ENDIF 
+</pre>
+</li>
+               <li>src/science/vegetation/soilcarb_jls.F90
+               add <code>bio_hum_cn</code> to the USE including the module
+               remove soil_cn   = 10.0
+               update (~ln 120), soil_cn wih bio_hum_cn
+<pre>
+  cn(l,3) = bio_hum_cn           ! C:N ratio of BIO - Fixed
+  cn(l,4) = bio_hum_cn           ! C:N ratio of HUM - Fixed
+</pre>
+              add (~ln 125)
+<pre>
+! N pool BIO+HUM are diagnostic from equivalent cSoil pool
+  ns_pool_gb(l,3) = cs(l,3) / bio_hum_cn
+  ns_pool_gb(l,4) = cs(l,4) / bio_hum_cn
+</pre>
+            update (~ln 220), soil_cn wih bio_hum_cn
+<pre>
+  IF (ns_pool_gb(l,3) &lt;  cs_min / bio_hum_cn) THEN
+    neg_n(l) = neg_n(l) + ns_pool_gb(l,3) - cs_min / bio_hum_cn
+  END IF
+  IF (ns_pool_gb(l,4) &lt;  cs_min / bio_hum_cn) THEN
+    neg_n(l) = neg_n(l) + ns_pool_gb(l,4) - cs_min / bio_hum_cn
+</pre>
+            update (~ln 230), soil_cn wih bio_hum_cn
+<pre>
+  ns_pool_gb(l,3) = MAX(ns_pool_gb(l,3),cs_min / bio_hum_cn)
+  ns_pool_gb(l,4) = MAX(ns_pool_gb(l,4),cs_min / bio_hum_cn)
+</pre>
+</li>
+           </ol>
+           <p><a href="https://code.metoffice.gov.uk/trac/jules/changeset?reponame=&new=4852%40main%2Fbranches%2Fdev%2Fandywiltshire%2Fvn4.6_soil_cn&old=4285%40main%2Ftrunk">Diff from #309</a>
            <br/>
-            <h4>Add a new module to rose stem.</h4>
+           <p>Other examples:
+              <ul>
+              <li><a href="https://code.metoffice.gov.uk/trac/jules/changeset?reponame=&new=6110%40main%2Fbranches%2Fdev%2Fadrianlock%2Fvn4.7_graup_in_jules&old=5320%40main%2Ftrunk">Diff from #414</a></li>
+              <li><a href="https://code.metoffice.gov.uk/trac/jules/changeset?reponame=&new=5083%40main%2Fbranches%2Fdev%2Fjohnmedwards%2Fvn4.6_rgrain_rev&old=4285%40main%2Ftrunk">Diff from #298</a></li>
+              </ul>
+           </p>
+           <br/>
+            <h4>Add a new module to rose stem</h4>
+
+
            <br/>
 
 HEREHER
@@ -1049,19 +1168,166 @@ fcm ci
             </div>
             <div class="well">
             <h3>Practical 6 will cover:</h3>
-            <p>When and Why do we need to do a UM-JULES rose stem test?</p>
+            <p>Why and When do we need to do a UM-JULES rose stem test?</p>
             <p>How do we run UM-JULES rose stem?</p>
-            <p>Where should the evidence go?</p>
             <p>What if there are failures?</p>
             <br/>
             <br/>
-            <h4>When and Why do we need to do a UM-JULES rose stem test?</h4>
+            <h4>Why and When do we need to do a UM-JULES rose stem test?</h4>
+            <p>There are many reasons to why we may need to run a UM-JULES rose
+               stem test.
+               For example:
+               <ul>
+              <li>To check that there is no coding impact on the UM from the 
+                  JULES code change when use in in the coupled UM-JULES model.</li>
+              <li>To prove that the JULES code change does not change KGO when
+                  run as the coupled UM-JULES model.</li>
+              <li>When the JULES change also requires a UM change.</li>
+            </ul>
+            </p>
             <br/>
             <h4>How do we run UM-JULES rose stem?</h4>
+            <p>For only testing a JULES change.</p>
+            <ol>
+            <li>Create a JULES ticket if it is not already created.</li>
+            <li>Commit your JULES branch changes to the repository.</li>
+            <li>Tested your JULES code changes and check the rose stem tests 
+                all pass.</li>
+            <li>Where do you find the evidence for the JULES rose stem tests for
+                your branch?</li>
+            <li>Where does the evidence need to be copied to?</li>
+            <li>Checkout the UM trunk at the revision that your JULES change is
+                for.</li>
+            <li>Run the rose stem test.</li>
+            <li>Where do you find the evidence for the UM rose stem tests for 
+                the JULES branch?</li>
+            <li>Where does the evidence need to be copied to?</li>
+            </ol>
             <br/>
-            <h4>Where should the evidence go?</h4>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <span class="glyphicon"></span>
+                        How To and Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+<ol>
+<li>See <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_beginner.html#P3">Tickets Beginner</a> and <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_intermediate.html#ticks">Tickets Intermediate</a>.</li>
+<li>fcm st
+# check that all files are expected to have changes have and that any new
+#are added and any removed are deleted.
+fcm ci
+# add a commit comment, save and close.
+y
+#to commit.</li>
+<li>In the directory of the branch.
+rose stem --group=all --new</li>
+<li>~cylc-run/&lt;JULES_BRANCH_NAME&gt;/trac.log</li>
+<li>JULES Ticket, Ticket Summary</li>
+<li>
+cd
+mkdir -p um/
+cd um
+fcm co fcm:um.x_tr@10.5
+# or if no fcm keywords set up
+fcm co https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.5
+# for example if the change was a JULES vn4.7 branch
+cd trunk</li>
+<li>rose stem --group=jules --new --name=umtr_jls&lt;JULES_ticket_no&gt; --sourece=. --source=/full/path/to/jules/branch/to/be/tested</li>
+<li>~cylc-run/umtr_jls&lt;JULES_ticket_no&gt;/trac.log</li>
+<li>JULES Ticket, Ticket Summary</li>
+</ol>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <p>For testing a JULES and UM combined change.</p>
+            <ol>
+            <li>Create a JULES ticket if it is not already created.</li>
+            <li>Commit your JULES branch changes to the repository.</li>
+            <li>Tested your JULES code changes and check the rose stem tests 
+                all pass.</li>
+            <li>Provide the evidence for you JULES branch rose stem tests in
+                the JULES the Ticket Summary.</li>
+            <li>Create a UM ticket and reference it in the JULES ticket,
+                reference the JULES ticket in the UM ticket.</li>
+            <li>Follow the <a href="https://code.metoffice.gov.uk/trac/um/wiki/working_practices">UM working practices</a>
+            <li>Create a UM branch.</li>
+            <li>Make changes.</li>
+            <li>Run the rose stem tests on the UM-JULES coupled branches.</li>
+            <li>Where do you find the evidence for the UM-JULES rose stem tests
+                for the UM-JULES coupled branch?</li>
+            <li>Where does the evidence need to be copied to?</li>
+            </ol>
+            <br/>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+                        <span class="glyphicon"></span>
+                        How To and Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+<ol>
+<li>See <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_beginner.html#P3">Tickets Beginner</a> and <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_intermediate.html#ticks">Tickets Intermediate</a>.</li>
+<li>fcm st
+# check that all files are expected to have changes have and that any new
+#are added and any removed are deleted.
+fcm ci
+# add a commit comment, save and close.
+y
+#to commit.</li>
+<li>In the directory of the branch.
+rose stem --group=all --new</li>
+<li>Copy the ~cylc-run/&lt;JULES_BRANCH_NAME&gt;/trac.log to the JULES Ticket, Ticket Summary</li>
+<li>See answer 1 but it is to be applied to the <a href="https://code.metoffice.gov.uk/trac/um">UM trac wiki pages</a> using the <a href="https://code.metoffice.gov.uk/trac/um/wiki/working_practices">UM working practices</a>.</li>
+<li>As it says</li>
+<li>
+cd
+mkdir -p um/
+cd um
+fcm bc &lt;UM_BRANCH_NAME&gt; fcm:um.x_tr@10.5
+# or if no fcm keywords set up
+fcm bc &lt;UM_BRANCH_NAME&gt; https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.5
+# for example if the change was a JULES vn4.7 branch
+cd &lt;UM_BRANCH_NAME&gt;</li>
+<li>Make your changes and commit them to the repository as you would for JULES.</li>
+<li>rose stem --group=jules --new --sourece=. --source=/full/path/to/jules/branch/to/be/tested</li>
+<li>~cylc-run/&lt;UM_BRANCH_NAME&gt;/trac.log</li>
+<li>UM Ticket, Ticket Summary and the JULES Ticket, Ticket Summary</li>
+</ol>
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <p><strong>Note</strong> if it is a combined UM-JULES ticket then
+               you need to get the tickets approved by the UM Systems team and 
+               the JULES System Manager.
+               Please email the UM System to ask to be assigned reviewers.</p>
             <br/>
             <h4>What if there are failures?</h4>
+            <p>This as with a standard/standalone JULES change then the KGO can 
+               only have failures for explained reasons and scientifically or
+               technically approved reasons.
+               <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_intermediate.html#bjrstem">When is it acceptable to have a failure in the KGO?</a></p>
             <br/>
 
 
@@ -1082,14 +1348,213 @@ fcm ci
             <br/>
             <br/>
             <h4>What is the metadata for?</h4>
+            <p>Metadata is included as part of the JULES code to help users
+               understand the intended use of variables, switches, parameters,
+               etc in JULES.</p>
+            <p>Metadata locations:
+            <ul>
+                 JULES code
+                <li>benchmark/meta/rose-meta.conf</li>
+                <li>rose-meta/jules-fcm-make/*/rose-meta.conf</li>
+                <li>rose-meta/jules-standalone/*/rose-meta.conf</li>
+                <li>rose-stem/meta/rose-meta.conf</li>
+                <br/>
+                JULES-Rose suites
+                <li>meta/rose-meta.conf</li>
+            </ul>
+            </p> 
             <br/>
             <h4>How do I create metadata?</h4>
+            <p>This depends on where the metadta is required.</p>
+            <br/>
+            <h5>JULES-Rose suites</h5>
+            <p>u-ai828 is missing metadata for the rose-suite.conf file, which
+               is called in by the suite.rc file.</p>
+            <p>What two sets of metadata are missing from the the 
+               <code>meta/rose-meta.conf</code> file?</p>
+            <p>Checkout u-ai828, create a branch of u-ai828, switch to the
+               branch, change the <code>meta/rose-meta.conf</code> file to
+               include helpful information for the two missing variables,
+               commit the changes to the branch and test using
+               <code>rose edit</code>.
+               Change the metadata so a negative values cannot be used, 
+               <a href="http://metomi.github.io/rose/doc/rose-rug-metadata-tutorial.html">metadata help (Viewing the Info)</a> and the MPI_NUM_TASKS to help.
+               Change the sort order. 
+               Commit your changes to the branch and re-check it.</p>
+            <br/>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
+                        <span class="glyphicon"></span>
+                        How To Example
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSeven" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+rosie checkout u-ai828
+fcm bc metadata
+fcm sw metadata
+# edit meta/rose-meta.conf e.g.
+[jinja2:suite.rc=JULES_PATH]
+ns=Runtime configuration
+compulsory=true
+description=The path to the JULES code dependending on the platform.
+type=character
+sort-key=d
+# don't forget the other variable.
+fcm ci
+rose edit
+# edit meta/rose-meta.conf sort-key and negative values not allowed.
+fcm ci
+rose edit
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <h5>JULES code - rose-stem</h5>
+            <p>This is very similar to the JULES-Rose suite example above, the
+               metadata is in the <code>rose-stem/meta/rose-meta.conf</code> 
+               file.
+               Most users and developers will never have to edit this file.</p>
+            <br/>
+            <h5>JULES code - benchmark</h5>
+            <p>This is very similar to the JULES-Rose suite example above, the
+               metadata is in the <code>rose-stem/meta/rose-meta.conf</code>
+               file.</p>
+            <br/>
+            <h5>JULES code - rose-meta</h5>
+            <p>This is the file that most users that are not purely using
+               JULES-Rose suites will want to edit.</p>
+            <p>It is very infrequent that the
+                <code>rose-meta/jules-fcm-make/versions.py</code>
+               needs updating except for a release.
+               It is not expected that a user/developer will need to edit this
+               file.</p>
+            <br/>
+            <p>Therefore the corresponding <code>rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code>
+               file is not expected to be edited by a user/developer.</p>
+            <br/>
+            <p>In both the <code>rose-meta/jules-fcm-make/</code> and the 
+               <code>rose-meta/jules-standalone/</code> directory there are 
+               <code>vn#.#/rose-meta.conf</code> files these are updated at each
+               release and or using the upgrade macro and are not to be 
+               edited.</p>
+            <br/>
+            <p>The file <strong>for editing</strong> is only the most recent
+               <code>rose-meta/jules-standalone/versions.py</code>
+               file.</p>
+           <p>An example of the file at the start of a release:</p>
+<pre>
+import rose.upgrade
+
+from .version34_40 import *
+from .version40_41 import *
+from .version41_42 import *
+from .version42_43 import *
+from .version43_44 import *
+from .version44_45 import *
+from .version45_46 import *
+from .version46_47 import *
+
+class vn47_txxx(rose.upgrade.MacroUpgrade):
+
+    """Upgrade macro from JULES by Author"""
+
+    BEFORE_TAG = "vn4.7"
+    AFTER_TAG = "vn4.7_txxx"
+
+    def upgrade(self, config, meta_config=None):
+        """Upgrade a JULES runtime app configuration."""
+
+        # Add settings
+        return config, self.reports
+
+</pre>
+            <p>During a release, after an edit:</p>
+<pre>
+import rose.upgrade
+
+from .version34_40 import *
+from .version40_41 import *
+from .version41_42 import *
+from .version42_43 import *
+from .version43_44 import *
+from .version44_45 import *
+from .version45_46 import *
+from .version46_47 import *
+
+class vn47_t414(rose.upgrade.MacroUpgrade):
+
+    """Upgrade macro from JULES by Adrian Lock"""
+
+    BEFORE_TAG = "vn4.7"
+    AFTER_TAG = "vn4.7_t414"
+
+    def upgrade(self, config, meta_config=None):
+        """Upgrade a JULES runtime app configuration."""
+
+        # Add settings
+        self.add_setting(config, ["namelist:jules_snow", "graupel_options"],
+                         "0")
+        return config, self.reports
+
+class vn47_txxx(rose.upgrade.MacroUpgrade):
+
+    """Upgrade macro from JULES by Author"""
+
+    BEFORE_TAG = "vn4.7_txxx"
+    AFTER_TAG = "vn4.7_txxx"
+
+    def upgrade(self, config, meta_config=None):
+        """Upgrade a JULES runtime app configuration."""
+
+        # Add settings
+        return config, self.reports
+</pre>
+            <br/>
+            <p>Accompanying this <code>rose-meta/jules-standalone/versions.py</code>
+              change is also a <code>rose-meta/jules-standalone/HEAD/rose-meta.conf</code>
+              file change.</p>
+            <p>For example, with the above change some sort-key valuse were
+               updated and a new section added:</p>
+<pre>
+[namelist:jules_snow=graupel_options]
+compulsory=true
+description=Switch for treatment of graupel in the snow scheme
+help=Always "Include graupel as snowfall" in standalone JULES because separate
+    =snow and graupel driving data are not available.
+    =If graupel is included in the UM surface snowfall diagnostic
+    =then JULES can either include this graupel as snow in the surface scheme (option 0),
+    =ignore this graupel completely, thereby breaking conservation
+    =of water and energy in the coupled land-atmosphere model (option 1) or
+    =treat graupel seperately (currently this only means allowing graupel to
+    =fall straight through the canopy)
+value-titles=Include graupel as snowfall,Ignore graupel in the surface snowfall,
+            =Treat graupel seperately
+values=0,1,2
+url=http://jules-lsm.github.io/vn4.7/namelists/jules_snow.nml.html#JULES_SNOW::graupel_options
+</pre>
+            <br/>
+            <p>Note in the jules-fcm-make/ directory there is only versions.py
+               and no versions*_*.py files like in the jules-standalone.
+               This is because there are relatively few changes to the 
+               jules-fcm-make metadata unlike the jules-standalone metadata.
             <br/>
             <h4>How do I test metadata?</h4>
+            <p><code>rose edit</code> checks the metadata, but if you do not
+               have GUI's or prefer command line you can use 
+               <code>rose metadata-check</code> in the metadata directory to 
+               check the metadata.</p>
             <br/>
-
             <br/>
-
             </div>
          </ul>
 
@@ -1099,15 +1564,58 @@ fcm ci
             </div>
             <div class="well">
             <h3>Practical 8 will cover:</h3>
+            <br/>
+            <p>The versions.py in the above Practical leads us onto upgrade
+                macros.</p>
+            <br/>
             <p>How to run an upgrade macro.</p>
             <p>How to create an upgrade macro.</p>
+            <p>create-app-rose.py</p>
             <br/>
             <br/>
-            <h4>How to run an upgrade macro.</h4>
-            <br/>
-            <h4>How to create an upgrade macro.</h4>
-            <br/>
+            <h4>How to run an upgrade macro</h4>
+            <p>Generally you will only need to run the following upgrade macros
+               as documented below.
+               For further information please see: <a href=""></a>
+            </p>
+<pre>
+# Checkout the suite
+rosie checkout &lt;suite_id&gt;
+# OR copy the suite to get a new id
+rosie copy &lt;suite_id&gt;
+# move to the directory of the (new)suite id
+cd ~/roses/&lt;(new)suite_id&gt;
 
+# Apply upgrade macros
+rose app-upgrade -C app/fcm_make &lt;version&gt; &amp;&amp; rose macro --fix -C app/fcm_make
+rose app-upgrade -C app/jules &lt;version&gt;  &amp;&amp; rose macro --fix -C app/jules
+
+# Commit the changes, noting the revision number from the commit
+fcm ci
+</pre>
+            <p>Try upgrading u-aa799 by copying it and then upgrading it.</p>
+            <br/>
+            <h4>How to create an upgrade macro</h4>
+            <p>Above in Practical 7 an upgrade macro was created in:
+               <code>rose-meta/jules-standalone/versions.py</code>.
+            <br/>
+            <h4>create-app-rose.py</h4>
+            <p>This is a utility to make namelists into a JULES-Rose suite.
+               The app's can then be used in a rosie u repository suite for 
+               science experiments.</p>
+            <pre>
+# create-app-rose vn_from vn_to namelist_path suite_name jules_code_path
+#  for example:
+create-rose-app vn4.4 vn4.7 /path/to/my/4.4/namelist/ my_4p4_conversion /path/to/my/jules/code/at/4.7/
+</pre>
+            <p>If you have a directory with old namelists files, please try the
+               <code>create-app-rose</code> command.</p>
+            <br/>
+            <br/>
+            <p>For more on Rose Upgrade and Upgrade Macros please see:
+               <a href="http://metomi.github.io/rose/doc/rose.html">Rose Documentation</a>.</p>
+             <p> <a href="http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-upgrade-usage.html">Upgrading</a>.</p>
+             <p> <a href="http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-upgrade-dev.html">Upgrade Macro Development</a>.</p>
             <br/>
 
             </div>
@@ -1139,58 +1647,6 @@ fcm ci
                 </div>
             </div>
             <br/>
-
-            <br/>
-            <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                        <span class="glyphicon"></span>
-                        Answers
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse">
-                   <div class="panel-body">
-                        <div class="row">
-                            <pre>
-                            <font color=green>
-# make the directory ~/jules/ and the path that may be required.
-                            </font>
-                            </pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br/>
-
-            <br/>
-            <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                        <span class="glyphicon"></span>
-                        Answers
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse">
-                   <div class="panel-body">
-                        <div class="row">
-                            <pre>
-                            <font color=green>
-# make the directory ~/jules/ and the path that may be required.
-                            </font>
-                            </pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br/>
-
-
 
 
 
