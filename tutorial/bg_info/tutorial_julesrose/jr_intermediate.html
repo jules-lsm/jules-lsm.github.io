@@ -974,6 +974,17 @@ bio_hum_CN         = my_nml % bio_hum_CN
            </ol>
            <p><a href="https://code.metoffice.gov.uk/trac/jules/changeset?reponame=&new=4852%40main%2Fbranches%2Fdev%2Fandywiltshire%2Fvn4.6_soil_cn&old=4285%40main%2Ftrunk">Diff from #309</a>
            <br/>
+            <br/>
+            <p>If you have added an Upgrade Macro you MUST also test it and apply the changes
+               to the JULES code:
+<pre>
+rose app-upgrade -M /path/to/the/metadata/for/testing/ app/fcm_make &lt;version&gt; &amp;&amp; rose macro --fix -M /path/to/the/metadat/for/testing/
+#or
+./bin/upgrade_jules_test_apps vn#.#_t###
+</pre>
+</p>
+            <br/>
+
            <p>Other examples:
               <ul>
               <li><a href="https://code.metoffice.gov.uk/trac/jules/changeset?reponame=&new=6110%40main%2Fbranches%2Fdev%2Fadrianlock%2Fvn4.7_graup_in_jules&old=5320%40main%2Ftrunk">Diff from #414</a></li>
@@ -1551,6 +1562,22 @@ url=http://jules-lsm.github.io/vn4.7/namelists/jules_snow.nml.html#JULES_SNOW::g
                have GUI's or prefer command line you can use 
                <code>rose metadata-check</code> in the metadata directory to 
                check the metadata.</p>
+            <br/>
+            <p>After changing the metadata in anyway or adding a new rose stem test (see 
+               <a href="?????">Advanced Tutorial</a>)
+<pre>
+rose macro --fix -M /path/to/the/metadata/for/testing/
+</pre>
+            </p>
+            <br/>
+            <p>If you have added an Upgrade Macro you MUST also test it and apply the changes
+               to the JULES code:
+<pre>
+rose app-upgrade -M /path/to/the/metadata/for/testing/ app/fcm_make &lt;version&gt; &amp;&amp; rose macro --fix -M /path/to/the/metadat/for/testing/
+#or
+./bin/upgrade_jules_test_apps vn#.#_t###
+</pre>
+</p>
             <br/>
             <br/>
             </div>
