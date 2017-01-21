@@ -1,6 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>     
+        <script>window.jQuery || document.write('<script src="./js/vendor/jquery.min.js"><\/script>')</script>
+        <script type="text/javascript" src="./js/quiz.js"></script>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -37,12 +40,14 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other material <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Quizzes</li>
-                                <li><a href="intermediate_quiz.html">Essentials Quiz</a></li>
+
+                                <li><a href="precourse_quiz.html">Pre-course Quiz</a></li>
+                                <li><a href="intermediate_quiz.html">Intermediate Quiz</a></li>
                                 <li><a href="advanced_quiz.html">Advanced Quiz</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Tutorials and practical's</li>
                                 <li><a href="jr_beginner.html">Beginner</a></li>
-                                <li><a href="jr_intermediate.html">Essentials</a></li>
+                                <li><a href="jr_intermediate.html">Intermediate</a></li>
                                 <li><a href="jr_advanced.html">Advanced</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Help/info</li>
@@ -60,165 +65,498 @@
         </nav>
         <div class="container theme-showcase" role="main">
             <div class="jumbotron">
-                <h2>Beginner Quiz - Background/General questions</h2>
-                <p>This quiz is to help you think about JULES and highligh your areas of interest and areas that you need training in. Please send you answers to jules-support@metoffice.gov.uk .</p>
-                <ol>
-                    <li>
-                        Do you presently run JULES in any form?
-                        <ol type="A">
-                            <li>Yes</li>
-                            <li>No</li>
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>
-                        Have you ever used a version control system before, even if it was not FCM?
-                        <ol type="A">
-                            <li>Yes</li>
-                            <li>No</li>
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>
-                        Have you ever used Rose/Cylc?
-                        <ol type="A">
-                            <li>Yes</li>
-                            <li>No</li>
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>
-                        How proficient at running in JULES in any form do you consider yourself?
-                        <ol type="A">
-                            <li>Novice</li>
-                            <li>Basic</li>
-                            <li>Intermediate</li>
-                            <li>Advanced</li>
-                            <li>Expert</li>
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>
-                        How confident are you at running JULES for data anaylsis only (just changing values/numbers/settings and not code)?
-                        <ol type="A">
-                            <li>No experience</li>
-                            <li>Unconfident</li>
-                            <li>Somewhat confident</li>
-                            <li>Confident</li>
-                            <li>Very confident</li>
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>
-                        How confident are you at running JULES as a developer of the code (changing the actual science of the system)?
-                        <ol type="A">
-                            <li>No experience</li>
-                            <li>Unconfident</li>
-                            <li>Somewhat confident</li>
-                            <li>Confident</li>
-                            <li>Very confident</li>
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>
-                        What do you want to use JULES-Rose and FCM for?
-                        <ol type="A">
-                            <li>Being able to collaborate with others</li>
-                            <li>Being able to use different versions of my code and/or the same code but diffferent settings in diferent runs</li>
-                            <li>Being able to test my changes as I develop</li>
-                            <li>Being able to develop/test different aspects at the same time using branches</li>
-                            <li>Being able to share my code/settings with others and merge their suggestions if approved</li>
-                            <li>Being able to go revert changes if I make mistakes</li>
-                            <li>Knowing that all my code is version controlled</li>
-                            <li>Knowing that my code is traceable and I know which version was used for what project</li>
-                            <li>All of the above</li>
-                            <li>Not sure yet</li>
-                            <li>Other:</li>
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>What area(s) of JULES are you interested in?
-                        <ol type="A">
-                            <li>Carbon budget</li>
-                            <li>Hydrology</li>
-                            <li>Radiation</li>
-                            <li>Snow</li>
-                            <li>Vegetation</li>
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>How will/are you using JULES? 
-                        <ol type="A">
-                            <li>Code development for research only</li>
-                            <li>Code development for committing to the respository</li>
-                            <li>Code development, all aspects</li>
-                            <li>Testing different values and settings for research science only </li>
-                            <li>Testing different values and settings for ideal Scientific configurations</li>
-                            <li>Research only</li>
-                            <li>All aspects of JULES research and development</li>
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>
-                        What times scales are you interested in?
-                        <ol type="A">
-                            <li>Climate monthly</li>
-                            <li>Climate seasonal</li>
-                            <li>Climiate yearly</li>
-                            <li>Climate 10's of years</li>
-                            <li>Climate 100's of years</li>
-                            <li>Numerial Weather Prediction (NWP) diaunal</li>
-                            <li>NWP</li>
-                            <li>All of the above</li>
-                            <li>Other:</li>
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>
-                        What size area(s) are you interested in?
-                        <ol type="A">
-                            <li>Global</li>
-                            <li>Single point</li>
-                            <li>Small box area</li>
-                            <li>Grid points</li>
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>
-                         What resolutions are you interested in?
-                         <ol type="A">
-                             <li>0.5 degree</li>
-                             <li>1 km </li>
-                             <li>Don't know</li>
-                             <li>Other:</li>
-                         </ol>
-                    </li>
-                    <br/>
-                    <li>What do you think the advantages are to using version control?
-                        <ol type="A">
-                        </ol>
-                    </li>
-                    <br/>
-                    <li>What do you think the advantages are to using Rose/Cylc to run trials (suites)?
-                        <ol type="A">
-                        </ol>
-                     </li>
-                     <br/> 
-                     <li>What do you think will be your greatest challenge with using version control and/or Rose/Cylc for JULES?
-                         <ol type="A">
-                         </ol>
-                     </li>
-                     <br/>
+                <h2>JULES Beginner quiz</h2>
+                <h3>JULES questions</h3>
+                <br/>
+                The aim of this quiz is to highlight what you have learnt and where you need to develop your learning.
+                It will hopefully encourage you that it is not as complicated as you may have once thought.
+                <br/>
+                This quiz can also be used as a revision/reminder tool.
+                <br/>
+                Please try to attempt all aspects of the quiz, you may be able to do none or all, you don't know until you try.
+                <br/>
+                <h3>Beginner quiz</h3>
+                <div class="well">
+                    <div id="results"></div>
+                </div>
+                <div class="well">
+                    <form id="qform" action=".">
+                        <ol>
+                            <li>
+                                <p class="question">What is <code>rosie go</code>?</p>
+                                <div id="1" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">A suite monitoring GUI</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">A output web based browser</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">A suite repository browser</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">A suite editor GUI</label><br/></li>
+                                        <li><input type="radio" value="E" /><label for="E">A non-GUI way to monitor suites</label><br/></li>
+                                        <li><input type="radio" value="F" /><label for="F">A suites monitoring GUI</label><br/></li>
+                                    </ol>
+                                    <p class="answers C"><em>C</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What is <code>rose edit</code>?</p>
+                                <div id="2" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">A suite monitoring GUI</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">A output web based browser</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">A suite repository browser</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">A suite editor GUI</label><br/></li>
+                                        <li><input type="radio" value="E" /><label for="E">A non-GUI way to monitor suites</label><br/></li>
+                                        <li><input type="radio" value="F" /><label for="F">A suites monitoring GUI</label><br/></li>
+                                    </ol>
+                                    <p class="answers D"><em>D</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What is <code>rose bush</code>?</p>
+                                <div id="3" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">A suite monitoring GUI</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">A output web based browser</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">A suite repository browser</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">A suite editor GUI</label><br/></li>
+                                        <li><input type="radio" value="E" /><label for="E">A non-GUI way to monitor suites</label><br/></li>
+                                        <li><input type="radio" value="F" /><label for="F">A suites monitoring GUI</label><br/></li>
+                                    </ol>
+                                    <p class="answers B"><em>B</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What is <code>cylc gcylc</code>?</p>
+                                <div id="4" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">A suite monitoring GUI</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">A output web based browser</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">A suite repository browser</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">A suite editor GUI</label><br/></li>
+                                        <li><input type="radio" value="E" /><label for="E">A non-GUI way to monitor suites</label><br/></li>
+                                        <li><input type="radio" value="F" /><label for="F">A suites monitoring GUI</label><br/></li>
+                                    </ol>
+                                    <p class="answers A"><em>A</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What is <code>cylc gscan</code>?</p>
+                                <div id="5" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">A suite monitoring GUI</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">A output web based browser</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">A suite repository browser</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">A suite editor GUI</label><br/></li>
+                                        <li><input type="radio" value="E" /><label for="E">A non-GUI way to monitor suites</label><br/></li>
+                                        <li><input type="radio" value="F" /><label for="F">A suites monitoring GUI</label><br/></li>
+                                    </ol>
+                                    <p class="answers F"><em>F</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What is <code>cylc scan -c</code>?</p>
+                                <div id="6" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">A suite monitoring GUI</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">A output web based browser</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">A suite repository browser</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">A suite editor GUI</label><br/></li>
+                                        <li><input type="radio" value="E" /><label for="E">A non-GUI way to monitor suites</label><br/></li>
+                                        <li><input type="radio" value="F" /><label for="F">A suites monitoring GUI</label><br/></li>
+                                    </ol>
+                                    <p class="answers E"><em>E</em></p>
+                                </div>
+                            </li>
 
-                </ol>
+                            <li>
+                                <p class="question">What command would you use to retrieve some code from a repository?</p>
+                                <div id="7" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">fcm checkout</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">fcm retrieve</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">fcm get</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">fcm branch</label><br/></li>
+                                    </ol>
+                                    <p class="answers A"><em>A</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">Which commands would commit code to the repository?</p>
+                                <div id="8" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">fcm commit|ct|ci</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">fcm commit|ct</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">fcm commit|ci</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">fcm ct|ci</label><br/></li>
+                                    </ol>
+                                    <p class="answers C"><em>C</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What is the best command for finding out in what files or directories your working copy are different from the repository, i.e. what has been modified etc?</p>
+                                <div id="9" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">fcm update</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">fcm trunk</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">fcm status</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">fcm info</label><br/></li>
+                                    </ol>
+                                    <p class="answers C"><em>C</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What does "?" mean when you issue the fcm status command?</p>
+                                <div id="10" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Item is missing</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Item is not under version control</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Item is conflicted</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Item is modified</label><br/></li>
+                                    </ol>
+                                    <p class="answers B"><em>B</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What does "M" mean when you issue the fcm status command?</p>
+                                <div id="11" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Item is missing</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Item is not under version control</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Item is replaced</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Item is modified</label><br/></li>
+                                    </ol>
+                                    <p class="answers D"><em>D</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What does "!" mean when you issue the fcm status command?</p>
+                                <div id="12" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Item is missing</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Item is not under version control</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Item is conflicted</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Item is modified</label><br/></li>
+                                    </ol>
+                                    <p class="answers A"><em>A</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What does "A" mean when you issue the fcm status command?</p>
+                                <div id="13" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Item is added</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Item is not under version control</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Item is deleted</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Item is replaced</label><br/></li>
+                                    </ol>
+                                    <p class="answers A"><em>A</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What does "D" mean when you issue the fcm status command?</p>
+                                <div id="14" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Item is added</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Item is not under version control</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Item is deleted</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Item is replaced</label><br/></li>
+                                    </ol>
+                                    <p class="answers C"><em>C</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">Where would you use the command "fcm add"?</p>
+                                <div id="15" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">When you have modified a file</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">When you have removed a file</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">When you have created a new file</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">When you have add a new repository</label><br/></li>
+                                    </ol>
+                                    <p class="answers C"><em>C</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">Why would you need to use the command "fcm switch" or "fcm sw"?</p>
+                                <div id="16" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">After creating a JULES-Rose suite branch and then to move to it</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">After checking out a JULES-Rose suite branch</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Before committing your JULES-Rose suite change</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Before creating a JULES-Rose suite branch from the trunk when on the trunk</label><br/></li>
+                                    </ol>
+                                    <p class="answers A"><em>A</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">Which of these commands can you use to create a branch?</p>
+                                <div id="17" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">fcm branch-create|bc|create</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">fcm branchcreate|bcreate</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">fcm branchcreate|bc|bcreate</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">fcm branch-create|bc|bcreate</label><br/></li>
+                                    </ol>
+                                    <p class="answers D"><em>D</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">How can we run a JULES-Rose suite?</p>
+                                <div id="18" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">rose suite-run</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Use the "Play/Run" button in rose edit</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">rose suite-run or Use the "Play/Run" button in rose edit</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">rose run</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">rose run or Use the "Play/Run" button in rose edit</label><br/></li>
+                                    </ol>
+                                    <p class="answers C"><em>C</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">How can you find out what branches are available in a repository?</p>
+                                <div id="19" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">fcm branch-list|bls</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">fcm branchlist|bls</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">fcm branchlist|bl</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">fcm branch-list|bl</label><br/></li>
+                                    </ol>
+                                    <p class="answers A"><em>A</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">How can we look at JULES Rose-suite or JULES rose stem job output/errors?</p>
+                                <div id="20" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">gcylc GUI, right click on the task, View, job.*</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">rose bush</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">cylc-run/log/job/1/&lt;TASKNAME&gt;/NN/job.*</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">cylc-run/work/1/&lt;TASKNAME&gt;/output/</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="E">All of the above</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="F">A-C</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="G">A, B, D</label><br/></li>
+                                    </ol>
+                                    <p class="answers F"><em>F</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">How can we look at JULES Rose-suite or JULES rose stem output?</p>
+                                <div id="21" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">gcylc GUI, right click on the task, View, job.*</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">rose bush</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">cylc-run/log/job/1/&lt;TASKNAME&gt;/NN/job.*</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">cylc-run/work/1/&lt;TASKNAME&gt;/output/</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="E">All of the above</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="F">A-C</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="G">A, B, D</label><br/></li>
+                                    </ol>
+                                    <p class="answers D"><em>D</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">How could you resolve an "!" returned from the "fcm st" command which is because you deleted the file without using fcm?</p>
+                                <div id="22" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">fcm rm &lt;FILENAME&gt;</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">You cannot</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">fcm rm --check|-c &lt;FILENAME&gt;</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">fcm rm -f &lt;FILENAME&gt;</label><br/></li>
+                                    </ol>
+                                    <p class="answers C"><em>C</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What is JULES rose stem?</p>
+                                <div id="23" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">A testing system for JULES code to check that new science or tech changes do not break existing code</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">A testing system for JULES code to check the UM</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">A testing system for JULES-Rose suites to test all suites ever</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">A testing system for JULES-Rose suites to test the UM</label><br/></li>
+                                    </ol>
+                                    <p class="answers A"><em>A</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What two repositories will you be using and needing for JULES only work?</p>
+                                <div id="24" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">JULES code and JULES suites</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">JULES code and roses u suites</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">UM code and JULES suites</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">UM code and roses u suites</label><br/></li>
+                                    </ol>
+                                    <p class="answers B"><em>B</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What is MOSRS?</p>
+                                <div id="25" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Met Office Stored Repository Service</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Met Office Shared Repository Service</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Met Office Science Repository Share</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Met Office Science Repository Store</label><br/></li>
+                                    </ol>
+                                    <p class="answers B"><em>B</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What are FCM keywords?</p>
+                                <div id="26" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Different repositories</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Shortcuts/aliases for example fcm:jules.x_tr</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Reference words</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">JULES specific repositories</label><br/></li>
+                                    </ol>
+                                    <p class="answers B"><em>B</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">How can you find out what the FCM keywords for are on your system?</p>
+                                <div id="27" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">fcm kp</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">fcm keywords-print</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">fcm keywords-point</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">1 and 2</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">1 and 3</label><br/></li>
+                                    </ol>
+                                    <p class="answers D"><em>D</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">What is FCM?</p>
+                                <div id="28" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">A private GitHub user friendly interface to subversion control</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">An open source GitHub user friendly interface to subversion control</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">A private GitHub alternative subversion control system</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">An open source GitHub alternative subversion control system</label><br/></li>
+                                    </ol>
+                                    <p class="answers B"><em>B</em></p>
+                                </div>
+                            </li>
+                            <li>                                <p class="question">Why use FCM?</p>
+                                <div id="29" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">It deletes old files and replaces them and provides version control</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">It saves the whole repository every time and provides version control</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">It saves only incremental change to files and provides version control</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">It save complete copies of only the files changed and provides version control</label><br/></li>                            
+                                    </ol>
+                                    <p class="answers C"><em>C</em></p>
+                                </div>
+                            </li>
+                            <li>                                <p class="question">How can you get a copy of the JULES code?</p>
+                                <div id="30" class="questions">
+                                    <ol type="A">                                                                  <li><input type="radio" value="A" />fcm ci fcm:jules.x_tr@vn#.# or fcm ci https://code.metoffice.gov.uk/svn/jules/main/trunk@vn#.#<label for="A"></label><br/></li>
+                                        <li><input type="radio" value="B" />fcm co fcm:jules.x_tr@vn#.# or fcm co https://code.metoffice.gov.uk/svn/jules/main/trunk@vn#.#<label for="B"></label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">fcm copy fcm:jules.x_tr@vn#.# or fcm copy https://code.metoffice.gov.uk/svn/jules/main/trunk@vn#.#</label><br/></li>                                                                                <li><input type="radio" value="D" /><label for="D">fcm get fcm:jules.x_tr@vn#.# or fcm get https://code.metoffice.gov.uk/svn/jules/main/trunk@vn#.#</label><br/></li>
+                                               <li><input type="radio" value="E" /><label for="E">fcm fetch fcm:jules.x_tr@vn#.# or fcm fetch https://code.metoffice.gov.uk/svn/jules/main/trunk@vn#.#</label><br/></li>                        
+                                    </ol>
+                                    <p class="answers B"><em>B</em></p>
+                                </div>
+                            </li>
+                            <li>                                <p class="question">Who can see my changes to JULES code?</p>
+                                <div id="31" class="questions">
+                                    
+                         <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Everyone</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">No one</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Only people at your institution</label><br/></li>                                                                                
+                                        <li><input type="radio" value="D" /><label for="D">Everyone with MOSRS JULES access</label><br/></li>
+                                        <li><input type="radio" value="E" /><label for="E">Everyone with MOSRS JULES access once the changes are committed to the repository</label><br/></li>                       
+                                    </ol>
+                                    <p class="answers E"><em>E</em></p>
+                                </div>
+                            </li>
+                            <li>                                
+                                <p class="question">What does KGO mean?
+</p>
+                                <div id="32" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Known Good Output</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Kept Good Output</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Kept Good Origin</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Kept Good Origin</label><br/></li>
+                                    </ol>
+                                    <p class="answers A"><em>A</em></p>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="question">Who can commit to the trunk of the JULES code?
+</p>
+                                <div id="33" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Anyone</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Anyone with a MOSRS account</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Anyone with a JULES MOSRS account</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Only the branch owner of the branch that they want to commit to the trunk</label><br/></li>
+                                        <li><input type="radio" value="E" /><label for="E">JULES System Manager and UM Systems Team</label><br/></li>
+                                        <li><input type="radio" value="F" /><label for="F">JULES System Manager only</label><br/></li>
+                                    </ol>
+                                    <p class="answers E"><em>E</em></p>
+                                </div>                            </li>
+                            <li>                                                                <p class="question">Who can commit to the branch of the JULES code?
+</p>
+                                <div id="34" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Anyone</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Anyone with a MOSRS account</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Anyone with a JULES MOSRS account</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Only the branch owner of the branch that they want to commit to the trunk</label><br/></li>
+                                        <li><input type="radio" value="E" /><label for="E">JULES System Manager and UM Systems Team</label><br/></li>
+                                        <li><input type="radio" value="F" /><label for="F">JULES System Manager only</label><br/></li>
+                                    </ol>
+                                    <p class="answers D"><em>D</em></p>
+                                </div>                            </li>
+                            <li>                                                                <p class="question">Who can commit to a JULES-Rose suite on rosie u repository?
+</p>
+                                <div id="35" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Anyone</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Anyone with a JULES MOSRS account</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Only the owner of the JULES-Rose suite</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Only the owner of the JULES-Rose suite branch</label><br/></li>
+                                        <li><input type="radio" value="E" /><label for="E">JULES System Manager and UM Systems Team</label><br/></li>
+                                        <li><input type="radio" value="F" /><label for="F">JULES System Manager only</label><br/></li>
+                                    </ol>
+                                    <p class="answers C"><em>C</em></p>
+                                </div>                            </li>
+                            <li>                                                                <p class="question">Who can commit to a JULES-Rose suite branch on rosie u repository?
+</p>
+                                <div id="36" class="questions">
+                                    <ol type="A">
+                                        <li><input type="radio" value="A" /><label for="A">Anyone</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">Anyone with a JULES MOSRS account</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">Only the owner of the JULES-Rose suite</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">Only the owner of the JULES-Rose suite branch</label><br/></li>                                        <li><input type="radio" value="E" /><label for="E">JULES System Manager and UM Systems Team</label><br/></li>
+                                        <li><input type="radio" value="F" /><label for="F">JULES System Manager only</label><br/></li>
+                                    </ol>
+                                    <p class="answers D"><em>D</em></p>
+                                </div>                            </li>
+
+                        </ol>
+                    </form>
+                </div>
+                <div class="page-header">
+                    <h3 id="answer">Answers</h3>
+                </div>
+                <div class="well">
+                    <p id="submit-container"><button id="submitbutton">Check
+                        Answers</button>
+                    </p>
+                </div>
             </div>
-            <br/>
             <div class="container">
-                <p><a class="btn btn-lg btn-success" href="jr_beginner.html" role="button">Beginner</a></p>
+                <p><a class="btn btn-lg btn-success" href="jr_intermediate.html" role="button">Intermediate course</a></p>
+                <br/>
             </div>
             <div class="container">
-            </div>
-            <hr/>
+            </div>            <hr/>
             <div class="container-fluid text-center">
                 <div class="row">
                     <div class="col-md-12">
@@ -236,8 +574,6 @@
             <!-- Bootstrap core JavaScript
                 ================================================== -->
             <!-- Placed at the end of the document so the pages load faster -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-            <script>window.jQuery || document.write('<script src="./js/vendor/jquery.min.js"><\/script>')</script>
             <script src="../etc/bootstrap/js/bootstrap.min.js"></script>
             <script src="./js/docs.min.js"></script>
             <script LANGUAGE="JavaScript">

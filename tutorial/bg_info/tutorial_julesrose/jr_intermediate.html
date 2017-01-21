@@ -42,7 +42,7 @@
                                 <li><a href="#bjrsuite">Running a basic JULES-Rose suite</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Intermediate Practical's</li>
-                                <li><a href="#Pracs">Practicals</a></li>
+                                <li><a href="#Pracs">Practical's</a></li>
                                 <li><a href="#fjre">Further JULES Rose Edit</a></li>
                                 <li><a href="#fjrsuite">Further JULES-Rose suites - duration, domain</a></li>
                                 <li><a href="#fjrstem">Further JULES rose stem - namelists, modules</a></li>
@@ -55,6 +55,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other material <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Quizzes</li>
+                                <li><a href="precourse_quiz.html">Pre-course Quiz</a></li>
                                 <li><a href="beginner_quiz.html">Beginner Quiz</a></li>
 
                                 <li><a href="intermediate_quiz.html">Intermediate Quiz</a></li>
@@ -101,6 +102,7 @@
             <ul>
             <li>Completed the <a href="http://metomi.github.io/rose/doc/rose.html">Rose User Guide</a>.</li>
             <li>Completed the <a href="jr_beginner.html">Beginner Tutorial</a>.</li>
+            <li>Completed the <a href="beginner_quiz.html">Beginner Quiz</a>.</li>      
             </ul>
             </p>
             <p>
@@ -113,13 +115,6 @@
             </p>
         </div>
 
-        <div class="well">
-            First let's do the Intermediate Quiz to see how much you already
-            know and what we will need to focus on in this section.
-        </div>
-        <div class="container">
-            <p><a class="btn btn-lg btn-success" href="intermediate_quiz.html" role="button">Intermediate Quiz</a></p>
-        </div>
         <br/>
 
         <h2><a id="bjrstem">Basics of JULES rose stem</a></h2>
@@ -199,8 +194,8 @@ These changes have to be justified usually with plots and approved by the code o
                 <h3>Why are their coding standards and reviewing?</h3>
             </div>
             <div class="well">
-               <p>Coding standards provide quailty assurance and help provide a consistient interface for development.</p>
-               <p>Using coding standards and following the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">working practices</a> and the <a href="https://code.metoffice.gov.uk/doc/um/vn10.6/papers/umdp_003.pdf">UMDP3</a> software standards aims to provide high quailty code.</p>
+               <p>Coding standards provide quality assurance and help provide a consistent interface for development.</p>
+               <p>Using coding standards and following the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">working practices</a> and the <a href="https://code.metoffice.gov.uk/doc/um/vn10.6/papers/umdp_003.pdf">UMDP3</a> software standards aims to provide high quality code.</p>
                 <p>It is known that not all of the current JULES code meets the standards and it is being constantly improved/developed to achieve this goal.</p>
                 <p>No new code is allowed on the trunk unless it meets the coding standards.</p>
                 <br/>
@@ -280,7 +275,7 @@ rosie go
 or
 <code>cylc sgc --name=&lt;SUITE_NAME&gt;</code></font>
 <li>What does the gcylc GUI going blank usually mean?</li>
-<font color=green>If there is "Stopped wth succeeded" in the bottom left then it is finished</font>
+<font color=green>If there is "Stopped with succeeded" in the bottom left then it is finished</font>
 <li>What does a red square mean?</li>
 <font color=green>The task has failed</font>
 <li>What does a grey square mean?</li>
@@ -314,7 +309,7 @@ or
             </div>
         </ul>
 
-        <h1><a id="Pracs">Practicals</a></h1>
+        <h1><a id="Pracs">Practical's</a></h1>
         <p>
         <ul>
             <div class="page-header">
@@ -330,7 +325,7 @@ or
             <p>Rose Bush via Rose Edit.</p>
             <p>Metadata and errors.</p>
             <br/>
-            <p>A greater understanding and familarity of Rose Edit will provide
+            <p>A greater understanding and familiarity of Rose Edit will provide
                a section of techniques for making changes to JULES-Rose suites 
                allowing the user to choose their preferred method.</p>
             <h3>Make a change in Rose Edit and save it</h3>
@@ -495,7 +490,7 @@ M       rose-suite.conf
                    the Beginner Tutorial, or do it now.
                    It takes about 10 minutes, use the <code>Play</code> icon
                    button.
-                   <p>Then Rose Bush, the web brower output page can be invoked.</p>
+                   <p>Then Rose Bush, the web browser output page can be invoked.</p>
                       <p>Either - </p>
                       <p>Select the <code>Tools</code> tab and then select
                       <code>View Output</code></p>
@@ -516,7 +511,7 @@ M       rose-suite.conf
                 <p>The important thing that we have to remember here is that
                    the Rose Edit can only be as good as the metadata that it is
                    provided with.
-                   Therefore if we can improve the metadate for a suite then we
+                   Therefore if we can improve the metadata for a suite then we
                    should.</p>
                 <br/>
                 <p>This suite works correctly at runtime, but does not use the
@@ -536,7 +531,7 @@ M       rose-suite.conf
 
                <p>Select a variable and then right click, <code>Info</code>.
                 <br/> <img src="images/rose_edit_meta3.png" width="80%" id="rem4"/>
-               <p>From the image above you can see thatt he date has to have 
+               <p>From the image above you can see that the date has to have 
                   the correct format.</p>
                 <p>Changing it to be incorrectly formatted provides a hover-over
                    error, as been in the image below.</p>
@@ -573,7 +568,7 @@ main_run_start='1982-07-01 03:00:00'
           </p>
           <br/>
            <h4>Different time period - flexible method</h4>
-          <p>However, if this is something that you wish to change regulary 
+          <p>However, if this is something that you wish to change regularly 
              then it would be best to add variables to the <code>rose-suite.conf</code>
              file and pass them to the jules app as described below:</p>
            <p>In the <code>rose-suite.conf</code> file:
@@ -653,7 +648,7 @@ file='drive_file.txt'
            <br/>
            <p>This is first example is an example of yearly, but as it takes a
               while we not run it.
-              The second example is monthly and we will impliment monthly and 
+              The second example is monthly and we will implement monthly and 
               run it.</p>
            <br>
            <strong>Yearly Example only</strong>
@@ -690,7 +685,7 @@ graph = """
 {% endfor %}
 
     [[housekeep]]
-        scrpit = echo "Success!"
+        script = echo "Success!"
 </pre>
            </p>
            <p>Changes to the <code>app/jules/</code> files and directory:
@@ -757,7 +752,7 @@ graph = """
 {% endfor %}
 
     [[housekeep]]
-        scrpit = echo "Success!"
+        script = echo "Success!"
 </pre>
            </p>
            <p>Changes to the <code>app/jules/</code> files and directory:
@@ -978,13 +973,17 @@ bio_hum_CN         = my_nml % bio_hum_CN
             <p>If you have added an Upgrade Macro you MUST also test it and apply the changes
                to the JULES code:
 <pre>
-rose app-upgrade -M /path/to/the/metadata/for/testing/ app/fcm_make &lt;version&gt; &amp;&amp; rose macro --fix -M /path/to/the/metadat/for/testing/
+rose app-upgrade -M /path/to/the/metadata/for/testing/ app/fcm_make &lt;version&gt; &amp;&amp; rose macro --fix -M /path/to/the/metadata/for/testing/
 #or
 ./bin/upgrade_jules_test_apps vn#.#_t###
+
+#here the &lt;version&gt; would be <code>HEAD</code> unless you change that metadata as well.
 </pre>
 </p>
             <br/>
-
+           <p>Run the JULES rose stem tests to make sure that all of the tests
+              pass.</p>
+          <br/>
            <p>Other examples:
               <ul>
               <li><a href="https://code.metoffice.gov.uk/trac/jules/changeset?reponame=&new=6110%40main%2Fbranches%2Fdev%2Fadrianlock%2Fvn4.7_graup_in_jules&old=5320%40main%2Ftrunk">Diff from #414</a></li>
@@ -992,15 +991,313 @@ rose app-upgrade -M /path/to/the/metadata/for/testing/ app/fcm_make &lt;version&
               </ul>
            </p>
            <br/>
-            <h4>Add a new module to rose stem</h4>
-
-
+            <h4>Add a new module to the JULES code</h4>
+            <p>Why use modules and not subroutines with DEPENDS ON?</p>
+            <ul>
+            <li>
+            <p>Modules are simple and make finding the piece of Fortran code
+               that you are looking for easier to find.
+               They also modulise the code therefore making files more user
+               friendly and readable. 
+               Further, adding, replacing and removing obsolete modules is
+               easy.
+            </li>
+            </ul>
+            </p>
+            <p>Other reasons to use modules:
+            <ol>
+            <li>The compiler will check the number and types of arguments.</li>
+            <li>the compiler can use memory in smarter ways.</li> 
+            <li>Code is more portable.</li>
+            <li>It takes seconds and can save hours of difficult debugging.</li>
+            </ol>
+            </p>
+            <br/>
+            <p>We will start by explaining the simplest form of how to use 
+              modules and then we try adding our own and testing it.</p> 
            <br/>
+            <ul>
+            <li>
+            <p>Simplest form:
+            </li>
+            </ul>
+            </p>
+            <p>
+            Modules must start and end like this:
+<pre>
+MODULE my_mod
+  CHARACTER(LEN=*), PARAMETER, PRIVATE :: ModuleName='MY_MOD'
+  CONTAINS
+  SUBROUTINE mycode(arg1, arg2)
 
-HEREHER
+  USE ...
+  ...
+  IMPLICIT NONE
+  ....INTENT(IN)
+  ....INTENT(INOUT)
+  ....INTENT(OUT)
+  ...
+  INTEGER(KIND=jpim), PARAMETER :: zhook_in  = 0
+  INTEGER(KIND=jpim), PARAMETER :: zhook_out = 1
+  REAL(KIND=jprb)               :: zhook_handle
+	
+  CHARACTER(LEN=*), PARAMETER :: RoutineName='mycode'
+
+  IF (lhook) CALL dr_hook(ModuleName//':'//RoutineName,zhook_in,zhook_handle)
+  ...
+  ...
+  IF (lhook) CALL dr_hook(ModuleName//':'//RoutineName,zhook_out,zhook_handle)
+  RETURN
+  END SUBROUTINE mycode
+END MODULE my_mod
+</pre>
+           They are used and called by:
+<pre>
+  ...
+  USE my_mod, ONLY: mycode
+  ...
+  IMPLICIT NONE
+  ...
+  CALL mycode(arg1, arg2)
+  ...
+</pre>
+           </p>
+           <br/>
+            <ul>
+            <li>
+            <p>Adding our own module:
+            </li>
+            </ul>
+            </p>
+            <p>
+            Let apply this to a new module that we would like to add to the
+            code.
+           </p>
+           <p>We are going to take the JULES vn4.7 release and move some code
+               into a module.</p>
+           <p>
+           <ul>
+           <li>Check out the JULES vn4.7 code release as vn4p7_tr</li>
+           <li>Change to the created directory</li>
+           <li><code>touch src/science/soil/n_leach_mod.F90</code></li>
+           <li>Open the file src/science/soil/hydrol_jls.F90</li>
+           <li>Line 63 add the USE statement for the new module "n_leach_mod" for the subroutine n_leach</li>
+           <li>Lines 715-722 remove.</li>
+           <li>Add a CALL for the subroutine and all the arguments it needs, 
+               as shown above in the "Simplest form" example.</li> 
+           <li>Lines 723-808 copy to the module called "n_leach_mod.F90"</li>
+           <li>Add to the top and bottom of the n_leach_mod.F90 file as shown 
+               above in the "Simplest form" example.</li>
+           </ul>
+           </p>
+
+            <br/>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <span class="glyphicon"></span>
+                        How To
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <p>
+src/science/soil/hydrol_jls.F90
+<pre>
+USE n_leach_mod,              ONLY: n_leach
+
+  CALL n_leach(npnts, nshyd, timestep, smcl, w_flux,                          &amp;
+               sub_surf_roff, qbase_l, k_1m)
+</pre>
+src/science/soil/n_leach_mod.F90
+<pre>
+MODULE n_leach_mod
+  CHARACTER(LEN=*), PARAMETER, PRIVATE :: ModuleName='N_LEACH_MOD'
+  CONTAINS
+  SUBROUTINE n_leach(npnts, nshyd, timestep, smcl, w_flux,                    &amp;
+                     sub_surf_roff, qbase_l, k_1m)
+
+USE parkind1, ONLY                : jprb, jpim
+USE yomhook, ONLY                 : lhook, dr_hook
+USE jules_surface_mod, ONLY       : l_layeredC
+USE jules_hydrology_mod, ONLY     : l_top
+USE jules_soil_mod, ONLY          : sm_levels, dzsoil
+USE jules_surface_types_mod, ONLY : npft
+USE prognostics, ONLY             : n_inorg_gb_lyrs, n_inorg_avail_pft
+USE trif_vars_mod, ONLY           : n_leach_gb
+USE jules_surface_mod, ONLY       : sorp
+
+IMPLICIT NONE
+
+INTEGER, INTENT(IN) ::                                                        &amp;
+ npnts                                                                        &amp;
+                     ! IN Number of gridpoints.
+,nshyd                                                                        &amp;
+                     ! IN Number of soil moisture levels.
+,k_1m
+                     !Layer index for top 1m
+
+
+
+REAL, INTENT(IN) ::                                                           &amp;
+ timestep                                                                     &amp;
+                      ! Model timestep (s).
+,w_flux(npnts,0:sm_levels)                                                    &amp;
+                      ! Fluxes of water between layers  (kg/m2/s)
+,qbase_l(npnts,sm_levels+1)                                                   &amp;
+                      ! Base flow from each level (kg/m2/s).
+,sub_surf_roff(npnts)                                                         &amp;
+                      ! Sub-surface runoff (kg/m2/s).
+,smcl(npnts,sm_levels)
+                      ! Soil moisture content of each layer (kg/m2).
+
+INTEGER ::                                                                    &amp;
+  i,                                                                          &amp;
+    !Counter for land points
+  n
+          !Counter for soil level
+
+REAL ::                                                                       &amp;
+ n_inorg_gb_old(npnts,sm_levels)                                              &amp;
+          !Start value of inorganic nitrogen
+,n_inorg_avail_old(npnts,npft,sm_levels)                                      &amp;
+          !Start value of available inorganic nitrogen
+,n_inorg_gb_tmp(npnts,nshyd)                                                  &amp;
+,n_inorg_avail_tmp(npnts,npft,nshyd)
+                      ! WORK temporary variables for inorganic Nitrogen
+
+
+
+INTEGER(KIND=jpim), PARAMETER :: zhook_in  = 0
+INTEGER(KIND=jpim), PARAMETER :: zhook_out = 1
+REAL(KIND=jprb)               :: zhook_handle
+
+CHARACTER(LEN=*), PARAMETER :: RoutineName='N_LEACH'
+
+
+IF (lhook) CALL dr_hook(ModuleName//':'//RoutineName,zhook_in,zhook_handle)
+
+!----------------------------------------------------------------------
+
+  n_leach_gb(:) = 0.0
+  DO i=1,npnts
+    n_leach_gb(i) = 0.0
+    IF (.NOT. l_layeredC) THEN
+      IF (SUM(smcl(i,1:k_1m)) &gt; EPSILON(0.0)) THEN
+        n_leach_gb(i) = sub_surf_roff(i) * (n_inorg_gb_lyrs(i,1) / sorp)      &amp;
+                        / SUM(smcl(i,1:k_1m))  ! (top 1m)
+      END IF
+      n_leach_gb(i) = MIN(n_leach_gb(i),(n_inorg_gb_lyrs(i,1) / sorp)         &amp;
+                      / timestep)
+      !H20 flux                ! N concentration Kg [N]/kg [H20]
+      n_inorg_gb_lyrs(i,1) = n_inorg_gb_lyrs(i,1) - n_leach_gb(i) * timestep
+    ELSE !IF LAYERED C
+      !Record old n_inorg, so we can calculate leaching.
+      DO n=1,nshyd
+        n_inorg_gb_tmp(i,n) = n_inorg_gb_lyrs(i,n)
+        n_inorg_avail_tmp(i,:,n) = n_inorg_avail_pft(i,:,n)
+      END DO
+
+      ! Explicitly move n_inorg through the layers with w_flux.
+      DO n=2,nshyd
+        IF (w_flux(i,n-1) &gt;= 0.0 .AND. smcl(i,n-1) &gt; EPSILON(0.0)) THEN
+          n_inorg_gb_lyrs(i,n) = n_inorg_gb_lyrs(i,n) + (timestep *           &amp;
+                                 w_flux(i,n-1) * n_inorg_gb_tmp(i,n-1))       &amp;
+                                 / (sorp * smcl(i,n-1))
+          n_inorg_gb_lyrs(i,n-1) = n_inorg_gb_lyrs(i,n-1) - (timestep *       &amp;
+                                   w_flux(i,n-1) * n_inorg_gb_tmp(i,n-1)) /   &amp;
+                                   (sorp * smcl(i,n-1))
+          n_inorg_avail_pft(i,:,n) = n_inorg_avail_pft(i,:,n) + (timestep *   &amp;
+                                     w_flux(i,n-1) *                          &amp;
+                                     n_inorg_avail_tmp(i,:,n-1)) /            &amp;
+                                    (sorp * smcl(i,n-1))
+          n_inorg_avail_pft(i,:,n-1) = n_inorg_avail_pft(i,:,n-1) - (timestep &amp;
+                                       * w_flux(i,n-1) *                      &amp;
+                                       n_inorg_avail_tmp(i,:,n-1)) /          &amp;
+                                       (sorp * smcl(i,n-1))
+        ELSE IF (w_flux(i,n-1) < 0.0 .AND. smcl(i,n) > EPSILON(0.0)) THEN
+          n_inorg_gb_lyrs(i,n) = n_inorg_gb_lyrs(i,n) + (timestep *           &amp;
+                                 w_flux(i,n-1) * n_inorg_gb_tmp(i,n)) /       &amp;
+                                 (sorp * smcl(i,n))
+          n_inorg_gb_lyrs(i,n-1) = n_inorg_gb_lyrs(i,n-1) - (timestep *       &amp;
+                                   w_flux(i,n-1) * n_inorg_gb_tmp(i,n)) /     &amp;
+                                   (sorp * smcl(i,n))
+          n_inorg_avail_pft(i,:,n) = n_inorg_avail_pft(i,:,n) + (timestep *   &amp;
+                                     w_flux(i,n-1) * n_inorg_avail_tmp(i,:,n))&amp;
+                                     / (sorp * smcl(i,n))
+          n_inorg_avail_pft(i,:,n-1) = n_inorg_avail_pft(i,:,n-1) - (timestep &amp;
+                                       * w_flux(i,n-1) *                      &amp;
+                                       n_inorg_avail_tmp(i,:,n)) /            &amp;
+                                       (sorp * smcl(i,n))
+        END IF
+      END DO
+      IF (w_flux(i,nshyd) &gt; 0.0 .AND. smcl(i,nshyd) &gt; EPSILON(0.0)) THEN
+        n_inorg_gb_lyrs(i,nshyd) = n_inorg_gb_lyrs(i,nshyd) - (timestep *     &amp;
+                                   w_flux(i,nshyd) *n_inorg_gb_tmp(i,nshyd))  &amp;
+                                   / (sorp * smcl(i,nshyd))
+        n_inorg_avail_pft(i,:,nshyd) = n_inorg_avail_pft(i,:,nshyd) -         &amp;
+                                       (timestep * w_flux(i,nshyd) *          &amp;
+                                       n_inorg_avail_tmp(i,:,nshyd)) /        &amp;
+                                       (sorp * smcl(i,nshyd))
+      END IF
+      IF (w_flux(i,0) &lt; 0.0 .AND. smcl(i,1) &gt; EPSILON(0.0)) THEN
+        n_inorg_gb_lyrs(i,1) = n_inorg_gb_lyrs(i,1) +  (timestep *            &amp;
+                               w_flux(i,0) * n_inorg_gb_tmp(i,1)) /           &amp;
+                               (sorp * smcl(i,1))
+        n_inorg_avail_pft(i,:,1) = n_inorg_avail_pft(i,:,1) + (timestep *     &amp;
+                                   w_flux(i,0) * n_inorg_avail_tmp(i,:,1)) /  &amp;
+                                  (sorp * smcl(i,1))
+      END IF
+      IF (l_top) THEN ! LSH on: include leaching from lateral runoff.
+        DO n=1,nshyd
+          n_inorg_gb_lyrs(i,n) = n_inorg_gb_lyrs(i,n) - (timestep *           &amp;
+                                 qbase_l(i,n) * n_inorg_gb_tmp(i,n)) /        &amp;
+                                 (sorp * smcl(i,n))
+          n_inorg_avail_pft(i,:,n) = n_inorg_avail_pft(i,:,n) - (timestep *   &amp;
+                                     qbase_l(i,n) * n_inorg_avail_tmp(i,:,n)) /&amp;
+                                     (sorp * smcl(i,n))
+        END DO
+      END IF ! LSH on.
+      ! Calculate total leaching as difference in total inorganic
+      ! nitrogen
+      n_leach_gb(i) = (SUM(n_inorg_gb_tmp(i,:)) -                             &amp;
+                       SUM(n_inorg_gb_lyrs(i,:))) / timestep
+      n_leach_gb(i) = MAX(n_leach_gb(i),0.0)
+    END IF !l_layeredC
+
+  END DO
+
+IF (lhook) CALL dr_hook(ModuleName//':'//RoutineName,zhook_out,zhook_handle)
+RETURN
+END SUBROUTINE n_leach
+END MODULE n_leach_mod
+                            </pre>
+</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <p>This example is based on JULES ticket<a href="">#394</a> which is               on the trunk and part of the JULES vn4.8 code release, but is
+               different as soil tiling was implemented before this ticket.</p>
             <br/>
             <br/>
-
+           <p>Run the JULES rose stem tests to make sure that all of the tests
+              pass.</p>
+           <br/>
+           <p>What if tests failed?</p>
+           <p>If we wanted this code on the JULES trunk then we would have to 
+              make sure that none of the tests fail.
+              Where could you look if tests failed for information on why they 
+              had failed?
+              We are not going to submit this code change for review as the
+              was code it correctly implemented at vn4.8 with the soil tiling.
+              This was just an example of how we could add a module.</p>
+          <br/>
 
             </div>
          </ul>
@@ -1022,9 +1319,9 @@ HEREHER
             <br/>
             <h4>Why create a ticket?</h4>
             <p>There is something that needs improving in the JULES code.</p>
-            <p>You have cretaed a branch that you wish to go on the JULES code 
-               trunk for everyone to benfit from.
-               Firstly make sure that you ahve followed all of the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">working practices</a>.
+            <p>You have created a branch that you wish to go on the JULES code 
+               trunk for everyone to benefit from.
+               Firstly make sure that you have followed all of the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">working practices</a>.
             <br/>
             <h4>Creating a ticket</h4>
             <p>Anyone can create a ticket to highlight an area of the JULES code
@@ -1060,7 +1357,7 @@ HEREHER
             <p>Create the ticket using the <code>Create ticket</code> button.
             <br/>
             <h4>Creating the Ticket Summary</h4>
-            <p>Clicking on the <code>Ticket Summay?</code> link will allow you
+            <p>Clicking on the <code>Ticket Summary?</code> link will allow you
              to create the page.</p>
             <p>This opens a new page which displays:
 <pre>
@@ -1072,11 +1369,11 @@ You could also create the same page higher in the hierarchy:
 "Create this page"  Using the template: "(blank page)"
 </pre>
              Choose the option <code>Ticketsummary</code> not the (blank page),
-             then select the button "Creat this page".
+             then select the button "Create this page".
              This will create the Ticket Summary page for you to fill in.</p>
             <br/>
             <h4>Filling in the Ticket Summary</h4>
-            <p>You much be logged in to edit the TIcket Summary page.</p>
+            <p>You much be logged in to edit the Ticket Summary page.</p>
             <p>Go to the bottom of the page and select the button 
                <code>Edit this page</code>.
                Fill in all of the sections that you can at the time.</p>
@@ -1086,7 +1383,7 @@ You could also create the same page higher in the hierarchy:
                have to run the JULES rose stem tests for your branch.</p>
             <p>More detail on rose stem have been discussed earlier in these
                tutorials.</p>
-            <p>Once rose stem has commpleted then the <code>trac.log</code> can
+            <p>Once rose stem has completed then the <code>trac.log</code> can
                be copied to the Ticket Summary.</p>
            <p>The location of the trac.log: <code>~/cylc-run/&lt;BRANCH_NAME&gt;/trac.log</code>.</p>
             <br/>
@@ -1098,7 +1395,7 @@ You could also create the same page higher in the hierarchy:
             <p>Please email people that you think may be willing to sci/tech 
                review your change to ask for a review before you assign it to
                them.</p>
-            <p>Note anoyone that has contributed to the branch cannot review the
+            <p>Note anyone that has contributed to the branch cannot review the
                branch.</p>
            <p>Once the sci/tech review is done they should sign it off and 
               assign it to the JULES System Manager for the code review.
@@ -1137,7 +1434,7 @@ follow them and create your own HoT.</p>
 <pre>
 # Create a branch from the JULES code repository at the head of the current trunk.
 # Note there is no "@"
-#  and there is not a version keyword or revsion given after the "@".
+#  and there is not a version keyword or revision given after the "@".
 fcm bc &gt;HOT_BRANCH_NAME&lt; fcm:jules.x_tr
 # Add a comment to the commit message, include the ticket number if you have one. 
 # Check out the HoT branch.
@@ -1145,7 +1442,7 @@ fcm co fcm:jules.x_br/dev/&gt;USERNAME&lt;/&gt;HOT_BRANCH_NAME&lt;
 </pre>
             <br/>
             <h4>Merging in our original branch to the HoT branch</h4>
-            <p>Now we have a HoT we can merge our orginal branch into and then 
+            <p>Now we have a HoT we can merge our original branch into and then 
                check the difference using FCM.
                When we are happy with the code merge we can run all of our 
                JULES rose stem tests for the Ticket Summary for the 
@@ -1159,7 +1456,7 @@ cd &gt;HOT_BRANCH_NAME&lt;/
 fcm merge fcm:jules.x_br/dev/&gt;USERNAME&lt;/&gt;BRANCH_NAME&lt;
 # Check the merge
 fcm diff -g
-# Once happy commmit the changes to the HoT branch.
+# Once happy commit the changes to the HoT branch.
 fcm ci
 # Add a suitable comment.
 </pre>
@@ -1217,13 +1514,13 @@ fcm ci
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
                         <span class="glyphicon"></span>
                         How To and Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseFive" class="panel-collapse collapse">
+                <div id="collapseSix" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
@@ -1283,13 +1580,13 @@ cd trunk</li>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
                         <span class="glyphicon"></span>
                         How To and Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseSix" class="panel-collapse collapse">
+                <div id="collapseSeven" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
@@ -1317,7 +1614,7 @@ fcm bc &lt;UM_BRANCH_NAME&gt; https://metoffice.code.gov.uk/svn/um/main/trunk@vn
 # for example if the change was a JULES vn4.7 branch
 cd &lt;UM_BRANCH_NAME&gt;</li>
 <li>Make your changes and commit them to the repository as you would for JULES.</li>
-<li>rose stem --group=jules --new --sourece=. --source=/full/path/to/jules/branch/to/be/tested</li>
+<li>rose stem --group=jules --new --source=. --source=/full/path/to/jules/branch/to/be/tested</li>
 <li>~cylc-run/&lt;UM_BRANCH_NAME&gt;/trac.log</li>
 <li>UM Ticket, Ticket Summary and the JULES Ticket, Ticket Summary</li>
 </ol>
@@ -1374,7 +1671,7 @@ cd &lt;UM_BRANCH_NAME&gt;</li>
             </p> 
             <br/>
             <h4>How do I create metadata?</h4>
-            <p>This depends on where the metadta is required.</p>
+            <p>This depends on where the metadata is required.</p>
             <br/>
             <h5>JULES-Rose suites</h5>
             <p>u-ai828 is missing metadata for the rose-suite.conf file, which
@@ -1395,13 +1692,13 @@ cd &lt;UM_BRANCH_NAME&gt;</li>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">
                         <span class="glyphicon"></span>
                         How To Example
                         </a>
                     </h4>
                 </div>
-                <div id="collapseSeven" class="panel-collapse collapse">
+                <div id="collapseEight" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
@@ -1412,7 +1709,7 @@ fcm sw metadata
 [jinja2:suite.rc=JULES_PATH]
 ns=Runtime configuration
 compulsory=true
-description=The path to the JULES code dependending on the platform.
+description=The path to the JULES code depending on the platform.
 type=character
 sort-key=d
 # don't forget the other variable.
@@ -1564,7 +1861,7 @@ url=http://jules-lsm.github.io/vn4.7/namelists/jules_snow.nml.html#JULES_SNOW::g
                check the metadata.</p>
             <br/>
             <p>After changing the metadata in anyway or adding a new rose stem test (see 
-               <a href="?????">Advanced Tutorial</a>)
+               <a href="jr_advanced.html">Advanced Tutorial</a>)
 <pre>
 rose macro --fix -M /path/to/the/metadata/for/testing/
 </pre>
@@ -1573,7 +1870,7 @@ rose macro --fix -M /path/to/the/metadata/for/testing/
             <p>If you have added an Upgrade Macro you MUST also test it and apply the changes
                to the JULES code:
 <pre>
-rose app-upgrade -M /path/to/the/metadata/for/testing/ app/fcm_make &lt;version&gt; &amp;&amp; rose macro --fix -M /path/to/the/metadat/for/testing/
+rose app-upgrade -M /path/to/the/metadata/for/testing/ app/fcm_make &lt;version&gt; &amp;&amp; rose macro --fix -M /path/to/the/metadata/for/testing/
 #or
 ./bin/upgrade_jules_test_apps vn#.#_t###
 </pre>
@@ -1646,43 +1943,14 @@ create-rose-app vn4.4 vn4.7 /path/to/my/4.4/namelist/ my_4p4_conversion /path/to
             </div>
          </ul>
 
-
-
-            <br/>
-            <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
-                        <span class="glyphicon"></span>
-                        Answers
-                        </a>
-                    </h4>
-                </div>
-                <div id="collapseFive" class="panel-collapse collapse">
-                   <div class="panel-body">
-                        <div class="row">
-                            <pre>
-                            <font color=green>
-# make the directory ~/jules/ and the path that may be required.
-                            </font>
-                            </pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br/>
-
             <h3>Congratulations you have completed the Intermediate Tutorial!</h3>
 
         <br/>
         <div class="container">
         <div class="well">
-        Now lets do the Advanced Quiz to see how much you already know and what we
-        will need to focus on in the next section.
-        Don't worry if you don't know all the answers yet, we will learning more in the next tutorial.
+        Now lets do the Intermediate Quiz to highlight your learning.
         </div>
-        <p><a class="btn btn-lg btn-success" href="advanced_quiz.html" role="button">Advanced Quiz</a></p>
+        <p><a class="btn btn-lg btn-success" href="intermediate_quiz.html" role="button">Intermediate Quiz</a></p>
         </div>
         <br/>
         <div class="container">

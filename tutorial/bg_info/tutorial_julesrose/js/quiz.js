@@ -1,30 +1,15 @@
 /******************************************************************************
- *  * (C) British crown copyright 2012-5 Met Office.
- *   *
- *    * This file is part of Rose, a framework for scientific suites.
- *     *
- *      * Rose is free software: you can redistribute it and/or modify
- *       * it under the terms of the GNU General Public License as published by
- *        * the Free Software Foundation, either version 3 of the License, or
- *         * (at your option) any later version.
- *          *
- *           * Rose is distributed in the hope that it will be useful,
- *            * but WITHOUT ANY WARRANTY; without even the implied warranty of
- *             * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *              * GNU General Public License for more details.
- *               *
- *                * You should have received a copy of the GNU General Public License
- *                 * along with Rose. If not, see <http://www.gnu.org/licenses/>.
+*        $(".answers").show(500);
+
  *                  *
  *                   ******************************************************************************/
 $(function() {
     /* Function for displaying answer/result info.*/
     function show_answers() {
-        $(".answers").show(500);
         $(".result-info").show(500);
     }
 
-    /* Validate and present results on button click.*/
+    /* Validate and pshow results on button click.*/
     $("#submitbutton").click(function() {
         $(".answer-status").remove();
         $(".results").hide();
@@ -56,7 +41,7 @@ $(function() {
         });
         /* Missing answer checking */
         if (missing_fields.length) {
-            alert("Need answers for questions: " + missing_fields.join(", "));
+            alert("Missing answers for questions: " + missing_fields.join(", "));
             return false;
         }
         /* Correct answer checking */
