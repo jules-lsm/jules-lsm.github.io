@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="JULES-Rose Tutorial">
+        <meta name="author" content="JULES System Manager">
+        <link rel="icon" href="jules_logo.png">
+        <title>JULES-Rose Glossary List</title>
+        <!-- Bootstrap core CSS -->
+        <link href="../etc/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap theme -->
+        <link href="../etc/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="general_theme.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">JULES-Rose Glossary List</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <!-- Add link to Homepage to training when created -->
+                        <li class="active"><a href="#">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other material <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Quizzes</li>
+                                <li><a href="precourse_quiz.html">Pre-course Quiz</a></li>
+                                <li><a href="beginner_quiz.html">Beginner Quiz</a></li>
+                                <li><a href="intermediate_quiz.html">Intermediate Quiz</a></li>
+                                <li><a href="advanced_quiz.html">Advanced Quiz</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Tutorials and practical's</li>
+                                <li><a href="jr_beginner.html">Beginner</a></li>
+                                <li><a href="jr_intermediate.html">Intermediate</a></li>
+                                <li><a href="jr_advanced.html">Advanced</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Help/info</li>
+                                <li><a href="jr_links.html">Links</a></li>
+                                <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
+                                <li><a href="jr_structures.html">JULES structures</a></li>
+                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc set-up</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container theme-showcase" role="main">
+            <div class="jumbotron">
+                <h2>Glossary list of JULES words</h2>
+                <br/>
+                <br/>
+                <ul>
+                <li>Ancillaries - datasets of fields at the resolution of the model, such as orography, soil moisture, etc.</li>
+                <li>Benchmarking - A way of evaluating the and comparing changes.</li>
+                <li>Configuration - The scientific setting chosen for the model to use.</li>
+                <li>Driving Data - The data source that drives the model, for example: GSWP2 or Loobos or WFDTI or CHESS etc.</li>
+                <li>Evaluation Tools - These are the different tools that are used by the community to evaluate the model at a given version, configuration with defined ancils and driving data.</li>
+                <li>KGO - Known Good Output, this is complier specific, it is used in the rose stem testing to prove that changes are not breaking existing code or are only improving the output in an agreed acceptable way, i.e. it is intended.</li>
+                <li>Suite - A collection of tasks, either applications and/or commands, which are scheduled to run based on the dependencies between the tasks.</li> 
+                <li>Version - The code at a defined release date, i.e. vn4.7 was released 2016-10-29 at revision number 5320.</li>
+
+                
+                </ul>
+                <br/>
+                <br/>
+                <h2>Glossary list of Rose commands</h2>
+                <br/>
+                <strong>To find out more about each command use the help, for example:
+                <code>rose &lt;COMMAND&gt; --help</code> </strong>
+                <br/>
+                <br/>
+                <ul>
+                <li>rose edit</li>
+                <li>rose sgc</li>
+                <li>rose slv</li>
+                <li>rose stem</li>
+                <li>rose stem --new</li>
+                <li>rose stem --new -S HOUSEKEEPING=false --source=.</li>
+                <li>rose suite-run</li>
+                <li>rose suite-run -i #(to install only to check dependencies - development only)</li>
+                <li>rose suite-run -- --mode=simulation --hold #(for suite design development only)</li>
+                <li>rose suite-run --new</li>
+                <li>rose suite-run --new --name=&lt;NEW_NAME&gt;</li>
+                <li>rose suite-shutdown</li>
+                <li>rose suite-shutdown --name=&lt;SUITE_NAME&gt; -- --now #(forces the suite to shutdown now and not wait)</li>
+                <li>rosie checkout</li>
+                <li>rosie copy</li>
+                <li>rosie delete</li>
+                <li>rosie go</li>
+
+                </ul>
+                <br/>               
+                <br/>
+                <h2>Glossary list of Cylc commands</h2>
+                <br/>
+                <strong>To find out more about each command use the help, for example:
+                <code>cylc &lt;COMMAND&gt; --help</code> </strong>
+                <br/>
+                <br/>
+                <ul>
+                <li>cylc gscan</li>
+                <li>cylc gui</li>
+                <li>cylc scan -c</li>
+                <li>cylc view -g -j &lt;SUITE_ID&gt;</li>
+                <li>gcylc</li>
+                <li>tail -f &lt;full/path/to/cylc-run/SUITE_ID/&gt;log/suite/log #(so you can follow the progress of the suite without a GUI)</li>
+                </ul>
+                <br/>
+                <br/>
+                <h2>Glossary list of FCM commands</h2>
+                <br/>
+                <strong>To find out more about each command use the help, for example:
+                <code>fcm &lt;COMMAND&gt; --help</code> </strong>
+                <br/>
+                <br/>
+                <ul>
+                    <li>
+                        fcm add
+                    </li>
+                    <li>
+                        fcm branch
+                    </li>
+                    <li>
+                        fcm branch-create
+                    </li>
+                    <li>
+                        fcm branch-create --branch-of-branch
+                    </li>
+                    <li>
+                        fcm branch-delete
+                    </li>
+                    <li>
+                        fcm branch-diff
+                    </li>
+                    <li>
+                        fcm branch-info
+                    </li>
+                    <li>
+                        fcm branch-list
+                    </li>
+                    <li>
+                        fcm browse
+                    </li>
+                    <li>
+                        fcm checkout
+                    </li>
+                    <li>
+                        fcm commit
+                    </li>
+                    <li>
+                        fcm conflicts
+                    </li>
+                    <li>
+                        fcm copy
+                    </li>
+                    <li>
+                        fcm delete
+                    </li>
+                    <li>
+                        fcm diff
+                    </li>
+                    <li>
+                        fcm info
+                    </li>
+                    <li>
+                        fcm list
+                    </li>
+                    <li>
+                        fcm log
+                    </li>
+                    <li>
+                        fcm mkdir
+                    </li>
+                    <li>
+                        fcm merge
+                    </li>
+                    <li>
+                        fcm merge --custom --revision N[:M] [OPTIONS] SOURCE
+                    </li>
+                    <li>
+                        fcm merge --custom [OPTIONS] URL1[@REV1] URL2[@REV2]
+                    </li>
+                    <li>
+                        fcm merge --reverse --revision
+                    </li>
+                    <li>
+                        fcm move
+                    </li>
+                    <li>
+                        fcm propdel
+                    </li>
+                    <li>
+                        fcm propedit
+                    </li>
+                    <li>
+                        fcm propset|ps
+                    </li>
+                    <li>
+                        fcm remove
+                    </li>
+                    <li>
+                        fcm revert
+                    </li>
+                    <li>
+                        fcm resolve
+                    </li>
+                    <li>
+                        fcm status
+                    </li>
+                    <li>
+                        fcm switch
+                    </li>
+                    <li>
+                        fcm trac
+                    </li>
+                    <li>
+                        fcm update
+                    </li>
+                    <li>
+                        fcm www
+                    </li>
+                </ul>
+            </div>
+            <a href="https://github.com/metomi/fcm/blob/master/CHANGES.md">FCM change log</a>
+            <br/>
+            <br/>
+            <div class="container">
+            </div>
+            <hr/>
+            <div class="container-fluid text-center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <address><small>
+                            &copy; British Crown Copyright 2006-17
+                            <a href="http://www.metoffice.gov.uk">Met Office</a>.<br />
+                            This document is released under the British <a href=
+                                "http://www.nationalarchives.gov.uk/doc/open-government-licence/" rel=
+                                "license">Open Government Licence</a>.<br />
+                            </small>
+                        </address>
+                    </div>
+                </div>
+            </div>
+            <!-- Bootstrap core JavaScript
+                ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="./js/vendor/jquery.min.js"><\/script>')</script>
+            <script src="../etc/bootstrap/js/bootstrap.min.js"></script>
+            <script src="./js/docs.min.js"></script>
+            <script LANGUAGE="JavaScript">
+                update = new Date(document.lastModified);
+                theMonth = update.getMonth() + 1;
+                theDate = update.getDate();
+                theYear = update.getFullYear();
+                theHour = update.getHours();
+                theMin = update.getMinutes();
+                theSec = update.getSeconds();
+                document.write("<strong> Last Modified:</strong> " + theYear + "-" + theMonth + "-" + theDate + "T" + theHour + ":" + theMin + ":" + theSec + "Z");
+            </script>
+        </div>
+    </body>
+</html>
+
