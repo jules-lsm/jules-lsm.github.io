@@ -41,6 +41,7 @@
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Advanced Practical's</li>
                                 <li><a href="#arst">Adding rose stem tests</a></li>
+                                 <li><a href="#aum">Adding an upgrade macro</a></li>
                                 <li><a href="#umjt">UM-JULES tickets</a></li>
                                 <li><a href="#rfcmc">Resolving FCM conflicts</a></li>
                             </ul>
@@ -78,6 +79,7 @@
             <ul>
                 <li><a href="#umdp3">UMDP3</a></li>
                 <li><a href="#arst">Adding rose stem tests</a></li>
+                <li><a href="#aum">Adding an upgrade macro</a></li>
                 <li><a href="#umjt">UM-JULES tickets</a></li>
                 <li><a href="#rfcmc">Resolving FCM conflicts</a></li>
 
@@ -128,34 +130,218 @@
         <p>
         <ul>
             <div class="page-header">
-                <h3>In development. Coming soon.</h3>
+                <h3>Overview</h3>
             </div>
             <div class="well">
-               <p> </p>
-
-
+               <p>The suite in <code>rose-stem</code> is a regression testing suite.
+                  It is used to verify that science/code changes do not break
+                  existing science/code within the JULES (with any new science 
+                  switched off).
+                  It does this by checking that the results of the modified 
+                  code and comparing them with Known Good Output (KGO)
+                  which is produced from the trunk of the JULES code.
+             </p>
+             <p>It is occasionally acceptable tests to fail and therefore for
+                results not to compare exactly with the KGO.
+                generally changes are very small and well understood and reasoned.
+                It is acceptable when:
+              <ul>
+              <li>The cause of the differences is well understood, for example,                   bug fix, initialisation error, improvement to science.
+                  These are at the discretion of the reviewers.</li>
+              <li>New tests.</li>
+              </ul>
+              </p>
+             <p>Rose stem app should never be changed other than by applying
+                the <code>upgrade_jules_test_apps</code> script.
+                The <code>upgrade_jules_test_apps</code> script runs the 
+                upgrade macro which should only modify the namelists enough 
+                for rose stem tasks to pass.</p>
             </div>
+            <div class="page-header">
+                <h3>Rose stem tests</h3>
+            </div>
+            <div class="well">
+            <p>Once you have identified the rose stem test that you want to 
+               create to safe guard a science configuration then please try to
+               develop the test.</p>
+            <p>A good starting point it to see if there is already and exisiting
+               rose stem test that is similar and then use that to tweek for
+               the desired configuration.</p>
+            <p>Rose stem test names should be as descriptive as possible while
+               still being reasonably short.
+               For example: gswp2_irrig_limit_low_river_storage .</p>
+            <p>This rose stem test was developed to test:  
+               Rose stem test with irrigation supply limited.
+               Starting with no water in the rivers and lots in the deep layer, therefore irrigation water should be mainly taken from the deep layer.</p>
+            <p>Change, <code>rose-stem/include/</code>: <code>meto</code>,
+               <code>vm</code>, <code>jasmin</code>, <code>ceh</code>,
+               <code>niwa</code> etc. <code>runtime*.rc</code> and 
+               <code>graph*.rc</code> files.</p>
+           <p><code>runtime*.rc</code> should include tasks <code>[[ ]]</code>
+              for the jules run (gswp2_irrig_limit_low_river_storage), KGO compare (nccmp_gswp2_irrig_limit_low_river_storage), housekeeping task (housekeep_gswp2_irrig_limit_low_river_storage).</p>
+           <p><code>graph*.rc</code> should include graph dependancies, for example:
+<pre>
+ "gswp2_irrig_limit_low_river_storage" : "fcm_make_mpi =&gt; \
+   gswp2_trip_spinup =&gt; gswp2_irrig_limit_low_river_storage =&gt; \
+    nccmp_gswp2_irrig_limit_low_river_storage =&gt; housekeep_gswp2_trip_spinup =&gt; \
+       housekeep_gswp2_irrig_limit_low_river_storage", 
+</pre>
+<p>and add it to the corect groups:
+<pre>
+ "gswp2" : ["gswp2_rivers", "gswp2_trip", "gswp2_trip_restart", "gswp2_irrig_limit_low_river_storage",...]
+</pre>
+           </p>
+           <p>Add you new rose-app.conf, e.g. <code>
+rose-stem/app/gswp2_irrig_limit_low_river_storage/rose-app.conf</code>
+             Don't forget to 
+<pre>fcm add rose-stem/app/gswp2_irrig_limit_low_river_storage/rose-app.conf </pre>
+           your new file with its directory structure.</p>
+            </div>
+
+
+            <div class="page-header">
+                <h3>Testing new rose stem tests</h3>
+            </div>
+            <div class="well">
+            <p>Before you test your new rose stem tests please run:</p> 
+<pre>
+rose macro --fix -M /path/to/JULES/metadata/dir/
+and OR
+/path/to/JULES/metadata/dir/bin/upgrade_jules_test_apps vnX.X_t&lt;ticket_num&gt;
+</pre>
+             <p>Where the <code>vnX.X_tt&lt;ticket_num&gt;</code> is given in
+              the file <code>rose-meta/jules-standalone/versions.py</code>. </p>
+            </div>
+            <div class="page-header">
+                <h3>Creating KGO</h3>
+            </div>
+            <div class="well">
+            <p>If you are using the JULES VM, you will need to generate the 
+               appropriate KGO for testing.
+               This is done using the trunk at the version from which your
+               branch is taken:</p>
+<pre>
+fcm co fcm:jules.x_tr@<version> jules_trunk
+cd jules_trunk
+</pre>
+           <p>KGO generation is done by using the rose-stem system to generate
+              the output and then moving it to the KGO directory.
+              The KGO version can be found by looking at
+              <code>rose-stem/include/variables.rc</code> file.
+             </p>
+<pre>
+# Using HOUSEKEEPING=false means the output is not deleted when it is finished with
+rose stem --group=all --source=. -S HOUSEKEEPING=false --new
+
+# Move the output to the KGO directory
+mkdir -p /jules/rose-stem-kgo/&lt;KGO version&gt;
+mv ~/cylc-run/jules_trunk/work/1/*/output/* /jules/rose-stem-kgo/&lt;KGO version&gt;
+</pre>
+            </div>
+           <div class="page-header">
+                <h3>Testing local KGO</h3>
+            </div>
+            <div class="well">
+            <p>As part of your rose stem test you may expect the KGO to fail 
+               for example you have created new rose stem tests so no previous
+                rose stem test KGO exists yet.</p>
+            <p>You may wish to test your new local test KGO, but it is not
+               compulsory.</p>
+            <p>First, commit your changes to your branch of the repository.</p>
+<pre>
+rose stem --group=all --new -S HOUSEKEEPING=false
+</pre>
+            <p>The suite will stop with waiting and have failures, this is 
+               as expected.</p>
+            <p>Now we need to copy the `local test` KGO to a directory for testing.</p>
+<pre>
+JULES_VERSION=vn#.#
+TICKET_NUMBER=t###
+TEST_KGO_DIR=~$USERNAME/jules/rose-test-kgo/${JULES_VERSION}_${TICKET_NUMBER}
+mkdir -p ${TEST_KGO_DIR}
+</pre>
+          <p>then edit KGO_DIR in the appropriate files:<br/>
+          For example at the Met Office:</p>
+<pre>
+/include/meto/runtime-xc40-cce.rc       
+/include/meto/runtime-linux.rc
+</pre>
+              <p>at JASMIN</p>
+<pre>
+/include/jasmin/runtime.rc
+</pre>
+             <p>to point to the new location.</p>
+             <p>Copy the <code>local test</code> KGO to the new directories.
+                The new test files will be in ~/cylc-run/&lt;suitename&gt;/work/1/*/output/*</p>
+              <p>Now stop the suite using the cylc gcycl GUI or</p>
+<pre>
+rose suite-shutdown --name=&lt;SUITE_NAME&gt; -- --now
+y
+</pre>
+             <p>Run rose stem on this branch</p>
+<pre>rose stem --group=all --new</pre>
+             <p>If the tests are bit reproducible they will all pass this time and if not then this needs to be addressed.</p>
+             <p>All changes to the local copy will need to be reverted, you can use:</p>
+<pre>
+fcm st
+fcm revert &lt;FILENAMES&gt;
+fcm st
+</pre>
+              <p>Note new KGO will be added to the central directories by the System Administrator at or just after the code is committed to the trunk.</p>
+            
+            </div>
+
         </ul>
         </p>
 
-        <h2><a id="umjt">UM-JULES tickets</a></h2>
+        <h2><a id="aum">Adding an upgrade macro</a></h2>
         <p>
         <ul>
             <div class="page-header">
                 <h3>In development. Coming soon.</h3>
             </div>
             <div class="well">
-               <p> </p>
+               <p>
+                 </p>
+
+
+            </div>
+        </ul>
+        </p>
+
+
+        <h2><a id="umjt">UM-JULES tickets</a></h2>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h3>Testing JULES with the UM code</h3>
+            </div>
+            <div class="well">
+               <p> This section assumes that your JULES changes do not have 
+                   linked UM changes.</p>
 <pre>
+# check that there are no uncommitted changes for your branch.
+cd /path/to/JULES/branch_for_testing/
+fcm st
+# should return nothing.
+cd /to/directory/for/checking/out/UMtrunk/into/
 fcm co fcm:um.x_tr
 cd trunk
-rose stem --group=jules --new --name=umtr_jlst### --source=. --source=/path/tp/jules/branch
+rose stem --group=jules --new --name=umtr_jlst### --source=. --source=/path/tp/jules/branch_for_testing
 # trac.log will appear in the cylc-run/umtr_jlst### when the rose stem tests have finished.
 </pre>
             <p>If the UM rose-stem tests fail, it may be because your changes
                require UM meta-data changes and/or a UM upgrade macro.
                In this case, you will need to create a UM branch, following 
                the <a href="https://code.metoffice.gov.uk/trac/um/wiki/working_practices">working_practices UM working practices</a>.
+            </p>
+            </div>
+            <div class="page-header">
+                <h3>Linked UM-JULES changes</h3>
+            </div>
+            <div class="well">
+               <p>If you have linked UM changes, you should be following the
+                   <a href="https://code.metoffice.gov.uk/trac/um/wiki/working_practices">working_practices UM working practices</a>.</p>
 
             </div>
         </ul>
