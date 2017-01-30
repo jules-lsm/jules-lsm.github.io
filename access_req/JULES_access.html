@@ -57,27 +57,29 @@
                <p>PLEASE NOTE: It can take up to about 2 weeks for requests to be completed and access give. You will receive an email on completion.
                </p>
                </br>
-               <form action="mailto:kerry.smout-day@metoffice.gov.uk?Subject=JULES%20Account%20Request" method="post" entype="multipart/form-data" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the JULES Terms and Conditions'); return false; }">
-               Full Name (Firstname Surname/Family name):<br/>
-               <input type="text" name="name"/><br/>
+               <form action="mailto:kerry.smout-day@metoffice.gov.uk?Subject=JULES%20Account%20Request" method="post" entype="multipart/form-data" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the JULES Terms and Conditions'); return false; }" >
+               <p>
+               <input type="hidden"/><br/>
+               Firstname:<br/>
+               <input type="text" name="firstname" value="Firstname"/><br/>
+               Surname/Family name:<br/>
+               <input type="text" name="surname" value="Surname"/><br/>
                Email address:</br>
                Please use your institution email address (i.e. NOT gmail/hotmail/etc.)<br/>
-               <input type="text" name="mail"/><br/>
+               <input type="text" name="mail" value="email@institution.ac"/><br/>
                Telephone number:</br>
-               <input type="text" name="phone"/><br/>
+               <input type="text" name="phone" value="+00 0000 000000" /><br/>
                Institution:</br>
                Or postal address if not applicable<br/>
-               <textarea name="institution" rows="4" cols="30"></textarea><br/>
+               <textarea name="institution" rows="4" cols="30">Institution addess</textarea><br/>
                How will you be using JULES?<br/>
                A brief description of how you intend to use JULES in your research. Please be more specific than "for land-surface modelling".<br/>
-               <textarea name="use" rows="6" cols="50"></textarea><br/>
+               <textarea name="use" rows="6" cols="50">My JULES use will be...</textarea><br/>
                <input type="checkbox" name="checkbox" value="check" id="agree" />  I accept the JULES Terms and Conditions:
                <a href="JULES_Licence.pdf">JULES Terms and Conditions</a>
                <input type="submit" name="submit" value="Send Request"/><br/>
+               </p>
                </form>
-<p>want all boxes to be filled as complusory.</p>
-<p>and see if can fix the formatting?</p>
-
             </div>
             <div class="container">
             </div>            <hr/>
