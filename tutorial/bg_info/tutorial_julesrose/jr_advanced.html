@@ -41,7 +41,7 @@
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Advanced Practical's</li>
                                 <li><a href="#arst">Adding rose stem tests</a></li>
-                                 <li><a href="#aum">Adding an upgrade macro</a></li>
+                                 <li><a href="#aum">Adding a complex upgrade macro</a></li>
                                 <li><a href="#umjt">UM-JULES tickets</a></li>
                                 <li><a href="#rfcmc">Resolving FCM conflicts</a></li>
                             </ul>
@@ -79,7 +79,7 @@
             <ul>
                 <li><a href="#umdp3">UMDP3</a></li>
                 <li><a href="#arst">Adding rose stem tests</a></li>
-                <li><a href="#aum">Adding an upgrade macro</a></li>
+                <li><a href="#aum">Adding a complex upgrade macro</a></li>
                 <li><a href="#umjt">UM-JULES tickets</a></li>
                 <li><a href="#rfcmc">Resolving FCM conflicts</a></li>
 
@@ -294,17 +294,68 @@ fcm st
         </ul>
         </p>
 
-        <h2><a id="aum">Adding an upgrade macro</a></h2>
+        <h2><a id="aum">Adding a complex upgrade macro</a></h2>
         <p>
         <ul>
             <div class="page-header">
-                <h3>In development. Coming soon.</h3>
+                <h3>Values in a namelist are consolidated</h3>
             </div>
             <div class="well">
-               <p>
+               <p>This example shows an addition to the <code>rose-meta/jules-standalone/versions.py</code>
+                  file to use only rfm and trip and point um_rfm and um_trip to
+                  to the respective river values.
                  </p>
+<pre>
+class vn47_t417(rose.upgrade.MacroUpgrade):
 
+    """Upgrade macro from JULES by Kerry Smout-Day"""
 
+    BEFORE_TAG = "vn4.7_t413"
+    AFTER_TAG = "vn4.7_t417"
+
+    def upgrade(self, config, meta_config=None):
+        """Upgrade a JULES runtime app configuration.
+           Point um_trip to trip, um_rfm to rfm as the values have been removed.
+           """
+
+         river_value = self.get_setting_value(config, ["namelist:jules_rivers", "rivers_type"])
+         if river_value == "'um_trip'":
+             self.change_setting_value(config, ["namelist:jules_rivers", "rivers_type"], 'trip')
+             trip_msg= """
+             !!!!! NOTE: um_trip is now replaced by trip see jls #417    !!!!
+                  """
+             self.add_report(info=trip_msg, is_warning=True)
+         elif river_value == "'um_rfm'":
+             self.change_setting_value(config, ["namelist:jules_rivers", "rivers_type"], 'rfm')
+             rfm_msg= """
+             !!!!! NOTE: um_rfm is now replaced by rfm see jls #417      !!!!
+                  """
+             self.add_report(info=rfm_msg, is_warning=True)
+        return config, self.reports
+</pre>
+            </div>
+            <div class="page-header">
+                <h3>HEREHER</h3>
+            </div>
+            <div class="well">
+               <p>HEREHER
+               </p>
+<pre>
+class vn45_t256(rose.upgrade.MacroUpgrade):
+
+    """Upgrade macro from JULES by Firstname Surname"""
+
+    BEFORE_TAG = "vnX.X_tXXX"
+    AFTER_TAG = "vnX.X_tXXX"
+
+    def upgrade(self, config, meta_config=None):
+        """Upgrade a JULES runtime app configuration."""
+
+        npft = int(self.get_setting_value(config, ["namelist:jules_surface_types", "npft"]))
+        self.add_setting(config, ["namelist:jules_pftparm", "can_struct_a_io"],','.join(['1.0']*npft))
+
+        return config, self.reports
+</pre>
             </div>
         </ul>
         </p>
