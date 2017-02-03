@@ -38,14 +38,14 @@
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Quizzes</li>
                                 <li><a href="precourse_quiz.html">Pre-course Quiz</a></li>
-                                <li><a href="beginner_quiz.html">Beginner Quiz</a></li>
-                                <li><a href="intermediate_quiz.html">Intermediate Quiz</a></li>
-                                <li><a href="advanced_quiz.html">Advanced Quiz</a></li>
+                                <li><a href="user_quiz.html">User Quiz</a></li>
+                                <li><a href="developer_quiz.html">Developer Quiz</a></li>
+                                <li><a href="developer advanced_quiz.html">Developer Advanced Quiz</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Tutorials and practical's</li>
-                                <li><a href="jr_beginner.html">Beginner</a></li>
-                                <li><a href="jr_intermediate.html">Intermediate</a></li>
-                                <li><a href="jr_advanced.html">Advanced</a></li>
+                                <li><a href="jr_user.html">User</a></li>
+                                <li><a href="jr_developer.html">Developer</a></li>
+                                <li><a href="jr_developer advanced.html">Developer Advanced</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Help/info</li>
                                 <li><a href="jr_links.html">Links</a></li>
@@ -330,6 +330,78 @@ store-plaintext-passwords = no
                      <li>Test rose stem <code>rose stem --group=all --source=. --new</code> You should have no failures this time.</li>
                 </ol>
             </div>
+                <h2>Running on JASMIN</h2>
+            <div class="well">
+                <br/>
+                <br/>
+                <p>
+                On <code>jasmin-sci2</code> or sci1, edit your 
+                <code>~/.bash_profile</code> file:
+<pre>
+# Get the aliases and functions
+
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+export PATH=$PATH:$HOME/bin
+HOST=$(hostname)
+
+if [[ $HOST = "jasmin-sci2.ceda.ac.uk" || $HOST = "jasmin-cylc.ceda.ac.uk" || $HOST = "jasmin-sci1.ceda.ac.uk" ]]; then
+  # Rose/cylc on jasmin-sci &amp; Lotus nodes
+  export PATH=/apps/contrib/metomi/bin:$PATH
+fi
+</pre>
+                On <code>jasmin-cylc</code> edit your:
+               <code>~/.bash_profile</code> file at the top:
+<pre>
+# Provide access to FCM, Rose and Cylc
+PATH=$PATH:/apps/contrib/metomi/bin
+
+# Ensure .bashrc is sourced in login shells
+# (only add this if it is not already done in your .bash_profile)
+[[ -f ~/.bashrc ]] &amp;&amp; . ~/.bashrc
+</pre>
+                At the bottom:
+<pre>
+[[ $- != *i* ]] &amp;&amp; return # Stop here if not running interactively
+[[ $(hostname) = "jasmin-cylc.ceda.ac.uk" ]] &amp;&amp; . mosrs-setup-gpg-agent
+# Enable bash completion for Rose commands
+[[ -f /apps/contrib/metomi/rose/etc/rose-bash-completion ]] &amp;&amp; . /apps/contrib/metomi/rose/etc/rose-bash-completion</pre>
+                 Now, whenever you login to <code>jasmin-cylc</code> you should be prompted for your Met Office Science Repository Service password. 
+<br/>
+A further set-up for JASMIN and MOSRS requires an update to your <code>~/.subversion/servers</code> file. Please add the following:
+<pre>
+[groups]
+metofficesharedrepos = code*.metoffice.gov.uk
+
+[metofficesharedrepos]
+# Specify your Science Repository Service user name here
+username = myusername
+store-plaintext-passwords = no
+</pre>
+                Check you  <code>~/.metomi/rose.conf</code> and add the following if missing:
+<pre>
+[rosie-id]
+prefix-default=u
+prefix-location.u=https://code.metoffice.gov.uk/svn/roses-u
+prefix-username.u=username 
+#username is all in lower case
+prefix-ws.u=https://code.metoffice.gov.uk/rosie/u
+
+[rose-stem]
+automatic-options=SITE=jasmin
+</pre>
+               This can be checked by running:
+<pre>
+rose config
+</pre>
+                </p>
+                </br>
+            </div>
+
             </div>
 
             <br/>
