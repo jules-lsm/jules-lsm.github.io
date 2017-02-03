@@ -8,7 +8,7 @@
         <meta name="description" content="JULES-Rose Tutorial" />
         <meta name="author" content="JULES System Manager" />
         <link rel="icon" href="jules_logo.png" />
-        <title>JULES-Rose intermediate</title>
+        <title>JULES-Rose developer</title>
         <!-- Bootstrap core CSS -->
         <link href="../etc/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
         <!-- Bootstrap theme -->
@@ -27,21 +27,21 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">JULES Intermediate</a>
+                    <a class="navbar-brand" href="#">JULES Developer</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <!-- Add link to Homepage to training when created -->
                         <li class="active"><a href="#">Home</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Intermediate material <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Developer material <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li class="dropdown-header">Intermediate Tutorials</li>
+                                <li class="dropdown-header">Developer Tutorials</li>
                                 <li><a href="#bjrstem">Basics of JULES rose stem</a></li>
                                 <li><a href="#bcode">Basics of Coding -UMDP3, Reviewing</a></li>
                                 <li><a href="#bjrsuite">Running a basic JULES-Rose suite</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li class="dropdown-header">Intermediate Practical's</li>
+                                <li class="dropdown-header">Developer Practical's</li>
                                 <li><a href="#Pracs">Practical's</a></li>
                                 <li><a href="#fjre">Further JULES Rose Edit</a></li>
                                 <li><a href="#fjrsuite">Further JULES-Rose suites - duration, domain</a></li>
@@ -56,14 +56,14 @@
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Quizzes</li>
                                 <li><a href="precourse_quiz.html">Pre-course Quiz</a></li>
-                                <li><a href="beginner_quiz.html">Beginner Quiz</a></li>
+                                <li><a href="user_quiz.html">User Quiz</a></li>
 
-                                <li><a href="intermediate_quiz.html">Intermediate Quiz</a></li>
-                                <li><a href="advanced_quiz.html">Advanced Quiz</a></li>
+                                <li><a href="developer_quiz.html">Developer Quiz</a></li>
+                                <li><a href="developer advanced_quiz.html">Developer Advanced Quiz</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Tutorials and practical's</li>
-                                <li><a href="jr_beginner.html">Beginner</a></li>
-                                <li><a href="jr_advanced.html">Advanced</a></li>
+                                <li><a href="jr_user.html">User</a></li>
+                                <li><a href="jr_developer advanced.html">Developer Advanced</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Help/info</li>
                                 <li><a href="jr_glossary.html">Glossary List</a></li>
@@ -80,7 +80,7 @@
         </nav>
         <div class="container theme-showcase" role="main">
         <div class="jumbotron">
-            <h1>Intermediate JULES-Rose Tutorial</h1>
+            <h1>Developer JULES-Rose Tutorial</h1>
             <p>This tutorial and practicals aim to cover the following topics:
             <ul>
                 <li><a href="#bjrstem">Basics of JULES rose stem</a></li>
@@ -101,8 +101,8 @@
             <p>It is expected that you have:
             <ul>
             <li>Completed the <a href="http://metomi.github.io/rose/doc/rose.html">Rose User Guide</a>.</li>
-            <li>Completed the <a href="jr_beginner.html">Beginner Tutorial</a>.</li>
-            <li>Completed the <a href="beginner_quiz.html">Beginner Quiz</a>.</li>      
+            <li>Completed the <a href="jr_user.html">User Tutorial</a>.</li>
+            <li>Completed the <a href="user_quiz.html">User Quiz</a>.</li>      
             </ul>
             </p>
             <p>
@@ -135,11 +135,11 @@
                   Use it to help with the practicals.</p>
 <pre>
 # Checkout the code to run rose stem test for
-mkdir -p ~/jules/vn4p7
-cd ~/jules/vn4p7
-fcm co fcm:jules.x_tr@vn4.7
-cd ~/jules/vn4p7/trunk
-rose stem --group=all --new --name=my_vn4p7tr_test
+mkdir -p ~/jules/vn4p8
+cd ~/jules/vn4p8
+fcm co fcm:jules.x_tr@vn4.8
+cd ~/jules/vn4p8/trunk
+rose stem --group=all --new --name=my_vn4p8tr_test
 </pre>
             <h4>Questions</h4>
             <ol>
@@ -183,6 +183,201 @@ These changes have to be justified usually with plots and approved by the code o
                     </div>
                 </div>
             </div>
+            <div class="page-header">
+                <h3>Running JULES rose stem and creating a branch and testing 
+                    the new code in it</h3>
+            </div>
+            <div class="well">
+            <p>Please refer to the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">Working Practices for JULES development</a>.
+            <br/>
+            <p>Here we will make a basic change to the JULES code and test it
+               with the rose stem test battery of tests.</p>
+            <p>We know that the JULES code passes all the tests from running it
+               earlier, we will make a branch for your change and see if the
+               branch change does not create failures.</p>
+           <h4>Creating a Branch</h4>
+           <p>Creating a branch from the latest code release of JULES:</p>
+           <p><code>cd ~jules</code>
+           <p><code>fcm bc tutorial_bc_rosestem fcm:jules.x_tr@vn4.8</code>
+           <br/>please insert the most recent version number.
+           <br/><code>bc</code> - means <code>branch-create</code>
+           <br/>"tutorial_bc_rosestem" will be the name of the branch.</p>
+           <p>If you do not have keywords set-up you will have to use the URL:
+           <code>fcm bc tutorial_bc_rosestem https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.8</code></p>
+           <p>This will bring up a text editor window for you to add your
+              commit message about the branch.</p>
+           <p>If you do not have text editor as default or wish to change the
+              default you can use, for example:
+              <code>export SVN_EDITOR=vim</code></p>
+           <p>The editor window should look like this:
+           <pre>
+
+--Add your commit message ABOVE - do not alter this line or those below--
+--FCM message (will be inserted automatically)--
+Created /main/branches/dev/kerryday/vn4.8_tutorial_bc_rosestem from /main/trunk@5320.
+--Change summary (not part of commit message)--
+A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/kerryday/vn4.8_tutorial_bc_rosestem
+</pre>
+           Add a comment to the top of it and then close, save it and accept
+           the change.
+           </p>
+           <p>This should return text like the following:</p>
+           <pre>
+<font color=blue>
+[info] Source: https://code.metoffice.gov.uk/svn/jules/main/trunk@5320 (5320)
+[info] vim: starting commit message editor...
+Change summary:
+--------------------------------------------------------------------------------
+A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/kerryday/vn4.8_tutorial_bc_rosestem
+--------------------------------------------------------------------------------
+Commit message is as follows:
+--------------------------------------------------------------------------------
+Created /main/branches/dev/kerryday/vn4.8_tutorial_bc_rosestem from /main/trunk@5320.
+--------------------------------------------------------------------------------
+Create the branch?
+Enter "y" or "n" (or just press &lt;return&gt; for "n") y
+Committed revision ####.
+[info] Created: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/kerryday/vn4.8_tutorial_bc_rosestem
+</font>
+           </pre>
+           <h4>Working on the Branch</h4>
+           <p>There are two different ways of working on a branch, for code
+              development I use the first and for suite development I use the
+              second. Both have different merits and are given below.</p>
+          <ol>
+          <li>Check out a copy to a new directory.
+             <br/>
+             <p>For example: <code>fcm co fcm:jules.x_br/dev/USERNAME/BRANCH_NAME</code> and then move to that directory.</li>
+          <li>Switch to the branch from within the directory of trunk@vn4.8.
+             <br/>
+             <p>For example: <code>fcm sw fcm:jules.x_br/dev/USERNAME/BRANCH_NAME</code>.</li>
+          </ol>
+          <p>Here we will use the first method (later we will use the second).</p>
+          <br/>
+          <pre>
+cd ~jules/
+fcm co fcm:jules.x_br/dev/USERNAME/vn4.8_tutorial_bc_rosestem
+cd vn4.8_tutorial_bc_rosestem
+</pre>
+           <p>HELPFUL HINT: if you forget your branch name you can list them using:</p>
+          <pre>
+fcm bls
+</pre>
+          <p>Now check the information for the directory of the repository that
+             you are presently in (very helpful when using switch) and the
+             status</p>
+<pre>
+fcm info
+<font color=blue>
+Path: .
+Working Copy Root Path: /USER/jules/vn4.8_tutorial_bc_rosestem
+URL: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/USERNAME/vn4.8_tutorial_bc_rosestem
+Relative URL: ^/main/branches/dev/USERNAME/vn4.8_tutorial_bc_rosestem
+Repository Root: https://code.metoffice.gov.uk/svn/jules
+Repository UUID: ac5b6c67-d81e-4bef-bedc-f37a4dd2bd0a
+Revision: 1222
+Node Kind: directory
+Schedule: normal
+Last Changed Author: USERNAME
+Last Changed Rev: 1234
+Last Changed Date: 2030-12-01 09:21:40 +0000 (Mon, 01 Dec 2030)
+
+</font>
+fcm st
+
+# returns nothing as there are no local/working copy changes in the directory.
+</pre>
+            <br/>
+            <p>Make a basic change to the branch:</p>
+            Note we are not keeping this change so it is not important
+            what it is.
+           <pre>
+cd ~jules/vn4.8_tutorial_bc_rosestem/
+fcm st
+
+#this returns nothing
+cd rose-stem/
+# edit the rose-suite.conf, change HOUSEKEEPING to false, save and close the file
+fcm st
+<font color=blue>M       rose-suite.conf</font>
+# we have decided that we did not want to change that, so lets revert it using
+# fcm.
+fcm revert rose-suite.conf
+fcm st
+
+# this returns nothing as we have reverted the uncommitted change that we made
+# in our local/working directory.
+          </pre>
+            <p>The <code>fcm revert</code> command is very helpful if you want
+               to revert, one, a few or all local changes.
+               See <code>fcm revert --help</code> for more options.</p>
+            <br/>
+           <p>Now to make a change that we want to keep and test:</p>
+           <pre>
+cd ~jules/vn4.8_tutorial_bc_rosestem/
+# move to the sourse directory of the JULES code
+cd src/snow
+# edit tridag.F90 ln 68 to be this:
+  gamm(n) = c(n-1) / beta_2
+# save and close the file
+           </pre>
+           <h4>Test the change</h4>
+           <ol>
+           <li>Run rose stem</li>
+           <li>Look at the appropriate logs to provide evidence of success or
+               failure</li>
+           <li>What three methods can you use to find the answer for 2.?</li>
+           <li>Which do you prefer and why?</li>
+           </ol>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">
+                        <span class="glyphicon"></span>
+                        Answers
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseEleven" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+                            <font color=green>
+Example failures and successes:
+Fails - fcm_make_meto_linux_gfortran_omp
+Fails - fcm_make_meto_linux_gfortran_debug
+Fails - fcm_make_meto_xc40_cee_debug
+Fails - fcm_make_meto_xc40_cee_omp
+Fails - fcm_make_meto_linux_intel_debug_noomp_nompi
+Fails - fcm_make_meto_linux_intel_noomp_mpi
+Succeed - fcm_make_meto_xc40_cce_omp
+Succeed - fcm_make_meto_xc40_cce_debug
+                            </font>
+                            </pre>
+                            <img src="images/fail_rs.png" width="95%" id="fail1"/>
+                            <p>job stderr states IMPLICIT NONE....for data object "BETA_2"</p>
+                           <p>Which is the change we made.</p>
+                           <p>Now revert the change using FCM</p>
+                           <br/>
+                          <p>The three methods are the gcylc GUI, Rose Bush and the cylc-run/ directory.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <p>You should have reverted that change if you are following this
+               tutorial, make sure there are no local changes by using
+               <code>fcm st</code> if there are changes please revert them.</p>
+            <br/>
+            <br/>
+            <p><strong>In the developer tutorial we will add a new variable, 
+               a new module etc.</strong></p>
+               <p>We have created a branch, making a change then reverting it, testing
+                  a change, finding the error and correcting it.</p>
+              <br/>
+
+
             <br/>
             </div>
         </ul>
@@ -299,7 +494,7 @@ or
             <div class="well">
                <p>There are some example suites that can be found on the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESWithRose#StandardRosesuites-Pleaseaddyourownheretohelpothers">JULES MOSRS pages</a></p>
                <p>Some have been developed for the JULES-Rose tutorials:
-              <ul><li> Beginner Practical 5 and 6 - <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a> MetO Suite, <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/9">u-ai829</a> VM Suite,  <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/4/3">u-ai843</a> JASMIN Suite.
+              <ul><li> User Practical 5 and 6 - <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a> MetO Suite, <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/9">u-ai829</a> VM Suite,  <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/4/3">u-ai843</a> JASMIN Suite.
                </li>
                </ul>
                </p>
@@ -487,7 +682,7 @@ M       rose-suite.conf
             <br/>
             <h3>Rose Bush via Rose Edit</h3>
                 <p>If the suite has been run, which it was via Rose Edit in
-                   the Beginner Tutorial, or do it now.
+                   the User Tutorial, or do it now.
                    It takes about 10 minutes, use the <code>Play</code> icon
                    button.
                    <p>Then Rose Bush, the web browser output page can be invoked.</p>
@@ -518,7 +713,7 @@ M       rose-suite.conf
                    metadata in Rose Edit as it is not correctly specified for
                    Rose Edit.
                    To do this point it to the copy of the trunk, for example:
-                   <code>/project/jules/vn4.7/trunk/</code> to the front of
+                   <code>/project/jules/vn4.8/trunk/</code> to the front of
                    both of the paths for fcm_make and jules metadata.</p>
                <p>Save and check the changes.</p>
                <p>Now the metadata is enabled we can see all of the information
@@ -637,7 +832,7 @@ file='drive_file.txt'
               computers will allow the model to not timeout.</p>
            <br/>
            <p>We are going to make changes very similar to the canradmod changes
-              in the Beginner course Practical 6 where we supplied a list of
+              in the User course Practical 6 where we supplied a list of
               different canradmod settings to run jules for different optional
               configurations.
            </p>
@@ -874,9 +1069,9 @@ read_list=.true.
             <br/>
            <p>Lets add a namelist.</p>
            <p>This is an example of how to add a namelist which is taken from
-              a namelist being added for JULES vn4.7 code release:</p>
+              a namelist being added for JULES vn4.8 code release:</p>
            <ol>
-               <li>Create a branch the JULES code from the trunk at vn4.6, 
+               <li>Create a branch the JULES code from the trunk at vn4.8, 
                    include tutorial in its name</li>
                <li>Checkout the branch</li>
                <li>Add the following namelist to the rose-meta.conf
@@ -1073,11 +1268,11 @@ END MODULE my_mod
             Let apply this to a new module that we would like to add to the
             code.
            </p>
-           <p>We are going to take the JULES vn4.7 release and move some code
+           <p>We are going to take the JULES vn4.8 release and move some code
                into a module.</p>
            <p>
            <ul>
-           <li>Check out the JULES vn4.7 code release as vn4p7_tr</li>
+           <li>Check out the JULES vn4.8 code release as vn4p8_tr</li>
            <li>Change to the created directory</li>
            <li><code>touch src/science/soil/n_leach_mod.F90</code></li>
            <li>Open the file src/science/soil/hydrol_jls.F90</li>
@@ -1525,7 +1720,7 @@ fcm ci
                         <div class="row">
                             <pre>
 <ol>
-<li>See <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_beginner.html#P3">Tickets Beginner</a> and <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_intermediate.html#ticks">Tickets Intermediate</a>.</li>
+<li>See <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_user.html#P3">Tickets User</a> and <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_developer.html#ticks">Tickets Developer</a>.</li>
 <li>fcm st
 # check that all files are expected to have changes have and that any new
 #are added and any removed are deleted.
@@ -1544,7 +1739,7 @@ cd um
 fcm co fcm:um.x_tr@10.5
 # or if no fcm keywords set up
 fcm co https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.5
-# for example if the change was a JULES vn4.7 branch
+# for example if the change was a JULES vn4.8 branch
 cd trunk</li>
 <li>rose stem --group=jules --new --name=umtr_jls&lt;JULES_ticket_no&gt; --sourece=. --source=/full/path/to/jules/branch/to/be/tested</li>
 <li>~cylc-run/umtr_jls&lt;JULES_ticket_no&gt;/trac.log</li>
@@ -1591,7 +1786,7 @@ cd trunk</li>
                         <div class="row">
                             <pre>
 <ol>
-<li>See <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_beginner.html#P3">Tickets Beginner</a> and <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_intermediate.html#ticks">Tickets Intermediate</a>.</li>
+<li>See <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_user.html#P3">Tickets User</a> and <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_developer.html#ticks">Tickets Developer</a>.</li>
 <li>fcm st
 # check that all files are expected to have changes have and that any new
 #are added and any removed are deleted.
@@ -1611,7 +1806,7 @@ cd um
 fcm bc &lt;UM_BRANCH_NAME&gt; fcm:um.x_tr@10.5
 # or if no fcm keywords set up
 fcm bc &lt;UM_BRANCH_NAME&gt; https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.5
-# for example if the change was a JULES vn4.7 branch
+# for example if the change was a JULES vn4.8 branch
 cd &lt;UM_BRANCH_NAME&gt;</li>
 <li>Make your changes and commit them to the repository as you would for JULES.</li>
 <li>rose stem --group=jules --new --source=. --source=/full/path/to/jules/branch/to/be/tested</li>
@@ -1633,7 +1828,7 @@ cd &lt;UM_BRANCH_NAME&gt;</li>
             <p>This as with a standard/standalone JULES change then the KGO can 
                only have failures for explained reasons and scientifically or
                technically approved reasons.
-               <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_intermediate.html#bjrstem">When is it acceptable to have a failure in the KGO?</a></p>
+               <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_developer.html#bjrstem">When is it acceptable to have a failure in the KGO?</a></p>
             <br/>
 
 
@@ -1769,13 +1964,14 @@ from .version43_44 import *
 from .version44_45 import *
 from .version45_46 import *
 from .version46_47 import *
+from .version47_48 import *
 
-class vn47_txxx(rose.upgrade.MacroUpgrade):
+class vn48_txxx(rose.upgrade.MacroUpgrade):
 
     """Upgrade macro from JULES by Author"""
 
-    BEFORE_TAG = "vn4.7"
-    AFTER_TAG = "vn4.7_txxx"
+    BEFORE_TAG = "vn4.8"
+    AFTER_TAG = "vn4.8_txxx"
 
     def upgrade(self, config, meta_config=None):
         """Upgrade a JULES runtime app configuration."""
@@ -1861,7 +2057,7 @@ url=http://jules-lsm.github.io/vn4.7/namelists/jules_snow.nml.html#JULES_SNOW::g
                check the metadata.</p>
             <br/>
             <p>After changing the metadata in anyway or adding a new rose stem test (see 
-               <a href="jr_advanced.html">Advanced Tutorial</a>)
+               <a href="jr_developer advanced.html">Developer Advanced Tutorial</a>)
 <pre>
 rose macro --fix -M /path/to/the/metadata/for/testing/
 </pre>
@@ -1928,7 +2124,7 @@ fcm ci
             <pre>
 # create-app-rose vn_from vn_to namelist_path suite_name jules_code_path
 #  for example:
-create-rose-app vn4.4 vn4.7 /path/to/my/4.4/namelist/ my_4p4_conversion /path/to/my/jules/code/at/4.7/
+create-rose-app vn4.4 vn4.8 /path/to/my/4.4/namelist/ my_4p4_conversion /path/to/my/jules/code/at/4.8/
 </pre>
             <p>If you have a directory with old namelists files, please try the
                <code>create-app-rose</code> command.</p>
@@ -1936,21 +2132,21 @@ create-rose-app vn4.4 vn4.7 /path/to/my/4.4/namelist/ my_4p4_conversion /path/to
             <br/>
             <p>For more on Rose Upgrade and Upgrade Macros please see:
                <a href="http://metomi.github.io/rose/doc/rose.html">Rose Documentation</a>.</p>
-             <p> <a href="http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-upgrade-usage.html">Upgrading</a>.</p>
-             <p> <a href="http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-upgrade-dev.html">Upgrade Macro Development</a>.</p>
+             <p> <a href="http://metomi.github.io/rose/doc/rose-rug-developer advanced-tutorials-upgrade-usage.html">Upgrading</a>.</p>
+             <p> <a href="http://metomi.github.io/rose/doc/rose-rug-developer advanced-tutorials-upgrade-dev.html">Upgrade Macro Development</a>.</p>
             <br/>
 
             </div>
          </ul>
 
-            <h3>Congratulations you have completed the Intermediate Tutorial!</h3>
+            <h3>Congratulations you have completed the Developer Tutorial!</h3>
 
         <br/>
         <div class="container">
         <div class="well">
-        Now lets do the Intermediate Quiz to highlight your learning.
+        Now lets do the Developer Quiz to highlight your learning.
         </div>
-        <p><a class="btn btn-lg btn-success" href="intermediate_quiz.html" role="button">Intermediate Quiz</a></p>
+        <p><a class="btn btn-lg btn-success" href="developer_quiz.html" role="button">Developer Quiz</a></p>
         </div>
         <br/>
         <div class="container">
