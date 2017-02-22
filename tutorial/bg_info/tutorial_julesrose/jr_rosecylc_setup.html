@@ -8,7 +8,7 @@
         <meta name="description" content="JULES-Rose Tutorial">
         <meta name="author" content="JULES System Manager">
         <link rel="icon" href="jules_logo.png">
-        <title>JULES-Rose Rose/Cylc set-up</title>
+        <title>JULES-Rose Rose/Cylc setup</title>
         <!-- Bootstrap core CSS -->
         <link href="../etc/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- Bootstrap theme -->
@@ -27,7 +27,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">JULES-Rose Rose/Cylc set-up</a>
+                    <a class="navbar-brand" href="#">JULES-Rose Rose/Cylc setup</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -40,18 +40,20 @@
                                 <li><a href="precourse_quiz.html">Pre-course Quiz</a></li>
                                 <li><a href="user_quiz.html">User Quiz</a></li>
                                 <li><a href="developer_quiz.html">Developer Quiz</a></li>
-                                <li><a href="developer advanced_quiz.html">Developer Advanced Quiz</a></li>
+                                <li><a href="developer_advanced_quiz.html">Developer Advanced Quiz</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Tutorials and practical's</li>
                                 <li><a href="jr_user.html">User</a></li>
                                 <li><a href="jr_developer.html">Developer</a></li>
-                                <li><a href="jr_developer advanced.html">Developer Advanced</a></li>
+                                <li><a href="jr_developer_advanced.html">Developer Advanced</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Help/info</li>
                                 <li><a href="jr_links.html">Links</a></li>
                                 <li><a href="jr_glossary.html">Glossary List</a></li>
                                 <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
                                 <li><a href="jr_structures.html">JULES structures</a></li>
+                                <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
+                                <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -61,7 +63,7 @@
         </nav>
         <div class="container theme-showcase" role="main">
             <div class="jumbotron">
-                <h1>Rose/Cylc set-up</h1>
+                <h1>Rose/Cylc setup</h1>
             </div>
                 <h2>Rose/Cylc site install</h2>
             <div class="well">
@@ -279,7 +281,7 @@ store-plaintext-passwords = no
                      accessed by all:
                     <code>ROSESTEM_DATA='/path/to/rosetsem/data/'</code></li>
                <li>cd $ROSESTEM_DATA</li>
-               <li>KGO_DIR=$ROSESTEM_DATA/rose-stem-kgo/vn4.7 #where 4.7 needs to be the appropriate JUELS version number</li>
+               <li>KGO_DIR=$ROSESTEM_DATA/rose-stem-kgo/vn4.7 #where 4.7 needs to be the appropriate JULES version number</li>
                <li>mkdir -p $KGO_DIR</li>
                #Copy across the data all except GSWP2 driving data
                <li>wget --user=ext_jules --password=&lt;SEE LINK ABOVE&gt; ftp://ftp.metoffice.gov.uk/benchmarking/benchmark.data.tar.gz</li>
@@ -329,79 +331,6 @@ store-plaintext-passwords = no
                          compliers.</p>
                      <li>Test rose stem <code>rose stem --group=all --source=. --new</code> You should have no failures this time.</li>
                 </ol>
-            </div>
-                <h2>Running on JASMIN</h2>
-            <div class="well">
-                <br/>
-                <br/>
-                <p>
-                On <code>jasmin-sci2</code> or sci1, edit your 
-                <code>~/.bash_profile</code> file:
-<pre>
-# Get the aliases and functions
-
-if [ -f ~/.bashrc ]; then
-        . ~/.bashrc
-fi
-
-# User specific environment and startup programs
-
-export PATH=$PATH:$HOME/bin
-HOST=$(hostname)
-
-if [[ $HOST = "jasmin-sci2.ceda.ac.uk" || $HOST = "jasmin-cylc.ceda.ac.uk" || $HOST = "jasmin-sci1.ceda.ac.uk" ]]; then
-  # Rose/cylc on jasmin-sci &amp; Lotus nodes
-  export PATH=/apps/contrib/metomi/bin:$PATH
-fi
-</pre>
-                On <code>jasmin-cylc</code> edit your:
-               <code>~/.bash_profile</code> file at the top:
-<pre>
-# Provide access to FCM, Rose and Cylc
-PATH=$PATH:/apps/contrib/metomi/bin
-
-# Ensure .bashrc is sourced in login shells
-# (only add this if it is not already done in your .bash_profile)
-[[ -f ~/.bashrc ]] &amp;&amp; . ~/.bashrc
-</pre>
-                At the bottom:
-<pre>
-[[ $- != *i* ]] &amp;&amp; return # Stop here if not running interactively
-[[ $(hostname) = "jasmin-cylc.ceda.ac.uk" ]] &amp;&amp; . mosrs-setup-gpg-agent
-# Enable bash completion for Rose commands
-[[ -f /apps/contrib/metomi/rose/etc/rose-bash-completion ]] &amp;&amp; . /apps/contrib/metomi/rose/etc/rose-bash-completion</pre>
-                 Now, whenever you login to <code>jasmin-cylc</code> you should be prompted for your Met Office Science Repository Service password. 
-<br/>
-A further set-up for JASMIN and MOSRS requires an update to your <code>~/.subversion/servers</code> file. Please add the following:
-<pre>
-[groups]
-metofficesharedrepos = code*.metoffice.gov.uk
-
-[metofficesharedrepos]
-# Specify your Science Repository Service user name here
-username = myusername
-store-plaintext-passwords = no
-</pre>
-                Check you  <code>~/.metomi/rose.conf</code> and add the following if missing:
-<pre>
-[rosie-id]
-prefix-default=u
-prefix-location.u=https://code.metoffice.gov.uk/svn/roses-u
-prefix-username.u=username 
-#username is all in lower case
-prefix-ws.u=https://code.metoffice.gov.uk/rosie/u
-
-[rose-stem]
-automatic-options=SITE=jasmin
-</pre>
-               This can be checked by running:
-<pre>
-rose config
-</pre>
-                </p>
-                </br>
-            </div>
-
             </div>
 
             <br/>

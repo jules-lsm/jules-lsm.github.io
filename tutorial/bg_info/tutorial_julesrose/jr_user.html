@@ -61,18 +61,20 @@
                                 <li><a href="user_quiz.html">User Quiz</a></li>
 
                                 <li><a href="developer_quiz.html">Developer Quiz</a></li>
-                                <li><a href="developer advanced_quiz.html">Developer Advanced Quiz</a></li>
+                                <li><a href="developer_advanced_quiz.html">Developer Advanced Quiz</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Tutorials and practical's</li>
                                 <li><a href="jr_developer.html">Developer</a></li>
-                                <li><a href="jr_developer advanced.html">Developer Advanced</a></li>
+                                <li><a href="jr_developer_advanced.html">Developer Advanced</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Help/info</li>
                                 <li><a href="jr_glossary.html">Glossary List</a></li>
                                 <li><a href="jr_links.html">Links</a></li>
                                 <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
                                 <li><a href="jr_structures.html">JULES structures</a></li>
-                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc set-up</a></li>
+                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
+                                <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
+                                <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -127,10 +129,10 @@
       on using JULES-Rose.</li>
       <li><a href="developer_quiz.html">Developer Quiz</a> testing your 
       learning from the developer course.</li>
-      <li><a href="jr_developer advanced.html">Developer Advanced tutorial and practical's</a>
+      <li><a href="jr_developer_advanced.html">Developer Advanced tutorial and practical's</a>
       this section is intended for developer advanced uses of JULES-Rose and covers
       higher level development of code and suites.</li>
-      <li><a href="developer advanced_quiz.html">Developer Advanced Quiz</a> testing your 
+      <li><a href="developer_advanced_quiz.html">Developer Advanced Quiz</a> testing your 
       learnign from the developer advanced quiz.</li>
       </ul>
       The design of the tutorial does mean that the user can just access the
@@ -388,9 +390,9 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
             </div>
             <div class="well">
             <h3>Practical 1 will cover:</h3>
-            <p>Checking your set-up.</p>
+            <p>Checking your setup.</p>
             <br/>
-            <p>Lets firstly check some set-up:</p>
+            <p>Lets firstly check some setup:</p>
             <pre>
             rosie hello
             # this should return something like this:
@@ -409,13 +411,13 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
             # hopefully they are the latest versions of the systems.
             fcm keyword-print
             # or short-hand: fcm kp
-            # this should return all of the keywords that you and the site have set-up, a sample of mine are:
+            # this should return all of the keywords that you and the site have setup, a sample of mine are:
             <font color="blue">
             location{primary}[jules.x] = https://code.metoffice.gov.uk/svn/jules/main
             location{primary}[jules_doc.x] = https://code.metoffice.gov.uk/svn/jules/doc
             </font>
             </pre>
-            <p>What are Keywords and why do we need them set-up?</p>
+            <p>What are Keywords and why do we need them setup?</p>
             <p>Keywords can be considered to be like short-hand or short-cuts to our full URL's.
             <br>
              Keywords can be defined in the FCM keyword configuration file (i.e. 
@@ -940,7 +942,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
                errors from the log of the suite.</p>
             <br/>
             <h4>Other ways of looking at information from the suite:</h4>
-            <p>We can, if it is set-up look at the information in a web 
+            <p>We can, if it is setup look at the information in a web 
                browser.</p>
             <p>This is known as <strong>rose bush</strong>.</p>
             <p>At the Met Office the top level page looks like the image
@@ -971,7 +973,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
             <p>The last two images are equivalent run on two different
                sites/systems.</p>
             <br/>
-            <p>Depending on your site set-up there are different ways of 
+            <p>Depending on your site setup there are different ways of 
                accessing rose bush.
                As can be seen in the above two images.
                In an internet window if you know the path you can use that.</p>
@@ -1385,7 +1387,7 @@ app/jules/file/Loobos_1997.dat
                   <code>rose-suite.info</code> file using Rosie Go</p>
                <h3>Rosie Go</h3>
                <p>Rosie Go is the suite browser GUI</p>
-               <p>First lets check your set-up, open your
+               <p>First lets check your setup, open your
                    <code>.metomi/rose.conf</code> file, it should include 
                    similar to the following output.</p>
 <pre>
@@ -1790,7 +1792,7 @@ rose suite-run --new --name=&lt;SOIL_TYPE&gt;_&lt;SUITE_ID&gt;
                         <div class="row">
                             <pre>
 <p> Note: The differences may only be small between the output for the different
-suite set-ups.
+suite setups.
 <br/>
 When plotting the differences the small difference may not be observable by eye 
 with some plotting packages.

@@ -42,7 +42,9 @@
                                 <li class="dropdown-header">Developer Advanced Practical's</li>
                                 <li><a href="#arst">Adding rose stem tests</a></li>
                                  <li><a href="#aum">Adding a complex upgrade macro</a></li>
-                                <li><a href="#umjt">UM-JULES tickets</a></li>
+                                <li><a href="#umjt">UM-JULES tickets and tests</a></li>
+                                <li><a href="#fcft">Further checks for tickets</a></li>
+                                <li><a href="#dot">Documentation on tickets</a></li>
                                 <li><a href="#rfcmc">Resolving FCM conflicts</a></li>
                             </ul>
                         <li class="dropdown">
@@ -53,7 +55,7 @@
                                 <li><a href="user_quiz.html">User Quiz</a></li>
 
                                 <li><a href="developer_quiz.html">Developer Quiz</a></li>
-                                <li><a href="developer advanced_quiz.html">Developer Advanced Quiz</a></li>
+                                <li><a href="developer_advanced_quiz.html">Developer Advanced Quiz</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Tutorials and practical's</li>
                                 <li><a href="jr_user.html">User</a></li>
@@ -64,7 +66,9 @@
                                 <li><a href="jr_links.html">Links</a></li>
                                 <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
                                 <li><a href="jr_structures.html">JULES structures</a></li>
-                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc set-up</a></li>
+                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
+                                <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
+                                <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -74,13 +78,15 @@
         </nav>
         <div class="container theme-showcase" role="main">
         <div class="jumbotron">
-            <h1>Developer Advanced JULES-Rose tutorial (in development)</h1>
+            <h1>Developer Advanced JULES-Rose tutorial</h1>
             <p>This aims to explain the importance of:
             <ul>
                 <li><a href="#umdp3">UMDP3</a></li>
                 <li><a href="#arst">Adding rose stem tests</a></li>
                 <li><a href="#aum">Adding a complex upgrade macro</a></li>
-                <li><a href="#umjt">UM-JULES tickets</a></li>
+                <li><a href="#umjt">UM-JULES tickets and tests</a></li>
+                <li><a href="#fcft">Further checks for tickets</a></li>
+                <li><a href="#dot">Documentation on tickets</a></li>
                 <li><a href="#rfcmc">Resolving FCM conflicts</a></li>
 
             </ul>
@@ -115,7 +121,7 @@
         <p>
         <ul>
             <div class="page-header">
-                <h3>In development. Coming soon.</h3>
+                <h3>Coding Standards</h3>
             </div>
             <div class="well">
                <p>The UM Systems team provide detailed guidance on software
@@ -156,6 +162,13 @@
                 The <code>upgrade_jules_test_apps</code> script runs the 
                 upgrade macro which should only modify the namelists enough 
                 for rose stem tasks to pass.</p>
+             <p>The script can be run my moving to the top the code directory, 
+                running:
+<pre>./bin/upgrade_jules_test_apps vnX.X_txxx
+</pre>
+                where vnX.X_txxx is the most recent upgrade macro.
+                This variable can be found in the 
+                <code>rose-meta/jules-standalone/versions.py</code> file.</p>
             </div>
             <div class="page-header">
                 <h3>Rose stem tests</h3>
@@ -209,11 +222,12 @@ rose macro --fix -M /path/to/JULES/metadata/dir/
 and OR
 /path/to/JULES/metadata/dir/bin/upgrade_jules_test_apps vnX.X_t&lt;ticket_num&gt;
 </pre>
-             <p>Where the <code>vnX.X_tt&lt;ticket_num&gt;</code> is given in
+             <p>Where the <code>vnX.X_t&lt;ticket_num&gt;</code> is given in
               the file <code>rose-meta/jules-standalone/versions.py</code>. </p>
+             <p><strong>New rose-stem tests mean that their will be new KGO.</strong></p>
             </div>
             <div class="page-header">
-                <h3>Creating KGO</h3>
+                <h3>Creating KGO for the New rose-stem tests (and in general)</h3>
             </div>
             <div class="well">
             <p>If you are using the JULES VM, you will need to generate the 
@@ -221,7 +235,7 @@ and OR
                This is done using the trunk at the version from which your
                branch is taken:</p>
 <pre>
-fcm co fcm:jules.x_tr@<version> jules_trunk
+fcm co fcm:jules.x_tr@&lt;version&gt; jules_trunk
 cd jules_trunk
 </pre>
            <p>KGO generation is done by using the rose-stem system to generate
@@ -335,33 +349,82 @@ class vn47_t417(rose.upgrade.MacroUpgrade):
 </pre>
             </div>
             <div class="page-header">
-                <h3>HEREHER</h3>
+                <h3>Search a value and apply logic statements</h3>
             </div>
             <div class="well">
-               <p>HEREHER
+               <p>This example shows an addition to the <code>rose-meta/jules-standalone/versions.py</code>
+                  file to search for a value, ncptf in the jules_surface_types 
+                  namelist and if present do one thing else do something
+                  different.
                </p>
 <pre>
-class vn45_t256(rose.upgrade.MacroUpgrade):
+class vnXX_tXXX(rose.upgrade.MacroUpgrade):
 
     """Upgrade macro from JULES by Firstname Surname"""
 
-    BEFORE_TAG = "vnX.X_tXXX"
+    BEFORE_TAG = "vnY.Y_tYYY"
     AFTER_TAG = "vnX.X_tXXX"
 
     def upgrade(self, config, meta_config=None):
         """Upgrade a JULES runtime app configuration."""
 
-        npft = int(self.get_setting_value(config, ["namelist:jules_surface_types", "npft"]))
-        self.add_setting(config, ["namelist:jules_pftparm", "can_struct_a_io"],','.join(['1.0']*npft))
-
+        ncpft_in = self.get_setting_value(config, ["namelist:jules_surface_types", "ncpft"])
+        if ncpft_in:
+            ncpft = int(ncpft_in)                   
+            self.add_setting(config, ["namelist:jules_cropparm", "nu_io"], ','.join(['0.0'] * ncpft))
+        else:
+            self.add_setting(config, ["namelist:jules_cropparm", "nu_io"], "-1e20")
         return config, self.reports
 </pre>
             </div>
+            <div class="page-header">
+                <h3>Testing upgrade macros</h3>
+            </div>
+            <div class="well">
+               <p>To create a test branch from an existing dev branch, type:
+<pre>
+fcm branch-create -k &lt;ticket&gt; --branch-of-branch -t test &lt;test_branch_name&gt; https://code.metoffice.gov.uk/svn/jules/main/branches/dev/&lt;user&gt;/&lt;dev_branch_name&gt;
+#or using the shorthands and FCM keywords
+fcm bc -k &lt;ticket&gt; --bob -t test &lt;test_branch_name&gt; fcm:jules.x_br/dev/&lt;user&gt;/&lt;dev_branch_name&gt;
+</pre>
+                  Using a test branch allows you and the reviewers to separate
+                  the results of the upgrade macro and metadata changes from
+                  other changes. 
+             <br/>
+                  Check out your test branch.
+<pre>
+fcm:jules.x_br/test/&lt;user&gt;/&lt;test_branch_name&gt; 
+</pre>
+                 Then run the following command to upgrade the apps in 
+                 <code>benchmark</code> and <code>rose-stem</code>:
+<pre>
+cd /path/to/your/test_branch_name/
+./bin/upgrade_jules_test_apps vnX.X_txxx
+</pre>
+                 Now you can check the changes using the following:
+<pre>
+#use the fcm graphical diff tool
+fcm diff -g
+#check the metadata via <code>rose edit</code>
+cd rose-stem
+rose edit
+#select the Metadata tab -&gt; Check fail-if, warn-f
+#select the Metadata tab -&gt; Auto-fix all configurations (if the option is avaliable)
+#Close the rose edit GUI usign the "x".
+
+#run the rose-stem tests and add the trac.log to the further testing section
+# of the Ticket Summary for the ticket.
+cd ..
+rose stem --group=all --new
+</pre>
+               </p>
+
+            </div>
+
         </ul>
         </p>
 
-
-        <h2><a id="umjt">UM-JULES tickets</a></h2>
+        <h2><a id="umjt">UM-JULES tickets and tests</a></h2>
         <p>
         <ul>
             <div class="page-header">
@@ -378,9 +441,12 @@ fcm st
 cd /to/directory/for/checking/out/UMtrunk/into/
 fcm co fcm:um.x_tr
 cd trunk
-rose stem --group=jules --new --name=umtr_jlst### --source=. --source=/path/tp/jules/branch_for_testing
+rose stem --group=jules,developer --new --name=umtr_jlst### --source=. --source=/path/tp/jules/branch_for_testing
 # trac.log will appear in the cylc-run/umtr_jlst### when the rose stem tests have finished.
 </pre>
+            <p>The trac.log needs to be added to the ticket summary for the
+               ticket to prove that the change does not affect the UM and that
+               a combined UM-JULES ticket is not needed.</p> 
             <p>If the UM rose-stem tests fail, it may be because your changes
                require UM meta-data changes and/or a UM upgrade macro.
                In this case, you will need to create a UM branch, following 
@@ -397,6 +463,131 @@ rose stem --group=jules --new --name=umtr_jlst### --source=. --source=/path/tp/j
             </div>
         </ul>
         </p>
+
+        <h2><a id="fcft">Further checks for tickets</a></h2>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h3>Documentation</h3>
+            </div>
+            <div class="well">
+               <p>Documentation needs updating if you have added a:
+                  <ul>
+                  <li>New Switch</li>
+                  <li>New Dimension</li>
+                  <li>New Science</li>
+               </ul>
+                  Or changed science.
+               </p>
+               <p>The documentation must be checked to make sure that changes
+                  compile correctly, with correct formatting. 
+                  Move to the correct directory:
+<pre>
+cd &lt;branch_name&gt;/docs/user_guide
+# Run make to build the documentation.
+
+#To build and view the html documentation:
+make html
+firefox build/html/index.html
+
+#To build and view the pdf documentation:
+make latexpdf
+acroread build/latex/JULES_User_Guide.pdf
+#or
+evince build/latex/JULES_User_Guide.pdf
+</pre>
+            </p>
+            </div>
+            <div class="page-header">
+                <h3>Code</h3>
+            </div>
+            <div class="well">
+                <p>
+                  Code need to me the UMDP3 standard, see above.
+                  Common mistakes:
+                  <ul>
+                     <li>Not making a new Module where appropriate.</li>
+                     <li>Not using a new indexing array variable when developing code especially DO loops.</li>
+                     <li>Upgrade macro must be checked in a test branch, see above.</li>
+                     <li>Upgrade macros must use integers and not character variables, e.g.
+<pre>
+#Use Integers
+            self.add_setting(config, ["namelist:jules_soil_biogeochem", "soil_bgc_model"], "2")
+#NOT Character variables
+            self.add_setting(config, ["namelist:jules_soil_biogeochem", "soil_bgc_model"], "rothc")
+</pre>
+</li>
+                     <li>Upgrade macros must use the same namelist format as the                         others and not append <code>_mod</code> as this creates
+                         new and unwanted namelists.
+<pre>
+#Use
+            self.add_setting(config, ["namelist:jules_soil_biogeochem", "soil_bgc_model"], "2")
+#Don't use appended "_mod"
+            self.add_setting(config, ["namelist:jules_soil_biogeochem_mod", "soil_bgc_model"], "2")
+</pre>
+</li>
+                     <li>Complier fcm_make warnings, please check the <code>fcm-make.log</code>.</li>
+                     <li>New science means a new rose-stem test to safe guard the new science.</li>
+                     <li>Never use tabs, and please do not add trailing 
+                         whitespaces, they can both cause problems with the code.</li>
+                  </ul>         
+                  </p>
+            </div>
+        </ul>
+        </p>
+
+        <h2><a id="dot">Documentation on tickets</a></h2>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h3>Documentation changes</h3>
+            </div>
+            <div class="well">
+               <p>To make changes to the JULES documentation you need to create
+                  a branch, checkout your branch, make changes, commit your 
+                  changes back and compile the documentation.
+<pre>
+fcm bc &lt;BRANCH_NAME&gt; fcm:jules_doc.x_tr
+fcm co fcm:jules_doc.x_br/dev/&lt;USER&gt;/&lt;BRANCH_NAME&gt;
+#or longhand
+fcm branch-create &lt;BRANCH_NAME&gt; https://code.metoffice.gov.uk/svn/jules/doc/trunk
+fcm checkout https://code.metoffice.gov.uk/svn/jules/doc/branches/dev/&lt;USER&gt;/&lt;BRANCH_NAME&gt;
+#make changes
+#commit changes back to the to the repository of the branch
+fcm ci
+#compile the LaTeX and html and check them
+
+cd &lt;branch_name&gt;/docs/user_guide
+# Run make to build the documentation.
+
+#To build and view the html documentation:
+make html
+firefox build/html/index.html
+
+#To build and view the pdf documentation:
+make latexpdf
+acroread build/latex/JULES_User_Guide.pdf
+#or
+evince build/latex/JULES_User_Guide.pdf
+</pre>
+                  Now we can create or update the appropriate ticket to get 
+                  the updated documentation on the JULES documentation trunk,
+                  for all to use.
+                  </p>
+                  <br/>
+                  <p>If the ticket is a documentation ONLY change then you do
+                     not have to run the rose-stem tests, just compile the
+                     documentation. Now get an appropriate reviewer and assign
+                     the ticket to them.</p>
+                  <br/>
+                  <p>If the ticket is a documentation and code change, as most
+                     are then you need to run rose-stem and compile the 
+                     documentation. Now get an appropriate reviewer and assign 
+                     the ticket to them.</p>
+            </div>
+        </ul>
+        </p>
+
 
         <h2><a id="rfcmc">Resolving FCM conflicts</a></h2>
         <p>
