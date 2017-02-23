@@ -177,8 +177,8 @@
             <p>Once you have identified the rose stem test that you want to 
                create to safe guard a science configuration then please try to
                develop the test.</p>
-            <p>A good starting point it to see if there is already and exisiting
-               rose stem test that is similar and then use that to tweek for
+            <p>A good starting point it to see if there is already and existing
+               rose stem test that is similar and then use that to tweak for
                the desired configuration.</p>
             <p>Rose stem test names should be as descriptive as possible while
                still being reasonably short.
@@ -192,14 +192,14 @@
                <code>graph*.rc</code> files.</p>
            <p><code>runtime*.rc</code> should include tasks <code>[[ ]]</code>
               for the jules run (gswp2_irrig_limit_low_river_storage), KGO compare (nccmp_gswp2_irrig_limit_low_river_storage), housekeeping task (housekeep_gswp2_irrig_limit_low_river_storage).</p>
-           <p><code>graph*.rc</code> should include graph dependancies, for example:
+           <p><code>graph*.rc</code> should include graph dependencies, for example:
 <pre>
  "gswp2_irrig_limit_low_river_storage" : "fcm_make_mpi =&gt; \
    gswp2_trip_spinup =&gt; gswp2_irrig_limit_low_river_storage =&gt; \
     nccmp_gswp2_irrig_limit_low_river_storage =&gt; housekeep_gswp2_trip_spinup =&gt; \
        housekeep_gswp2_irrig_limit_low_river_storage", 
 </pre>
-<p>and add it to the corect groups:
+<p>and add it to the correct groups:
 <pre>
  "gswp2" : ["gswp2_rivers", "gswp2_trip", "gswp2_trip_restart", "gswp2_irrig_limit_low_river_storage",...]
 </pre>
@@ -595,7 +595,7 @@ evince build/latex/JULES_User_Guide.pdf
             <div class="page-header">
                 <h3>FCM Text and Tree conflicts.</h3>
             </div>
-            <p>Sometimes when we merge branches into HoT branches we recieve a
+            <p>Sometimes when we merge branches into HoT branches we receive a
                message at the end of the merge saying that we have 
                <code>Text Conflicts</code> or <code>Tree Conflicts</code>.
                <code>Text Conflicts</code> are easier to resolve than
@@ -668,7 +668,7 @@ evince build/latex/JULES_User_Guide.pdf
             <p><code>fcm resolve --accept working &lt;FILENAME&gt;</code>
             </p>
             <p>This will try to resolve the tree conflict and ask you if you 
-               would like to go ahead with the merge? This is fo you to decide.</p>
+               would like to go ahead with the merge? This is for you to decide.</p>
             <p>
                A common way that a tree conflict occurs is after a merge when a file has been
                deleted or renamed on one branch, and modified on another.
