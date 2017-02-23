@@ -54,18 +54,19 @@
                                 <li><a href="precourse_quiz.html">Pre-course Quiz</a></li>
                                 <li><a href="user_quiz.html">User Quiz</a></li>
                                 <li><a href="developer_quiz.html">Developer Quiz</a></li>
-                                <li><a href="developer advanced_quiz.html">Developer Advanced Quiz</a></li>
+                                <li><a href="developer_advanced_quiz.html">Developer Advanced Quiz</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Tutorials and practical's</li>
                                 <li><a href="jr_user.html">User</a></li>
                                 <li><a href="jr_developer.html">Developer</a></li>
-                                <li><a href="jr_developer advanced.html">Developer Advanced</a></li>
+                                <li><a href="jr_developer_advanced.html">Developer Advanced</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Help/info</li>
                                 <li><a href="jr_links.html">Links</a></li>
                                 <li><a href="jr_glossary.html">Glossary List</a></li>
                                 <li><a href="jr_structures.html">JULES structures</a></li>
-                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc set-up</a></li>
+                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
+                                <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -235,7 +236,7 @@ fcm ci
             <h1><a id="S3">Using a keyword to check the log</a></h1>
             <div class="well">
                 <pre>
-# set-up your keyword.
+# setup your keyword.
 cd ~/.metomi/fcm/
 # edit the <samp>keyword.cfg</samp> file, for example:
 location{primary}[jules.x] = https://code.metoffice.gov.uk/svn/jules/main
@@ -250,7 +251,7 @@ fcm log fcm:jules.x
                 <pre>
 # checkout the trunk with the URL.
 fcm co URL &lt;LOCATION OF WORKING/LOCAL COPY&gt;
-# checkout the trunk with the keyword if it is set-up.
+# checkout the trunk with the keyword if it is setup.
 fcm co fcm:jules.x_tr &lt;LOCATION OF WORKING/LOCAL COPY&gt;
 # create a branch of the trunk.
 fcm bc &lt;NAME OF BRANCH&gt;

@@ -59,18 +59,20 @@
                                 <li><a href="user_quiz.html">User Quiz</a></li>
 
                                 <li><a href="developer_quiz.html">Developer Quiz</a></li>
-                                <li><a href="developer advanced_quiz.html">Developer Advanced Quiz</a></li>
+                                <li><a href="developer_advanced_quiz.html">Developer Advanced Quiz</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Tutorials and practical's</li>
                                 <li><a href="jr_user.html">User</a></li>
-                                <li><a href="jr_developer advanced.html">Developer Advanced</a></li>
+                                <li><a href="jr_developer_advanced.html">Developer Advanced</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Help/info</li>
                                 <li><a href="jr_glossary.html">Glossary List</a></li>
                                 <li><a href="jr_links.html">Links</a></li>
                                 <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
                                 <li><a href="jr_structures.html">JULES structures</a></li>
-                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc set-up</a></li>
+                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
+                                <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
+                                <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -202,7 +204,7 @@ These changes have to be justified usually with plots and approved by the code o
            <br/>please insert the most recent version number.
            <br/><code>bc</code> - means <code>branch-create</code>
            <br/>"tutorial_bc_rosestem" will be the name of the branch.</p>
-           <p>If you do not have keywords set-up you will have to use the URL:
+           <p>If you do not have keywords setup you will have to use the URL:
            <code>fcm bc tutorial_bc_rosestem https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.8</code></p>
            <p>This will bring up a text editor window for you to add your
               commit message about the branch.</p>
@@ -315,7 +317,7 @@ fcm st
            <p>Now to make a change that we want to keep and test:</p>
            <pre>
 cd ~jules/vn4.8_tutorial_bc_rosestem/
-# move to the sourse directory of the JULES code
+# move to the source/root directory of the JULES code
 cd src/snow
 # edit tridag.F90 ln 68 to be this:
   gamm(n) = c(n-1) / beta_2
@@ -1002,7 +1004,7 @@ read_list=.true.
                be false and 1 x 1.
                u-ai828 (or u-ai829 for VM or u-ai843 for JASMIN, or u-ai844
                for remote JASMIN from your desktop) with the metadata specified
-               has this set-up.</p>
+               has this setup.</p>
             <img src="images/rose_edit_dom1.png" width="80%" id="red1"/>
             <br/>
             <br/>
@@ -1014,7 +1016,7 @@ read_list=.true.
                the name of the land fraction data.
                <code>Model grid</code> has the sub grid set to true and the
                boundaries to the lat and long of the domain.
-               To see an example with the second type of set-up see the 
+               To see an example with the second type of setup see the 
                JULES-Rose suite u-ai509 with the metatdata specified as above.</p>
             <img src="images/rose_edit_dom2.png" width="80%" id="red2"/>
             <br/>
@@ -1532,10 +1534,14 @@ END MODULE n_leach_mod
             <img src="images/new_ticket.png" width="80%" id="red2"/>
             <br/>
             <h4>Filling in the empty ticket</h4>
-            <p>Complete the <code>Summary</code> section, Chose the appropriate
+            <p>Complete the <code>Summary</code> section. Chose the appropriate
             <code>Type</code> and only change the <code>Milestone</code> to the
             upcoming JULES code release if you think that you will complete it
-            in time.</p>
+            in time. <code>Owner</code> must be provided and is usually the 
+            person that has opened the ticket. If someone is to be assigned
+            please get their permission first. The <code>Priority</code>
+            should be provided. Only the <code>CC</code> and <code>Keywords</code>
+            are allowed to be left empty.</p>
             <p>The <code>Description</code> should be a clear and concise
                explanation of the problem and the proposed solution.
                There also needs to be a link to the branch and the Ticket
@@ -1573,7 +1579,7 @@ You could also create the same page higher in the hierarchy:
                <code>Edit this page</code>.
                Fill in all of the sections that you can at the time.</p>
             <br/>
-            <h4>Adding the <code>trac.log</code></h4>
+            <h4>Adding the <code>trac.log</code>'s</h4>
             <p>After you have made your code change and are happy with it you
                have to run the JULES rose stem tests for your branch.</p>
             <p>More detail on rose stem have been discussed earlier in these
@@ -1581,6 +1587,10 @@ You could also create the same page higher in the hierarchy:
             <p>Once rose stem has completed then the <code>trac.log</code> can
                be copied to the Ticket Summary.</p>
            <p>The location of the trac.log: <code>~/cylc-run/&lt;BRANCH_NAME&gt;/trac.log</code>.</p>
+            <p>Note that UM-JULES rose stem tests must be run with the group 
+            <code>--group=jules,developer</code> if your site does not have this
+               capability please email Jules-Support@metoffice.gov.uk to request
+               assistance.</p>
             <br/>
             <h4>The review process</h4>
             <p>You must have code owner approval for your change before it is 
@@ -2025,7 +2035,7 @@ class vn47_txxx(rose.upgrade.MacroUpgrade):
             <p>Accompanying this <code>rose-meta/jules-standalone/versions.py</code>
               change is also a <code>rose-meta/jules-standalone/HEAD/rose-meta.conf</code>
               file change.</p>
-            <p>For example, with the above change some sort-key valuse were
+            <p>For example, with the above change some sort-key values were
                updated and a new section added:</p>
 <pre>
 [namelist:jules_snow=graupel_options]
@@ -2057,7 +2067,7 @@ url=http://jules-lsm.github.io/vn4.7/namelists/jules_snow.nml.html#JULES_SNOW::g
                check the metadata.</p>
             <br/>
             <p>After changing the metadata in anyway or adding a new rose stem test (see 
-               <a href="jr_developer advanced.html">Developer Advanced Tutorial</a>)
+               <a href="jr_developer_advanced.html">Developer Advanced Tutorial</a>)
 <pre>
 rose macro --fix -M /path/to/the/metadata/for/testing/
 </pre>
@@ -2132,8 +2142,8 @@ create-rose-app vn4.4 vn4.8 /path/to/my/4.4/namelist/ my_4p4_conversion /path/to
             <br/>
             <p>For more on Rose Upgrade and Upgrade Macros please see:
                <a href="http://metomi.github.io/rose/doc/rose.html">Rose Documentation</a>.</p>
-             <p> <a href="http://metomi.github.io/rose/doc/rose-rug-developer advanced-tutorials-upgrade-usage.html">Upgrading</a>.</p>
-             <p> <a href="http://metomi.github.io/rose/doc/rose-rug-developer advanced-tutorials-upgrade-dev.html">Upgrade Macro Development</a>.</p>
+             <p> <a href="http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-upgrade-usage.html">Upgrading</a>.</p>
+             <p> <a href="http://metomi.github.io/rose/doc/rose-rug-advanced-tutorials-upgrade-dev.html">Upgrade Macro Development</a>.</p>
             <br/>
 
             </div>

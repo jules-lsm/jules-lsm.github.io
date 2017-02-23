@@ -48,14 +48,16 @@
                                 <li class="dropdown-header">Tutorials and practical's</li>
                                 <li><a href="jr_user.html">User</a></li>
                                 <li><a href="jr_developer.html">Developer</a></li>
-                                <li><a href="jr_developer advanced.html">Developer Advanced</a></li>
+                                <li><a href="jr_developer_advanced.html">Developer Advanced</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Help/info</li>
                                 <li><a href="jr_glossary.html">Glossary List</a></li>
                                 <li><a href="jr_links.html">Links</a></li>
                                 <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
                                 <li><a href="jr_structures.html">JULES structures</a></li>
-                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc set-up</a></li>
+                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
+                                <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
+                                <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -79,7 +81,6 @@
                 <div class="well">
                     <div id="results"></div>
                 </div>
-               This quiz is being developed with the Developer Advanced tutorial and is not complete yet.
                 <div class="well">
                     <form id="qform" action=".">
                         <ol>
@@ -188,10 +189,203 @@
                                     </ol>
                                     <p class="answers B"><em>B</em></p>
                                 </div>                         </li>
+                        <li>
+                            <p class="question">When adding a new rose-stem test what file(s) are to added/updated?</p>
+                            <div id="6" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">rose-stem/include/*/runtime*.rc and /graph*.rc</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">rose-stem/include/*/runtime*.rc and /graph*.rc and rose-stem/app/&lt;NEW_ROSE_STEM_TEST_NAME&gt;/rose-app.conf</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">rose-stem/include/*/runtime*.rc and rose-stem/app/&lt;NEW_ROSE_STEM_TEST_NAME&gt;/rose-app.conf</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">rose-stem/include/*/graph*.rc and rose-stem/app/&lt;NEW_ROSE_STEM_TEST_NAME&gt;/rose-app.conf</label><br/></li>
+                                    <li><input type="radio" value="E" /><label for="E">rose-stem/app/&lt;NEW_ROSE_STEM_TEST_NAME&gt;/rose-app.conf</label><br/></li>
+                                </ol>
+                                <p class="answers B"><em>B</em></p>
+                            </div>
+                        </li>
 
+                        <li>
+                            <p class="question">Where can you find out what the latest vnX.X_txxx number is for running the app upgrade macro?</p>
+                            <div id="7" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">rose-meta/jules-fcm-make/versions.py</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">rose-meta/jules-standalone/versionXX_YY.py</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">rose-meta/jules-standalone/HEAD/rose-meta.conf</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">rose-meta/jules-standalone/versions.py</label><br/></li>
+                                </ol>
+                                <p class="answers D"><em>D</em></p>
+                            </div>
+                        </li>
 
+                        <li>
+                            <p class="question">How can we create new KGO?</p>
+                            <div id="8" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">rose stem --group=all -S HOUSEKEEP=true --new<</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">rose stem --group=all -S HOUSEKEEPING=true --new<</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">rose stem --group=all -S HOUSEKEEP=false --new<</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">rose stem --group=all -S HOUSEKEEPING=false --new</label><br/></li>
+                                </ol>
+                                <p class="answers D"><em>D</em></p>
+                            </div>
+                        </li>
 
+                        <li>
+                            <p class="question">To what file to do add an app upgrade macro?</p>
+                            <div id="9" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">rose-meta/jules-fcm-make/versions.py</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">rose-meta/jules-standalone/versionXX_YY.py</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">rose-meta/jules-standalone/HEAD/rose-meta.conf</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">rose-meta/jules-standalone/versions.py</label><br/></li>
+                                </ol>
+                                <p class="answers D"><em>D</em></p>
+                            </div>
+                        </li>
 
+                        <li>
+                            <p class="question">What command would create a test branch for testing an upgrade macro?</p>
+                            <div id="10" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">fcm bc -k &lt;ticket&gt; --bob -t test &lt;test_branch_name&gt; fcm:jules.x_br/dev/&lt;user&gt;/&lt;dev_branch_name&gt;</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">fcm bc -k &lt;ticket&gt; --bob -t test fcm:jules.x_br/dev/&lt;user&gt;/&lt;dev_branch_name&gt;</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">fcm bc -k &lt;ticket&gt; --bob &lt;test_branch_name&gt; fcm:jules.x_br/dev/&lt;user&gt;/&lt;dev_branch_name&gt;</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">fcm bc -k &lt;ticket&gt; --bob &lt;test_branch_name&gt;</label><br/></li>
+                                </ol>
+                                <p class="answers A"><em>A</em></p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <p class="question">What command would you run to test and apply an app upgrade macro?</p>
+                            <div id="11" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">./bin/upgrade_jules_apps -a</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">./bin/upgrade_jules_test_apps</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">./bin/upgrade_jules_test_apps vnX.X_txxx</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">./bin/upgrade_jules_apps vnX.X_txxx</label><br/></li>
+                                    <li><input type="radio" value="E" /><label for="E">./bin/upgrade_jules_apps -a</label><br/></li>
+                                </ol>
+                                <p class="answers C"><em>C</em></p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <p class="question">What do you need to do to check a change to an upgrade macro?</p>
+                            <div id="12" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">run rose-stem, check the diff using <code>fcm diff -g</code>, check <code>rose edit</code> Check fail-if, warn-if and Auto-fix</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">run rose-stem, check the diff using <code>fcm diff -g</code></label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">run rose-stem, check <code>rose edit</code> Check fail-if, warn-if and Auto-fix</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">check the diff using <code>fcm diff -g</code></label><br/></li>
+                                    <li><input type="radio" value="E" /><label for="E">check the diff using <code>fcm diff -g</code>, check <code>rose edit</code> Check fail-if, warn-if and Auto-fix</label><br/></li>
+                                    <li><input type="radio" value="F" /><label for="F">check <code>rose edit</code> Check fail-if, warn-if and Auto-fix</label><br/></li>
+                                </ol>
+                                <p class="answers A"><em>A</em></p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <p class="question">If you have UM access, how can you checkout the UM code at vn#.#?</p>
+                            <div id="13" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">fcm co fcm:um.x_tr@rvn#.#</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">fcm co fcm:um.x_tr@#.#</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">fcm co fcm:um.x_tr@vn#.#</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">fcm co fcm:um.x_tr</label><br/></li>
+                                    <li><input type="radio" value="E" /><label for="E">fcm co fcm:um.x_tr@HEAD</label><br/></li>
+                                </ol>
+                                <p class="answers C"><em>C</em></p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <p class="question">What command would run the rose-stem tests for UM-JULES combined from the UM trunk directory?</p>
+                            <div id="14" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">rose stem --group=jules,developer --new</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">rose stem --group=jules,developer --new --source=.</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">rose stem --new --source=. --source=/path/to/jules/code</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">rose stem --group=jules,developer --new --source=. --source=/path/to/jules/code</label><br/></li>
+                                </ol>
+                                <p class="answers D"><em>D</em></p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <p class="question">What science/tech changes need a documentation change?</p>
+                            <div id="15" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">New science, new switch, changes to science</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">New science, new dimension, new switch, changes to science</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">New dimension, new switch, changes to science</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">New science, new dimension, new switch, changes to science, coding style changes</label><br/></li>
+                                </ol>
+                                <p class="answers B"><em>B</em></p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <p class="question">What the are coding standards often currently referred to as?</p>
+                            <div id="16" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">JULESDP3</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">UMDP3</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">DP3</label><br/></li>
+                                </ol>
+                                <p class="answers B"><em>B</em></p>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="question">When is a new rose-stem test required?</p>
+                            <div id="17" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">New science, if one does not already exist to safe guard science</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">For every change</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">New science only</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">Only if one does not already exist to safe guard science</label><br/></li>
+
+                                </ol>
+                                <p class="answers A"><em>A</em></p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <p class="question">How do can you compile and check the documentation branch from within docs/user_guide?</p>
+                            <div id="18" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">make latexpdf; evince build/latex/JULES_Users_Guide.pdf</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">make html; firefox build/html/index.html</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">make html; firefox build/html/index.html; make latexpdf; evince build/latex/JULES_Users_Guide.pdf</label><br/></li>
+                                    <li><input type="radio" value="D" /><label for="D">make html; make latexpdf</label><br/></li>
+                                </ol>
+                                <p class="answers C"><em>C</em></p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <p class="question">How can a documentation branch be created?</p>
+                            <div id="19" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">fcm bc &lt;DOC_BRANCH_NAME&gt; fcm:jules.doc.x_tr@vn#.#</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">fcm bc &lt;DOC_BRANCH_NAME&gt;</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">fcm bc fcm:jules_doc.x_tr@vn#.#</label><br/></li>
+		                    <li><input type="radio" value="D" /><label for="D">fcm bc &lt;DOC_BRANCH_NAME&gt; fcm:jules_doc.x_tr@vn#.#</label><br/></li>
+                                </ol>
+                                <p class="answers D"><em>D</em></p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <p class="question">For a documentation only ticket what tests need to be run??</p>
+                            <div id="20" class="questions">
+                                <ol type="A">
+                                    <li><input type="radio" value="A" /><label for="A">Compile and check the html, LaTeX files</label><br/></li>
+                                    <li><input type="radio" value="B" /><label for="B">Compile and check the html, LaTeX files and rose-stem</label><br/></li>
+                                    <li><input type="radio" value="C" /><label for="C">Rose stem</label><br/></li>
+                                </ol>
+                                <p class="answers A"><em>A</em></p>
+                            </div>
+                        </li>
                         </ol>
                     </form>
                 </div>
@@ -201,11 +395,11 @@
                 <div class="well">
                     <p id="submit-container"><button id="submitbutton">Check
                         Answers</button>
-                    </p>
+                   </p>
                 </div>
             </div>
             <div class="container">
-                <p><a class="btn btn-lg btn-success" href="jr_developer advanced.html" role="button">Developer Advanced course</a></p>
+                <p><a class="btn btn-lg btn-success" href="jr_developer_advanced.html" role="button">Developer Advanced course</a></p>
                 <br/>
             </div>
             <div class="container">

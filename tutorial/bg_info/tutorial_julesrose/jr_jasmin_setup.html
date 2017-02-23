@@ -8,7 +8,7 @@
         <meta name="description" content="JULES-Rose Tutorial">
         <meta name="author" content="JULES System Manager">
         <link rel="icon" href="jules_logo.png">
-        <title>JULES Links</title>
+        <title>JULES JASMIN setup</title>
         <!-- Bootstrap core CSS -->
         <link href="../etc/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- Bootstrap theme -->
@@ -27,7 +27,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">JULES Links</a>
+                    <a class="navbar-brand" href="#">JULES JASMIN setup</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -49,11 +49,11 @@
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Help/info</li>
                                 <li><a href="jr_glossary.html">Glossary List</a></li>
+                                <li><a href="jr_links.html">Links</a></li>
                                 <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
                                 <li><a href="jr_structures.html">JULES structures</a></li>
                                 <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
                                 <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
-                                <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -63,72 +63,132 @@
         </nav>
         <div class="container theme-showcase" role="main">
             <div class="jumbotron">
-                <br/>
-                <br/>
-                <h2>JULES Links</h2>
-                <a href="https://code.metoffice.gov.uk/trac/jules">JULES on MOSRS</a>
-                <br/>
-                <a href="https://jules-lsm.github.io/access_req/JULES_access.html">Requesting access to the JULES code</a>
-                <br/>
-                <a href="https://jules-lsm.github.io/vn4.7/">JULES vn4.7 User Guide</a> to see a different version of the user guide change the vn#.# to your desired version number.
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">JULES Working Practices</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESTipOfDay">JULES Tip Of the Day (JTOD)</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/query?status=approved&status=assigned&status=code_review&status=committed&status=in_progress&status=new&status=sci%2Ftech_review&milestone=JULES+v4.8+release&col=id&col=summary&col=status&col=type&col=priority&col=milestone&col=time&order=priority">Custom Query Milestone is JULES v4.8 release</a> change the Filters as appropriate.
-                <br/>
-                <br/>
-                <h2>VM (JULES) Links</h2>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine">VM (JULES)</a> note you need to <code>sudo install-jules-*</code> all three of the scripts.
-                <br/>
-                <a href="https://github.com/metomi/metomi-vms#metomi-vms">metomi-vms</a>
- <br/>
-                <a href="https://github.com/metomi/metomi-vms/tree/master/usr/local/bin">Location of the install-jules-* scripts on GitHub</a>
-                <br/>
-                <br/>
-                <h2>JASMIN and MoNSooN (JULES) Links</h2>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/RoseJULESonJASMIN">JASMIN (JULES)</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki???">MoNSooN (JULES)</a> Not avaliable yet.
- <br/>
+                <h1>JASMIN setup</h1>
+            </div>
                 <br/>
                 <br/>
 
-                <h2>Rose/Cylc Links</h2>
-                <a href="http://metomi.github.io/rose/doc/rose.html">Rose Documentation</a>
+                <h2>How to get access to JASMIN:</h2>
+            <div class="well">
+                <p>Get a CEDA account: <a href="https://services.ceda.ac.uk/cedasite/register/start/">start</a>.</p>
+                 <p>Sign up for a JASMIN login account:
+<a href="https://services.ceda.ac.uk/cedasite/resreg/application?attributeid=jasmin-login">login</a>.</p>
+                 <p>Create an SSH key pair:
+<a href="http://jasmin.ac.uk/workflow/ssh-keys/ssh-key-linux/">ssh-key-linux</a>.</p>
+                 <p>Upload your public key to our website:
+<a href="http://jasmin.ac.uk/workflow/ssh-keys/registering-your-ssh-key">registering your ssh key</a>.</p>
+                 <p>Mail <a href="mailto:support@ceda.ac.uk">CEDA support</a> 
+                to say that you have uploaded your public key ready for your
+                JASMIN login account to be activated.</p>
                 <br/>
-               <a href="https://code.metoffice.gov.uk/trac/roses-u/">Rosie Repository</a> Click on the <code>Browse Source</code> button. Use to looks at JULES-Rose suites, e.g. <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a>
+                <p>Logging on to JASMIN:
+<pre>
+ssh -A -X kday002@jasmin-login1.ceda.ac.uk
+</pre>
+                </p>
+                <p>To access FCM/Rose/Cylc you need to be on the <code>jasmin-cylc</code>
+<pre>
+ssh jasmin-sci2.ceda.ac.uk #or jasmin-sci1.ceda.ac.uk
+ssh jasmin-cylc
+</pre>
+                When you log onto the <code>jasmin-cylc</code> server you will
+                 be asked for your Met Office Science Repository Service
+                (MOSRS) password, please enter it.
+                If you get your password wrong try again using:
+<pre>
+mosrs-cache-password
+</pre>
+                to re-enter your password.
+                </p>
+           </div>
+              <h2>Running directly on JASMIN:</h2>
+            <div class="well">
                 <br/>
-                <a href="https://cylc.github.io/cylc/documentation.html">Cylc Documentation</a>
                 <br/>
-                <a href="https://cylc.github.io/cylc/html/single/cug-html.html">Cylc User Guide Single Page</a>
-                <br/>
-                <br/>
+                <p>
+                On <code>jasmin-sci2</code> or sci1, edit your
+                <code>~/.bash_profile</code> file:
+<pre>
+# Get the aliases and functions
 
-                <h2>Subversion/FCM/Trac Links</h2>
-                <a href="http://svnbook.red-bean.com/en/1.8/">Subversion Book</a>
-                <br/>
-                <a href="http://jules-lsm.github.io/tutorial/bg_info/tutorial/index.html">FCM tutorial</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/home">Met Office Science Repository Service (MOSRS)</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESKeywords">FCM Keywords for JULES</a>
-                <br/>
-                <a href="https://trac.edgewall.org/">Trac</a>
-                <br/>
-                <a href="https://en.wikipedia.org/wiki/Trac">About Trac</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/newticket">Creating a ticket</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices#Creatinganewticket">Advice on Creating a Ticket</a>
-                <br/>
-                <a href="http://trac.edgewall.org/wiki/TracIni">The Trac Configuration File</a>
-                <br/>
-                <a href="http://trac.edgewall.org/wiki/TracTickets">The Trac Ticket System</a>
-                <br/>
-                <a href="http://furius.ca/xxdiff/doc/xxdiff-doc.html">xxdiff documentation: http://furius.ca/xxdiff/doc/xxdiff-doc.html</a>
-                <br>
+if [ -f ~/.bashrc ]; then
+        . ~/.bashrc
+fi
+
+# User specific environment and startup programs
+
+export PATH=$PATH:$HOME/bin
+HOST=$(hostname)
+
+if [[ $HOST = "jasmin-sci2.ceda.ac.uk" || $HOST = "jasmin-cylc.ceda.ac.uk" || $HOST = "jasmin-sci1.ceda.ac.uk" ]]; then
+  # Rose/cylc on jasmin-sci &amp; Lotus nodes
+  export PATH=/apps/contrib/metomi/bin:$PATH
+fi
+</pre>
+                On <code>jasmin-cylc</code> edit your:
+               <code>~/.bash_profile</code> file at the top:
+<pre>
+# Provide access to FCM, Rose and Cylc
+PATH=$PATH:/apps/contrib/metomi/bin
+
+# Ensure .bashrc is sourced in login shells
+# (only add this if it is not already done in your .bash_profile)
+[[ -f ~/.bashrc ]] &amp;&amp; . ~/.bashrc
+</pre>
+                At the bottom:
+<pre>
+[[ $- != *i* ]] &amp;&amp; return # Stop here if not running interactively
+[[ $(hostname) = "jasmin-cylc.ceda.ac.uk" ]] &amp;&amp; . mosrs-setup-gpg-agent
+# Enable bash completion for Rose commands
+[[ -f /apps/contrib/metomi/rose/etc/rose-bash-completion ]] &amp;&amp; . /apps/contrib/metomi/rose/etc/rose-bash-completion</pre>
+                 Now, whenever you login to <code>jasmin-cylc</code> you should be prompted for your Met Office Science Repository Service password.
+<br/>
+A further setup for JASMIN and MOSRS requires an update to your <code>~/.subversion/servers</code> file. Please add the following:
+<pre>
+[groups]
+metofficesharedrepos = code*.metoffice.gov.uk
+
+[metofficesharedrepos]
+# Specify your Science Repository Service user name here
+username = myusername
+store-plaintext-passwords = no
+</pre>
+                Check you  <code>~/.metomi/rose.conf</code> and add the following if missing:
+<pre>
+[rosie-id]
+prefix-default=u
+prefix-location.u=https://code.metoffice.gov.uk/svn/roses-u
+prefix-username.u=username
+#username is all in lower case
+prefix-ws.u=https://code.metoffice.gov.uk/rosie/u
+
+[rose-stem]
+automatic-options=SITE=jasmin
+</pre>
+               This can be checked by running:
+<pre>
+rose config
+</pre>
+                </p>
+                </br>
+            </div>
+            <div>
+                <h2>Remote running JASMIN from a desktop to get GUI's:</h2>
+            <div class="well">
+                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/RoseJULESonJASMIN#AquickdemoofrunningaRosesuiteonJASMIN">A quick demo of running a Rose suite on JASMIN</a>
+            </div>
+            <br/>
+            <div>
+                <h2>Helpful commands for the JASMIN with no GUI's:</h2>
+            <div class="well">
+                <p>On the <code>jasmin-cylc</code> server</p>
+                <p>  <ul>
+                     <li><code>tail -f ~/cylc-run/SUITE_NAME/log/suite/log</code> #to follow the progress of a suite while it is running </li>
+                     <li><code>rose suite-shutdown --name=SUITE_NAME -- --now</code> #to shutdown you suite</li>
+                     <li><code>cylc scan -c</code> #to see what suites you have running</li>
+                     <li><code>cylc trigger SUITE_NAME TASK_NAME:failed</code> #to trigger failed task(s), not you can use <code>*</code> within the TASK_NAME to pattern match part of the full task name to trigger multiple tasks</li>
+                  </ul>
+                </p>
             </div>
 
             <div class="container">

@@ -48,18 +48,20 @@
                                 <li><a href="precourse_quiz.html">Pre-course Quiz</a></li>
                                 <li><a href="user_quiz.html">User Quiz</a></li>
                                 <li><a href="developer_quiz.html">Developer Quiz</a></li>
-                                <li><a href="developer advanced_quiz.html">Developer Advanced Quiz</a></li>
+                                <li><a href="developer_advanced_quiz.html">Developer Advanced Quiz</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Tutorials and practical's</li>
                                 <li><a href="jr_user.html">User</a></li>
                                 <li><a href="jr_developer.html">Developer</a></li>
-                                <li><a href="jr_developer advanced.html">Developer Advanced</a></li>
+                                <li><a href="jr_developer_advanced.html">Developer Advanced</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Help/info</li>
                                 <li><a href="jr_glossary.html">Glossary List</a></li>
                                 <li><a href="jr_links.html">Links</a></li>
                                 <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
-                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc set-up</a></li>
+                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
+                                <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
+                                <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -79,7 +81,7 @@
                 <br/>
             </div>
              <h1><a id="jcode">JULES code</a></h1>
-             <p>Last updated - 2016-12-29
+             <p>Last updated - 2017-02-20
              </p>
              <p>
              <ul>
@@ -182,7 +184,7 @@ admin  benchmark  bin  etc  includes  rose-meta  rose-stem  src  utils
     |           |----build
     |           |        |----debug.cfg,fast.cfg,normal.cfg
     |           |----complier
-    |           |           |----cray.cfg,gfortran.cfg,intel.cfg
+    |           |           |----cray.cfg,gfortran.cfg,intel.cfg,xlf.cfg
     |           |----make.cfg
     |           |----mpi
     |           |      |----mpi.cfg,nompi.cfg
@@ -191,15 +193,15 @@ admin  benchmark  bin  etc  includes  rose-meta  rose-stem  src  utils
     |           |----omp
     |           |      |----noomp.cfg,omp.cfg
     |           |----platform
-    |           |           |----custom.cfg,jasmin-lotus-intel.cfg,
+    |           |           |----custom.cfg,ceh.cfg,jasmin-lotus-intel.cfg,
     |           |                 meto-linux-gfortran.cfg,meto-linux-intel-mpi.cfg
     |           |                 meto-linux-intel-nompi.cfg,meto-xc40-cce.cfg
-    |           |                 monsoon-xc40-cce.cfg,vm.cfg
+    |           |                 monsoon-xc40-cce.cfg,niaw-pwr6-xlf.cfg,uoe.cfg,vm.cfg
     |           |----remote
     |                     |----local.cfg,remote.cfg
                  </pre>
                <p><code>include</code> contains the files to be included for
-                  different set-ups.</p>
+                  different setups.</p>
                <pre>
 <font color="orange">include</font>
     |----shared
@@ -218,7 +220,7 @@ admin  benchmark  bin  etc  includes  rose-meta  rose-stem  src  utils
     |                 |---versions.py
     |                 |---vn*
     |                         |----rose-meta.conf
-    |                   (vn4.0,vn4.1,vn4.2,vn4.3,vn4.4,vn4.5,vn4.6,vn4.7)
+    |                   (vn4.0,vn4.1,vn4.2,vn4.3,vn4.4,vn4.5,vn4.6,vn4.7,vn4.8)
     |----jules-standalone
     |                   |----HEAD
     |                   |       |----rose-meta.conf
@@ -229,7 +231,7 @@ admin  benchmark  bin  etc  includes  rose-meta  rose-stem  src  utils
     |                   |                                  |---pages.py
     |                   |---__init__.py
     |                   |---versions*_*.py
-    |                   |   (34_40,40_41,41_42,42_43,43_44,44_45,45_46,46_47)
+    |                   |   (34_40,40_41,41_42,42_43,43_44,44_45,45_46,46_47,47_48)
     |                   |---versions.py
     |                   |---vn*
     |                         |----rose-meta.conf
@@ -238,7 +240,7 @@ admin  benchmark  bin  etc  includes  rose-meta  rose-stem  src  utils
     |                                          |----widget
     |                                                    |---__init__.py
     |                                                    |---pages.py
-    |                    (vn4.0,vn4.1,vn4.2,vn4.3,vn4.4,vn4.5,vn4.6,vn4.7)
+    |                    (vn4.0,vn4.1,vn4.2,vn4.3,vn4.4,vn4.5,vn4.6,vn4.7,vn4.8)
                  </pre>
                <p><code>rose-stem</code> contains the rose stem tests, settings, site settings, suite etc.</p>
                <pre>
@@ -250,19 +252,23 @@ admin  benchmark  bin  etc  includes  rose-meta  rose-stem  src  utils
     |      |           |----rose-app.conf
     |      |----gswp2_*
     |      |          |----rose-app.conf
-    |      |    (closures,euro4,gl4,rivers,trip,trip_restart,trip_spinup,ukv)
+    |      |    (closures,euro4,gl4,irrig_limit_high_river_storage,
+    |      |     irrig_limit_low_river_storage,rivers,rivers_restart,trip,
+    |      |     rivers_spinup,trip_restart,trip_spinup,ukv)
     |      |----loobos_*
     |                  |----file
     |                  |       |----initial_conditions.dat,tile_fractions.dat
     |                  |----rose-app.conf
     |           (crm*_traitF 1-6,crm6_traitF_srfT,crm6_traitT,crops,daily_disagg,
     |            esm,esm_spinup,euro4,fire,fire_spinup,forecast,gl4,irrig,
-    |            jules_c1p1,jules_cn,jules_cn_spinup,julesc,julesc_spinup,
-    |            prescribe_sthuf,ukv)
+    |            jules_c1p1,jules_cn,jules_cn_spinup,jules_layeredcn,jules_layeredcn_spinup,
+    |            julesc,julesc_spinup,prescribe_sthuf,ukv)
     |----bin
     |      |----compare_all,gen_gswp2_drive_file,suite_report.py
     |----include
     |          |----graph.rc
+    |          |----cehwl1
+    |          |         |----graph.rc,queues.rc,runtime.rc
     |          |----jasmin
     |          |         |----graph.rc,runtime.rc
     |          |----meto
@@ -273,6 +279,9 @@ admin  benchmark  bin  etc  includes  rose-meta  rose-stem  src  utils
     |          |----monsoon
     |          |          |----graph-xc40-cce.rc,graph.rc,queues.rc,
     |          |               runtime-xc40-cce.rc,runtime.rc
+    |          |----niwa
+    |          |       |----graph.rc,queues.rc,runtime.rc,runtime-fitzroy-xlf.rc,
+    |          |            runtime-linux.rc
     |          |----queues.rc
     |          |----runtime.rc
     |          |----variables.rc
@@ -301,14 +310,17 @@ admin  benchmark  bin  etc  includes  rose-meta  rose-stem  src  utils
     |          |                      imogen_progs.F90
     |          |----shared
     |          |         |----CN_utils_mod.F90,ancil_info.F90,bvoc_vars.F90,
-    |          |               c_elevate.F90,crop_utils_mod.F90,crop_vars_mod.F90
+    |          |               c_elevate.F90,calc_c_comps_triffid_mod.F90,calc_litter_flux_mod.F90,
+    |          |               crop_utils_mod.F90,crop_vars_mod.F90,
     |          |               datetime_utils_mod.F90,fire_vars_mod.F90,
     |          |               fluxes.F90,jules_hydrology_mod.F90,jules_internal.F90,
-    |          |               jules_mod.F90,jules_print_mgr.F90,jules_radiation_mod.F90,
+    |          |               jules_mod.F90,jules_plant_n_uptake_mod.F90,
+    |          |               jules_print_mgr.F90,jules_radiation_mod.F90,
     |          |               jules_rivers_mod.F90,jules_sea_seaice_mod.F90,
     |          |               jules_snow_mod.F90,jules_soil_mod.F90,
-    |          |               jules_surface_mod.F90,jules_surface_types_mod.F90,
-    |          |               jules_vegetation_mod.F90,lake_mod.F90,max_dimensions.F90,
+    |          |               jules_soil_biogeochem_mod.F90,jules_surface_mod.F90,
+    |          |               jules_surface_types_mod.F90,jules_vegetation_mod.F90,
+    |          |               lake_mod.F90,max_dimensions.F90,
     |          |               ozone_vars.F90,p_s_parms.F90,prognostics.F90,
     |          |               river_control.F90,surf_couple_explicit_mod.F90,
     |          |               surf_couple_extra_mod.F90,surf_couple_implicit_mod.F90,
@@ -369,8 +381,10 @@ admin  benchmark  bin  etc  includes  rose-meta  rose-stem  src  utils
     |                 |             |----init.F90,init_drive.F90,init_fire.F90,
     |                 |             |     init_hydrology.F90,init_imogen.F90,
     |                 |             |     init_output.F90,init_parms.F90,
+    |                 |             |     init_plant_n_uptake_mod.F90,
     |                 |             |     init_prescribed_data.F90,init_radiation.F90,
     |                 |             |     init_rivers.F90,init_snow.F90,init_soil.F90,
+    |                 |             |     init_soil_biogeochem.F90,
     |                 |             |     init_surface.F90,init_surface_types.F90,
     |                 |             |     init_time.F90,init_urban.F90,init_vars_tmp.F90,
     |                 |             |     init_vegetation.F90
@@ -499,97 +513,97 @@ admin  benchmark  bin  etc  includes  rose-meta  rose-stem  src  utils
     |               |----land_tile_ids.F90
     |---science
     |         |----fire
-    |         |       |----calc_mon_no.F90,canadian.F90,fire_allocate.F90,
+    |         |       |----calc_mon_no.F90,canadian_mod.F90,fire_allocate.F90,
     |         |             fire_calc_daily.F90,fire_init.F90,fire_mod.F90,
-    |         |             fire_timestep.F90,inferno_io_mod.F90,inferno_mod.F90,
-    |         |             mcarthur.F90,nesterov.F90
+    |         |             fire_timestep_mod.F90,inferno_io_mod.F90,inferno_mod.F90,
+    |         |             mcarthur_mod.F90,nesterov_mod.F90
     |         |----flake
-    |         |        |----data_parameters.F90,flake.F90,flake_albedo_ref.F90,
-    |         |              flake_configure.F90,flake_derivedtypes.F90,
-    |         |              flake_driver.F90,flake_parameters.F90,
-    |         |              flake_paramoptic_ref.F90,flake_radflux.F90,
+    |         |        |----data_parameters_mod.F90,flake.F90,flake_albedo_ref_mod.F90,
+    |         |              flake_configure_mod.F90,flake_derivedtypes_mod.F90,
+    |         |              flake_driver_mod.F90,flake_parameters_mod.F90,
+    |         |              flake_paramoptic_ref_mod.F90,flake_radflux.F90,
     |         |              jules_flake_interface_1D.F90
     |         |----params
-    |         |         |----blend_h.F90,c_0_dg_c.F90,c_bvoc.F90,c_ch4.F90,c_densty.F90,
-    |         |               c_epslon.F90,c_g.F90,c_gamma.F90,c_kappai.F90,c_lheat.F90,
-    |         |               c_mm_m.F90,c_pi.F90,c_r_cp.F90,c_rhowat.F90,c_rmol.F90,
-    |         |               c_rough.F90,c_sicehc.F90,c_surf.F90,c_topog.F90,
-    |         |               c_vkman.F90,c_z0h_z0m.F90,ccarbon.F90,cropparm.F90,
-    |         |               cropparm_io.F90,csigma.F90,descent.F90,dust_param.F90,
-    |         |               nvegparm.F90,nvegparm_io.F90,pftparm.F90,
-    |         |               pftparm_io.F90,theta_field_sizes.F90,trif.F90,
-    |         |               trif_io.F90,urban_param.F90,veg_param.F90
+    |         |         |----blend_h_mod.F90,c_0_dg_c_mod.F90,c_bvoc_mod.F90,c_ch4_mod.F90,c_densty_mod.F90,
+    |         |               c_epslon_mod.F90,c_g_mod.F90,c_gamma_mod.F90,c_kappai_mod.F90,c_lheat_mod.F90,
+    |         |               c_mm_m_mod.F90,c_pi_mod.F90,c_r_cp_mod.F90,c_rhowat_mod.F90,c_rmol_mod.F90,
+    |         |               c_rough_mod.F90,c_sicehc_mod.F90,c_surf_mod.F90,c_topog_mod.F90,
+    |         |               c_vkman_mod.F90,c_z0h_z0m_mod.F90,ccarbon_mod.F90,cropparm_mod.F90,
+    |         |               cropparm_io_mod.F90,csigma_mod.F90,descent_mod.F90,dust_param_mod.F90,
+    |         |               nvegparm_mod.F90,nvegparm_io_mod.F90,pftparm_mod.F90,
+    |         |               pftparm_io_mod.F90,theta_field_sizes_mod.F90,trif_mod.F90,
+    |         |               trif_io_mod.F90,urban_param_mod.F90,veg_param_mod.F90
     |         |----radiation
-    |         |            |----Jin11_osa_mod.F90,albpft_jls.F90,albsnow_jls.F90,
-    |         |                  albsnow_ts_jls.F90,canyonalb.F90,ftsa_jls.F90,
-    |         |                  matinv.F90,tile_albedo_jls.F90,urbanemis.F90
+    |         |            |----Jin11_osa_mod.F90,albpft_jls_mod.F90,albsnow_jls_mod.F90,
+    |         |                  albsnow_ts_jls_mod.F90,canyonalb_mod.F90,ftsa_jls_mod.F90,
+    |         |                  matinv_mod.F90,tile_albedo_jls_mod.F90,urbanemis_mod.F90
     |         |----river_routing
     |         |                |----shared
     |         |                |         |----arealat1.F90,c0fmt.F90,
-    |         |                |               c_grid2grid_mod.F90,cosd.F90,cp2.F90,
+    |         |                |               c_grid2grid_mod.F90,cosd.F90,cp2_mod.F90,
     |         |                |               getlat0.F90,getlon0.F90,givelat.F90,
     |         |                |               givelen.F90,givelon.F90,giverade.F90,
-    |         |                |               initial0.F90,jules_riversparm.F90,
-    |         |                |               mmd2kgs.F90,outflow1.F90,
-    |         |                |               pre_areaver.F90,
+    |         |                |               initial0_mod.F90,jules_riversparm_mod.F90,
+    |         |                |               mmd2kgs_mod.F90,outflow1_mod.F90,
+    |         |                |               pre_areaver_mod.F90,
     |         |                |               riv_directions_mod.F90,
-    |         |                |               riv_intctl-riv_ic1a.F90,
-    |         |                |               riv_intctl-riv_ic2a.F90,
-    |         |                |               riv_rout-river1a.F90,
-    |         |                |               riv_rout-river2a.F90,
-    |         |                |               routedbl.F90,setarea.F90,
-    |         |                |               setcoef.F90,setinit.F90,setlen.F90,
-    |         |                |               setnext.F90,setrval.F90,sind.F90,
-    |         |                |               wrtwblog.F90
+    |         |                |               riv_intctl-riv_ic1a_mod.F90,
+    |         |                |               riv_intctl-riv_ic2a_mod.F90,
+    |         |                |               riv_rout-river1a_mod.F90,
+    |         |                |               riv_rout-river2a_mod.F90,
+    |         |                |               routedbl_mod.F90,setarea_mod.F90,
+    |         |                |               setcoef_mod.F90,setinit_mod.F90,setlen_mod.F90,
+    |         |                |               setnext_mod.F90,setrval_mod.F90,sind.F90,
+    |         |                |               wrtwblog_mod.F90
     |         |                |----standalone
-    |         |                |             |----areaver_mod.F90,rivers_route_rfm.F90,
-    |         |                |                   rivers_route_trip.F90,
-    |         |                |                   rivers_route_utils.F90
+    |         |                |             |----areaver_mod.F90,rivers_route_rfm_mod.F90,
+    |         |                |                   rivers_route_trip_mod.F90,
+    |         |                |                   rivers_route_utils_mod.F90
     |         |                |----um
-    |         |                      |----diagnostics_riv-dagriv1.F90,do_areaver.F90,
-    |         |                            do_map_max.F90,init_a2t.F90,init_a2t_4A.F90,
-    |         |                            init_a2t_4A.F90,init_riv.F90,
+    |         |                      |----diagnostics_riv-dagriv1_mod.F90,do_areaver_mod.F90,
+    |         |                            do_map_max_mod.F90,init_a2t_mod.F90,
+    |         |                            init_a2t_4A_mod.F90,init_riv_mod.F90,
     |         |                            riv_concerns_mod.F90,river_inputs_mod.F90
     |         |----snow
-    |         |       |----canopysnow.F90,compactsnow.F90,layersnow.F90,relayersnow.F90,
-    |         |             snow.F90,snowgrain.F90,snowpack.F90,snowtherm.F90,
-    |         |             tridag.F90
+    |         |       |----canopysnow_mod.F90,compactsnow_mod.F90,layersnow_mod.F90,relayersnow_mod.F90,
+    |         |             snow_mod.F90,snowgrain_mod.F90,snowpack_mod.F90,snowtherm_mod.F90,
+    |         |             tridag_mod.F90
     |         |----soil
-    |         |       |----bedrock_jls.F90,calc_baseflow_jls.F90,calc_baseflow_jules.F90,
-    |         |             calc_fsat.F90,calc_zw_inund_jls.F90,calc_zw_jls.F90,
-    |         |             ch4_wetl_jls.F90,darcy_ch.F90,darcy_ic.F90,darcy_vg_jls.F90,
-    |         |             elev_htc_jls.F90,frunoff_jls.F90,gauss_jls.F90,
-    |         |             heat_con_jls.F90,hyd_con_ch.F90,hyd_con_ic.F90,
-    |         |             hyd_con_vg_jls.F90,hydrol_jls.F90,ice_htc_jls.F90,
-    |         |             infiltration_rate.F90,pdm_jls.F90,sieve_jls.F90,
-    |         |             soil_htc_jls.F90,soil_hyd_jls.F90,soil_hyd_update.F90,
-    |         |             soil_hyd_wt.F90,soilmc_jls.F90,soilt_jls.F90,surf_hyd_jls.F90
+    |         |       |----bedrock_jls_mod.F90,calc_baseflow_jls_mod.F90,calc_baseflow_jules_mod.F90,
+    |         |             calc_fsat_mod.F90,calc_zw_inund_jls_mod.F90,calc_zw_jls_mod.F90,
+    |         |             ch4_wetl_jls_mod.F90,darcy_ch_mod.F90,darcy_ic_mod.F90,darcy_vg_jls_mod.F90,
+    |         |             elev_htc_jls_mod.F90,frunoff_jls_mod.F90,gauss_jls_mod.F90,
+    |         |             heat_con_jls_mod.F90,hyd_con_ch_mod.F90,hyd_con_ic_mod.F90,
+    |         |             hyd_con_vg_jls_mod.F90,hydrol_jls_mod.F90,ice_htc_jls_mod.F90,
+    |         |             infiltration_rate_mod.F90,pdm_jls_mod.F90,sieve_jls_mod.F90,
+    |         |             soil_htc_jls_mod.F90,soil_hyd_jls_mod.F90,soil_hyd_update_mod.F90,
+    |         |             soil_hyd_wt_mod.F90,soilmc_jls_mod.F90,soilt_jls_mod.F90,surf_hyd_jls_mod.F90
     |         |----surface
-    |         |          |----bvoc_emissions.F90,cancap_jls.F90,dewpnt_jls.F90,
+    |         |          |----bvoc_emissions_mod.F90,cancap_jls.F90,dewpnt_jls.F90,
     |         |                dustresb_jls.F90,elevate.F90,fcdch.F90,
-    |         |                generate_anthrop_heat_jls.F90,get_us.F90,
-    |         |                ice_formdrag_lupkes.F90,im_sf_pt2_jls.F90,
-    |         |                leaf_jls.F90,leaf_limits.F90,leaf_lit_jls.F90,
+    |         |                generate_anthrop_heat_jls_mod.F90,get_us.F90,
+    |         |                ice_formdrag_lupkes_mod.F90,im_sf_pt2_jls.F90,
+    |         |                leaf_jls_mod.F90,leaf_limits.F90,leaf_lit_jls.F90,
     |         |                microbe_jls.F90,phi_m_h.F90,phi_m_h_vol.F90,
-    |         |                physiol_jls.F90,qsat_jls.F90,qsat_mix_jls.F90,
+    |         |                physiol_jls_mod.F90,qsat_jls.F90,qsat_mix_jls.F90,
     |         |                qsat_wat_jls.F90,raero_jls.F90,root_frac_jls.F90,
     |         |                screen_tq_jls.F90,sea_rough_int.F90,sf_aero.F90,
-    |         |                sf_diags_mod.F90,sf_evap_jls.F90,sf_exch_jls.F90,
-    |         |                sf_expl_jls.F90,sf_flux.F90,sf_impl2_jls.F90,
+    |         |                sf_diags_mod.F90,sf_evap_jls.F90,sf_exch_jls_mod.F90,
+    |         |                sf_expl_jls.F90,sf_flux_mod.F90,sf_impl2_jls.F90,
     |         |                sf_melt_jls.F90,sf_orog_gb_jls.F90,sf_orog_jls.F90,
-    |         |                sf_resist_jls.F90,sf_rib.F90,sf_stom_jls.F90,
-    |         |                sfl_int.F90,sice_htf_jls.F90,smc_ext_jls.F90,
+    |         |                sf_resist_jls.F90,sf_rib.F90,sf_stom_jls_mod.F90,
+    |         |                sfl_int_mod.F90,sice_htf_jls.F90,smc_ext_jls_mod.F90,
     |         |                soil_evap_jls.F90,stdev1.F90,urbanz0.F90,vgrav_jls.F90
     |         |----vegetation
-    |                       |----calc_crop_date.F90,compete_jls.F90,crop.F90,
+    |                       |----calc_crop_date.F90,compete_jls.F90,crop_mod.F90,
     |                             decay_jls.F90,develop.F90,dpm_rpm_jls.F90,
-    |                             emerge.F90,fao_evapotranspiration.F90,
+    |                             emerge.F90,fao_evapotranspiration_mod.F90,
     |                             irrig_dmd.F90,lotka_eq_jls.F90,lotka_jls.F90,
     |                             lotka_noeq_jls.F90,lotka_noeq_subset_jls.F90,
-    |                             opt_crop_date.F90,partition.F90,pft_sparm_jls.F90,
+    |                             opt_crop_date.F90,partition.F90,pft_sparm_jls_mod.F90,
     |                             phenol_jls.F90,plant_growth_n.F90,soilcarb_jls.F90,
-    |                             soilcarb_layers_jls.F90,sow.F90,sparm_jls.F90,
-    |                             triffid_jls.F90,veg-veg1a_jls.F90,veg-veg2a_jls.F90,
+    |                             soilcarb_layers_jls_mod.F90,sow.F90,sparm_jls_mod.F90,
+    |                             triffid_jls.F90,veg-veg1a_jls_mod.F90,veg-veg2a_jls_mod.F90,
     |                             vegcarb_jls.F90,woodprod.F90
     |---util
            |----cube

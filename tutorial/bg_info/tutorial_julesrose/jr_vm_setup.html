@@ -8,7 +8,7 @@
         <meta name="description" content="JULES-Rose Tutorial">
         <meta name="author" content="JULES System Manager">
         <link rel="icon" href="jules_logo.png">
-        <title>JULES Links</title>
+        <title>JULES VM setup</title>
         <!-- Bootstrap core CSS -->
         <link href="../etc/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <!-- Bootstrap theme -->
@@ -27,7 +27,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">JULES Links</a>
+                    <a class="navbar-brand" href="#">JULES VM setup</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -49,10 +49,10 @@
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Help/info</li>
                                 <li><a href="jr_glossary.html">Glossary List</a></li>
+                                <li><a href="jr_links.html">Links</a></li>
                                 <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
                                 <li><a href="jr_structures.html">JULES structures</a></li>
                                 <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
-                                <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
                                 <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
                             </ul>
                         </li>
@@ -63,74 +63,113 @@
         </nav>
         <div class="container theme-showcase" role="main">
             <div class="jumbotron">
+                <h1>VM setup</h1>
+            </div>
                 <br/>
                 <br/>
-                <h2>JULES Links</h2>
-                <a href="https://code.metoffice.gov.uk/trac/jules">JULES on MOSRS</a>
+                <h2>JULES Virtual Machine setup</h2>
+            <div class="well">
+                <p>JULES can be run on a Virtual Machine (VM).</p>
+                <p>The metomi team at the Met Office provide a VM with FCM,
+                    Rose and Cylc installed and configured.
+                    To use the VM, follow the <a href="https://github.com/metomi/metomi-vms#metomi-vms">instructions</a> 
+                    for the Ubuntu 14.04 VM.</p>
                 <br/>
-                <a href="https://jules-lsm.github.io/access_req/JULES_access.html">Requesting access to the JULES code</a>
+                <p>You will need root access to your laptop/computer to be able
+                   to install of the software required:
+                   <a href="https://www.virtualbox.org/">VirtualBox</a> and
+                   <a href="https://www.vagrantup.com/">Vagrant</a> then you
+                   need to download the metomi VM setup files from 
+                   <a href="https://github.com/metomi/metomi-vms/archive/master.zip">github</a>.
+                   Then extract the files, these will be put into a directory
+                   called <code>metomi-vms-master</code>.
+                   For Window 10 specific advice please read <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine#JULESdevelopmentusingavirtualmachine">JULES development using a virtual machine</a>.
+                   I (Kerry Smout-Day) have only had experience installing and
+                   running the VM on Mac's.
+                </p>
+              </div>
                 <br/>
-                <a href="https://jules-lsm.github.io/vn4.7/">JULES vn4.7 User Guide</a> to see a different version of the user guide change the vn#.# to your desired version number.
+                <h2>VM JULES Data</h2>
+            <div class="well">
+                <p><a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine#JULES-specificinstructions">VM JULES Data</a>
+                   can be obtained by running the three scripts in the link.
+                   You need to run <code>sudo install-jules-*</code> for all 
+                   three of the scripts.
+                </p>
                 <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">JULES Working Practices</a>
+                <p>The 
+                <a href="https://github.com/metomi/metomi-vms/tree/master/usr/local/bin">location of the install-jules-* scripts on GitHub</a>
+                  are provide by the link for full details if required.</p>
                 <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESTipOfDay">JULES Tip Of the Day (JTOD)</a>
+           </div>
+                <h2>VM KGO</h2>
+            <div class="well">
+                <p>Known Good Output (KGO) is the good data that <code>nccmp</code> uses
+                   to compare with the new output that the rose stem suite has created in the
+                   current suite run.</p>
+                <ol>
+                    <li>
+                     KGO_DIR=&lt;/jules/rose-stem-kgo/&gt;</li>
+<li>                     VN=vn4.7_t??? #replace with the appropriate KGO version
+</li>
+<li>                     mkdir -p $KGO_DIR/$VN</li>
+<li>                     JULES_TRUNK=&lt;path/to/jules/vn4.7/trunk&gt; #replace vn4.7 with the appropriate JULES version number</li>
+                     <li>cd $JULES_TRUNK</li>
+                     #This suite will fail, but do it anyway as we need to create the KGO
+                     <li><code>rose stem --group=all --source=. -S HOUSEKEEPING=false --new</code></li>
+                     <li>cd ~/cylc-run/trunk</li>
+                     <li>cp work/1/loobos_*/output/* $KGO_DIR/$VN</li>
+                     <li>cp work/1/gswp2_*/output/* $KGO_DIR/$VN</li>
+                     <br/>
+                     <p>Now rose stem should be configured for your site and
+                         compliers.</p>
+                     <li>Test rose stem <code>rose stem --group=all --source=. --new</code> You should have no failures this time.</li>
+                </ol>
                 <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/query?status=approved&status=assigned&status=code_review&status=committed&status=in_progress&status=new&status=sci%2Ftech_review&milestone=JULES+v4.8+release&col=id&col=summary&col=status&col=type&col=priority&col=milestone&col=time&order=priority">Custom Query Milestone is JULES v4.8 release</a> change the Filters as appropriate.
-                <br/>
-                <br/>
-                <h2>VM (JULES) Links</h2>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine">VM (JULES)</a> note you need to <code>sudo install-jules-*</code> all three of the scripts.
-                <br/>
-                <a href="https://github.com/metomi/metomi-vms#metomi-vms">metomi-vms</a>
- <br/>
-                <a href="https://github.com/metomi/metomi-vms/tree/master/usr/local/bin">Location of the install-jules-* scripts on GitHub</a>
-                <br/>
-                <br/>
-                <h2>JASMIN and MoNSooN (JULES) Links</h2>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/RoseJULESonJASMIN">JASMIN (JULES)</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki???">MoNSooN (JULES)</a> Not avaliable yet.
- <br/>
-                <br/>
-                <br/>
-
-                <h2>Rose/Cylc Links</h2>
-                <a href="http://metomi.github.io/rose/doc/rose.html">Rose Documentation</a>
-                <br/>
-               <a href="https://code.metoffice.gov.uk/trac/roses-u/">Rosie Repository</a> Click on the <code>Browse Source</code> button. Use to looks at JULES-Rose suites, e.g. <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a>
-                <br/>
-                <a href="https://cylc.github.io/cylc/documentation.html">Cylc Documentation</a>
-                <br/>
-                <a href="https://cylc.github.io/cylc/html/single/cug-html.html">Cylc User Guide Single Page</a>
-                <br/>
-                <br/>
-
-                <h2>Subversion/FCM/Trac Links</h2>
-                <a href="http://svnbook.red-bean.com/en/1.8/">Subversion Book</a>
-                <br/>
-                <a href="http://jules-lsm.github.io/tutorial/bg_info/tutorial/index.html">FCM tutorial</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/home">Met Office Science Repository Service (MOSRS)</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESKeywords">FCM Keywords for JULES</a>
-                <br/>
-                <a href="https://trac.edgewall.org/">Trac</a>
-                <br/>
-                <a href="https://en.wikipedia.org/wiki/Trac">About Trac</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/newticket">Creating a ticket</a>
-                <br/>
-                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices#Creatinganewticket">Advice on Creating a Ticket</a>
-                <br/>
-                <a href="http://trac.edgewall.org/wiki/TracIni">The Trac Configuration File</a>
-                <br/>
-                <a href="http://trac.edgewall.org/wiki/TracTickets">The Trac Ticket System</a>
-                <br/>
-                <a href="http://furius.ca/xxdiff/doc/xxdiff-doc.html">xxdiff documentation: http://furius.ca/xxdiff/doc/xxdiff-doc.html</a>
-                <br>
             </div>
 
+                <h2>VM Other help</h2>
+            <div class="well">
+                <p>To start the VM for the first time:<br/>
+<pre>
+cd ~/metomi-vm=master
+
+#Start the VM for the first ever time
+vagrant up
+#when run for the first time since installing this takes about 10-20 minutes depending on your internet connection speed.
+#when it has completed the install it will shut itself down
+
+#Start the VM after the first ever time
+vagrant up
+#this takes about 2-5 mins
+#you will be asked for your MOSRS password
+&lt;enter your MOSRS password&gt;
+#if you fail to enter your password correctly:
+mosrs-cache-password
+#this will allow you to try your password again.
+
+#To quit the VM safely
+vagrant halt
+#or within the ssh session
+sudo shutdown -h now
+
+#To remove your VM and start again use the following command.
+#This will delete all the files downloaded.
+#Remember to commit any local changes back to the repositories before doing this# as all local files will also be deleted, this include any data analysis.
+vagrant destroy
+</pre>
+                </p>
+                <br/>
+                <p>Helpful commands for the VM:
+                  <ul>
+                     <li>rose slv #to open rose bush</li>
+                     <li>rose edit #to open the rose editor GUI</li>
+                     <li>rose suite-shutdown --name=SUITE_NAME -- --now #to shutdown you suite</li>
+                     <li>cylc scan -c #to see what suites you have running</li>
+                     <li>cylc gscan #to see what suites you have running via the GUI</li>
+                  </ul>
+                </p>
+            </div>
             <div class="container">
             </div>
             <hr/>
