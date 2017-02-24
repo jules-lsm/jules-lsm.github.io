@@ -1,0 +1,621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.16. crop_params.nml &mdash; Joint UK Land Environment Simulator (JULES) v4.8 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '4.8',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v4.8 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.17. triffid_params.nml" href="triffid_params.nml.html" />
+    <link rel="prev" title="6.15. nveg_params.nml" href="nveg_params.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="triffid_params.nml.html" title="6.17. triffid_params.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.15. nveg_params.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.8 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="crop-params-nml">
+<h1>6.16. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt><a class="headerlink" href="#crop-params-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains a single namelist called <a class="reference internal" href="#namelist-JULES_CROPPARM"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_CROPPARM</span></tt></a> that sets time- and space-invariant parameters for each crop type.</p>
+<div class="section" id="namelist-JULES_CROPPARM">
+<span id="jules-cropparm-namelist-members"></span><h2>6.16.1. <tt class="docutils literal"><span class="pre">JULES_CROPPARM</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_CROPPARM" title="Permalink to this headline">¶</a></h2>
+<p>This namelist reads the values of parameters for each of the crop functional types. These parameters are a function of crop pft only.  These parameters are only required if <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><tt class="xref nml nml-mem docutils literal"><span class="pre">ncpft</span></tt></a> &gt; 0.  The crop pfts should be in the same order as in <a class="reference internal" href="pft_params.nml.html"><em>pft_params.nml</em></a>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Osborne et al, <a class="reference external" href="http://www.geosci-model-dev.net/8/1139/2015/gmd-8-1139-2015.html">JULES-crop: a parametrisation of crops in the Joint UK Land Environment Simulator</a>, Geosci. Model Dev., 8, 1139-1155, 2015.</li>
+</ul>
+</div>
+<dl class="member">
+<dt id="JULES_CROPPARM::t_bse_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">t_bse_io</tt><a class="headerlink" href="#JULES_CROPPARM::t_bse_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Base temperature (K).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::t_opt_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">t_opt_io</tt><a class="headerlink" href="#JULES_CROPPARM::t_opt_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Optimum temperature (K).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::tmax_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">tmax_io</tt><a class="headerlink" href="#JULES_CROPPARM::tmax_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum temperature (K).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::tt_emr_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">tt_emr_io</tt><a class="headerlink" href="#JULES_CROPPARM::tt_emr_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Thermal time between sowing and emergence (deg Cd).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::crit_pp_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">crit_pp_io</tt><a class="headerlink" href="#JULES_CROPPARM::crit_pp_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Critical photoperiod (hours).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::pp_sens_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">pp_sens_io</tt><a class="headerlink" href="#JULES_CROPPARM::pp_sens_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Sensitivity of development rate to photoperiod (hours<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::rt_dir_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">rt_dir_io</tt><a class="headerlink" href="#JULES_CROPPARM::rt_dir_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient determining relative growth of roots vertically and horizontally.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::alpha1_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">alpha1_io</tt><a class="headerlink" href="#JULES_CROPPARM::alpha1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient for determining partitioning.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::alpha2_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">alpha2_io</tt><a class="headerlink" href="#JULES_CROPPARM::alpha2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient for determining partitioning.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::alpha3_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">alpha3_io</tt><a class="headerlink" href="#JULES_CROPPARM::alpha3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient for determining partitioning.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::beta1_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">beta1_io</tt><a class="headerlink" href="#JULES_CROPPARM::beta1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient for determining partitioning.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::beta2_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">beta2_io</tt><a class="headerlink" href="#JULES_CROPPARM::beta2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient for determining partitioning.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::beta3_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">beta3_io</tt><a class="headerlink" href="#JULES_CROPPARM::beta3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient for determining partitioning.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::gamma_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">gamma_io</tt><a class="headerlink" href="#JULES_CROPPARM::gamma_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient for determining specific leaf area (m<sup>2</sup> kg<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::delta_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">delta_io</tt><a class="headerlink" href="#JULES_CROPPARM::delta_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient for determining specific leaf area (m<sup>2</sup> kg<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::remob_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">remob_io</tt><a class="headerlink" href="#JULES_CROPPARM::remob_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Remobilisation factor. Fraction of stem growth partitioned to RESERVEC.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::cfrac_s_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">cfrac_s_io</tt><a class="headerlink" href="#JULES_CROPPARM::cfrac_s_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Carbon fraction of dry matter for stems.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::cfrac_r_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">cfrac_r_io</tt><a class="headerlink" href="#JULES_CROPPARM::cfrac_r_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Carbon fraction of dry matter for roots.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::cfrac_l_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">cfrac_l_io</tt><a class="headerlink" href="#JULES_CROPPARM::cfrac_l_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Carbon fraction of dry matter for leaves.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::allo1_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">allo1_io</tt><a class="headerlink" href="#JULES_CROPPARM::allo1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Allometric coefficient relating STEMC to CANHT.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::allo2_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">allo2_io</tt><a class="headerlink" href="#JULES_CROPPARM::allo2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Allometric coefficient relating STEMC to CANHT.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::mu_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">mu_io</tt><a class="headerlink" href="#JULES_CROPPARM::mu_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Allometric coefficient for calculation of senescence. MIN(mu_io * (dvi - sen_dvi_io) ** nu_io, 1.0) is the fraction of leaf carbon that is moved to the harvest pool per day once senescence has started.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::nu_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">nu_io</tt><a class="headerlink" href="#JULES_CROPPARM::nu_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Allometric coefficient for calculation of senescence. See description for <a class="reference internal" href="#JULES_CROPPARM::mu_io" title="JULES_CROPPARM::mu_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">mu_io</span></tt></a></p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::yield_frac_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">yield_frac_io</tt><a class="headerlink" href="#JULES_CROPPARM::yield_frac_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of the harvest carbon pool converted to yield carbon (yield is the economically valuable component of the harvest pool e.g. kernel).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::initial_carbon_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">initial_carbon_io</tt><a class="headerlink" href="#JULES_CROPPARM::initial_carbon_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Carbon in crop at emergence in kgC/m2.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::initial_c_dvi_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">initial_c_dvi_io</tt><a class="headerlink" href="#JULES_CROPPARM::initial_c_dvi_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>DVI at which the crop carbon is set to <a class="reference internal" href="#JULES_CROPPARM::initial_carbon_io" title="JULES_CROPPARM::initial_carbon_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">initial_carbon_io</span></tt></a>. Should be at emergence (0.0) or shortly after.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::sen_dvi_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">sen_dvi_io</tt><a class="headerlink" href="#JULES_CROPPARM::sen_dvi_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>DVI at which leaf senescence begins.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_CROPPARM::t_mort_io">
+<tt class="descclassname">JULES_CROPPARM::</tt><tt class="descname">t_mort_io</tt><a class="headerlink" href="#JULES_CROPPARM::t_mort_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(ncpft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Soil temperature (second level) at which to kill crop if DVI&gt;1.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface_types.nml.html">6.2. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface.nml.html">6.3. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_radiation.nml.html">6.4. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_hydrology.nml.html">6.5. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_vegetation.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil_biogeochem.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_soil_biogeochem.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_snow.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_rivers.nml.html">6.10. <tt class="docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.11. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.12. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.13. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.14. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.15. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.16. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.17. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.18. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fire.nml.html">6.19. <tt class="docutils literal"><span class="pre">fire.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.20. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.21. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.22. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.23. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.24. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nveg_params.nml.html"
+                        title="previous chapter">6.15. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="triffid_params.nml.html"
+                        title="next chapter">6.17. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="triffid_params.nml.html" title="6.17. triffid_params.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.15. nveg_params.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v4.8 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2017.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>
