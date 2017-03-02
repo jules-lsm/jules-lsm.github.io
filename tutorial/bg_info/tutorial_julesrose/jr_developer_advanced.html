@@ -41,7 +41,8 @@
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Developer Advanced Practical's</li>
                                 <li><a href="#arst">Adding rose stem tests</a></li>
-                                 <li><a href="#aum">Adding a complex upgrade macro</a></li>
+                                <li><a href="#aum">Adding a complex upgrade macro</a></li>
+                                <li><a href="#ad">Adding diagnostics</a></li>
                                 <li><a href="#umjt">UM-JULES tickets and tests</a></li>
                                 <li><a href="#fcft">Further checks for tickets</a></li>
                                 <li><a href="#dot">Documentation on tickets</a></li>
@@ -84,6 +85,7 @@
                 <li><a href="#umdp3">UMDP3</a></li>
                 <li><a href="#arst">Adding rose stem tests</a></li>
                 <li><a href="#aum">Adding a complex upgrade macro</a></li>
+                <li><a href="#ad">Adding diagnostics</a></li>
                 <li><a href="#umjt">UM-JULES tickets and tests</a></li>
                 <li><a href="#fcft">Further checks for tickets</a></li>
                 <li><a href="#dot">Documentation on tickets</a></li>
@@ -424,6 +426,106 @@ rose stem --group=all --new
         </ul>
         </p>
 
+
+        <h2><a id="ad">Adding diagnostics</a></h2>
+        <p>
+        <ul>
+            <div class="page-header">
+                <h3>New diagnostics in JULES and the required UM change</h3>
+            </div>
+            <div class="well">
+               <p>This will may be a JULES-UM combined ticket.
+               <br/>
+               For the UM working practices please see there <a href="https://code.metoffice.gov.uk/trac/um/wiki/working_practices">Working Practices for UM Development</a> page.
+              </p>
+            </div>
+            <div class="page-header">
+                <h3>JULES code specific files to change</h3>
+            </div>
+            <div class="well">
+              <p>
+              To add a new diagnostic that only requires a JULES change the
+              files to be changed in JULES <code>src</code>are:
+              <ul>
+              <li><code>control/shared/???_utils_mod.F90</code></li>
+              <li><code>control/shared/???_vars_mod.F90 </code></li>
+              <li><code>initialisation/shared/allocate_jules_arrays.F90</code></li>
+              <li><code>io/model_interface/extract_var.inc</code></li>
+              <li><code>io/model_interface/model_interface_mod.F90</code></li>
+              <li><code>io/model_interface/variable_metadata.inc</code></li>
+              <li><code>science/????/???_mod.F90</code></li>
+              </ul>
+               <a href="https://code.metoffice.gov.uk/trac/jules/ticket/280">#280 JULES only</a> ticket example of adding a diagnostic.
+                Thanks to Karina Williams for allowing me to share this,
+                however please do not contact her for advice,
+                please contact jules-support@metoffice.gov.uk .
+               </p>
+              <p>
+              To add a new diagnostic that require JULES and UM changes the
+              files to be changed in JULES <code>src</code>are:
+              <ul>
+              <li><code>control/shared/???_extra_mod.F90</code></li>
+              <li><code>control/shared/???_vars_mod.F90 </code></li>
+              <li><code>control/um/diagnostics_???_mod.F90</code></li>
+              <li><code>initialisation/shared/allocate_jules_arrays.F90</code></li>
+              <li><code>io/model_interface/extract_var.inc</code></li>
+              <li><code>io/model_interface/model_interface_mod.F90</code></li>
+              <li><code>io/model_interface/variable_metadata.inc</code></li>
+              <li><code>science/????/???_jls.F90</code></li>
+             </ul>
+              <p>See <a href="https://code.metoffice.gov.uk/trac/jules/ticket/358">#358 JULES</a>
+                for a JULES UM  combined example ticket.
+                Thanks to Andy Wiltshire for allowing me to share this,
+                however please do not contact him for advice,
+                please contact jules-support@metoffice.gov.uk .
+              </p>
+            </div>
+            <div class="page-header">
+                <h3>JULES doc specific files to change</h3>
+            </div>
+            <div class="well">
+              <p>
+              A documentation branch will be needed and the new diagnosic must
+              be add to the correct section in the
+              <code>docs/user_guide/source/output-variables.rst</code> file.
+               </p>
+            </div>
+            <div class="page-header">
+                <h3>UM specific files to change</h3>
+            </div>
+            <div class="well">
+              <p>
+              You will need to seek permission from code owners and apparoval
+              from the appropriate boards, which will include FieldsFile and PP
+              (FFPP). 
+              PP is the file format that archiving use.
+              FFPP must be added as a Keyword in the UM ticket and a review from
+              FFPP board to be provided and it must be signed off in the UM 
+              Ticket Summary.
+              </p>
+              <p>
+              The files that you will have to change are the UM <code>rose-meta/um-atmos/HEAD/etc/stash/STASHmaster/</code>
+              <ul>
+                  <li><code>STASHmaster-meta.conf</code></li>
+                  <li><code>STASHmaster_A</code></li>
+              </ul>
+              </p>
+            </div>
+            <div class="page-header">
+                <h3>JULES and UM ticket example</h3>
+            </div>
+            <div class="well">
+              <p>See <a href="https://code.metoffice.gov.uk/trac/jules/ticket/358">#358 JULES</a>
+                 and <a href="https://code.metoffice.gov.uk/trac/um/ticket/1987">#1987 UM</a> 
+                for an example ticket.
+                Thanks to Andy Wiltshire for allowing me to share this,
+                however please do not contact him for advice,
+                please contact jules-support@metoffice.gov.uk .
+               </p>
+            </div>
+        </ul>
+        </p>
+
         <h2><a id="umjt">UM-JULES tickets and tests</a></h2>
         <p>
         <ul>
@@ -459,7 +561,6 @@ rose stem --group=jules,developer --new --name=umtr_jlst### --source=. --source=
             <div class="well">
                <p>If you have linked UM changes, you should be following the
                    <a href="https://code.metoffice.gov.uk/trac/um/wiki/working_practices">working_practices UM working practices</a>.</p>
-
             </div>
         </ul>
         </p>
@@ -476,6 +577,7 @@ rose stem --group=jules,developer --new --name=umtr_jlst### --source=. --source=
                   <li>New Switch</li>
                   <li>New Dimension</li>
                   <li>New Science</li>
+                  <li>New Diagnostic</li>
                </ul>
                   Or changed science.
                </p>

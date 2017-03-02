@@ -101,7 +101,7 @@
                 Pre-requisites
                 <li>Have requested for access to JULES from the <a href="http://jules-lsm.github.io/access_req/JULES_access.html"></a>jules-lsm.github.io JULES access request page.</li>
                 <li>Have therefore got a Met Office Science Repository Service account and can access <a href="https://code.metoffice.gov.uk/trac/jules">JULES MOSRS webpages</a>.</li>
-               <li>Have Rose, Cylc, FCM, keywords set up on the machine you are working on or are using the VM. <a href="https://github.com/metomi/metomi-vms">GitHub VM webpages</a> and the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine">guidance</a> from the JULES MOSRS web pages.</li>
+               <li>Have Rose, Cylc, FCM, keywords set up on the machine you are working on or are using the Virtual Machine (VM). <a href="https://github.com/metomi/metomi-vms">GitHub VM webpages</a> and the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine">guidance</a> from the JULES MOSRS web pages.</li>
             <li>Completed the <a href="http://metomi.github.io/rose/doc/rose.html">Rose User Guide</a>.</li>
 
             </ul>
@@ -245,7 +245,7 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
                 <br/>
                 Exeter University, Astrophysics Dept. Exo-planets.
                 <br/>
-                ...the JULES community, on JASMIN, VM and at their location.
+                ...the JULES community, on JASMIN, Virtual Machine (VM) and at their location.
             </div>
             <div class="page-header">
                 <h2>What are the advantages to using Rose/Cylc?</h2>
@@ -966,7 +966,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
             <img src="images/rose_bush3.png" width="85%" id="rb3"/>
             <br/>
             <br/>
-            <p>On the VM the suite level page looks like the image below.</p>
+            <p>On the Virtual Machine (VM) the suite level page looks like the image below.</p>
             <img src="images/vm_rose_bush.png" width="85%"id="vmrb"/>
             <br/>
             <br/>
@@ -1296,7 +1296,7 @@ rose sgc --name=SUITE_ID</font>
                   The "number" is incremental, no two suites can have the 
                   same number, also you cannot choose the number.</p>
                <pre>
-rosie checkout u-ai828
+rosie checkout u-ai828 # or u-ai829 or u-ai843
 <font color=blue>
 [INFO] u-ai828: local copy created at /USER/roses/u-ai828
 </font>
@@ -1305,7 +1305,7 @@ rosie checkout u-ai828
                <h3>JULES-Rose suite structure</h3>
                <p>The suite structure is similar for all suites.</p>
                <pre>
-cd /USER/roses/u-ai828
+cd /USER/roses/u-ai828 # or u-ai829 or u-ai843
 ls
 <font color=blue>
 app  meta  rose-suite.conf  rose-suite.info  suite.rc
@@ -1453,7 +1453,8 @@ Notepad and pen - Local copy (modified)
                   <ol>
                      <li>Command line
 <pre>
-cd /USER/roses/u-ai828
+rosie checkout u-ai828 # or u-ai829 (VM) or u-ai843 (JASMIN)
+cd /USER/roses/u-ai828 # or u-ai829 or u-ai843
 rose edit
 </pre>
 </li>
@@ -1461,12 +1462,6 @@ rose edit
                      <li>Rosie Go GUI - right click on the suite of interest 
                          and select <code>Edit Suite</code></li>
                     </p>
-                    <img src="images/rose_edit.png" width="90%" id="red"/>
-                    <br/>
-                    <p>Click OK on both of the Error messages.
-                       They are only warnings as the suite uses Jinja2 variables
-                       from the rose-suite.conf file that Rose Edit has not
-                       expanded.</p>
                     <p>Click on the different items in the <code>Index</code>
                        on the left hand side of the panel of the Rose Edit GUI.
                        What do you notice about the items in the Index?</p>
@@ -1507,14 +1502,18 @@ They are the same as in the command line directory.
                <p><strong>IF USING THE VM PLEASE USE SUITE ID u-ai829</strong>
                <br/>
                <strong>IF USING THE JASMIN PLEASE USE SUITE ID u-ai843</strong>
-               and change the path of to the JULES code in the 
-               <code>rose-suite.conf</code> to point to your vagrant file
-               location of the JULES vn4.8 code, for example, /home/vagrant/jules/vn4.7/trunk/</p>
+               <br/>
+               Change the path of to the JULES code in the 
+               <code>rose-suite.conf</code> to point to your  location of the 
+               JULES vn4.8 code, for example on the VM: <code>/home/vagrant/jules/vn4.8/trunk/</code>
+               <br/>
+               on JASMIN: <code>~&lt;USER&gt;/jules/vn4.8/trunk/</code></p>
                <p>There are three ways to run the suite:
                   <ol>
                      <li>Command line
 <pre>
-cd /USER/roses/u-ai828
+rosie checkout u-ai828 # or u-ai829 or u-ai843
+cd /USER/roses/u-ai828 # or u-ai829 or u-ai843
 rose suite-run
 </pre>
 </li>
@@ -1620,7 +1619,7 @@ Clay
 12.14,0.2864,0.001432,0.4523,0.3692,0.2696,1.244E+06,0.2192,0.17
 </pre>
                   <br/>
-                <h3>Copy u-ai828 and edit the rose-suite.info</h3>
+                <h3>Copy u-ai828/u-ai829/u-ai843 and edit the rose-suite.info</h3>
                 <p>Chose one of the following two options to create your copy
                    of the suite.</p>
                 <ol>
@@ -1643,12 +1642,12 @@ Clay
                             <pre>
                 <ol>
 <li>At command line?</li>
-<font color=green>rosie copy u-ai828
+<font color=green>rosie copy u-ai828 #or u-ai829 or u-ai843
 # This open the rose-suite.info file in a text editor, change the description 
 # to include the soil type you will change.</font>
 <li>Via Rosie Go</li>
 <font color=green>rosie go &amp;
-# search u-ai828
+# search u-ai828/u-ai829/u-ai843
 # right click, select copy, select FORWARD, change the description to include
 # the soil type you will change, click OK.</font>
                 </ol>
