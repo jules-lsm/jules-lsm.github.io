@@ -49,7 +49,7 @@
                                 <li><a href="#P1">Practical 1 - Background</a></li>
                                 <li><a href="#P2">Practical 2 - Basic FCM</a></li>
                                 <li><a href="#P3">Practical 3 - Checkout code</a></li>
-                                <li><a href="#P4">Practical 4 -Checkout a suite </a></li>
+                                <li><a href="#P4">Practical 4 - Checkout a suite </a></li>
                                 <li><a href="#P5">Practical 5 - Change Ancillaries</a></li>
                                 <li><a href="#P6">Practical 6 - Change Radiation Model and Plotting</a></li>
                             </ul>
@@ -75,6 +75,7 @@
                                 <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
                                 <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
                                 <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
+                                <li><a href="jr_help_page.html">JULES help</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -395,7 +396,7 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
             <br/>
             <p>Lets firstly check some setup:</p>
             <pre>
-            rosie hello
+            rosie hello --prefix=u
             # this should return something like this:
             <font color="blue">
             https://code.metoffice.gov.uk/rosie/u/hello: Hello kerryday
@@ -717,7 +718,6 @@ Global options_
                <p>Using the gcylc GUI, Rose Bush and the cylc-run directory.</p>
                <p>Using basic FCM commands.</p>
                <p>The basics of Trac pages and Tickets.</p>
-               <p>Creating a branch and testing a basic change.</p>
             <br/>
             <p>We will now checkout the JULES code from the MOSRS repository.</p>
             <p>This will allow us to;</p>
@@ -725,9 +725,7 @@ Global options_
                     <li>practice some FCM commands,</li>
                     <li>run the rose stem (the test suite/battery),</li>
                     <li>familiarise ourselves with some of the Rose and Cylc GUI's,</li>
-                    <li>create branch from the trunk and make and test a basic change,</li>
-                    <li>merge a different branch into your new branch,</li>
-                    <li>Working Practices and Top Gotchas</li>
+                    <li>understand and use the basic features in Trac and Tickets</li>
                 </ul>
              <h3>Checkout the code</h3>
              <p>To checkout the trunk at the latest version/code release try the following:</p>
@@ -1251,14 +1249,13 @@ rose sgc --name=SUITE_ID</font>
                right of the page and fill in the details.
                The Description will need a link to the branch before it is
                passed for review.
-               For example <code>[log:main/dev/kerryday/vn4.7_new_tests vn4.7_new_tests]</code>
+               For example <code>[log:main/branches/dev/kerryday/vn4.7_new_tests vn4.7_new_tests]</code>
                and a Ticket Summary page <code>[wiki:ticket/###/TicketSummary ticket summary]</code>
               These make it easier for the reviewer.</p>
               <p>If you are only reporting a bug then please fill in as much as
                  possible with evidence and try to find a suitable person to
                  do the work if you are not able and Cc the JULES System Manger.
               </p>
-
             <br/>
             <h3>What have we covered in Practical 3?</h3>
                <p>In this section we introduced the gcylc GUI and helpful Rose 
@@ -1297,7 +1294,7 @@ rose sgc --name=SUITE_ID</font>
                   The "number" is incremental, no two suites can have the 
                   same number, also you cannot choose the number.</p>
                <pre>
-rosie checkout u-ai828 # or u-ai829 or u-ai843
+rosie checkout u-ai828 # or u-ai829 for running on the VM or u-ai843 for JASMIN
 <font color=blue>
 [INFO] u-ai828: local copy created at /USER/roses/u-ai828
 </font>
@@ -1306,7 +1303,7 @@ rosie checkout u-ai828 # or u-ai829 or u-ai843
                <h3>JULES-Rose suite structure</h3>
                <p>The suite structure is similar for all suites.</p>
                <pre>
-cd /USER/roses/u-ai828 # or u-ai829 or u-ai843
+cd /USER/roses/u-ai828 # or u-ai829 for running on the VM or u-ai843 for JASMIN
 ls
 <font color=blue>
 app  meta  rose-suite.conf  rose-suite.info  suite.rc
@@ -1513,7 +1510,7 @@ They are the same as in the command line directory.
                   <ol>
                      <li>Command line
 <pre>
-rosie checkout u-ai828 # or u-ai829 or u-ai843
+rosie checkout u-ai828 # or u-ai829 (VM) or u-ai843 (JASMIN)
 cd /USER/roses/u-ai828 # or u-ai829 or u-ai843
 rose suite-run
 </pre>
@@ -1648,7 +1645,7 @@ Clay
                             <pre>
                 <ol>
 <li>At command line?</li>
-<font color=green>rosie copy u-ai828 #or u-ai829 or u-ai843
+<font color=green>rosie copy u-ai828 #or u-ai829 (VM) or u-ai843 (JASMIN)
 # This open the rose-suite.info file in a text editor, change the description 
 # to include the soil type you will change.</font>
 <li>Via Rosie Go</li>
@@ -1729,6 +1726,8 @@ const_val=3.295,0.04983,0.02455,0.3732,0.1039,0.03264,1341000.0,
                   <p>Open the Rose Edit GUI after you have made your changes to so that the metadata checks for mistakes.</p>
 
                   <strong>COMMIT your changes</strong> using <code>fcm ci</code>
+                  <a href="https://code.metoffice.gov.uk/trac/roses-u/changeset?reponame=&new=36444%40a%2Fi%2F8%2F2%2F8%2Fsand_prac5&old=28215%40a%2Fi%2F8%2F2%2F8%2Ftrunk">The diff from the Trac pages of the changes made to the suite.</a>
+
 
                   <h3>Running the suite with a different name to the suite ID.</h3>
 <pre>
@@ -1748,6 +1747,36 @@ rose suite-run --new --name=sand_&lt;SUITE_ID&gt;
                      commit your changes and to check where you are with
                      <code>fcm info</code>.
                      <br/>
+
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen">
+                        <span class="glyphicon"></span>
+                        Methods
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseSeventeen" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+rosie copy u-ai828 # u-ai829 (VM) or u-ai843 (JASMIN)
+
+OR (my preferred method, but it is a personal preference)
+
+cd /USER/roses/u-ai828
+fcm bc clay #for branch-create
+fcm sw clay #for switch branch
+#or fcm sw https://code.metoffice.gov.uk/svn/roses-u/a/i/8/2/8/clay
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
                      <p>Run your new soil type using:
 <pre>
 rose suite-run --new --name=&lt;SOIL_TYPE&gt;_&lt;SUITE_ID&gt;
@@ -1786,13 +1815,13 @@ rose suite-run --new --name=&lt;SOIL_TYPE&gt;_&lt;SUITE_ID&gt;
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen">
                         <span class="glyphicon"></span>
                         Note
                         </a>
                     </h4>
                 </div>
-                <div id="collapseSeventeen" class="panel-collapse collapse">
+                <div id="collapseEighteen" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
@@ -1842,13 +1871,13 @@ clearly by eye but MatLab and Iris display the difference.</p>
                which will reduce the running time of your suite.</p>
             <h3>Changing canopy the radiation model configurations</h3>
                <p>Information on the options in JULES for calculating the effect
-                  of the vegetation canopy on radiation is in the <a href="http://jules-lsm.github.io/vn4.7/namelists/jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod">documentation.</a></p>
+                  of the vegetation canopy on radiation is in the <a href="http://jules-lsm.github.io/vn4.8/namelists/jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod">documentation.</a></p>
               In summary, in the <code>jules</code> application configuration
               file <code>SUITE_ID/app/jules/rose-app.conf</code> the namelist 
               <code>jules_vegetation</code> has an option <code>can_rad_mod</code>.
               </p>
               <p>
-              What is the default set to in <code>u-ai828/u-ai829</code>? 
+              What is the default set to in <code>u-ai828/u-ai829/u-ai843</code>? 
               What two ways can you find the value?
               </p>
 
@@ -1856,13 +1885,13 @@ clearly by eye but MatLab and Iris display the difference.</p>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseNineteen">
                         <span class="glyphicon"></span>
                         Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseEighteen" class="panel-collapse collapse">
+                <div id="collapseNineteen" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
@@ -1883,24 +1912,24 @@ rose edit -&gt; jules &gt; namelist &gt; jules_vegetation <code>can_rad_mod</cod
             <h3>Changing the JULES-Rose suite design to run JULES for multiple configurations</h3>
             <p>To change the suite design we have to edit the text files in the
                suite using a text editor.</p>
-            <p>First we must either copy <code>u-ai828/u-ai829</code> or create
-               a branch of <code>u-ai828/u-ai829</code> and then switch to it.
+            <p>First we must either copy <code>u-ai828/u-ai829/u-ai843</code> or create
+               a branch of <code>u-ai828/u-ai829/u-ai843</code> and then switch to it.
             </p>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseNinteen">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwenty">
                         <span class="glyphicon"></span>
                         Methods
                         </a>
                     </h4>
                 </div>
-                <div id="collapseNinteen" class="panel-collapse collapse">
+                <div id="collapseTwenty" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
-rosie copy u-ai828
+rosie copy u-ai828 # u-ai829 (VM) or u-ai843 (JASMIN)
 
 OR (my preferred method, but it is a personal preference)
 
@@ -1964,6 +1993,9 @@ can_rad_mod=1
               </li>
               </ol>
               </p>
+              <br/>
+                  <a href="https://code.metoffice.gov.uk/trac/roses-u/changeset?reponame=&new=36446%40a%2Fi%2F8%2F2%2F8%2Frad_models_prac6&old=28220%40a%2Fi%2F8%2F2%2F8%2Ftrunk">The diff from the Trac pages of the changes made to the suite.</a>
+              <br/>
               <p>We need to save our changes before running the suite.</p>
               <p>How can we check what our changes are and then commit them to
                  the repository?</p>
@@ -1971,13 +2003,13 @@ can_rad_mod=1
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwenty">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyOne">
                         <span class="glyphicon"></span>
                         Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseTwenty" class="panel-collapse collapse">
+                <div id="collapseTwentyOne" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
@@ -2080,13 +2112,13 @@ At revision 28232
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyOne">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyTwo">
                         <span class="glyphicon"></span>
                         Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseTwentyOne" class="panel-collapse collapse">
+                <div id="collapseTwentyTwo" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
@@ -2270,13 +2302,13 @@ if __name__ == '__main__':
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyTwo">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyThree">
                         <span class="glyphicon"></span>
                         Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseTwentyTwo" class="panel-collapse collapse">
+                <div id="collapseTwentyThree" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
@@ -2302,13 +2334,13 @@ plot_crm - waiting
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyThree">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyFour">
                         <span class="glyphicon"></span>
                         Answers
                         </a>
                     </h4>
                 </div>
-                <div id="collapseTwentyThree" class="panel-collapse collapse">
+                <div id="collapseTwentyFour" class="panel-collapse collapse">
                    <div class="panel-body">
                         <div class="row">
                             <pre>
