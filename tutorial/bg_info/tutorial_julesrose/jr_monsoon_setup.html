@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="JULES-Rose Tutorial">
+        <meta name="author" content="JULES System Manager">
+        <link rel="icon" href="jules_logo.png">
+        <title>JULES MONSooN setup</title>
+        <!-- Bootstrap core CSS -->
+        <link href="../etc/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap theme -->
+        <link href="../etc/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link href="general_theme.css" rel="stylesheet">
+    </head>
+    <body>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">JULES MONSooN setup</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <!-- Add link to Homepage to training when created -->
+                        <li class="active"><a href="#">Home</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User material <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">JULES MONSooN</li>
+                                    <li><a href="#gen">General Advice</a></li>
+                                    <li><a href="#ea">External Access</a></li>
+                                    <li><a href="#ia">Internal Access</a></li>
+                                    <li><a href="#gas">General Access Setup</a></li>
+                                    <li><a href="#am">Access to MONSooN</a></li>
+                            </ul>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Other material <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-header">Quizzes</li>
+                                <li><a href="precourse_quiz.html">Pre-course Quiz</a></li>
+                                <li><a href="user_quiz.html">User Quiz</a></li>
+                                <li><a href="developer_quiz.html">Developer Quiz</a></li>
+                                <li><a href="developer_advanced_quiz.html">Developer Advanced Quiz</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Tutorials and practical's</li>
+                                <li><a href="jr_user.html">User</a></li>
+                                <li><a href="jr_developer.html">Developer</a></li>
+                                <li><a href="jr_developer_advanced.html">Developer Advanced</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li class="dropdown-header">Help/info</li>
+                                <li><a href="jr_links.html">Links</a></li>
+                                <li><a href="jr_glossary.html">Glossary List</a></li>
+                                <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
+                                <li><a href="jr_structures.html">JULES structures</a></li>
+                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
+                                <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
+                                <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
+                                <li><a href="jr_help_page.html">JULES Help</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </nav>
+        <div class="container theme-showcase" role="main">
+            <div class="jumbotron">
+                <br/>
+             <h1>MONSooN advice</h1>
+            <ul>
+                <li><a href="#gen">General Advice</a></li>
+                <li><a href="#ea">External Access</a></li>
+                <li><a href="#ia">Internal Access</a></li>
+                <li><a href="#gas">General Access Setup</a></li>
+                <li><a href="#am">Access to MONSooN</a></li>
+            </ul>
+
+        </div>
+        <div class="well">
+                <br/>
+                <h2><a id="gen">General Advice</a></h2>
+                <br/>
+                <br/>
+                <h3>What is MONSooN?</h3>
+                <p> The MONSooN shared supercomputing service is a collaboration between the Met Office and the Natural Environment Research Council (NERC) to provide a shared supercomputing resource to enable collaborative research.
+Further details, including how to apply to use the system, can be found <a href="http://collab.metoffice.gov.uk/twiki/bin/view/Support/MONSooN">here</a> and <a href="http://collab.metoffice.gov.uk/twiki/bin/view/Support/ApplyingToUseMONSooN">here</a>.
+                </p>
+                <p>Please ensure that you login to exvmsrose - please do not try from other systems since they do not have the required setup.
+           </p>
+           <p><a href="http://collab.metoffice.gov.uk/twiki/bin/view/Support/MONSooNIntroPack">MONSooN collaboration Intro Pack page</a>
+           <p>
+            </div>
+        <div class="well">
+                <br/>
+                <h2><a id="ea">External Access</a></h2>
+                <br/>
+                <br/>
+                <h3>
+                   Advice on getting started on MONSooN on a computer anywhere:
+                </h3>
+                <p>The commands to enter and the onscreen instructions returned
+                    by lander MONSooN are interleaved with advice and help.
+                </p>
+                <p>Please be read and follow the instructions carefully, after
+                   the first time you access MONSooN it is much easier.
+                </p>
+                <ul>
+                <li><strong>First time access</strong>
+                    <br/>
+                    In a terminal:
+<pre>
+#ssh to the lander MONSooN, use your username.
+$<font color=blue> ssh &lt;MONSooNUSERNAME&gt;@lander.monsoon-metoffice.co.uk</font>
+The authenticity of host 'lander.monsoon-metoffice.co.uk (212.219.243.19)' can't be established.
+RSA key fingerprint is ################################################.
+
+#Type "yes" and press the enter key after the next onscreen instruction.
+
+Are you sure you want to continue connecting (yes/no)? <font color=blue>yes</font>
+
+Warning: Permanently added 'lander.monsoon-metoffice.co.uk,###.###.###.##' (RSA) to the list of known hosts.
+WARNING:
+This computer is provided for the processing of official information.
+Unauthorised access described in Met Office SyOps may constitute a criminal offence.
+All activity on the system is liable to monitoring.
+
+#This is the 6 digit number on the RSA keyfob and sometimes call the "tokencode".
+#This number changes every ~minute with a countdown on the right hand side displayed by the horizonal lines which decrease from 6 to 0, at 0 it changes to a new number.
+
+Enter PASSCODE:<font color=blue>######</font>
+
+#Type "y" and press the enter key after the next instruction
+
+To continue you must enter a new PIN. Are you ready to enter a new PIN? (y/n) [n]: <font color=blue>y</font>
+
+#Think of a memorable PIN which is 4-8 digits.
+#Enter it after the next instruction followed by the enter key.
+#Then confirm it by entering it again when requested followed by the enter key and then press the enter key again to continue.
+
+Enter new PIN between 4-8 digits:<font color=blue>####(####)</font>
+Re-enter new PIN to confirm:<font color=blue>####(####)</font>
+New PIN accepted, press enter to continue.
+
+#Now enter your PIN followed by the PASSCODE and press the enter key after the following request.
+
+Enter PASSCODE:<font color=blue>####(####)######</font>
+Wait for the tokencode to change, then enter the new tokencode :<font color=blue>######</font>
+
+==============================================================================
+Latest news and information regarding MONSooN can always be found at
+http://collab.metoffice.gov.uk/twiki/bin/view/Support/LatestNews
+                                     AJ Watling, MONSooN Tech Lead  7/10/2015
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*** REMINDER - MONSooN Cutover *TODAY* 14th March                         ****
+Please do not use Monsoon until notified via Newsgroups/Yammer/TWiki.
+http://collab.metoffice.gov.uk/twiki/bin/view/Support/Monsoon2Migration
+Many thanks - AJ Watling
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+</pre>
+                <p>Add the following to the top of your .bash_profile file if missing:
+<pre>
+# Provide access to FCM, Rose and Cylc
+PATH=$PATH:~fcm/bin
+
+# Ensure .bashrc is sourced in login shells
+# (only add this if it is not already done in your .bash_profile)
+[[ -f ~/.bashrc ]] &amp;&amp; . ~/.bashrc
+</pre>
+           </p>
+                <p>Add the following to the end of your .bashrc file if missing:
+<pre>
+[[ $- != *i* ]] &amp;&amp; return # Stop here if not running interactively
+[[ $HOSTNAME = "exvmsrose.monsoon-metoffice.co.uk" ]] &amp;&amp; . mosrs-setup-gpg-agent
+# Enable bash completion for Rose commands
+[[ -f ~fcm/rose/etc/rose-bash-completion ]] &amp;&amp; . ~fcm/rose/etc/rose-bash-completion
+</pre>
+           </p>
+
+          <p>Connect to the cylc server.</p>
+
+<pre>
+#ssh to the cylc server
+
+[&lt;MONSooNUSERNAME&gt;@exvmslander:~]$<font color=blue>ssh -Y exvmsrose</font>
+WARNING:
+This computer is provided for the processing of official information.
+Unauthorised access described in Met Office SyOps may constitute a criminal offence.
+All activity on the system is liable to monitoring.
+Last login: Fri Mar 31 07:12:22 2017 from ##.###.##.##
+
+#Enter your MOSRS password at the prompt and press enter.
+#If you miss type your MOSRS password use "mosrs-cache-password" to try again.
+#You will be asked for your MOSRS password everytime you log in.
+#If not then your setup is incorrect and this must be corrected, see further instructions below.
+
+Met Office Science Repository Service password:<font color=blue>MOSRSPASSWORD</font>
+Subversion password cached
+https://code.metoffice.gov.uk/rosie/u/hello: Hello &lt;MOSRSNUSERNAME&gt;</font>
+Rosie password cached
+
+[&lt;MONSooNUSERNAME&gt;@exvmsrose:~]$<font color=blue> exit</font>
+#logout
+#Connection to exvmsrose closed.
+[&lt;MONSooNUSERNAME&gt;@exvmslander:~]$<font color=blue> exit</font>
+#logout
+#Connection to lander.monsoon-metoffice.co.uk closed.
+</pre>
+                </li>
+                <li><strong>Post First time access</strong>
+                    <br/>
+<pre>
+$<font color=blue> ssh &lt;MONSooNUSERNAME&gt;@lander.monsoon-metoffice.co.uk</font>
+WARNING:
+This computer is provided for the processing of official information.
+Unauthorised access described in Met Office SyOps may constitute a criminal offence.
+All activity on the system is liable to monitoring.
+
+#Now enter your PIN followed by the PASSCODE and press the enter key after the following request.
+
+Enter PASSCODE:<font color=blue>####(####)######</font>
+Last login: Mon Apr  3 05:01:07 2017 from 79.74.134.108
+==============================================================================
+Latest news and information regarding MONSooN can always be found at
+http://collab.metoffice.gov.uk/twiki/bin/view/Support/LatestNews
+                                     AJ Watling, MONSooN Tech Lead  7/10/2015
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*** REMINDER - MONSooN Cutover *TODAY* 14th March                         ****
+Please do not use Monsoon until notified via Newsgroups/Yammer/TWiki.
+http://collab.metoffice.gov.uk/twiki/bin/view/Support/Monsoon2Migration
+Many thanks - AJ Watling
+#++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+[&lt;MONSooNUSERNAME&gt;@exvmslander:~]$<font color=blue> ssh -Y exvmsrose</font>
+WARNING:
+This computer is provided for the processing of official information.
+Unauthorised access described in Met Office SyOps may constitute a criminal offence.
+All activity on the system is liable to monitoring.
+Last login: Mon Apr  3 05:01:44 2017 from 10.168.6.1
+
+#Enter your MOSRS password at the prompt and press enter.
+
+Met Office Science Repository Service password:<font color=blue>MOSRSPASSWORD</font>
+Subversion password cached
+https://code.metoffice.gov.uk/rosie/u/hello: Hello &lt;MOSRSUSERNAME&gt;
+Rosie password cached
+[&lt;MONSooNUSERNAME&gt;@exvmsrose:~]$
+</pre>
+                </li>
+                </ul>
+            </div>
+        <div class="well">
+                <br/>
+                <h2><a id="ia">Internal HQ Desktop Access</a></h2>
+                <br/>
+                <br/>
+                <p>Your <code>.ssh/config</code> file should have been setup 
+                   by the MONSooN team.
+                   Please email JULES-Support are having issues.
+                </p>
+                <ul>
+                <li>ssh to MONSooN:
+<pre>
+$<font color=blue> ssh -Y xcsc</font>
+</pre>
+                </li>
+                <li>
+                <p>Add the following to the top of your .bash_profile file if missing on your first ever access to MONSooN:
+<pre>
+# Provide access to FCM, Rose and Cylc
+PATH=$PATH:~fcm/bin
+
+# Ensure .bashrc is sourced in login shells
+# (only add this if it is not already done in your .bash_profile)
+[[ -f ~/.bashrc ]] &amp;&amp; . ~/.bashrc
+</pre>
+           </p>
+                <p>Add the following to the end of your .bashrc file if missing on your first ever access to MONSooN:
+<pre>
+[[ $- != *i* ]] &amp;&amp; return # Stop here if not running interactively
+[[ $HOSTNAME = "exvmsrose.monsoon-metoffice.co.uk" ]] &amp;&amp; . mosrs-setup-gpg-agent
+# Enable bash completion for Rose commands
+[[ -f ~fcm/rose/etc/rose-bash-completion ]] &amp;&amp; . ~fcm/rose/etc/rose-bash-completion
+</pre>
+           </p>
+           </li>
+           <li>ssh to the cylc server:
+<pre>
+$<font color=blue> ssh -Y exvmsrose</font>
+WARNING:
+This computer is provided for the processing of official information.
+Unauthorised access described in Met Office SyOps may constitute a criminal offence.
+All activity on the system is liable to monitoring.
+Last login: Tue Mar 28 07:31:38 2017 from ##.###.##.##
+Met Office Science Repository Service password:
+First time use: enter your password again
+Authentication realm: &lt;https://code.metoffice.gov.uk:443&gt; Met Office Code
+Password for '&lt;MOSRSUSERNAME&gt;': <font color=blue>&lt;MOSRSPASSWORD&gt;</font>
+
+Subversion password cached
+https://code.metoffice.gov.uk/rosie/u/hello: Hello &lt;MOSRSUSERNAME&gt;
+Rosie password cached
+</pre>    
+
+           </li>
+
+            </ul>
+            </div>
+        <div class="well">
+                <br/>
+                <h2><a id="gas">General Access Setup</a></h2>
+                <br/>
+                <br/>
+                <p>There are a few setup things that everyone needs to check and
+                   update as required.
+                </p>
+                <p>The <code>~/.subversion/servers</code> file on MONSooN must 
+                   contain the following:
+<pre>  
+[groups]
+metofficesharedrepos = code*.metoffice.gov.uk
+
+[metofficesharedrepos]
+# Specify your Science Repository Service user name here
+username = &lt;MOSRSUSERNAME&gt;
+store-plaintext-passwords = no
+</pre>
+                </p>
+                <p>The command <code>rose config</code> should include the
+                   following line in the <code>[rosie-id]</code> section:
+<pre>
+[rosie-id]
+......
+prefixes-ws-default=u
+</pre>
+                If not then please add it to your <code>.metomi/rose.conf</code>
+                file.
+                </p>
+
+            </div>
+        <div class="well">
+                <br/>
+                <h2><a id="am">Access to MONSooN</a></h2>
+                <br/>
+                <br/>
+                <p>IN PROGRESS
+           </p>
+
+            </div>
+
+            <div class="container">
+            </div>
+            <hr/>
+            <div class="container-fluid text-center">
+                <div class="row">
+                    <div class="col-md-12">
+                        <address><small>
+                            &copy; British Crown Copyright 2006-17
+                            <a href="http://www.metoffice.gov.uk">Met Office</a>.<br />
+                            This document is released under the British <a href=
+                                "http://www.nationalarchives.gov.uk/doc/open-government-licence/" rel=
+                                "license">Open Government Licence</a>.<br />
+                            </small>
+                        </address>
+                    </div>
+                </div>
+            </div>
+            <!-- Bootstrap core JavaScript
+                ================================================== -->
+            <!-- Placed at the end of the document so the pages load faster -->
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+            <script>window.jQuery || document.write('<script src="./js/vendor/jquery.min.js"><\/script>')</script>
+            <script src="../etc/bootstrap/js/bootstrap.min.js"></script>
+            <script src="./js/docs.min.js"></script>
+            <script LANGUAGE="JavaScript">
+                update = new Date(document.lastModified);
+                theMonth = update.getMonth() + 1;
+                theDate = update.getDate();
+                theYear = update.getFullYear();
+                theHour = update.getHours();
+                theMin = update.getMinutes();
+                theSec = update.getSeconds();
+                document.write("<strong> Last Modified:</strong> " + theYear + "-" + theMonth + "-" + theDate + "T" + theHour + ":" + theMin + ":" + theSec + "Z");
+            </script>
+        </div>
+    </body>
+</html>
+
