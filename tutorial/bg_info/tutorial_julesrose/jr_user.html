@@ -75,6 +75,7 @@
                                 <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
                                 <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
                                 <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
+                                <li><a href="jr_monsoon_setup.html">JULES MONSooN setup</a></li>
                                 <li><a href="jr_help_page.html">JULES help</a></li>
                             </ul>
                         </li>
@@ -246,7 +247,7 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
                 <br/>
                 Exeter University, Astrophysics Dept. Exo-planets.
                 <br/>
-                ...the JULES community, on JASMIN, Virtual Machine (VM) and at their location.
+                ...the JULES community, on JASMIN, MONSooN, Virtual Machine (VM) and at their location.
             </div>
             <div class="page-header">
                 <h2>What are the advantages to using Rose/Cylc?</h2>
@@ -796,6 +797,16 @@ fcm co https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.8
                 </div>
             </div>
             <br/>
+            <p>We are now going to run the rose-stem tests purely as a 
+               demonstration of a JULES running with Rose.</p>
+<pre>
+rose stem --new -- --hold
+</pre>
+            <p>This will set it running but not allow it to start as we have 
+               used the option <code>-- --hold</code>.</p>
+            <p>The option <code>--new</code> forces a completly new run to be
+               created.</p>
+            <br/>
             <p>Rose and Cylc provide many helpful Graphical User Interfaces (GUI's).</p>
             <br/>
            Now lets explore the GUI's.
@@ -1025,7 +1036,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
             <p>Cycles List</p>
             <p>The Cycles List tab at the top is useful for looking at the
                suite dependant on its cycle.</p>
-            <p>As you can see below this functionality is not that useful for
+            <p>As you can see below this functionality is not utilised for
                rose stem suites.</p>
             <img src="images/rose_bush6.png" width="85%" id="rb6"/>
             <br/>
@@ -1249,7 +1260,7 @@ rose sgc --name=SUITE_ID</font>
                right of the page and fill in the details.
                The Description will need a link to the branch before it is
                passed for review.
-               For example <code>[log:main/branches/dev/kerryday/vn4.7_new_tests vn4.7_new_tests]</code>
+               For example <code>[log:main/branches/dev/kerryday/vn4.8_new_tests vn4.8_new_tests]</code>
                and a Ticket Summary page <code>[wiki:ticket/###/TicketSummary ticket summary]</code>
               These make it easier for the reviewer.</p>
               <p>If you are only reporting a bug then please fill in as much as
@@ -1294,7 +1305,7 @@ rose sgc --name=SUITE_ID</font>
                   The "number" is incremental, no two suites can have the 
                   same number, also you cannot choose the number.</p>
                <pre>
-rosie checkout u-ai828 # or u-ai829 for running on the VM or u-ai843 for JASMIN
+rosie checkout u-ai828 # or u-ai829 for running on the VM or u-ai843 for JASMIN or u-al388 for MONSooN
 <font color=blue>
 [INFO] u-ai828: local copy created at /USER/roses/u-ai828
 </font>
@@ -1303,7 +1314,7 @@ rosie checkout u-ai828 # or u-ai829 for running on the VM or u-ai843 for JASMIN
                <h3>JULES-Rose suite structure</h3>
                <p>The suite structure is similar for all suites.</p>
                <pre>
-cd /USER/roses/u-ai828 # or u-ai829 for running on the VM or u-ai843 for JASMIN
+cd /USER/roses/u-ai828 # or u-ai829 for running on the VM or u-ai843 for JASMIN or u-al388 for MONSooN 
 ls
 <font color=blue>
 app  meta  rose-suite.conf  rose-suite.info  suite.rc
@@ -1451,8 +1462,8 @@ Notepad and pen - Local copy (modified)
                   <ol>
                      <li>Command line
 <pre>
-rosie checkout u-ai828 # or u-ai829 (VM) or u-ai843 (JASMIN)
-cd /USER/roses/u-ai828 # or u-ai829 or u-ai843
+rosie checkout u-ai828 # or u-ai829 (VM) or u-ai843 (JASMIN) or u-al388 (MONSooN)
+cd /USER/roses/u-ai828 # or u-ai829 or u-ai843 or u-al388
 rose edit
 </pre>
 </li>
@@ -1501,6 +1512,8 @@ They are the same as in the command line directory.
                <br/>
                <strong>IF USING THE JASMIN PLEASE USE SUITE ID u-ai843</strong>
                <br/>
+               <strong>IF USING THE MONSooN PLEASE USE SUITE ID u-al388</strong>
+               <br/>
                Change the path of to the JULES code in the 
                <code>rose-suite.conf</code> to point to your  location of the 
                JULES vn4.8 code, for example on the VM: <code>/home/vagrant/jules/vn4.8/trunk/</code>
@@ -1510,8 +1523,8 @@ They are the same as in the command line directory.
                   <ol>
                      <li>Command line
 <pre>
-rosie checkout u-ai828 # or u-ai829 (VM) or u-ai843 (JASMIN)
-cd /USER/roses/u-ai828 # or u-ai829 or u-ai843
+rosie checkout u-ai828 # or u-ai829 (VM) or u-ai843 (JASMIN) or u-al388 (MONSooN)
+cd /USER/roses/u-ai828 # or u-ai829 or u-ai843 or u-al388
 rose suite-run
 </pre>
 </li>
@@ -1622,7 +1635,7 @@ Clay
 12.14,0.2864,0.001432,0.4523,0.3692,0.2696,1.244E+06,0.2192,0.17
 </pre>
                   <br/>
-                <h3>Copy u-ai828/u-ai829/u-ai843 and edit the rose-suite.info</h3>
+                <h3>Copy u-ai828/u-ai829/u-ai843/u-al388 and edit the rose-suite.info</h3>
                 <p>Chose one of the following two options to create your copy
                    of the suite.</p>
                 <ol>
@@ -1645,12 +1658,12 @@ Clay
                             <pre>
                 <ol>
 <li>At command line?</li>
-<font color=green>rosie copy u-ai828 #or u-ai829 (VM) or u-ai843 (JASMIN)
+<font color=green>rosie copy u-ai828 #or u-ai829 (VM) or u-ai843 (JASMIN) or u-al388 (MONSooN)
 # This open the rose-suite.info file in a text editor, change the description 
 # to include the soil type you will change.</font>
 <li>Via Rosie Go</li>
 <font color=green>rosie go &amp;
-# search u-ai828/u-ai829/u-ai843
+# search u-ai828/u-ai829/u-ai843/u-al388
 # right click, select copy, select FORWARD, change the description to include
 # the soil type you will change, click OK.</font>
                 </ol>
@@ -1679,7 +1692,7 @@ output_period=86400
 </pre>
 </li>
                   <li>Ensure that gridbox mean sensible heat flux, latent heat flux and surface temperature are output.
-                  <p<a href="http://jules-lsm.github.io/vn4.7/output-variables.html">JULES Output variables</a></p>
+                  <p<a href="http://jules-lsm.github.io/vn4.8/output-variables.html">JULES Output variables</a></p>
 <pre>
 ftl_gb 	Gridbox surface sensible heat flux (W m-2)
 latent_heat 	Gridbox surface latent heat flux (W m-2)
@@ -1762,7 +1775,7 @@ rose suite-run --new --name=sand_&lt;SUITE_ID&gt;
                    <div class="panel-body">
                         <div class="row">
                             <pre>
-rosie copy u-ai828 # u-ai829 (VM) or u-ai843 (JASMIN)
+rosie copy u-ai828 # u-ai829 (VM) or u-ai843 (JASMIN) or u-al388 (MONSooN)
 
 OR (my preferred method, but it is a personal preference)
 
@@ -1877,7 +1890,7 @@ clearly by eye but MatLab and Iris display the difference.</p>
               <code>jules_vegetation</code> has an option <code>can_rad_mod</code>.
               </p>
               <p>
-              What is the default set to in <code>u-ai828/u-ai829/u-ai843</code>? 
+              What is the default set to in <code>u-ai828/u-ai829/u-ai843/u-al388</code>? 
               What two ways can you find the value?
               </p>
 
@@ -1912,8 +1925,8 @@ rose edit -&gt; jules &gt; namelist &gt; jules_vegetation <code>can_rad_mod</cod
             <h3>Changing the JULES-Rose suite design to run JULES for multiple configurations</h3>
             <p>To change the suite design we have to edit the text files in the
                suite using a text editor.</p>
-            <p>First we must either copy <code>u-ai828/u-ai829/u-ai843</code> or create
-               a branch of <code>u-ai828/u-ai829/u-ai843</code> and then switch to it.
+            <p>First we must either copy <code>u-ai828/u-ai829/u-ai843/u-al388</code> or create
+               a branch of <code>u-ai828/u-ai829/u-ai843/u-al388</code> and then switch to it.
             </p>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
@@ -1929,7 +1942,7 @@ rose edit -&gt; jules &gt; namelist &gt; jules_vegetation <code>can_rad_mod</cod
                    <div class="panel-body">
                         <div class="row">
                             <pre>
-rosie copy u-ai828 # u-ai829 (VM) or u-ai843 (JASMIN)
+rosie copy u-ai828 # u-ai829 (VM) or u-ai843 (JASMIN) or u-al388 (MONSooN)
 
 OR (my preferred method, but it is a personal preference)
 

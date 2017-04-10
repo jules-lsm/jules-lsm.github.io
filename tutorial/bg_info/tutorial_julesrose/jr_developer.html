@@ -73,6 +73,7 @@
                                 <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
                                 <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
                                 <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
+                                <li><a href="jr_monsoon_setup.html">JULES MONSooN setup</a></li>
                                 <li><a href="jr_help_page.html">JULES help</a></li>
                             </ul>
                         </li>
@@ -497,7 +498,7 @@ or
             <div class="well">
                <p>There are some example suites that can be found on the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESWithRose#StandardRosesuites-Pleaseaddyourownheretohelpothers">JULES MOSRS pages</a></p>
                <p>Some have been developed for the JULES-Rose tutorials:
-              <ul><li> User Practical 5 and 6 - <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a> MetO Suite, <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/9">u-ai829</a> VM Suite,  <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/4/3">u-ai843</a> JASMIN Suite.
+              <ul><li> User Practical 5 and 6 - <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a> MetO Suite, <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/9">u-ai829</a> VM Suite,  <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/4/3">u-ai843</a> JASMIN Suite, <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/l/3/8/8">u-al388</a> MONSooN Suite.
                </li>
                </ul>
                </p>
@@ -527,7 +528,7 @@ or
                a section of techniques for making changes to JULES-Rose suites 
                allowing the user to choose their preferred method.</p>
             <h3>Make a change in Rose Edit and save it</h3>
-            <p>Open Rose Edit for the suite u-ai828<p>
+            <p>Open Rose Edit for the suite u-ai828 Meto SPICE (u-ai829 VM, u-ai843 JASMIN, u-al388 MONSooN)<p>
             <br/>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
@@ -546,12 +547,12 @@ or
 # checkout the suite either using rosie go or command line
 
 rosie go
-# search for u-ai828
+# search for u-ai828 #(u-ai829 VM, u-ai843 JASMIN, u-al388 MONSooN)
 # double click on it to check it out, this checks it out locally and opens Rose Edit
 
 # at command line
-rosie checkout u-ai828
-cd ~/roses/u-ai828
+rosie checkout u-ai828 #(u-ai829 VM, u-ai843 JASMIN, u-al388 MONSooN)
+cd ~/roses/u-ai828 #(u-ai829 VM, u-ai843 JASMIN, u-al388 MONSooN)
 rose edit 
                             </pre>
                         </div>
@@ -751,7 +752,8 @@ M       rose-suite.conf
            <br/>
            <h4><strong>For this section please use the JULES-Rose suite u-aj012</strong></h4>
            <br/>
-           <p>For the VM use u-aj013 and for JASMIN use u-aj014.</p>
+           <p>For the VM use u-aj013, for JASMIN use u-aj014, for MONSooN use
+              u-al438.</p>
            <br/>
            <p>The suite uses GSWP2 data for one month.</p>
            <br/>
@@ -1004,8 +1006,8 @@ read_list=.true.
                Latitude and Longitude must be defined and the Input grid should
                be false and 1 x 1.
                u-ai828 (or u-ai829 for VM or u-ai843 for JASMIN, or u-ai844
-               for remote JASMIN from your desktop) with the metadata specified
-               has this setup.</p>
+               for remote JASMIN from your desktop, u-al388 MONSooN) with the
+               metadata specified has this setup.</p>
             <img src="images/rose_edit_dom1.png" width="80%" id="red1"/>
             <br/>
             <br/>
@@ -1021,8 +1023,9 @@ read_list=.true.
                JULES-Rose suite u-ai509 with the metatdata specified as above.</p>
             <img src="images/rose_edit_dom2.png" width="80%" id="red2"/>
             <br/>
-            <p>The suite u-ai828 requires Loobos data which is included within
-               the suite.</p>
+            <p>The suite u-ai828 (or u-ai829 for VM or u-ai843 for JASMIN, or 
+                u-ai844 for remote JASMIN from your desktop, u-al388 MONSooN)
+                requires Loobos data which is included within the suite.</p>
             <br/>
             <p>The suite u-ai509 (u-ai510 for VM or u-ai511 for JASMIN) require
                GWSP2 data which is very big but part of the VM install-jules-* 
@@ -1030,9 +1033,9 @@ read_list=.true.
                if the data is available.
                Note this suite takes a while to run, about 25 mins.</p>
             <p>For a much faster running suite use u-aj012 (u-aj013 for VM or 
-               u-aj014 for JASMIN + remoteJAMSIN), it is the same as
-               u-ai509 but runs for only 1 month and not 1 year and therefore
-               takes about 5 minutes to run.</p>
+               u-aj014 for JASMIN + remoteJAMSIN, for MONSooN u-al438), it is 
+               the same as u-ai509 but runs for only 1 month and not 1 year and 
+               therefore takes about 5 minutes to run.</p>
             <p>Change both suites:</p>
               <ul>
               <li>The first to run for a different site, Latitude 53.32 and 
@@ -1908,7 +1911,7 @@ cd &lt;UM_BRANCH_NAME&gt;</li>
                    <div class="panel-body">
                         <div class="row">
                             <pre>
-rosie checkout u-ai828
+rosie checkout u-ai828 #(u-ai829 VM, u-ai843 JASMIN, u-al388 MONSooN)
 fcm bc metadata
 fcm sw metadata
 # edit meta/rose-meta.conf e.g.
