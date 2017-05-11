@@ -94,7 +94,7 @@
                                         <li><input type="radio" value="B" /><label for="B">fcm ct</label><br/></li>
                                         <li><input type="radio" value="C" /><label for="C">fcm checkout</label><br/></li>
                                     </ol>
-                                    <p class="answers D"><em>B</em></p>
+                                    <p class="answers D"><em>D</em></p>
                                 </div>
                             </li>
                             <li>
@@ -137,7 +137,7 @@
                                 <p class="question">What does "?" mean when you issue the fcm status command?</p>
                                 <div id="5" class="questions">
                                     <ol type="A">
-                                        <li><input type="radio" value="A" /><label for="A">Item is missing</label><br/></li>
+                                        <li><input type="radio" value="A" /><label for="A">Item is missing and was there previously</label><br/></li>
                                         <li><input type="radio" value="B" /><label for="B">Item is not under version control</label><br/></li>
                                         <li><input type="radio" value="C" /><label for="C">Item is conflicted</label><br/></li>
                                         <li><input type="radio" value="D" /><label for="D">Item is modified</label><br/></li>
@@ -238,9 +238,9 @@
                                         <li><input type="radio" value="B" /><label for="B">rose bush</label><br/></li>
                                         <li><input type="radio" value="C" /><label for="C">cylc-run/log/job/1/&lt;TASKNAME&gt;/NN/job.*</label><br/></li>
                                         <li><input type="radio" value="D" /><label for="D">cylc-run/work/1/&lt;TASKNAME&gt;/output/</label><br/></li>
-                                        <li><input type="radio" value="D" /><label for="E">All of the above</label><br/></li>
-                                        <li><input type="radio" value="D" /><label for="F">A-C</label><br/></li>
-                                        <li><input type="radio" value="D" /><label for="G">A, B, D</label><br/></li>
+                                        <li><input type="radio" value="E" /><label for="E">All of the above</label><br/></li>
+                                        <li><input type="radio" value="F" /><label for="F">A-C</label><br/></li>
+                                        <li><input type="radio" value="G" /><label for="G">A, B, D</label><br/></li>
                                     </ol>
                                     <p class="answers F"><em>F</em></p>
                                 </div>
@@ -282,18 +282,6 @@
                                 </div>
                             </li>
                             <li>
-                                <p class="question">What is JULES rose stem?</p>
-                                <div id="17" class="questions">
-                                    <ol type="A">
-                                        <li><input type="radio" value="A" /><label for="A">A testing system for JULES code to check that new science or tech changes do not break existing code</label><br/></li>
-                                        <li><input type="radio" value="B" /><label for="B">A testing system for JULES code to check the UM</label><br/></li>
-                                        <li><input type="radio" value="C" /><label for="C">A testing system for JULES-Rose suites to test all suites ever</label><br/></li>
-                                        <li><input type="radio" value="D" /><label for="D">A testing system for JULES-Rose suites to test the UM</label><br/></li>
-                                    </ol>
-                                    <p class="answers A"><em>A</em></p>
-                                </div>
-                            </li>
-                            <li>
                                 <p class="question">What two repositories will you be using and needing for JULES only work?</p>
                                 <div id="18" class="questions">
                                     <ol type="A">
@@ -312,8 +300,8 @@
                                         <li><input type="radio" value="A" /><label for="A">fcm kp</label><br/></li>
                                         <li><input type="radio" value="B" /><label for="B">fcm keywords-print</label><br/></li>
                                         <li><input type="radio" value="C" /><label for="C">fcm keywords-point</label><br/></li>
-                                        <li><input type="radio" value="D" /><label for="D">1 and 2</label><br/></li>
-                                        <li><input type="radio" value="D" /><label for="D">1 and 3</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">A and B</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">A and C</label><br/></li>
                                     </ol>
                                     <p class="answers D"><em>D</em></p>
                                 </div>
@@ -331,7 +319,21 @@
                             <li>
                                 <p class="question">Complete the JULES-Rose code branch create sequence:
 <br/>
-fcm ____ &lt;BRANCH_NAME&gt; fcm:jules.x_tr@vn#.# ; fcm ____ fcm:jules.x_br/dev/&lt;USERENAME&gt;&lt;BRANCH_NAME&gt; ; cd &lt;BRANCH_NAME&gt; ; #make changes  and add a new file; fcm ___ ; fcm ____ &lt;NEW_FILE&gt; ; fcm ___ ; #nothing unknown; fcm ___; #add commit message; y ; fcm ___ ; #no local changes, changes on the JULES code branches repository </p>
+<pre>
+fcm ____ &lt;BRANCH_NAME&gt; fcm:jules.x_tr@vn#.#
+fcm ____ fcm:jules.x_br/dev/&lt;USERNAME&gt;&lt;BRANCH_NAME&gt;
+cd &lt;BRANCH_NAME&gt;
+#make changes and add a new file
+fcm ___ 
+fcm ____ &lt;NEW_FILE&gt; 
+fcm ___ 
+#nothing unknown
+fcm ___
+#add commit message
+y
+fcm ___ 
+#no local changes, changes on the JULES code branches repository </p>
+</pre>
                                 <div id="21" class="questions">
                                     <ol type="A">
                                         <li><input type="radio" value="A" /><label for="A">bc, co, st, add, st, ci, st</label><br/></li>
@@ -345,7 +347,21 @@ fcm ____ &lt;BRANCH_NAME&gt; fcm:jules.x_tr@vn#.# ; fcm ____ fcm:jules.x_br/dev/
                             <li>                                
                                 <p class="question">Complete the JULES rose suite copy sequence:
 <br/>
-rosie ____ &lt;SUITE_ID&gt; ; #add to description, save and close;  cd &lt;NEW_SUITE_ID&gt; ; #make changes to the suite including deleting a file; fcm ___ ; fcm ____ ___ &lt;NEW_FILE&gt; ; fcm ___ ; #nothing unknown; fcm ___; #add commit message; y ; fcm ___ ; #no local changes, changes on the rosie u repository </p>
+<pre>
+rosie ____ &lt;SUITE_ID&gt;
+#add to description, save and close
+cd &lt;NEW_SUITE_ID&gt;
+#make changes to the suite including deleting a file
+fcm ___
+fcm ____ ___ &lt;NEW_FILE&gt;
+fcm ___ 
+#nothing unknown
+fcm ___
+#add commit message
+y 
+fcm ___ 
+#no local changes, changes on the rosie u repository </p>
+</pre>
                                 <div id="22" class="questions">
                                     <ol type="A">
                                         <li><input type="radio" value="A" /><label for="A">copy, st, rm, st, ci, st</label><br/></li>
@@ -360,13 +376,32 @@ rosie ____ &lt;SUITE_ID&gt; ; #add to description, save and close;  cd &lt;NEW_S
                             <li>                                
                                 <p class="question">Complete the JULES rose suite branch create sequence:
 <br/>
-rosie ____ &lt;SUITE_ID&gt; ;  cd &lt;SUITE_ID&gt; ; fcm ___ $lt;BRANCH_NAME&gt; ; #add commit message, save and close; fcm ___ ; #incase the branch name is forgotten; fcm ___ $lt;BRANCH_NAME&gt; ; fcm ___ ; #make changes to the suite; fcm ___ ; fcm ___ ; #nothing unknown; fcm ___; #add commit message; y ; fcm ___ ; #no local changes, changes on the suite branch of the rosie u repository; fcm ___ trunk; #back to the trunk of the suite ID </p>
+<pre>
+rosie ____ &lt;SUITE_ID&gt;
+cd &lt;SUITE_ID&gt;
+fcm ___ &lt;BRANCH_NAME&gt;
+#add commit message, save and close
+fcm ___
+#incase the branch name is forgotten
+fcm ___ &lt;BRANCH_NAME&gt;
+#make changes to the suite
+fcm ___
+fcm ___
+#add commit message
+y
+fcm ___
+#nothing unknown
+#no local changes, changes on the suite branch of the rosie u repository
+fcm ___ trunk
+#back to the trunk of the suite ID
+</pre>
+ </p>
                                 <div id="23" class="questions">
                                     <ol type="A">
-                                        <li><input type="radio" value="A" /><label for="A">checkout, bc, blt, sw, info, st, ci, sw</label><br/></li>
-                                        <li><input type="radio" value="B" /><label for="B">checkout, bc, blt, sp, info, st, ci, sw</label><br/></li>
-                                        <li><input type="radio" value="C" /><label for="C">checkout, bc, bls, sw, info, st, ci, sw</label><br/></li>
-                                        <li><input type="radio" value="D" /><label for="D">checkout, bc, bls, sp, info, st, ci, sw</label><br/></li>
+                                        <li><input type="radio" value="A" /><label for="A">checkout, bc, blt, sw, info, st, ci, st, sw</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">checkout, bc, blt, sp, info, st, ci, st, sw</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">checkout, bc, bls, sw, info, st, ci, st, sw</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">checkout, bc, bls, sp, info, st, ci, st, sw</label><br/></li>
                                     </ol>
                                     <p class="answers C"><em>C</em></p>
                                 </div>
@@ -507,7 +542,7 @@ create ticket -&gt; changes -&gt; ____________ &gt; ___________ &gt; ask for sci
 <li><input type="radio" value="I" /><label for="I">A &amp; C</label><br/></li>
 
                                     </ol>
-                                    <p class="answers H"><em>G</em></p>
+                                    <p class="answers H"><em>H</em></p>
                                 </div>                            </li>
                             <li>                                                                <p class="question">Who can do a code rev?
 </p>
@@ -554,7 +589,7 @@ create ticket -&gt; changes -&gt; ____________ &gt; ___________ &gt; ask for sci
                                 </div>                            </li>
                             <li>                                                                <p class="question">How can you merge your original branch into your new HoT branch?
 <br/>
-fcm ___ fcm:jules.x_br/dev/&lt;USERSNAME&gt;/&lt;HoT_BRANCH&gt; ; cd &lt;HoT_BRANCH&gt; / fcm ___ &lt;ORIGINAL_BRANCH&gt; ;fcm ___ ; fcm ___ ; y
+fcm ___ fcm:jules.x_br/dev/&lt;USERNAME&gt;/&lt;HoT_BRANCH&gt; ; cd &lt;HoT_BRANCH&gt; / fcm ___ &lt;ORIGINAL_BRANCH&gt; ;fcm ___ ; fcm ___ ; y
 </p>
                                 <div id="37" class="questions">
                                     <ol type="A">
@@ -568,10 +603,10 @@ fcm ___ fcm:jules.x_br/dev/&lt;USERSNAME&gt;/&lt;HoT_BRANCH&gt; ; cd &lt;HoT_BRA
                             <li>                                                                <p class="question">What files are edited when adding a namelist</p>
                                 <div id="38" class="questions">
                                     <ol type="A">
-                                        <li><input type="radio" value="A" /><label for="A">rose-meta/jules-standalone/HEAD/rose-app.conf, src/control/shared/???_mod.F90, src/science/&lt;scheme&gt;/&lt;routine&lt;.F90</label><br/></li>
-                                        <li><input type="radio" value="B" /><label for="B">src/control/shared/???_mod.F90, src/science/&lt;scheme&gt;/&lt;routine&lt;.F90</label><br/></li>
-                                        <li><input type="radio" value="C" /><label for="C">rose-meta/jules-standalone/versions.py, src/control/shared/???_mod.F90, src/science/&lt;scheme&gt;/&lt;routine&lt;.F90</label><br/></li>
-                                        <li><input type="radio" value="D" /><label for="D">rose-meta/jules-standalone/HEAD/rose-app.conf, rose-meta/jules-standalone/versions.py, src/control/shared/???_mod.F90, src/science/&lt;scheme&gt;/&lt;routine&lt;.F90</label><br/></li>
+                                        <li><input type="radio" value="A" /><label for="A">rose-meta/jules-standalone/HEAD/rose-app.conf, src/control/shared/???_mod.F90, src/science/&lt;scheme&gt;/&lt;routine&gt;.F90</label><br/></li>
+                                        <li><input type="radio" value="B" /><label for="B">src/control/shared/???_mod.F90, src/science/&lt;scheme&gt;/&lt;routine&gt;.F90</label><br/></li>
+                                        <li><input type="radio" value="C" /><label for="C">rose-meta/jules-standalone/versions.py, src/control/shared/???_mod.F90, src/science/&lt;scheme&gt;/&lt;routine&gt;.F90</label><br/></li>
+                                        <li><input type="radio" value="D" /><label for="D">rose-meta/jules-standalone/HEAD/rose-app.conf, rose-meta/jules-standalone/versions.py, src/control/shared/???_mod.F90, src/science/&lt;scheme&gt;/&lt;routine&gt;.F90</label><br/></li>
                                     </ol>
                                     <p class="answers D"><em>D</em></p>
                                 </div>                            </li>
