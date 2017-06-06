@@ -406,9 +406,9 @@
             fcm --version
             # these should return something like this:
             <font color="blue">
-            Rose 2016.11.1 (/net/home/.../rose-2016.11.1)
-            6.11.2
-            FCM 2016.12.0 (/net/home/.../fcm-2016.12.0)
+            Rose 2017.02.0 (/net/home/.../rose-2017.02.0)
+            7.3.0
+            FCM 2017.02.0 (/net/home/.../fcm-2017.02.0)
             </font>
             # hopefully they are the latest versions of the systems.
             fcm keyword-print
@@ -804,7 +804,8 @@ cd trunk
             <p>We always need to specify a group when running rose-stem, here 
                we will use <code>--group=all</code>.
                Other possible options are <code>loobos</code>, <code>gswp2</code>, 
-               <code>linux</code>, <code>xc40</code>.
+               <code>linux</code>, <code>xc40</code>, <code>tutorial</code>, 
+               <code>tutorial_linux</code>, <code>tutorial_xc40</code>.
             </p>
             <p>If you forget the <code>--group=...</code> option you will get 
                an error like the following:
@@ -980,7 +981,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
                "Suite List" button.
                This then provides a list of the owners suites that they have 
                run and or are running.</p>
-            <img src="images/rose_bush2.png" width="65%" id="rb2"/>
+            <img src="images/rose_bush2.png" width="95%" id="rb2"/>
             <br/>
             <br/>
             <p>At the Met Office the suite level page looks like the image
@@ -1433,6 +1434,8 @@ rosie go &amp;
                <p>Hover your mouse over each of the icons on the far left of
                   the Rosie Go GUI and find out what each of the images mean.</p
 >
+               <p>Please note difference in icons etc are likely as different
+                  systems and desktops have different Apperance Preferences set.</p>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -1777,9 +1780,16 @@ rose suite-run --new --name=sand_&lt;SUITE_ID&gt;
                     <code>rosie copy &lt;SUITE_ID&gt;</code> and get a new suite
                     and new suite ID for your changes and commit it. </li>
                  <li>Create a branch from the current suite and the use 
-                     <code>fcm sw &lt;BRANCH_NAME&gt;</code>, remember to 
-                     commit your changes and to check where you are with
-                     <code>fcm info</code>.
+                     <code>fcm sw &lt;BRANCH_NAME&gt;</code>.
+                     <br/>Remember to always:
+                     <ul>
+                     <li> check where you are on the repository (the trunk or 
+                         a branch) with the fcm command <code>fcm info</code> 
+                         or by using rosie go</li>
+                    <li> check the status of the current version of the suite that you are working on</li>
+                    <li> COMMIT any changes and to the repository</li>
+                    <li> list the branches that are available for that suite</li>
+                    </ul>
                      <br/>
 
             <div class="panel-group" id="accordion">
@@ -1801,7 +1811,22 @@ rosie copy u-ai828 # u-ai829 (VM) or u-ai843 (JASMIN) or u-al388 (MONSooN)
 OR (my preferred method, but it is a personal preference)
 
 cd /USER/roses/u-ai828
+# for where you are in the repository, a branch or the trunk
+fcm info
+# OR rosie go
+rosie go &amp;
+<img src="images/rosie_go_branches.png" width="80%" id="res"/>
+# from this example we can see that the local copy of the suite-id u-ai828 is not the trunk but the branch "sand_prac5"
+            <br/>
+# check the status to see if there is anything to commit
+fcm st
+# commit uncommitted changes
+fcm ci
+# list all the current branches for this suite on the repository
+fcm bls
+# create a branch called clay 
 fcm bc clay #for branch-create
+# switch to the clay branch
 fcm sw clay #for switch branch
 #or fcm sw https://code.metoffice.gov.uk/svn/roses-u/a/i/8/2/8/clay
                             </pre>
@@ -1937,7 +1962,17 @@ clearly by eye but MatLab and Iris display the difference.</p>
 can_rad_mod=4
 
 command line, view the file u-ai828/app/jules/rose-app.conf
-rose edit -&gt; jules &gt; namelist &gt; jules_vegetation <code>can_rad_mod</code>
+
+OR
+
+rose edit
+First check the metadata is pointing to the correct location (change to point to your copy of the code)
+e.g.
+for jules ~kerryday/JULES/vn4p8/trunk/rose-metadata/jules-standalone/vn4.8 
+for fcm_make ~kerryday/JULES/vn4p8/trunk/rose-metadata/jules-fcm-make/vn4.8
+Refresh the metadata using the Metadata tab at the top of rose edit.
+Then:
+ -&gt; jules -&gt; Namelist configuration -&gt; Sciecne settings -&gt; Vegetation options <code>can_rad_mod</code> (about half way down). REMEMBER to expand your rose edit window to see all of the options.
                             </font>
 <img src="images/rose_edit_rad.png" width="95%" id="rer"/>
                             </pre>
@@ -1995,7 +2030,7 @@ CANRADMOD=['canradmod_1', 'canradmod_2', 'canradmod_3', 'canradmod_4', 'canradmo
 <pre>
         graph = """
                 {% for crm in CANRADMOD %}
-                    fcm_make => jules_{{crm}}
+                    fcm_make =&gt; jules_{{crm}}
                 {% endfor %}
                 """
 </pre>
@@ -2014,7 +2049,46 @@ CANRADMOD=['canradmod_1', 'canradmod_2', 'canradmod_3', 'canradmod_4', 'canradmo
  ...        --ntasks={{ OMP_NUM_THREADS * MPI_NUM_TASKS}}
 {% endfor %}
 </pre>
-            The optional configuration file is selected by the suite using the
+
+
+          <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyFive">
+                        <span class="glyphicon"></span>
+                        How To and Answer in full
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwentyFive" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+{% for crm in CANRADMOD %}
+    [[jules_{{crm}}]]
+        inherit = None, SPICE
+        script = "mkdir -p output ; rose task-run --path= --path=share/fcm_make/build/bin --app-key=jules --opt-conf-key={{crm}}"
+        [[[job]]]
+            execution time limit = {{ WALLTIME }}
+        [[[remote]]]
+            host = {{ ROSE_ORIG_HOST }}
+        [[[environment]]]
+            JULES_PATH      = {{ JULES_PATH }}
+            MPI_NUM_TASKS   = {{ MPI_NUM_TASKS }}
+            OMP_NUM_THREADS = {{ OMP_NUM_THREADS }}
+            NPROC           = {{ MPI_NUM_TASKS }}
+        [[[directives]]]
+            # MPI_NUM_TASKS * OMP_NUM_THREADS
+            --ntasks={{ OMP_NUM_THREADS * MPI_NUM_TASKS}}
+{% endfor %}
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+  The optional configuration file is selected by the suite using the
             <code>--opt-conf-key={{crm}}</code> syntax/code, also Jinja2.</li>
             <h3>Add optional configurations files to the JULES-Rose suite</h3>
             <li>We need to add an <code>opt</code> folder to the jules app.</li>
@@ -2186,6 +2260,8 @@ This means that there are optional configurations, if you click on the icon
 it displays the optional configurations, note there is none for canradmod_4 as
 it is the same as the default option.
 </font>
+If you click on the icon rose edit looks like:
+<img src="images/rose_edit_rad3.png" width="95%" id="rer"/>
             </ol>
                             </pre>
                         </div>
@@ -2195,7 +2271,7 @@ it is the same as the default option.
             <br/>
 
 
-            <h3>Adding plots</h3>
+            <h3>Adding plots - ONLY to be done if you have Iris installed</h3>
             <p>You may want to do some plotting of the data and you can add this
                to be part of your suite.</p>
             <p>Here we will see how to do this using a Python Iris script.</p>

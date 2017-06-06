@@ -139,6 +139,9 @@
                <li><code>gswp2</code></li>
                <li><code>linux</code>, meto only</li>
                <li><code>xc40</code>, meto only</li>
+               <li><code>tutorial</code></li>
+               <li><code>tutorial_linux</code>, meto only</li>
+               <li><code>tutorial_xc40</code>, meto only</li>
                </ul>
                <br/>
                <br/>
@@ -703,6 +706,42 @@ rose edit
                 </div>
             </div>
             <br/>
+            <p>Enable/point to the JULES code metadata if you have not already done so.
+            </p>
+            <p>Follow the
+                   instructions below:<br/>
+                   For example point to the trunk version of the JULES code metadata:
+                   <code>/project/jules/vn4.8/trunk/</code> to the
+                   <strong>front</strong> of
+                   both of the paths for fcm_make and jules metadata.</p>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseNineteen">
+            <span class="glyphicon"></span>
+            Help on where to find the 3 locations
+            </a>
+            </h4>
+            </div>
+            <div id="collapseNineteen" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+            <ol>
+            <font color="green">
+            <li>Index section on the left side -&gt; fcm_make -&gt; Build configuration -&gt; Path to JULES source:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>
+            <li>Index section on the left side -&gt; fcm_make -&gt; meta:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>            <li>Index section on the left side -&gt; jules -&gt; meta:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-standalone/HEAD/rose-meta.conf</code>cd            </li>
+            </li>
+            </font>
+            </ol>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br/>
+               <p>Save and check the changes.</p>
+
+            <br/>
             <p>Change the <code>WALLTIME</code> in the suite conf -&gt; Runtime configuration from PT3H to PT2H40M.</p>
             <p>The <code>WALLTIME</code> should have changed colour from black
                to blue.
@@ -822,7 +861,7 @@ M       rose-suite.conf
                     There should be nine.
                     Click on one it should display:
                     <br/>
-                    <img src="images/rose_edit_ignore.png" width="80%" id="rei"/></p>
+                    <img src="images/rose_edit_ignore.png" width="90%" id="rei"/></p>
                  <p>The <code>Latent Pages</code> are not often required, only
                     the <code>poll</code> option in <code>Fcm Make</code> may be
                     useful at a later date.
@@ -852,7 +891,7 @@ M       rose-suite.conf
                 <h4>What is metadata?</h4>
                 <p>Metadata is included as part of the JULES code to help users understand the intended use of variables, switches, parameters, etc in JULES.</p>
                 <h4>Using metadata</h4>
-                <p>Creating metadata and testing metadata that you have 
+                <p>Creating metadata and testing the metadata that you have 
                    created is covered in <a href="#md">Practical 7</a><p>
                 <p>If a change is made which does not comply with the metadata
                    either within the JULES-Rose suite or the JULES-Rose code
@@ -861,18 +900,18 @@ M       rose-suite.conf
                    as good as the metadata that is either provided/created by
                    everyone.
                    Metadata is very important for ensuring that users use the 
-                   JULES-Rose suite/code as it was intended.</strong></p>
+                   JULES-Rose suite/code as it was intended by the developer/designer.</strong></p>
                 <br/>
-                <p>Let looks at an example:</p>
+                <p>Let looks at an example of a metadata warning:</p>
                 <p>Note that selecting an invalid value for <code>MPI_NUM_TASKS</code>
                    provides a warning triangle and a red cog next to the 
                    offending variable, see the image below.</p>
                 <br/> <img src="images/rose_edit_warning.png" width="80%" id="rew"/>
                 <br/>
-                <p>This suite as it is does work correctly when run, but it 
-                   does not use the metadata in Rose Edit as it is not 
-                   correctly specified for Rose Edit.
-                   To do this point it to the copy of the trunk, for example:
+                <p>You should have already pointed the suite to a copy of the 
+                   JULES code metadata for Rose Edit to use. If not follow the
+                   instructions below:<br/>
+                   For example point to the trunk version of the JULES code metadata:
                    <code>/project/jules/vn4.8/trunk/</code> to the
                    <strong>front</strong> of
                    both of the paths for fcm_make and jules metadata.</p>
@@ -902,7 +941,7 @@ M       rose-suite.conf
             </div>
             <br/>
                <p>Save and check the changes.</p>
-               <p>Now the metadata is enabled we can see all of the information
+               <p>With the metadata enabled we can see all of the information
                   on the variables.</p>
                 <br/> <img src="images/rose_edit_meta.png" width="80%" id="rem"/>
                 <br/> <img src="images/rose_edit_meta2.png" width="80%" id="rem2"/>
@@ -2320,8 +2359,9 @@ END MODULE n_leach_mod
             in time. <code>Owner</code> must be provided and is usually the 
             person that has opened the ticket. If someone is to be assigned
             please get their permission first. The <code>Priority</code>
-            should be provided. Only the <code>CC</code> and <code>Keywords</code>
-            are allowed to be left empty.</p>
+            should be provided. You must <code>Cc</code> the appropriate 
+            module leader(s). Only <code>Keywords</code> are allowed to be left
+            empty.</p>
             <p>The <code>Description</code> should be a clear and concise
                explanation of the problem and the proposed solution.
                There also needs to be a link to the branch and the Ticket
@@ -2338,8 +2378,8 @@ END MODULE n_leach_mod
             <p>Create the ticket using the <code>Create ticket</code> button.
             <br/>
             <h4>Creating the Ticket Summary</h4>
-            <p>Clicking on the <code>Ticket Summary?</code> link will allow you
-             to create the page.</p>
+            <p>Clicking on the <code>Ticket Summary?</code> link this will 
+             allow you to create the Ticket Summary page.</p>
             <p>This opens a new page which displays:
 <pre>
 The page ticket/###/TicketSummary does not exist. You can create it here.
@@ -2350,10 +2390,10 @@ You could also create the same page higher in the hierarchy:
 "Create this page"  Using the template: "(blank page)"
 </pre>
              Choose the option <code>Ticketsummary</code> not the (blank page),
-             then select the button "Create this page".
+             then click the button "Create this page".
              This will create the Ticket Summary page for you to fill in.</p>
             <br/>
-            <h4>Filling in the Ticket Summary</h4>
+            <h4>Filling in the Ticket Summary page</h4>
             <p>You much be logged in to edit the Ticket Summary page.</p>
             <p>Go to the bottom of the page and select the button 
                <code>Edit this page</code>.
@@ -2361,20 +2401,22 @@ You could also create the same page higher in the hierarchy:
             <br/>
             <h4>Adding the <code>trac.log</code>'s</h4>
             <p>After you have made your code change and are happy with it you
-               have to run the JULES rose-stem tests for your branch.</p>
-            <p>More detail on roserstem have been discussed earlier in these
+               must run the JULES rose-stem tests for your branch.</p>
+            <p>More detail on rose-stem have been discussed earlier in these
                tutorials.</p>
             <p>Once rose-stem has completed then the <code>trac.log</code> can
-               be copied to the Ticket Summary.</p>
+               be copied from the <code>~/cylc-run/</code> directory to the 
+               Ticket Summary.</p>
            <p>The location of the trac.log: <code>~/cylc-run/&lt;BRANCH_NAME&gt;/trac.log</code>.</p>
-            <p>Note that UM-JULES rose-stem tests must be run with the group 
+            <p>Note that UM-JULES rose-stem tests must be run with the groups 
             <code>--group=jules,developer</code> if your site does not have this
                capability please email Jules-Support@metoffice.gov.uk to request
                assistance.</p>
             <br/>
             <h4>The review process</h4>
             <p>You must have module leader approval for your change before it 
-               is reviewed.</p>
+               is reviewed, they should have been Cc'ed into the ticket
+               when you created the ticket.</p>
             <p>You will need to find a sci/tech reviewer (appropriate module
                leaders can give guidance) and the JULES System Manger (and or 
                the UM Systems Team as appropriate) will code review your change.
@@ -2388,9 +2430,11 @@ You could also create the same page higher in the hierarchy:
               assign it to the JULES System Manager for the code review.
               They are responsible for checking the overall integrity of the
               change.
-              Checking if the change will cause issues on the trunk, if the 
-              testing was sufficient, and if the appropriate permissions and
-              standards have been achieved.</p>
+              They will check to see if the change will cause issues on the 
+              trunk, decided if the testing was sufficient, and if the 
+              appropriate permissions and standards have been achieved.</p>
+            <p>They can ask you create a HoT branch if required and to make the
+               appropriate changes to the code to me it suitable for the trunk.</p>
             <br/>
             </div>
          </ul>
@@ -2478,7 +2522,11 @@ fcm ci
             </p>
             <br/>
             <h4>How do we run UM-JULES rose-stem?</h4>
-            <p>For only testing a JULES change.</p>
+            <p>Only for testing a JULES change.</p>
+            <p>Note you or the site you are working on must have access to 
+               the UM code repository.
+               If not you <strong>cannot</strong> do this testing and must ask
+               the JULES System Manager for assistance.</p>
             <ol>
             <li>Create a JULES ticket if it is not already created.</li>
             <li>Commit your JULES branch changes to the repository.</li>
