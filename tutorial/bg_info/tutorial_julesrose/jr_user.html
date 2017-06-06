@@ -188,8 +188,7 @@
                "Environmental forecasting suites generate forecast products from a potentially large group of interdependent scientific models and associated data processing tasks."
                Cylc is now not just used for forecasting models but for scheduling tasks on computers by people all over the world.
                Monterey - US Naval Research Laboratory use it for scheduling tasks on there computer systems.
-                This is growing collaboration with people around the world, at p
-resent there are 17 contributors, 11 of which are not Met Office UK.
+                This is growing collaboration with people around the world, at present there are 17 contributors, 11 of which are not Met Office UK.
                 The code is hosted on GitHub at <a href="https://github.com/cylc/cylc">cylc/cylc</a>.
             </div>
             <div class="page-header">
@@ -407,9 +406,9 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
             fcm --version
             # these should return something like this:
             <font color="blue">
-            Rose 2016.11.1 (/net/home/.../rose-2016.11.1)
-            6.11.2
-            FCM 2016.12.0 (/net/home/.../fcm-2016.12.0)
+            Rose 2017.02.0 (/net/home/.../rose-2017.02.0)
+            7.3.0
+            FCM 2017.02.0 (/net/home/.../fcm-2017.02.0)
             </font>
             # hopefully they are the latest versions of the systems.
             fcm keyword-print
@@ -422,11 +421,11 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
             </pre>
             <p>What are Keywords and why do we need them setup?</p>
             <p>Keywords can be considered to be like short-hand or short-cuts to our full URL's.
-            <br>
+            <br/>
              Keywords can be defined in the FCM keyword configuration file (i.e. 
              <samp>$FCM/etc/fcm/keyword.cfg</samp> and 
              <samp>$HOME/.metomi/fcm/keyword.cfg</samp>).
-             <br>
+             <br/>
             For <strong>example</strong> in our <samp>.cfg</samp> file in our $HOME
             directory we can define a keyword as follows:
             <pre>        location{primary}[jules.x] = https://code.metoffice.gov.uk/svn/jules/main
@@ -463,7 +462,7 @@ resent there are 17 contributors, 11 of which are not Met Office UK.
             </div>
             </div>
             </div>
-            <br>
+            <br/>
 
 
             </div>
@@ -724,7 +723,7 @@ Global options_
             <p>This will allow us to;</p>
                 <ul>
                     <li>practice some FCM commands,</li>
-                    <li>run the rose stem (the test suite/battery),</li>
+                    <li>run the rose-stem (the test suite/battery),</li>
                     <li>familiarise ourselves with some of the Rose and Cylc GUI's,</li>
                     <li>understand and use the basic features in Trac and Tickets</li>
                 </ul>
@@ -733,7 +732,7 @@ Global options_
              <ol>
                  <li>Create a directory at <code>~/jules/vn4p8</code></li>
                  <li>Checkout the trunk at vn4.8 (or the latest <a href="https://code.metoffice.gov.uk/trac/jules#ReleaseSchedule">release</a>)</li>
-                 <p>We do not want to run the "rose-stem" suite, but firstly what is the rose-stem suite and why may we want to run it in the future?</p>
+                 <p>We do want to run the "rose-stem" suite purely as an example of a running suite, but firstly what is the rose-stem suite and why may we want to run it in the future?</p>
             <br/>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
@@ -785,11 +784,14 @@ weekly.
 # make the directory ~/jules/vn4p8 and the path that may be required.
 mkdir -p ~/jules/vn4p8
 # change to the directory ~/jules/vn4p8
-cd ~/jules
-# checkout the JULES code at version vn4.8 using keywords
+cd ~/jules/vn4p8
+# checkout the JULES code at version vn4.8 using keywords to a directory called 
+# trunk
 fcm co fcm:jules.x_tr@vn4.8
 # or checkout the JULES code at version vn4.8 using the full URL
 fcm co https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.8
+# move the trunk/ directory
+cd trunk
                             </font>
                             </pre>
                         </div>
@@ -799,8 +801,21 @@ fcm co https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.8
             <br/>
             <p>We are now going to run the rose-stem tests purely as a 
                demonstration of a JULES running with Rose.</p>
+            <p>We always need to specify a group when running rose-stem, here 
+               we will use <code>--group=all</code>.
+               Other possible options are <code>loobos</code>, <code>gswp2</code>, 
+               <code>linux</code>, <code>xc40</code>, <code>tutorial</code>, 
+               <code>tutorial_linux</code>, <code>tutorial_xc40</code>.
+            </p>
+            <p>If you forget the <code>--group=...</code> option you will get 
+               an error like the following:
 <pre>
-rose stem --new -- --hold
+<font color=red>[FAIL]</font> cylc validate -v --strict fred # return-code=1, stderr=
+<font color=red>[FAIL]</font> 'No suite dependency graph defined.'
+</pre>
+           </p>
+<pre>
+rose stem --group=all --new -- --hold
 </pre>
             <p>This will set it running but not allow it to start as we have 
                used the option <code>-- --hold</code>.</p>
@@ -966,7 +981,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
                "Suite List" button.
                This then provides a list of the owners suites that they have 
                run and or are running.</p>
-            <img src="images/rose_bush2.png" width="65%" id="rb2"/>
+            <img src="images/rose_bush2.png" width="95%" id="rb2"/>
             <br/>
             <br/>
             <p>At the Met Office the suite level page looks like the image
@@ -1037,7 +1052,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
             <p>The Cycles List tab at the top is useful for looking at the
                suite dependant on its cycle.</p>
             <p>As you can see below this functionality is not utilised for
-               rose stem suites.</p>
+               rose-stem suites.</p>
             <img src="images/rose_bush6.png" width="85%" id="rb6"/>
             <br/>
             <br/>
@@ -1196,7 +1211,7 @@ rose sgc --name=SUITE_ID</font>
             <ol>
             <li>
             <p>Now we know some of the more regularly used functionality of the
-               gcylc GUI we should let our rose stem suite run.</p>
+               gcylc GUI we should let our rose-stem suite run.</p>
             <p>Release the suite using the <code>Play</code> button on the top
                left of the gcylc GUI.</p>
             <p>Have a look around the gcylc GUI and find some of the functions
@@ -1419,6 +1434,8 @@ rosie go &amp;
                <p>Hover your mouse over each of the icons on the far left of
                   the Rosie Go GUI and find out what each of the images mean.</p
 >
+               <p>Please note difference in icons etc are likely as different
+                  systems and desktops have different Apperance Preferences set.</p>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -1635,7 +1652,7 @@ Clay
 12.14,0.2864,0.001432,0.4523,0.3692,0.2696,1.244E+06,0.2192,0.17
 </pre>
                   <br/>
-                <h3>Copy u-ai828/u-ai829/u-ai843/u-al388 and edit the rose-suite.info</h3>
+                <h3>Copy either u-ai828 (Meto) or u-ai829 (VM) or u-ai843 (JAMSIN) or u-al388 (MONSooN) and edit the rose-suite.info</h3>
                 <p>Chose one of the following two options to create your copy
                    of the suite.</p>
                 <ol>
@@ -1704,12 +1721,19 @@ not add them.</p>
 
 </li>
                   <li>Change the output directory name, create the relevant directory, change the run ID.
-                  <p> In the <code>app/jules/rose-app.conf</code> file change
+                  <p> In the <code>app/jules/rose-app.conf</code> file below the 
+<pre>
+[command]
+default=rose-jules-run
+</pre>
+            section add:
 <pre>
 [file:./sand/output]
 mode=mkdir
 source=
-
+</pre>
+                    and change:
+<pre>
 [namelist:jules_output]
 output_dir='./sand/output'
 run_id='sand'
@@ -1717,12 +1741,12 @@ run_id='sand'
 </li>
 </ol>
                   <h3>Change the spinup.</h3>
-                  <p>In the <code>app/jules/rose-app.conf</code> file change</p 
+                  <p>In the <code>app/jules/rose-app.conf</code> file change</p> 
 <pre>
 [namelist:jules_spinup]
 max_spinup_cycles=10
 nvars=1
-spinup_end='1977-12-31 23:00:00'
+spinup_end='1997-12-31 23:00:00'
 spinup_start='1996-12-31 23:00:00'
 terminate_on_spinup_fail=.false.
 tolerance=5.0
@@ -1754,11 +1778,18 @@ rose suite-run --new --name=sand_&lt;SUITE_ID&gt;
                  <ol>
                  <li>Copy your recent suite, &lt;SUITE_ID&gt; using 
                     <code>rosie copy &lt;SUITE_ID&gt;</code> and get a new suite
-                    and new suite ID for you changes and commit it. </li>
+                    and new suite ID for your changes and commit it. </li>
                  <li>Create a branch from the current suite and the use 
-                     <code>fcm sw &lt;BRANCH_NAME&gt;</code>, remember to 
-                     commit your changes and to check where you are with
-                     <code>fcm info</code>.
+                     <code>fcm sw &lt;BRANCH_NAME&gt;</code>.
+                     <br/>Remember to always:
+                     <ul>
+                     <li> check where you are on the repository (the trunk or 
+                         a branch) with the fcm command <code>fcm info</code> 
+                         or by using rosie go</li>
+                    <li> check the status of the current version of the suite that you are working on</li>
+                    <li> COMMIT any changes and to the repository</li>
+                    <li> list the branches that are available for that suite</li>
+                    </ul>
                      <br/>
 
             <div class="panel-group" id="accordion">
@@ -1780,7 +1811,22 @@ rosie copy u-ai828 # u-ai829 (VM) or u-ai843 (JASMIN) or u-al388 (MONSooN)
 OR (my preferred method, but it is a personal preference)
 
 cd /USER/roses/u-ai828
+# for where you are in the repository, a branch or the trunk
+fcm info
+# OR rosie go
+rosie go &amp;
+<img src="images/rosie_go_branches.png" width="80%" id="res"/>
+# from this example we can see that the local copy of the suite-id u-ai828 is not the trunk but the branch "sand_prac5"
+            <br/>
+# check the status to see if there is anything to commit
+fcm st
+# commit uncommitted changes
+fcm ci
+# list all the current branches for this suite on the repository
+fcm bls
+# create a branch called clay 
 fcm bc clay #for branch-create
+# switch to the clay branch
 fcm sw clay #for switch branch
 #or fcm sw https://code.metoffice.gov.uk/svn/roses-u/a/i/8/2/8/clay
                             </pre>
@@ -1797,11 +1843,14 @@ rose suite-run --new --name=&lt;SOIL_TYPE&gt;_&lt;SUITE_ID&gt;
 </p>
                      <br/>
                      To switch back to the original use <code>fcm sw trunk</code>
-                     you can check your branch names using <code>fcm bls</code></li>
+                     <strong>BUT first always remember to commit your changes
+                     back to the branch using</strong> <code>fcm ci</code>
+                     <strong>before switching</strong>.
+                     Note, you can check your branch names using <code>fcm bls</code></li>
                  </ol>
                  <br/>
-                 <p>The first is the simplest, but I personally prefer the
-                    second as it groups them suites together.</p>
+                 <p>The first method is the simplest, but I personally prefer the
+                    second as it groups similar suites together with one id.</p>
                  <br/>
                  <p>An examples of how the Rosie Repository Trac pages look follow:</p>
                  <a href="https://code.metoffice.gov.uk/trac/roses-u/browser/a/i/8/2/8">u-ai828</a>
@@ -1871,7 +1920,7 @@ clearly by eye but MatLab and Iris display the difference.</p>
                <p>
                In Practical 5 we copied the suite three times, sand, loam and clay.
                Each had its own suite id and we ran each suite to get the results.
-               However, this is not the most effect way of running the suite to
+               However, this is not the most effective way of running the suite to
                get the data as each time it run the <code>fcm_make</code> task.
               </p>
               <br/>
@@ -1913,7 +1962,17 @@ clearly by eye but MatLab and Iris display the difference.</p>
 can_rad_mod=4
 
 command line, view the file u-ai828/app/jules/rose-app.conf
-rose edit -&gt; jules &gt; namelist &gt; jules_vegetation <code>can_rad_mod</code>
+
+OR
+
+rose edit
+First check the metadata is pointing to the correct location (change to point to your copy of the code)
+e.g.
+for jules ~kerryday/JULES/vn4p8/trunk/rose-metadata/jules-standalone/vn4.8 
+for fcm_make ~kerryday/JULES/vn4p8/trunk/rose-metadata/jules-fcm-make/vn4.8
+Refresh the metadata using the Metadata tab at the top of rose edit.
+Then:
+ -&gt; jules -&gt; Namelist configuration -&gt; Sciecne settings -&gt; Vegetation options <code>can_rad_mod</code> (about half way down). REMEMBER to expand your rose edit window to see all of the options.
                             </font>
 <img src="images/rose_edit_rad.png" width="95%" id="rer"/>
                             </pre>
@@ -1926,7 +1985,7 @@ rose edit -&gt; jules &gt; namelist &gt; jules_vegetation <code>can_rad_mod</cod
             <p>To change the suite design we have to edit the text files in the
                suite using a text editor.</p>
             <p>First we must either copy <code>u-ai828/u-ai829/u-ai843/u-al388</code> or create
-               a branch of <code>u-ai828/u-ai829/u-ai843/u-al388</code> and then switch to it.
+               a branch of either <code>u-ai828/u-ai829/u-ai843/u-al388</code> and then switch to it.
             </p>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
@@ -1971,7 +2030,7 @@ CANRADMOD=['canradmod_1', 'canradmod_2', 'canradmod_3', 'canradmod_4', 'canradmo
 <pre>
         graph = """
                 {% for crm in CANRADMOD %}
-                    fcm_make => jules_{{crm}}
+                    fcm_make =&gt; jules_{{crm}}
                 {% endfor %}
                 """
 </pre>
@@ -1990,7 +2049,46 @@ CANRADMOD=['canradmod_1', 'canradmod_2', 'canradmod_3', 'canradmod_4', 'canradmo
  ...        --ntasks={{ OMP_NUM_THREADS * MPI_NUM_TASKS}}
 {% endfor %}
 </pre>
-            The optional configuration file is selected by the suite using the
+
+
+          <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyFive">
+                        <span class="glyphicon"></span>
+                        How To and Answer in full
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapseTwentyFive" class="panel-collapse collapse">
+                   <div class="panel-body">
+                        <div class="row">
+                            <pre>
+{% for crm in CANRADMOD %}
+    [[jules_{{crm}}]]
+        inherit = None, SPICE
+        script = "mkdir -p output ; rose task-run --path= --path=share/fcm_make/build/bin --app-key=jules --opt-conf-key={{crm}}"
+        [[[job]]]
+            execution time limit = {{ WALLTIME }}
+        [[[remote]]]
+            host = {{ ROSE_ORIG_HOST }}
+        [[[environment]]]
+            JULES_PATH      = {{ JULES_PATH }}
+            MPI_NUM_TASKS   = {{ MPI_NUM_TASKS }}
+            OMP_NUM_THREADS = {{ OMP_NUM_THREADS }}
+            NPROC           = {{ MPI_NUM_TASKS }}
+        [[[directives]]]
+            # MPI_NUM_TASKS * OMP_NUM_THREADS
+            --ntasks={{ OMP_NUM_THREADS * MPI_NUM_TASKS}}
+{% endfor %}
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+  The optional configuration file is selected by the suite using the
             <code>--opt-conf-key={{crm}}</code> syntax/code, also Jinja2.</li>
             <h3>Add optional configurations files to the JULES-Rose suite</h3>
             <li>We need to add an <code>opt</code> folder to the jules app.</li>
@@ -2162,6 +2260,8 @@ This means that there are optional configurations, if you click on the icon
 it displays the optional configurations, note there is none for canradmod_4 as
 it is the same as the default option.
 </font>
+If you click on the icon rose edit looks like:
+<img src="images/rose_edit_rad3.png" width="95%" id="rer"/>
             </ol>
                             </pre>
                         </div>
@@ -2171,11 +2271,13 @@ it is the same as the default option.
             <br/>
 
 
-            <h3>Adding plots</h3>
+            <h3>Adding plots - ONLY to be done if you have Iris installed</h3>
             <p>You may want to do some plotting of the data and you can add this
                to be part of your suite.</p>
             <p>Here we will see how to do this using a Python Iris script.</p>
 <pre>
+# always commit your changes before sw
+fcm ci
 # switch to the trunk
 fcm sw trunk
 # Create a new branch for the plotting suite
@@ -2250,7 +2352,7 @@ def plot_data(files, curr_var, filename):
     for var in curr_var:
         for crm in CANRADMOD:
             qplt.plot((files[crm]).extract(var)[0], label = crm)
-        plt.legend()
+        plt.legend(loc='best')
         savefile = filename[x]
         plt.savefig(savefile)
         x += 1

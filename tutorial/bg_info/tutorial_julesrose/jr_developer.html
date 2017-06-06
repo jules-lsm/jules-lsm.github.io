@@ -37,7 +37,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Developer material <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header">Developer Tutorials</li>
-                                <li><a href="#bjrstem">Basics of JULES rose stem</a></li>
+                                <li><a href="#bjrstem">Basics of JULES rose-stem</a></li>
                                 <li><a href="#bcode">Basics of Coding -UMDP3, Reviewing</a></li>
                                 <li><a href="#bjrsuite">Running a basic JULES-Rose suite</a></li>
                                 <li role="separator" class="divider"></li>
@@ -45,7 +45,7 @@
                                 <li><a href="#Pracs">Practical's</a></li>
                                 <li><a href="#fjre">Further JULES Rose Edit</a></li>
                                 <li><a href="#fjrsuite">Further JULES-Rose suites - duration, domain</a></li>
-                                <li><a href="#fjrstem">Further JULES rose stem - namelists, modules</a></li>
+                                <li><a href="#fjrstem">Further JULES rose-stem - namelists, modules</a></li>
                                 <li><a href="#ticks">More on Tickets - Populating</a></li>
                                 <li><a href="#hot">HoT branches and merging branch into it</a></li>
                                 <li><a href="#umj">UM-JULES</a></li>
@@ -87,12 +87,12 @@
             <h1>Developer JULES-Rose Tutorial</h1>
             <p>This tutorial and practicals aim to cover the following topics:
             <ul>
-                <li><a href="#bjrstem">Basics of JULES rose stem</a></li>
+                <li><a href="#bjrstem">Basics of JULES rose-stem</a></li>
                 <li><a href="#bcode">Basics of Coding -UMDP3, Reviewing</a></li>
                 <li><a href="#bjrsuite">Running a basic JULES-Rose suite</a></li>
                 <li><a href="#fjre">Further JULES Rose Edit</a></li>
                 <li><a href="#fjrsuite">Further JULES-Rose suites - duration, domain</a></li>
-                <li><a href="#fjrstem">Further JULES rose stem - namelists, modules</a></li>
+                <li><a href="#fjrstem">Further JULES rose-stem - namelists, modules</a></li>
                 <li><a href="#ticks">More on Tickets - Populating</a></li>
                 <li><a href="#hot">HoT branches and merging branch into it</a></li>
                 <li><a href="#umj">UM-JULES</a></li>
@@ -112,7 +112,7 @@
             <p>
             OR have:
             <ul>
-            <li>Experience running rose stem and JULES-Rose suites.</li>
+            <li>Experience running rose-stem and JULES-Rose suites.</li>
             <li>Made basic changes to JULES-Rose suites.</li>
             <li>Experience with basic FCM commands.</li>
             </ul>
@@ -121,30 +121,110 @@
 
         <br/>
 
-        <h2><a id="bjrstem">Basics of JULES rose stem</a></h2>
+        <h2><a id="bjrstem">Basics of JULES rose-stem</a></h2>
         <p>
         <ul>
             <div class="page-header">
-                <h3>What is JULES rose stem?</h3>
+                <h3>What is JULES rose-stem?</h3>
             </div>
             <div class="well">
                <p>This is the test battery/suite of regression tests that code development changesets must be tested on.</p>
                <p>JULES needs to pass all of the tests for code to accepted on the trunk.</p>
-               <p>Use the command <code>rose stem --group-all</code> to test all.</p>
-               <p>Note for quick preliminary testing use <code>--group=loobos</code>.</code>
+               <p>Use the command <code>rose stem --group=all</code> to test all.</p>
+               <p>Note for quick preliminary testing use <code>--group=tutorial</code> for the VM, JASMIN, cehlw1, niwa or <code>--group=tutorial_linux</code> for meto-linux or <code>group=tutorial_xc40</code> for the meto-xc40 (this includes MONSooN).</p>
+               <br/>
+               <p>Other groups are:
+               <ul>
+               <li><code>loobos</code></li>
+               <li><code>gswp2</code></li>
+               <li><code>linux</code>, meto only</li>
+               <li><code>xc40</code>, meto only</li>
+               <li><code>tutorial</code></li>
+               <li><code>tutorial_linux</code>, meto only</li>
+               <li><code>tutorial_xc40</code>, meto only</li>
+               </ul>
                <br/>
                <br/>
-               <h4>Running rose stem</h4>
-               <p>The following is an example/reminder of how to run rose stem.
+               <h4>Running rose-stem</h4>
+               <p>The following is an example/reminder of how to run rose-stem.
                   Use it to help with the practicals.</p>
 <pre>
-# Checkout the code to run rose stem test for
+# Checkout the code to run rose-stem test for
 mkdir -p ~/jules/vn4p8
 cd ~/jules/vn4p8
 fcm co fcm:jules.x_tr@vn4.8
 cd ~/jules/vn4p8/trunk
-rose stem --group=all --new --name=my_vn4p8tr_test
+rose stem --group=tutorial --new --name=my_vn4p8tr_test
 </pre>
+            <p>
+            <h4>Rose-stem workflow</h4>
+            While this is running we can discuss the workflow of rose-stem.
+            <p>
+<pre>
+fcm_make_debug          gswp2_*           nccmp gswp2_*
+      &amp;           =&gt;       &amp;        =&gt;          &amp;          =&gt; housekeep
+fcm_make_omp            loobos_*          nccmp_loobos_*
+</pre>            
+            This can be explained by the following flow diagram:
+<pre>
+fcm-make task  =&gt;  JULES configurations either  =&gt;  netcdf comparison task with KGO,          =&gt; tidy up task
+                  using loobos or GWSP" data       Known Good Output for each JULES config.
+</pre> 
+            The JULES output for a configuration from a trunk run version of the code, usually saved in the location /jules/rose-stem-kgo/vn#.# is known as the Known Good Output (KGO).
+            The KGO is compared to the current output created by the rose-stem jules configuration using a netcdf comparison tool, nccmp.
+            If any of the nccmp tasks fail then the output in the current rose-stem tests does not match the KGO and this must be justified.
+            <br/>
+            <strong>Justified reasons for changes to KGO and nncmp failures</strong>
+            <br/>
+            <ul>
+            <li>It a new configuration and therefore no previous KGO existed</li>
+            <li>There was a mistake in the orginal code and this has been corrected, plots and numbers show evidence of the improvment and have module leader approval and they MUST be Cc'ed in the Ticket.</li>
+            <li>The code has been updated with new science and plots/figures/paper etc provide evidence</li>
+            </ul>
+            <p>
+            Present Module leaders are:
+            <table style="width:100%">
+              <tr>
+                <th>Module</th>
+                <th>Leader(s)</th>
+                <th>Email(s)</th>
+              </tr>
+              <tr>
+                <td>Surface</td>
+                <td>Richard Essery</td>
+                <td>richard.essery@ed.ac.uk</td>
+              </tr>
+              <tr>
+                <td>Hydrology</td>
+                <td>Anne Verhoef or Nic Gedney</td>
+                <td>a.verhoef@reading.ac.uk and nicola.gedney@metoffice.gov.uk</td>
+              </tr>
+              <tr>
+                <td>Vegetation</td>
+                <td>Anna Harper and Lina Mercado and Karina Williams</td>
+                <td>a.harper@exeter.ac.uk and l.mercardo@exeter.ac.uk and karina.williams@metoffice.gov.uk </td>
+              </tr>
+              <tr>
+                <td>Biochemistry</td>
+                <td>Sarah Chadburn and Mat Williams</td>
+                <td>sarah.chadburn@metoffice.gov.uk/s.e.chadburn@exeter.ac.uk and mat.williams@ed.ac.uk</td>
+              </tr>
+              <tr>
+                <td>Biogenic Fluxes</td>
+                <td>Oliver Wild and Gerd Folberth</td>
+                <td>o.wild@lancaster.ac.uk and gerd.folberth@metoffice.gov.uk</td>
+              </tr>
+              <tr>
+                <td>Technical Changes</td>
+                <td>Douglas Clark and Kerry Smout-Day</td>
+                <td>dbcl@ceh.ac.uk and kerry.smout-day@metoffice.gov.uk</td>
+              </tr>
+            </table>
+            </p>
+            </p>
+            </p>
+            <br/>
+            <br/>
             <h4>Questions</h4>
             <ol>
                 <li>What are the three ways for looking at the job stderr?</li>
@@ -188,14 +268,14 @@ These changes have to be justified usually with plots and approved by the code o
                 </div>
             </div>
             <div class="page-header">
-                <h3>Running JULES rose stem and creating a branch and testing 
+                <h3>Running JULES rose-stem and creating a branch and testing 
                     the new code in it</h3>
             </div>
             <div class="well">
             <p>Please refer to the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">Working Practices for JULES development</a>.
             <br/>
             <p>Here we will make a basic change to the JULES code and test it
-               with the rose stem test battery of tests.</p>
+               with the rose-stem test battery of tests.</p>
             <p>We know that the JULES code passes all the tests from running it
                earlier, we will make a branch for your change and see if the
                branch change does not create failures.</p>
@@ -218,9 +298,9 @@ These changes have to be justified usually with plots and approved by the code o
 
 --Add your commit message ABOVE - do not alter this line or those below--
 --FCM message (will be inserted automatically)--
-Created /main/branches/dev/kerryday/vn4.8_tutorial_bc_rosestem from /main/trunk@5320.
+Created /main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem from /main/trunk@5320.
 --Change summary (not part of commit message)--
-A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/kerryday/vn4.8_tutorial_bc_rosestem
+A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
 </pre>
            Add a comment to the top of it and then close, save it and accept
            the change.
@@ -232,16 +312,16 @@ A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/kerryday/vn4.8_tu
 [info] vim: starting commit message editor...
 Change summary:
 --------------------------------------------------------------------------------
-A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/kerryday/vn4.8_tutorial_bc_rosestem
+A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
 --------------------------------------------------------------------------------
 Commit message is as follows:
 --------------------------------------------------------------------------------
-Created /main/branches/dev/kerryday/vn4.8_tutorial_bc_rosestem from /main/trunk@5320.
+Created /main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem from /main/trunk@5320.
 --------------------------------------------------------------------------------
 Create the branch?
 Enter "y" or "n" (or just press &lt;return&gt; for "n") y
 Committed revision ####.
-[info] Created: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/kerryday/vn4.8_tutorial_bc_rosestem
+[info] Created: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
 </font>
            </pre>
            <h4>Working on the Branch</h4>
@@ -249,18 +329,19 @@ Committed revision ####.
               development I use the first and for suite development I use the
               second. Both have different merits and are given below.</p>
           <ol>
-          <li>Check out a copy to a new directory.
+          <li>Check out a copy to a new directory in your ~jules/vn4p8/ directory.
              <br/>
-             <p>For example: <code>fcm co fcm:jules.x_br/dev/USERNAME/BRANCH_NAME</code> and then move to that directory.</li>
+             <p>For example: <code>fcm co fcm:jules.x_br/dev/MOSRS_USERNAME/BRANCH_NAME</code> and then move to that directory.</li>
           <li>Switch to the branch from within the directory of trunk@vn4.8.
              <br/>
-             <p>For example: <code>fcm sw fcm:jules.x_br/dev/USERNAME/BRANCH_NAME</code>.</li>
+             <p>For example: <code>fcm sw fcm:jules.x_br/dev/MOSRS_USERNAME/BRANCH_NAME</code>.</li>
           </ol>
           <p>Here we will use the first method (later we will use the second).</p>
           <br/>
           <pre>
-cd ~jules/
-fcm co fcm:jules.x_br/dev/USERNAME/vn4.8_tutorial_bc_rosestem
+mkdir -p ~jules/vn4p8
+cd ~jules/vn4p8
+fcm co fcm:jules.x_br/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
 cd vn4.8_tutorial_bc_rosestem
 </pre>
            <p>HELPFUL HINT: if you forget your branch name you can list them using:</p>
@@ -275,14 +356,14 @@ fcm info
 <font color=blue>
 Path: .
 Working Copy Root Path: /USER/jules/vn4.8_tutorial_bc_rosestem
-URL: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/USERNAME/vn4.8_tutorial_bc_rosestem
-Relative URL: ^/main/branches/dev/USERNAME/vn4.8_tutorial_bc_rosestem
+URL: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
+Relative URL: ^/main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
 Repository Root: https://code.metoffice.gov.uk/svn/jules
 Repository UUID: ac5b6c67-d81e-4bef-bedc-f37a4dd2bd0a
 Revision: 1222
 Node Kind: directory
 Schedule: normal
-Last Changed Author: USERNAME
+Last Changed Author: MOSRS_USERNAME
 Last Changed Rev: 1234
 Last Changed Date: 2030-12-01 09:21:40 +0000 (Mon, 01 Dec 2030)
 
@@ -296,7 +377,7 @@ fcm st
             Note we are not keeping this change so it is not important
             what it is.
            <pre>
-cd ~jules/vn4.8_tutorial_bc_rosestem/
+cd ~jules/vn4p8/vn4.8_tutorial_bc_rosestem/
 fcm st
 
 #this returns nothing
@@ -318,16 +399,16 @@ fcm st
             <br/>
            <p>Now to make a change that we want to keep and test:</p>
            <pre>
-cd ~jules/vn4.8_tutorial_bc_rosestem/
+cd ~jules/vn4p8/vn4.8_tutorial_bc_rosestem/
 # move to the source/root directory of the JULES code
-cd src/snow
-# edit tridag.F90 ln 68 to be this:
+cd src/science/snow
+# edit tridag_mod.F90 ln 68 to be this:
   gamm(n) = c(n-1) / beta_2
 # save and close the file
            </pre>
            <h4>Test the change</h4>
            <ol>
-           <li>Run rose stem</li>
+           <li>Run rose-stem</li>
            <li>Look at the appropriate logs to provide evidence of success or
                failure</li>
            <li>What three methods can you use to find the answer for 2.?</li>
@@ -339,7 +420,7 @@ cd src/snow
                     <h4 class="panel-title">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">
                         <span class="glyphicon"></span>
-                        Answers
+                        Answers and further instructions
                         </a>
                     </h4>
                 </div>
@@ -348,6 +429,8 @@ cd src/snow
                         <div class="row">
                             <pre>
                             <font color=green>
+rose stem --group=tutorial --new #for meto-linux use --group=tutorial_linux
+
 Example failures and successes:
 Fails - fcm_make_meto_linux_gfortran_omp
 Fails - fcm_make_meto_linux_gfortran_debug
@@ -360,9 +443,10 @@ Succeed - fcm_make_meto_xc40_cce_debug
                             </font>
                             </pre>
                             <img src="images/fail_rs.png" width="95%" id="fail1"/>
+                            <br/>
                             <p>job stderr states IMPLICIT NONE....for data object "BETA_2"</p>
                            <p>Which is the change we made.</p>
-                           <p>Now revert the change using FCM</p>
+                           <p>Now <strong>revert</strong> the change using FCM</p>
                            <br/>
                           <p>The three methods are the gcylc GUI, Rose Bush and the cylc-run/ directory.</p>
                         </div>
@@ -377,12 +461,47 @@ Succeed - fcm_make_meto_xc40_cce_debug
             <br/>
             <p><strong>In the developer tutorial we will add a new variable, 
                a new module etc.</strong></p>
-               <p>We have created a branch, making a change then reverting it, testing
-                  a change, finding the error and correcting it.</p>
+               <p>We have created a branch, maked a change then reverted it, 
+                  made another change, tested the change, found the error and
+                  corrected it by reverting the change.</p>
               <br/>
+           <br/>
+           <h3>A little more background information on the code repository...What does HEAD mean, etc?</h3>
+           <p>The JULES code is part of the MOSRS repository.</p>
+           <p>The code is "tagged" at every release with a version number, for
+              example vn4.8.</p>
+           <p>The working practices state that we should work at a "tagged"
+              release.
+              For example <code>fcm bc my_jules_change fcm:jules.x_tr@vn4.8</code>
+              this checkouts out the JULES code at vn4.8 and would provide the
+              branch main/branches/dev/MOSRS_USERNAME/vn4.8_my_jules_change .
+           </p>
+           <p>As from the day that "tagged" version of the JULES code is
+              released the trunk is open for new changes to be added.
+              New changes are added upto about three weeks before the next
+              "tagged" version of the code is released.
+              In that three weeks the next "tagged" release is being created and
+              fully tested.
+            </p>
+            <p>Near the end of a release cycle you may be asked to create a
+               HEAD of Trunk branch, this is known as a HoT branch and is
+               explained later.
+               Instead of using <code>fcm:jules.x_tr@vn4.8</code> you would use
+               <code>fcm:jules.x_tr@HEAD</code> and the branch created would
+               start with a r#### instead of vn#.# where the r#### is the
+               revision number of the JULES code respository that the branch
+               was created from.
+            </p>
+           <p>Sometimes you are required to select a JULES code revision,
+              for example if you want to work from a revision known committed
+              branch.
+              Instead of using <code>fcm:jules.x_tr@vn4.8</code> you would use
+              <code>fcm:jules.x_tr@r###</code> and the branch created would
+              start with a r#### instead of vn#.# where the r#### is the
+              revision number of the JULES code respository that the branch
+              was created from.
+           </p>
 
-
-            <br/>
             </div>
         </ul>
 
@@ -398,12 +517,34 @@ Succeed - fcm_make_meto_xc40_cce_debug
                 <p>It is known that not all of the current JULES code meets the standards and it is being constantly improved/developed to achieve this goal.</p>
                 <p>No new code is allowed on the trunk unless it meets the coding standards.</p>
                 <br/>
-                <p>Reviewing is a very important process, not only must code meet the coding standards and pass the regression testing (rose stem) it must also go through a two stage review process.
-                 <ul><li>Stage one is the Sci/Tech Review - code must be approved by the appropriate module owner(s) and reviewed Scientifically/Technically by a specialist in the area whom has not been involved in the development of the code.</li>
+                <p>Reviewing is a very important process, not only must code meet the coding standards and pass the regression testing (rose-stem) it must also go through a two stage review process.
+                 <ul><li>Stage one is the Sci/Tech Review - code must be approved by the appropriate module leader(s) which are to be Cc'ed in the Ticket.
+                  Then the ticket can be reviewed Scientifically/Technically by a specialist in the area whom has not been involved in the development of the code. Module leaders can give guidance on a suitable reviewer if required.</li>
                  <li>Stage two is the Code Review - the code must meet the coding standards and be as efficient as possible.
-                     At present the code reviewer is either Kerry Smout-Day (JULES System Manager) or a member of the UM Systems Team.</li></ul></p> 
+                     At present the code reviewer is either the JULES System Manager or a member of the UM Systems Team.</li></ul></p> 
             <br/>
             </div>
+            <div class="page-header">
+                <h3>What are the top 10 Gotchas for code style in reviews?</h3>
+            </div>
+            <div class="well">
+               <p>
+               <ul>
+               <li>Brackets - please use brackets to make the equations easier to understand and check for typos.</li>
+               <li>Alignment - please align code, this is especially important multi-line equations as it makes them easier to follow. </li>
+               <li>Spaces around mathematical operators - makes equations easier to read and review.</li>
+               <li>Comments - more are better, but keep them relevant and remember to answer all questions before submission for review. </li>
+               <li>Align "&amp;" at column 79- easier to read. </li>
+               <li>80 character line limit - easier to read. </li>
+               <li>Remove trailing white spaces - easier to read. </li>
+               <li>All Fortran keywords must be UPPER case and with the correct spacing, i.e. "END IF", "END DO", "IF (", "MAX(", "EXP(", LEN, KIND etc. Note the code at vn4.8 has had all of these corrected for the repository. </li>
+               <li>trac.log evidence for rose stem test not being in the TicketSummary? page or not being the latest commit to the branch repository. </li>
+               <li>rose config-dump - please run "rose config-dump &lt;FILENAME&gt;" on rose files that you have edited for them to be auto checked and corrected. </li>
+               </ul>
+               </p>
+            <br/>
+            </div>
+
         </ul>
 
 
@@ -419,6 +560,8 @@ Succeed - fcm_make_meto_xc40_cce_debug
                <li>At command line</li>
 <pre>
 # first checkout the suite if there is not already have a local copy
+# remember Rosie commands can be executed from anywhere and will populate the 
+# correct directory for you, i.e. the roses/ directory.
 rosie checkout &lt;SUITE_ID&gt;
 # change to the directory of the local copy
 cd ~roses/&lt;SUITE_ID&gt;
@@ -427,6 +570,8 @@ rose suite-run --new #--name=&lt;DIFFERENT_NAME_IF_REQUIRED&gt;
             <li>Via Rose Edit</li>
 <pre>
 # first checkout the suite if there is not already have a local copy
+# remember Rosie commands can be executed from anywhere and will populate the
+# correct directory for you, i.e. the roses/ directory.
 rosie checkout &lt;SUITE_ID&gt;
 # change to the directory of the local copy
 cd ~roses/&lt;SUITE_ID&gt;
@@ -548,10 +693,11 @@ or
 
 rosie go
 # search for u-ai828 #(u-ai829 VM, u-ai843 JASMIN, u-al388 MONSooN)
-# double click on it to check it out, this checks it out locally and opens Rose Edit
+# double click on it to check it out, this checks it out locally to your roses directory and opens Rose Edit
 
 # at command line
 rosie checkout u-ai828 #(u-ai829 VM, u-ai843 JASMIN, u-al388 MONSooN)
+# this checks it out locally to your roses directory
 cd ~/roses/u-ai828 #(u-ai829 VM, u-ai843 JASMIN, u-al388 MONSooN)
 rose edit 
                             </pre>
@@ -560,7 +706,43 @@ rose edit
                 </div>
             </div>
             <br/>
-            <p>Change the <code>WALLTIME</code> in the suite conf -&gt; Runtime configuration from 180 to 160.</p>
+            <p>Enable/point to the JULES code metadata if you have not already done so.
+            </p>
+            <p>Follow the
+                   instructions below:<br/>
+                   For example point to the trunk version of the JULES code metadata:
+                   <code>/project/jules/vn4.8/trunk/</code> to the
+                   <strong>front</strong> of
+                   both of the paths for fcm_make and jules metadata.</p>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseNineteen">
+            <span class="glyphicon"></span>
+            Help on where to find the 3 locations
+            </a>
+            </h4>
+            </div>
+            <div id="collapseNineteen" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+            <ol>
+            <font color="green">
+            <li>Index section on the left side -&gt; fcm_make -&gt; Build configuration -&gt; Path to JULES source:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>
+            <li>Index section on the left side -&gt; fcm_make -&gt; meta:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>            <li>Index section on the left side -&gt; jules -&gt; meta:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-standalone/HEAD/rose-meta.conf</code>cd            </li>
+            </li>
+            </font>
+            </ol>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br/>
+               <p>Save and check the changes.</p>
+
+            <br/>
+            <p>Change the <code>WALLTIME</code> in the suite conf -&gt; Runtime configuration from PT3H to PT2H40M.</p>
             <p>The <code>WALLTIME</code> should have changed colour from black
                to blue.
                There should be blue dots next to suite conf and Runtime 
@@ -576,8 +758,8 @@ rose edit
                 <p>In the icon panel of the Rose Edit GUI there is a blank box 
                    and an icon on binoculars next to it.
                    This is the search box and button.<p/>
-                <p>Search <code>output</code>, press the search button until
-                   all of the files with output are found.</p>
+                <p>Search <code>output</code>, press the search button 
+                   repeatedly until all of the files with output are found.</p>
                 <br/><img src="images/rose_edit_search.png" width="80%" id="res"/>
             <br/>
             <h3>Make changes and undo the last one, save and commit changes</h3>
@@ -586,7 +768,7 @@ rose edit
               <li>Change can_rad_mod from 4 to 1.</li>
               <li>Change the location of the output from './output' to './tester/output'
               <p>What is the full path location that the new output directory would located?</p></li>
-              <li>Change <code>JULES_OMP</code> to omp.</li>
+              <li>Change the <code>JULES_OMP</code> option to omp.</li>
               </ul>
               <p>Save the changes.</p>
               <p>How do you know that the changes are saved?</p>
@@ -610,7 +792,7 @@ It is located in jules -&gt; namelist -&gt; jules_vegetation the second box down
 Search "output"
 It is located in jules -&gt; namelist -&gt; jules_output the second box down, output_dir.
 Search "JULES_OMP"
-It is located in fcm -&gt; env the third box down.
+It is located in fcm -&gt; Build Configuration the third box down.
 <font color=green>The blue dots and text go.</font>
                             </pre>
                         </div>
@@ -618,11 +800,13 @@ It is located in fcm -&gt; env the third box down.
                 </div>
             </div>
             <br/>
-            <p>Now undo the last change as we are not running with omp.
-               This is done my using the <code>Undo</code> button.
+            <p>Now undo the last change as we are not going to run with omp.
+               This is done by using the <code>Undo</code> button.
                In the Rose Edit GUI this is the 6th icon button from the left 
                and is a yellow backward curving arrow.</p>
-            <p>This and the green backward curving arrow directly to the right
+            <p>Note the yellow backwards arrow with a page included in the icon
+               is the <code>Undo Page</code> button.
+            <p>This and the green foreward curving arrow directly to the right
                can be used to undo and redo changes in the order that they
                were made.</p>
             <p>Save the changes so there are only the three changes in total,
@@ -631,7 +815,6 @@ It is located in fcm -&gt; env the third box down.
                This opens a terminal with at the suite directory path.
                Now check for local changes <code>fcm st</code>.</p>
 <pre>
-M       app/fcm_make/rose-app.conf
 M       app/jules/rose-app.conf
 M       rose-suite.conf
 </pre>
@@ -656,71 +839,109 @@ M       rose-suite.conf
                 <br/><img src="images/rose_edit_other.png" width="85%" id="reo"/>
 
             <br/>
-            <h3>View Ignored Variables/Pages and Latent Pages</h3>
+            <h3>View All Ignored Variables/Pages and Latent Pages</h3>
                 <p>Some variable and pages are hidden from users as the default.
                    These are known as <code>Ignored</code> Variable and Pages.</p>
                 <p>We may want to see them in the Rose Edit GUI, they can be 
                    made viewable by: selecting the <code>View</code> tab and
-                   then selecting <code>View Ignored Variables</code>,
-                   <code>View Ignored Pages</code> and 
-                   <code>View Latent Pages</code>.</p>
-                 <p>With <code>View Ignored Variables</code> selected click on
-                    the fcm_make -&gt; env section, it should now display three
+                   then selecting <code>View All Ignored Variables</code>,
+                   <code>View All Ignored Pages</code> and 
+                   <code>View All Latent Pages</code>.</p>
+                 <p>With <code>View All Ignored Variables</code> selected 
+                    click on the fcm_make -&gt; Build Configuration section, 
+                    it should now display three
                     greyed out variables, which have the <code>!!</code> in
                     front of them.
                     This is how you would see then in a text editor, they are 
                     not used which is why they were not displayed.</p>
-                 <p>With <code>View Ignored Pages</code> selected click on
+                 <p>With <code>View All Ignored Pages</code> selected click on
                     the jules -&gt; namelist, it should now display additional
                     namelists, which have the <code>!!</code> in
                     front of them.
                     There should be nine.
                     Click on one it should display:
                     <br/>
-                    <img src="images/rose_edit_ignore.png" width="80%" id="rei"/></p>
+                    <img src="images/rose_edit_ignore.png" width="90%" id="rei"/></p>
                  <p>The <code>Latent Pages</code> are not often required, only
-                    the poll one may be useful at a later date.
+                    the <code>poll</code> option in <code>Fcm Make</code> may be
+                    useful at a later date.
                     They show the possible other know of pages that could be 
                     populated.</p>
  
             <br/>
             <h3>Rose Bush via Rose Edit</h3>
-                <p>If the suite has been run, which it was via Rose Edit in
-                   the User Tutorial, or do it now.
-                   It takes about 10 minutes, use the <code>Play</code> icon
-                   button.
-                   <p>Then Rose Bush, the web browser output page can be invoked.</p>
-                      <p>Either - </p>
-                      <p>Select the <code>Tools</code> tab and then select
-                      <code>View Output</code></p>
+                <p>Please run the suite u-ai828 (meto-linux), or u-ai829 (VM), 
+                   or, u-ai843 (JASMIN), or u-al388 (MONSooN) if you have not
+                   previously run is, note it was part of teh User Tutorial.
+                   the suite takes about 10 minutes to complete, you can run it
+                   by using the <code>Play</code> icon button from the Rose 
+                   Edit GUI.
+                   <p>The output from the run can be accessed viewed in Rose 
+                      Bush (the web browser output pages) by invoking Rose
+                      Bush using one of two options:</p>
+                     <ul> <p><li>Select the <code>Tools</code> tab and then select
+                      <code>View Output</code></li></p>
                       <p>or</p>
-                      <p>Select the <code>View Output</code> folder icon, the 
-                      13th from the left.<p>
+                     <p><li>Select the <code>View Output</code> folder icon, the 
+                      13th from the left.</li></p></ul>
                       <p>Try one of the techniques.</p> 
 
             <br/>
             <h3>Metadata and errors</h3>
+                <h4>What is metadata?</h4>
+                <p>Metadata is included as part of the JULES code to help users understand the intended use of variables, switches, parameters, etc in JULES.</p>
+                <h4>Using metadata</h4>
+                <p>Creating metadata and testing the metadata that you have 
+                   created is covered in <a href="#md">Practical 7</a><p>
                 <p>If a change is made which does not comply with the metadata
-                   Rose Edit provides warnings.</p>
+                   either within the JULES-Rose suite or the JULES-Rose code
+                   Rose Edit provides warnings for the user.</p>
+                <p><strong>Remember that rose edit  warnings/errors can only 
+                   as good as the metadata that is either provided/created by
+                   everyone.
+                   Metadata is very important for ensuring that users use the 
+                   JULES-Rose suite/code as it was intended by the developer/designer.</strong></p>
+                <br/>
+                <p>Let looks at an example of a metadata warning:</p>
                 <p>Note that selecting an invalid value for <code>MPI_NUM_TASKS</code>
                    provides a warning triangle and a red cog next to the 
                    offending variable, see the image below.</p>
                 <br/> <img src="images/rose_edit_warning.png" width="80%" id="rew"/>
                 <br/>
-                <p>The important thing that we have to remember here is that
-                   the Rose Edit can only be as good as the metadata that it is
-                   provided with.
-                   Therefore if we can improve the metadata for a suite then we
-                   should.</p>
-                <br/>
-                <p>This suite works correctly at runtime, but does not use the
-                   metadata in Rose Edit as it is not correctly specified for
-                   Rose Edit.
-                   To do this point it to the copy of the trunk, for example:
-                   <code>/project/jules/vn4.8/trunk/</code> to the front of
+                <p>You should have already pointed the suite to a copy of the 
+                   JULES code metadata for Rose Edit to use. If not follow the
+                   instructions below:<br/>
+                   For example point to the trunk version of the JULES code metadata:
+                   <code>/project/jules/vn4.8/trunk/</code> to the
+                   <strong>front</strong> of
                    both of the paths for fcm_make and jules metadata.</p>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine">
+            <span class="glyphicon"></span>
+            Help on where to find the 3 locations
+            </a>
+            </h4>
+            </div>
+            <div id="collapseNine" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+            <ol>
+            <font color="green">
+            <li>Index section on the left side -&gt; fcm_make -&gt; Build configuration -&gt; Path to JULES source:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>
+            <li>Index section on the left side -&gt; fcm_make -&gt; meta:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>            <li>Index section on the left side -&gt; jules -&gt; meta:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-standalone/HEAD/rose-meta.conf</code>cd            </li>
+            </li>
+            </font>
+            </ol>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br/>
                <p>Save and check the changes.</p>
-               <p>Now the metadata is enabled we can see all of the information
+               <p>With the metadata enabled we can see all of the information
                   on the variables.</p>
                 <br/> <img src="images/rose_edit_meta.png" width="80%" id="rem"/>
                 <br/> <img src="images/rose_edit_meta2.png" width="80%" id="rem2"/>
@@ -728,7 +949,11 @@ M       rose-suite.conf
                    metadata.<p/>
                 <br/> <img src="images/rose_edit_meta4.png" width="80%" id="rem3"/>            
 
-               <p>Select a variable and then right click, <code>Info</code>.
+               <p>Select a variable and then right click, <code>Info</code>
+                <br/>
+                OR
+                <br/>
+                Right click on the icon of a cog for info.
                 <br/> <img src="images/rose_edit_meta3.png" width="80%" id="rem4"/>
                <p>From the image above you can see that the date has to have 
                   the correct format.</p>
@@ -745,17 +970,109 @@ M       rose-suite.conf
             </div>
             <div class="well">
             <h3>Practical 2 will cover:</h3>
-            <p>Changing the JULES-Rose suite to run for a different duration.</p>
             <p>Changing the JULES-Rose suite to run for a different domain.</p>
+            <p>Changing the JULES-Rose suite to run for a different duration.</p>
+            <h3>Changing the JULES-Rose suite to run for a different domain</h3>
+            <p>In JULES there are two ways to change the domain:
+            <ol>
+            <li>Changing the namelist <code>jules_latlon</code> and uses a
+                single site.</li>
+            <li>Changing the namelist  <code>jules_model_grid</code> and uses a
+                gridbox domain.</li>
+            </ol>
+            </p>
+            <p>The first method requires all of the <code>Model grid</code> 
+               variables in the <code>Grid configuration</code> to be
+                <code>false</code>.
+               The Latitude and Longitude must be defined and the Input grid
+               should be set to false and be 1 x 1.
+            </p>
+            <p>
+               For this practical please use one of the following suites:
+               u-ai828 (or u-ai829 for VM or u-ai843 for JASMIN, or u-ai844
+               for remote JASMIN from your desktop, u-al388 MONSooN) and
+               make sure that you have added the metadata as above.</p>
+            <img src="images/rose_edit_dom1.png" width="80%" id="red1"/>
             <br/>
+            <br/>
+            <p>The second method requires Index <code>Input grid</code> -&gt; 
+               <code>grid_is_1d</code> to be set to <strong>true</strong> 
+               and the other four variables to be defined as specified below:
+               <ol>
+               <li><code>Latitude and longitude</code> set to Latitude/Longitude
+               and specifiy the ancil file location for the dataset.</li>
+               <li><code>Longitude</code> set to Longitude
+               and specifiy the ancil file location for the dataset.</li>
+               <li><code>Land fraction</code> needs the ancil file location and
+               the name of the land fraction data.</li>
+               <li><code>Model grid</code> has the sub grid set to true and the
+               boundaries to the lat and long of the domain.</li>
+               </ol>
+               To see an example with the second type of setup see the
+               JULES-Rose suite u-ai509 with the metatdata specified as above.
+               </p>
+            <img src="images/rose_edit_dom2.png" width="80%" id="red2"/>
+            <br/>
+            <strong>Note:</strong>
+            <p>The suite u-ai828 (or u-ai829 for VM or u-ai843 for JASMIN, or
+                u-ai844 for remote JASMIN from your desktop, u-al388 MONSooN)
+                requires <strong>Loobos</strong> data which <strong>is</strong>
+                included within the suite.</p>
+            <br/>
+            <p><strong>Not recommended</strong>: The suite u-ai509 (u-ai510 for VM or u-ai511 for JASMIN) require
+               <strong>GWSP2</strong> data which is very big but part of the 
+               VM install-jules-* extra scripts so can be run on the VM
+               if you have downloaded the data.
+               This data is also available from a FTP site, please see the 
+               Data retrieval section of <a href="http://jules-lsm.github.io/tutorial/bg_info/tutorial_julesrose/jr_rosecylc_setup.html">JULES-Rose Rose/Cylc setup</a>
+            </p>
+            <p>
+               Note this suite takes a while to run, about 25 mins.</p>
+            <p><strong>Recommended</strong>: For a much faster running suite <strong>use</strong> u-aj012 (u-aj013 for VM or
+               u-aj014 for JASMIN + remote JAMSIN, for MONSooN u-al438).
+               The suite are the "same" as u-ai509 but they run for only 1 month
+               and instead of 1 year and therefore takes about 5 minutes to run.</p>
+            <p>Change both suites, <code>u-ai828</code> and <code>u-aj012</code>
+              (or their respective equivalent for the platform you are using):</p>
+              <ul>
+              <li>The u-ai828 suite to run for a different site, Latitude 53.32 and
+                  Longitude 0.0.</li>
+              <li>The u-aj012 suite to run over the gridbox lat 53.5 55.5, long -1.0 1.0.</li>
+              <li><strong>Extension task if you have time</strong>: The u-aj012 suite again but to run globally (use u-ah270 for help),
+                  note running this will take a very long time so you may want
+                  to use u-ai511 for testing as it is a cut down of the full
+                  suite.</li>
+
+            <br/>
+
            <h3>Changing the JULES-Rose suite to run for a different durations</h3>
            <br/>
-           <h4><strong>For this section please use the JULES-Rose suite u-aj012</strong></h4>
-           <br/>
-           <p>For the VM use u-aj013, for JASMIN use u-aj014, for MONSooN use
-              u-al438.</p>
+           <h4><strong>For this section please use the JULES-Rose suite u-aj012 
+             (Meto), for the VM use u-aj013, for JASMIN use u-aj014, for
+              MONSooN use u-al438</strong></h4>
            <br/>
            <p>The suite uses GSWP2 data for one month.</p>
+           <h4>One off Method v Flexiable Method</h4>
+           <p>The one off method is a quick and very simple solution but
+              means that you have to remember where you made the change and 
+              what it was called in the appropriate <code>app</code>. 
+              Whereas using the flexible method means all variables that a user
+              may want to change are <strong>all</strong> in the same file, the 
+              <code>rose-suite.conf</code> and passed to the correct location
+              when the developer setup the suite for you. </p>
+          <br/>
+          <p><strong>Why use the rose-suite.conf file?</strong>
+          <br/>
+          The ethos for defining variables in the <code>rose-suite.conf</code>
+          file is that users should only have to change the
+          <code>rose-suite.conf</code> and not the <code>suite.rc</code> file
+          for passing variables around the suite that the user may wish to 
+          change.
+          <br/>
+          It is hoped that once the developer has setup the 
+          <code>suite.rc</code> that the user should only have to change the 
+          variables in the <code>rose-suite.conf</code> file.
+          </p>
            <br/>
            <h4>Different time period - one off method</h4>
            <p>This is a simple change to the jules app, changing the 
@@ -771,44 +1088,116 @@ main_run_start='1982-07-01 03:00:00'
           <p>However, if this is something that you wish to change regularly 
              then it would be best to add variables to the <code>rose-suite.conf</code>
              file and pass them to the jules app as described below:</p>
-           <p>In the <code>rose-suite.conf</code> file:
+           <p>In the <code>rose-suite.conf</code> file add the variables:
 <pre>
 MAIN_RUN_END='1982-07-07 03:00:00'
 MAIN_RUN_START='1982-07-01 03:00:00' 
 </pre>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">
+            <span class="glyphicon"></span>
+            Example of the updated: rose-suite.conf
+            </a>
+            </h4>
+            </div>
+            <div id="collapseTen" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+            <ol>
+<pre>
+[jinja2:suite.rc]
+DESKTOP=false
+JULES_PATH='/project/jules/vn4.8/trunk'
+MPI_NUM_TASKS=12
+OMP_NUM_THREADS=2
+WALLTIME=PT3H
+<font color="green">MAIN_RUN_END='1982-07-07 03:00:00'
+MAIN_RUN_START='1982-07-01 03:00:00'</font>
+</pre>
+            </ol>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br/>
+
            </p>
-           <p>In the <code>suite.rc</code> file:
+           <p>In the <code>suite.rc</code> file add the environment variables:
 <pre>
      [[jules]]
          [[[environment]]]
              ...
              main_run_end   = {{ MAIN_RUN_END }}
              main_run_start = {{ MAIN_RUN_START }}
-</pre> 
-           </p>
-           <p>In the <code>app/jules/rose-app.conf</code>:
-<pre>
-[env]
-main_run_end=${main_run_end}
-main_run_start=${main_run_start}
+</pre>
 
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">
+            <span class="glyphicon"></span>
+            Example of the updated: suite.rc [[jules]] section
+            </a>
+            </h4>
+            </div>
+            <div id="collapseEleven" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+            <ol>
+<pre>
+    [[jules]]
+        inherit = None, SPICE
+        script = "mkdir -p output ; rose task-run --path= --path=share/fcm_make/build/bin"
+        [[[job]]]
+            execution time limit = {{ WALLTIME }}
+        [[[remote]]]
+            host = {{ ROSE_ORIG_HOST }}
+        [[[environment]]]
+            JULES_PATH      = {{ JULES_PATH }}
+            MPI_NUM_TASKS   = {{ MPI_NUM_TASKS }}
+            OMP_NUM_THREADS = {{ OMP_NUM_THREADS }}
+            NPROC           = {{ MPI_NUM_TASKS }}
+<font color="green">            main_run_end   = {{ MAIN_RUN_END }}
+            main_run_start = {{ MAIN_RUN_START }}</font>
+        [[[directives]]]
+            # MPI_NUM_TASKS * OMP_NUM_THREADS
+            --ntasks={{ OMP_NUM_THREADS * MPI_NUM_TASKS}}
+</pre>
+            </ol>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br/>
+ 
+           </p>
+           <p>In the <code>app/jules/rose-app.conf</code> change the values of
+              the two variables as shown below:
+<pre>
 [namelist:jules_time]
 main_run_end=${main_run_end}
 main_run_start=${main_run_start}
 </pre>
+
          </p>
            <br/>
            <p>As we are using a different time which is within the driving data
               date range we do not have to change the namelist:jules_drive.</p>
            <p>If we are to change the dates to a different month or year then 
-              we must change:
+              we must change the values for the varibles (only change to GSWP2
+              if not using loobos data):
 <pre>
 [namelist:jules_drive]
 data_end='1982-07-31 23:59:59'
 data_start='1982-07-01 03:00:00'
 file='$GSWP2_INSTALL_DIR/drive/%vv/%vv198207.nc'
 </pre>
-             This may include sourcing more or different data, for example:
+             This may include sourcing more or different data, 
+             <strong>for example only</strong>:
 <pre>      
 [namelist:jules_drive]
 data_end='1986-03-31 23:59:59'
@@ -822,10 +1211,11 @@ data_end='1996-01-01 03:00:00'
 data_start='1982-07-01 03:00:00'
 file='drive_file.txt'
 </pre>
+         <strong>End of examples for changing driving data.</strong>
           </p>
           <br/>
-          <p>To add flexibility to the suite use the second option for the drive
-             data as we have access to all of the files. </p>
+          <p>To add flexibility to the suite use the second option for the
+             driving data as we have access to all of the files. </p>
            <br/>
            <h4>Yearly or Monthly</h4>
            <p>We are going to update our suite to run JULES for a year or a
@@ -850,12 +1240,12 @@ file='drive_file.txt'
               while we not run it.
               The second example is monthly and we will implement monthly and 
               run it.</p>
-           <br>
+           <br/>
            <strong>Yearly Example only</strong>
            <p>Changes to the <code>rose-suite.conf</code> file:
 <pre>
 YEARS=["2011","2012","2013","2014","2015"]
-WALLTIME=4320
+WALLTIME='P3D'
 </pre>
            </p>
            <p>Changes to the <code>suite.rc</code> file:
@@ -887,6 +1277,88 @@ graph = """
     [[housekeep]]
         script = echo "Success!"
 </pre>
+
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">
+            <span class="glyphicon"></span>
+            Example of the updated: suite.rc
+            </a>
+            </h4>
+            </div>
+            <div id="collapseTwelve" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+<pre>
+#!jinja2
+[cylc]
+    UTC mode = True
+
+[scheduling]
+    [[dependencies]]
+<font color="green">graph = """
+          fcm_make =&gt;\
+          {% for year in YEARS %}
+              jules_{{year}} =&gt;\
+          {% endfor %}
+          housekeep
+        """ </font>
+[runtime]
+    [[root]]
+        script = rose task-run --verbose
+        [[[events]]]
+            mail events = submission failed, submission timeout, failed, timeout
+
+    [[SPICE]]
+         pre-script = ". /usr/local/bin/prg_default"
+        [[[job]]]
+            batch system = slurm
+
+    [[fcm_make]]
+        inherit = None, SPICE
+        [[[job]]]
+           execution time limit = PT20M
+        [[[remote]]]
+            host = {{ ROSE_ORIG_HOST }}
+        [[[environment]]]
+            JULES_PATH       = {{ JULES_PATH }}
+            ROSE_TASK_N_JOBS = 4
+        [[[directives]]]
+            --ntasks=6
+
+<font color="green">{% for year in YEARS %}
+    [[jules_{{year}}]]
+        inherit = SPICE
+        {% if year == YEARS[0] %}
+            script = "mkdir -p output ; rose task-run --app-key=jules --path= --path=share/fcm_make/build/bin"
+        {% else %}
+            script = "mkdir -p output ; rose task-run --app-key=jules -O dump --path= --path=share/fcm_make/build/bin"
+          #Note - upper o not zero
+        {% endif %}
+        env-script = year_next=$(({{year}}+1))</font>
+        [[[environment]]]
+            JULES_PATH      = {{ JULES_PATH }}
+            MPI_NUM_TASKS   = {{ MPI_NUM_TASKS }}
+            OMP_NUM_THREADS = {{ OMP_NUM_THREADS }}
+            NPROC           = {{ MPI_NUM_TASKS }}
+<font color="green">            year={{year}}
+            year_next=${year_next}
+{% endfor %}
+
+    [[housekeep]]
+        script = echo "Success!"
+</font>
+</pre>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br/>
+
+
+
            </p>
            <p>Changes to the <code>app/jules/</code> files and directory:
               Add an <code>opt/</code> directory.</p>
@@ -901,10 +1373,6 @@ file='${CYLC_TASK_WORK_DIR}/output/gl6_notop_gswp2.dump.${year}0101.10800nc'
            </p>
            <p>Changes to the app/jules/rose-app.conf file:
 <pre>
-[env]
-year=${year}
-year_next=${year_next}
-
 [namelist:jules_time]
 main_run_end='${year_next}-01-01 01:00:00'
 main_run_start='${year}-01-01 01:00:00'
@@ -954,12 +1422,93 @@ graph = """
     [[housekeep]]
         script = echo "Success!"
 </pre>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">
+            <span class="glyphicon"></span>
+            Example of the updated: suite.rc
+            </a>
+            </h4>
+            </div>
+            <div id="collapseFourteen" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+<pre>
+#!jinja2
+[cylc]
+    UTC mode = True
+
+[scheduling]
+    [[dependencies]]
+<font color="green">graph = """
+          fcm_make =&gt;\
+          {% for month in MONTHS %}
+              jules_{{"%0.2d" % month|int}} =&gt;\
+          {% endfor %}
+          housekeep
+        """</font>
+[runtime]
+    [[root]]
+        script = rose task-run --verbose
+        [[[events]]]
+            mail events = submission failed, submission timeout, failed, timeout
+
+    [[SPICE]]
+         pre-script = ". /usr/local/bin/prg_default"
+        [[[job]]]
+            batch system = slurm
+
+    [[fcm_make]]
+        inherit = None, SPICE
+        [[[job]]]
+           execution time limit = PT20M
+        [[[remote]]]
+            host = {{ ROSE_ORIG_HOST }}
+        [[[environment]]]
+            JULES_PATH       = {{ JULES_PATH }}
+            ROSE_TASK_N_JOBS = 4
+        [[[directives]]]
+            --ntasks=6
+
+<font color="green">{% for month in MONTHS %}
+    [[jules_{{"%0.2d" % month|int}}]]
+        inherit = SPICE
+        {% if month == MONTHS[0] %}
+            script = "mkdir -p output ; rose task-run --app-key=jules --path= --path=share/fcm_make/build/bin"
+        {% else %}
+            script = "mkdir -p output ; rose task-run --app-key=jules -O dump --path= --path=share/fcm_make/build/bin"
+                      #Note - upper o not zero
+        {% endif %}
+        env-script = """ month_next='{{ "%0.2d" % (month|int + 1)}}' """</font>
+        [[[environment]]]
+            JULES_PATH      = {{ JULES_PATH }}
+            MPI_NUM_TASKS   = {{ MPI_NUM_TASKS }}
+            OMP_NUM_THREADS = {{ OMP_NUM_THREADS }}
+            NPROC           = {{ MPI_NUM_TASKS }}
+<font color="green">            month={{"%0.2d" % month|int}}
+            month_next=${month_next}
+            year={{ YEAR }}
+{% endfor %}
+
+    [[housekeep]]
+        script = echo "Success!"</font>
+</pre>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br/>
+
            </p>
            <p>Changes to the <code>app/jules/</code> files and directory:
               Add an <code>opt/</code> directory.</p>
 
            <br/>
-           <p>Add a file <code>rose-app-dump.conf</code> to the opt/ directory:
+           <p>Add a file called <code>rose-app-dump.conf</code> to the opt/ 
+              directory and then add the following information to overwrite the
+              variables in the standard rose-app.conf:
 <pre>
 [namelist:jules_initial]
 dump_file=.true.
@@ -968,11 +1517,6 @@ file='${CYLC_TASK_WORK_DIR}/output/gl6_notop_gswp2.dump.${year}${month}01.10800n
            </p>
            <p>Changes to the app/jules/rose-app.conf file:
 <pre>
-[env]
-year=${year}
-month=${month}
-month_next=${month_next}
-
 [namelist:jules_time]
 main_run_end='${year}-${month_next}-01 01:00:00'
 main_run_start='${year}-${month}-01 01:00:00'
@@ -992,58 +1536,7 @@ read_list=.true.
            <p>A branch was created for this suite it is called "duration_ly_prac2", it has been fully tested and it can be used for comparison.</p>
            <br/>
             <br/>
-            <h3>Changing the JULES-Rose suite to run for a different domain</h3>
-            <p>In JULES there are two ways to change the domain:
-            <ol>
-            <li>Changing the namelist <code>jules_latlon</code> and uses a 
-                single site.</li>
-            <li>Changing the namelist  <code>jules_model_grid</code> and uses a
-                gridbox domain.</li>
-            </ol>
-            </p>
-            <p>The first requires all of the <code>Model grid</code> variables 
-               in the <code>Grid configuration</code> to be <code>false</code>.
-               Latitude and Longitude must be defined and the Input grid should
-               be false and 1 x 1.
-               u-ai828 (or u-ai829 for VM or u-ai843 for JASMIN, or u-ai844
-               for remote JASMIN from your desktop, u-al388 MONSooN) with the
-               metadata specified has this setup.</p>
-            <img src="images/rose_edit_dom1.png" width="80%" id="red1"/>
-            <br/>
-            <br/>
-            <p>The second requires <code>Input grid</code> to be true and the
-               other four variables defined.
-               <code>Latitude and longitude</code> set to Latitude/Longitude
-               including the ancil file location for the dataset.
-               <code>Land fraction</code> needs the ancil file location and
-               the name of the land fraction data.
-               <code>Model grid</code> has the sub grid set to true and the
-               boundaries to the lat and long of the domain.
-               To see an example with the second type of setup see the 
-               JULES-Rose suite u-ai509 with the metatdata specified as above.</p>
-            <img src="images/rose_edit_dom2.png" width="80%" id="red2"/>
-            <br/>
-            <p>The suite u-ai828 (or u-ai829 for VM or u-ai843 for JASMIN, or 
-                u-ai844 for remote JASMIN from your desktop, u-al388 MONSooN)
-                requires Loobos data which is included within the suite.</p>
-            <br/>
-            <p>The suite u-ai509 (u-ai510 for VM or u-ai511 for JASMIN) require
-               GWSP2 data which is very big but part of the VM install-jules-* 
-               extra scripts so can be run on the VM
-               if the data is available.
-               Note this suite takes a while to run, about 25 mins.</p>
-            <p>For a much faster running suite use u-aj012 (u-aj013 for VM or 
-               u-aj014 for JASMIN + remoteJAMSIN, for MONSooN u-al438), it is 
-               the same as u-ai509 but runs for only 1 month and not 1 year and 
-               therefore takes about 5 minutes to run.</p>
-            <p>Change both suites:</p>
-              <ul>
-              <li>The first to run for a different site, Latitude 53.32 and 
-                  Longitude 0.0.</li>
-              <li>The second to run over the gridbox lat 53.5 55.5, long -1.0 1.0.</li>
-              <li>The second again but to run globally (use u-ah270 for help),
-                  note running this will take a very long time so you may want
-                  to use u-ai511 for testing.</li>
+
               </ul></p>
 
              
@@ -1051,14 +1544,19 @@ read_list=.true.
          </ul>
         <ul>
             <div class="page-header">
-                <h2><a id="fjrstem">Practical 3 - Further JULES rose stem - namelists, modules</a></h2>
+                <h2><a id="fjrstem">Practical 3 - Further JULES rose-stem - namelists, modules</a></h2>
             </div>
             <div class="well">
             <h3>Practical 3 will cover:</h3>
-            <p>Add a namelist to rose stem.</p>
-            <p>Add a new module to rose stem.</p>
+            <p>Add a namelist to rose-stem.</p>
+            <p>Add a new module to rose-stem.</p>
+            <p>
+            <ul>
+            <li><strong>Hints are provided below the example by linking to the Trac diffs.</strong></li>
+            </ul>
+            </p>
            <br/>
-            <h4>Add a namelist to rose stem</h4>
+            <h4>Add a namelist to rose-stem</h4>
             <ol>
             <p>A new namelist will always change the following files:
                 <li>rose-meta/jules-standalone/HEAD/rose-meta.conf</li>
@@ -1073,16 +1571,321 @@ read_list=.true.
             </p>
             </ol>
             <br/>
-           <p>Lets add a namelist.</p>
+            <strong>A simple example</strong>
+            <br/>
+            <p>
+            We want to add a the namelist
+            <code>jules_hydrology=l_drench_soil</code> for using our new science
+            <code>l_drench_soil</code> to drench the soil at each timestep.</p>
+            <p>
+            <ol>
+            <li>Create a branch (dev)</li>
+            <li>Add the science</li>
+            <li>Update the metadata</li>
+            <li>Add the upgrade macro</li>
+            <li>Test the science, (on a dev branch)</li>
+            <li>Create a branch (test) from the dev branch - a bob</li>
+            <li>Test the science after running the upgrade macro (on a test branch)</li>
+            <li>Test Rose Edit (on a test branch)</li>
+            <li>Run rose-stem on the test branch</li>
+            <li>Test the new science switched on</li>
+            </ol>
+            </p>
+            <p>
+            Normally you would create a ticket first, but here we will use #296
+            as this has been set up for tutorials.</p>
+            <br/>
+            <p>
+            <ol>
+            <li>Create a branch (dev) - use the <code>-k</code> option to
+                specify the ticket number when creating the branch.
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen">
+            <span class="glyphicon"></span>
+            How To
+            </a>
+            </h4>
+            </div>
+            <div id="collapseThirteen" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+<pre>
+<font color="green">fcm bc -k 296 namelist_example fcm:jules.x_tr@vn4.8</font>
+</pre>
+            </div>
+            </div>
+            </div>
+            </div>
+            Add a suitable commit message and type <code>y</code> and press the
+            enter/return key to create the branch.
+            <br/>
+            Checkout the branch to your <code>jules/vn4p8/</code> directory.
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen">
+            <span class="glyphicon"></span>
+            How To
+            </a>
+            </h4>
+            </div>
+            <div id="collapseSixteen" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+<pre>
+<font color="green">fcm co fcm:jules.x_br/dev/MOSRS_USERNAME/vn4.8_namelist_example</font>
+</pre>
+            </div>
+            </div>
+            </div>
+            </div>
+            </li>
+            <br/>
+            <li>Add the science - edit <code>src/science/soil/surf_hyd_jls_mod.F90</code> by increasing the large-scale rainfall in the surface hydrology scheme.
+At ~ line 166 after the Fortran intrinsics are defined add:
+<pre>
+!If we are using the drenching feature, add the water to ls_rain
+IF ( l_drench_soil ) THEN
+  ls_rain_local(:) = ls_rain_land(:) + drench_increment
+END IF
+
+!NOTES:
+! If this was a more complicated piece of code, we would consider doing this
+! differently to allow the compiler to take advantage of OpenMP and other
+! optimisations.
+</pre>
+and change <code>ls_rain_land</code> to <code>ls_rain_local</code> at ~ line 200.
+<br/>
+edit <code>src/control/shared/jules_hydrology_mod.F90</code>
+At ~ line 22 add the following:
+<pre>
+!-----------------------------------------------------------------------------
+! Drench functionality for the practice development
+!-----------------------------------------------------------------------------
+  LOGICAL         :: l_drench_soil = .FALSE.
+        !Switch for turning on the drench code
+  
+  REAL, PARAMETER :: drench_increment = 0.001
+        !Amount the drench the soil by in kg/m2/s
+        !3.6 mm/h is 0.001 kg/m2/s
+</pre>
+Ideally we would add these the appropriate section (at the bottom of the LOGICAL section ~ line 48 and at the bottom of the REAL section ~line 62).
+<strong>Remember:</strong>
+<ul>
+<li>Default switch value should be false.</li>
+<li>USE statements should be added where you need to use the variable.</li>
+<li>A paremeter must be used and not a "magic number" (an unique values with unexplained meaning).</li>
+</ul>
+Add to the <strong>Namelist</strong> ~ line 76-82
+<pre>
+!------------------------------------------------------------------------------
+! Single namelist definition for UM and standalone
+!------------------------------------------------------------------------------
+  NAMELIST /jules_hydrology/                                                  &amp;
+    l_hydrology, l_top, l_pdm, l_spdmvar, l_baseflow_corr, l_var_rainfrac,    &amp;
+    l_wetland_unfrozen,l_wetland_ch4_npp,                                     &amp;
+    dz_pdm, b_pdm, s_pdm, slope_pdm_max, ti_max, ti_wetl, zw_max, nfita,      &amp;
+    l_drench_soil
+</pre>
+Add a log message to <code>src/initialisation/standalone/init_hydrology.F90</code> at ~ line 85 after the other CALLs.
+<pre>
+  IF ( l_drench_soil ) THEN
+    CALL log_info("init_hydrology", "Soil drenching is switched on")
+  END IF
+</pre>
+This should be all the science, we will test the science shortly.
+</li>
+            <br/>
+            <li>Update the metadata - edit <code>rose-meta/jules-standalone/HEAD/rose-meta.conf</code> as shown:
+<pre>
+[namelist:jules_hydrology=l_drench_soil]
+compulsory = false
+description = Drench the soil at each timestep
+url = http://jules-lsm.github.io/vn&lt;VERSION&gt;/namelists/jules_hydrology.nml.html#JULES_HYDROLOGY::l_drench_soil
+type = logical
+sort-key = h
+</pre>
+</li>
+<br/>
+            <br/>
+            <li>Add the upgrade macro - edit <code>rose-meta/jules-standalone/versions.py</code> file just before the comment line about the template:
+<pre>
+class vn##_t##(rose.upgrade.MacroUpgrade):
+
+    """Upgrade macro from JULES by USERNAME/NAME"""
+
+    BEFORE_TAG = "vn#.#"
+    AFTER_TAG = "vn#.#_t##"
+
+    def upgrade(self, config, meta_config=None):
+        """Upgrade a JULES runtime app configuration."""
+
+        '''
+           This adds the l_drench_soil switch to increase the large-scale
+           rainfall in the surface hydrology.
+        '''
+        # Add a new namelist item with its default value
+        self.add_setting(config, ["namelist:jules_hydrology", "l_drench_soil"], ".false.")
+
+        # Add settings
+        return config, self.reports
+</pre>
+</li>
+            <br/>
+            <li>Test the science, (on a dev branch)
+           <p>We have already created a branch and are working on it.
+              By default <code>fcm bc</code> creates the branch on dev.
+              </p>
+            <p>Check the status of the code and commit the changes.</p>
+            <p>Run the rose-stem tests</p>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen">
+            <span class="glyphicon"></span>
+            Answers
+            </a>
+            </h4>
+            </div>
+            <div id="collapseSeventeen" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+<pre>
+fcm st
+fcm ci
+#for running all the rose-stem tests for a evidence for the Ticket Summary
+#as part of the Ticket for review.
+<font color="green">rose stem --group=all --new</font>
+#for running the tutorial rose-stem tests for a evidence for the Ticket Summary
+#as part of the Ticket for review.
+#(_linux/_xc40 for Met Office intenal only)
+<font color="green">rose stem --group=tutorial(_linux/_xc40) --new</font>
+</pre>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br/>
+            <p>All rose-stem tests should pass.</p>
+            <p>A <code>trac.log</code> file will be produced for copying to the
+               Ticket Summary of the Ticket.
+               It is located in the <code>~/cylc-run/&lt;BRANCH_NAME&gt;/</code> directory.
+</li>
+            <br/>
+            <li>Create a branch (test) from the branch (dev), a branch-of-branch
+                bob.
+<pre>
+cd ~/jules/vn4p8/
+fcm branch-create -k 296 --branch-of-branch -t test namelist_example_test_branch fcm:jules.x_br/dev/MOSRSUSERNAME/vn4.8_namelist_example
+fcm co fcm:jules.x_br/test/MOSRSUSERNAME/r####_namelist_example_test_branch
+cd r####_namelist_example_test_branch
+</pre>
+</li>
+            <br/>
+            <li>Test the science after running the upgrade macro (on a test
+                branch)
+<pre>
+./bin/upgrade_jules_test_apps vn4.8_t296
+</pre>
+</li>
+            <br/>
+            <li>Test Rose Edit (on a test branch)
+<pre>
+rose edit
+</pre>
+<p>Navigate the Rose Edit GUI to check the section that you have changed, including the namelist being present with the true/false option.</p>
+</li>
+            <br/>
+            <li>Run rose-stem on the test branch
+            <p>Check the status of the code and commit the changes.</p>
+            <p>Run the rose-stem tests</p>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen">
+            <span class="glyphicon"></span>
+            Answers
+            </a>
+            </h4>
+            </div>
+            <div id="collapseEighteen" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+<pre>
+fcm st
+fcm ci
+#for running all the rose-stem tests for a evidence for the Ticket Summary
+#as part of the Ticket for review.
+<font color="green">rose stem --group=all --new</font>
+#for running the tutorial rose-stem tests for a evidence for the Ticket Summary
+#as part of the Ticket for review.
+#(_linux/_xc40 for Met Office intenal only)
+<font color="green">rose stem --group=tutorial(_linux/_xc40) --new</font>
+</pre>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br/>
+            <p>All rose-stem tests should pass.</p>
+            <p>A <code>trac.log</code> file will be produced for copying to the
+               Ticket Summary of the Ticket.
+               It is located in the <code>~/cylc-run/&lt;BRANCH_NAME&gt;/</code> directory.
+</li>
+            <br/>
+            <li>Test the new science switched on - We need to demonstrate how the new science works for the review process.
+            <p>Make a copy of <code>u-ai828</code> (meto) or <code>u-ai829</code> VM or <code>u-ai843</code> JASMIN or <code>u-al388</code>.</p>
+            <p>Apply the upgrade macro using
+<pre>
+#Firstly change the <strong>path to JULES metadata</strong> to be your branch
+#in all three locations as done above (fcm_make, fcm_make-Build Configuration,
+# jules)
+# Apply upgrade macros
+rose app-upgrade -M ~/jules/vn4p8/vn4.8_namelist_example -C app/fcm_make vn4.8_269  &amp;&amp; rose macro --fix -M ~/jules/vn4p8/vn4.8_namelist_example -C app/fcm_make 
+# fcm-make not always required, skip if it does not work with: "[FAIL] Error: could not find meta flag"
+rose app-upgrade -M ~/jules/vn4p8/vn4.8_namelist_example -C app/jules vn4.8_269 &amp;&amp; rose macro --fix -M ~/jules/vn4p8/vn4.8_namelist_example -C app/jules
+</pre>
+</p>
+   <p>Run the suite:
+<pre>
+rose suite-run --new
+</pre>
+     Compare the output.</p>
+</li>
+            </ol>
+
+            </p>
+            <br/>
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen">
+            <span class="glyphicon"></span>
+            A complicated example just for reference and ideas
+            </a>
+            </h4>
+            </div>
+            <div id="collapseFifteen" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+       <p>Lets add a namelist.</p>
            <p>This is an example of how to add a namelist which is taken from
-              a namelist being added for JULES vn4.8 code release:</p>
+              a namelist being added for JULES vn4.7 code release:</p>
            <ol>
-               <li>Create a branch the JULES code from the trunk at vn4.8, 
+               <li>Create a branch the JULES code from the trunk at vn4.6, 
                    include tutorial in its name</li>
                <li>Checkout the branch</li>
                <li>Add the following namelist to the rose-meta.conf
 <pre>
 [namelist:jules_surface=bio_hum_CN]
+complusory=true
 ns=namelist/Science settings/Surface options/Parameters
 description=Bio and Hum Soil Carbon pools CN ratio
 url=http://jules-lsm.github.io/vn4.6/namelists/jules_surface.nml.html#JULES_SURFACE::bio_hum_cn
@@ -1092,13 +1895,13 @@ sort-key=m
 </pre>
 </li>
                <li>Edit the versions.py file to include your metadata and the 
-                  original template, use <code>vn4.6_t000</code> and
+                  original template, use <code>vn4.6_t309</code> and
 <pre>
 self.add_setting(config, ["namelist:jules_surface", "bio_hum_cn"], "10.0")
 </pre>
 </li>
                <li>To </code>src/control/shared/jules_surface_mod.F90</code>
-                   add (~ln 275):
+                   add (~line (ln) 275):
 <pre>
 ! Parameters for soil respiration.
 bio_hum_CN = 10.0
@@ -1169,20 +1972,30 @@ bio_hum_CN         = my_nml % bio_hum_CN
 </li>
            </ol>
            <p><a href="https://code.metoffice.gov.uk/trac/jules/changeset?reponame=&new=4852%40main%2Fbranches%2Fdev%2Fandywiltshire%2Fvn4.6_soil_cn&old=4285%40main%2Ftrunk">Diff from #309</a>
+            </div>
+            </div>
+            </div>
+            </div>
+
            <br/>
             <br/>
-            <p>If you have added an Upgrade Macro you MUST also test it and apply the changes
+            <p>If you have added an Upgrade Macro you MUST also test it in Rose Edit and apply the changes
                to the JULES code:
 <pre>
-rose app-upgrade -M /path/to/the/metadata/for/testing/ app/fcm_make &lt;version&gt; &amp;&amp; rose macro --fix -M /path/to/the/metadata/for/testing/
+#rose edit test, check the metadata is as intended
+rose edit -M /path/to/the/metadata/for/testing/rose-meta
+#run the upgrade macro
+rose app-upgrade -M /path/to/the/metadata/for/testing/rose-meta app/fcm_make &lt;version&gt; &amp;&amp; rose macro --fix -M /path/to/the/metadata/for/testing/rose-meta
 #or
 ./bin/upgrade_jules_test_apps vn#.#_t###
 
-#here the &lt;version&gt; would be <code>HEAD</code> unless you change that metadata as well.
+#here the &lt;version&gt; would be <code>HEAD</code>.
 </pre>
 </p>
+           <br/>
+            </br/>
             <br/>
-           <p>Run the JULES rose stem tests to make sure that all of the tests
+           <p>Run the JULES rose-stem tests to make sure that all of the tests
               pass.</p>
           <br/>
            <p>Other examples:
@@ -1283,12 +2096,12 @@ END MODULE my_mod
            <li><code>touch src/science/soil/n_leach_mod.F90</code></li>
            <li>Open the file src/science/soil/hydrol_jls.F90</li>
            <li>Line 63 add the USE statement for the new module "n_leach_mod" for the subroutine n_leach</li>
-           <li>Lines 715-722 remove.</li>
+           <li>Lines 715-722 remove</li>
            <li>Add a CALL for the subroutine and all the arguments it needs, 
-               as shown above in the "Simplest form" example.</li> 
+               as shown above in the "Simplest form" example</li> 
            <li>Lines 723-808 copy to the module called "n_leach_mod.F90"</li>
            <li>Add to the top and bottom of the n_leach_mod.F90 file as shown 
-               above in the "Simplest form" example.</li>
+               above in the "Simplest form" example</li>
            </ul>
            </p>
 
@@ -1420,7 +2233,7 @@ IF (lhook) CALL dr_hook(ModuleName//':'//RoutineName,zhook_in,zhook_handle)
                                        * w_flux(i,n-1) *                      &amp;
                                        n_inorg_avail_tmp(i,:,n-1)) /          &amp;
                                        (sorp * smcl(i,n-1))
-        ELSE IF (w_flux(i,n-1) < 0.0 .AND. smcl(i,n) > EPSILON(0.0)) THEN
+        ELSE IF (w_flux(i,n-1) &lt; 0.0 .AND. smcl(i,n) &gt; EPSILON(0.0)) THEN
           n_inorg_gb_lyrs(i,n) = n_inorg_gb_lyrs(i,n) + (timestep *           &amp;
                                  w_flux(i,n-1) * n_inorg_gb_tmp(i,n)) /       &amp;
                                  (sorp * smcl(i,n))
@@ -1483,11 +2296,12 @@ END MODULE n_leach_mod
                 </div>
             </div>
             <br/>
-            <p>This example is based on JULES ticket<a href="">#394</a> which is               on the trunk and part of the JULES vn4.8 code release, but is
-               different as soil tiling was implemented before this ticket.</p>
+            <p>This example is based on JULES ticket<a href="">#394</a> which is               on the trunk and part of the JULES vn4.8 code release, but it is
+               different to the code on the trunk as soil tiling was 
+               implemented before this ticket.</p>
             <br/>
             <br/>
-           <p>Run the JULES rose stem tests to make sure that all of the tests
+           <p>Run the JULES rose-stem tests to make sure that all of the tests
               pass.</p>
            <br/>
            <p>What if tests failed?</p>
@@ -1496,8 +2310,9 @@ END MODULE n_leach_mod
               Where could you look if tests failed for information on why they 
               had failed?
               We are not going to submit this code change for review as the
-              was code it correctly implemented at vn4.8 with the soil tiling.
-              This was just an example of how we could add a module.</p>
+              code was correctly implemented for vn4.8 with the soil tiling.
+              This is <strong>just</strong> an example of how we 
+              <strong>could</strong> add a module.</p>
           <br/>
 
             </div>
@@ -1544,8 +2359,9 @@ END MODULE n_leach_mod
             in time. <code>Owner</code> must be provided and is usually the 
             person that has opened the ticket. If someone is to be assigned
             please get their permission first. The <code>Priority</code>
-            should be provided. Only the <code>CC</code> and <code>Keywords</code>
-            are allowed to be left empty.</p>
+            should be provided. You must <code>Cc</code> the appropriate 
+            module leader(s). Only <code>Keywords</code> are allowed to be left
+            empty.</p>
             <p>The <code>Description</code> should be a clear and concise
                explanation of the problem and the proposed solution.
                There also needs to be a link to the branch and the Ticket
@@ -1553,7 +2369,7 @@ END MODULE n_leach_mod
                These can be created in preparation for the change even if they
                are not 100% ready, for example:
 <pre>
-[log:main/dev/user/branch_name branch_name]
+[log:main/dev/&lt;MOSRS_USERNAME&gt;/&lt;BRANCH_NAME&gt; &lt;BRANCH_NAME&gt;]
 [wiki:ticket/###/TicketSummary Ticket Summary]
 </pre>
              The ### will be replaced by the ticket number once the ticket is 
@@ -1562,8 +2378,8 @@ END MODULE n_leach_mod
             <p>Create the ticket using the <code>Create ticket</code> button.
             <br/>
             <h4>Creating the Ticket Summary</h4>
-            <p>Clicking on the <code>Ticket Summary?</code> link will allow you
-             to create the page.</p>
+            <p>Clicking on the <code>Ticket Summary?</code> link this will 
+             allow you to create the Ticket Summary page.</p>
             <p>This opens a new page which displays:
 <pre>
 The page ticket/###/TicketSummary does not exist. You can create it here.
@@ -1574,10 +2390,10 @@ You could also create the same page higher in the hierarchy:
 "Create this page"  Using the template: "(blank page)"
 </pre>
              Choose the option <code>Ticketsummary</code> not the (blank page),
-             then select the button "Create this page".
+             then click the button "Create this page".
              This will create the Ticket Summary page for you to fill in.</p>
             <br/>
-            <h4>Filling in the Ticket Summary</h4>
+            <h4>Filling in the Ticket Summary page</h4>
             <p>You much be logged in to edit the Ticket Summary page.</p>
             <p>Go to the bottom of the page and select the button 
                <code>Edit this page</code>.
@@ -1585,22 +2401,26 @@ You could also create the same page higher in the hierarchy:
             <br/>
             <h4>Adding the <code>trac.log</code>'s</h4>
             <p>After you have made your code change and are happy with it you
-               have to run the JULES rose stem tests for your branch.</p>
-            <p>More detail on rose stem have been discussed earlier in these
+               must run the JULES rose-stem tests for your branch.</p>
+            <p>More detail on rose-stem have been discussed earlier in these
                tutorials.</p>
-            <p>Once rose stem has completed then the <code>trac.log</code> can
-               be copied to the Ticket Summary.</p>
+            <p>Once rose-stem has completed then the <code>trac.log</code> can
+               be copied from the <code>~/cylc-run/</code> directory to the 
+               Ticket Summary.</p>
            <p>The location of the trac.log: <code>~/cylc-run/&lt;BRANCH_NAME&gt;/trac.log</code>.</p>
-            <p>Note that UM-JULES rose stem tests must be run with the group 
+            <p>Note that UM-JULES rose-stem tests must be run with the groups 
             <code>--group=jules,developer</code> if your site does not have this
                capability please email Jules-Support@metoffice.gov.uk to request
                assistance.</p>
             <br/>
             <h4>The review process</h4>
-            <p>You must have code owner approval for your change before it is 
-               reviewed.</p>
-            <p>You will need to find a sci/tech reviewer and the JULES System
-               Manger will code review your change.</p>
+            <p>You must have module leader approval for your change before it 
+               is reviewed, they should have been Cc'ed into the ticket
+               when you created the ticket.</p>
+            <p>You will need to find a sci/tech reviewer (appropriate module
+               leaders can give guidance) and the JULES System Manger (and or 
+               the UM Systems Team as appropriate) will code review your change.
+            </p>
             <p>Please email people that you think may be willing to sci/tech 
                review your change to ask for a review before you assign it to
                them.</p>
@@ -1610,16 +2430,18 @@ You could also create the same page higher in the hierarchy:
               assign it to the JULES System Manager for the code review.
               They are responsible for checking the overall integrity of the
               change.
-              Checking if the change will cause issues on the trunk, if the 
-              testing was sufficient, and if the appropriate permissions and
-              standards have been achieved.</p>
+              They will check to see if the change will cause issues on the 
+              trunk, decided if the testing was sufficient, and if the 
+              appropriate permissions and standards have been achieved.</p>
+            <p>They can ask you create a HoT branch if required and to make the
+               appropriate changes to the code to me it suitable for the trunk.</p>
             <br/>
             </div>
          </ul>
 
         <ul>
             <div class="page-header">
-                <h2><a id="hot">Practical 5 - HoT branches and merging branch into it</a></h2>
+                <h2><a id="hot">Practical 5 - HEAD of TRUNK (HoT) branches and merging branch into it</a></h2>
             </div>
             <div class="well">
             <h3>Practical 5 will cover:</h3>
@@ -1642,27 +2464,25 @@ You could also create the same page higher in the hierarchy:
 follow them and create your own HoT.</p>
 <pre>
 # Create a branch from the JULES code repository at the head of the current trunk.
-# Note there is no "@"
-#  and there is not a version keyword or revision given after the "@".
-fcm bc &gt;HOT_BRANCH_NAME&lt; fcm:jules.x_tr
+fcm bc &lt;HOT_BRANCH_NAME&gt; fcm:jules.x_tr@HEAD
 # Add a comment to the commit message, include the ticket number if you have one. 
 # Check out the HoT branch.
-fcm co fcm:jules.x_br/dev/&gt;USERNAME&lt;/&gt;HOT_BRANCH_NAME&lt; 
+fcm co fcm:jules.x_br/dev/&lt;MOSRS_USERNAME&gt;/&lt;HOT_BRANCH_NAME&gt; 
 </pre>
             <br/>
             <h4>Merging in our original branch to the HoT branch</h4>
             <p>Now we have a HoT we can merge our original branch into and then 
                check the difference using FCM.
                When we are happy with the code merge we can run all of our 
-               JULES rose stem tests for the Ticket Summary for the 
+               JULES rose-stem tests for the Ticket Summary for the 
                <code>trac.log</code> to be include in.</p>
             <p>Please follow the following instructions to include your
                original branch in the HoT branch tat you have just created.</p>
 <pre>
 # Move to the HoT branch directory.
-cd &gt;HOT_BRANCH_NAME&lt;/
+cd &lt;HOT_BRANCH_NAME&gt;/
 # Merge your branch to the HoT branch.
-fcm merge fcm:jules.x_br/dev/&gt;USERNAME&lt;/&gt;BRANCH_NAME&lt;
+fcm merge fcm:jules.x_br/dev/&lt;MOSRS_USERNAME&gt;/&lt;BRANCH_NAME&gt;
 # Check the merge
 fcm diff -g
 # Once happy commit the changes to the HoT branch.
@@ -1683,12 +2503,12 @@ fcm ci
             </div>
             <div class="well">
             <h3>Practical 6 will cover:</h3>
-            <p>Why and When do we need to do a UM-JULES rose stem test?</p>
-            <p>How do we run UM-JULES rose stem?</p>
+            <p>Why and When do we need to do a UM-JULES rose-stem test?</p>
+            <p>How do we run UM-JULES rose-stem?</p>
             <p>What if there are failures?</p>
             <br/>
             <br/>
-            <h4>Why and When do we need to do a UM-JULES rose stem test?</h4>
+            <h4>Why and When do we need to do a UM-JULES rose-stem test?</h4>
             <p>There are many reasons to why we may need to run a UM-JULES rose
                stem test.
                For example:
@@ -1701,20 +2521,24 @@ fcm ci
             </ul>
             </p>
             <br/>
-            <h4>How do we run UM-JULES rose stem?</h4>
-            <p>For only testing a JULES change.</p>
+            <h4>How do we run UM-JULES rose-stem?</h4>
+            <p>Only for testing a JULES change.</p>
+            <p>Note you or the site you are working on must have access to 
+               the UM code repository.
+               If not you <strong>cannot</strong> do this testing and must ask
+               the JULES System Manager for assistance.</p>
             <ol>
             <li>Create a JULES ticket if it is not already created.</li>
             <li>Commit your JULES branch changes to the repository.</li>
-            <li>Tested your JULES code changes and check the rose stem tests 
+            <li>Tested your JULES code changes and check the rose-stem tests 
                 all pass.</li>
-            <li>Where do you find the evidence for the JULES rose stem tests for
+            <li>Where do you find the evidence for the JULES rose-stem tests for
                 your branch?</li>
             <li>Where does the evidence need to be copied to?</li>
             <li>Checkout the UM trunk at the revision that your JULES change is
                 for.</li>
-            <li>Run the rose stem test.</li>
-            <li>Where do you find the evidence for the UM rose stem tests for 
+            <li>Run the rose-stem test.</li>
+            <li>Where do you find the evidence for the UM rose-stem tests for 
                 the JULES branch?</li>
             <li>Where does the evidence need to be copied to?</li>
             </ol>
@@ -1734,7 +2558,7 @@ fcm ci
                         <div class="row">
                             <pre>
 <ol>
-<li>See <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_user.html#P3">Tickets User</a> and <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_developer.html#ticks">Tickets Developer</a>.</li>
+<li>See <a href="http://jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_user.html#P3">Tickets User</a> and <a href="http://jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_developer.html#ticks">Tickets Developer</a>.</li>
 <li>fcm st
 # check that all files are expected to have changes have and that any new
 #are added and any removed are deleted.
@@ -1750,12 +2574,12 @@ rose stem --group=all --new</li>
 cd
 mkdir -p um/
 cd um
-fcm co fcm:um.x_tr@10.5
+fcm co fcm:um.x_tr@vn10.6
 # or if no fcm keywords set up
-fcm co https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.5
+fcm co https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.6
 # for example if the change was a JULES vn4.8 branch
 cd trunk</li>
-<li>rose stem --group=jules --new --name=umtr_jls&lt;JULES_ticket_no&gt; --sourece=. --source=/full/path/to/jules/branch/to/be/tested</li>
+<li>rose stem --group=jules,developer --new --name=umtr_jls&lt;JULES_ticket_no&gt; --sourece=. --source=/full/path/to/jules/branch/to/be/tested</li>
 <li>~cylc-run/umtr_jls&lt;JULES_ticket_no&gt;/trac.log</li>
 <li>JULES Ticket, Ticket Summary</li>
 </ol>
@@ -1770,19 +2594,21 @@ cd trunk</li>
             <ol>
             <li>Create a JULES ticket if it is not already created.</li>
             <li>Commit your JULES branch changes to the repository.</li>
-            <li>Tested your JULES code changes and check the rose stem tests 
+            <li>Tested your JULES code changes and check the rose-stem tests 
                 all pass.</li>
-            <li>Provide the evidence for you JULES branch rose stem tests in
+            <li>Provide the evidence for you JULES branch rose-stem tests in
                 the JULES the Ticket Summary.</li>
             <li>Create a UM ticket and reference it in the JULES ticket,
                 reference the JULES ticket in the UM ticket.</li>
             <li>Follow the <a href="https://code.metoffice.gov.uk/trac/um/wiki/working_practices">UM working practices</a>
             <li>Create a UM branch.</li>
             <li>Make changes.</li>
-            <li>Run the rose stem tests on the UM-JULES coupled branches.</li>
-            <li>Where do you find the evidence for the UM-JULES rose stem tests
+            <li>Run the rose-stem tests on the UM-JULES coupled branches.</li>
+            <li>Where do you find the evidence for the UM-JULES rose-stem tests
                 for the UM-JULES coupled branch?</li>
             <li>Where does the evidence need to be copied to?</li>
+            <li>Make sure you document both JULES and UM changes on their 
+                respective branches and metadata help.</li>
             </ol>
             <br/>
             <div class="panel-group" id="accordion">
@@ -1800,7 +2626,7 @@ cd trunk</li>
                         <div class="row">
                             <pre>
 <ol>
-<li>See <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_user.html#P3">Tickets User</a> and <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_developer.html#ticks">Tickets Developer</a>.</li>
+<li>See <a href="http://jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_user.html#P3">Tickets User</a> and <a href="http://jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_developer.html#ticks">Tickets Developer</a>.</li>
 <li>fcm st
 # check that all files are expected to have changes have and that any new
 #are added and any removed are deleted.
@@ -1823,7 +2649,7 @@ fcm bc &lt;UM_BRANCH_NAME&gt; https://metoffice.code.gov.uk/svn/um/main/trunk@vn
 # for example if the change was a JULES vn4.8 branch
 cd &lt;UM_BRANCH_NAME&gt;</li>
 <li>Make your changes and commit them to the repository as you would for JULES.</li>
-<li>rose stem --group=jules --new --source=. --source=/full/path/to/jules/branch/to/be/tested</li>
+<li>rose stem --group=jules,developer --new --source=. --source=/full/path/to/jules/branch/to/be/tested</li>
 <li>~cylc-run/&lt;UM_BRANCH_NAME&gt;/trac.log</li>
 <li>UM Ticket, Ticket Summary and the JULES Ticket, Ticket Summary</li>
 </ol>
@@ -1842,7 +2668,7 @@ cd &lt;UM_BRANCH_NAME&gt;</li>
             <p>This as with a standard/standalone JULES change then the KGO can 
                only have failures for explained reasons and scientifically or
                technically approved reasons.
-               <a href="file:///net/home/h02/kerryday/jules-lsm.github.io.git/tutorial/bg_info/tutorial_julesrose/jr_developer.html#bjrstem">When is it acceptable to have a failure in the KGO?</a></p>
+               <a href="#bjrstem">When is it acceptable to have a failure in the KGO?</a></p>
             <br/>
 
 
@@ -2070,7 +2896,7 @@ url=http://jules-lsm.github.io/vn4.7/namelists/jules_snow.nml.html#JULES_SNOW::g
                <code>rose metadata-check</code> in the metadata directory to 
                check the metadata.</p>
             <br/>
-            <p>After changing the metadata in anyway or adding a new rose stem test (see 
+            <p>After changing the metadata in anyway or adding a new rose-stem test (see 
                <a href="jr_developer_advanced.html">Developer Advanced Tutorial</a>)
 <pre>
 rose macro --fix -M /path/to/the/metadata/for/testing/
@@ -2102,7 +2928,7 @@ rose app-upgrade -M /path/to/the/metadata/for/testing/ app/fcm_make &lt;version&
             <br/>
             <p>How to run an upgrade macro.</p>
             <p>How to create an upgrade macro.</p>
-            <p>create-app-rose.py</p>
+            <p>create-rose-app.py</p>
             <br/>
             <br/>
             <h4>How to run an upgrade macro</h4>
@@ -2131,17 +2957,17 @@ fcm ci
             <p>Above in Practical 7 an upgrade macro was created in:
                <code>rose-meta/jules-standalone/versions.py</code>.
             <br/>
-            <h4>create-app-rose.py</h4>
+            <h4>create-rose-app.py</h4>
             <p>This is a utility to make namelists into a JULES-Rose suite.
                The app's can then be used in a rosie u repository suite for 
                science experiments.</p>
             <pre>
-# create-app-rose vn_from vn_to namelist_path suite_name jules_code_path
+# create-rose-app vn_from vn_to namelist_path suite_name jules_code_path
 #  for example:
 create-rose-app vn4.4 vn4.8 /path/to/my/4.4/namelist/ my_4p4_conversion /path/to/my/jules/code/at/4.8/
 </pre>
             <p>If you have a directory with old namelists files, please try the
-               <code>create-app-rose</code> command.</p>
+               <code>create-rose-app</code> command.</p>
             <br/>
             <br/>
             <p>For more on Rose Upgrade and Upgrade Macros please see:

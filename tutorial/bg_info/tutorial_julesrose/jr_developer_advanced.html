@@ -40,7 +40,7 @@
                                 <li><a href="#umdp3">UMDP3</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li class="dropdown-header">Developer Advanced Practical's</li>
-                                <li><a href="#arst">Adding rose stem tests</a></li>
+                                <li><a href="#arst">Adding rose-stem tests</a></li>
                                 <li><a href="#aum">Adding a complex upgrade macro</a></li>
                                 <li><a href="#ad">Adding diagnostics</a></li>
                                 <li><a href="#umjt">UM-JULES tickets and tests</a></li>
@@ -85,7 +85,7 @@
             <p>This aims to explain the importance of:
             <ul>
                 <li><a href="#umdp3">UMDP3</a></li>
-                <li><a href="#arst">Adding rose stem tests</a></li>
+                <li><a href="#arst">Adding rose-stem tests</a></li>
                 <li><a href="#aum">Adding a complex upgrade macro</a></li>
                 <li><a href="#ad">Adding diagnostics</a></li>
                 <li><a href="#umjt">UM-JULES tickets and tests</a></li>
@@ -110,9 +110,9 @@
             <p>
             OR have:
             <ul>
-            <li>Experience running rose stem and JULES-Rose suites.</li>
+            <li>Experience running rose-stem and JULES-Rose suites.</li>
             <li>Made complex changes to JULES-Rose suites.</li>
-            <li>Made complex changes to JULES code including testing with rose stem.</li>
+            <li>Made complex changes to JULES code including testing with rose-stem.</li>
             <li>Experience with FCM commands.</li>
             </ul>
             </p>
@@ -136,7 +136,7 @@
         </ul>
         </p>
 
-        <h2><a id="arst">Adding rose stem tests</a></h2>
+        <h2><a id="arst">Adding rose-stem tests</a></h2>
         <p>
         <ul>
             <div class="page-header">
@@ -165,7 +165,7 @@
                 the <code>upgrade_jules_test_apps</code> script.
                 The <code>upgrade_jules_test_apps</code> script runs the 
                 upgrade macro which should only modify the namelists enough 
-                for rose stem tasks to pass.</p>
+                for rose-stem tasks to pass.</p>
              <p>The script can be run my moving to the top the code directory, 
                 running:
 <pre>./bin/upgrade_jules_test_apps vnX.X_txxx
@@ -178,16 +178,16 @@
                 <h3>Rose stem tests</h3>
             </div>
             <div class="well">
-            <p>Once you have identified the rose stem test that you want to 
+            <p>Once you have identified the rose-stem test that you want to 
                create to safe guard a science configuration then please try to
                develop the test.</p>
             <p>A good starting point it to see if there is already and existing
-               rose stem test that is similar and then use that to tweak for
+               rose-stem test that is similar and then use that to tweak for
                the desired configuration.</p>
             <p>Rose stem test names should be as descriptive as possible while
                still being reasonably short.
                For example: gswp2_irrig_limit_low_river_storage .</p>
-            <p>This rose stem test was developed to test:  
+            <p>This rose-stem test was developed to test:  
                Rose stem test with irrigation supply limited.
                Starting with no water in the rivers and lots in the deep layer, therefore irrigation water should be mainly taken from the deep layer.</p>
             <p>Change, <code>rose-stem/include/</code>: <code>meto</code>,
@@ -217,10 +217,10 @@ rose-stem/app/gswp2_irrig_limit_low_river_storage/rose-app.conf</code>
 
 
             <div class="page-header">
-                <h3>Testing new rose stem tests</h3>
+                <h3>Testing new rose-stem tests</h3>
             </div>
             <div class="well">
-            <p>Before you test your new rose stem tests please run:</p> 
+            <p>Before you test your new rose-stem tests please run:</p> 
 <pre>
 rose macro --fix -M /path/to/JULES/metadata/dir/
 and OR
@@ -249,7 +249,7 @@ cd jules_trunk
              </p>
 <pre>
 # Using HOUSEKEEPING=false means the output is not deleted when it is finished with
-rose stem --group=all --source=. -S HOUSEKEEPING=false --new
+rose stem --group=all -S HOUSEKEEPING=false --new
 
 # Move the output to the KGO directory
 mkdir -p /jules/rose-stem-kgo/&lt;KGO version&gt;
@@ -260,9 +260,9 @@ mv ~/cylc-run/jules_trunk/work/1/*/output/* /jules/rose-stem-kgo/&lt;KGO version
                 <h3>Testing local KGO</h3>
             </div>
             <div class="well">
-            <p>As part of your rose stem test you may expect the KGO to fail 
-               for example you have created new rose stem tests so no previous
-                rose stem test KGO exists yet.</p>
+            <p>As part of your rose-stem test you may expect the KGO to fail 
+               for example you have created new rose-stem tests so no previous
+                rose-stem test KGO exists yet.</p>
             <p>You may wish to test your new local test KGO, but it is not
                compulsory.</p>
             <p>First, commit your changes to your branch of the repository.</p>
@@ -296,7 +296,7 @@ mkdir -p ${TEST_KGO_DIR}
 rose suite-shutdown --name=&lt;SUITE_NAME&gt; -- --now
 y
 </pre>
-             <p>Run rose stem on this branch</p>
+             <p>Run rose-stem on this branch</p>
 <pre>rose stem --group=all --new</pre>
              <p>If the tests are bit reproducible they will all pass this time and if not then this needs to be addressed.</p>
              <p>All changes to the local copy will need to be reverted, you can use:</p>
@@ -546,7 +546,7 @@ cd /to/directory/for/checking/out/UMtrunk/into/
 fcm co fcm:um.x_tr
 cd trunk
 rose stem --group=jules,developer --new --name=umtr_jlst### --source=. --source=/path/tp/jules/branch_for_testing
-# trac.log will appear in the cylc-run/umtr_jlst### when the rose stem tests have finished.
+# trac.log will appear in the cylc-run/umtr_jlst### when the rose-stem tests have finished.
 </pre>
             <p>The trac.log needs to be added to the ticket summary for the
                ticket to prove that the change does not affect the UM and that

@@ -283,7 +283,7 @@ store-plaintext-passwords = no
                      accessed by all:
                     <code>ROSESTEM_DATA='/path/to/rosetsem/data/'</code></li>
                <li>cd $ROSESTEM_DATA</li>
-               <li>KGO_DIR=$ROSESTEM_DATA/rose-stem-kgo/vn4.7 #where 4.7 needs to be the appropriate JULES version number</li>
+               <li>KGO_DIR=$ROSESTEM_DATA/rose-stem-kgo/vn#.# #where #.# needs to be the appropriate JULES version number</li>
                <li>mkdir -p $KGO_DIR</li>
                #Copy across the data all except GSWP2 driving data
                <li>wget --user=ext_jules --password=&lt;SEE LINK ABOVE&gt; ftp://ftp.metoffice.gov.uk/benchmarking/benchmark.data.tar.gz</li>
@@ -318,10 +318,10 @@ store-plaintext-passwords = no
                 <ol>
                     <li>
                      KGO_DIR=&lt;path/to/jules/rose-stem-kgo/&gt;</li>
-<li>                     VN=vn4.7_t??? #replace with the appropriate KGO version
+<li>                     VN=vn#.#_t??? #replace with the appropriate KGO version
 </li>
 <li>                     mkdir -p $KGO_DIR/$VN</li>
-<li>                     JULES_TRUNK=&lt;path/to/jules/vn4.7/trunk&gt; #replace vn4.7 with the appropriate JULES version number</li>
+<li>                     JULES_TRUNK=&lt;path/to/jules/vn#.#/trunk&gt; #replace vn#.# with the appropriate JULES version number</li>
                      <li>cd $JULES_TRUNK</li>
                      #This suite will fail, but do it anyway as we need to create the KGO
                      <li><code>rose stem --group=all --source=. -S HOUSEKEEPING=false --new</code></li>
@@ -333,6 +333,19 @@ store-plaintext-passwords = no
                          compliers.</p>
                      <li>Test rose stem <code>rose stem --group=all --source=. --new</code> You should have no failures this time.</li>
                 </ol>
+            </div>
+                <h2>Rose Bush</h2>
+            <div class="well">
+            <p>
+            Rose Bush is an intranet web service at your site on pre-setup on 
+            the Virtual Machine (VM).
+            It enables users to view their suite logs using a web browser.
+            Depending on your specific site and systems you may not have the 
+            the required admin access rights to setup the service.
+           <br/>
+            For more information please see the Rose Documentation on 
+            <a href="http://metomi.github.io/rose/doc/rose-install.html#rose-bush">Rose Bush</a>.
+            </p>
             </div>
 
             <br/>
