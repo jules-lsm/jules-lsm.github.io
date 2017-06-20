@@ -129,8 +129,8 @@
             </div>
             <div class="well">
                <p>This is the test battery/suite of regression tests that code development changesets must be tested on.</p>
-               <p>JULES needs to pass all of the tests for code to accepted on the trunk.</p>
-               <p>Use the command <code>rose stem --group=all</code> to test all.</p>
+               <p>JULES needs to pass all of the tests for code to be accepted on the trunk.</p>
+               <p>Use the command <code>rose stem --group=all</code> to test allof the groups in the rose-stem test battery/groups.</p>
                <p>Note for quick preliminary testing use <code>--group=tutorial</code> for the VM, JASMIN, cehlw1, niwa or <code>--group=tutorial_linux</code> for meto-linux or <code>group=tutorial_xc40</code> for the meto-xc40 (this includes MONSooN).</p>
                <br/>
                <p>Other groups are:
@@ -164,11 +164,13 @@ rose stem --group=tutorial --new --name=my_vn4p8tr_test
 fcm_make_debug          gswp2_*           nccmp gswp2_*
       &amp;           =&gt;       &amp;        =&gt;          &amp;          =&gt; housekeep
 fcm_make_omp            loobos_*          nccmp_loobos_*
+
+fcm_make_omp            eraint_*          nccmp_eraint_*
 </pre>            
             This can be explained by the following flow diagram:
 <pre>
 fcm-make task  =&gt;  JULES configurations either  =&gt;  netcdf comparison task with KGO,          =&gt; tidy up task
-                  using loobos or GWSP" data       Known Good Output for each JULES config.
+                  using loobos/GSWP2/ERAINT data       Known Good Output for each JULES config.
 </pre> 
             The JULES output for a configuration from a trunk run version of the code, usually saved in the location /jules/rose-stem-kgo/vn#.# is known as the Known Good Output (KGO).
             The KGO is compared to the current output created by the rose-stem jules configuration using a netcdf comparison tool, nccmp.
@@ -191,33 +193,38 @@ fcm-make task  =&gt;  JULES configurations either  =&gt;  netcdf comparison task
               </tr>
               <tr>
                 <td>Surface</td>
-                <td>Richard Essery</td>
-                <td>richard.essery@ed.ac.uk</td>
+                <td>John Edwards and Richard Essery</td>
+                <td>john.m.edwards@metoffice.gov.uk and richard.essery@ed.ac.uk</td>
               </tr>
               <tr>
                 <td>Hydrology</td>
-                <td>Anne Verhoef or Nic Gedney</td>
-                <td>a.verhoef@reading.ac.uk and nicola.gedney@metoffice.gov.uk</td>
+                <td>Nic Gedney and Anne Verhoef</td>
+                <td>nicola.gedney@metoffice.gov.uk and a.verhoef@reading.ac.uk</td>
               </tr>
               <tr>
                 <td>Vegetation</td>
-                <td>Anna Harper and Lina Mercado and Karina Williams</td>
-                <td>a.harper@exeter.ac.uk and l.mercardo@exeter.ac.uk and karina.williams@metoffice.gov.uk </td>
+                <td>Anna Harper, Lina Mercado and Karina Williams</td>
+                <td>a.harper@exeter.ac.uk, l.mercado@exeter.ac.uk and karina.williams@metoffice.gov.uk </td>
               </tr>
               <tr>
                 <td>Biochemistry</td>
-                <td>Sarah Chadburn and Mat Williams</td>
-                <td>sarah.chadburn@metoffice.gov.uk/s.e.chadburn@exeter.ac.uk and mat.williams@ed.ac.uk</td>
+                <td>Eleanor Burke and Sarah Chadburn</td>
+                <td>eleanor.burke@metoffice.gov.uk and sarah.chadburn@metoffice.gov.uk/s.e.chadburn@exeter.ac.uk</td>
               </tr>
               <tr>
                 <td>Biogenic Fluxes</td>
-                <td>Oliver Wild and Gerd Folberth</td>
-                <td>o.wild@lancaster.ac.uk and gerd.folberth@metoffice.gov.uk</td>
+                <td>Gerd Folberth and Oliver Wild</td>
+                <td>gerd.folberth@metoffice.gov.uk and o.wild@lancaster.ac.uk</td>
               </tr>
               <tr>
                 <td>Technical Changes</td>
-                <td>Douglas Clark and Kerry Smout-Day</td>
-                <td>dbcl@ceh.ac.uk and kerry.smout-day@metoffice.gov.uk</td>
+                <td>TBC and TBC</td>
+                <td>TBC and TBC</td>
+              </tr>
+              <tr>
+                <td>Evaluation</td>
+                <td>Tristan Quaife and Graham Weedon</td>
+                <td>t.l.quaife@reading.ac.uk and graham.weedon@metoffice.gov.uk</td>
               </tr>
             </table>
             </p>
@@ -541,6 +548,7 @@ Succeed - fcm_make_meto_xc40_cce_debug
                <li>trac.log evidence for rose stem test not being in the TicketSummary? page or not being the latest commit to the branch repository. </li>
                <li>rose config-dump - please run "rose config-dump &lt;FILENAME&gt;" on rose files that you have edited for them to be auto checked and corrected. </li>
                </ul>
+               <a href="https://code.metoffice.gov.uk/trac/jules/wiki/WorkingPractices">Working Practices</a> and <a href="https://code.metoffice.gov.uk/doc/um/vn10.6/papers/umdp_003.pdf">UMDP3</a> with the above 10 Gotchas should cover all the s=coding standards.
                </p>
             <br/>
             </div>
@@ -618,14 +626,18 @@ rosie go
 <code>cylc gscan</code> then double click on the name of the suite to open the gcylc GUI for,
 or
 <code>cylc sgc --name=&lt;SUITE_NAME&gt;</code></font>
+<br/>
 <li>What does the gcylc GUI going blank usually mean?</li>
 <font color=green>If there is "Stopped with succeeded" in the bottom left then it is finished</font>
+<br/>
 <li>What does a red square mean?</li>
 <font color=green>The task has failed</font>
 <li>What does a grey square mean?</li>
 <font color=green>The task has succeeded</font>
+<br/>
 <li>What does a green square mean?</li>
 <font color=green>The task is running</font>
+<br/>
 <li>Where is the output of a task usually located?</li>
 <font color=green>In the cylc-run/&lt;SUITE_NAME&gt;/work/1/&lt;TASK_NAME&gt;/output/ directory</font>
 </ol>
@@ -819,7 +831,7 @@ M       app/jules/rose-app.conf
 M       rose-suite.conf
 </pre>
              <p>To commit them to the repository <code>fcm ci</code> add a 
-                comment, save, close and except.</p>
+                comment, save, close and accept/exit.</p>
              <p>To revert all the changes before they are committed, close the 
                 Rose Edit GUI, <code>fcm revert * -R</code>.</p>
              <p><strong>Remember you can only commit changes if you are the suite owner as defined in the rose-suite.info file.</strong></p>
@@ -865,15 +877,15 @@ M       rose-suite.conf
                  <p>The <code>Latent Pages</code> are not often required, only
                     the <code>poll</code> option in <code>Fcm Make</code> may be
                     useful at a later date.
-                    They show the possible other know of pages that could be 
+                    They show the possible other known pages that could be 
                     populated.</p>
  
             <br/>
             <h3>Rose Bush via Rose Edit</h3>
                 <p>Please run the suite u-ai828 (meto-linux), or u-ai829 (VM), 
                    or, u-ai843 (JASMIN), or u-al388 (MONSooN) if you have not
-                   previously run is, note it was part of teh User Tutorial.
-                   the suite takes about 10 minutes to complete, you can run it
+                   previously run it, note it was part of teh User Tutorial.
+                   The suite takes about 10 minutes to complete, you can run it
                    by using the <code>Play</code> icon button from the Rose 
                    Edit GUI.
                    <p>The output from the run can be accessed viewed in Rose 
@@ -897,12 +909,12 @@ M       rose-suite.conf
                    either within the JULES-Rose suite or the JULES-Rose code
                    Rose Edit provides warnings for the user.</p>
                 <p><strong>Remember that rose edit  warnings/errors can only 
-                   as good as the metadata that is either provided/created by
+                   be as good as the metadata that is either provided/created by
                    everyone.
                    Metadata is very important for ensuring that users use the 
                    JULES-Rose suite/code as it was intended by the developer/designer.</strong></p>
                 <br/>
-                <p>Let looks at an example of a metadata warning:</p>
+                <p>Let us looks at an example of a metadata warning:</p>
                 <p>Note that selecting an invalid value for <code>MPI_NUM_TASKS</code>
                    provides a warning triangle and a red cog next to the 
                    offending variable, see the image below.</p>
@@ -958,7 +970,7 @@ M       rose-suite.conf
                <p>From the image above you can see that the date has to have 
                   the correct format.</p>
                 <p>Changing it to be incorrectly formatted provides a hover-over
-                   error, as been in the image below.</p>
+                   error, as seen in the image below.</p>
                 <br/> <img src="images/rose_edit_meta5.png" width="80%" id="rem5"/>
 
             </div>
@@ -975,9 +987,9 @@ M       rose-suite.conf
             <h3>Changing the JULES-Rose suite to run for a different domain</h3>
             <p>In JULES there are two ways to change the domain:
             <ol>
-            <li>Changing the namelist <code>jules_latlon</code> and uses a
+            <li>Changing the namelist <code>jules_latlon</code> and use a
                 single site.</li>
-            <li>Changing the namelist  <code>jules_model_grid</code> and uses a
+            <li>Changing the namelist  <code>jules_model_grid</code> and use a
                 gridbox domain.</li>
             </ol>
             </p>
@@ -1035,7 +1047,7 @@ M       rose-suite.conf
             <p>Change both suites, <code>u-ai828</code> and <code>u-aj012</code>
               (or their respective equivalent for the platform you are using):</p>
               <ul>
-              <li>The u-ai828 suite to run for a different site, Latitude 53.32 and
+              <li>The u-ai828 suite to run for different site, Latitude 53.32 and
                   Longitude 0.0.</li>
               <li>The u-aj012 suite to run over the gridbox lat 53.5 55.5, long -1.0 1.0.</li>
               <li><strong>Extension task if you have time</strong>: The u-aj012 suite again but to run globally (use u-ah270 for help),
@@ -1188,8 +1200,8 @@ main_run_start=${main_run_start}
            <p>As we are using a different time which is within the driving data
               date range we do not have to change the namelist:jules_drive.</p>
            <p>If we are to change the dates to a different month or year then 
-              we must change the values for the varibles (only change to GSWP2
-              if not using loobos data):
+              we must change the values for the variables (only change to GSWP2
+              if not using Loobos data):
 <pre>
 [namelist:jules_drive]
 data_end='1982-07-31 23:59:59'
@@ -1222,21 +1234,21 @@ file='drive_file.txt'
               month at a time.
               This is because not all computers allow for tasks (jobs) to run
               for greater than a three hour wallclock limit. 
-              Therefore some model runs, for example global data over 100's,
+              Therefore some model runs, for example global data,
               may need to be split up into yearly/monthly JULES tasks so the
               computers will allow the model to not timeout.</p>
            <br/>
            <p>We are going to make changes very similar to the canradmod changes
               in the User course Practical 6 where we supplied a list of
-              different canradmod settings to run jules for different optional
+              different canradmod settings to run JULES for different optional
               configurations.
            </p>
-           <p>This suite is slightly different in it design as the first time
+           <p>This suite is slightly different in its design as the first time
               that JULES is run it will use driving data and from then onwards
-              it will use the previous years data as its driving data. 
+              it will use the previous year's data as its driving data. 
            </p>
            <br/>
-           <p>This is first example is an example of yearly, but as it takes a
+           <p>This is first example is yearly, but as it takes a
               while we not run it.
               The second example is monthly and we will implement monthly and 
               run it.</p>
@@ -1678,7 +1690,7 @@ Ideally we would add these the appropriate section (at the bottom of the LOGICAL
 <ul>
 <li>Default switch value should be false.</li>
 <li>USE statements should be added where you need to use the variable.</li>
-<li>A paremeter must be used and not a "magic number" (an unique values with unexplained meaning).</li>
+<li>A parameter must be used and not a "magic number" (an unique values with unexplained meaning).</li>
 </ul>
 Add to the <strong>Namelist</strong> ~ line 76-82
 <pre>
@@ -2084,7 +2096,7 @@ END MODULE my_mod
             </ul>
             </p>
             <p>
-            Let apply this to a new module that we would like to add to the
+            Let us apply this to a new module that we would like to add to the
             code.
            </p>
            <p>We are going to take the JULES vn4.8 release and move some code
@@ -2394,7 +2406,7 @@ You could also create the same page higher in the hierarchy:
              This will create the Ticket Summary page for you to fill in.</p>
             <br/>
             <h4>Filling in the Ticket Summary page</h4>
-            <p>You much be logged in to edit the Ticket Summary page.</p>
+            <p>You must be logged in to edit the Ticket Summary page.</p>
             <p>Go to the bottom of the page and select the button 
                <code>Edit this page</code>.
                Fill in all of the sections that you can at the time.</p>
@@ -2424,7 +2436,7 @@ You could also create the same page higher in the hierarchy:
             <p>Please email people that you think may be willing to sci/tech 
                review your change to ask for a review before you assign it to
                them.</p>
-            <p>Note anyone that has contributed to the branch cannot review the
+            <p>Note: no one that has contributed to the branch can review the
                branch.</p>
            <p>Once the sci/tech review is done they should sign it off and 
               assign it to the JULES System Manager for the code review.
@@ -2434,7 +2446,7 @@ You could also create the same page higher in the hierarchy:
               trunk, decided if the testing was sufficient, and if the 
               appropriate permissions and standards have been achieved.</p>
             <p>They can ask you create a HoT branch if required and to make the
-               appropriate changes to the code to me it suitable for the trunk.</p>
+               appropriate changes to the code to make it suitable for the trunk.</p>
             <br/>
             </div>
          </ul>
