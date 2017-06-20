@@ -72,10 +72,10 @@
                                 <li><a href="jr_links.html">Links</a></li>
                                 <li><a href="jr_mqrg.html">My Quick Reference Guide</a></li>
                                 <li><a href="jr_structures.html">JULES structures</a></li>
-                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc setup</a></li>
-                                <li><a href="jr_vm_setup.html">JULES VM setup</a></li>
-                                <li><a href="jr_jasmin_setup.html">JULES JASMIN setup</a></li>
-                                <li><a href="jr_monsoon_setup.html">JULES MONSooN setup</a></li>
+                                <li><a href="jr_rosecylc_setup.html">Rose/Cylc set-up</a></li>
+                                <li><a href="jr_vm_setup.html">JULES VM set-up</a></li>
+                                <li><a href="jr_jasmin_setup.html">JULES JASMIN set-up</a></li>
+                                <li><a href="jr_monsoon_setup.html">JULES MONSooN set-up</a></li>
                                 <li><a href="jr_help_page.html">JULES help</a></li>
                             </ul>
                         </li>
@@ -101,10 +101,10 @@
         <div class="well">
             <ul>
                 Pre-requisites
-                <li>Have requested for access to JULES from the <a href="http://jules-lsm.github.io/access_req/JULES_access.html"></a>jules-lsm.github.io JULES access request page.</li>
-                <li>Have therefore got a Met Office Science Repository Service account and can access <a href="https://code.metoffice.gov.uk/trac/jules">JULES MOSRS webpages</a>.</li>
+                <li>Already requested access to JULES from the <a href="http://jules-lsm.github.io/access_req/JULES_access.html"></a>jules-lsm.github.io JULES access request page.</li>
+                <li>Have got a Met Office Science Repository Service account (required to access <a href="https://code.metoffice.gov.uk/trac/jules">JULES MOSRS webpages</a>.</li>
                <li>Have Rose, Cylc, FCM, keywords set up on the machine you are working on or are using the Virtual Machine (VM). <a href="https://github.com/metomi/metomi-vms">GitHub VM webpages</a> and the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine">guidance</a> from the JULES MOSRS web pages.</li>
-            <li>Completed the <a href="http://metomi.github.io/rose/doc/rose.html">Rose User Guide</a>.</li>
+            <li>Completed reading the <a href="http://metomi.github.io/rose/doc/rose.html">Rose User Guide</a>.</li>
 
             </ul>
         </div>
@@ -115,7 +115,8 @@
       JULES-Rose.
       </p>
       <p>
-      Ideally the tutorial would be used in the following order:
+      Ideally the tutorial would be completed in its designed order and in full
+      and therefore used in the following order:
       <ul>
       <li><a href="jr_users.html">Users tutorial and practical's</a>
       , pre-quiz section - this can be considered the starting point.</li>
@@ -157,8 +158,11 @@
             </div>
             <div class="well">
                JULES is the Joint UK Land Environment Simulation model, it is a community Land Surface Model (LSM). 
-               The model can be used as a standalone model.
-               It is also part of the Met Office weather and climate prediction models where it is used in the couple between the land and the atmosphere as part of the Met Office Unified Model (UM).
+               This Land Surface model can be used as a standalone model (i.e. 
+               where the meteorological forcing data is provided from existing
+               files rather than by a coupled Atmospheric model such as the Met
+               Office Unified Model, UM).
+               It is also used as part of the Met Office weather and climate prediction models where it is used in the couple between the land and the atmosphere as part of the Met Office Unified Model (UM).
             </div>
             <div class="page-header">
                 <h2>Why use JULES?</h2>
@@ -167,7 +171,7 @@
                JULES is used in the UK and worldwide for weather, climate and science research.
                JULES is used by meteorological services, universities, institutions and centres.
               JULES produces world class science and research.
-              The code is hosted on the MOSRS which works with version control to provide a repository for all to access and browse.
+              The code is hosted on the Met Office Shared Repository Service (MOSRS) which works with version control to provide a repository for all to access and browse.
              Version control allows for accountability, traceability and reproduceability.
              <p>Can you think of a scenario when you version control would be advantageous in your current job/activity? Describe it.</p>
              <p>Describe how you share work now with colleagues, could this be improved? How?</p>
@@ -187,7 +191,7 @@
                "Cylc was developed for the EcoConnect Forecasting System at NIWA (National Institute of Water and Atmospheric Research, New Zealand)."
                "Environmental forecasting suites generate forecast products from a potentially large group of interdependent scientific models and associated data processing tasks."
                Cylc is now not just used for forecasting models but for scheduling tasks on computers by people all over the world.
-               Monterey - US Naval Research Laboratory use it for scheduling tasks on there computer systems.
+               Monterey - US Naval Research Laboratory use it for scheduling tasks on their computer systems.
                 This is growing collaboration with people around the world, at present there are 17 contributors, 11 of which are not Met Office UK.
                 The code is hosted on GitHub at <a href="https://github.com/cylc/cylc">cylc/cylc</a>.
             </div>
@@ -195,10 +199,10 @@
                 <h2>What is Rose?</h2>
             </div>
             <div class="well">
-                Rose is a wrapper to Cylc.
+                Rose is a wrapper to Cylc. This means it is a the user-friendly interface around Cylc to make it more human accessable.
                 It was developed when the Met Office saw the potential power of Cylc and that it could be made more user friendly but adding some additional functions around Cylc in the form of Rose.
                 The Met Office wanted to work with NIWA to develop both Cylc and Rose for forecasting.
-                This is growing collaboration with people around the world, at present there are 17 contributors, 4 of which are not Met Office UK.
+                This is a growing collaboration with people around the world, at present there are 17 contributors, 4 of which are not Met Office UK.
                 The code is hosted on GitHub at <a href="https://github.com/metomi/rose">metomi/rose</a>.
                 The <a href="http://metomi.github.io/rose/doc/rose.html">Rose documentation</a> can be useful for background reading and a more detailed explanation for how the infrastructure works.
             </div>
@@ -208,12 +212,13 @@
             <div class="well">
                 Rose/Cylc provides a user friendly interface for JULES suites and allows them to be scheduled in the most efficient way using Cylc's clever algorithm (code).
                 This means you just provide the order that you would like to run things in and it does the rest for you, submitting them once the dependencies have been meet.
-                Rose/Cylc provides a user friendly interface for JULES code development with tests to check that your development has not broken someone else or some other code.
-                Rose suites can be shared via the MOSRS using the "u-repository" and therefore you can choose an existing suite (bunch of tasks with the dependencies, inputs, outputs, all collected in one place) or adapt and existing suite for your own needs and run it to get your data.
-               You can run bash, python, R, IDL scripts/tasks all as part of the suite, which means once it is set up you can run the suite and get on with a cuppa or some other work!
+                Rose/Cylc provides a user friendly interface for JULES code development with tests to check that your development has not compromised someone else's or coding elsewhere.
+                Rose suites can be shared via the MOSRS using the "u-repository" and therefore you can choose an existing suite (a group of tasks with the dependencies, inputs, outputs, all collected in one place) or adapt and existing suite for your own needs and run it to get your data.
+               You can run bash, python, R, IDL scripts/tasks all as part of the suite, which means once it is set up you can run the suite and get on with other jobs.
                Rose can retrieve data, archive data, remove data, plot data etc if you give it the correct tasks and tell it what the dependencies are.
                Rose means that you can run many suites with slightly different setting using the same base suite one straight after the other without having to wait for the first one to finish before running the next.
-               Rose is meant to make your life easier so if it not try to figure out why and make it help.
+               Rose is designed to simplify work load scheduling thereby making life simplier.
+               This tutorial will help you understand its utility.
                What work/activity/research that you are doing do you think you could use Rose/Cylc for?
             </div>
             <div class="page-header">
@@ -254,7 +259,7 @@
             <div class="well">
                 <ul>
                     <li>All the files are text files therefore you can search them using <code>grep</code></li>
-                    <li>There are lots of Graphical User Interfaces (GUI's) to help make the user experience better and it easier to make changes and run suites.</li>
+                    <li>There are lots of Graphical User Interfaces (GUIs) to help make the user experience better and it easier to make changes and run suites.</li>
                     <li>Easy to add/remove/change: namelists, values etc</li>
                     <li>Can you think of any other things that it may or could be useful to have Rose make developing code and running suites (models/simulations) easier?
                 </ul>
@@ -311,7 +316,7 @@
                     own personal working copy and they can work simultaneously and independently 
                     to modify their personal copies which can then be merged together later. 
                     Note it is the humans' responsibility to merge the files correctly and 
-                    resolve any conflicts by manually.
+                    resolve any conflicts manually.
                     This may mean choosing the correct file after discussions with any others 
                     editing the repository.
                 </li>
@@ -366,7 +371,7 @@
             </div>
             <div class="well">
                 These are suites created by the community for research and developing and testing new science.
-                A selection of examples can be found on the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESWithRose#StandardRosesuites-Pleaseaddyourownheretohelpothers">JULESstandard suites</a> page and on the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/ConfigurationsInfo#Configurations">JULES configurations</a> page.
+                A selection of examples can be found on the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESWithRose#StandardRosesuites-Pleaseaddyourownheretohelpothers">JULES standard suites</a> page and on the <a href="https://code.metoffice.gov.uk/trac/jules/wiki/ConfigurationsInfo#Configurations">JULES configurations</a> page.
             </div>
         </ul>
         <br/>
@@ -377,7 +382,7 @@
                 <h2>What is JULES Rose stem?</h2>
             </div>
             <div class="well">
-                This is a testing system that checks to make sure that any code changes do not break any existing science that has a test.
+                This is a testing system that checks to make sure that any code changes do not break (i.e. compromise) any existing science that has a test.
                 More tests are being added to provide robustness to the system.
                 Rose stem is part of the JULES code and can be run by anyone that has a copy of the code and is running on the Virtual Machine (VM), JASMIN, MONSooN or any other supported site.
                 <p>A supported site is one that has a site specific configuration as part of the code repository.</p>
@@ -392,9 +397,9 @@
             </div>
             <div class="well">
             <h3>Practical 1 will cover:</h3>
-            <p>Checking your setup.</p>
+            <p>Checking your set-up.</p>
             <br/>
-            <p>Lets firstly check some setup:</p>
+            <p>Lets firstly check some set-up:</p>
             <pre>
             rosie hello --prefix=u
             # this should return something like this:
@@ -413,13 +418,13 @@
             # hopefully they are the latest versions of the systems.
             fcm keyword-print
             # or short-hand: fcm kp
-            # this should return all of the keywords that you and the site have setup, a sample of mine are:
+            # this should return all of the keywords that you and the site have set-up, a sample of mine are:
             <font color="blue">
             location{primary}[jules.x] = https://code.metoffice.gov.uk/svn/jules/main
             location{primary}[jules_doc.x] = https://code.metoffice.gov.uk/svn/jules/doc
             </font>
             </pre>
-            <p>What are Keywords and why do we need them setup?</p>
+            <p>What are Keywords and why do we need them set-up?</p>
             <p>Keywords can be considered to be like short-hand or short-cuts to our full URL's.
             <br/>
              Keywords can be defined in the FCM keyword configuration file (i.e. 
@@ -528,7 +533,7 @@ fcm rm - for removing a file or directory from the repository, option -c to
 fcm revert - for reverting a file or directory which has not been 
              checked in/committed to the repository yet.
 fcm st - for checking the status of the repository, VERY IMPORTANT, more later
-fcm sw - for switching branches, don't often done for code but great for suites
+fcm sw - for switching branches, not often used with code but great for suites
 fcm up - for updating the repository
                             </font>
                             </pre>
@@ -610,7 +615,7 @@ Global options_
             <br/>
             <p>More on fcm st</p>
             The command <code>fcm st</code> is a very powerful command and one which 
-            should be used frequently to aid with our use of FCM.
+            should be used frequently to aid our use of FCM.
             <br/>
             <code>fcm st</code> returns the status of the local/working copy files and 
             directories.
@@ -724,10 +729,18 @@ Global options_
                 <ul>
                     <li>practice some FCM commands,</li>
                     <li>run the rose-stem (the test suite/battery),</li>
-                    <li>familiarise ourselves with some of the Rose and Cylc GUI's,</li>
+                    <li>familiarise ourselves with some of the Rose and Cylc GUIs,</li>
                     <li>understand and use the basic features in Trac and Tickets</li>
                 </ul>
              <h3>Checkout the code</h3>
+             <p>The JULES code is continously being developed and improved.
+                There are three releases of the code a year, ~ 1st of March, July and November.
+                Each has a unique version number, for example the March 2017 release was JULES vn4.8.
+                This code is fully tested, reviewed approved and stable, it is known as the <strong>trunk</strong> code.
+                Code that is in development is known as <strong>branch</strong> code, the Developer and Advanced Developer course take copied of the trunk to make branches for code development.
+                <strong>Unless guided differently always use a release version of the code for all JULES-Rose suites and JULES code branches for developement.</strong>
+             </p>
+             <br>
              <p>To checkout the trunk at the latest version/code release try the following:</p>
              <ol>
                  <li>Create a directory at <code>~/jules/vn4p8</code></li>
@@ -800,7 +813,7 @@ cd trunk
             </div>
             <br/>
             <p>We are now going to run the rose-stem tests purely as a 
-               demonstration of a JULES running with Rose.</p>
+               demonstration of running JULES with Rose.</p>
             <p>We always need to specify a group when running rose-stem, here 
                we will use <code>--group=all</code>.
                Other possible options are <code>loobos</code>, <code>gswp2</code>, 
@@ -819,18 +832,18 @@ rose stem --group=all --new -- --hold
 </pre>
             <p>This will set it running but not allow it to start as we have 
                used the option <code>-- --hold</code>.</p>
-            <p>The option <code>--new</code> forces a completly new run to be
+            <p>The option <code>--new</code> forces a completely new run to be
                created.</p>
             <br/>
-            <p>Rose and Cylc provide many helpful Graphical User Interfaces (GUI's).</p>
+            <p>Rose and Cylc provide many helpful Graphical User Interfaces (GUIs).</p>
             <br/>
-           Now lets explore the GUI's.
+           Now to explore the GUIs.
            <h3>The cylc gcylc GUI</h3>
            <p>We will now discuss the gcylc GUI functionality ready for running 
               suites in the next practical.</p>
            <p>The cylc gcylc GUI is the suite specific Graphical User 
               Interface for monitoring the progress of a specific suite.</p>
-           <p>Note you can have a unique gcylc's open for different each suite.</p>
+           <p>Note you can have a different gcylc GUI open for different each suite.</p>
            <p>A JULES-Rose gcylc GUI could look like this:</p>
            <img src="images/uai828_demo_1.png" width="60%" id="cgd1"/>
            <br/>
@@ -838,16 +851,16 @@ rose stem --group=all --new -- --hold
               understand the different aspects of it.</p>
            <h4>Key points from the gcylc GUI</h4>
            <ol>
-           <li>The square coloured blocks - theses are the current states of the tasks
+           <li>The square coloured blocks - these are the current states of the tasks
            <br/><img src="images/task_filtering.png" width="35%" id="tf"/></li>
            <li>If there is an "F" inside the square blocks - this denotes that
-               it is part of a family of tasks, these can be considers as a
+               it is part of a family of tasks, these can be considered as a
                common group.</li>
            <li>When a task has run you can look at its standard output via the 
            GUI by right clicking on the task name.
            For example, fcm_make:
            <br/><img src="images/u_ai828_demo_2.png" width="60%" id="cgd2"/>
-           <br/>Then you can look at the standard out, err and interact with
+           <br/>Then you can look at the standard out (stdout), err (stderr) and interact with
            the task.</li>
            <li>We can pause or stop the suite using the buttons at the top left
            of the gcylc GUI or by selecting the <code>Control</code> tab
@@ -967,7 +980,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
                errors from the log of the suite.</p>
             <br/>
             <h4>Other ways of looking at information from the suite:</h4>
-            <p>We can, if it is setup look at the information in a web 
+            <p>We can, if it is set-up look at the information in a web 
                browser.</p>
             <p>This is known as <strong>rose bush</strong>.</p>
             <p>At the Met Office the top level page looks like the image
@@ -998,7 +1011,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
             <p>The last two images are equivalent run on two different
                sites/systems.</p>
             <br/>
-            <p>Depending on your site setup there are different ways of 
+            <p>Depending on your site set-up there are different ways of 
                accessing rose bush.
                As can be seen in the above two images.
                In an internet window if you know the path you can use that.</p>
@@ -1226,9 +1239,14 @@ rose sgc --name=SUITE_ID</font>
             <h3>Tickets</h3>
             <p>A brief description and discussion on tickets</p>
             <br/>
-            <p>Even if you never have any intention of making a ticket which 
-               you hope resolve tickets can be used to highlight bugs, when 
-               something has been broken, or areas of development.
+            <p>Tickets can be used to highlight bugs, when something has or is 
+               broken, areas of development, etc.
+               Even if you never have any intention of resolving problem you
+               have identified you may still need to create a ticket.
+               Hopefully you would try to resolve the problem, probably with
+               help from a collegue.
+            </p>
+            <p>
                Therefore it is helpful to understand them, their uses, how to
                create a ticket and or just keep any eye on tickets that may
                be of interest to the science that you are working on.</p>
@@ -1244,7 +1262,7 @@ rose sgc --name=SUITE_ID</font>
             <li>It provides a roadmap feature for managing project release,
                 including a record of all changes included in the release.</li>
             <li>It has a built-in wiki.</li>
-            <li>It lets us use a browser for viewing the repositories, where
+            <li>It allows us to use a browser for viewing the repositories, where
                 we can browse the code and files, examine revision logs and 
                 changesets.</li>
            <li>It provides a timeline view with summaries of changes to.</li>
@@ -1307,7 +1325,7 @@ rose sgc --name=SUITE_ID</font>
                   <p>Run the JULES-Rose suite</p>
                <br/>
                <p>In this practical we will use two different methods, command
-                  line and GUI's for all of the tasks.</p>
+                  line and GUIs for all of the tasks.</p>
                <p>Please try both and then chose which you prefer, but remember,
                   you can mix and match and always change your mind!</p>
                <br/>
@@ -1411,7 +1429,7 @@ app/jules/file/Loobos_1997.dat
                   <code>rose-suite.info</code> file using Rosie Go</p>
                <h3>Rosie Go</h3>
                <p>Rosie Go is the suite browser GUI</p>
-               <p>First lets check your setup, open your
+               <p>First check your set-up, open your
                    <code>.metomi/rose.conf</code> file, it should include 
                    similar to the following output.</p>
 <pre>
@@ -1787,7 +1805,7 @@ rose suite-run --new --name=sand_&lt;SUITE_ID&gt;
                          a branch) with the fcm command <code>fcm info</code> 
                          or by using rosie go</li>
                     <li> check the status of the current version of the suite that you are working on</li>
-                    <li> COMMIT any changes and to the repository</li>
+                    <li> COMMIT any changes to the repository</li>
                     <li> list the branches that are available for that suite</li>
                     </ul>
                      <br/>
@@ -1888,7 +1906,7 @@ rose suite-run --new --name=&lt;SOIL_TYPE&gt;_&lt;SUITE_ID&gt;
                         <div class="row">
                             <pre>
 <p> Note: The differences may only be small between the output for the different
-suite setups.
+suite set-ups.
 <br/>
 When plotting the differences the small difference may not be observable by eye 
 with some plotting packages.
@@ -1921,12 +1939,12 @@ clearly by eye but MatLab and Iris display the difference.</p>
                In Practical 5 we copied the suite three times, sand, loam and clay.
                Each had its own suite id and we ran each suite to get the results.
                However, this is not the most effective way of running the suite to
-               get the data as each time it run the <code>fcm_make</code> task.
+               get the data as each time it runs the <code>fcm_make</code> task.
               </p>
               <br/>
               <p>This time we want to run the suite for six different model configurations.
                  Each is only a one line change, it would be a waste of resource
-                 to have six different suites and run each so we will used the 
+                 to have six different suites and run each so we will use the 
                  functionality of Rose to make this more efficient.
             </p>
             <p>Cylc/Rose will schedule the jules tasks to run simultaneously
@@ -2494,7 +2512,7 @@ soil_moisture_availability_factor_tseries.png
         <br/>
         <div class="container">
         <div class="well">
-        Now lets do the User Quiz to highlight your learning.
+        Now do the User Quiz to highlight your learning.
         </div>
         <p><a class="btn btn-lg btn-success" href="user_quiz.html" role="button">User Quiz</a></p>
         </div>
