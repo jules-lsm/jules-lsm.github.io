@@ -285,10 +285,12 @@ store-plaintext-passwords = no
                <li>cd $ROSESTEM_DATA</li>
                <li>KGO_DIR=$ROSESTEM_DATA/rose-stem-kgo/vn#.# #where #.# needs to be the appropriate JULES version number</li>
                <li>mkdir -p $KGO_DIR</li>
-               #Copy across the data all except GSWP2 driving data
+               <br/>
+               #Copy across the data including the ERAINT data but not the GSWP2 driving data
                <li>wget --user=ext_jules --password=&lt;SEE LINK ABOVE&gt; ftp://ftp.metoffice.gov.uk/benchmarking/benchmark.data.tar.gz</li>
                <li>tar -xvzf benchmark.data.tar.gz</li>
                <li>rm benchmark.data.tar.gz</li>
+               <br/>
                #Copy across the GSWP2 driving data
                <li>cd gswp2</li>
                <li>wget --user=ext_jules --password=&lt;SEE LINK ABOVE&gt;  ftp://ftp.metoffice.gov.uk/benchmarking/benchmark_gswp2_data.tar.xz</li>
