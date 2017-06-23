@@ -75,19 +75,20 @@
                 <p>The metomi team at the Met Office provide a VM with FCM,
                     Rose and Cylc installed and configured.
                     To use the VM, follow the <a href="https://github.com/metomi/metomi-vms#metomi-vms">instructions</a> 
-                    for the Ubuntu 14.04 VM.</p>
+                    for the Ubuntu 16.04 VM.</p>
                 <br/>
                 <p>You will need root access to your laptop/computer to be able
                    to install of the software required:
-                   <a href="https://www.virtualbox.org/">VirtualBox</a> and
-                   <a href="https://www.vagrantup.com/">Vagrant</a> then you
+                   <a href="https://www.virtualbox.org/">VirtualBox</a> 
+                   (version 5.1.6 or later required) and
+                   <a href="https://www.vagrantup.com/">Vagrant</a> 
+                   (version 1.9.1 or later required) then you
                    need to download the metomi VM setup files from 
                    <a href="https://github.com/metomi/metomi-vms/archive/master.zip">github</a>.
                    Then extract the files, these will be put into a directory
                    called <code>metomi-vms-master</code>.
                    For Window 10 specific advice please read <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine#JULESdevelopmentusingavirtualmachine">JULES development using a virtual machine</a>.
-                   I (Kerry Smout-Day) have only had experience installing and
-                   running the VM on Mac's.
+                   This has been installed on Mac and Windows.
                 </p>
                 <br/>
                 <p>
@@ -107,7 +108,16 @@ prefixes-ws-default=tmp u
                 <p><a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine#JULES-specificinstructions">VM JULES Data</a>
                    can be obtained by running the three scripts in the link.
                    You need to run <code>sudo install-jules-*</code> for all 
-                   three of the scripts.
+                   three of the scripts:
+<pre>
+# For the extras needed.
+sudo install-jules-extras
+# For the benchmarking and ERAINT data for rose-stem
+sudo install-jules-benchmark-data
+# For the GSWP2 data for rose-stem
+sudo install-jules-gswp2-data
+</pre>
+                <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine#JULES-specificinstructions">The FTP site password.</a>
                 </p>
                 <br/>
                 <p>The 

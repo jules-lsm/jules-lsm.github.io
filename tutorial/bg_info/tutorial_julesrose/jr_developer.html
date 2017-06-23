@@ -150,11 +150,11 @@
                   Use it to help with the practicals.</p>
 <pre>
 # Checkout the code to run rose-stem test for
-mkdir -p ~/jules/vn4p8
-cd ~/jules/vn4p8
-fcm co fcm:jules.x_tr@vn4.8
-cd ~/jules/vn4p8/trunk
-rose stem --group=tutorial --new --name=my_vn4p8tr_test
+mkdir -p ~/jules/vn4p9
+cd ~/jules/vn4p9
+fcm co fcm:jules.x_tr@vn4.9
+cd ~/jules/vn4p9/trunk
+rose stem --group=tutorial --new --name=my_vn4p9tr_test
 </pre>
             <p>
             <h4>Rose-stem workflow</h4>
@@ -289,12 +289,12 @@ These changes have to be justified usually with plots and approved by the code o
            <h4>Creating a Branch</h4>
            <p>Creating a branch from the latest code release of JULES:</p>
            <p><code>cd ~jules</code>
-           <p><code>fcm bc tutorial_bc_rosestem fcm:jules.x_tr@vn4.8</code>
+           <p><code>fcm bc tutorial_bc_rosestem fcm:jules.x_tr@vn4.9</code>
            <br/>please insert the most recent version number.
            <br/><code>bc</code> - means <code>branch-create</code>
            <br/>"tutorial_bc_rosestem" will be the name of the branch.</p>
            <p>If you do not have keywords setup you will have to use the URL:
-           <code>fcm bc tutorial_bc_rosestem https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.8</code></p>
+           <code>fcm bc tutorial_bc_rosestem https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.9</code></p>
            <p>This will bring up a text editor window for you to add your
               commit message about the branch.</p>
            <p>If you do not have text editor as default or wish to change the
@@ -305,9 +305,9 @@ These changes have to be justified usually with plots and approved by the code o
 
 --Add your commit message ABOVE - do not alter this line or those below--
 --FCM message (will be inserted automatically)--
-Created /main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem from /main/trunk@5320.
+Created /main/branches/dev/MOSRS_USERNAME/vn4.9_tutorial_bc_rosestem from /main/trunk@5320.
 --Change summary (not part of commit message)--
-A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
+A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.9_tutorial_bc_rosestem
 </pre>
            Add a comment to the top of it and then close, save it and accept
            the change.
@@ -319,16 +319,16 @@ A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn
 [info] vim: starting commit message editor...
 Change summary:
 --------------------------------------------------------------------------------
-A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
+A    https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.9_tutorial_bc_rosestem
 --------------------------------------------------------------------------------
 Commit message is as follows:
 --------------------------------------------------------------------------------
-Created /main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem from /main/trunk@5320.
+Created /main/branches/dev/MOSRS_USERNAME/vn4.9_tutorial_bc_rosestem from /main/trunk@5320.
 --------------------------------------------------------------------------------
 Create the branch?
 Enter "y" or "n" (or just press &lt;return&gt; for "n") y
 Committed revision ####.
-[info] Created: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
+[info] Created: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.9_tutorial_bc_rosestem
 </font>
            </pre>
            <h4>Working on the Branch</h4>
@@ -336,20 +336,20 @@ Committed revision ####.
               development I use the first and for suite development I use the
               second. Both have different merits and are given below.</p>
           <ol>
-          <li>Check out a copy to a new directory in your ~jules/vn4p8/ directory.
+          <li>Check out a copy to a new directory in your ~jules/vn4p9/ directory.
              <br/>
              <p>For example: <code>fcm co fcm:jules.x_br/dev/MOSRS_USERNAME/BRANCH_NAME</code> and then move to that directory.</li>
-          <li>Switch to the branch from within the directory of trunk@vn4.8.
+          <li>Switch to the branch from within the directory of trunk@vn4.9.
              <br/>
              <p>For example: <code>fcm sw fcm:jules.x_br/dev/MOSRS_USERNAME/BRANCH_NAME</code>.</li>
           </ol>
           <p>Here we will use the first method (later we will use the second).</p>
           <br/>
           <pre>
-mkdir -p ~jules/vn4p8
-cd ~jules/vn4p8
-fcm co fcm:jules.x_br/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
-cd vn4.8_tutorial_bc_rosestem
+mkdir -p ~jules/vn4p9
+cd ~jules/vn4p9
+fcm co fcm:jules.x_br/dev/MOSRS_USERNAME/vn4.9_tutorial_bc_rosestem
+cd vn4.9_tutorial_bc_rosestem
 </pre>
            <p>HELPFUL HINT: if you forget your branch name you can list them using:</p>
           <pre>
@@ -362,9 +362,9 @@ fcm bls
 fcm info
 <font color=blue>
 Path: .
-Working Copy Root Path: /USER/jules/vn4.8_tutorial_bc_rosestem
-URL: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
-Relative URL: ^/main/branches/dev/MOSRS_USERNAME/vn4.8_tutorial_bc_rosestem
+Working Copy Root Path: /USER/jules/vn4.9_tutorial_bc_rosestem
+URL: https://code.metoffice.gov.uk/svn/jules/main/branches/dev/MOSRS_USERNAME/vn4.9_tutorial_bc_rosestem
+Relative URL: ^/main/branches/dev/MOSRS_USERNAME/vn4.9_tutorial_bc_rosestem
 Repository Root: https://code.metoffice.gov.uk/svn/jules
 Repository UUID: ac5b6c67-d81e-4bef-bedc-f37a4dd2bd0a
 Revision: 1222
@@ -384,7 +384,7 @@ fcm st
             Note we are not keeping this change so it is not important
             what it is.
            <pre>
-cd ~jules/vn4p8/vn4.8_tutorial_bc_rosestem/
+cd ~jules/vn4p9/vn4.9_tutorial_bc_rosestem/
 fcm st
 
 #this returns nothing
@@ -406,7 +406,7 @@ fcm st
             <br/>
            <p>Now to make a change that we want to keep and test:</p>
            <pre>
-cd ~jules/vn4p8/vn4.8_tutorial_bc_rosestem/
+cd ~jules/vn4p9/vn4.9_tutorial_bc_rosestem/
 # move to the source/root directory of the JULES code
 cd src/science/snow
 # edit tridag_mod.F90 ln 68 to be this:
@@ -476,12 +476,12 @@ Succeed - fcm_make_meto_xc40_cce_debug
            <h3>A little more background information on the code repository...What does HEAD mean, etc?</h3>
            <p>The JULES code is part of the MOSRS repository.</p>
            <p>The code is "tagged" at every release with a version number, for
-              example vn4.8.</p>
+              example vn4.9.</p>
            <p>The working practices state that we should work at a "tagged"
               release.
-              For example <code>fcm bc my_jules_change fcm:jules.x_tr@vn4.8</code>
-              this checkouts out the JULES code at vn4.8 and would provide the
-              branch main/branches/dev/MOSRS_USERNAME/vn4.8_my_jules_change .
+              For example <code>fcm bc my_jules_change fcm:jules.x_tr@vn4.9</code>
+              this checkouts out the JULES code at vn4.9 and would provide the
+              branch main/branches/dev/MOSRS_USERNAME/vn4.9_my_jules_change .
            </p>
            <p>As from the day that "tagged" version of the JULES code is
               released the trunk is open for new changes to be added.
@@ -493,7 +493,7 @@ Succeed - fcm_make_meto_xc40_cce_debug
             <p>Near the end of a release cycle you may be asked to create a
                HEAD of Trunk branch, this is known as a HoT branch and is
                explained later.
-               Instead of using <code>fcm:jules.x_tr@vn4.8</code> you would use
+               Instead of using <code>fcm:jules.x_tr@vn4.9</code> you would use
                <code>fcm:jules.x_tr@HEAD</code> and the branch created would
                start with a r#### instead of vn#.# where the r#### is the
                revision number of the JULES code respository that the branch
@@ -502,7 +502,7 @@ Succeed - fcm_make_meto_xc40_cce_debug
            <p>Sometimes you are required to select a JULES code revision,
               for example if you want to work from a revision known committed
               branch.
-              Instead of using <code>fcm:jules.x_tr@vn4.8</code> you would use
+              Instead of using <code>fcm:jules.x_tr@vn4.9</code> you would use
               <code>fcm:jules.x_tr@r###</code> and the branch created would
               start with a r#### instead of vn#.# where the r#### is the
               revision number of the JULES code respository that the branch
@@ -544,7 +544,7 @@ Succeed - fcm_make_meto_xc40_cce_debug
                <li>Align "&amp;" at column 79- easier to read. </li>
                <li>80 character line limit - easier to read. </li>
                <li>Remove trailing white spaces - easier to read. </li>
-               <li>All Fortran keywords must be UPPER case and with the correct spacing, i.e. "END IF", "END DO", "IF (", "MAX(", "EXP(", LEN, KIND etc. Note the code at vn4.8 has had all of these corrected for the repository. </li>
+               <li>All Fortran keywords must be UPPER case and with the correct spacing, i.e. "END IF", "END DO", "IF (", "MAX(", "EXP(", LEN, KIND etc. Note the code at vn4.9 has had all of these corrected for the repository. </li>
                <li>trac.log evidence for rose stem test not being in the TicketSummary? page or not being the latest commit to the branch repository. </li>
                <li>rose config-dump - please run "rose config-dump &lt;FILENAME&gt;" on rose files that you have edited for them to be auto checked and corrected. </li>
                </ul>
@@ -723,7 +723,7 @@ rose edit
             <p>Follow the
                    instructions below:<br/>
                    For example point to the trunk version of the JULES code metadata:
-                   <code>/project/jules/vn4.8/trunk/</code> to the
+                   <code>/project/jules/vn4.9/trunk/</code> to the
                    <strong>front</strong> of
                    both of the paths for fcm_make and jules metadata.</p>
             <div class="panel-group" id="accordion">
@@ -741,8 +741,8 @@ rose edit
             <div class="row">
             <ol>
             <font color="green">
-            <li>Index section on the left side -&gt; fcm_make -&gt; Build configuration -&gt; Path to JULES source:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>
-            <li>Index section on the left side -&gt; fcm_make -&gt; meta:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>            <li>Index section on the left side -&gt; jules -&gt; meta:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-standalone/HEAD/rose-meta.conf</code>cd            </li>
+            <li>Index section on the left side -&gt; fcm_make -&gt; Build configuration -&gt; Path to JULES source:  <code>/project/jules/vn4.9/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>
+            <li>Index section on the left side -&gt; fcm_make -&gt; meta:  <code>/project/jules/vn4.9/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>            <li>Index section on the left side -&gt; jules -&gt; meta:  <code>/project/jules/vn4.9/trunk/rose-meta/jules-standalone/HEAD/rose-meta.conf</code>cd            </li>
             </li>
             </font>
             </ol>
@@ -924,7 +924,7 @@ M       rose-suite.conf
                    JULES code metadata for Rose Edit to use. If not follow the
                    instructions below:<br/>
                    For example point to the trunk version of the JULES code metadata:
-                   <code>/project/jules/vn4.8/trunk/</code> to the
+                   <code>/project/jules/vn4.9/trunk/</code> to the
                    <strong>front</strong> of
                    both of the paths for fcm_make and jules metadata.</p>
             <div class="panel-group" id="accordion">
@@ -942,8 +942,8 @@ M       rose-suite.conf
             <div class="row">
             <ol>
             <font color="green">
-            <li>Index section on the left side -&gt; fcm_make -&gt; Build configuration -&gt; Path to JULES source:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>
-            <li>Index section on the left side -&gt; fcm_make -&gt; meta:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>            <li>Index section on the left side -&gt; jules -&gt; meta:  <code>/project/jules/vn4.8/trunk/rose-meta/jules-standalone/HEAD/rose-meta.conf</code>cd            </li>
+            <li>Index section on the left side -&gt; fcm_make -&gt; Build configuration -&gt; Path to JULES source:  <code>/project/jules/vn4.9/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>
+            <li>Index section on the left side -&gt; fcm_make -&gt; meta:  <code>/project/jules/vn4.9/trunk/rose-meta/jules-fcm-make/HEAD/rose-meta.conf</code> </li>            <li>Index section on the left side -&gt; jules -&gt; meta:  <code>/project/jules/vn4.9/trunk/rose-meta/jules-standalone/HEAD/rose-meta.conf</code>cd            </li>
             </li>
             </font>
             </ol>
@@ -1122,7 +1122,7 @@ MAIN_RUN_START='1982-07-01 03:00:00'
 <pre>
 [jinja2:suite.rc]
 DESKTOP=false
-JULES_PATH='/project/jules/vn4.8/trunk'
+JULES_PATH='/project/jules/vn4.9/trunk'
 MPI_NUM_TASKS=12
 OMP_NUM_THREADS=2
 WALLTIME=PT3H
@@ -1625,7 +1625,7 @@ read_list=.true.
             <div class="panel-body">
             <div class="row">
 <pre>
-<font color="green">fcm bc -k 296 namelist_example fcm:jules.x_tr@vn4.8</font>
+<font color="green">fcm bc -k 296 namelist_example fcm:jules.x_tr@vn4.9</font>
 </pre>
             </div>
             </div>
@@ -1634,7 +1634,7 @@ read_list=.true.
             Add a suitable commit message and type <code>y</code> and press the
             enter/return key to create the branch.
             <br/>
-            Checkout the branch to your <code>jules/vn4p8/</code> directory.
+            Checkout the branch to your <code>jules/vn4p9/</code> directory.
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
             <div class="panel-heading">
@@ -1649,7 +1649,7 @@ read_list=.true.
             <div class="panel-body">
             <div class="row">
 <pre>
-<font color="green">fcm co fcm:jules.x_br/dev/MOSRS_USERNAME/vn4.8_namelist_example</font>
+<font color="green">fcm co fcm:jules.x_br/dev/MOSRS_USERNAME/vn4.9_namelist_example</font>
 </pre>
             </div>
             </div>
@@ -1792,8 +1792,8 @@ fcm ci
             <li>Create a branch (test) from the branch (dev), a branch-of-branch
                 bob.
 <pre>
-cd ~/jules/vn4p8/
-fcm branch-create -k 296 --branch-of-branch -t test namelist_example_test_branch fcm:jules.x_br/dev/MOSRSUSERNAME/vn4.8_namelist_example
+cd ~/jules/vn4p9/
+fcm branch-create -k 296 --branch-of-branch -t test namelist_example_test_branch fcm:jules.x_br/dev/MOSRSUSERNAME/vn4.9_namelist_example
 fcm co fcm:jules.x_br/test/MOSRSUSERNAME/r####_namelist_example_test_branch
 cd r####_namelist_example_test_branch
 </pre>
@@ -1802,7 +1802,7 @@ cd r####_namelist_example_test_branch
             <li>Test the science after running the upgrade macro (on a test
                 branch)
 <pre>
-./bin/upgrade_jules_test_apps vn4.8_t296
+./bin/upgrade_jules_test_apps vn4.9_t296
 </pre>
 </li>
             <br/>
@@ -1859,9 +1859,9 @@ fcm ci
 #in all three locations as done above (fcm_make, fcm_make-Build Configuration,
 # jules)
 # Apply upgrade macros
-rose app-upgrade -M ~/jules/vn4p8/vn4.8_namelist_example -C app/fcm_make vn4.8_269  &amp;&amp; rose macro --fix -M ~/jules/vn4p8/vn4.8_namelist_example -C app/fcm_make 
+rose app-upgrade -M ~/jules/vn4p9/vn4.9_namelist_example -C app/fcm_make vn4.9_269  &amp;&amp; rose macro --fix -M ~/jules/vn4p9/vn4.9_namelist_example -C app/fcm_make 
 # fcm-make not always required, skip if it does not work with: "[FAIL] Error: could not find meta flag"
-rose app-upgrade -M ~/jules/vn4p8/vn4.8_namelist_example -C app/jules vn4.8_269 &amp;&amp; rose macro --fix -M ~/jules/vn4p8/vn4.8_namelist_example -C app/jules
+rose app-upgrade -M ~/jules/vn4p9/vn4.9_namelist_example -C app/jules vn4.9_269 &amp;&amp; rose macro --fix -M ~/jules/vn4p9/vn4.9_namelist_example -C app/jules
 </pre>
 </p>
    <p>Run the suite:
@@ -2099,11 +2099,11 @@ END MODULE my_mod
             Let us apply this to a new module that we would like to add to the
             code.
            </p>
-           <p>We are going to take the JULES vn4.8 release and move some code
+           <p>We are going to take the JULES vn4.9 release and move some code
                into a module.</p>
            <p>
            <ul>
-           <li>Check out the JULES vn4.8 code release as vn4p8_tr</li>
+           <li>Check out the JULES vn4.9 code release as vn4p9_tr</li>
            <li>Change to the created directory</li>
            <li><code>touch src/science/soil/n_leach_mod.F90</code></li>
            <li>Open the file src/science/soil/hydrol_jls.F90</li>
@@ -2308,7 +2308,7 @@ END MODULE n_leach_mod
                 </div>
             </div>
             <br/>
-            <p>This example is based on JULES ticket<a href="">#394</a> which is               on the trunk and part of the JULES vn4.8 code release, but it is
+            <p>This example is based on JULES ticket<a href="">#394</a> which is               on the trunk and part of the JULES vn4.9 code release, but it is
                different to the code on the trunk as soil tiling was 
                implemented before this ticket.</p>
             <br/>
@@ -2322,7 +2322,7 @@ END MODULE n_leach_mod
               Where could you look if tests failed for information on why they 
               had failed?
               We are not going to submit this code change for review as the
-              code was correctly implemented for vn4.8 with the soil tiling.
+              code was correctly implemented for vn4.9 with the soil tiling.
               This is <strong>just</strong> an example of how we 
               <strong>could</strong> add a module.</p>
           <br/>
@@ -2589,7 +2589,7 @@ cd um
 fcm co fcm:um.x_tr@vn10.6
 # or if no fcm keywords set up
 fcm co https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.6
-# for example if the change was a JULES vn4.8 branch
+# for example if the change was a JULES vn4.9 branch
 cd trunk</li>
 <li>rose stem --group=jules,developer --new --name=umtr_jls&lt;JULES_ticket_no&gt; --sourece=. --source=/full/path/to/jules/branch/to/be/tested</li>
 <li>~cylc-run/umtr_jls&lt;JULES_ticket_no&gt;/trac.log</li>
@@ -2658,7 +2658,7 @@ cd um
 fcm bc &lt;UM_BRANCH_NAME&gt; fcm:um.x_tr@10.5
 # or if no fcm keywords set up
 fcm bc &lt;UM_BRANCH_NAME&gt; https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.5
-# for example if the change was a JULES vn4.8 branch
+# for example if the change was a JULES vn4.9 branch
 cd &lt;UM_BRANCH_NAME&gt;</li>
 <li>Make your changes and commit them to the repository as you would for JULES.</li>
 <li>rose stem --group=jules,developer --new --source=. --source=/full/path/to/jules/branch/to/be/tested</li>
@@ -2822,8 +2822,8 @@ class vn48_txxx(rose.upgrade.MacroUpgrade):
 
     """Upgrade macro from JULES by Author"""
 
-    BEFORE_TAG = "vn4.8"
-    AFTER_TAG = "vn4.8_txxx"
+    BEFORE_TAG = "vn4.9"
+    AFTER_TAG = "vn4.9_txxx"
 
     def upgrade(self, config, meta_config=None):
         """Upgrade a JULES runtime app configuration."""
@@ -2976,7 +2976,7 @@ fcm ci
             <pre>
 # create-rose-app vn_from vn_to namelist_path suite_name jules_code_path
 #  for example:
-create-rose-app vn4.4 vn4.8 /path/to/my/4.4/namelist/ my_4p4_conversion /path/to/my/jules/code/at/4.8/
+create-rose-app vn4.4 vn4.9 /path/to/my/4.4/namelist/ my_4p4_conversion /path/to/my/jules/code/at/4.9/
 </pre>
             <p>If you have a directory with old namelists files, please try the
                <code>create-rose-app</code> command.</p>

@@ -735,7 +735,7 @@ Global options_
              <h3>Checkout the code</h3>
              <p>The JULES code is continously being developed and improved.
                 There are three releases of the code a year, ~ 1st of March, July and November.
-                Each has a unique version number, for example the March 2017 release was JULES vn4.8.
+                Each has a unique version number, for example the March 2017 release was JULES vn4.9.
                 This code is fully tested, reviewed approved and stable, it is known as the <strong>trunk</strong> code.
                 Code that is in development is known as <strong>branch</strong> code, the Developer and Advanced Developer course take copied of the trunk to make branches for code development.
                 <strong>Unless guided differently always use a release version of the code for all JULES-Rose suites and JULES code branches for developement.</strong>
@@ -743,8 +743,8 @@ Global options_
              <br>
              <p>To checkout the trunk at the latest version/code release try the following:</p>
              <ol>
-                 <li>Create a directory at <code>~/jules/vn4p8</code></li>
-                 <li>Checkout the trunk at vn4.8 (or the latest <a href="https://code.metoffice.gov.uk/trac/jules#ReleaseSchedule">release</a>)</li>
+                 <li>Create a directory at <code>~/jules/vn4p9</code></li>
+                 <li>Checkout the trunk at vn4.9 (or the latest <a href="https://code.metoffice.gov.uk/trac/jules#ReleaseSchedule">release</a>)</li>
                  <p>We do want to run the "rose-stem" suite purely as an example of a running suite, but firstly what is the rose-stem suite and why may we want to run it in the future?</p>
             <br/>
             <div class="panel-group" id="accordion">
@@ -794,15 +794,15 @@ weekly.
                         <div class="row">
                             <pre>
                             <font color=green>
-# make the directory ~/jules/vn4p8 and the path that may be required.
-mkdir -p ~/jules/vn4p8
-# change to the directory ~/jules/vn4p8
-cd ~/jules/vn4p8
-# checkout the JULES code at version vn4.8 using keywords to a directory called 
+# make the directory ~/jules/vn4p9 and the path that may be required.
+mkdir -p ~/jules/vn4p9
+# change to the directory ~/jules/vn4p9
+cd ~/jules/vn4p9
+# checkout the JULES code at version vn4.9 using keywords to a directory called 
 # trunk
-fcm co fcm:jules.x_tr@vn4.8
-# or checkout the JULES code at version vn4.8 using the full URL
-fcm co https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.8
+fcm co fcm:jules.x_tr@vn4.9
+# or checkout the JULES code at version vn4.9 using the full URL
+fcm co https://code.metoffice.gov.uk/svn/jules/main/trunk@vn4.9
 # move the trunk/ directory
 cd trunk
                             </font>
@@ -867,7 +867,7 @@ rose stem --group=all --new -- --hold
            <br/><img src="images/u_ai828_demo_3.png" width="60%" id="cgd3"/>
            <br/><img src="images/stop_suite_daemon.png" width="35%" id="ssd"/>
            <br/>Note in the last image in the top taskbar it says:
-           <code>Stop Suite Daemon vn4p8</code> this means that this panel 
+           <code>Stop Suite Daemon vn4p9</code> this means that this panel 
            can be used to stop the suite at the location it is running using 
            the suite daemon.
            Which is the computer program that runs as a background process.</li>
@@ -953,7 +953,7 @@ There are mainly reasons, for example it failed and you need to fix the error.
             <br/>
             <h4>What if you accidently close the gcylc GUI?</h4>
             <p>You can reopen it using:</p>
-            <code>cylc gui vn4p8 #where vn4p8 is the suite id</code>
+            <code>cylc gui vn4p9 #where vn4p9 is the suite id</code>
             <br/>OR
             <p>You can use the cylc gscan GUI</p>
             <code>cylc gscan &amp; #&amp; background the task so you can still use your terminal</code>
@@ -1293,7 +1293,7 @@ rose sgc --name=SUITE_ID</font>
                right of the page and fill in the details.
                The Description will need a link to the branch before it is
                passed for review.
-               For example <code>[log:main/branches/dev/kerryday/vn4.8_new_tests vn4.8_new_tests]</code>
+               For example <code>[log:main/branches/dev/kerryday/vn4.9_new_tests vn4.9_new_tests]</code>
                and a Ticket Summary page <code>[wiki:ticket/###/TicketSummary ticket summary]</code>
               These make it easier for the reviewer.</p>
               <p>If you are only reporting a bug then please fill in as much as
@@ -1551,9 +1551,9 @@ They are the same as in the command line directory.
                <br/>
                Change the path of to the JULES code in the 
                <code>rose-suite.conf</code> to point to your  location of the 
-               JULES vn4.8 code, for example on the VM: <code>/home/vagrant/jules/vn4.8/trunk/</code>
+               JULES vn4.9 code, for example on the VM: <code>/home/vagrant/jules/vn4.9/trunk/</code>
                <br/>
-               on JASMIN: <code>~&lt;USER&gt;/jules/vn4.8/trunk/</code></p>
+               on JASMIN: <code>~&lt;USER&gt;/jules/vn4.9/trunk/</code></p>
                <p>There are three ways to run the suite:
                   <ol>
                      <li>Command line
@@ -1727,7 +1727,7 @@ output_period=86400
 </pre>
 </li>
                   <li>Ensure that gridbox mean sensible heat flux, latent heat flux and surface temperature are output.
-                  <p<a href="http://jules-lsm.github.io/vn4.8/output-variables.html">JULES Output variables</a></p>
+                  <p<a href="http://jules-lsm.github.io/vn4.9/output-variables.html">JULES Output variables</a></p>
 <pre>
 ftl_gb 	Gridbox surface sensible heat flux (W m-2)
 latent_heat 	Gridbox surface latent heat flux (W m-2)
@@ -1951,7 +1951,7 @@ clearly by eye but MatLab and Iris display the difference.</p>
                which will reduce the running time of your suite.</p>
             <h3>Changing canopy the radiation model configurations</h3>
                <p>Information on the options in JULES for calculating the effect
-                  of the vegetation canopy on radiation is in the <a href="http://jules-lsm.github.io/vn4.8/namelists/jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod">documentation.</a></p>
+                  of the vegetation canopy on radiation is in the <a href="http://jules-lsm.github.io/vn4.9/namelists/jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod">documentation.</a></p>
               In summary, in the <code>jules</code> application configuration
               file <code>SUITE_ID/app/jules/rose-app.conf</code> the namelist 
               <code>jules_vegetation</code> has an option <code>can_rad_mod</code>.
@@ -1986,8 +1986,8 @@ OR
 rose edit
 First check the metadata is pointing to the correct location (change to point to your copy of the code)
 e.g.
-for jules ~kerryday/JULES/vn4p8/trunk/rose-metadata/jules-standalone/vn4.8 
-for fcm_make ~kerryday/JULES/vn4p8/trunk/rose-metadata/jules-fcm-make/vn4.8
+for jules ~kerryday/JULES/vn4p9/trunk/rose-metadata/jules-standalone/vn4.9 
+for fcm_make ~kerryday/JULES/vn4p9/trunk/rose-metadata/jules-fcm-make/vn4.9
 Refresh the metadata using the Metadata tab at the top of rose edit.
 Then:
  -&gt; jules -&gt; Namelist configuration -&gt; Sciecne settings -&gt; Vegetation options <code>can_rad_mod</code> (about half way down). REMEMBER to expand your rose edit window to see all of the options.
