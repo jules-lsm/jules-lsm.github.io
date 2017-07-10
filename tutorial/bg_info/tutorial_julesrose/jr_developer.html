@@ -130,7 +130,7 @@
             <div class="well">
                <p>This is the test battery/suite of regression tests that code development changesets must be tested on.</p>
                <p>JULES needs to pass all of the tests for code to be accepted on the trunk.</p>
-               <p>Use the command <code>rose stem --group=all</code> to test allof the groups in the rose-stem test battery/groups.</p>
+               <p>Use the command <code>rose stem --group=all</code> to test all of the groups in the rose-stem test battery/groups.</p>
                <p>Note for quick preliminary testing use <code>--group=tutorial</code> for the VM, JASMIN, cehlw1, niwa or <code>--group=tutorial_linux</code> for meto-linux or <code>group=tutorial_xc40</code> for the meto-xc40 (this includes MONSooN).</p>
                <br/>
                <p>Other groups are:
@@ -1256,7 +1256,7 @@ file='drive_file.txt'
            <strong>Yearly Example only</strong>
            <p>Changes to the <code>rose-suite.conf</code> file:
 <pre>
-YEARS=["2011","2012","2013","2014","2015"]
+YEARS=["1984","1985","1986","1987","1988"]
 WALLTIME='P3D'
 </pre>
            </p>
@@ -1272,7 +1272,7 @@ graph = """
 
 {% for year in YEARS %}
     [[jules_{{year}}]]
-        inherit = SPICE
+        inherit = SPICE # (MO) or LINUX (VM) you should not need to change this line
         {% if year == YEARS[0] %}
             script = "mkdir -p output ; rose task-run --app-key=jules --path= --path=share/fcm_make/build/bin"
         {% else %}
@@ -1329,7 +1329,7 @@ graph = """
             batch system = slurm
 
     [[fcm_make]]
-        inherit = None, SPICE
+        inherit = None, SPICE 
         [[[job]]]
            execution time limit = PT20M
         [[[remote]]]
@@ -1342,7 +1342,8 @@ graph = """
 
 <font color="green">{% for year in YEARS %}
     [[jules_{{year}}]]
-        inherit = SPICE
+        inherit = SPICE # (MO) or LINUX (VM) you should not need to change this
+line
         {% if year == YEARS[0] %}
             script = "mkdir -p output ; rose task-run --app-key=jules --path= --path=share/fcm_make/build/bin"
         {% else %}
@@ -1390,9 +1391,11 @@ main_run_end='${year_next}-01-01 01:00:00'
 main_run_start='${year}-01-01 01:00:00'
 
 [namelist:jules_drive]
-data_end='${year_next}-01-31 23:59:59'
-data_start='${year}-01-01 03:00:00'
-file='drive_file.txt
+data_end='1996-01-01 03:00:00'
+data_start='1982-07-01 03:00:00'
+file='drive_file.txt'
+nfiles=162
+read_list=.true.
 </pre>
            </p>
            <p>These are all of the changes that would need to be made.<p/>
@@ -1416,7 +1419,8 @@ graph = """
 
 {% for month in MONTHS %}
     [[jules_{{"%0.2d" % month|int}}]]
-        inherit = SPICE
+        inherit = SPICE  # (MO) or LINUX (VM) you should not need to change this
+line
         {% if month == MONTHS[0] %}
             script = "mkdir -p output ; rose task-run --app-key=jules --path= --path=share/fcm_make/build/bin"
         {% else %}
@@ -1440,7 +1444,7 @@ graph = """
             <h4 class="panel-title">
             <a data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">
             <span class="glyphicon"></span>
-            Example of the updated: suite.rc
+            Example of the updated: suite.rc (MO Linux)
             </a>
             </h4>
             </div>
@@ -1486,7 +1490,8 @@ graph = """
 
 <font color="green">{% for month in MONTHS %}
     [[jules_{{"%0.2d" % month|int}}]]
-        inherit = SPICE
+        inherit = SPICE  # (MO) or LINUX (VM) you should not need to change this
+line
         {% if month == MONTHS[0] %}
             script = "mkdir -p output ; rose task-run --app-key=jules --path= --path=share/fcm_make/build/bin"
         {% else %}
@@ -1514,6 +1519,92 @@ graph = """
             <br/>
 
            </p>
+
+            <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title">
+            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFourteenVM">
+            <span class="glyphicon"></span>
+            Example of the updated: suite.rc (VM)
+            </a>
+            </h4>
+            </div>
+            <div id="collapseFourteenVM" class="panel-collapse collapse">
+            <div class="panel-body">
+            <div class="row">
+<pre>
+#!jinja2
+[cylc]
+    UTC mode = True
+
+[scheduling]
+    [[dependencies]]
+<font color="green">graph = """
+          fcm_make =&gt;\
+          {% for month in MONTHS %}
+              jules_{{"%0.2d" % month|int}} =&gt;\
+          {% endfor %}
+          housekeep
+        """</font>
+[runtime]
+    [[root]]
+        script = rose task-run --verbose
+        [[[events]]]
+            mail events = submission failed, submission timeout, failed, timeout
+
+    [[LINUX]]
+         pre-script = "ulimit -s unlimited"
+        [[[job]]]
+            batch system = background
+        [[[environment]]]
+            GSWP2_INSTALL_DIR = {{ GSWP2_INSTALL_DIR }}
+
+    [[fcm_make]]
+        inherit = None, LINUX
+        [[[remote]]]
+            host = {{ ROSE_ORIG_HOST }}
+        [[[environment]]]
+            JULES_PATH       = {{ JULES_PATH }}
+            JULES_PATH_META  = {{ JULES_PATH }}/rose-meta/
+            ROSE_TASK_N_JOBS = 2
+
+<font color="green">{% for month in MONTHS %}
+    [[jules_{{"%0.2d" % month|int}}]]
+        inherit = LINUX #(VM) you should not need to change this
+line
+        {% if month == MONTHS[0] %}
+            script = "mkdir -p output ; rose task-run --app-key=jules --path= --path=share/fcm_make/build/bin"
+        {% else %}
+            script = "mkdir -p output ; rose task-run --app-key=jules -O dump --path= --path=share/fcm_make/build/bin"
+                      #Note - upper o not zero
+        {% endif %}
+        env-script = """ month_next='{{ "%0.2d" % (month|int + 1)}}' """</font>
+        [[[environment]]]
+            JULES_PATH      = {{ JULES_PATH }}
+            MPI_NUM_TASKS   = {{ MPI_NUM_TASKS }}
+            OMP_NUM_THREADS = {{ OMP_NUM_THREADS }}
+            NPROC           = {{ MPI_NUM_TASKS }}
+<font color="green">            month={{"%0.2d" % month|int}}
+            month_next=${month_next}
+            year={{ YEAR }}
+{% endfor %}
+
+    [[housekeep]]
+        script = echo "Success!"</font>
+</pre>
+            </div>
+            </div>
+            </div>
+            </div>
+            <br/>
+
+
+
+
+
+
+
            <p>Changes to the <code>app/jules/</code> files and directory:
               Add an <code>opt/</code> directory.</p>
 
@@ -1604,7 +1695,8 @@ read_list=.true.
             </ol>
             </p>
             <p>
-            Normally you would create a ticket first, but here we will use #296
+            Normally you would create a ticket first, but here we will use
+             <strong>#296</strong>
             as this has been set up for tutorials.</p>
             <br/>
             <p>
@@ -1658,7 +1750,13 @@ read_list=.true.
             </li>
             <br/>
             <li>Add the science - edit <code>src/science/soil/surf_hyd_jls_mod.F90</code> by increasing the large-scale rainfall in the surface hydrology scheme.
-At ~ line 166 after the Fortran intrinsics are defined add:
+At line ~150 add the LOGICAL and REAL's for the three variables that we are adding:
+<pre>
+LOGICAL, PARAMETER :: l_drench_soil = .TRUE.
+REAL :: ls_rain_local(land_pts)
+REAL :: drench_increment = 0.0001
+</pre>
+At ~ line 168 after the Fortran intrinsics are defined add:
 <pre>
 !If we are using the drenching feature, add the water to ls_rain
 IF ( l_drench_soil ) THEN
@@ -1670,7 +1768,7 @@ END IF
 ! differently to allow the compiler to take advantage of OpenMP and other
 ! optimisations.
 </pre>
-and change <code>ls_rain_land</code> to <code>ls_rain_local</code> at ~ line 200.
+and change <code>ls_rain_land</code> to <code>ls_rain_local</code> in three places, at ~ line 200, ~ line 271 and ~ line 276.
 <br/>
 edit <code>src/control/shared/jules_hydrology_mod.F90</code>
 At ~ line 22 add the following:
@@ -1692,24 +1790,54 @@ Ideally we would add these the appropriate section (at the bottom of the LOGICAL
 <li>USE statements should be added where you need to use the variable.</li>
 <li>A parameter must be used and not a "magic number" (an unique values with unexplained meaning).</li>
 </ul>
-Add to the <strong>Namelist</strong> ~ line 76-82
+Add to the <strong>Namelist</strong> ~ line 76-82 <code>l_drench_soil</code> to the end of the namelist. 
 <pre>
 !------------------------------------------------------------------------------
 ! Single namelist definition for UM and standalone
 !------------------------------------------------------------------------------
   NAMELIST /jules_hydrology/                                                  &amp;
     l_hydrology, l_top, l_pdm, l_spdmvar, l_baseflow_corr, l_var_rainfrac,    &amp;
-    l_wetland_unfrozen,l_wetland_ch4_npp,                                     &amp;
+    l_wetland_unfrozen,                                                       &amp;
     dz_pdm, b_pdm, s_pdm, slope_pdm_max, ti_max, ti_wetl, zw_max, nfita,      &amp;
     l_drench_soil
 </pre>
-Add a log message to <code>src/initialisation/standalone/init_hydrology.F90</code> at ~ line 85 after the other CALLs.
+Add l_drench_soil to jules_hydrology ~ line 172 
+<pre>
+    WRITE(lineBuffer, *) '  l_drench_soil = ', l_drench_soil
+    CALL jules_print('jules_hydrology', lineBuffer)
+</pre>
+Add increase the number of n_log by one ~ line 216
+<pre>
+    INTEGER, PARAMETER :: n_log = 8
+</pre>
+Add the LOGICAL to the TYPE my_namelist list ~ line 235
+<pre>
+      LOGICAL :: l_drench_soil
+</pre>
+Update the setup of the namelist ~ line 255
+<pre>
+      my_nml % l_drench_soil   = l_drench_soil
+</pre>
+Update the namelists broadacst ~ line 280
+<pre>
+      l_drench_soil   = my_nml % l_drench_soil
+</pre>
+<br/>
+Edit  <code>src/initialisation/standalone/init_hydrology.F90</code>
+Add the <code>l_drench_soil</code> to the USE statement
+<pre>
+  USE jules_hydrology_mod, ONLY : jules_hydrology, check_jules_hydrology,     &amp;
+                                  l_top, l_pdm, l_drench_soil
+</pre>
+Adding a log message at ~ line 85 after the other CALLs.
 <pre>
   IF ( l_drench_soil ) THEN
     CALL log_info("init_hydrology", "Soil drenching is switched on")
   END IF
 </pre>
 This should be all the science, we will test the science shortly.
+<br/>
+<a href="https://code.metoffice.gov.uk/trac/jules/changeset?reponame=&new=8671%40main%2Fbranches%2Fdev%2Fkerryday%2Fvn4.9_developer_p3_drench&old=8484%40main%2Ftrunk">Diff of vn4.9 trunk to a vn4.9 branch with the changes made.</a>
 </li>
             <br/>
             <li>Update the metadata - edit <code>rose-meta/jules-standalone/HEAD/rose-meta.conf</code> as shown:
@@ -1724,14 +1852,14 @@ sort-key = h
 </li>
 <br/>
             <br/>
-            <li>Add the upgrade macro - edit <code>rose-meta/jules-standalone/versions.py</code> file just before the comment line about the template:
+            <li>Add the upgrade macro - edit <code>rose-meta/jules-standalone/versions.py</code> file just before the comment line about the template (Note this is based on the idea that you are creating a branch at vn4.9 for ticket #296):
 <pre>
-class vn##_t##(rose.upgrade.MacroUpgrade):
+class vn49_t296(rose.upgrade.MacroUpgrade):
 
     """Upgrade macro from JULES by USERNAME/NAME"""
 
-    BEFORE_TAG = "vn#.#"
-    AFTER_TAG = "vn#.#_t##"
+    BEFORE_TAG = "vn4.9"
+    AFTER_TAG = "vn4.9_t296"
 
     def upgrade(self, config, meta_config=None):
         """Upgrade a JULES runtime app configuration."""
@@ -1770,9 +1898,6 @@ class vn##_t##(rose.upgrade.MacroUpgrade):
 <pre>
 fcm st
 fcm ci
-#for running all the rose-stem tests for a evidence for the Ticket Summary
-#as part of the Ticket for review.
-<font color="green">rose stem --group=all --new</font>
 #for running the tutorial rose-stem tests for a evidence for the Ticket Summary
 #as part of the Ticket for review.
 #(_linux/_xc40 for Met Office intenal only)
@@ -1815,7 +1940,7 @@ rose edit
             <br/>
             <li>Run rose-stem on the test branch
             <p>Check the status of the code and commit the changes.</p>
-            <p>Run the rose-stem tests</p>
+            <p>Run the rose-stem tests, normally we would run using the <code>--group=all</code> option but for the tutorial please use the <code>--group=tutorial</code> or <code>--group=tutorial_linux</code> if you are at the MO site.</p>
             <div class="panel-group" id="accordion">
             <div class="panel panel-default">
             <div class="panel-heading">
@@ -1832,9 +1957,6 @@ rose edit
 <pre>
 fcm st
 fcm ci
-#for running all the rose-stem tests for a evidence for the Ticket Summary
-#as part of the Ticket for review.
-<font color="green">rose stem --group=all --new</font>
 #for running the tutorial rose-stem tests for a evidence for the Ticket Summary
 #as part of the Ticket for review.
 #(_linux/_xc40 for Met Office intenal only)
@@ -1845,7 +1967,7 @@ fcm ci
             </div>
             </div>
             <br/>
-            <p>All rose-stem tests should pass.</p>
+            <p>The rose-stem tests should pass.</p>
             <p>A <code>trac.log</code> file will be produced for copying to the
                Ticket Summary of the Ticket.
                It is located in the <code>~/cylc-run/&lt;BRANCH_NAME&gt;/</code> directory.
@@ -1997,7 +2119,8 @@ bio_hum_CN         = my_nml % bio_hum_CN
 #rose edit test, check the metadata is as intended
 rose edit -M /path/to/the/metadata/for/testing/rose-meta
 #run the upgrade macro
-rose app-upgrade -M /path/to/the/metadata/for/testing/rose-meta app/fcm_make &lt;version&gt; &amp;&amp; rose macro --fix -M /path/to/the/metadata/for/testing/rose-meta
+rose app-upgrade -M /path/to/the/metadata/for/testing/rose-meta app/fcm_make &lt;vn#.#_t###&gt; &amp;&amp; rose macro --fix -M /path/to/the/metadata/for/testing/rose-meta -C app/fcm_make
+rose app-upgrade -M /path/to/the/metadata/for/testing/rose-meta app/jules &lt;vn#.#_t###&gt; &amp;&amp; rose macro --fix -M /path/to/the/metadata/for/testing/rose-meta -C app/jules
 #or
 ./bin/upgrade_jules_test_apps vn#.#_t###
 
@@ -2511,7 +2634,7 @@ fcm ci
 
         <ul>
             <div class="page-header">
-                <h2><a id="umj">Practical 6 - UM-JULES</a></h2>
+                <h2><a id="umj">Practical 6 - UM-JULES <strong>only for users with UM code access</strong></a></h2>
             </div>
             <div class="well">
             <h3>Practical 6 will cover:</h3>
@@ -2586,9 +2709,9 @@ rose stem --group=all --new</li>
 cd
 mkdir -p um/
 cd um
-fcm co fcm:um.x_tr@vn10.6
+fcm co fcm:um.x_tr@vn10.8
 # or if no fcm keywords set up
-fcm co https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.6
+fcm co https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.8
 # for example if the change was a JULES vn4.9 branch
 cd trunk</li>
 <li>rose stem --group=jules,developer --new --name=umtr_jls&lt;JULES_ticket_no&gt; --sourece=. --source=/full/path/to/jules/branch/to/be/tested</li>
@@ -2655,9 +2778,9 @@ rose stem --group=all --new</li>
 cd
 mkdir -p um/
 cd um
-fcm bc &lt;UM_BRANCH_NAME&gt; fcm:um.x_tr@10.5
+fcm bc &lt;UM_BRANCH_NAME&gt; fcm:um.x_tr@10.8
 # or if no fcm keywords set up
-fcm bc &lt;UM_BRANCH_NAME&gt; https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.5
+fcm bc &lt;UM_BRANCH_NAME&gt; https://metoffice.code.gov.uk/svn/um/main/trunk@vn10.8
 # for example if the change was a JULES vn4.9 branch
 cd &lt;UM_BRANCH_NAME&gt;</li>
 <li>Make your changes and commit them to the repository as you would for JULES.</li>
@@ -2817,8 +2940,9 @@ from .version44_45 import *
 from .version45_46 import *
 from .version46_47 import *
 from .version47_48 import *
+from .version48_49 import *
 
-class vn48_txxx(rose.upgrade.MacroUpgrade):
+class vn49_txxx(rose.upgrade.MacroUpgrade):
 
     """Upgrade macro from JULES by Author"""
 
@@ -2831,6 +2955,23 @@ class vn48_txxx(rose.upgrade.MacroUpgrade):
         # Add settings
         return config, self.reports
 
+
+'''
+Do not edit any lines below this point - this is the template.
+'''
+
+class vn49_txxx(rose.upgrade.MacroUpgrade):
+
+    """Upgrade macro from JULES by Author"""
+
+    BEFORE_TAG = "vn4.9_txxx"
+    AFTER_TAG = "vn4.9_txxx"
+
+    def upgrade(self, config, meta_config=None):
+        """Upgrade a JULES runtime app configuration."""
+
+        # Add settings
+        return config, self.reports
 </pre>
             <p>During a release, after an edit:</p>
 <pre>
@@ -2860,6 +3001,11 @@ class vn47_t414(rose.upgrade.MacroUpgrade):
                          "0")
         return config, self.reports
 
+
+'''
+Do not edit any lines below this point - this is the template.
+'''
+
 class vn47_txxx(rose.upgrade.MacroUpgrade):
 
     """Upgrade macro from JULES by Author"""
@@ -2872,6 +3018,7 @@ class vn47_txxx(rose.upgrade.MacroUpgrade):
 
         # Add settings
         return config, self.reports
+
 </pre>
             <br/>
             <p>Accompanying this <code>rose-meta/jules-standalone/versions.py</code>

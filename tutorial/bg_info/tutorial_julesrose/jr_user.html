@@ -815,7 +815,7 @@ cd trunk
             <p>We are now going to run the rose-stem tests purely as a 
                demonstration of running JULES with Rose.</p>
             <p>We always need to specify a group when running rose-stem, here 
-               we will use <code>--group=all</code>.
+               we will use <code>--group=tutorial</code> or <code>--group=tutorial_linux</code> if you are at teh Met Office and working on Linux.
                Other possible options are <code>loobos</code>, <code>gswp2</code>, 
                <code>linux</code>, <code>xc40</code>, <code>tutorial</code>, 
                <code>tutorial_linux</code>, <code>tutorial_xc40</code>.
@@ -1551,7 +1551,7 @@ They are the same as in the command line directory.
                <br/>
                Change the path of to the JULES code in the 
                <code>rose-suite.conf</code> to point to your  location of the 
-               JULES vn4.9 code, for example on the VM: <code>/home/vagrant/jules/vn4.9/trunk/</code>
+               JULES vn4.9 code, for example on the VM: <code>/home/vagrant/jules/vn4p9/trunk/</code>
                <br/>
                on JASMIN: <code>~&lt;USER&gt;/jules/vn4.9/trunk/</code></p>
                <p>There are three ways to run the suite:
@@ -1933,7 +1933,7 @@ clearly by eye but MatLab and Iris display the difference.</p>
                   <p>Add optional configurations files to the JULES-Rose suite</p>
                   <p>Run the suite</p>
                   <p>Questions</p>
-                  <p>Adding plots</p>
+                  <p>Adding plots - only presently possible if you have Iris installed</p>
                <br/>
                <p>
                In Practical 5 we copied the suite three times, sand, loam and clay.
@@ -1990,7 +1990,7 @@ for jules ~kerryday/JULES/vn4p9/trunk/rose-metadata/jules-standalone/vn4.9
 for fcm_make ~kerryday/JULES/vn4p9/trunk/rose-metadata/jules-fcm-make/vn4.9
 Refresh the metadata using the Metadata tab at the top of rose edit.
 Then:
- -&gt; jules -&gt; Namelist configuration -&gt; Sciecne settings -&gt; Vegetation options <code>can_rad_mod</code> (about half way down). REMEMBER to expand your rose edit window to see all of the options.
+ -&gt; jules -&gt; Namelist configuration -&gt; Science settings -&gt; Vegetation options <code>can_rad_mod</code> (about half way down). REMEMBER to expand your rose edit window to see all of the options.
                             </font>
 <img src="images/rose_edit_rad.png" width="95%" id="rer"/>
                             </pre>
