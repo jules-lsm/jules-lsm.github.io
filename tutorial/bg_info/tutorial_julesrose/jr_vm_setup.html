@@ -112,9 +112,9 @@ prefixes-ws-default=tmp u
 <pre>
 # For the extras needed.
 sudo install-jules-extras
-# For the benchmarking and ERAINT data for rose-stem
+# For the benchmarking and ERAINT data for rose-stem and the smallest GSWP2 for rose-stem
 sudo install-jules-benchmark-data
-# For the GSWP2 data for rose-stem
+# For the full set of GSWP2 data if needed! NOTE: this is 22GB. Only install if you have space and need it.
 sudo install-jules-gswp2-data
 </pre>
                 <a href="https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine#JULES-specificinstructions">The FTP site password.</a>
@@ -133,10 +133,10 @@ sudo install-jules-gswp2-data
                 <ol>
                     <li>
                      KGO_DIR=&lt;/jules/rose-stem-kgo/&gt;</li>
-<li>                     VN=vn4.7_t??? #replace with the appropriate KGO version
+<li>                     VN=vn4.9_t??? #replace with the appropriate KGO version
 </li>
 <li>                     mkdir -p $KGO_DIR/$VN</li>
-<li>                     JULES_TRUNK=&lt;path/to/jules/vn4.7/trunk&gt; #replace vn4.7 with the appropriate JULES version number</li>
+<li>                     JULES_TRUNK=&lt;path/to/jules/vn4.9/trunk&gt; #replace vn4.9 with the appropriate JULES version number</li>
                      <li>cd $JULES_TRUNK</li>
                      #This suite will fail, but do it anyway as we need to create the KGO
                      <li><code>rose stem --group=all --source=. -S HOUSEKEEPING=false --new</code></li>
