@@ -179,15 +179,6 @@ PATH=$PATH:~fcm/bin
 [[ -f ~/.bashrc ]] &amp;&amp; . ~/.bashrc
 </pre>
            </p>
-                <p>Add the following to the end of your .bashrc file if missing:
-<pre>
-[[ $- != *i* ]] &amp;&amp; return # Stop here if not running interactively
-[[ $HOSTNAME = "exvmsrose.monsoon-metoffice.co.uk" ]] &amp;&amp; . mosrs-setup-gpg-agent
-# Enable bash completion for Rose commands
-[[ -f ~fcm/rose/etc/rose-bash-completion ]] &amp;&amp; . ~fcm/rose/etc/rose-bash-completion
-</pre>
-           </p>
-
           <p>Connect to the cylc server.</p>
 
 <pre>
@@ -209,7 +200,29 @@ Met Office Science Repository Service password:<font color=blue>MOSRSPASSWORD</f
 Subversion password cached
 https://code.metoffice.gov.uk/rosie/u/hello: Hello &lt;MOSRSNUSERNAME&gt;</font>
 Rosie password cached
+</pre>
+                <p>Add the following to the top of your .bash_profile file if missing:
+<pre>
+# Provide access to FCM, Rose and Cylc
+PATH=$PATH:~fcm/bin
 
+# Ensure .bashrc is sourced in login shells
+# (only add this if it is not already done in your .bash_profile)
+[[ -f ~/.bashrc ]] &amp;&amp; . ~/.bashrc
+</pre>
+           </p>
+                <p>Add the following to the end of your .bashrc file if missing:
+<pre>
+[[ $- != *i* ]] &amp;&amp; return # Stop here if not running interactively
+[[ $HOSTNAME = "exvmsrose.monsoon-metoffice.co.uk" ]] &amp;&amp; . mosrs-setup-gpg-agent
+# Enable bash completion for Rose commands
+[[ -f ~fcm/rose/etc/rose-bash-completion ]] &amp;&amp; . ~fcm/rose/etc/rose-bash-completion
+</pre>
+           </p>
+
+         <p>Exit MONSooN:</p>
+
+<pre>
 [&lt;MONSooNUSERNAME&gt;@exvmsrose:~]$<font color=blue> exit</font>
 #logout
 #Connection to exvmsrose closed.
