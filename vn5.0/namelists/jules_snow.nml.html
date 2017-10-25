@@ -1,0 +1,943 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.10. jules_snow.nml &mdash; Joint UK Land Environment Simulator (JULES) v5.0 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v5.0 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.11. jules_rivers.nml" href="jules_rivers.nml.html" />
+    <link rel="prev" title="6.9. jules_soil_ecosse.nml" href="jules_soil_ecosse.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_rivers.nml.html" title="6.11. jules_rivers.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_soil_ecosse.nml.html" title="6.9. jules_soil_ecosse.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.0 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jules-snow-nml">
+<h1>6.10. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt><a class="headerlink" href="#jules-snow-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets the snow options and parameters. It contains one namelist called <a class="reference internal" href="#namelist-JULES_SNOW"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_SNOW</span></tt></a>.</p>
+<div class="section" id="jules-snow-namelist-members">
+<h2>6.10.1. <tt class="docutils literal"><span class="pre">JULES_SNOW</span></tt> namelist members<a class="headerlink" href="#jules-snow-namelist-members" title="Permalink to this headline">¶</a></h2>
+<p>HCTN30 refers to Hadley Centre technical note 30, available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes">the Met Office Library</a>.</p>
+<span class="target" id="namelist-JULES_SNOW"></span><dl class="member">
+<dt id="JULES_SNOW::nsmax">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">nsmax</tt><a class="headerlink" href="#JULES_SNOW::nsmax" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum possible number of snow layers.</p>
+<dl class="docutils">
+<dt>0</dt>
+<dd>A composite soil/snow layer is used. This value gives the behaviour found in JULES2.0 and earlier.</dd>
+<dt>&gt; 0</dt>
+<dd>The state of up to <tt class="docutils literal"><span class="pre">nsmax</span></tt> separate snow layers is modelled. Values of <tt class="docutils literal"><span class="pre">nsmax</span> <span class="pre">=</span> <span class="pre">3</span></tt> or more are recommended.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::l_snowdep_surf">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">l_snowdep_surf</tt><a class="headerlink" href="#JULES_SNOW::l_snowdep_surf" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use equivalent canopy snow depth for surface calculations on tiles with a snow canopy.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::frac_snow_subl_melt">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">frac_snow_subl_melt</tt><a class="headerlink" href="#JULES_SNOW::frac_snow_subl_melt" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0 or 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for use of snow-cover fraction in the calculation of sublimation and melting.</p>
+<ol class="arabic simple" start="0">
+<li>Off</li>
+<li>On</li>
+</ol>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::graupel_options">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">graupel_options</tt><a class="headerlink" href="#JULES_SNOW::graupel_options" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0 or 1 or 2</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for treatment of graupel in the snow scheme</p>
+<ol class="arabic simple" start="0">
+<li>Include graupel as snowfall</li>
+<li>Ignore graupel in the surface snowfall</li>
+<li>Treat graupel separately</li>
+</ol>
+<p>Always &#8220;Include graupel as snowfall&#8221; (option 0) in standalone JULES because 
+separate snow and graupel driving data are not available.
+If graupel is included in the UM surface snowfall diagnostic 
+then JULES can either include this graupel as snow in the surface scheme (option 0), 
+ignore this graupel completely, thereby breaking conservation
+of water and energy in the coupled land-atmosphere model (option 1) or 
+treat graupel seperately (currently this only means allowing graupel to
+fall straight through the canopy)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::dzsnow">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">dzsnow</tt><a class="headerlink" href="#JULES_SNOW::dzsnow" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nsmax)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Prescribed thickness of each snow layer (m).</p>
+<p>Only used if <a class="reference internal" href="#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> &gt; 0.</p>
+<p>The interpretation of <tt class="docutils literal"><span class="pre">dzsnow</span></tt> is slightly complicated and an example of the evolution of the snow layers is given below.</p>
+<p><tt class="docutils literal"><span class="pre">dzsnow</span></tt> gives the thickness of each layer when it is not the bottom layer.</p>
+<p>For the top layer, the minimum thickness is <tt class="docutils literal"><span class="pre">dzsnow(1)</span></tt> and the maximum thickness is <tt class="docutils literal"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">dzsnow(1)</span></tt>. For all other layers <tt class="docutils literal"><span class="pre">iz</span></tt>, the minimum thickness is <tt class="docutils literal"><span class="pre">dzsnow(iz</span> <span class="pre">-</span> <span class="pre">1)</span></tt>, i.e. the given thickness of the previous layer, and the maximum thickness is <tt class="docutils literal"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">dzsnow(iz)</span></tt>, i.e. twice the layer <tt class="docutils literal"><span class="pre">dzsnow</span></tt> value, except for the last possible layer (<a class="reference internal" href="#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a>) which has no upper limit.</p>
+<p>As a snowpack deepens, the bottom layer (closest to the soil; label this as layer <tt class="docutils literal"><span class="pre">b</span></tt>) thickens until it reaches its maximum allowed thickness, at which point it will split into a layer of depth <tt class="docutils literal"><span class="pre">dzsnow(b)</span></tt> and a new bottom layer <tt class="docutils literal"><span class="pre">b</span> <span class="pre">+</span> <span class="pre">1</span></tt> is added to hold the remaining snow. If a layer becomes thinner than its value in <tt class="docutils literal"><span class="pre">dzsnow</span></tt> it is removed and the snow partitioned between the remaining layers. Whenever a layer splits or is removed, the properties of the layer (e.g. temperature) are allocated to the remaining layers.</p>
+<p>Note that <tt class="docutils literal"><span class="pre">dzsnow(nsmax)</span></tt>, the final thickness, is not used but a value must be input.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::cansnowpft">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">cansnowpft</tt><a class="headerlink" href="#JULES_SNOW::cansnowpft" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Flag indicating whether snow can be held under the canopy of each PFT.</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> = 4.</p>
+<p>The model of snow under the canopy is currently only suitable for coniferous trees.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Snow can be held under the canopy.</dd>
+<dt>FALSE</dt>
+<dd>Snow cannot be held under the canopy.</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-radiation-parameters admonition">
+<p class="first admonition-title">Radiation parameters</p>
+<dl class="member">
+<dt id="JULES_SNOW::r0">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">r0</tt><a class="headerlink" href="#JULES_SNOW::r0" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">50.0</td>
+</tr>
+</tbody>
+</table>
+<p>Grain size for fresh snow (μm).</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_snow_albedo</span></tt></a> = TRUE. See HCTN30 Eq.15.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::rmax">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">rmax</tt><a class="headerlink" href="#JULES_SNOW::rmax" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">2000.0</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum snow grain size (μm).</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_snow_albedo</span></tt></a> = TRUE. See HCTN30 p4.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::snow_ggr">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">snow_ggr</tt><a class="headerlink" href="#JULES_SNOW::snow_ggr" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(3)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.6, 0.06, 0.23e6</td>
+</tr>
+</tbody>
+</table>
+<p>Snow grain area growth rates (μm<sup>2</sup> s<sup>-1</sup>).</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_snow_albedo</span></tt></a> = TRUE. See HCTN30 Eq.16.</p>
+<p>The 3 values are for melting snow, cold fresh snow and cold aged snow respectively.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::amax">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">amax</tt><a class="headerlink" href="#JULES_SNOW::amax" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(2)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.98, 0.7</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum albedo for fresh snow.</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_snow_albedo</span></tt></a> or <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_elev_land_ice" title="JULES_SURFACE::l_elev_land_ice"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_elev_land_ice</span></tt></a>
+are true</p>
+<p>Values 1 and 2 are for VIS and NIR wavebands respectively.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::aicemax">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">aicemax</tt><a class="headerlink" href="#JULES_SNOW::aicemax" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(2)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.78, 0.36</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum albedo for bare ice</p>
+<p>Only used if <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_elev_land_ice" title="JULES_SURFACE::l_elev_land_ice"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_elev_land_ice</span></tt></a> = TRUE. See also <cite>rho_firn_albedo</cite></p>
+<p>Values 1 and 2 are for VIS and NIR wavebands respectively.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::maskd">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">maskd</tt><a class="headerlink" href="#JULES_SNOW::maskd" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">50.0</td>
+</tr>
+</tbody>
+</table>
+<p>Used in exponent of equation weighting snow-covered and snow-free albedo.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::dtland">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">dtland</tt><a class="headerlink" href="#JULES_SNOW::dtland" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">2.0</td>
+</tr>
+</tbody>
+</table>
+<p>Degrees Celsius below zero at which snow albedo equals cold deep snow albedo.</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_snow_albedo</span></tt></a> = FALSE. This is 2.0 in HCTN30 Eq4.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::kland_numerator">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">kland_numerator</tt><a class="headerlink" href="#JULES_SNOW::kland_numerator" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.3</td>
+</tr>
+</tbody>
+</table>
+<p>Used in snow-ageing effect on albedo.</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_snow_albedo</span></tt></a> = FALSE.</p>
+<p>Must not be zero.</p>
+<p><tt class="docutils literal"><span class="pre">kland</span></tt> is computed by dividing this value by <a class="reference internal" href="#JULES_SNOW::dtland" title="JULES_SNOW::dtland"><tt class="xref nml nml-mem docutils literal"><span class="pre">dtland</span></tt></a> - see HCTN30 Eq4.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::can_clump">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">can_clump</tt><a class="headerlink" href="#JULES_SNOW::can_clump" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Clumping parameter for snow on the canopy in calculation of albedo.</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> = 4, <a class="reference internal" href="#JULES_SNOW::cansnowpft" title="JULES_SNOW::cansnowpft"><tt class="xref nml nml-mem docutils literal"><span class="pre">cansnowpft</span></tt></a> = TRUE on that tile and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_embedded_snow" title="JULES_RADIATION::l_embedded_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_embedded_snow</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::n_lai_exposed">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">n_lai_exposed</tt><a class="headerlink" href="#JULES_SNOW::n_lai_exposed" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>LAI distribution parameter for calculation of snow albedo.</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_embedded_snow" title="JULES_RADIATION::l_embedded_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_embedded_snow</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_SNOW::lai_alb_lim_sn">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">lai_alb_lim_sn</tt><a class="headerlink" href="#JULES_SNOW::lai_alb_lim_sn" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum LAI in calculation of albedo in the presence of snow.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-other-snow-parameters admonition">
+<p class="first admonition-title">Other snow parameters</p>
+<dl class="member">
+<dt id="JULES_SNOW::rho_snow_const">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">rho_snow_const</tt><a class="headerlink" href="#JULES_SNOW::rho_snow_const" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">250.0</td>
+</tr>
+</tbody>
+</table>
+<p>Constant density of lying snow (kg m<sup>-3</sup>).</p>
+<p>This value is used if <a class="reference internal" href="#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> = 0, in which case all snow is modelled as a single layer of constant density.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::rho_snow_fresh">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">rho_snow_fresh</tt><a class="headerlink" href="#JULES_SNOW::rho_snow_fresh" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">100.0</td>
+</tr>
+</tbody>
+</table>
+<p>Density of fresh snow (kg m<sup>-3</sup>).</p>
+<p>This value is only used if <a class="reference internal" href="#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> &gt; 0.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::rho_firn_albedo">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">rho_firn_albedo</tt><a class="headerlink" href="#JULES_SNOW::rho_firn_albedo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">550.0</td>
+</tr>
+</tbody>
+</table>
+<p>If <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_elev_land_ice" title="JULES_SURFACE::l_elev_land_ice"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_elev_land_ice</span></tt></a> = TRUE, this is the threshold density (as measured over the ~top 10cm, depending
+on how the dzsnow layers are specified) at which the grain-size calculation of prognostic snow albedo will switch to one
+dependent on the surface density of the snowpack. Albedo is linearly scaled between <cite>amax</cite> for <cite>rho_snow_const</cite> and <cite>aicemax</cite> 
+for rho_ice=917 kg/m^3.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::snow_hcon">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">snow_hcon</tt><a class="headerlink" href="#JULES_SNOW::snow_hcon" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.265</td>
+</tr>
+</tbody>
+</table>
+<p>Thermal conductivity of lying snow (W m<sup>-1</sup> K<sup>-1</sup>).</p>
+<p>See HCTN30 Eq.42.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::snow_hcap">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">snow_hcap</tt><a class="headerlink" href="#JULES_SNOW::snow_hcap" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.63e6</td>
+</tr>
+</tbody>
+</table>
+<p>Thermal capacity of lying snow (J K<sup>-1</sup> m<sup>-3</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::snowliqcap">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">snowliqcap</tt><a class="headerlink" href="#JULES_SNOW::snowliqcap" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.05</td>
+</tr>
+</tbody>
+</table>
+<p>Liquid water holding capacity of lying snow, as a fraction of snow mass.</p>
+<p>Only used if <a class="reference internal" href="#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> &gt; 0.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::snowinterceptfact">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">snowinterceptfact</tt><a class="headerlink" href="#JULES_SNOW::snowinterceptfact" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.7</td>
+</tr>
+</tbody>
+</table>
+<p>Constant in relationship between mass of intercepted snow and snowfall rate.</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> = 4.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::snowloadlai">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">snowloadlai</tt><a class="headerlink" href="#JULES_SNOW::snowloadlai" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">4.4</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of maximum canopy snow load to leaf area index (kg m<sup>-2</sup>).</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> = 4.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::snowunloadfact">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">snowunloadfact</tt><a class="headerlink" href="#JULES_SNOW::snowunloadfact" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.4</td>
+</tr>
+</tbody>
+</table>
+<p>Constant in relationship between canopy snow unloading and canopy snow melt rate.</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> = 4.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::unload_rate_cnst">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">unload_rate_cnst</tt><a class="headerlink" href="#JULES_SNOW::unload_rate_cnst" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Constant term in the background unloading rate for snow on the canopy.</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> = 4 and <a class="reference internal" href="#JULES_SNOW::cansnowpft" title="JULES_SNOW::cansnowpft"><tt class="xref nml nml-mem docutils literal"><span class="pre">cansnowpft</span></tt></a> = TRUE on that tile.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::unload_rate_u">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">unload_rate_u</tt><a class="headerlink" href="#JULES_SNOW::unload_rate_u" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Term proportional to wind speed in unloading rate for snow on the canopy.</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> = 4 and <a class="reference internal" href="#JULES_SNOW::cansnowpft" title="JULES_SNOW::cansnowpft"><tt class="xref nml nml-mem docutils literal"><span class="pre">cansnowpft</span></tt></a> = TRUE on that tile.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::i_snow_cond_parm">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">i_snow_cond_parm</tt><a class="headerlink" href="#JULES_SNOW::i_snow_cond_parm" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0 or 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Scheme used to calculate the conductivity of snow</p>
+<p>Only used if <a class="reference internal" href="#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> &gt; 0.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::l_et_metamorph">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">l_et_metamorph</tt><a class="headerlink" href="#JULES_SNOW::l_et_metamorph" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Include the effect of thermal metamorphism on the snow density.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::l_snow_infilt">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">l_snow_infilt</tt><a class="headerlink" href="#JULES_SNOW::l_snow_infilt" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Pass rainfall and melting from the canopy to the snowpack as infiltration.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::l_snow_nocan_hc">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">l_snow_nocan_hc</tt><a class="headerlink" href="#JULES_SNOW::l_snow_nocan_hc" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Do not include the canopy heat capacity in the surface energy balance at the top of the snow pack on tiles without a canopy snow model.</dd>
+<dt>FALSE</dt>
+<dd>The canopy heat capacity is include in the surface energy balance at the top of the snow pack.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::a_snow_et">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">a_snow_et</tt><a class="headerlink" href="#JULES_SNOW::a_snow_et" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Constant in parametrization of thermal metamorphism.</p>
+<p>Only used if <a class="reference internal" href="#JULES_SNOW::l_et_metamorph" title="JULES_SNOW::l_et_metamorph"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_et_metamorph</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::b_snow_et">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">b_snow_et</tt><a class="headerlink" href="#JULES_SNOW::b_snow_et" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Constant in parametrization of thermal metamorphism.</p>
+<p>Only used if <a class="reference internal" href="#JULES_SNOW::l_et_metamorph" title="JULES_SNOW::l_et_metamorph"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_et_metamorph</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::c_snow_et">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">c_snow_et</tt><a class="headerlink" href="#JULES_SNOW::c_snow_et" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Constant in parametrization of thermal metamorphism.</p>
+<p>Only used if <a class="reference internal" href="#JULES_SNOW::l_et_metamorph" title="JULES_SNOW::l_et_metamorph"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_et_metamorph</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::rho_snow_et_crit">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">rho_snow_et_crit</tt><a class="headerlink" href="#JULES_SNOW::rho_snow_et_crit" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Critical density in parametrization of thermal metamorphism.</p>
+<p>Only used if <a class="reference internal" href="#JULES_SNOW::l_et_metamorph" title="JULES_SNOW::l_et_metamorph"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_et_metamorph</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SNOW::i_grain_growth_opt">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">i_grain_growth_opt</tt><a class="headerlink" href="#JULES_SNOW::i_grain_growth_opt" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0 or 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Scheme used to calculate the rate of growth of snow grains.</p>
+<p>Setting this to 0 invokes the original scheme based on Marshall (1989),
+with no dependence of the rate of growth of small grains on the
+temperature.</p>
+<p>Setting it to 1 invokes the scheme for growth of snow grains proposed
+by Taillandier et al. (2007) for equitemperature metamorphism. This
+is significantly slower than the default scheme at low temperatures.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_SNOW::i_relayer_opt">
+<tt class="descclassname">JULES_SNOW::</tt><tt class="descname">i_relayer_opt</tt><a class="headerlink" href="#JULES_SNOW::i_relayer_opt" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0 or 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Scheme used to relayer the snowpack. Setting the option to 0 invokes
+the original scheme with relayering of the grain size involving the
+grain size itself, while setting it to 1 causes the relayering to be 
+done using the inverse of the grain size. This is more consistent
+with conserving the SSA, though full conservation would require
+mass weighting to be invoked during regridding.</p>
+<p>Only used if <a class="reference internal" href="#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> &gt; 0.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="example-of-the-evolution-of-snow-layer-thickness">
+<h2>6.10.2. Example of the evolution of snow layer thickness<a class="headerlink" href="#example-of-the-evolution-of-snow-layer-thickness" title="Permalink to this headline">¶</a></h2>
+<p>The table below gives an example of how the number and thickness of snow layers varies with total snow depth for the case of <a class="reference internal" href="#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> = 3 and <tt class="docutils literal"><span class="pre">dzsnow</span> <span class="pre">=</span> <span class="pre">(0.1,</span> <span class="pre">0.15,</span> <span class="pre">0.2)</span></tt>. Note that if the values given by the user for <a class="reference internal" href="#JULES_SNOW::dzsnow" title="JULES_SNOW::dzsnow"><tt class="xref nml nml-mem docutils literal"><span class="pre">dzsnow</span></tt></a> are a decreasing series with <tt class="docutils literal"><span class="pre">dzsnow(i)</span> <span class="pre">&lt;=</span> <span class="pre">2</span> <span class="pre">*</span> <span class="pre">dzsnow(i</span> <span class="pre">-</span> <span class="pre">1)</span></tt>, the algorithm will result in layers <tt class="docutils literal"><span class="pre">i</span></tt> and <tt class="docutils literal"><span class="pre">i</span> <span class="pre">+</span> <span class="pre">1</span></tt> being added at the same time. Don&#8217;t panic - this should not be a problem for the simulation.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="8%" />
+<col width="16%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Snow depth (m)</th>
+<th class="head">Number
+of layers</th>
+<th class="head">Layer thickness,
+uppermost layer
+first (m)</th>
+<th class="head">Comments</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">d</span> <span class="pre">&lt;</span> <span class="pre">0.1</span></tt></td>
+<td>0</td>
+<td>&nbsp;</td>
+<td>While the depth of snow is less than <tt class="docutils literal"><span class="pre">dzsnow(1)</span></tt>, the layer model is not
+active and snow and soil are combined in a composite layer.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">0.1</span> <span class="pre">&lt;=</span> <span class="pre">d</span> <span class="pre">&lt;</span> <span class="pre">0.2</span></tt></td>
+<td>1</td>
+<td>Total snow depth</td>
+<td>The single layer grows until it is twice as thick as <tt class="docutils literal"><span class="pre">dzsnow(1)</span></tt>.</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">0.2</span> <span class="pre">&lt;=</span> <span class="pre">d</span> <span class="pre">&lt;</span> <span class="pre">0.4</span></tt></td>
+<td>2</td>
+<td>0.1, remainder</td>
+<td>Above 0.2m, the single layer splits into a top layer of 0.1m and the remaining
+snow in the bottom layer.</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">&gt;=</span> <span class="pre">0.4</span></tt></td>
+<td>3</td>
+<td>0.1, 0.15, remainder</td>
+<td>At 0.4m depth, layer 2 (which has grown to 0.3m thick, i.e. <tt class="docutils literal"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">dzsnow(2)</span></tt>),
+splits into a layer of 0.15m and a new bottom layer holding the the remaining
+0.15m. As all layers are now in use, any subsequent deepening of the pack is
+dealt with by increasing the thickness in this bottom layer.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface_types.nml.html">6.2. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface.nml.html">6.3. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_radiation.nml.html">6.4. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_hydrology.nml.html">6.5. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_vegetation.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil_biogeochem.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_soil_biogeochem.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil_ecosse.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_soil_ecosse.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.10. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_rivers.nml.html">6.11. <tt class="docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.12. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.13. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.14. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.15. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.16. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crop_params.nml.html">6.17. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.18. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.19. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fire.nml.html">6.20. <tt class="docutils literal"><span class="pre">fire.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.21. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.22. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.23. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.24. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.25. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="jules_soil_ecosse.nml.html"
+                        title="previous chapter">6.9. <tt class="docutils literal"><span class="pre">jules_soil_ecosse.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jules_rivers.nml.html"
+                        title="next chapter">6.11. <tt class="docutils literal docutils literal docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_rivers.nml.html" title="6.11. jules_rivers.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_soil_ecosse.nml.html" title="6.9. jules_soil_ecosse.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.0 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2017.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

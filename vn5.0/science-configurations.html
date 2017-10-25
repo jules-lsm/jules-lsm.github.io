@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>7. JULES science configurations &mdash; Joint UK Land Environment Simulator (JULES) v5.0 User Guide</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v5.0 User Guide" href="index.html" />
+    <link rel="next" title="8. JULES examples" href="examples.html" />
+    <link rel="prev" title="6.25. output.nml" href="namelists/output.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="examples.html" title="8. JULES examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="namelists/output.nml.html" title="6.25. output.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Joint UK Land Environment Simulator (JULES) v5.0 User Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jules-science-configurations">
+<h1>7. JULES science configurations<a class="headerlink" href="#jules-science-configurations" title="Permalink to this headline">¶</a></h1>
+<p>As a component of the Met Office Unified Model (UM), JULES is used for a wide range of purposes, from very short-term forecasting to earth system modelling over timespans of many decades. To achieve this, the UM uses the same code configured in different ways (e.g. switching science options on and off, changing scientific parameter values). The JULES science configurations aim to replicate some of the commonly used UM configurations for standalone JULES, making it simple to run JULES with appropriate science options for different purposes.</p>
+<p>The namelists for each configuration can be found in the <tt class="docutils literal"><span class="pre">configurations</span></tt> directory.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The core configurations of JULES are currently being updated, after which the information on this page will be revised. For the latest guidance users should check <a class="reference external" href="http://jules.jchmr.org/content/configurations">the configurations page on the JULES website</a>.</p>
+</div>
+<p>These configurations do not include all the namelists that JULES requires to run - they only define the scientific options (e.g. which pieces of science are switched on, scientific parameter values). They must be combined with dataset-specific namelists to run JULES - examples are provided showing how to run each configuration using the Loobos weather station data that is bundled with JULES (see <a class="reference internal" href="examples.html"><em>JULES examples</em></a>).</p>
+<dl class="docutils">
+<dt>ESM1.0</dt>
+<dd><p class="first">This is an earth-system type configuration designed to produce reasonable global vegetation distributions and carbon fluxes. The first version of the configuration is based on parameters used in the ISI-MIP project and uses <a class="reference internal" href="namelists/jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_rad_mod</span></tt></a> = 1. Future versions will replicate the setup used in HadGEM3-ES/UK-ESM1.</p>
+<p>It uses TRIFFID, competing vegetation and the multi-layer snow scheme. It is also the only configuration that is made up of two parts:</p>
+<ol class="arabic simple">
+<li>A spin up run using <a class="reference internal" href="namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_trif_eq" title="JULES_VEGETATION::l_trif_eq"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trif_eq</span></tt></a> = T and a long <a class="reference internal" href="namelists/jules_vegetation.nml.html#JULES_VEGETATION::triffid_period" title="JULES_VEGETATION::triffid_period"><tt class="xref nml nml-mem docutils literal"><span class="pre">triffid_period</span></tt></a>.</li>
+<li>A transient run, started from the end dump of the spinup run, using <a class="reference internal" href="namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_trif_eq" title="JULES_VEGETATION::l_trif_eq"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trif_eq</span></tt></a> = F and a shorter <a class="reference internal" href="namelists/jules_vegetation.nml.html#JULES_VEGETATION::triffid_period" title="JULES_VEGETATION::triffid_period"><tt class="xref nml nml-mem docutils literal"><span class="pre">triffid_period</span></tt></a>.</li>
+</ol>
+<div class="last admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This configuration is deprecated. JULES-C is now the recommended configuration for earth-system studies.</p>
+</div>
+</dd>
+<dt>JULES-C</dt>
+<dd><p class="first">This is a Carbon-Cycle configuration of JULES similar to ESM1.0, and is the prototype configuration for UKESM1.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This configuration should also be used as a spinup run followed by a transient run, with similar changes to ESM1.0.</p>
+</div>
+</dd>
+<dt>EURO4</dt>
+<dd>This configuration replicates the science used in the Met Office European 4km forecast model.</dd>
+<dt>GL4.0</dt>
+<dd>Global Land (GL) is a configuration of JULES that is developed over an annual release cycle for use across weather and climate modelling timescales and systems. Global Land is used in the Met Office Unified Model with the Global Atmosphere (GA) configuration. More information can be found on the Met Office collaboration wiki <a class="reference external" href="https://code.metoffice.gov.uk/trac/gmed">GMED</a>.</dd>
+<dt>Operational Forecast</dt>
+<dd>This configuration replicates the science used in the Met Office global forecast model. It is designed to run as fast as possible, and this is reflected in the selected science options. This is the only configuration that uses the aggregate surface tile.</dd>
+<dt>UKV</dt>
+<dd>This configuration replicates the science used in the Met Office UK Variable resolution forecast model.</dd>
+</dl>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="namelists/output.nml.html"
+                        title="previous chapter">6.25. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">output.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="examples.html"
+                        title="next chapter">8. JULES examples</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="examples.html" title="8. JULES examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="namelists/output.nml.html" title="6.25. output.nml"
+             >previous</a> |</li>
+        <li><a href="index.html">Joint UK Land Environment Simulator (JULES) v5.0 User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2017.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

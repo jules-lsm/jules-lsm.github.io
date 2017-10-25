@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4.2. ASCII files &mdash; Joint UK Land Environment Simulator (JULES) v5.0 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v5.0 User Guide" href="../index.html" />
+    <link rel="up" title="4. Input files for JULES" href="overview.html" />
+    <link rel="next" title="4.3. NetCDF files" href="netcdf.html" />
+    <link rel="prev" title="4.1. General principles" href="principles.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="netcdf.html" title="4.3. NetCDF files"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="principles.html" title="4.1. General principles"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.0 User Guide</a> &raquo;</li>
+          <li><a href="overview.html" accesskey="U">4. Input files for JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ascii-files">
+<h1>4.2. ASCII files<a class="headerlink" href="#ascii-files" title="Permalink to this headline">¶</a></h1>
+<p>JULES only supports the use of ASCII files for data at a single location. In this case, the input grid can be specified either as a 1D grid with length 1 or as a 2D grid of size 1 x 1. The data should be laid out in columns with one timestep of data per row (with time increasing with the number of rows). For variables with additional &#8216;levels&#8217; dimensions (e.g. soil layers), the values for each level should be in consecutive columns.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Variables should be given to JULES in the order they appear in the file, and there should be no unused variables in between. This may mean that some datasets may require pre-processing for use with JULES, even if they are already columnar.</p>
+</div>
+<p>If the first character of a line is either <tt class="docutils literal"><span class="pre">#</span></tt> or <tt class="docutils literal"><span class="pre">!</span></tt>, the line is taken to be a comment. JULES reads no information from comments - they are purely for annotating the dataset for users.</p>
+<div class="section" id="example-ascii-input">
+<h2>4.2.1. Example ASCII input<a class="headerlink" href="#example-ascii-input" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="ascii-meteorological-forcing-data">
+<h3>4.2.1.1. ASCII meteorological forcing data<a class="headerlink" href="#ascii-meteorological-forcing-data" title="Permalink to this headline">¶</a></h3>
+<p>This example is taken from the Loobos data in <tt class="docutils literal"><span class="pre">loobos/Loobos_1997.dat</span></tt>:</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="c1"># Meteorological data for Loobos, 1997.</span>
+<span class="c1"># One year of 30 minute data.</span>
+<span class="c1">#   Down  Down      Rainfall      Snowfall     Air       Wind                 Specific</span>
+<span class="c1">#   SWR   LWR        rate           rate      temp.      speed     Pressure   humidity</span>
+<span class="c1">#(W m-2) (W m-2)  (kg m-2 s-1) (kg m-2 s-1)   (K)       (m s-1) )   (Pa)      (kg kg-1)</span>
+    <span class="mf">0.0</span>  <span class="mf">187.8</span>     <span class="mf">0.000E+00</span>     <span class="mf">0.000E+00</span>   <span class="mf">259.800</span>     <span class="mf">2.017</span>     <span class="mf">102400.0</span>   <span class="mf">1.384E-03</span>
+    <span class="mf">0.0</span>  <span class="mf">186.9</span>     <span class="mf">0.000E+00</span>     <span class="mf">0.000E+00</span>   <span class="mf">259.700</span>     <span class="mf">3.770</span>     <span class="mf">102400.0</span>   <span class="mf">1.384E-03</span>
+    <span class="mf">0.0</span>  <span class="mf">186.7</span>     <span class="mf">0.000E+00</span>     <span class="mf">0.000E+00</span>   <span class="mf">259.600</span>     <span class="mf">4.290</span>     <span class="mf">102400.0</span>   <span class="mf">1.373E-03</span>
+<span class="c1"># ...</span>
+</pre></div>
+</div>
+<p>Each row represents a timestep of data. Each column represents a variable. Driving variables have no additional dimension.</p>
+</div>
+<div class="section" id="initial-conditions">
+<h3>4.2.1.2. Initial conditions<a class="headerlink" href="#initial-conditions" title="Permalink to this headline">¶</a></h3>
+<p>From the Loobos example - see <tt class="docutils literal"><span class="pre">examples/point_loobos/data/initial_conditions.dat</span></tt>:</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="c1"># sthuf(1:sm_levels)            t_soil(1:sm_levels)</span>
+  <span class="mf">0.749</span>  <span class="mf">0.743</span>  <span class="mf">0.754</span>  <span class="mf">0.759</span>    <span class="mf">276.78</span>  <span class="mf">277.46</span>  <span class="mf">278.99</span>  <span class="mf">282.48</span>
+</pre></div>
+</div>
+<p>Although only one &#8216;timestep&#8217; of data is supplied, the data must still be laid out in columns. These variables have a value for each soil layer, which are given in consecutive columns. This quickly becomes cumbersome for large numbers of variables, which is why NetCDF is recommended even
+for data at a single point.</p>
+</div>
+<div class="section" id="time-varying-data-with-an-additional-dimension">
+<h3>4.2.1.3. Time varying data with an additional dimension<a class="headerlink" href="#time-varying-data-with-an-additional-dimension" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-nml"><div class="highlight"><pre><span class="c1"># lai(1:npft)                canht(1:npft)</span>
+  <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.2</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.6</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+  <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.2</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.6</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+  <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.2</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.7</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
+<span class="c1"># ... </span>
+</pre></div>
+</div>
+<p>These variables have one value for each plant functional type (see <a class="reference internal" href="../overview/intro.html"><em>Overview of JULES</em></a>). For each variable, the values for each pft are in consecutive columns. Each row is one timestep of data.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="overview.html">4. Input files for JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="principles.html">4.1. General principles</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">4.2. ASCII files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="netcdf.html">4.3. NetCDF files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file-name-templating.html">4.4. File name templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="temporal-interpolation.html">4.5. Temporal interpolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="principles.html"
+                        title="previous chapter">4.1. General principles</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="netcdf.html"
+                        title="next chapter">4.3. NetCDF files</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="netcdf.html" title="4.3. NetCDF files"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="principles.html" title="4.1. General principles"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.0 User Guide</a> &raquo;</li>
+          <li><a href="overview.html" >4. Input files for JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2017.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

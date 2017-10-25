@@ -1,0 +1,163 @@
+``jules_hydrology.nml``
+=======================
+
+
+This file sets the hydrology options. It contains one namelist called :nml:lst:`JULES_HYDROLOGY`.
+
+
+
+``JULES_HYDROLOGY`` namelist members
+-------------------------------------
+
+.. nml:namelist:: JULES_HYDROLOGY
+
+.. nml:member:: l_top
+
+   :type: logical
+   :default: F
+
+   Switch for a TOPMODEL-type model of runoff production.
+
+   TRUE
+       Use a TOPMODEL-type scheme. This is based on Gedney and Cox (2003); see also Clark and Gedney (2008).
+
+   FALSE
+       No TOPMODEL scheme.
+
+   .. seealso::
+      References:
+
+      * Gedney, N. and P.M.Cox, 2003 , The sensitivity of global climate model simulations to the representation of soil moisture heterogeneity, J. Hydrometeorology, 4, 1265-1275.
+      * Clark and Gedney, 2008, Representing the effects of subgrid variability of soil moisture on runoff generation in a land surface model, Journal of Geophysical Research - Atmospheres, 113, D10111, doi:10.1029/2007JD008940.
+
+
+.. nml:member:: l_pdm
+
+   :type: logical
+   :default: F
+
+   Switch for a PDM-type model of runoff production.
+
+   PDM is the Probability Distributed Model (Moore, 1985), implemented in JULES following Clark and Gedney (2008).
+
+   TRUE
+       Use a PDM scheme.
+
+   FALSE
+       No PDM scheme.
+
+   .. seealso::
+      References:
+   
+      * Moore, R. J. (1985), The probability-distributed principle and runoff production at point and basin scales, Hydrol. Sci. J., 30, 273-297.
+      * Clark and Gedney, 2008, Representing the effects of subgrid variability of soil moisture on runoff generation in a land surface model, Journal of Geophysical Research - Atmospheres, 113, D10111, doi:10.1029/2007JD008940.
+      
+
+.. nml:group:: Only used if :nml:mem:`l_top` = TRUE
+
+   .. nml:member:: zw_max
+
+      :type: real
+      :default: 6.0
+
+      The maximum allowed depth to the water table (m).
+
+      This is the depth to the bottom of an additional layer below the :nml:mem:`JULES_SOIL::sm_levels` soil layers and hence should be set to a value greater than ``SUM(dzsoil)``.
+
+
+   .. nml:member:: ti_max
+
+      :type: real
+      :default: 10.0
+
+      The maximum possible value of the topographic index.
+
+
+   .. nml:member:: ti_wetl
+
+      :type: real
+      :default: 1.5
+
+      A calibration parameter used in the calculation of the wetland fraction.
+
+      It is used to increment the "critical" value of the topographic index that is used to calculate the saturated fraction of the gridbox. It excludes locations with large values of the topographic index from the wetland fraction.
+   
+      See Gedney and Cox (2003).
+
+   .. nml:member:: nfita
+
+      :type: integer
+      :default: 20
+
+      The number of values tried when fitting wetland and saturation fractions to water table depth in the initialisation.
+
+
+   .. nml:member:: l_wetland_unfrozen
+
+      :type: logical
+      :default: F
+
+   TRUE
+      Treat the calculations of wetland and surface saturation fractions more like those of an unfrozen soil.
+
+   FALSE
+       Use standard wetland and surface saturation fraction calculations.
+
+
+.. nml:group:: Only used if :nml:mem:`l_pdm` = TRUE
+
+   .. nml:member:: dz_pdm
+
+      :type: real
+      :default: 1.0
+
+      The depth of soil considered by PDM (m).
+
+      A value of ~1m can be used.
+
+
+   .. nml:member:: b_pdm
+
+      :type: real
+      :default: 1.0
+
+      Shape factor for the pdf.
+
+   .. nml:member:: s_pdm
+
+      :type: real
+      :permitted: 0-1
+      :default: 0.0
+
+      Minimum soil water content below which there is no surface runoff saturation excess production by PDM (fraction of maximum storage, as S0/Smax)
+
+   .. nml:member:: l_spdmvar
+
+      :type: logical
+      :default: F  
+
+      Use a linear function of topographic slope to calculate S0/Smax: s_pdm=MAX(0.0,1-(slope/:nml:mem:`JULES_HYDROLOGY::slope_pdm_max`)).
+
+      The function has been tested for Great Britain catchments.
+
+      This function will result in high S0/Smax values for flatter regions and low values for steeper regions.
+
+      TRUE
+          Use a the linear function of slope to calculate S0/Smax.
+
+      FALSE
+          Use a fixed S0/Smax parameter, specified in :nml:mem:`JULES_HYDROLOGY::s_pdm`.
+
+   .. nml:group:: Only used if :nml:mem:`l_spdmvar` = TRUE
+
+      .. nml:member:: slope_pdm_max
+
+         :type: real
+         :default: 6.0
+
+         The maximum topographic slope (deg) in the linear function of slope to calculate S0/Smax. Slopes above this value will result in a S0/Smax value of zero.
+
+         A value of 6.0 has been tested for slope fields calculated from a high resolution DEM dataset (50m IHDTM for Great Britain).
+
+	 For slopes calculated from coarser DEM datasets, a lower value might be more appropriate as fine-resolution features of the terrain are not included.	 	    
+
