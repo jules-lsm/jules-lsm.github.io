@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1.11. JULES version 4.1 Release Notes &mdash; Joint UK Land Environment Simulator (JULES) v5.1 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v5.1 User Guide" href="../index.html" />
+    <link rel="up" title="1. Release notes for JULES" href="contents.html" />
+    <link rel="next" title="1.12. JULES version 4.0 Release Notes" href="JULES4-0.html" />
+    <link rel="prev" title="1.10. JULES version 4.2 Release Notes" href="JULES4-2.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES4-0.html" title="1.12. JULES version 4.0 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-2.html" title="1.10. JULES version 4.2 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="jules-version-4-1-release-notes">
+<h1>1.11. JULES version 4.1 Release Notes<a class="headerlink" href="#jules-version-4-1-release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="irrigation-demand">
+<h2>1.11.1. Irrigation demand<a class="headerlink" href="#irrigation-demand" title="Permalink to this headline">¶</a></h2>
+<p>When enabled, irrigation demand adds water to the soil moisture up to the critical point, meaning that vegetation does not experience water stress. At the moment the amount of water added is not limited, although it will be limited in a future version.</p>
+<p>There are two schemes that can be used to determine when to irrigate:</p>
+<ol class="arabic simple">
+<li>This method calculates optimum planting dates for non-rice crops using averages from driving data and so requires at least one year of driving data. It was written by Nic Gedney and is based on the crop calendar from Doell &amp; Siebert (2002).</li>
+<li>Uses development index (dvi) across all tiles from JULES-crop (written by Rutger Dankers). Maximum dvi must exceed -1 (indicates sowing) for irrigation to occur.</li>
+</ol>
+<p>See the documentation for <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_irrig_dmd" title="JULES_VEGETATION::l_irrig_dmd"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_irrig_dmd</span></tt></a> for more details.</p>
+</div>
+<div class="section" id="carbon-cycle-developments">
+<h2>1.11.2. Carbon cycle developments<a class="headerlink" href="#carbon-cycle-developments" title="Permalink to this headline">¶</a></h2>
+<p>A number of carbon cycle developments are included in this release:</p>
+<ol class="arabic simple">
+<li>Changes to the competition code to allow for flexible, height-based competition in TRIFFID. See <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_ht_compete" title="JULES_VEGETATION::l_ht_compete"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_ht_compete</span></tt></a>.</li>
+<li>Trait-based plant physiology that allows the plant physiology to be defined by parameters that are more readily definable from observations. See <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a>.</li>
+<li>Code for simulating land-use change (e.g. forest clearance) including product pools (previously implemented in HadGEM2-ES). See <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_landuse" title="JULES_VEGETATION::l_landuse"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_landuse</span></tt></a>.</li>
+<li>Time-varying agricultural fraction now officially supported. Time-varying CO2 concentration is also supported with some caveats. See <a class="reference internal" href="../namelists/prescribed_data.nml.html#supported-prescribed-variables"><em>the list of supported prescribed data variables</em></a>.</li>
+<li>Switch to enable/disable the adjustment of fractions during initialisation. See <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_recon" title="JULES_VEGETATION::l_recon"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_recon</span></tt></a>.</li>
+</ol>
+</div>
+<div class="section" id="maximum-and-minimum-output-types">
+<h2>1.11.3. Maximum and minimum output types<a class="headerlink" href="#maximum-and-minimum-output-types" title="Permalink to this headline">¶</a></h2>
+<p>It is now possible to output the maximum and minimum value over the output period of any variable, e.g. monthly maximum.</p>
+<p>See <a class="reference internal" href="../namelists/output.nml.html#JULES_OUTPUT_PROFILE::output_type" title="JULES_OUTPUT_PROFILE::output_type"><tt class="xref nml nml-mem docutils literal"><span class="pre">output_type</span></tt></a> for more information.</p>
+</div>
+<div class="section" id="changes-to-the-coupling-routines">
+<h2>1.11.4. Changes to the coupling routines<a class="headerlink" href="#changes-to-the-coupling-routines" title="Permalink to this headline">¶</a></h2>
+<p>The routines that couple the JULES science to the UM and to the standalone wrapper have changed - see <tt class="docutils literal"><span class="pre">src/control/standalone/control.F90</span></tt>.</p>
+<p>This is mainly in order to simplify the coupling with the UM and to facilitate upcoming developments.</p>
+</div>
+<div class="section" id="bugs-and-other-changes">
+<h2>1.11.5. Bugs and other changes<a class="headerlink" href="#bugs-and-other-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>It is now possible to run with a fixed 365-day calender (i.e. no leap years) using the <a class="reference internal" href="../namelists/timesteps.nml.html#JULES_TIME::l_leap" title="JULES_TIME::l_leap"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_leap</span></tt></a> flag.</li>
+<li>Corrected temperature limitation on soil respiration to be consistent with HadGEM2-ES.</li>
+<li>Minor tweaks to the crop model.</li>
+<li>Improvements to the BVOC emissions model, including linking with UKCA via the UM for coupled studies.</li>
+<li>Changes to introduce the COARE algorithm for surface exchange over the ocean.</li>
+<li>Improved error messages for I/O errors (e.g. namelist reading)</li>
+<li>Fixed a bug where the start and end time of data are not initialised correctly when using the daily disaggregator.</li>
+<li>Fixed a bug in tilepts caused by the use of short-circuiting logic that is not supported by some compilers.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">1. Release notes for JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="JULES5-1.html">1.1. JULES version 5.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-0.html">1.2. JULES version 5.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-9.html">1.3. JULES version 4.9 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-8.html">1.4. JULES version 4.8 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-7.html">1.5. JULES version 4.7 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-6.html">1.6. JULES version 4.6 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-5.html">1.7. JULES version 4.5 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-4.html">1.8. JULES version 4.4 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-3.html">1.9. JULES version 4.3 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-2.html">1.10. JULES version 4.2 Release Notes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">1.11. JULES version 4.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-0.html">1.12. JULES version 4.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-4.html">1.13. JULES version 3.4 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-3.html">1.14. JULES version 3.3 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-2.html">1.15. JULES version 3.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-1.html">1.16. JULES version 3.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-0.html">1.17. JULES version 3.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES2-2.html">1.18. JULES version 2.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES2-1.html">1.19. JULES version 2.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES2-0.html">1.20. JULES version 2.0 Release Notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">9. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES4-2.html"
+                        title="previous chapter">1.10. JULES version 4.2 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES4-0.html"
+                        title="next chapter">1.12. JULES version 4.0 Release Notes</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES4-0.html" title="1.12. JULES version 4.0 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-2.html" title="1.10. JULES version 4.2 Release Notes"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >1. Release notes for JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2018.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

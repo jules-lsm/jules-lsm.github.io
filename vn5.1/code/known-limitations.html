@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>9.2. Known limitations of the code &mdash; Joint UK Land Environment Simulator (JULES) v5.1 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v5.1 User Guide" href="../index.html" />
+    <link rel="up" title="9. Aspects of the code" href="contents.html" />
+    <link rel="next" title="10. JULES Output variables" href="../output-variables.html" />
+    <link rel="prev" title="9.1. I/O framework" href="io.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="../output-variables.html" title="10. JULES Output variables"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="io.html" title="9.1. I/O framework"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">9. Aspects of the code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="known-limitations-of-the-code">
+<h1>9.2. Known limitations of the code<a class="headerlink" href="#known-limitations-of-the-code" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="limit-to-longest-possible-run">
+<h2>9.2.1. Limit to longest possible run<a class="headerlink" href="#limit-to-longest-possible-run" title="Permalink to this headline">¶</a></h2>
+<p>The longest possible run that can be attempted with JULES is approximately 100 years. A longer run should be split into smaller sections, with each later section starting from the final dump of the previous section. This restriction on run length arises because some of the time variables can become too large for the declared type of variable meaning that calculations return incorrect results and the program will probably crash. The size of each variable is in part affected by the compiler used, but a maximum run length of ~100 years appears to be a common case for 32-bit machines. Note that JULES uses the compiler&#8217;s default KIND for each type of variable. Changes to the KIND of any variable would have to be propagated through the code.</p>
+</div>
+<div class="section" id="spin-up-over-short-periods">
+<h2>9.2.2. Spin-up over short periods<a class="headerlink" href="#spin-up-over-short-periods" title="Permalink to this headline">¶</a></h2>
+<p>The current code has not been tested with a spin-up cycle that is short in comparison to the period of any input data (e.g. a spin-up cycle of 1 day using prescribed vegetation data with a period of 10 days). The code will likely run but the evolution of the vegetation data may not be what was intended. However, it is unlikely that a user would want to try such a run.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../science-configurations.html">7. JULES science configurations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">8. JULES examples</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">9. Aspects of the code</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="io.html">9.1. I/O framework</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">9.2. Known limitations of the code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">10. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="io.html"
+                        title="previous chapter">9.1. I/O framework</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../output-variables.html"
+                        title="next chapter">10. JULES Output variables</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="../output-variables.html" title="10. JULES Output variables"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="io.html" title="9.1. I/O framework"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >9. Aspects of the code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2018.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

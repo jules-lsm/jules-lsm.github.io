@@ -1,0 +1,190 @@
+``urban.nml``
+=============
+
+
+This file contains two namelists called :nml:lst:`JULES_URBAN_SWITCHES` and :nml:lst:`JULES_URBAN2T_PARAM`.
+
+This section reads in model configuration choices, geometry & material characteristics data for the urban schemes URBAN-2T and MORUSES. Both these schemes must have an :nml:mem:`JULES_SURFACE_TYPES::urban_roof` tile and an :nml:mem:`JULES_SURFACE_TYPES::urban_canyon` tile. Values from this section are only used if either of the two-tile urban schemes are enabled by specifying an :nml:mem:`JULES_SURFACE_TYPES::urban_roof` tile.
+
+For parameters that MORUSES does not parameterise, and for any MORUSES parametrisations that are turned off, values from :doc:`nveg_params.nml` will be used. See the switches below for more information.
+
+Further information on MORUSES, including references, can be found in the technical documentation and under :nml:mem:`JULES_URBAN_SWITCHES::l_moruses`.
+
+
+
+``JULES_URBAN_SWITCHES`` namelist members
+-----------------------------------------
+
+.. nml:namelist:: JULES_URBAN_SWITCHES
+
+
+.. nml:member:: l_moruses
+
+   :type: logical
+   :default: F
+
+   .. note:: Not used unless an :nml:mem:`JULES_SURFACE_TYPES::urban_roof` tile is present.
+
+   Switch for turning on MORUSES.
+
+   TRUE
+       Use MORUSES parameterisations.
+
+   FALSE
+       Do not use MORUSES parameterisations. Use urban tile parameters, set in :doc:`nveg_params.nml`, instead.
+
+   .. seealso::
+      References:
+   
+      *   Porson, A., et al. (2010), Implementation of a new urban energy budget scheme in the MetUM. Part I: Description and idealized simulations, Quarterly Journal of the Royal Meteorological Society, 136: 1514-1529. doi: 10.1002/qj.668
+      *   Porson, A., et al. (2010), Implementation of a new urban energy budget scheme into MetUM. Part II: Validation against observations and model Intercomparison, Quarterly Journal of the Royal Meteorological Society, 136: 1530-1542. doi: 10.1002/qj.572
+
+
+.. nml:member:: l_urban_empirical
+
+   :type: logical
+   :default: T
+
+   Switch to use empirical relationships for urban geometry, based on total urban fraction. Dimensions calculated are W/R, H/W & H.
+
+   URBAN-2T uses W/R only.
+
+   Used in calculation of the canyon and roof fractions and also to distribute anthropogenic heat between roof and canyon if :nml:mem:`JULES_SURFACE::l_anthrop_heat_src` = TRUE.
+
+   TRUE
+       Use empirical relationships for urban geometry.
+
+   FALSE
+       Appropriate data needs to be supplied instead.
+
+   .. warning:: These are only valid for high resolutions (~1 km).
+
+   .. seealso::
+      References:
+   
+      *   Bohnenstengel SI, Evans S, Clark P, Belcher SE (2010). Simulations of the London urban heat island, Quarterly Journal of the Royal Meteorological Society (submitted)
+
+
+.. nml:member:: l_moruses_macdonald
+
+   :type: logical
+   :default: T
+
+   MORUSES switch for using MacDonald et al. (1998) to calculate effective roughness length of urban areas and displacement height from urban geometry.
+
+   TRUE
+       Use MacDonald et al. (1998) formulations.
+
+   FALSE
+       Appropriate data needs to be supplied instead.
+
+   .. note:: If :nml:mem:`l_urban_empirical` = TRUE then :nml:mem:`l_moruses_macdonald` = TRUE, which the code enforces.
+
+   .. seealso::
+      References:
+   
+      *   Macdonald RW, Griffiths RF, Hall D. 1998. An improved method for the estimation of surface roughness of obstacle arrays. Atmos. Env. 32: 1857-1864
+
+
+.. nml:member:: l_moruses_albedo
+
+   :type: logical
+   :default: T
+
+   MORUSES switch for effective canyon albedo parameterisation.
+
+   TRUE
+       Use MORUSES parameterisation. Requires that :nml:mem:`JULES_RADIATION::l_cosz` = TRUE, which the code automatically enables.
+
+   FALSE
+       The canyon albedo is taken from :nml:mem:`JULES_NVEGPARM::albsnf_nvg_io` and :nml:mem:`JULES_NVEGPARM::albsnc_nvg_io`.
+
+   In all cases, the roof albedo is taken from :nml:mem:`JULES_NVEGPARM::albsnf_nvg_io` and :nml:mem:`JULES_NVEGPARM::albsnc_nvg_io`.
+
+
+.. nml:member:: l_moruses_emissivity
+
+   :type: logical
+   :default: F
+
+   MORUSES switch for effective canyon emissivity parameterisation.
+
+   TRUE
+       Use MORUSES parameterisation.
+
+   FALSE
+       The canyon emmissivity is taken from :nml:mem:`JULES_NVEGPARM::emis_nvg_io`.
+
+   In all cases, the roof emissivity is taken from :nml:mem:`JULES_NVEGPARM::emis_nvg_io`.
+
+
+.. nml:member:: l_moruses_rough
+
+   :type: logical
+   :default: T
+
+   MORUSES switch for effective roughness length for heat parameterisation.
+
+   TRUE
+       Use MORUSES parameterisation for canyon and roof.
+
+   FALSE
+       Values for canyon and roof are taken from :nml:mem:`JULES_NVEGPARM::z0_nvg_io` and :nml:mem:`JULES_NVEGPARM::z0hm_nvg_io`.
+
+
+.. nml:member:: l_moruses_storage
+
+   :type: logical
+   :default: T
+
+   MORUSES switch for thermal inertia and coupling with underlying soil parameterisation.
+
+   TRUE
+       Use MORUSES parameterisation.
+
+   FALSE
+       Values are taken from :nml:mem:`JULES_NVEGPARM::ch_nvg_io` and :nml:mem:`JULES_NVEGPARM::vf_nvg_io`.
+
+
+.. nml:member:: l_moruses_storage_thin
+
+   :type: logical
+   :default: T
+
+   MORUSES switch to use a thin roof to simulate the effects of insulation.
+
+   Only used if :nml:mem:`l_moruses_storage` = TRUE.
+
+   TRUE
+       Use thin, insulated roof.
+
+   FALSE
+       Use damping depth diffusivity of roofing materials.
+
+
+
+
+``JULES_URBAN2T_PARAM`` namelist members
+----------------------------------------
+
+.. nml:namelist:: JULES_URBAN2T_PARAM
+
+
+.. nml:member:: anthrop_heat_scale
+
+   :type: real
+   :default: 1.0
+
+   Distribution scaling factor, which allows the anthropogenic heat flux to be spread between the :nml:mem:`JULES_SURFACE_TYPES::urban_canyon` and :nml:mem:`JULES_SURFACE_TYPES::urban_roof` tiles such that:
+
+   *   ``H_roof = anthrop_heat_scale x H_canyon``
+   *   ``H_canyon x (W/R) + H_roof x ( 1.0 - W/R ) = anthrop_heat``
+
+   Has a value between 0.0 and 1.0 where the extremes correspond to:
+
+   *   0.0 = all released within the canyon.
+   *   1.0 = evenly spread between canyon and roof.
+
+   Only used if :nml:mem:`JULES_SURFACE::l_anthrop_heat_src` = TRUE.
+
+

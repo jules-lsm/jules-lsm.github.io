@@ -1,0 +1,28 @@
+``jules_lsm_switch.nml``
+========================
+
+
+This file contains a single namelist called :nml:lst:`JULES_LSM_SWITCH` that indicates which land surface model is to be used - JULES or CABLE.
+
+.. note::
+   The CABLE model has not yet been implemented within the JULES repository.
+
+
+``JULES_LSM_SWITCH`` namelist members
+-------------------------------------
+
+.. nml:namelist:: JULES_LSM_SWITCH
+
+.. nml:member:: lsm_id
+
+   :type: integer 
+   :default: 0
+
+   Switch for land surface model.
+
+   1
+       The JULES land surface model will be used.
+
+   2
+       The CABLE land surface model will be used.
+
