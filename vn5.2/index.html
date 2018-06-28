@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Joint UK Land Environment Simulator (JULES) User Guide &mdash; Joint UK Land Environment Simulator (JULES) v5.1 User Guide</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '5.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v5.1 User Guide" href="#" />
+    <link rel="next" title="1. Release notes for JULES" href="release_notes/contents.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="release_notes/contents.html" title="1. Release notes for JULES"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">Joint UK Land Environment Simulator (JULES) v5.1 User Guide</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="joint-uk-land-environment-simulator-jules-user-guide">
+<h1>Joint UK Land Environment Simulator (JULES) User Guide<a class="headerlink" href="#joint-uk-land-environment-simulator-jules-user-guide" title="Permalink to this headline">¶</a></h1>
+<p>The Joint UK Land Environment Simulator (JULES) is a computer model that simulates many soil and vegetation processes. This guide primarily describes the format of the input and output files, and does not include detailed descriptions of the science and representation of the processes in the model.</p>
+<p>The first version of JULES was based on the Met Office Surface Exchange System (MOSES), the land surface model used in the <a class="reference external" href="http://www.metoffice.gov.uk/research/modelling-systems/unified-model">Unified Model</a> (UM) of the <a class="reference external" href="http://www.metoffice.gov.uk">UK Met Office</a>. After that initial split, the MOSES and JULES code bases evolved separately, but with JULES v2.1 these differences were reconciled with the UM. As of JULES v3.1, a single code repository is used for both standalone JULES and JULES in the UM.</p>
+<p>Further information can be found on the JULES website: <a class="reference external" href="http://jules.jchmr.org/">http://jules.jchmr.org/</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="release_notes/contents.html">1. Release notes for JULES</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES5-2.html">1.1. JULES version 5.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES5-1.html">1.2. JULES version 5.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES5-0.html">1.3. JULES version 5.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES4-9.html">1.4. JULES version 4.9 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES4-8.html">1.5. JULES version 4.8 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES4-7.html">1.6. JULES version 4.7 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES4-6.html">1.7. JULES version 4.6 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES4-5.html">1.8. JULES version 4.5 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES4-4.html">1.9. JULES version 4.4 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES4-3.html">1.10. JULES version 4.3 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES4-2.html">1.11. JULES version 4.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES4-1.html">1.12. JULES version 4.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES4-0.html">1.13. JULES version 4.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES3-4.html">1.14. JULES version 3.4 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES3-3.html">1.15. JULES version 3.3 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES3-2.html">1.16. JULES version 3.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES3-1.html">1.17. JULES version 3.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES3-0.html">1.18. JULES version 3.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES2-2.html">1.19. JULES version 2.2 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES2-1.html">1.20. JULES version 2.1 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES2-0.html">1.21. JULES version 2.0 Release Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="release_notes/JULES1-0.html">1.22. JULES version 1.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="overview/intro.html">2. Overview of JULES</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview/overview.html">2.1. Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview/key-switches.html">2.2. Some key switches</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="building-and-running/intro.html">3. Building and running JULES</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="building-and-running/considerations.html">3.1. Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-and-running/required-software.html">3.2. Required software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-and-running/fcm.html">3.3. Building JULES using FCM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-and-running/running-jules.html">3.4. Running JULES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="building-and-running/rose.html">3.5. Automatic upgrading and GUI using Rose</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="input/overview.html">4. Input files for JULES</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="input/principles.html">4.1. General principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input/ascii.html">4.2. ASCII files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input/netcdf.html">4.3. NetCDF files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input/file-name-templating.html">4.4. File name templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="input/temporal-interpolation.html">4.5. Temporal interpolation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">5. JULES output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="output.html#associating-output-values-with-the-correct-time">5.1. Associating output values with the correct time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html#initial-data">5.2. Initial data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.html#dump-files">5.3. Dump files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="namelists/contents.html">6. The JULES namelist files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="namelists/intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/jules_lsm_switch.nml.html">6.2. <tt class="docutils literal"><span class="pre">jules_lsm_switch.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/jules_surface_types.nml.html">6.3. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/jules_surface.nml.html">6.4. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/jules_radiation.nml.html">6.5. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/jules_hydrology.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/jules_soil.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/jules_vegetation.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_soil_biogeochem.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/jules_soil_ecosse.nml.html">6.10. <tt class="docutils literal"><span class="pre">jules_soil_ecosse.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/jules_snow.nml.html">6.11. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/jules_rivers.nml.html">6.12. <tt class="docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/timesteps.nml.html">6.13. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/model_grid.nml.html">6.14. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/ancillaries.nml.html">6.15. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/pft_params.nml.html">6.16. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/nveg_params.nml.html">6.17. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/crop_params.nml.html">6.18. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/triffid_params.nml.html">6.19. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/urban.nml.html">6.20. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/fire.nml.html">6.21. <tt class="docutils literal"><span class="pre">fire.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/drive.nml.html">6.22. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/imogen.nml.html">6.23. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/prescribed_data.nml.html">6.24. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/initial_conditions.nml.html">6.25. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="namelists/output.nml.html">6.26. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code/contents.html">8. Aspects of the code</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="code/io.html">8.1. I/O framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code/known-limitations.html">8.2. Known limitations of the code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="output-variables.html">9. JULES Output variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="output-variables.html#variables-that-have-a-single-value-at-each-gridpoint-land-and-sea">9.1. Variables that have a single value at each gridpoint (land and sea)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-variables.html#variables-that-have-a-single-value-at-each-land-gridpoint">9.2. Variables that have a single value at each land gridpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-variables.html#variables-that-have-a-value-for-each-pft-at-each-land-gridpoint">9.3. Variables that have a value for each PFT at each land gridpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-variables.html#variables-that-have-a-value-for-each-crop-pft-at-each-land-grid-point">9.4. Variables that have a value for each crop PFT at each land grid point</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-variables.html#variables-that-have-a-value-for-each-tile-at-each-land-gridpoint">9.5. Variables that have a value for each tile at each land gridpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-variables.html#variables-that-have-a-value-for-each-surface-type-at-each-land-gridpoint">9.6. Variables that have a value for each surface type at each land gridpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-variables.html#variables-that-have-a-value-for-each-soil-level-at-each-land-gridpoint">9.7. Variables that have a value for each soil level at each land gridpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-variables.html#variables-that-have-a-value-for-each-bedrock-layer-at-each-land-gridpoint">9.8. Variables that have a value for each bedrock layer at each land gridpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-variables.html#variables-that-have-a-value-for-each-soil-biogeochemistry-pool-at-each-soil-biogeochemistry-layer-at-each-land-gridpoint">9.9. Variables that have a value for each soil biogeochemistry pool at each soil biogeochemistry layer at each land gridpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-variables.html#variables-that-have-a-value-for-each-soil-biogeochemistry-layer-at-each-land-gridpoint">9.10. Variables that have a value for each  soil biogeochemistry layer at each land gridpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="output-variables.html#variables-that-have-a-value-for-each-snow-layer-on-each-tile-at-each-land-gridpoint">9.11. Variables that have a value for each snow layer on each tile at each land gridpoint</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="#">Table Of Contents</a></h3>
+    <ul>
+<li class="toctree-l1"><a class="reference internal" href="release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="release_notes/contents.html"
+                        title="next chapter">1. Release notes for JULES</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="release_notes/contents.html" title="1. Release notes for JULES"
+             >next</a> |</li>
+        <li><a href="#">Joint UK Land Environment Simulator (JULES) v5.1 User Guide</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2018.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

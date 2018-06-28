@@ -1,0 +1,575 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.17. nveg_params.nml &mdash; Joint UK Land Environment Simulator (JULES) v5.1 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v5.1 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.18. crop_params.nml" href="crop_params.nml.html" />
+    <link rel="prev" title="6.16. pft_params.nml" href="pft_params.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="crop_params.nml.html" title="6.18. crop_params.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pft_params.nml.html" title="6.16. pft_params.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="nveg-params-nml">
+<h1>6.17. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt><a class="headerlink" href="#nveg-params-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains 2 namelists called <a class="reference internal" href="#namelist-JULES_NVEGPARM"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_NVEGPARM</span></tt></a> and <a class="reference internal" href="#namelist-JULES_NVEGPARM_CABLE"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_NVEGPARM_CABLE</span></tt></a> that set time-invariant parameters for non-vegetation surface types for the JULES and CABLE land surface models respectively.</p>
+<div class="section" id="namelist-JULES_NVEGPARM">
+<span id="jules-nvegparm-namelist-members"></span><h2>6.17.1. <tt class="docutils literal"><span class="pre">JULES_NVEGPARM</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_NVEGPARM" title="Permalink to this headline">¶</a></h2>
+<p>This namelist reads the values of parameters for each of the non-vegetation surface types if the JULES land surface model is being used. These parameters are a function of surface type only. All parameters must be defined for any configuration.</p>
+<p>The files given in the examples directory are a good starting point for setting up any JULES run, and in the majority of cases can be left untouched.</p>
+<p>HCTN30 refers to Hadley Centre technical note 30, available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes">the Met Office Library</a>.</p>
+<dl class="member">
+<dt id="JULES_NVEGPARM::albsnc_nvg_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">albsnc_nvg_io</tt><a class="headerlink" href="#JULES_NVEGPARM::albsnc_nvg_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Snow-covered albedo.</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_snow_albedo</span></tt></a> = FALSE. See HCTN30 Table 1.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::albsnf_nvg_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">albsnf_nvg_io</tt><a class="headerlink" href="#JULES_NVEGPARM::albsnf_nvg_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Snow-free albedo.</p>
+<p>See HCTN30 Table 1.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::albsnf_nvgu_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">albsnf_nvgu_io</tt><a class="headerlink" href="#JULES_NVEGPARM::albsnf_nvgu_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Upper limit on snow-free albedo, when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::albsnf_nvgl_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">albsnf_nvgl_io</tt><a class="headerlink" href="#JULES_NVEGPARM::albsnf_nvgl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Lower limit on snow-free albedo, when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::catch_nvg_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">catch_nvg_io</tt><a class="headerlink" href="#JULES_NVEGPARM::catch_nvg_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Capacity for water (kg m<sup>-2</sup>).</p>
+<p>See HCTN30 p7.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::gs_nvg_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">gs_nvg_io</tt><a class="headerlink" href="#JULES_NVEGPARM::gs_nvg_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Surface conductance (m s<sup>-1</sup>).</p>
+<p>See HCTN30 p7. Soil conductance is modified by soil moisture according to HCTN30 Eq35.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::infil_nvg_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">infil_nvg_io</tt><a class="headerlink" href="#JULES_NVEGPARM::infil_nvg_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Infiltration enhancement factor.</p>
+<p>The maximum infiltration rate defined by the soil parameters for the whole gridbox may be modified for each tile to account for tile-dependent factors.</p>
+<p>See HCTN30 p14 for full details.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::z0_nvg_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">z0_nvg_io</tt><a class="headerlink" href="#JULES_NVEGPARM::z0_nvg_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Roughness length for momentum (m).</p>
+<p>See HCTN30 Table 4.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::ch_nvg_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">ch_nvg_io</tt><a class="headerlink" href="#JULES_NVEGPARM::ch_nvg_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Heat capacity of this surface type (J K<sup>-1</sup> m<sup>-2</sup>).</p>
+<p>Used only if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> is 3 or 4.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::vf_nvg_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">vf_nvg_io</tt><a class="headerlink" href="#JULES_NVEGPARM::vf_nvg_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Fractional coverage of non-vegetation &#8220;canopy&#8221;.</p>
+<p>Typically set to 0.0 (conductively coupled), but value of 1.0 (radiatively coupled) used if tile should have a heat capacity in conjunction with <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> options 3 or 4.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If <a class="reference internal" href="urban.nml.html#JULES_URBAN_SWITCHES::l_moruses_storage" title="JULES_URBAN_SWITCHES::l_moruses_storage"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_moruses_storage</span></tt></a> = T, then for the roof coupling: 0 = <strong>uncoupled</strong></p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::emis_nvg_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">emis_nvg_io</tt><a class="headerlink" href="#JULES_NVEGPARM::emis_nvg_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Surface emissivity.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::z0hm_nvg_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">z0hm_nvg_io</tt><a class="headerlink" href="#JULES_NVEGPARM::z0hm_nvg_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of the roughness length for heat to the roughness length for momentum.</p>
+<p>This is generally assumed to be 0.1. See HCTN30 p6. Note that this is the ratio of the roughness length for heat to that for momentum. It does not alter the roughness length for momentum, which is given by <a class="reference internal" href="#JULES_NVEGPARM::z0_nvg_io" title="JULES_NVEGPARM::z0_nvg_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">z0_nvg_io</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM::z0hm_classic_nvg_io">
+<tt class="descclassname">JULES_NVEGPARM::</tt><tt class="descname">z0hm_classic_nvg_io</tt><a class="headerlink" href="#JULES_NVEGPARM::z0hm_classic_nvg_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of the roughness length for heat to the roughness length for momentum <em>for the CLASSIC aerosol scheme only</em>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This makes no difference to the model when running standalone, and is only required to keep the standalone and UM interfaces consistent.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_NVEGPARM_CABLE">
+<span id="jules-nvegparm-cable-namelist-members"></span><h2>6.17.2. <tt class="docutils literal"><span class="pre">JULES_NVEGPARM_CABLE</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_NVEGPARM_CABLE" title="Permalink to this headline">¶</a></h2>
+<p>This namelist reads the values of parameters for each of the non-vegetation surface types if the CABLE land surface model is being used. These parameters are a function of surface type only. All parameters must be defined for any configuration.</p>
+<dl class="member">
+<dt id="JULES_NVEGPARM_CABLE::silt_io">
+<tt class="descclassname">JULES_NVEGPARM_CABLE::</tt><tt class="descname">silt_io</tt><a class="headerlink" href="#JULES_NVEGPARM_CABLE::silt_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of soil which is silt.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM_CABLE::clay_io">
+<tt class="descclassname">JULES_NVEGPARM_CABLE::</tt><tt class="descname">clay_io</tt><a class="headerlink" href="#JULES_NVEGPARM_CABLE::clay_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of soil which is clay.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM_CABLE::sand_io">
+<tt class="descclassname">JULES_NVEGPARM_CABLE::</tt><tt class="descname">sand_io</tt><a class="headerlink" href="#JULES_NVEGPARM_CABLE::sand_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of soil which is sand.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM_CABLE::swilt_io">
+<tt class="descclassname">JULES_NVEGPARM_CABLE::</tt><tt class="descname">swilt_io</tt><a class="headerlink" href="#JULES_NVEGPARM_CABLE::swilt_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Volume of H<sub>2</sub>O at wilting (m<sup>3</sup> m<sup>-3</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM_CABLE::sfc_io">
+<tt class="descclassname">JULES_NVEGPARM_CABLE::</tt><tt class="descname">sfc_io</tt><a class="headerlink" href="#JULES_NVEGPARM_CABLE::sfc_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Volume of H<sub>2</sub>O at field capacity (m<sup>3</sup> m<sup>-3</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM_CABLE::ssat_io">
+<tt class="descclassname">JULES_NVEGPARM_CABLE::</tt><tt class="descname">ssat_io</tt><a class="headerlink" href="#JULES_NVEGPARM_CABLE::ssat_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Volume of H<sub>2</sub>O at saturation (m<sup>3</sup> m<sup>-3</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM_CABLE::bch_io">
+<tt class="descclassname">JULES_NVEGPARM_CABLE::</tt><tt class="descname">bch_io</tt><a class="headerlink" href="#JULES_NVEGPARM_CABLE::bch_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Parameter b in Campbell equation.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM_CABLE::hyds_io">
+<tt class="descclassname">JULES_NVEGPARM_CABLE::</tt><tt class="descname">hyds_io</tt><a class="headerlink" href="#JULES_NVEGPARM_CABLE::hyds_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Hydraulic conductivity at saturation (m<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM_CABLE::sucs_io">
+<tt class="descclassname">JULES_NVEGPARM_CABLE::</tt><tt class="descname">sucs_io</tt><a class="headerlink" href="#JULES_NVEGPARM_CABLE::sucs_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Suction at saturation (m).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM_CABLE::rhosoil_io">
+<tt class="descclassname">JULES_NVEGPARM_CABLE::</tt><tt class="descname">rhosoil_io</tt><a class="headerlink" href="#JULES_NVEGPARM_CABLE::rhosoil_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil bulk density (kg m<sup>-3</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_NVEGPARM_CABLE::css_io">
+<tt class="descclassname">JULES_NVEGPARM_CABLE::</tt><tt class="descname">css_io</tt><a class="headerlink" href="#JULES_NVEGPARM_CABLE::css_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil specific heat capacity (J kg<sup>-1</sup> K<sup>-1</sup>).</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_lsm_switch.nml.html">6.2. <tt class="docutils literal"><span class="pre">jules_lsm_switch.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface_types.nml.html">6.3. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface.nml.html">6.4. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_radiation.nml.html">6.5. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_hydrology.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_vegetation.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil_biogeochem.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_soil_biogeochem.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil_ecosse.nml.html">6.10. <tt class="docutils literal"><span class="pre">jules_soil_ecosse.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_snow.nml.html">6.11. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_rivers.nml.html">6.12. <tt class="docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.13. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.14. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.15. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.16. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.17. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crop_params.nml.html">6.18. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.19. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.20. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fire.nml.html">6.21. <tt class="docutils literal"><span class="pre">fire.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.22. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.23. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.24. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.25. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.26. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pft_params.nml.html"
+                        title="previous chapter">6.16. <tt class="docutils literal docutils literal"><span class="pre">pft_params.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="crop_params.nml.html"
+                        title="next chapter">6.18. <tt class="docutils literal docutils literal docutils literal"><span class="pre">crop_params.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="crop_params.nml.html" title="6.18. crop_params.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pft_params.nml.html" title="6.16. pft_params.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2018.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

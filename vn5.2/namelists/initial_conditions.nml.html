@@ -1,0 +1,818 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.25. initial_conditions.nml &mdash; Joint UK Land Environment Simulator (JULES) v5.1 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v5.1 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.26. output.nml" href="output.nml.html" />
+    <link rel="prev" title="6.24. prescribed_data.nml" href="prescribed_data.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="output.nml.html" title="6.26. output.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="prescribed_data.nml.html" title="6.24. prescribed_data.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="initial-conditions-nml">
+<h1>6.25. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt><a class="headerlink" href="#initial-conditions-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains a single namelist called <a class="reference internal" href="#namelist-JULES_INITIAL"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_INITIAL</span></tt></a> that is used to set up the initial state of prognostic variables.</p>
+<div class="section" id="namelist-JULES_INITIAL">
+<span id="jules-initial-namelist-members"></span><h2>6.25.1. <tt class="docutils literal"><span class="pre">JULES_INITIAL</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_INITIAL" title="Permalink to this headline">¶</a></h2>
+<p>The values of all prognostic variables must be set at the start of a run. This initial state, or initial condition, can be read from a &#8220;dump&#8221; from an earlier run of the model, or may be read from a different file. Another option is to prescribe a simple or idealised initial state by giving constant values for the prognostic variables directly in the namelist. It is also possible to set some fields using values from a file (e.g. a dump) but to set others to constants given in the namelist.</p>
+<dl class="member">
+<dt id="JULES_INITIAL::dump_file">
+<tt class="descclassname">JULES_INITIAL::</tt><tt class="descname">dump_file</tt><a class="headerlink" href="#JULES_INITIAL::dump_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Indicates whether the given <a class="reference internal" href="#JULES_INITIAL::file" title="JULES_INITIAL::file"><tt class="xref nml nml-mem docutils literal"><span class="pre">file</span></tt></a> is a dump from a previous run of JULES.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>The file is a JULES dump file.</dd>
+<dt>FALSE</dt>
+<dd>The file is not a JULES dump file.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INITIAL::total_snow">
+<tt class="descclassname">JULES_INITIAL::</tt><tt class="descname">total_snow</tt><a class="headerlink" href="#JULES_INITIAL::total_snow" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch controlling simplified initialisation of snow variables.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Only the total mass of snow on each tile (see <tt class="docutils literal"><span class="pre">snow_tile</span></tt> in <a class="reference internal" href="#list-of-initial-condition-variables"><em>List of initial condition variables</em></a>) is required to be input, and all related variables will be calculated from this or simple assumptions made. All the snow is assumed to be on the ground (not in the canopy).</dd>
+<dt>FALSE</dt>
+<dd>All snow variables required for the current configuration must be input separately (see <a class="reference internal" href="#list-of-initial-condition-variables"><em>List of initial condition variables</em></a>).</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-members-used-to-set-up-spacially-varying-properties admonition">
+<p class="first admonition-title">Members used to set up spacially varying properties</p>
+<dl class="member">
+<dt id="JULES_INITIAL::file">
+<tt class="descclassname">JULES_INITIAL::</tt><tt class="descname">file</tt><a class="headerlink" href="#JULES_INITIAL::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The file to read initial conditions from.</p>
+<p>If <a class="reference internal" href="#JULES_INITIAL::use_file" title="JULES_INITIAL::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> (see below) is FALSE for every variable, this will not be used.</p>
+<p>If <a class="reference internal" href="#JULES_INITIAL::dump_file" title="JULES_INITIAL::dump_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">dump_file</span></tt></a> = TRUE, this should be a JULES dump file.</p>
+<p>If <a class="reference internal" href="#JULES_INITIAL::dump_file" title="JULES_INITIAL::dump_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">dump_file</span></tt></a> = FALSE, this should be a file conforming to the <a class="reference internal" href="../input/overview.html"><em>JULES input requirements</em></a>. This file name may use <a class="reference internal" href="../input/file-name-templating.html"><em>variable name templating</em></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INITIAL::nvars">
+<tt class="descclassname">JULES_INITIAL::</tt><tt class="descname">nvars</tt><a class="headerlink" href="#JULES_INITIAL::nvars" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of initial condition variables that will be provided.</p>
+<p>See <a class="reference internal" href="#list-of-initial-condition-variables"><em>List of initial condition variables</em></a> for those required for a particular configuration.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If <a class="reference internal" href="#JULES_INITIAL::dump_file" title="JULES_INITIAL::dump_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">dump_file</span></tt></a> = TRUE and <a class="reference internal" href="#JULES_INITIAL::nvars" title="JULES_INITIAL::nvars"><tt class="xref nml nml-mem docutils literal"><span class="pre">nvars</span></tt></a> = 0, then the model will attempt to initialise all required variables from the given dump file.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INITIAL::var">
+<tt class="descclassname">JULES_INITIAL::</tt><tt class="descname">var</tt><a class="headerlink" href="#JULES_INITIAL::var" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>List of initial condition variable names as recognised by JULES (see <a class="reference internal" href="#list-of-initial-condition-variables"><em>List of initial condition variables</em></a>). Names are case sensitive.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, variable names must be in the order they appear in the file.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INITIAL::use_file">
+<tt class="descclassname">JULES_INITIAL::</tt><tt class="descname">use_file</tt><a class="headerlink" href="#JULES_INITIAL::use_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_INITIAL::var" title="JULES_INITIAL::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a>, this indicates if it should be read from the specified file or whether a constant value is to be used.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>The variable will be read from the file.</dd>
+<dt>FALSE</dt>
+<dd>The variable will be set to a constant value everywhere using <a class="reference internal" href="#JULES_INITIAL::const_val" title="JULES_INITIAL::const_val"><tt class="xref nml nml-mem docutils literal"><span class="pre">const_val</span></tt></a> below.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INITIAL::var_name">
+<tt class="descclassname">JULES_INITIAL::</tt><tt class="descname">var_name</tt><a class="headerlink" href="#JULES_INITIAL::var_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">&#8216;&#8217; (empty string)</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_INITIAL::var" title="JULES_INITIAL::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a> where <a class="reference internal" href="#JULES_INITIAL::use_file" title="JULES_INITIAL::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE, this is the name of the variable in the file containing the data.</p>
+<p>If the empty string (the default) is given for any variable, then the corresponding value from <a class="reference internal" href="#JULES_INITIAL::var" title="JULES_INITIAL::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a> is used instead.</p>
+<p>This is not used for variables where <a class="reference internal" href="#JULES_INITIAL::use_file" title="JULES_INITIAL::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE, but a placeholder must still be given in that case.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this is not used - only the order in the file matters, as described above.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_INITIAL::tpl_name">
+<tt class="descclassname">JULES_INITIAL::</tt><tt class="descname">tpl_name</tt><a class="headerlink" href="#JULES_INITIAL::tpl_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_INITIAL::var" title="JULES_INITIAL::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a>, this is the string to substitute into the file name in place of the variable name substitution string.</p>
+<p>If the file name does not use variable name templating, this is not used.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_INITIAL::const_val">
+<tt class="descclassname">JULES_INITIAL::</tt><tt class="descname">const_val</tt><a class="headerlink" href="#JULES_INITIAL::const_val" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_INITIAL::var" title="JULES_INITIAL::var"><tt class="xref nml nml-mem docutils literal"><span class="pre">var</span></tt></a> where <a class="reference internal" href="#JULES_INITIAL::use_file" title="JULES_INITIAL::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE, this is a constant value that the variable will be set to at every point in every layer.</p>
+<p>This is not used for variables where <a class="reference internal" href="#JULES_INITIAL::use_file" title="JULES_INITIAL::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE, but a placeholder must still be given.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="list-of-initial-condition-variables">
+<span id="id1"></span><h3>6.25.1.1. List of initial condition variables<a class="headerlink" href="#list-of-initial-condition-variables" title="Permalink to this headline">¶</a></h3>
+<p>All input to the model must be on the same grid (see <a class="reference internal" href="../input/overview.html"><em>Input files for JULES</em></a>), and initial conditions are no different. Even when the variable is only required for land points, values must be provided for the full input grid. Variables read as initial conditions must have no time dimension.</p>
+<p>The variables it is possible to specify as initial conditions can be grouped into &#8216;types&#8217; depending on the number and size of the levels dimensions they are required to have. For NetCDF files, the dimension names are those specified in the <a class="reference internal" href="model_grid.nml.html#namelist-JULES_INPUT_GRID"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_INPUT_GRID</span></tt></a> namelist. For variables with no type specified, no levels dimensions should be used.</p>
+<p>The required levels dimensions for each initial condition &#8216;type&#8217; are given in the following table:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="14%" />
+<col width="36%" />
+<col width="43%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Type</th>
+<th class="head">Number of levels
+dimensions</th>
+<th class="head">Levels dimension name(s)</th>
+<th class="head">Levels dimension size(s)</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>soil</td>
+<td>1</td>
+<td><a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::soil_dim_name" title="JULES_INPUT_GRID::soil_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_dim_name</span></tt></a></td>
+<td><a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><tt class="xref nml nml-mem docutils literal"><span class="pre">sm_levels</span></tt></a></td>
+</tr>
+<tr class="row-odd"><td>pft</td>
+<td>1</td>
+<td><a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::pft_dim_name" title="JULES_INPUT_GRID::pft_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">pft_dim_name</span></tt></a></td>
+<td><a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::npft" title="JULES_SURFACE_TYPES::npft"><tt class="xref nml nml-mem docutils literal"><span class="pre">npft</span></tt></a></td>
+</tr>
+<tr class="row-even"><td>cpft</td>
+<td>1</td>
+<td><a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::cpft_dim_name" title="JULES_INPUT_GRID::cpft_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">cpft_dim_name</span></tt></a></td>
+<td><a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><tt class="xref nml nml-mem docutils literal"><span class="pre">ncpft</span></tt></a></td>
+</tr>
+<tr class="row-odd"><td>type</td>
+<td>1</td>
+<td><a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::type_dim_name" title="JULES_INPUT_GRID::type_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">type_dim_name</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">ntype</span></tt> (<a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::npft" title="JULES_SURFACE_TYPES::npft"><tt class="xref nml nml-mem docutils literal"><span class="pre">npft</span></tt></a> +
+<a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::nnvg" title="JULES_SURFACE_TYPES::nnvg"><tt class="xref nml nml-mem docutils literal"><span class="pre">nnvg</span></tt></a>)</td>
+</tr>
+<tr class="row-even"><td>tile</td>
+<td>1</td>
+<td><a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::tile_dim_name" title="JULES_INPUT_GRID::tile_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">tile_dim_name</span></tt></a></td>
+<td><tt class="docutils literal"><span class="pre">ntiles</span></tt> (1 if <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_aggregate" title="JULES_SURFACE::l_aggregate"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_aggregate</span></tt></a>
+= TRUE, <tt class="docutils literal"><span class="pre">ntype</span></tt> otherwise)</td>
+</tr>
+<tr class="row-odd"><td>sclayer</td>
+<td>1</td>
+<td><a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::sclayer_dim_name" title="JULES_INPUT_GRID::sclayer_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">sclayer_dim_name</span></tt></a></td>
+<td><p class="first">Number of soil biogeochemistry layers.</p>
+<p>If using the single-pool moodel
+(<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 1 )
+this is 1.</p>
+<p>If using the RothC model
+(<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 2)
+with
+<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="JULES_SOIL_BIOGEOCHEM::l_layeredc"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_layeredc</span></tt></a> = FALSE
+this is 1, else with
+<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="JULES_SOIL_BIOGEOCHEM::l_layeredc"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_layeredc</span></tt></a> = TRUE
+this is equal to <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><tt class="xref nml nml-mem docutils literal"><span class="pre">sm_levels</span></tt></a>.</p>
+<p class="last">If using the ECOSSE model
+(<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 3)
+this is equal to
+<a class="reference internal" href="jules_soil_ecosse.nml.html#JULES_SOIL_ECOSSE::dim_cslayer" title="JULES_SOIL_ECOSSE::dim_cslayer"><tt class="xref nml nml-mem docutils literal"><span class="pre">dim_cslayer</span></tt></a>.</p>
+</td>
+</tr>
+<tr class="row-even"><td>scpool</td>
+<td>2</td>
+<td><a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::scpool_dim_name" title="JULES_INPUT_GRID::scpool_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">scpool_dim_name</span></tt></a>,
+<a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::sclayer_dim_name" title="JULES_INPUT_GRID::sclayer_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">sclayer_dim_name</span></tt></a></td>
+<td>number of soil carbon pools (1 if
+<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 1,
+4 otherwise) and number of soil biogeochemistry layers
+(see <tt class="docutils literal"><span class="pre">sclayer</span></tt> above)</td>
+</tr>
+<tr class="row-odd"><td>bedrock</td>
+<td>1</td>
+<td><a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::bedrock_dim_name" title="JULES_INPUT_GRID::bedrock_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">bedrock_dim_name</span></tt></a></td>
+<td><p class="first"><a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::ns_deep" title="JULES_SOIL::ns_deep"><tt class="xref nml nml-mem docutils literal"><span class="pre">ns_deep</span></tt></a></p>
+<p class="last">Only applicable if <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::l_bedrock" title="JULES_SOIL::l_bedrock"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_bedrock</span></tt></a> =
+TRUE</p>
+</td>
+</tr>
+<tr class="row-even"><td>snow</td>
+<td>2</td>
+<td><a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::tile_dim_name" title="JULES_INPUT_GRID::tile_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">tile_dim_name</span></tt></a>,
+<a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::snow_dim_name" title="JULES_INPUT_GRID::snow_dim_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">snow_dim_name</span></tt></a></td>
+<td><p class="first"><tt class="docutils literal"><span class="pre">ntiles</span></tt> (see above), <a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a></p>
+<p class="last">Only applicable if <tt class="docutils literal"><span class="pre">nsmax</span> <span class="pre">&gt;</span> <span class="pre">0</span></tt></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The required variables for a particular configuration, along with their &#8216;type&#8217; as specified above, are given in the following table.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="67%" />
+<col width="7%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+<th class="head">Type</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td colspan="3">Always required</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">canopy</span></tt></td>
+<td>Amount of intercepted water that is held on each tile (kg m<sup>-2</sup>).</td>
+<td>tile</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">cs</span></tt></td>
+<td><p class="first">Soil carbon (kg m<sup>-2</sup>).</p>
+<p>If using the single-pool model (<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 1),
+this is the total soil carbon.</p>
+<p class="last">Otherwise, this is the carbon in each of the 4 pools of the RothC or ECOSSE models.</p>
+</td>
+<td>scpool</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">gs</span></tt></td>
+<td><p class="first">Stomatal conductance for water vapour (m s<sup>-1</sup>).</p>
+<p class="last">This is used to start the iterative calculation of gs for the first timestep only.</p>
+</td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">snow_tile</span></tt></td>
+<td><p class="first">If <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> /= 4, this is the total snow on the tile
+(since there is a single store which doesn&#8217;t distinguish between snow on canopy and
+under canopy).</p>
+<p>If <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> = 4 (and then only at tiles where
+<a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::cansnowpft" title="JULES_SNOW::cansnowpft"><tt class="xref nml nml-mem docutils literal"><span class="pre">cansnowpft</span></tt></a> = TRUE), <tt class="docutils literal"><span class="pre">snow_tile</span></tt> is interpreted as the
+snow on the canopy, except when overridden by <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a>
+= TRUE.</p>
+<p>If <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = TRUE, <tt class="docutils literal"><span class="pre">snow_tile</span></tt> is used to hold the
+total snow on the tile (and is subsequently put onto the ground at tiles that
+distinguish between ground and canopy stores).</p>
+<p class="last">Further details of snow initialisation are given below.</p>
+</td>
+<td>tile</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">t_soil</span></tt></td>
+<td>Temperature of each soil layer (K).</td>
+<td>soil</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">tstar_tile</span></tt></td>
+<td>Temperature of each tile (K). This is the surface or skin temperature.</td>
+<td>tile</td>
+</tr>
+<tr class="row-odd"><td colspan="3">Required if <tt class="docutils literal"><span class="pre">sthuf</span></tt> is not prescribed for all levels in <a class="reference internal" href="prescribed_data.nml.html#namelist-JULES_PRESCRIBED"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_PRESCRIBED</span></tt></a></td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">sthuf</span></tt></td>
+<td>Soil wetness for each soil layer. This is the mass of soil water (liquid and frozen),
+expressed as a fraction of the water content at saturation.</td>
+<td>soil</td>
+</tr>
+<tr class="row-odd"><td colspan="3">Required if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_phenol" title="JULES_VEGETATION::l_phenol"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_phenol</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">lai</span></tt></td>
+<td>Leaf area index of each PFT.</td>
+<td>pft</td>
+</tr>
+<tr class="row-odd"><td colspan="3">Required if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">canht</span></tt></td>
+<td>Height (m) of each PFT.</td>
+<td>pft</td>
+</tr>
+<tr class="row-odd"><td colspan="3">Required if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_veg_compete" title="JULES_VEGETATION::l_veg_compete"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_veg_compete</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">frac</span></tt></td>
+<td>The fraction of land area of each gridbox that is covered by each surface type.</td>
+<td>type</td>
+</tr>
+<tr class="row-odd"><td colspan="3">Required if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_irrig_dmd" title="JULES_VEGETATION::l_irrig_dmd"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_irrig_dmd</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">sthu_irr</span></tt></td>
+<td>Unfrozen soil wetness of each layer as a fraction of saturation in irrigated fraction.</td>
+<td>soil</td>
+</tr>
+<tr class="row-odd"><td colspan="3">Required if <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><tt class="xref nml nml-mem docutils literal"><span class="pre">ncpft</span></tt></a> &gt; 0</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">cropdvi</span></tt></td>
+<td>Development index for each crop pft.</td>
+<td>cpft</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">croprootc</span></tt></td>
+<td>Root carbon pool for each crop pft (kg m<sup>-2</sup>).</td>
+<td>cpft</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">cropharvc</span></tt></td>
+<td>Carbon in &#8216;harvest parts&#8217; pool for each crop pft (kg m<sup>-2</sup>) .</td>
+<td>cpft</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">cropreservec</span></tt></td>
+<td>Carbon in stem reserves pool for each crop pft (kg m<sup>-2</sup>).</td>
+<td>cpft</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">croplai</span></tt></td>
+<td>Leaf area index of each crop pft.</td>
+<td>cpft</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">cropcanht</span></tt></td>
+<td>Height (m) of each crop pft.</td>
+<td>cpft</td>
+</tr>
+<tr class="row-even"><td colspan="3">Required if <a class="reference internal" href="jules_hydrology.nml.html#JULES_HYDROLOGY::l_top" title="JULES_HYDROLOGY::l_top"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_top</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">sthzw</span></tt></td>
+<td><p class="first">Soil wetness in the deep (&#8220;water table&#8221;) layer beneath the standard soil column.</p>
+<p class="last">This is the mass of soil water (liquid and frozen), expressed as a fraction of the
+water content at saturation.</p>
+</td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">zw</span></tt></td>
+<td>Depth from the surface to the water table (m).</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td colspan="3">Required if <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::l_bedrock" title="JULES_SOIL::l_bedrock"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_bedrock</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">tsoil_deep</span></tt></td>
+<td>Temperature of each bedrock layer (K)</td>
+<td>bedrock</td>
+</tr>
+<tr class="row-odd"><td colspan="3">Required if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_snow_albedo</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">rgrain</span></tt></td>
+<td>Snow surface grain size (μm) on each tile.</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td colspan="3">Required if <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = FALSE</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">rho_snow</span></tt></td>
+<td><p class="first">Bulk density of lying snow (kg m<sup>-3</sup>).</p>
+<p>If <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = TRUE then this is set as follows:</p>
+<ul class="last simple">
+<li>If <a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> = 0, it is set to
+<a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::rho_snow_const" title="JULES_SNOW::rho_snow_const"><tt class="xref nml nml-mem docutils literal"><span class="pre">rho_snow_const</span></tt></a>.</li>
+<li>If <a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> &gt; 0 and there is an existing snow pack, it is set to
+<a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::rho_snow_const" title="JULES_SNOW::rho_snow_const"><tt class="xref nml nml-mem docutils literal"><span class="pre">rho_snow_const</span></tt></a>.</li>
+<li>If <a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> &gt; 0 and there is no snow pack, it is set to
+<a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::rho_snow_fresh" title="JULES_SNOW::rho_snow_fresh"><tt class="xref nml nml-mem docutils literal"><span class="pre">rho_snow_fresh</span></tt></a>.</li>
+</ul>
+</td>
+<td>tile</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">snow_depth</span></tt></td>
+<td><p class="first">Depth of snow (kg m).</p>
+<p class="last">If <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = TRUE, this is calculated from mass and
+density of snow.</p>
+</td>
+<td>tile</td>
+</tr>
+<tr class="row-even"><td colspan="3">Required if <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = FALSE and <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> = 4</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">snow_grnd</span></tt></td>
+<td><p class="first">Amount of snow on the ground, beneath the canopy (kg m<sup>-2</sup>), on each tile.</p>
+<p class="last">If <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = TRUE this is set to <tt class="docutils literal"><span class="pre">snow_tile</span></tt> at tiles
+where <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_model</span></tt></a> = 4 is active, and to zero at all other
+tiles.</p>
+</td>
+<td>tile</td>
+</tr>
+<tr class="row-even"><td colspan="3">Required if <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = FALSE and <a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> &gt; 0</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">nsnow</span></tt></td>
+<td><p class="first">The number of snow layers on each tile.</p>
+<p class="last">If <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = TRUE this is calculated from the snow depth.</p>
+</td>
+<td>tile</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">snow_ds</span></tt></td>
+<td><p class="first">Depth of snow in each layer (kg m).</p>
+<p class="last">If <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = TRUE this is calculated from the snow depth
+and the number of snow layers.</p>
+</td>
+<td>snow</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">snow_ice</span></tt></td>
+<td><p class="first">Mass of frozen water in each snow layer (kg m<sup>-2</sup>).</p>
+<p class="last">If <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = TRUE all snow is assumed to be ice.</p>
+</td>
+<td>snow</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">snow_liq</span></tt></td>
+<td><p class="first">Mass of liquid water in each snow layer (kg m<sup>-2</sup>).</p>
+<p class="last">If <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = TRUE this is set to zero.</p>
+</td>
+<td>snow</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">tsnow</span></tt></td>
+<td><p class="first">Temperature of each snow layer (K).</p>
+<p class="last">If <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = TRUE this is set to the temperature of the
+top soil layer.</p>
+</td>
+<td>snow</td>
+</tr>
+<tr class="row-even"><td colspan="3">Required if <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = FALSE, <a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> &gt; 0 and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_snow_albedo</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">rgrainl</span></tt></td>
+<td><p class="first">Snow grain size (μm) on each tile in each snow layer.</p>
+<p class="last">If <a class="reference internal" href="#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><tt class="xref nml nml-mem docutils literal"><span class="pre">total_snow</span></tt></a> = TRUE this is set to <tt class="docutils literal"><span class="pre">rgrain</span></tt>.</p>
+</td>
+<td>snow</td>
+</tr>
+<tr class="row-even"><td colspan="3">Required if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = TRUE and <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_landuse" title="JULES_VEGETATION::l_landuse"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_landuse</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">frac_agr_prev</span></tt></td>
+<td>Gridbox agricultural/crop fraction from previous TRIFFID timestep.</td>
+<td>none</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">wood_prod_fast</span></tt></td>
+<td>Carbon content of the wood products pool with a fast decay rate.</td>
+<td>none</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">wood_prod_med</span></tt></td>
+<td>Carbon content of the wood products pool with a medium decay rate.</td>
+<td>none</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">wood_prod_slow</span></tt></td>
+<td>Carbon content of the wood products pool with a slow decay rate.</td>
+<td>none</td>
+</tr>
+<tr class="row-odd"><td colspan="3">Required if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = TRUE and <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_landuse" title="JULES_VEGETATION::l_landuse"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_landuse</span></tt></a> = TRUE and
+<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trif_crop" title="JULES_VEGETATION::l_trif_crop"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trif_crop</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">frac_past_prev</span></tt></td>
+<td>Gridbox pasture fraction from previous TRIFFID timestep.</td>
+<td>none</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Required if using RothC (<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 2) with
+<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_nitrogen" title="JULES_VEGETATION::l_nitrogen"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_nitrogen</span></tt></a> = TRUE., or if using ECOSSE
+(<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 3) with <a class="reference internal" href="jules_soil_ecosse.nml.html#JULES_SOIL_ECOSSE::l_soil_n" title="JULES_SOIL_ECOSSE::l_soil_n"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_soil_n</span></tt></a> = TRUE.</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">ns</span></tt></td>
+<td>Soil nitrogen (kg m<sup>-2</sup>).</td>
+<td>scpool</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Required if using RothC (<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 2) and
+<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_nitrogen" title="JULES_VEGETATION::l_nitrogen"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_nitrogen</span></tt></a> = TRUE.</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">n_inorg</span></tt></td>
+<td>Soil inorganic nitrogen  (kg m<sup>-2</sup>).</td>
+<td>sclayer</td>
+</tr>
+<tr class="row-odd"><td colspan="2">Required if using ECOSSE (<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 3) and
+<a class="reference internal" href="jules_soil_ecosse.nml.html#JULES_SOIL_ECOSSE::l_soil_n" title="JULES_SOIL_ECOSSE::l_soil_n"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_soil_n</span></tt></a> = TRUE.</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">n_amm</span></tt></td>
+<td>Soil ammonium  (kg m<sup>-2</sup>).</td>
+<td>sclayer</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">n_nit</span></tt></td>
+<td>Soil nitrate  (kg m<sup>-2</sup>).</td>
+<td>sclayer</td>
+</tr>
+<tr class="row-even"><td colspan="3">Required if <a class="reference internal" href="jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_rivers</span></tt></a> = TRUE, <a class="reference internal" href="jules_rivers.nml.html#JULES_RIVERS::rivers_type" title="JULES_RIVERS::rivers_type"><tt class="xref nml nml-mem docutils literal"><span class="pre">rivers_type</span></tt></a> = &#8216;rfm&#8217; and
+<a class="reference internal" href="#JULES_INITIAL::dump_file" title="JULES_INITIAL::dump_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">dump_file</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">rfm_surfstore_rp</span></tt></td>
+<td>Surface water storage on river routing points (m3)</td>
+<td>none</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">rfm_substore_rp</span></tt></td>
+<td>Sub-surface water storage on river routing points (m3)</td>
+<td>none</td>
+</tr>
+<tr class="row-odd"><td><tt class="docutils literal"><span class="pre">rfm_flowin_rp</span></tt></td>
+<td>Surface flow into a grid box on river routing points (m3)</td>
+<td>none</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">rfm_bflowin_rp</span></tt></td>
+<td>Sub-surface flow into a grid box on river routing points (m3)</td>
+<td>none</td>
+</tr>
+<tr class="row-odd"><td colspan="3">Required if <a class="reference internal" href="jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_rivers</span></tt></a> = TRUE, <a class="reference internal" href="jules_rivers.nml.html#JULES_RIVERS::rivers_type" title="JULES_RIVERS::rivers_type"><tt class="xref nml nml-mem docutils literal"><span class="pre">rivers_type</span></tt></a> = &#8216;trip&#8217; and
+<a class="reference internal" href="#JULES_INITIAL::dump_file" title="JULES_INITIAL::dump_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">dump_file</span></tt></a> = TRUE</td>
+</tr>
+<tr class="row-even"><td><tt class="docutils literal"><span class="pre">rivers_sto_rp</span></tt></td>
+<td>Water storage (kg)</td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<dl class="last docutils">
+<dt>if <a class="reference internal" href="jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_rivers</span></tt></a> = TRUE, <a class="reference internal" href="jules_rivers.nml.html#JULES_RIVERS::rivers_type" title="JULES_RIVERS::rivers_type"><tt class="xref nml nml-mem docutils literal"><span class="pre">rivers_type</span></tt></a> = &#8216;rfm&#8217; and <a class="reference internal" href="#JULES_INITIAL::dump_file" title="JULES_INITIAL::dump_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">dump_file</span></tt></a> = FALSE,</dt>
+<dd>rfm_surfstore_rp, rfm_substore_rp, rfm_flowin_rp and rfm_bflowin are initialised to zero.</dd>
+</dl>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">if <a class="reference internal" href="jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_rivers</span></tt></a> = TRUE, <a class="reference internal" href="jules_rivers.nml.html#JULES_RIVERS::rivers_type" title="JULES_RIVERS::rivers_type"><tt class="xref nml nml-mem docutils literal"><span class="pre">rivers_type</span></tt></a> = &#8216;trip&#8217; and <a class="reference internal" href="#JULES_INITIAL::dump_file" title="JULES_INITIAL::dump_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">dump_file</span></tt></a> = FALSE, 
+rivers_sto_rp is initialised to zero.</p>
+</div>
+</div>
+</div>
+<div class="section" id="examples-of-specification-of-initial-state">
+<h2>6.25.2. Examples of specification of initial state<a class="headerlink" href="#examples-of-specification-of-initial-state" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="specification-of-initial-state-at-a-single-point">
+<h3>6.25.2.1. Specification of initial state at a single point<a class="headerlink" href="#specification-of-initial-state-at-a-single-point" title="Permalink to this headline">¶</a></h3>
+<p>This assumes that <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_phenol" title="JULES_VEGETATION::l_phenol"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_phenol</span></tt></a> = FALSE, <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = FALSE, <a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 1 and <a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a> = 0.</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_INITIAL</span>
+  <span class="nv">file</span> <span class="o">=</span> <span class="s2">&quot;initial_conditions.dat&quot;</span><span class="p">,</span>
+
+  <span class="nv">nvars</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="nv">var</span>       <span class="o">=</span> <span class="s1">&#39;canopy&#39;</span>  <span class="s1">&#39;tstar_tile&#39;</span>   <span class="s1">&#39;cs&#39;</span>  <span class="s1">&#39;gs&#39;</span>  <span class="s1">&#39;rgrain&#39;</span>  <span class="s1">&#39;snow_tile&#39;</span>  <span class="s1">&#39;sthuf&#39;</span>  <span class="s1">&#39;t_soil&#39;</span><span class="p">,</span>
+  <span class="nv">use_file</span>  <span class="o">=</span>       <span class="ss">F</span>             <span class="ss">F</span>      <span class="ss">F</span>     <span class="ss">F</span>         <span class="ss">F</span>            <span class="ss">F</span>        <span class="ss">T</span>         <span class="ss">T</span> <span class="p">,</span>
+  <span class="nv">const_val</span> <span class="o">=</span>     <span class="mf">0.0</span>        <span class="mf">276.78</span>   <span class="mf">12.1</span>   <span class="mf">0.0</span>      <span class="mf">50.0</span>          <span class="mf">0.0</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>Or using the alternative list syntax (see <a class="reference internal" href="intro.html"><em>Introduction to Fortran namelists</em></a>):</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_INITIAL</span>
+  <span class="nv">file</span> <span class="o">=</span> <span class="s2">&quot;initial_conditions.dat&quot;</span><span class="p">,</span>
+
+  <span class="nv">nvars</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;canopy&#39;</span><span class="p">,</span>      <span class="nv">use_file</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="ss">F</span><span class="p">,</span>  <span class="nv">const_val</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;tstar_tile&#39;</span><span class="p">,</span>  <span class="nv">use_file</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="ss">F</span><span class="p">,</span>  <span class="nv">const_val</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mf">276.78</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;cs&#39;</span><span class="p">,</span>          <span class="nv">use_file</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="ss">F</span><span class="p">,</span>  <span class="nv">const_val</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mf">12.1</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;gs&#39;</span><span class="p">,</span>          <span class="nv">use_file</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="ss">F</span><span class="p">,</span>  <span class="nv">const_val</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;rgrain&#39;</span><span class="p">,</span>      <span class="nv">use_file</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="ss">F</span><span class="p">,</span>  <span class="nv">const_val</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="mf">50.0</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;snow_tile&#39;</span><span class="p">,</span>   <span class="nv">use_file</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="ss">F</span><span class="p">,</span>  <span class="nv">const_val</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;sthuf&#39;</span><span class="p">,</span>       <span class="nv">use_file</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">=</span> <span class="ss">T</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;t_soil&#39;</span><span class="p">,</span>      <span class="nv">use_file</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">=</span> <span class="ss">T</span><span class="p">,</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>This shows how a mixture of constant values and initial state from a file can be used. In this case, the first 6 variables will be set to constant values everywhere (<a class="reference internal" href="#JULES_INITIAL::use_file" title="JULES_INITIAL::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE) with the last 2 read from the specified file (<a class="reference internal" href="#JULES_INITIAL::use_file" title="JULES_INITIAL::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE).</p>
+<p><a class="reference internal" href="#JULES_INITIAL::file" title="JULES_INITIAL::file"><tt class="xref nml nml-mem docutils literal"><span class="pre">file</span></tt></a> specifies an ASCII file to read the variables for which <a class="reference internal" href="#JULES_INITIAL::use_file" title="JULES_INITIAL::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = TRUE from.</p>
+<p>Since the variables are arranged such that all those with <a class="reference internal" href="#JULES_INITIAL::use_file" title="JULES_INITIAL::use_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">use_file</span></tt></a> = FALSE are first, we need only supply constant values for those variables that require them.</p>
+<p>The contents of <tt class="docutils literal"><span class="pre">initial_conditions.dat</span></tt> should look similar to:</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="c1"># sthuf(1:4)                    t_soil(1:4)</span>
+  <span class="mf">0.749</span>  <span class="mf">0.743</span>  <span class="mf">0.754</span>  <span class="mf">0.759</span>    <span class="mf">276.78</span>  <span class="mf">277.46</span>  <span class="mf">278.99</span>  <span class="mf">282.48</span>
+</pre></div>
+</div>
+<p>The data for each soil layer is given in consecutive columns. A comment line is used to indicate which columns comprise which variable (see <a class="reference internal" href="../input/overview.html"><em>Input files for JULES</em></a> for more details).</p>
+<p>Specifying initial state for gridded data using NetCDF files is similar, except that:</p>
+<ul class="simple">
+<li><a class="reference internal" href="#JULES_INITIAL::var_name" title="JULES_INITIAL::var_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">var_name</span></tt></a> is required for each variable read from file.</li>
+<li>If variable name templating is used, <a class="reference internal" href="#JULES_INITIAL::tpl_name" title="JULES_INITIAL::tpl_name"><tt class="xref nml nml-mem docutils literal"><span class="pre">tpl_name</span></tt></a> is required for each variable read from file.</li>
+</ul>
+</div>
+<div class="section" id="specification-of-initial-state-from-an-existing-dump-file">
+<h3>6.25.2.2. Specification of initial state from an existing dump file<a class="headerlink" href="#specification-of-initial-state-from-an-existing-dump-file" title="Permalink to this headline">¶</a></h3>
+<p>In this example, we use an existing dump file (from a previous run) to set the initial values of all required variables.</p>
+<div class="highlight-nml"><div class="highlight"><pre><span class="nn">&amp;JULES_INITIAL</span>
+  <span class="nv">dump_file</span> <span class="o">=</span> <span class="ss">T</span><span class="p">,</span>
+  <span class="nv">file</span> <span class="o">=</span> <span class="s2">&quot;jules_dump.nc&quot;</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#JULES_INITIAL::dump_file" title="JULES_INITIAL::dump_file"><tt class="xref nml nml-mem docutils literal"><span class="pre">dump_file</span></tt></a> = TRUE indicates that the given file should be interpreted as a JULES dump file.</p>
+<p><a class="reference internal" href="#JULES_INITIAL::file" title="JULES_INITIAL::file"><tt class="xref nml nml-mem docutils literal"><span class="pre">file</span></tt></a> specifies the dump file to read (in this case a NetCDF dump file).</p>
+<p>Since it is not specified, <a class="reference internal" href="#JULES_INITIAL::nvars" title="JULES_INITIAL::nvars"><tt class="xref nml nml-mem docutils literal"><span class="pre">nvars</span></tt></a> takes its default value of 0, which indicates that JULES should attempt to read all required variables from the given dump file.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_lsm_switch.nml.html">6.2. <tt class="docutils literal"><span class="pre">jules_lsm_switch.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface_types.nml.html">6.3. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface.nml.html">6.4. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_radiation.nml.html">6.5. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_hydrology.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_vegetation.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil_biogeochem.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_soil_biogeochem.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil_ecosse.nml.html">6.10. <tt class="docutils literal"><span class="pre">jules_soil_ecosse.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_snow.nml.html">6.11. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_rivers.nml.html">6.12. <tt class="docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.13. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.14. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.15. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="pft_params.nml.html">6.16. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.17. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crop_params.nml.html">6.18. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.19. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.20. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fire.nml.html">6.21. <tt class="docutils literal"><span class="pre">fire.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.22. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.23. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.24. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.25. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.26. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="prescribed_data.nml.html"
+                        title="previous chapter">6.24. <tt class="docutils literal docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="output.nml.html"
+                        title="next chapter">6.26. <tt class="docutils literal docutils literal"><span class="pre">output.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="output.nml.html" title="6.26. output.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="prescribed_data.nml.html" title="6.24. prescribed_data.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.1 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2018.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>
