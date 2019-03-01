@@ -1,0 +1,2612 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>6.18. pft_params.nml &mdash; Joint UK Land Environment Simulator (JULES) v5.4 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v5.4 User Guide" href="../index.html" />
+    <link rel="up" title="6. The JULES namelist files" href="contents.html" />
+    <link rel="next" title="6.19. nveg_params.nml" href="nveg_params.nml.html" />
+    <link rel="prev" title="6.17. ancillaries.nml" href="ancillaries.nml.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.19. nveg_params.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ancillaries.nml.html" title="6.17. ancillaries.nml"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.4 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pft-params-nml">
+<h1>6.18. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt><a class="headerlink" href="#pft-params-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file can contain 2 namelists called <a class="reference internal" href="#namelist-JULES_PFTPARM"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_PFTPARM</span></tt></a> and <a class="reference internal" href="#namelist-JULES_PFTPARM_CABLE"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_PFTPARM_CABLE</span></tt></a> that set time and space-invariant parameters for plant functional types for the JULES and CABLE land surface models respectively.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the crop model is on (i.e. <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><tt class="xref nml nml-mem docutils literal"><span class="pre">ncpft</span></tt></a> &gt; 0), the order of PFTs must be natural PFTs followed by crop PFTs.</p>
+</div>
+<div class="section" id="namelist-JULES_PFTPARM">
+<span id="jules-pftparm-namelist-members"></span><h2>6.18.1. <tt class="docutils literal"><span class="pre">JULES_PFTPARM</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_PFTPARM" title="Permalink to this headline">¶</a></h2>
+<p>This namelist reads the values of parameters for each of the plant functional types (PFTs) if the JULES land surface model is being used. These parameters are a function of PFT only. Parameters that also vary with time and location can be prescribed in <a class="reference internal" href="prescribed_data.nml.html"><em>prescribed_data.nml</em></a>. Parameters that are only required if the dynamic vegetation (TRIFFID) or phenology sections are requested are read separately in <a class="reference internal" href="triffid_params.nml.html"><em>triffid_params.nml</em></a>. Every member must be given a value for every run.</p>
+<p>The files given in the examples directory are a good starting point for setting up any JULES run, and in the majority of cases can be left untouched.</p>
+<p>HCTN24 and 30 refer to Hadley Centre technical notes 24 and 30, available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes">the Met Office Library</a>.</p>
+<dl class="member">
+<dt id="JULES_PFTPARM::canht_ft_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">canht_ft_io</tt><a class="headerlink" href="#JULES_PFTPARM::canht_ft_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The height of each PFT (m), also known as the canopy height.</p>
+<p>The value read here is only used if TRIFFID is not active (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = FALSE).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If TRIFFID is active, canopy height is a prognostic variable and its initial value is read in <a class="reference internal" href="initial_conditions.nml.html"><em>initial_conditions.nml</em></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::lai_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">lai_io</tt><a class="headerlink" href="#JULES_PFTPARM::lai_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The leaf area index (LAI) of each PFT.</p>
+<p>The value read here is only used if neither phenology nor TRIFFID is active (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_phenol" title="JULES_VEGETATION::l_phenol"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_phenol</span></tt></a> = FALSE and <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a> = FALSE).</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If phenology is active, LAI is a prognostic variable and its initial value is read in <a class="reference internal" href="initial_conditions.nml.html"><em>initial_conditions.nml</em></a>. When TRIFFID is active but phenology is not active (not recommended), LAI is calculated from the canopy height (meaning that the seasonal cycle of LAI will not be correctly represented).</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::c3_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">c3_io</tt><a class="headerlink" href="#JULES_PFTPARM::c3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Flag indicating whether PFT is C3 type.</p>
+<ol class="arabic simple" start="0">
+<li>Not C3 (i.e. C4).</li>
+<li>C3.</li>
+</ol>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::orient_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">orient_io</tt><a class="headerlink" href="#JULES_PFTPARM::orient_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Flag indicating leaf angle distribution.</p>
+<ol class="arabic simple" start="0">
+<li>Spherical.</li>
+<li>Horizontal.</li>
+</ol>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::can_struct_a_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">can_struct_a_io</tt><a class="headerlink" href="#JULES_PFTPARM::can_struct_a_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Canopy structure factor (dimensionless). can_struct_a_io=1.0 indicates a structurally homogeneous canopy. Corresponds to the structure factor Zeta in Pinty et al 2006 except assumed not to vary with zenith angle i.e. b=0. The canopy structure factor has no effect if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_rad_mod</span></tt></a> = 1.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Pinty, B., T. Lavergne, R. E. Dickinson, J.-L. Widlowski, N. Gobron, and M. M. Verstraete (2006), Simplifying the interaction of land surfaces with radiation for relating remote sensing products to climate models, J. Geophys. Res., 111, D02116, doi:10.1029/2005JD005952.</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::a_wl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">a_wl_io</tt><a class="headerlink" href="#JULES_PFTPARM::a_wl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Allometric coefficient relating the target woody biomass to the leaf area index (kg carbon m<sup>-2</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::a_ws_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">a_ws_io</tt><a class="headerlink" href="#JULES_PFTPARM::a_ws_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Woody biomass as a multiple of live stem biomass.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::albsnc_max_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">albsnc_max_io</tt><a class="headerlink" href="#JULES_PFTPARM::albsnc_max_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Snow-covered albedo for large leaf area index.</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_snow_albedo</span></tt></a> = FALSE. See HCTN30 Eq.2.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::albsnc_min_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">albsnc_min_io</tt><a class="headerlink" href="#JULES_PFTPARM::albsnc_min_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Snow-covered albedo for zero leaf area index.</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_snow_albedo</span></tt></a> = FALSE. See HCTN30 Eq.2.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::albsnf_max_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">albsnf_max_io</tt><a class="headerlink" href="#JULES_PFTPARM::albsnf_max_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Snow-free albedo for large LAI.</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = FALSE. See HCTN30 Eq.1.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::albsnf_maxu_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">albsnf_maxu_io</tt><a class="headerlink" href="#JULES_PFTPARM::albsnf_maxu_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Upper bound for the snow-free albedo for large LAI, when scaled to match input obs.</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = FALSE and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::albsnf_maxl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">albsnf_maxl_io</tt><a class="headerlink" href="#JULES_PFTPARM::albsnf_maxl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Lower bound for the snow-free albedo for large LAI, when scaled to match input obs.</p>
+<p>Only used if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = FALSE and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::alpha_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">alpha_io</tt><a class="headerlink" href="#JULES_PFTPARM::alpha_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Quantum efficiency (mol CO<sub>2</sub> per mol PAR photons).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::alnir_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">alnir_io</tt><a class="headerlink" href="#JULES_PFTPARM::alnir_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf reflection coefficient for NIR. See HCTN30 Table 3.</p>
+<p>Used when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::alniru_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">alniru_io</tt><a class="headerlink" href="#JULES_PFTPARM::alniru_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Upper limit for the leaf reflection coefficient for NIR, when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::alnirl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">alnirl_io</tt><a class="headerlink" href="#JULES_PFTPARM::alnirl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Lower limit for the leaf reflection coefficient for NIR, when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::alpar_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">alpar_io</tt><a class="headerlink" href="#JULES_PFTPARM::alpar_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf reflection coefficient for VIS (photosyntehtically active radiation). See HCTN30 Table 3.</p>
+<p>Used when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::alparu_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">alparu_io</tt><a class="headerlink" href="#JULES_PFTPARM::alparu_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Upper limit for the leaf reflection coefficient for VIS, when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::alparl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">alparl_io</tt><a class="headerlink" href="#JULES_PFTPARM::alparl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Lower limit for the leaf reflection coefficient for VIS, when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::b_wl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">b_wl_io</tt><a class="headerlink" href="#JULES_PFTPARM::b_wl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Allometric exponent relating the target woody biomass to the leaf area index. This is 5/3 in HCTN24 Eq.8.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::catch0_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">catch0_io</tt><a class="headerlink" href="#JULES_PFTPARM::catch0_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum canopy capacity (kg m<sup>-2</sup>).</p>
+<p>This is the minimum amount of water that can be held on the canopy. See HCTN30 p7.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::dcatch_dlai_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">dcatch_dlai_io</tt><a class="headerlink" href="#JULES_PFTPARM::dcatch_dlai_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Rate of change of canopy capacity with LAI (kg m<sup>-2</sup>).</p>
+<p>Canopy capacity is calculated as <tt class="docutils literal"><span class="pre">catch0</span> <span class="pre">+</span> <span class="pre">dcatch_dlai*lai</span></tt>. See HCTN30 p7.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::dgl_dm_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">dgl_dm_io</tt><a class="headerlink" href="#JULES_PFTPARM::dgl_dm_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Rate of change of leaf turnover rate with moisture availability.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::dgl_dt_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">dgl_dt_io</tt><a class="headerlink" href="#JULES_PFTPARM::dgl_dt_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Rate of change of leaf turnover rate with temperature (K<sup>-1</sup>).</p>
+<p>This is 9 in HCTN24 Eq.10.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::dqcrit_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">dqcrit_io</tt><a class="headerlink" href="#JULES_PFTPARM::dqcrit_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Critical humidity deficit (kg H<sub>2</sub>O per kg air).</p>
+<p>Only used with the Jacobs model of stomatal conductance (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::stomata_model" title="JULES_VEGETATION::stomata_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">stomata_model</span></tt></a> = 1).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::dz0v_dh_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">dz0v_dh_io</tt><a class="headerlink" href="#JULES_PFTPARM::dz0v_dh_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Rate of change of vegetation roughness length for momentum with height.</p>
+<p>Roughness length is calculated as <tt class="docutils literal"><span class="pre">dz0v_dh</span> <span class="pre">*</span> <span class="pre">canht_ft</span></tt>. See HCTN30 p5.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::eta_sl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">eta_sl_io</tt><a class="headerlink" href="#JULES_PFTPARM::eta_sl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Live stemwood coefficient (kg C/m/(m2 leaf)).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fd_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fd_io</tt><a class="headerlink" href="#JULES_PFTPARM::fd_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Scale factor for dark respiration. See HCTN 24 Eq. 56.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fsmc_of_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fsmc_of_io</tt><a class="headerlink" href="#JULES_PFTPARM::fsmc_of_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Moisture availability below which leaves are dropped.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::f0_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">f0_io</tt><a class="headerlink" href="#JULES_PFTPARM::f0_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal"><span class="pre">CI</span> <span class="pre">/</span> <span class="pre">CA</span></tt> for <tt class="docutils literal"><span class="pre">DQ</span> <span class="pre">=</span> <span class="pre">0</span></tt>. See HCTN 24 Eq. 32.</p>
+<p>Only used with the Jacobs model of stomatal conductance (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::stomata_model" title="JULES_VEGETATION::stomata_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">stomata_model</span></tt></a> = 1).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::g1_stomata_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">g1_stomata_io</tt><a class="headerlink" href="#JULES_PFTPARM::g1_stomata_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Parameter g1 for the Medlyn et al. (2011) model of stomatal conductance (kPa<sup>0.5</sup>) - this is the sensitivity of the stomatal conductance to the assimilation rate. See Eqn.11 in Medlyn et al. (2012), <a class="reference external" href="https://doi.org/10.1111/j.1365-2486.2012.02790.x">https://doi.org/10.1111/j.1365-2486.2012.02790.x</a>.</p>
+<p>Only used with the Medlyn model of stomatal conductance (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::stomata_model" title="JULES_VEGETATION::stomata_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">stomata_model</span></tt></a> = 2).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::g_leaf_0_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">g_leaf_0_io</tt><a class="headerlink" href="#JULES_PFTPARM::g_leaf_0_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum turnover rate for leaves (/360days).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::glmin_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">glmin_io</tt><a class="headerlink" href="#JULES_PFTPARM::glmin_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum leaf conductance for H<sub>2</sub>O (m s<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::infil_f_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">infil_f_io</tt><a class="headerlink" href="#JULES_PFTPARM::infil_f_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Infiltration enhancement factor.</p>
+<p>The maximum infiltration rate defined by the soil parameters for the whole gridbox may be modified for each PFT to account for tile-dependent factors, such as macro-pores related to vegetation roots.</p>
+<p>See HCTN30 p14 for full details.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::hw_sw_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">hw_sw_io</tt><a class="headerlink" href="#JULES_PFTPARM::hw_sw_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of N stem to N heartwood (kgN/kgN) from the TRY database.</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a> = T.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::kext_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">kext_io</tt><a class="headerlink" href="#JULES_PFTPARM::kext_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Light extinction coefficient - used with Beer&#8217;s Law for light absorption through tile canopies. See HCTN30 Eq.3.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::kpar_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">kpar_io</tt><a class="headerlink" href="#JULES_PFTPARM::kpar_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>PAR Extinction coefficient (m<sup>2</sup> leaf / m<sup>2</sup> ground).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::lai_alb_lim_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">lai_alb_lim_io</tt><a class="headerlink" href="#JULES_PFTPARM::lai_alb_lim_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum LAI permitted in calculation of the albedo in snow-free conditions.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::neff_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">neff_io</tt><a class="headerlink" href="#JULES_PFTPARM::neff_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Scale factor relating V<sub>cmax</sub> with leaf nitrogen concentration. See HCTN 24 Eq. 51.</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a> = F.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::nl0_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">nl0_io</tt><a class="headerlink" href="#JULES_PFTPARM::nl0_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Top leaf nitrogen concentration (kg N/kg C).</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a> = F.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::nr_nl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">nr_nl_io</tt><a class="headerlink" href="#JULES_PFTPARM::nr_nl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of root nitrogen concentration to leaf nitrogen concentration.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::nr_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">nr_io</tt><a class="headerlink" href="#JULES_PFTPARM::nr_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Root nitrogen concentration  (kgN/kgC).
+Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a> = T.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::ns_nl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">ns_nl_io</tt><a class="headerlink" href="#JULES_PFTPARM::ns_nl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of stem nitrogen concentration to leaf nitrogen concentration.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::nsw_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">nsw_io</tt><a class="headerlink" href="#JULES_PFTPARM::nsw_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Stemwood nitrogen concentration (kgN/kgC).
+Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a> = T.</p>
+</dd></dl>
+
+<dl class="member">
+<dt>
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">hw_sw_io</tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of Heartwood to Stemwood Nitrogen Concentration (typically 0.5)
+Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a> = T.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::omega_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">omega_io</tt><a class="headerlink" href="#JULES_PFTPARM::omega_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf scattering coefficient for PAR.</p>
+<p>Used when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::omegau_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">omegau_io</tt><a class="headerlink" href="#JULES_PFTPARM::omegau_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Upper limit for the leaf scattering coefficient for PAR, when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::omegal_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">omegal_io</tt><a class="headerlink" href="#JULES_PFTPARM::omegal_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Lower limit for the leaf scattering coefficient for PAR, when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::omnir_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">omnir_io</tt><a class="headerlink" href="#JULES_PFTPARM::omnir_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf scattering coefficient for NIR.</p>
+<p>Used when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::omniru_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">omniru_io</tt><a class="headerlink" href="#JULES_PFTPARM::omniru_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Upper limit for the leaf scattering coefficient for NIR, when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::omnirl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">omnirl_io</tt><a class="headerlink" href="#JULES_PFTPARM::omnirl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Lower limit for the leaf scattering coefficient for NIR, when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_albedo_obs</span></tt></a> = TRUE and <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_spec_albedo</span></tt></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::r_grow_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">r_grow_io</tt><a class="headerlink" href="#JULES_PFTPARM::r_grow_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Growth respiration fraction.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fsmc_mod_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fsmc_mod_io</tt><a class="headerlink" href="#JULES_PFTPARM::fsmc_mod_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for method of weighting the contribution that different soil layers make to the soil moisture availability factor fsmc.</p>
+<ol class="arabic simple" start="0">
+<li>(recommended) Calculate fsmc in each soil layer and take a weighted average, using the fraction of roots in each layer as weights. Root distribution e-folding depth is given by <a class="reference internal" href="#JULES_PFTPARM::rootd_ft_io" title="JULES_PFTPARM::rootd_ft_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">rootd_ft_io</span></tt></a>.</li>
+<li>Calculate fsmc using average properties for the root zone. Depth of root zone is given by <a class="reference internal" href="#JULES_PFTPARM::rootd_ft_io" title="JULES_PFTPARM::rootd_ft_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">rootd_ft_io</span></tt></a>. This is not currently allowed if layered soil C (<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="JULES_SOIL_BIOGEOCHEM::l_layeredc"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_layeredc</span></tt></a> = TRUE) and the RothC model are selected (<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 2)  because of unplanned effects on litter inputs.</li>
+</ol>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::psi_open_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">psi_open_io</tt><a class="headerlink" href="#JULES_PFTPARM::psi_open_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Soil potential above which the soil moisture stress factor on vegetation (fsmc) is one. Unit: Pa. Allowed range: must be negative. Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_use_pft_psi" title="JULES_VEGETATION::l_use_pft_psi"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_use_pft_psi</span></tt></a> = T.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::psi_close_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">psi_close_io</tt><a class="headerlink" href="#JULES_PFTPARM::psi_close_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Soil potential below which the soil moisture stress factor on vegetation (fsmc) is zero. Unit: Pa. Allowed range: must be negative. Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_use_pft_psi" title="JULES_VEGETATION::l_use_pft_psi"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_use_pft_psi</span></tt></a> = T.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::rootd_ft_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">rootd_ft_io</tt><a class="headerlink" href="#JULES_PFTPARM::rootd_ft_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Parameter determining the root depth (m).</p>
+<p>If <a class="reference internal" href="#JULES_PFTPARM::fsmc_mod_io" title="JULES_PFTPARM::fsmc_mod_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">fsmc_mod_io</span></tt></a> = 0, an exponential root distribution with depth is assumed, with e-folding depth <tt class="docutils literal"><span class="pre">rootd_ft</span></tt> (see HCTN30 Eq.32). Note that this means that generally some of the roots exist at depths greater than <tt class="docutils literal"><span class="pre">rootd_ft</span></tt>. If <a class="reference internal" href="#JULES_PFTPARM::fsmc_mod_io" title="JULES_PFTPARM::fsmc_mod_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">fsmc_mod_io</span></tt></a> = 1, <tt class="docutils literal"><span class="pre">rootd_ft</span></tt> is the total depth of the root zone.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fsmc_p0_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fsmc_p0_io</tt><a class="headerlink" href="#JULES_PFTPARM::fsmc_p0_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Pft-dependent parameter governing the threshold at which the plant starts to experience water stress due to lack of water in the soil. Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_use_pft_psi" title="JULES_VEGETATION::l_use_pft_psi"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_use_pft_psi</span></tt></a> = F. The volumetric soil moisture content (m<sup>3</sup> water per m<sup>3</sup> soil) at which the plant starts to become water stressed is <tt class="docutils literal"><span class="pre">sm_wilt+(sm_crit-sm_wilt)*(1-fsmc_p0)</span></tt> (see <a class="reference internal" href="ancillaries.nml.html#namelist-JULES_SOIL_PROPS"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_SOIL_PROPS</span></tt></a> for a description of <tt class="docutils literal"><span class="pre">sm_wilt</span></tt> and <tt class="docutils literal"><span class="pre">sm_crit</span></tt>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::sigl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">sigl_io</tt><a class="headerlink" href="#JULES_PFTPARM::sigl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Specific density of leaf carbon (kg C/m<sup>2</sup> leaf).</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a> = F.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::tleaf_of_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">tleaf_of_io</tt><a class="headerlink" href="#JULES_PFTPARM::tleaf_of_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Temperature below which leaves are dropped (K).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::tlow_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">tlow_io</tt><a class="headerlink" href="#JULES_PFTPARM::tlow_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Lower temperature for photosynthesis (deg C).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::tupp_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">tupp_io</tt><a class="headerlink" href="#JULES_PFTPARM::tupp_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Upper temperature for photosynthesis (deg C).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::emis_pft_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">emis_pft_io</tt><a class="headerlink" href="#JULES_PFTPARM::emis_pft_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Surface emissivity.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::z0hm_pft_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">z0hm_pft_io</tt><a class="headerlink" href="#JULES_PFTPARM::z0hm_pft_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of the roughness length for heat to the roughness length for momentum.</p>
+<p>This is generally assumed to be 0.1. See HCTN30 p6. Note that this is the ratio of the roughness length for heat to that for momentum. It does not alter the roughness length for momentum, which is calculated using <a class="reference internal" href="#JULES_PFTPARM::canht_ft_io" title="JULES_PFTPARM::canht_ft_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">canht_ft_io</span></tt></a> and <a class="reference internal" href="#JULES_PFTPARM::dz0v_dh_io" title="JULES_PFTPARM::dz0v_dh_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">dz0v_dh_io</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::z0hm_classic_pft_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">z0hm_classic_pft_io</tt><a class="headerlink" href="#JULES_PFTPARM::z0hm_classic_pft_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of the roughness length for heat to the roughness length for momentum <em>for the CLASSIC aerosol scheme only</em>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This makes no difference to the model when running standalone, and is only required to keep the standalone and UM interfaces consistent.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fl_o3_ct_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fl_o3_ct_io</tt><a class="headerlink" href="#JULES_PFTPARM::fl_o3_ct_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Critical flux of O3 to vegetation (nmol m<sup>-2</sup> s<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::dfp_dcuo_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">dfp_dcuo_io</tt><a class="headerlink" href="#JULES_PFTPARM::dfp_dcuo_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Plant type specific O3 sensitivity parameter (nmol<sup>-1</sup> m<sup>2</sup> s).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::ief_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">ief_io</tt><a class="headerlink" href="#JULES_PFTPARM::ief_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Isoprene Emission Factor (μg g<sup>-1</sup> h<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::tef_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">tef_io</tt><a class="headerlink" href="#JULES_PFTPARM::tef_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Monoterpene Emission Factor (μg g<sup>-1</sup> h<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::mef_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">mef_io</tt><a class="headerlink" href="#JULES_PFTPARM::mef_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Methanol Emission Factor (μg g<sup>-1</sup> h<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::aef_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">aef_io</tt><a class="headerlink" href="#JULES_PFTPARM::aef_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Acetone Emission Factor (μg g<sup>-1</sup> h<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::ci_st_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">ci_st_io</tt><a class="headerlink" href="#JULES_PFTPARM::ci_st_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Tybe:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf-internal CO<sub>2</sub>concentration at standard conditions (Pa),</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Standard conditions are: T = 303.15K, p = 1013.25 hPa, atmospheric CO<sub>2</sub> = 370 ppmv,  PAR = 1000 μmol m<sup>-2</sup> s<sup>-1</sup>.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::gpp_st_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">gpp_st_io</tt><a class="headerlink" href="#JULES_PFTPARM::gpp_st_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Tybe:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Gross primary production (GPP) at standard conditions (kgC m<sup>-2</sup> s<sup>-1</sup>),</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Standard conditions are: T = 303.15K, p = 1013.25 hPa, atmospheric CO<sub>2</sub> = 370 ppmv, PAR = 1000 μmol m<sup>-2</sup> s<sup>-1</sup>.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::nmass_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">nmass_io</tt><a class="headerlink" href="#JULES_PFTPARM::nmass_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Top leaf nitrogen content per unit mass (kgN kgLeaf<sup>-1</sup>).</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a> = T.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::lma_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">lma_io</tt><a class="headerlink" href="#JULES_PFTPARM::lma_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf mass per unit area (kgLeaf m<sup>-2</sup>).</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a> = T.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::vint_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">vint_io</tt><a class="headerlink" href="#JULES_PFTPARM::vint_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>There is a linear relationship between Vcmax and Narea. Previously Vcmax was calculated as the product of nl0 and neff.</p>
+<p>This is now replaced by a linear regression based on data reported in Kattge et al. 2009. Vint is the y-intercept, vsl is the slope.</p>
+<p>Units: μmol CO2 m<sup>-2</sup> s<sup>-1</sup>.</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a> = T.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::vsl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">vsl_io</tt><a class="headerlink" href="#JULES_PFTPARM::vsl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Slope in the linear regression between Vcmax and Narea.</p>
+<p>Units: μmol CO2 gN<sup>-1</sup> s<sup>-1</sup>.</p>
+<p>Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trait_phys</span></tt></a> = T.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::kn_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">kn_io</tt><a class="headerlink" href="#JULES_PFTPARM::kn_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None.</td>
+</tr>
+</tbody>
+</table>
+<p>Parameter for decay of  nitrogen through the canopy, as a function of layers. Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_rad_mod</span></tt></a> = 4 or 5.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::knl_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">knl_io</tt><a class="headerlink" href="#JULES_PFTPARM::knl_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None.</td>
+</tr>
+</tbody>
+</table>
+<p>Parameter for decay of  nitrogen through the canopy, as a function of LAI. Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><tt class="xref nml nml-mem docutils literal"><span class="pre">can_rad_mod</span></tt></a> = 6.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::q10_leaf_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">q10_leaf_io</tt><a class="headerlink" href="#JULES_PFTPARM::q10_leaf_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None.</td>
+</tr>
+</tbody>
+</table>
+<p>Q10 factor for plant respiration.</p>
+<p>See Cox et al. (1999) Eq. 66.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Was previously a single parameter but now can have PFT-dependent values.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fef_co2_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fef_co2_io</tt><a class="headerlink" href="#JULES_PFTPARM::fef_co2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Fire CO2 Emission Factor (g kg<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fef_co_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fef_co_io</tt><a class="headerlink" href="#JULES_PFTPARM::fef_co_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Fire CO Emission Factor (g kg<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fef_ch4_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fef_ch4_io</tt><a class="headerlink" href="#JULES_PFTPARM::fef_ch4_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Fire CH4 Emission Factor (g kg<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fef_nox_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fef_nox_io</tt><a class="headerlink" href="#JULES_PFTPARM::fef_nox_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Fire NOx Emission Factor (g kg<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fef_so2_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fef_so2_io</tt><a class="headerlink" href="#JULES_PFTPARM::fef_so2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Fire SO2 Emission Factor (g kg<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fef_oc_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fef_oc_io</tt><a class="headerlink" href="#JULES_PFTPARM::fef_oc_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Fire OC Emission Factor (g kg<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fef_bc_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fef_bc_io</tt><a class="headerlink" href="#JULES_PFTPARM::fef_bc_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Fire BC Emission Factor (g kg<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::ccleaf_min_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">ccleaf_min_io</tt><a class="headerlink" href="#JULES_PFTPARM::ccleaf_min_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf minimum combustion completeness.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::ccleaf_max_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">ccleaf_max_io</tt><a class="headerlink" href="#JULES_PFTPARM::ccleaf_max_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf maximum combustion completeness.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::ccwood_min_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">ccwood_min_io</tt><a class="headerlink" href="#JULES_PFTPARM::ccwood_min_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Wood minimum combustion completeness.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::ccwood_max_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">ccwood_max_io</tt><a class="headerlink" href="#JULES_PFTPARM::ccwood_max_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Wood maximum combustion completeness.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::avg_ba_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">avg_ba_io</tt><a class="headerlink" href="#JULES_PFTPARM::avg_ba_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Average PFT Burnt Area per fire (m<sup>2</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM::fire_mort_io">
+<tt class="descclassname">JULES_PFTPARM::</tt><tt class="descname">fire_mort_io</tt><a class="headerlink" href="#JULES_PFTPARM::fire_mort_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Scaling factor for vegetation mortality caused by fire (from INFERNO burned area). Can be varied between 0.0 (no morality) and 1.0 (100% mortality) for each PFT.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_PFTPARM_CABLE">
+<span id="jules-pftparm-cable-namelist-members"></span><h2>6.18.2. <tt class="docutils literal"><span class="pre">JULES_PFTPARM_CABLE</span></tt> namelist members<a class="headerlink" href="#namelist-JULES_PFTPARM_CABLE" title="Permalink to this headline">¶</a></h2>
+<p>This namelist reads the values of parameters for each of the plant functional types (PFTs) if the CABLE land surface model is being used. These parameters are a function of PFT only. Every member must be given a value for every run.</p>
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::a1gs_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">a1gs_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::a1gs_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Represents the sensitivity of stomatal conductance to the assimilation rate (unitless).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::alpha_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">alpha_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::alpha_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Initial slope of J-Q response curve. Units: mol (electrons) mol<sup>-1</sup> (photons) (C3)
+mol (CO<sub>2</sub>) mol<sup>-1</sup> (photons) (C4)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::canst1_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">canst1_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::canst1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum intercepted water by canopy. (mm LAI<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::cfrd_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">cfrd_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::cfrd_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of day respiration to vcmax</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::clitt_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">clitt_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::clitt_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf litter (alters resistance to soil evaporation) (tC ha<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::conkc0_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">conkc0_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::conkc0_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Michaelis-menton constant for carboxylase (bar)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::conko0_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">conko0_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::conko0_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Michaelis-menton constant for oxygenase (bar)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::convex_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">convex_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::convex_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Convexity of J-Q response curve (unitless).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::cplant1_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">cplant1_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::cplant1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon in 1st vegetation carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::cplant2_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">cplant2_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::cplant2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon in 2nd vegetation carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::cplant3_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">cplant3_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::cplant3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon in 3rd vegetation carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::csoil1_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">csoil1_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::csoil1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil carbon in 1st soil carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::csoil2_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">csoil2_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::csoil2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil carbon in 2nd soil carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::d0gs_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">d0gs_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::d0gs_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>d0 in stomatal conductance model (kPa)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::ejmax_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">ejmax_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::ejmax_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum potential electron transport rate top leaf, currently double the assigned value of vcmax. (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::ekc_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">ekc_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::ekc_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Activation energy for carboxylase (J mol<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::eko_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">eko_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::eko_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Activation energy for oxygenase (J mol<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::extkn_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">extkn_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::extkn_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Extinction coefficient for vertical profile of N.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::frac4_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">frac4_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::frac4_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of c4 plants</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::froot1_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">froot1_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::froot1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 1st soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::froot2_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">froot2_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::froot2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 2nd soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::froot3_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">froot3_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::froot3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 3rd soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::froot4_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">froot4_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::froot4_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 4th soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::froot5_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">froot5_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::froot5_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 5th soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::froot6_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">froot6_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::froot6_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 6th soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::g0_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">g0_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::g0_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Residual stomatal conductance as net assimilation rate reaches zero (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::g1_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">g1_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::g1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Sensitivity of stomatal conductance to the assimilation rate (kPa).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::gswmin_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">gswmin_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::gswmin_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Minimal stomatal conductance (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::hc_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">hc_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::hc_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Height of canopy (m)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::length_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">length_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::length_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf length (m)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::ratecp1_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">ratecp1_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::ratecp1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon pool rate constant in 1st vegetation carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::ratecp2_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">ratecp2_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::ratecp2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon pool rate constant in 2nd vegetation carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::ratecp3_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">ratecp3_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::ratecp3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon pool rate constant in 3rd vegetation carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::ratecs1_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">ratecs1_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::ratecs1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil carbon pool rate constant in 1st soil carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::ratecs2_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">ratecs2_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::ratecs2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil carbon pool rate constant in 2nd soil carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::refl1_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">refl1_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::refl1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf reflectance in 1st radiation band.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::refl2_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">refl2_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::refl2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf reflectance in 2nd radiation band.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::refl3_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">refl3_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::refl3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf reflectance in 3rd radiation band.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::rp20_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">rp20_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::rp20_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant respiration scaler</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::rpcoef_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">rpcoef_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::rpcoef_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Temperature coefficient for non-leaf plant respiration (C<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::rs20_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">rs20_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::rs20_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil respiration at 20 deg C</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::shelrb_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">shelrb_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::shelrb_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Sheltering factor</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::taul1_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">taul1_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::taul1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf transmittance in 1st radiation band</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::taul2_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">taul2_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::taul2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf transmittance in 2nd radiation band</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::taul3_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">taul3_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::taul3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf transmittance in 3rd radiation band</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::tmaxvj_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">tmaxvj_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::tmaxvj_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum temperature of the start of photosynthesis (deg C)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::tminvj_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">tminvj_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::tminvj_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum temperature of the start of photosynthesis (deg C)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::vbeta_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">vbeta_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::vbeta_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Stomatal sensitivity to soil water.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::vcmax_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">vcmax_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::vcmax_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum RuBP carboxylation rate top leaf. (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::vegcf_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">vegcf_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::vegcf_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Scalar on soil respiration (place-holder scheme)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::wai_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">wai_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::wai_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Wood area index (stem + branches + twigs) (not currently used in any calculations)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::width_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">width_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::width_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf width (m)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::xalbnir_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">xalbnir_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::xalbnir_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Not currently used in any calculations.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::xfang_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">xfang_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::xfang_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf angle parameter</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PFTPARM_CABLE::zr_io">
+<tt class="descclassname">JULES_PFTPARM_CABLE::</tt><tt class="descname">zr_io</tt><a class="headerlink" href="#JULES_PFTPARM_CABLE::zr_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum rooting depth (cm)</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="intro.html">6.1. Introduction to Fortran namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_lsm_switch.nml.html">6.2. <tt class="docutils literal"><span class="pre">jules_lsm_switch.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface_types.nml.html">6.3. <tt class="docutils literal"><span class="pre">jules_surface_types.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_environment.nml.html">6.4. <tt class="docutils literal"><span class="pre">model_environment.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_surface.nml.html">6.5. <tt class="docutils literal"><span class="pre">jules_surface.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_radiation.nml.html">6.6. <tt class="docutils literal"><span class="pre">jules_radiation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_hydrology.nml.html">6.7. <tt class="docutils literal"><span class="pre">jules_hydrology.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil.nml.html">6.8. <tt class="docutils literal"><span class="pre">jules_soil.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_vegetation.nml.html">6.9. <tt class="docutils literal"><span class="pre">jules_vegetation.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil_biogeochem.nml.html">6.10. <tt class="docutils literal"><span class="pre">jules_soil_biogeochem.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_soil_ecosse.nml.html">6.11. <tt class="docutils literal"><span class="pre">jules_soil_ecosse.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_snow.nml.html">6.12. <tt class="docutils literal"><span class="pre">jules_snow.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="jules_rivers.nml.html">6.13. <tt class="docutils literal"><span class="pre">jules_rivers.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="science_fixes.nml.html">6.14. <tt class="docutils literal"><span class="pre">science_fixes.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="timesteps.nml.html">6.15. <tt class="docutils literal"><span class="pre">timesteps.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model_grid.nml.html">6.16. <tt class="docutils literal"><span class="pre">model_grid.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ancillaries.nml.html">6.17. <tt class="docutils literal"><span class="pre">ancillaries.nml</span></tt></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">6.18. <tt class="docutils literal"><span class="pre">pft_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="nveg_params.nml.html">6.19. <tt class="docutils literal"><span class="pre">nveg_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="crop_params.nml.html">6.20. <tt class="docutils literal"><span class="pre">crop_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="triffid_params.nml.html">6.21. <tt class="docutils literal"><span class="pre">triffid_params.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="urban.nml.html">6.22. <tt class="docutils literal"><span class="pre">urban.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fire.nml.html">6.23. <tt class="docutils literal"><span class="pre">fire.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="drive.nml.html">6.24. <tt class="docutils literal"><span class="pre">drive.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="imogen.nml.html">6.25. <tt class="docutils literal"><span class="pre">imogen.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="prescribed_data.nml.html">6.26. <tt class="docutils literal"><span class="pre">prescribed_data.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="initial_conditions.nml.html">6.27. <tt class="docutils literal"><span class="pre">initial_conditions.nml</span></tt></a></li>
+<li class="toctree-l2"><a class="reference internal" href="output.nml.html">6.28. <tt class="docutils literal"><span class="pre">output.nml</span></tt></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ancillaries.nml.html"
+                        title="previous chapter">6.17. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">ancillaries.nml</span></tt></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nveg_params.nml.html"
+                        title="next chapter">6.19. <tt class="docutils literal docutils literal docutils literal docutils literal"><span class="pre">nveg_params.nml</span></tt></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.19. nveg_params.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ancillaries.nml.html" title="6.17. ancillaries.nml"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.4 User Guide</a> &raquo;</li>
+          <li><a href="contents.html" >6. The JULES namelist files</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

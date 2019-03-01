@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3.4. Running JULES &mdash; Joint UK Land Environment Simulator (JULES) v5.4 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v5.4 User Guide" href="../index.html" />
+    <link rel="up" title="3. Building and running JULES" href="intro.html" />
+    <link rel="next" title="3.5. Automatic upgrading and GUI using Rose" href="rose.html" />
+    <link rel="prev" title="3.3. Building JULES using FCM" href="fcm.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="rose.html" title="3.5. Automatic upgrading and GUI using Rose"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fcm.html" title="3.3. Building JULES using FCM"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.4 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" accesskey="U">3. Building and running JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="running-jules">
+<h1>3.4. Running JULES<a class="headerlink" href="#running-jules" title="Permalink to this headline">¶</a></h1>
+<p>The user interface of JULES consists of several files with the extension <tt class="docutils literal"><span class="pre">.nml</span></tt> containing Fortran namelists. These files and the namelist members are documented in more detail in <a class="reference internal" href="../namelists/contents.html"><em>The JULES namelist files</em></a>. These namelists are grouped together in a single directory. That directory is referred to as the <em>namelist directory</em> for a JULES run.</p>
+<p>Once a <a class="reference internal" href="fcm.html"><em>JULES executable is compiled</em></a> and the <a class="reference internal" href="../namelists/contents.html"><em>namelists</em></a> are set up, JULES can be run in one of two ways:</p>
+<ol class="arabic">
+<li><p class="first">Run the JULES executable in the namelist directory with no arguments:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nb">cd</span> /path/to/namelist/dir
+/path/to/jules.exe
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run the JULES executable with the namelist directory as an argument:</p>
+<div class="highlight-bash"><div class="highlight"><pre>/path/to/jules.exe  /path/to/namelist/dir
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Any relative paths given to JULES via the namelists (e.g. <a class="reference internal" href="../namelists/ancillaries.nml.html#JULES_FRAC::file" title="JULES_FRAC::file"><tt class="xref nml nml-mem docutils literal"><span class="pre">file</span></tt></a> in <a class="reference internal" href="../namelists/ancillaries.nml.html#namelist-JULES_FRAC"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_FRAC</span></tt></a>) will be interpreted <em>relative to the current working directory</em>.</p>
+<p>This means that if the user plans to use the second method to run JULES (e.g. in a batch environment), it is advisable to use fully-qualified path names for all files specified in the namelists.</p>
+<p class="last">To allow runs to be portable across different machines, it is common to specify data files relative to the namelist directory (e.g. in the <tt class="docutils literal"><span class="pre">point_loobos_*</span></tt> examples supplied with JULES). In this case, JULES must be run using the first method to allow the relative paths to be resolved correctly.</p>
+</div>
+<div class="section" id="running-the-loobos-example-from-a-fresh-download-of-jules">
+<h2>3.4.1. Running the Loobos example from a fresh download of JULES<a class="headerlink" href="#running-the-loobos-example-from-a-fresh-download-of-jules" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p class="first">Move into the JULES root directory (the directory containing <tt class="docutils literal"><span class="pre">includes</span></tt>, <tt class="docutils literal"><span class="pre">src</span></tt> etc.):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd</span> /jules/root/dir
+</pre></div>
+</div>
+</li>
+<li><p class="first">Build JULES:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>fcm make -f etc/fcm-make/make.cfg
+</pre></div>
+</div>
+</li>
+<li><p class="first">Move into the example directory:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">cd </span>examples/point_loobos/
+</pre></div>
+</div>
+</li>
+<li><p class="first">Run the JULES executable:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>../../build/bin/jules.exe
+</pre></div>
+</div>
+</li>
+</ol>
+</div>
+<div class="section" id="running-jules-with-openmp">
+<h2>3.4.2. Running JULES with OpenMP<a class="headerlink" href="#running-jules-with-openmp" title="Permalink to this headline">¶</a></h2>
+<p>If JULES is compiled with OpenMP, then it must be told how many OpenMP threads to use. This is done using the environment variable <tt class="docutils literal"><span class="pre">OMP_NUM_THREADS</span></tt>:</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span><span class="nb">export </span><span class="nv">OMP_NUM_THREADS</span><span class="o">=</span>4  <span class="c"># Use 4 threads for OpenMP parallel regions</span>
+<span class="nv">$ </span>/path/to/jules.exe
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-jules-with-mpi">
+<h2>3.4.3. Running JULES with MPI<a class="headerlink" href="#running-jules-with-mpi" title="Permalink to this headline">¶</a></h2>
+<p>When running JULES using MPI, JULES attempts to find a suitable decomposition of the grid depending on how many MPI tasks are made available to it. Each MPI task can then be thought of as its own independent version of JULES, with each task being responsible for a portion of the grid. Each task reads its portion of the input file(s), performs calculations on those points and outputs its portion of the output file(s). Tasks only communicate in order to read and write dump files - this ensures that dump files are consistent regardless of decomposition, i.e. a dump from any run (MPI or not; different numbers of MPI tasks), can be used to (re-)start any other run and produce identical results, providing the overall model grids are the same.</p>
+<p>None of the namelists or namelist members are parallel-specific - the same <a class="reference internal" href="../namelists/contents.html"><em>JULES namelists</em></a> can be used to run JULES with or without MPI, and the final results will be identical.</p>
+<p>If JULES is compiled with MPI, then it must be run using commands from your MPI distribution (usually called <tt class="docutils literal"><span class="pre">mpiexec</span></tt> and/or <tt class="docutils literal"><span class="pre">mpirun</span></tt>):</p>
+<div class="highlight-bash"><div class="highlight"><pre><span class="nv">$ </span>mpirun -n 4 /path/to/jules.exe  <span class="c"># Run JULES using 4 MPI tasks</span>
+</pre></div>
+</div>
+<p>Detailed discussion of <tt class="docutils literal"><span class="pre">mpiexec</span></tt>/<tt class="docutils literal"><span class="pre">mpirun</span></tt> is beyond the scope of this document - please refer to the documentation for your chosen MPI distribution for the available options and features.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">3. Building and running JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="considerations.html">3.1. Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="required-software.html">3.2. Required software</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fcm.html">3.3. Building JULES using FCM</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">3.4. Running JULES</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rose.html">3.5. Automatic upgrading and GUI using Rose</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fcm.html"
+                        title="previous chapter">3.3. Building JULES using FCM</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="rose.html"
+                        title="next chapter">3.5. Automatic upgrading and GUI using Rose</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="rose.html" title="3.5. Automatic upgrading and GUI using Rose"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fcm.html" title="3.3. Building JULES using FCM"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.4 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" >3. Building and running JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>

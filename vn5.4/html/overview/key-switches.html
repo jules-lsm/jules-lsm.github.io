@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2.2. Some key switches &mdash; Joint UK Land Environment Simulator (JULES) v5.4 User Guide</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '5.4',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="Joint UK Land Environment Simulator (JULES) v5.4 User Guide" href="../index.html" />
+    <link rel="up" title="2. Overview of JULES" href="intro.html" />
+    <link rel="next" title="3. Building and running JULES" href="../building-and-running/intro.html" />
+    <link rel="prev" title="2.1. Overview" href="overview.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="../building-and-running/intro.html" title="3. Building and running JULES"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="2.1. Overview"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.4 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" accesskey="U">2. Overview of JULES</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="some-key-switches">
+<h1>2.2. Some key switches<a class="headerlink" href="#some-key-switches" title="Permalink to this headline">¶</a></h1>
+<p>There are many variables that act together to determine how a run of JULES is set up and these are covered in detail in <a class="reference internal" href="../namelists/contents.html"><em>The JULES namelist files</em></a>. Additionally, <a class="reference external" href="http://jules.jchmr.org/content/configurations">configurations</a> illustrate suitable combinations of options. Here we highlight a few key switches that select broad areas of science, particularly for the benefit of new users.</p>
+<p>The phenology model for natural vegetation can be enabled using <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_phenol" title="JULES_VEGETATION::l_phenol"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_phenol</span></tt></a> which uses the leaf turnover rate to calculate a time-varying Leaf Area Index (LAI).</p>
+<p>To simulate carbon stocks in natural vegetation, the TRIFFID dynamic vegetation model can be enabled via the switch <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_triffid</span></tt></a>. When TRIFFID is on, competition between tiles is switched on with <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_veg_compete" title="JULES_VEGETATION::l_veg_compete"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_veg_compete</span></tt></a> and the effect of nitrogen on vegetation growth is enabled via <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_nitrogen" title="JULES_VEGETATION::l_nitrogen"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_nitrogen</span></tt></a>.</p>
+<p>The crop model, which is simulates phenology and carbon stocks in crops, can be switched on by setting the number of crop tiles <a class="reference internal" href="../namelists/jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><tt class="xref nml nml-mem docutils literal"><span class="pre">ncpft</span></tt></a> to a non-zero value.</p>
+<p>The crop model and TRIFFID cannot currently be used together. To simulate agricultural areas within TRIFFID, a fraction of the gridbox can be reserved for agricultural Plant Functional Types (PFTs) (as defined by <a class="reference internal" href="../namelists/triffid_params.nml.html#JULES_TRIFFID::crop_io" title="JULES_TRIFFID::crop_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">crop_io</span></tt></a> &gt; 0). Agricultural PFT competition and a representation of harvest carbon can be switched on with <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_trif_crop" title="JULES_VEGETATION::l_trif_crop"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_trif_crop</span></tt></a>.</p>
+<p>If neither the phenology model nor the crop model are used, LAI for each vegetation tile can be set to a constant (<a class="reference internal" href="../namelists/pft_params.nml.html#JULES_PFTPARM::lai_io" title="JULES_PFTPARM::lai_io"><tt class="xref nml nml-mem docutils literal"><span class="pre">lai_io</span></tt></a>) or a time series or seasonal cycle can be prescribed (<a class="reference internal" href="../namelists/prescribed_data.nml.html#namelist-JULES_PRESCRIBED"><tt class="xref nml nml-lst docutils literal"><span class="pre">JULES_PRESCRIBED</span></tt></a>).</p>
+<p>To simulate carbon and nitrogen stocks in the soil, a model based on RothC should be selected by setting <a class="reference internal" href="../namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 2. This option adds prognostic soil pools and must be used with the TRIFFID vegetation model. If TRIFFID is not used, prescribed soil pools must be invoked via <a class="reference internal" href="../namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><tt class="xref nml nml-mem docutils literal"><span class="pre">soil_bgc_model</span></tt></a> = 1. Layered soil pools are used if <a class="reference internal" href="../namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="JULES_SOIL_BIOGEOCHEM::l_layeredc"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_layeredc</span></tt></a> = .TRUE..</p>
+<p>A multi-layer snow model can be selected using <a class="reference internal" href="../namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><tt class="xref nml nml-mem docutils literal"><span class="pre">nsmax</span></tt></a>. Parameterisations of surface and subsurface runoff generation are controlled using <a class="reference internal" href="../namelists/jules_hydrology.nml.html#JULES_HYDROLOGY::l_top" title="JULES_HYDROLOGY::l_top"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_top</span></tt></a> and <a class="reference internal" href="../namelists/jules_hydrology.nml.html#JULES_HYDROLOGY::l_pdm" title="JULES_HYDROLOGY::l_pdm"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_pdm</span></tt></a>, while the routing of water in rivers uses <a class="reference internal" href="../namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><tt class="xref nml nml-mem docutils literal"><span class="pre">l_rivers</span></tt></a>.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+    <h3><a href="../index.html">Table Of Contents</a></h3>
+    <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes for JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">2. Overview of JULES</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">2.1. Overview</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">2.2. Some key switches</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="overview.html"
+                        title="previous chapter">2.1. Overview</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../building-and-running/intro.html"
+                        title="next chapter">3. Building and running JULES</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="../building-and-running/intro.html" title="3. Building and running JULES"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="2.1. Overview"
+             >previous</a> |</li>
+        <li><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.4 User Guide</a> &raquo;</li>
+          <li><a href="intro.html" >2. Overview of JULES</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.
+    </div>
+
+  </body>
+</html>
