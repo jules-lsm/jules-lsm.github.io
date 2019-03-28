@@ -1,0 +1,32 @@
+``science_fixes.nml``
+=====================
+
+
+This file contains one namelist called :nml:lst:`JULES_TEMP_FIXES`.
+
+This namelist sets 'short-term' temporary logicals used to protect science bug
+fixes that lead to alterations in science results. It is expected that these
+logicals will be short lived as the preference should be for all configurations
+to use the corrected code. However, to maintain short term reproducibility of
+results across JULES versions the fixes are protected by logicals until the
+fixes become the default in all model configurations at which point the logical
+is retired. See module for when the switch is due for review.
+
+``JULES_TEMP_FIXES`` namelist members
+-------------------------------------
+
+.. nml:namelist:: JULES_TEMP_FIXES
+
+.. nml:member:: l_fix_moruses_roof_rad_coupling
+
+   :type: logical
+   :default: F
+
+   This switch corrects a bug in the surface energy balance when the MORUSES
+   radiative roof coupling is used
+   (see :nml:mem:`JULES_URBAN_SWITCHES::l_moruses_storage`). The thermal
+   conductivity of the soil (hcons) is erroneously set to zero, which causes
+   the roof to be effectively uncoupled when
+   :nml:mem:`JULES_VEGETATION::l_vegcan_soilfx`.
+
+

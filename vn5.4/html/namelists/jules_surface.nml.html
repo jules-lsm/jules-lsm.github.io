@@ -1,0 +1,521 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.5. jules_surface.nml &#8212; Joint UK Land Environment Simulator (JULES) v5.4 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.6. jules_radiation.nml" href="jules_radiation.nml.html" />
+    <link rel="prev" title="6.4. model_environment.nml" href="model_environment.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_radiation.nml.html" title="6.6. jules_radiation.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model_environment.nml.html" title="6.4. model_environment.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.4 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-surface-nml">
+<h1>6.5. <code class="docutils literal notranslate"><span class="pre">jules_surface.nml</span></code><a class="headerlink" href="#jules-surface-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets the surface options. It contains one namelist called <a class="reference internal" href="#namelist-JULES_SURFACE"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SURFACE</span></code></a>.</p>
+<div class="section" id="namelist-JULES_SURFACE">
+<span id="jules-surface-namelist-members"></span><h2>6.5.1. <code class="docutils literal notranslate"><span class="pre">JULES_SURFACE</span></code> namelist members<a class="headerlink" href="#namelist-JULES_SURFACE" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_SURFACE::all_tiles">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">all_tiles</code><a class="headerlink" href="#JULES_SURFACE::all_tiles" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0,1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Perform calculations of tile properties on all tiles (except land ice) for all gridpoints even when the tile fraction is zero.</p>
+<ol class="arabic simple" start="0">
+<li>Off</li>
+<li>On</li>
+</ol>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::cor_mo_iter">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">cor_mo_iter</code><a class="headerlink" href="#JULES_SURFACE::cor_mo_iter" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">1-4</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">1</td>
+</tr>
+</tbody>
+</table>
+<p>Corrections to Monin-Obukhov surface exchange calculation. Please see also <a class="reference external" href="https://code.metoffice.gov.uk/doc/um/latest/papers/umdp_024.pdf">UMDP24 “The Parametrization of Boundary Layer Processes” (section 8.4.1)</a>.</p>
+<ol class="arabic simple">
+<li>Correct convective gustiness in low winds</li>
+<li>Correct U* in dust scheme,</li>
+<li>Limit Obukhov length in low winds</li>
+<li>Improve the initialisation of the iteration</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Option 4 should be the preferred option.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::beta_cnv_bl">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">beta_cnv_bl</code><a class="headerlink" href="#JULES_SURFACE::beta_cnv_bl" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;=0.0</td>
+</tr>
+</tbody>
+</table>
+<p>Dimensionless coefficient for convective boundary layer gustiness in surface exchange.  Historically this was set to 0.08 but now 0.04 is recommended when gustiness induced by cumulus convection is included.  Please see also <a class="reference external" href="https://code.metoffice.gov.uk/doc/um/latest/papers/umdp_024.pdf">UMDP24 “The Parametrization of Boundary Layer Processes” (section 8.1)</a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::l_aggregate">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">l_aggregate</code><a class="headerlink" href="#JULES_SURFACE::l_aggregate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch controlling number of tiles for each gridbox.</p>
+<p>This is used to set the number of surface energy balances that are solved for each gridbox (<code class="docutils literal notranslate"><span class="pre">ntiles</span></code>).</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Aggregate parameter values are used to solve a single energy balance per gridbox. This option sets <code class="docutils literal notranslate"><span class="pre">ntiles</span> <span class="pre">=</span> <span class="pre">1</span></code>.</dd>
+<dt>FALSE</dt>
+<dd>A separate energy balance is calculated for each surface type. This option sets <code class="docutils literal notranslate"><span class="pre">ntiles</span> <span class="pre">=</span> <span class="pre">ntype</span></code>.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::i_aggregate_opt">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">i_aggregate_opt</code><a class="headerlink" href="#JULES_SURFACE::i_aggregate_opt" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0-1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Option for aggregating surface properties to tiles:</p>
+<ol class="arabic simple" start="0">
+<li>Aggregate momentum roughness lengths and set the thermal roughness length as a given fraction of this (in practice the ratio of roughness lengths for the first surface type).</li>
+<li>Aggregate the thermal roughness lengths separately from the momentum roughness lengths using an analogous algorithm.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This option is ignored unless <a class="reference internal" href="#JULES_SURFACE::l_aggregate" title="JULES_SURFACE::l_aggregate"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_aggregate</span></code></a> is true.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::l_epot_corr">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">l_epot_corr</code><a class="headerlink" href="#JULES_SURFACE::l_epot_corr" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use correction to the calculation of potential evaporation.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::l_point_data">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">l_point_data</code><a class="headerlink" href="#JULES_SURFACE::l_point_data" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Flag indicating if driving data are point or area-average values. This affects the treatment of precipitation input and how snow affects the albedo.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Driving data are point data. Precipitation is not distributed in space (see FALSE below) and is all assumed to be large-scale in origin. The albedo formulation is suitable for a point.</dd>
+<dt>FALSE</dt>
+<dd>Driving data are area averages. The precipitation inputs are assumed to be exponentially distributed in space, as in UMDP25, and can include convective and large-scale components. The albedo formulation is suitable for a gridbox.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::l_land_ice_imp">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">l_land_ice_imp</code><a class="headerlink" href="#JULES_SURFACE::l_land_ice_imp" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to control the use of implicit numerics to update land ice temperatures.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use implicit numerics to update land ice temperatures.</dd>
+<dt>FALSE</dt>
+<dd>Use explicit numerics to update land ice temperatures.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::l_anthrop_heat_src">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">l_anthrop_heat_src</code><a class="headerlink" href="#JULES_SURFACE::l_anthrop_heat_src" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for inclusion of anthropogenic contribution to the surface heat flux from <em>urban</em> surface types. If <a class="reference internal" href="#JULES_SURFACE::l_urban2t" title="JULES_SURFACE::l_urban2t"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_urban2t</span></code></a> then the anthropogenic heat will be distributed between the <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_canyon</span></code></a> and <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_roof</span></code></a> according to <a class="reference internal" href="urban.nml.html#JULES_URBAN2T_PARAM::anthrop_heat_scale" title="JULES_URBAN2T_PARAM::anthrop_heat_scale"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">anthrop_heat_scale</span></code></a>, otherwise it is added to <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban" title="JULES_SURFACE_TYPES::urban"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban</span></code></a> only.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Add anthropogenic effect.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::iscrntdiag">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">iscrntdiag</code><a class="headerlink" href="#JULES_SURFACE::iscrntdiag" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0 or 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Switch controlling method for diagnosing screen temperature.</p>
+<ol class="arabic simple" start="0">
+<li>Use surface similarity theory.</li>
+<li>Use surface similarity theory but allow decoupling in very stable conditions based on the quasi-equilibrium radiative solution.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Option 0 should be the preferred option in standalone i.e. no decoupling until the decoupled options are fully tested in standalone scenarios.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::l_elev_lw_down">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">l_elev_lw_down</code><a class="headerlink" href="#JULES_SURFACE::l_elev_lw_down" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">false</td>
+</tr>
+</tbody>
+</table>
+<p>If tiles are set to be at an elevation offset from the gridbox mean altitude (see <a class="reference internal" href="model_grid.nml.html#namelist-JULES_SURF_HGT"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SURF_HGT</span></code></a>) this switch controls
+whether downwelling longwave radiation is adjusted along with surface air temperature and relative humidity.</p>
+<p>If true, the downwelling longwave for each tile not at the gridbox mean height is adjusted by an amount
+proportional to the fourth power of the adjustment that has been made to the surface air temperature. The adjustments are then
+scaled such that the sum over all tiles conserves the gridbox mean energy in the original forcing.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::l_elev_land_ice">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">l_elev_land_ice</code><a class="headerlink" href="#JULES_SURFACE::l_elev_land_ice" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">false</td>
+</tr>
+</tbody>
+</table>
+<p>Allows multiple ice tiles to exist in an ice gridbox, usually with each representing a different elevation (<a class="reference internal" href="model_grid.nml.html#namelist-JULES_SURF_HGT"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SURF_HGT</span></code></a>)
+band on in icesheet areas so that a sub-gridscale surface mass balance term (a strong function of altitude) can be derived for forcing
+icesheet/glacier models.  When enabled, ice tiles in a gridbox do not use the usual (gridbox mean) JULES soil/ice subsurface model,
+but each tile has an independent single layer bedrock-type solid ice boundary condition under the snowpack.</p>
+<p>In addition, when selected, dense snowpacks on elevated ice gridboxes are parameterised to behave more like firn in two ways:
+1) The meltwater-holding capacity of snow layers reduces as a linear function of their density, becoming zero
+above the pore-closure density of 850 kg/m^2 so as to restrict retention of melt within the snowpack.
+2) Where the top few centimetres of the pack has a density appropriate to firn/bare ice
+and the grain-size physics otherwise used for snow albedo become less appropriate,
+surface albedo becomes a function of density, tending towards that of bare ice as density increases
+(see <a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::rho_firn_albedo" title="JULES_SNOW::rho_firn_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">rho_firn_albedo</span></code></a>, <a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::amax" title="JULES_SNOW::amax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">amax</span></code></a>, <a class="reference internal" href="jules_snow.nml.html#JULES_SNOW::aicemax" title="JULES_SNOW::aicemax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">aicemax</span></code></a>).</p>
+<p>If this scheme is enabled, a depth for the bedrock layer must be provided (<a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::dzsoil_elev" title="JULES_SOIL::dzsoil_elev"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dzsoil_elev</span></code></a>) and the new tile
+numbers must be specified (<a class="reference internal" href="jules_surface_types.nml.html#namelist-JULES_SURFACE_TYPES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SURFACE_TYPES</span></code></a>) as either type <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::elev_ice" title="JULES_SURFACE_TYPES::elev_ice"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">elev_ice</span></code></a> (for fully glaciated areas) or <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::elev_rock" title="JULES_SURFACE_TYPES::elev_rock"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">elev_rock</span></code></a> (for
+non-glaciated areas where the bedrock may become exposed under a thin snow layer). The total number of non-vegetated tiles, and
+their surface properties (<a class="reference internal" href="nveg_params.nml.html#namelist-JULES_NVEGPARM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_NVEGPARM</span></code></a>, usually set to be the same as the normal ice tile) must be set accordingly,
+as with any tile.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::l_urban2t">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">l_urban2t</code><a class="headerlink" href="#JULES_SURFACE::l_urban2t" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">false</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for using the two-tile urban schemes (including MORUSES). This allows two urban tiles (<a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_canyon</span></code></a> and <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_roof</span></code></a>) to be used instead of one.
+Additional parameters must be supplied via <a class="reference internal" href="nveg_params.nml.html#namelist-JULES_NVEGPARM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_NVEGPARM</span></code></a>, with some able to be provided by MORUSES (see <a class="reference internal" href="urban.nml.html#namelist-JULES_URBAN_SWITCHES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_URBAN_SWITCHES</span></code></a>).</p>
+</dd></dl>
+
+<div class="admonition-surface-parameters admonition">
+<p class="first admonition-title">Surface parameters</p>
+<dl class="member">
+<dt id="JULES_SURFACE::hleaf">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">hleaf</code><a class="headerlink" href="#JULES_SURFACE::hleaf" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">5.7e4</td>
+</tr>
+</tbody>
+</table>
+<p>Specific heat capacity of leaves (J K<sup>-1</sup> per kg carbon).</p>
+<p>See Hadley Centre Technical Note 30, p6, available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes">the Met Office Library</a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::hwood">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">hwood</code><a class="headerlink" href="#JULES_SURFACE::hwood" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.1e4</td>
+</tr>
+</tbody>
+</table>
+<p>Specific heat capacity of wood (J K<sup>-1</sup> per kg carbon).</p>
+<p>See Hadley Centre Technical Note 30, p6, available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes">the Met Office Library</a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::beta1">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">beta1</code><a class="headerlink" href="#JULES_SURFACE::beta1" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.83</td>
+</tr>
+</tbody>
+</table>
+<p>Coupling coefficient for co-limitation in photosynthesis model.</p>
+<p>See Cox et al. (1999), Eq.61.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::beta2">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">beta2</code><a class="headerlink" href="#JULES_SURFACE::beta2" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.93</td>
+</tr>
+</tbody>
+</table>
+<p>Coupling coefficient for co-limitation in photosynthesis model.</p>
+<p>See Cox et al. (1999), Eq.61.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SURFACE::fwe_c3">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">fwe_c3</code><a class="headerlink" href="#JULES_SURFACE::fwe_c3" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.5</td>
+</tr>
+</tbody>
+</table>
+<p>Constant in expression for limitation of photosynthesis by transport of products, for C3 plants.</p>
+<p>See Cox et al. (1999) Eq.60.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_SURFACE::fwe_c4">
+<code class="descclassname">JULES_SURFACE::</code><code class="descname">fwe_c4</code><a class="headerlink" href="#JULES_SURFACE::fwe_c4" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">20000.0</td>
+</tr>
+</tbody>
+</table>
+<p>Constant in expression for limitation of photosynthesis by transport of products, for C4 plants.</p>
+<p>See Cox et al. (1999) Eq.60.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.5. <code class="docutils literal notranslate"><span class="pre">jules_surface.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-JULES_SURFACE">6.5.1. <code class="docutils literal notranslate"><span class="pre">JULES_SURFACE</span></code> namelist members</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="model_environment.nml.html"
+                        title="previous chapter">6.4. <code class="docutils literal notranslate"><span class="pre">model_environment.nml</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jules_radiation.nml.html"
+                        title="next chapter">6.6. <code class="docutils literal notranslate"><span class="pre">jules_radiation.nml</span></code></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_radiation.nml.html" title="6.6. jules_radiation.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model_environment.nml.html" title="6.4. model_environment.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.4 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>
