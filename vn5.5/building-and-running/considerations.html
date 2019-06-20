@@ -1,0 +1,146 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>3.1. Considerations &#8212; Joint UK Land Environment Simulator (JULES) v5.5 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.2. Required software" href="required-software.html" />
+    <link rel="prev" title="3. Building and running JULES" href="intro.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="required-software.html" title="3.2. Required software"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="3. Building and running JULES"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.5 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="intro.html" accesskey="U">3. Building and running JULES</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="considerations">
+<h1>3.1. Considerations<a class="headerlink" href="#considerations" title="Permalink to this headline">¶</a></h1>
+<p>Depending on your use case, there are two main things that you need to consider:</p>
+<div class="section" id="do-i-need-netcdf">
+<h2>3.1.1. Do I need NetCDF?<a class="headerlink" href="#do-i-need-netcdf" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.unidata.ucar.edu/software/netcdf/">NetCDF</a> is a data format (and associated software libraries) specifically designed for large-scale scientific data. It has two major benefits over raw binary data:</p>
+<ol class="arabic simple">
+<li>It is machine-independent, so <a class="reference external" href="http://en.wikipedia.org/wiki/Endianness">endianness</a> is not an issue when moving datasets between machines</li>
+<li>It is self-describing, so as well as containing raw data, NetCDF files also contain metadata describing the data (e.g. variable names, units, origin). Many tools are capable of exploiting this metadata to simplify processing.</li>
+</ol>
+<p>JULES can be built with or without NetCDF, however <em>building JULES without NetCDF limits the functionality of JULES</em>. Without NetCDF, JULES will use a dummy NetCDF library which allows the program to build but provides no functionality. Any attempt to use NetCDF files as input with this option will result in a runtime error. All input files must be columnar ASCII, meaning that the user is restricted to running at a single point only. Output files will automatically use a columnar ASCII format with headers. File formats are discussed in more detail in <a class="reference internal" href="../input/overview.html"><span class="doc">Input files for JULES</span></a>.</p>
+</div>
+<div class="section" id="do-i-need-parallel-processing">
+<h2>3.1.2. Do I need parallel processing?<a class="headerlink" href="#do-i-need-parallel-processing" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For running JULES at a single point, parallel processing provides no advantage. However, if JULES is already compiled with OpenMP or MPI enabled, it is still possible to run a single point by simply specifying the number of OpenMP threads and/or MPI tasks to be 1.</p>
+</div>
+<p>JULES is capable of exploiting parallel processing techniques to reduce processing time for distributed/gridded simulations. There are two different methods JULES can use:</p>
+<dl class="docutils">
+<dt>OpenMP</dt>
+<dd><p class="first"><a class="reference external" href="http://en.wikipedia.org/wiki/OpenMP">OpenMP</a> is a form of compiler-assisted parallelisation that uses directives for shared-memory, loop-level parallelism across multiple cores on a machine (OpenMP is <em>not</em> capable of utilising a cluster of machines).</p>
+<p class="last">This form of parallelism is not as effective as MPI, but may provide some speedup and does not require a specially compiled NetCDF library.</p>
+</dd>
+<dt>MPI</dt>
+<dd><p class="first"><a class="reference external" href="http://en.wikipedia.org/wiki/Message_Passing_Interface">MPI (Message Passing Interface)</a> is a standardised message passing interface. MPI coordinates the running of multiple ‘tasks’ in parallel, potentially on several machines (or nodes), and provides mechanisms for these tasks to communicate with each other.</p>
+<p class="last">JULES takes advantage of the parallel I/O features available in <a class="reference external" href="http://www.hdfgroup.org/HDF5/">HDF5</a> and <a class="reference external" href="http://www.unidata.ucar.edu/software/netcdf/">NetCDF4</a>, which enable multiple MPI tasks to read from and write to the same NetCDF file(s) at the same time. These features must be explicitly enabled when NetCDF is compiled (see <a class="reference internal" href="required-software.html"><span class="doc">Required software</span></a>).</p>
+</dd>
+</dl>
+<p>It is also possible to use MPI and OpenMP together, where each MPI task has a number of OpenMP threads, however this is very advanced and beyond the scope of this document.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">3.1. Considerations</a><ul>
+<li><a class="reference internal" href="#do-i-need-netcdf">3.1.1. Do I need NetCDF?</a></li>
+<li><a class="reference internal" href="#do-i-need-parallel-processing">3.1.2. Do I need parallel processing?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="previous chapter">3. Building and running JULES</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="required-software.html"
+                        title="next chapter">3.2. Required software</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="required-software.html" title="3.2. Required software"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="3. Building and running JULES"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.5 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="intro.html" >3. Building and running JULES</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>

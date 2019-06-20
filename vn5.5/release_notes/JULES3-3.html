@@ -1,0 +1,164 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1.18. JULES version 3.3 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v5.5 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.19. JULES version 3.2 Release Notes" href="JULES3-2.html" />
+    <link rel="prev" title="1.17. JULES version 3.4 Release Notes" href="JULES3-4.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES3-2.html" title="1.19. JULES version 3.2 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-4.html" title="1.17. JULES version 3.4 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.5 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-version-3-3-release-notes">
+<h1>1.18. JULES version 3.3 Release Notes<a class="headerlink" href="#jules-version-3-3-release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ability-to-run-jules-in-parallel">
+<h2>1.18.1. Ability to run JULES in parallel<a class="headerlink" href="#ability-to-run-jules-in-parallel" title="Permalink to this headline">¶</a></h2>
+<p>JULES can now run multiple points in parallel, using multiple cores on the same machine or a cluster of machines. This is accomplished using <a class="reference external" href="http://en.wikipedia.org/wiki/Message_Passing_Interface">MPI (Message Passing Interface)</a>, a standardised message passing interface. Several implementations of MPI are available, the most commonly used being <a class="reference external" href="http://www.mpich.org/">MPICH2</a> and <a class="reference external" href="http://www.open-mpi.org/">OpenMPI</a>.</p>
+<p>JULES takes advantage of the parallel I/O features in <a class="reference external" href="http://www.hdfgroup.org/HDF5/">HDF5</a> / <a class="reference external" href="http://www.unidata.ucar.edu/software/netcdf/">NetCDF4</a>. These are not enabled by default, and so must be explicitly enabled when HDF5 / NetCDF4 are compiled. More information on how to do this can be found on the <a class="reference external" href="http://www.unidata.ucar.edu/software/netcdf/docs/getting_and_building_netcdf.html#build_parallel">NetCDF website</a>.</p>
+<p>Information on how to build and run JULES in parallel can be found in the JULES User Guide. <em>Note that although this development has proven stable during testing, it is still experimental and is considered to be for advanced users only.</em></p>
+</div>
+<div class="section" id="changes-to-documentation">
+<h2>1.18.2. Changes to documentation<a class="headerlink" href="#changes-to-documentation" title="Permalink to this headline">¶</a></h2>
+<p>From a users point of view, the most important change is that the JULES documentation and coding standards are now provided in two forms - HTML (this is the preferred format) and PDF. The HTML documentation is also available on the web at <a class="reference external" href="http://jules-lsm.github.io/">http://jules-lsm.github.io/</a>.</p>
+<p>This has been made possible by migrating the documentation from a single massive Word document to the <a class="reference external" href="http://sphinx-doc.org/">Sphinx</a> documentation generator (with some custom extensions to better support Fortran namelists). Although originally intended to document Python projects, Sphinx’s extensibility has seen it adopted for a wide range of projects. Using Sphinx has several advantages over the previous monolithic Word document:</p>
+<ul class="simple">
+<li>Both forms of documentation (HTML and PDF) can be built from the same sources.</li>
+<li>The documentation is now split into several smaller files that are combined by Sphinx at build-time, leading to increased readability.</li>
+<li><a class="reference external" href="http://docutils.sourceforge.net/rst.html">reStructuredText</a>, the markup language used by Sphinx, is a plain text format, meaning that it can be version controlled much more effectively than a Word document (which is treated by Subversion as a single binary entity).</li>
+<li>The only software required to update the documentation is your favourite text editor (rather than Word).</li>
+</ul>
+<p>The <a class="reference external" href="https://puma.nerc.ac.uk/trac/JULES">JULES repository on PUMA</a> has also been refactored so that configurations, documentation and examples sit in a separate project to the core Fortran code.</p>
+</div>
+<div class="section" id="other-changes">
+<h2>1.18.3. Other changes<a class="headerlink" href="#other-changes" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Disambiguation of sea ice roughness lengths for heat and momentum</dt>
+<dd>Prior to vn3.3, these were implicitly assumed to be equal by the code. They can now be set separately in the namelist <code class="docutils literal notranslate"><span class="pre">JULES_SURF_PARAM</span></code>.</dd>
+<dt>Improvements to the numerics in the soil hydrology</dt>
+<dd>Previously, the soil hydrology scheme coped poorly with significant gradients in soil moisture because of the sensitive dependence of the hydraulic conductivity and soil water suction on the soil moisture. See the new switch <code class="docutils literal notranslate"><span class="pre">l_dpsids_dsdz</span></code>.</dd>
+<dt>Implicit numerics for land ice</dt>
+<dd>Previously, the updating of land ice temperatures was always explicit, limiting the thickness of soil levels that can be used with standard time steps. There is now an option for implicit numerics for land ice - see the new switch <code class="docutils literal notranslate"><span class="pre">l_land_ice_imp</span></code>.</dd>
+<dt>Scaling of land surface albedo to agree with a given input</dt>
+<dd>An option has been added to prescribe the grid-box mean snow-free albedo to a given input (e.g. observations, climatology). See the new switch <code class="docutils literal notranslate"><span class="pre">l_albedo_obs</span></code>. For SW albedos, the albedos of the individual tiles are scaled linearly so that the grid-box mean albedo matches the observations, within limits for each tile. When VIS and NIR albedos are required then the input parameters are scaled and corrected in a similar manner. The change was included in the Global Land configuration at vn5.0: <a class="reference external" href="https://code.metoffice.gov.uk/trac/GL/ticket/8">https://code.metoffice.gov.uk/trac/GL/ticket/8</a>.</dd>
+<dt>BVOC emissions now on a switch</dt>
+<dd>Previously, BVOC emissions diagnostics were calculated all the time, regardless of whether they were output. A new switch - <code class="docutils literal notranslate"><span class="pre">l_bvoc_emis</span></code> - has been added to enable the calculation of these diagnostics only when required.</dd>
+<dt>Improvements to logging</dt>
+<dd>A new namelist file - <code class="docutils literal notranslate"><span class="pre">logging.nml</span></code> - has been added to give more control over log output from JULES. Previously all output was directed to <code class="docutils literal notranslate"><span class="pre">stdout</span></code>.</dd>
+<dt>Specify namelist directory as an argument</dt>
+<dd>It is now possible to specify the directory containing the namelist files as a command line argument to JULES. If no argument is given, JULES looks for the namelist files in the current working directory. Previously, JULES had to be executed in the directory containing the namelists - this change should make it easier to run JULES in batch mode.</dd>
+</dl>
+</div>
+<div class="section" id="bugs-fixed">
+<h2>1.18.4. Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Initialisation of <code class="docutils literal notranslate"><span class="pre">chr1p5m</span></code> and <code class="docutils literal notranslate"><span class="pre">resfs</span></code> in <code class="docutils literal notranslate"><span class="pre">sf_exch</span></code>.</li>
+<li>Fix for potential divide-by-zero in <code class="docutils literal notranslate"><span class="pre">sf_stom</span></code> when running with <code class="docutils literal notranslate"><span class="pre">can_rad_mod</span> <span class="pre">=</span> <span class="pre">1</span></code>.</li>
+<li>Various UM-related fixes not relevant to standalone JULES (ENDGAME, aerosol deposition scheme, etc.).</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.18. JULES version 3.3 Release Notes</a><ul>
+<li><a class="reference internal" href="#ability-to-run-jules-in-parallel">1.18.1. Ability to run JULES in parallel</a></li>
+<li><a class="reference internal" href="#changes-to-documentation">1.18.2. Changes to documentation</a></li>
+<li><a class="reference internal" href="#other-changes">1.18.3. Other changes</a></li>
+<li><a class="reference internal" href="#bugs-fixed">1.18.4. Bugs fixed</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES3-4.html"
+                        title="previous chapter">1.17. JULES version 3.4 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES3-2.html"
+                        title="next chapter">1.19. JULES version 3.2 Release Notes</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES3-2.html" title="1.19. JULES version 3.2 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-4.html" title="1.17. JULES version 3.4 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.5 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>
