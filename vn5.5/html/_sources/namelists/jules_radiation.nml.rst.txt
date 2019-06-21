@@ -1,0 +1,138 @@
+``jules_radiation.nml``
+=======================
+
+
+This file sets the radiation options. It contains one namelist called :nml:lst:`JULES_RADIATION`.
+
+
+
+``JULES_RADIATION`` namelist members
+-------------------------------------
+
+.. nml:namelist:: JULES_RADIATION
+
+.. nml:member:: l_cosz
+
+   :type: logical
+   :default: T
+
+   Switch for calculation of solar zenith angle. 
+
+   TRUE
+       Calculate zenith angle.
+
+   FALSE
+       Assume constant zenith angle of zero, meaning sun is directly overhead.
+       
+
+.. nml:member:: l_spec_albedo
+
+   :type: logical
+   :default: F
+
+   Switch for albedo model.
+
+   TRUE
+       Use spectral albedo with VIS and NIR components.
+
+   FALSE
+       Use a single (averaged) waveband albedo.
+       
+       
+.. nml:member:: l_spec_alb_bs
+
+   :type: logical
+   :default: F
+
+   Switch for albedo model, when spectral albedo is being used.
+
+   Requires :nml:mem:`l_spec_albedo` = TRUE.
+
+   TRUE
+       Produces a single albedo for use by both the direct and diffuse beams (a 'blue' sky albedo). This currently copies the diffuse beam albedo for the direct beam.
+
+   FALSE
+       Produces both a direct ('black' sky) and a diffuse ('white' sky) albedo.
+       
+       
+.. nml:member:: l_niso_direct
+
+   :type: logical
+   :default: F
+
+   Switch for using full non-isotropic expression for direct back-scattering in plant canopies.
+   
+   Requires :nml:mem:`l_spec_albedo` = TRUE.
+   
+   TRUE
+       Use full non-isotropic expression for back-scattering in plant canopies.
+
+   FALSE
+       Use the original isotropic expression.
+       
+       
+.. nml:member:: l_snow_albedo
+
+   :type: logical
+   :default: F
+
+   Switch for using prognostic snow properties in model albedo.
+   
+   Requires :nml:mem:`l_spec_albedo` = TRUE.
+   
+   TRUE
+       Use prognostic snow properties for albedo.
+
+   FALSE
+       Calculate albedo of snow using only snow depth.
+       
+.. nml:member:: l_embedded_snow
+
+   :type: logical
+   :default: F
+
+   Switch to use embedded canopy model for calculation of snow albedo.
+
+   TRUE
+      Use the embedded canopy snow albedo model. This is excluive of :nml:mem:`JULES_RADIATION::l_snow_albedo`.
+
+   FALSE
+       No effect.
+  
+.. nml:member:: l_mask_snow_orog
+
+   :type: logical
+   :default: F
+
+   Switch for orographic masking of snow.
+
+   TRUE
+      Include orographic masking of snow in calculating albedo.
+
+   FALSE
+       No effect.
+
+       
+.. nml:member:: l_albedo_obs
+
+   :type: logical
+   :default: F
+
+   Switch for applying a scaling factor to the albedo values, on tiles, so that the resultant aggregate albedo matches observations.
+   
+   TRUE
+       Scale the albedo values on tiles.
+       
+       .. note:: Observed albedo(s) must be prescribed in :doc:`prescribed_data.nml`.
+
+   FALSE
+       Do not scale the albedo values on tiles.
+
+.. nml:member:: wght_alb
+
+   :type: real(4)
+   :default: MDI
+
+   Weights to form the overall albedo from its components.
+
+      
