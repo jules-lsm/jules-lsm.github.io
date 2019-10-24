@@ -1,0 +1,354 @@
+``imogen.nml``
+==============
+
+
+This file contains two namelists called :nml:lst:`IMOGEN_RUN_LIST` and :nml:lst:`IMOGEN_ANLG_VALS_LIST`. Values from this section are only used if IMOGEN is enabled (i.e. :nml:mem:`JULES_DRIVE::l_imogen` = TRUE).
+
+Since IMOGEN calculates the forcing for an entire year at once, an IMOGEN run must have a start time of 00:00:00 on the 1st of January for some year.
+
+IMOGEN is currently restricted to run only on the HadCM3LC grid, i.e. there are 96 x 56 grid cells where each cell has size 3.75 degrees longitude by 2.5 degrees latitude with no Antarctica. This means that:
+
+* :nml:mem:`JULES_INPUT_GRID::nx` = 96 and :nml:mem:`JULES_INPUT_GRID::ny` = 56.
+* The file ``examples/imogen/data/jules/grid_info.nc`` should be used to set up the correct latitude, longitude and land fraction, as in the given example.
+
+IMOGEN also uses its own I/O, so it expects IMOGEN specific files in a different format to JULES - this may change in the future. An example of setting up IMOGEN is provided in ``examples/imogen`` - this should be used as a guide if creating new files for IMOGEN.
+
+
+``IMOGEN_RUN_LIST`` namelist members
+------------------------------------
+
+.. nml:namelist:: IMOGEN_RUN_LIST
+
+
+.. nml:member:: co2_init_ppmv
+
+   :type: real
+   :default: 286.085
+
+   Initial CO2 concentration (ppmv).
+
+
+.. nml:member:: file_scen_emits
+
+   :type: character
+   :default: None
+
+   If used, file containing CO2 emissions.
+
+   This file is expected to be in a specific format - see the IMOGEN example.
+
+
+.. nml:member:: file_non_co2_vals
+
+   :type: character
+   :default: None
+
+   If used, file containing non-CO2 values.
+
+   This file is expected to be in a specific format - see the IMOGEN example.
+
+
+.. nml:member:: file_scen_co2_ppmv
+
+   :type: character
+   :default: None
+
+   If used, file containing CO2 values.
+
+   This file is expected to be in a specific format - see the IMOGEN example.
+
+
+.. nml:member:: ch4_init_ppbv
+
+   :type: real
+   :default: 774.1
+
+   Initial CH4 concentration (ppbv).
+
+   Only if :nml:mem:`land_feed_ch4` = TRUE.
+
+
+.. nml:member:: yr_fch4_ref
+
+   :type: real
+   :default: 2000
+
+   Year for reference wetland CH4 emissions and atmospheric CH4 decay rate, i.e. :nml:mem:`fch4_ref`, :nml:mem:`tau_ch4_ref` & :nml:mem:`ch4_ppbv_ref`.
+
+   Only if :nml:mem:`land_feed_ch4` = TRUE.
+
+
+.. nml:member:: ch4_ppbv_ref
+
+   :type: real
+   :default: 1751.02
+
+   Reference atmosphere CH4 concentration at :nml:mem:`yr_fch4_ref` (ppbv).
+
+   Only if :nml:mem:`land_feed_ch4` = TRUE.
+
+
+.. nml:member:: tau_ch4_ref
+
+   :type: real
+   :default: 8.4
+
+   Lifetime of CH4 in atmosphere at :nml:mem:`yr_fch4_ref` (years). Value used in Gedney et al. (2004) S3 (Table 1) from TAR, Table 4.3 (subscript d).
+
+   Only if :nml:mem:`land_feed_ch4` = TRUE.
+
+
+.. nml:member:: fch4_ref
+
+   :type: real
+   :default: 180.0
+
+   Reference wetland CH4 emissions for reference year :nml:mem:`yr_fch4_ref` (Tg CH4/yr).
+
+   Only if :nml:mem:`land_feed_ch4` = TRUE.
+
+
+.. nml:member:: file_ch4_n2o
+
+   :type: character
+   :default: None
+
+   File containing the CH4 and N2O atmos concs. The number of years in this file is defined by :nml:mem:`nyr_ch4_n2o`. This file is expected to be an ascii file with three columns: the first column is the year, the second column is the CH4 concentration (ppbv) and the third column is the N2O concentration (ppbv). There is one row for each year and no header.
+
+   Only if :nml:mem:`land_feed_ch4` = TRUE.
+
+
+.. nml:member:: nyr_ch4_n2o
+
+   :type: integer
+   :default: 241
+
+   Number of years of CH4 and N2O data in :nml:mem:`file_ch4_n2o`.
+
+   Only if :nml:mem:`land_feed_ch4` = TRUE.
+
+
+.. nml:member:: anlg
+
+   :type: logical
+   :default: T
+
+   If TRUE, then use the GCM analogue model.
+
+
+.. nml:member:: anom
+
+   :type: logical
+   :default: T
+
+   If TRUE, then incorporate anomalies.
+
+
+.. nml:member:: c_emissions
+
+   :type: logical
+   :default: T
+
+   If TRUE, CO2 concentration is calculated.
+
+
+.. nml:member:: include_co2
+
+   :type: logical
+   :default: T
+
+   If TRUE, include adjustments to CO2 values.
+
+
+.. nml:member:: include_non_co2
+
+   :type: logical
+   :default: T
+
+   If TRUE, include adjustments to non-CO2 values.
+
+
+.. nml:member:: land_feed_co2
+
+   :type: logical
+   :default: F
+
+   If TRUE, include land CO2 feedbacks on atmospheric CO2.
+
+
+.. nml:member:: land_feed_ch4
+
+   :type: logical
+   :default: F
+
+   If TRUE, include wetland CH4 feedbacks on atmospheric CH4. Prescribed CH4 concentrations assume a non-varying natural wetland CH4 component. However, when :nml:mem:`land_feed_ch4` = TRUE the constant wetland CH4 emissions are perturbed using the anomaly in modelled natural wetland CH4 emission. The methane emissions are calculated for the diagnosed wetland area when :nml:mem:`JULES_HYDROLOGY::l_top` = TRUE. These are accumulated and passed to IMOGEN.
+
+   To ensure consistency with the observed atmospheric CH4 growth rate the model needs to be calibrated to produce :nml:mem:`fch4_ref` TgCh4 per year (default 180) for the year  :nml:mem:`yr_fch4_ref` (default 2000). This is done by calibrating q10_ch4 (either :nml:mem:`JULES_SOIL_BIOGEOCHEM::q10_ch4_cs`, :nml:mem:`JULES_SOIL_BIOGEOCHEM::q10_ch4_npp`, :nml:mem:`JULES_SOIL_BIOGEOCHEM::q10_ch4_resps`, depending on whether cs, npp or resps is defined as the substrate by :nml:mem:`JULES_SOIL_BIOGEOCHEM::ch4_substrate`) and const_ch4 (either :nml:mem:`JULES_SOIL_BIOGEOCHEM::const_ch4_cs`, :nml:mem:`JULES_SOIL_BIOGEOCHEM::const_ch4_npp`, :nml:mem:`JULES_SOIL_BIOGEOCHEM::const_ch4_resps`, again depending on whether cs, npp or resps is defined as the substrate  by :nml:mem:`JULES_SOIL_BIOGEOCHEM::ch4_substrate`). The calibration can be carried out as discussed in Comyn-Platt et al. (2018) and needs to be checked before proceeding because the model won't necessarily produce the correct values by default.
+
+   For wetland CH4 feedbacks values for the following: :nml:mem:`fch4_ref`, :nml:mem:`tau_ch4_ref`, :nml:mem:`ch4_ppbv_ref`, :nml:mem:`yr_fch4_ref`, :nml:mem:`ch4_init_ppbv`, :nml:mem:`file_ch4_n2o`, and :nml:mem:`nyr_ch4_n2o` are also required.
+
+   .. seealso::
+      References:
+
+      * Gedney, N., Cox, P. M. & Huntingford, C. Climate feedback from wetland methane emissions. Geophys. Res. Lett. 31, L20503 (2004).
+
+      * Comyn-Platt E, Hayman G, Huntingford C, Chadburn SE, Burke EJ, Harper AB, Collins WJ, Webber CP, Powell T, Cox PM, Gedney N. Carbon budgets for 1.5 and 2 C targets lowered by natural wetland and permafrost feedbacks. Nature geoscience. 2018 Aug;11(8):568.
+
+
+.. nml:member:: ocean_feed
+
+   :type: logical
+   :default: F
+
+   If TRUE, include ocean feedbacks on atmospheric CO2.
+
+
+.. nml:member:: nyr_emiss
+
+   :type: integer
+   :default: 241
+
+   Number of years of emission data in file.
+
+
+.. nml:member:: file_points_order
+
+   :type: character
+   :default: None
+
+   File containing the mapping of IMOGEN global grid points onto IMOGEN land points (different from the JULES land points).
+
+
+.. nml:member:: initialise_from_dump
+
+   :type: logical
+   :default: F
+
+   Indicates how the IMOGEN prognostic variables will be initialised.
+
+   TRUE
+       Use a dump file (specified in :nml:mem:`dump_file` below) from a previous run with IMOGEN to initialise the IMOGEN prognostics.
+
+   FALSE
+       IMOGEN will handle the initialisation of its prognostics internally.
+
+
+.. nml:member:: dump_file
+
+   :type: character
+   :default: None
+
+   The name of the dump file to initialise from.
+
+   Only used if :nml:mem:`initialise_from_dump` = TRUE.
+
+
+
+
+``IMOGEN_ANLG_VALS_LIST`` namelist members
+------------------------------------------
+
+.. nml:namelist:: IMOGEN_ANLG_VALS_LIST
+
+
+.. nml:member:: q2co2
+
+   :type: real
+   :default: 3.74
+
+   Radiative forcing due to doubling CO2 (W m\ :sup:`-2`).
+
+
+.. nml:member:: f_ocean
+
+   :type: real
+   :default: 0.711
+
+   Fractional coverage of the ocean.
+
+
+.. nml:member:: kappa_o
+
+   :type: real
+   :default: 383.8
+
+   Ocean eddy diffusivity (W m\ :sup:`-1` K\ :sup:`-1`).
+
+
+.. nml:member:: lambda_l
+
+   :type: real
+   :default: 0.52
+
+   Inverse of climate sensitivity over land (W m\ :sup:`-2` K\ :sup:`-1`).
+
+
+.. nml:member:: lambda_o
+
+   :type: real
+   :default: 1.75
+
+   Inverse of climate sensitivity over ocean (W m\ :sup:`-2` K\ :sup:`-1`).
+
+
+.. nml:member:: mu
+
+   :type: real
+   :default: 1.87
+
+   Ratio of land to ocean temperature anomalies.
+
+
+.. nml:member:: t_ocean_init
+
+   :type: real
+   :default: 289.28
+
+   Initial ocean temperature (K).
+
+
+.. nml:member:: nyr_non_co2
+
+   :type: integer
+   :default: 21
+
+   Number of years for which non-co2 forcing is prescribed.
+
+
+.. nml:member:: dir_patt
+
+   :type: character
+   :default: None
+
+   Directory containing the patterns.
+
+   Files in this directory are expected to be in a specific format - see the IMOGEN example.
+
+
+.. nml:member:: dir_clim
+
+   :type: character
+   :default: None
+
+   Directory containing initialising climatology.
+
+   Files in this directory are expected to be in a specific format - see the IMOGEN example.
+
+
+.. nml:member:: dir_anom
+
+   :type: character
+   :default: None
+
+   Directory containing prescribed anomalies.
+
+   Files in this directory are expected to be in a specific format - see the IMOGEN example.
+
+
+.. nml:member:: file_non_co2
+
+   :type: logical
+   :default: F
+
+   If true, then non-CO2 radiative forcings are contained within a file.
+

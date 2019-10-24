@@ -1,0 +1,1008 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.26. drive.nml &#8212; Joint UK Land Environment Simulator (JULES) v5.6 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.27. imogen.nml" href="imogen.nml.html" />
+    <link rel="prev" title="6.25. fire.nml" href="fire.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="imogen.nml.html" title="6.27. imogen.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fire.nml.html" title="6.25. fire.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.6 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="drive-nml">
+<h1>6.26. <code class="docutils literal notranslate"><span class="pre">drive.nml</span></code><a class="headerlink" href="#drive-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains a single namelist called <a class="reference internal" href="#namelist-JULES_DRIVE"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DRIVE</span></code></a> that indicates how meteorological driving data is input.</p>
+<div class="section" id="namelist-JULES_DRIVE">
+<span id="jules-drive-namelist-members"></span><h2>6.26.1. <code class="docutils literal notranslate"><span class="pre">JULES_DRIVE</span></code> namelist members<a class="headerlink" href="#namelist-JULES_DRIVE" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_DRIVE::l_imogen">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">l_imogen</code><a class="headerlink" href="#JULES_DRIVE::l_imogen" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for IMOGEN.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>IMOGEN is used to generate meteorological forcing data.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If IMOGEN is enabled, only <a class="reference internal" href="#JULES_DRIVE::z1_tq_vary" title="JULES_DRIVE::z1_tq_vary"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_tq_vary</span></code></a>, <a class="reference internal" href="#JULES_DRIVE::z1_tq_in" title="JULES_DRIVE::z1_tq_in"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_tq_in</span></code></a>, <a class="reference internal" href="#JULES_DRIVE::z1_uv_in" title="JULES_DRIVE::z1_uv_in"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_uv_in</span></code></a>, <a class="reference internal" href="#JULES_DRIVE::z1_tq_file" title="JULES_DRIVE::z1_tq_file"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_tq_file</span></code></a> and <a class="reference internal" href="#JULES_DRIVE::z1_tq_var_name" title="JULES_DRIVE::z1_tq_var_name"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_tq_var_name</span></code></a> are used from this namelist.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::t_for_snow">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">t_for_snow</code><a class="headerlink" href="#JULES_DRIVE::t_for_snow" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">274.0</td>
+</tr>
+</tbody>
+</table>
+<p>If total precipitation is given as a forcing variable, then <a class="reference internal" href="#JULES_DRIVE::t_for_snow" title="JULES_DRIVE::t_for_snow"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">t_for_snow</span></code></a> is the near-surface air temperature (K) at or below which the precipitation is assumed to be snowfall. At higher temperatures, all the precipitation is assumed to be liquid.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::t_for_con_rain">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">t_for_con_rain</code><a class="headerlink" href="#JULES_DRIVE::t_for_con_rain" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">373.15</td>
+</tr>
+</tbody>
+</table>
+<p>If total preciption or total rainfall are given, then <a class="reference internal" href="#JULES_DRIVE::t_for_con_rain" title="JULES_DRIVE::t_for_con_rain"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">t_for_con_rain</span></code></a> is the near-surface air temperature (K) at or above which rainfall is assumed to be convective in origin. At lower temperatures, all the rainfall is assumed to be large-scale in origin.</p>
+<p>Also see <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::confrac" title="JULES_SOIL::confrac"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">confrac</span></code></a>.</p>
+<p><a class="reference internal" href="#JULES_DRIVE::t_for_con_rain" title="JULES_DRIVE::t_for_con_rain"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">t_for_con_rain</span></code></a> is not used if <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_point_data" title="JULES_SURFACE::l_point_data"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_point_data</span></code></a> = TRUE, since then there is no convective precipitation.</p>
+<p>All snow is assumed to be large-scale in origin.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::diff_frac_const">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">diff_frac_const</code><a class="headerlink" href="#JULES_DRIVE::diff_frac_const" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.0</td>
+</tr>
+</tbody>
+</table>
+<p>A constant value used to calculate diffuse radiation from the total downward shortwave radiation.</p>
+<p>Only used if diffuse radiation is not given as a forcing variable (see <a class="reference internal" href="#list-of-jules-forcing-variables"><span class="std std-ref">List of JULES forcing variables</span></a>).</p>
+</dd></dl>
+
+<div class="admonition-members-used-to-control-the-daily-disaggregator admonition">
+<p class="first admonition-title">Members used to control the daily disaggregator</p>
+<p>HCTN96 refer to Hadley Centre technical note 96, available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes">the Met Office Library</a>.</p>
+<dl class="member">
+<dt id="JULES_DRIVE::l_daily_disagg">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">l_daily_disagg</code><a class="headerlink" href="#JULES_DRIVE::l_daily_disagg" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch controlling whether the disaggregator is used to convert daily data driving data to driving data at the model timestep. See HCTN96 for a description of the disaggregation methods used.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd><p class="first">Disaggregator is used.</p>
+<div class="last admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>The disaggregator requires:</p>
+<ol class="last arabic simple">
+<li>Daily forcing data, i.e. <a class="reference internal" href="#JULES_DRIVE::data_period" title="JULES_DRIVE::data_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">data_period</span></code></a> = 86400</li>
+<li><a class="reference internal" href="timesteps.nml.html#JULES_TIME::main_run_start" title="JULES_TIME::main_run_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_start</span></code></a>, <a class="reference internal" href="timesteps.nml.html#JULES_SPINUP::spinup_start" title="JULES_SPINUP::spinup_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">spinup_start</span></code></a> and <a class="reference internal" href="#JULES_DRIVE::data_start" title="JULES_DRIVE::data_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">data_start</span></code></a> to be 00:00:00 for some day.</li>
+</ol>
+</div>
+</dd>
+<dt>FALSE</dt>
+<dd>Disaggregator is not used.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::l_disagg_const_rh">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">l_disagg_const_rh</code><a class="headerlink" href="#JULES_DRIVE::l_disagg_const_rh" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch controlling sub-daily disaggregation of humidity.</p>
+<p>Only used if <a class="reference internal" href="#JULES_DRIVE::l_daily_disagg" title="JULES_DRIVE::l_daily_disagg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_daily_disagg</span></code></a> = TRUE.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Relative humidity is kept constant over day.</dd>
+<dt>FALSE</dt>
+<dd>Specific humidity is kept constant over day (apart from when limited by specific humidity at saturation).</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::dur_conv_rain">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">dur_conv_rain</code><a class="headerlink" href="#JULES_DRIVE::dur_conv_rain" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">21600.0</td>
+</tr>
+</tbody>
+</table>
+<p>Duration of a convective rainfall event in seconds for use in the disaggregator. See HCTN96 section 2.4.</p>
+<p>Only used if <a class="reference internal" href="#JULES_DRIVE::l_daily_disagg" title="JULES_DRIVE::l_daily_disagg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_daily_disagg</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::dur_ls_rain">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">dur_ls_rain</code><a class="headerlink" href="#JULES_DRIVE::dur_ls_rain" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">3600.0</td>
+</tr>
+</tbody>
+</table>
+<p>Duration of a large-scale rainfall event in seconds for use in the disaggregator. See HCTN96 section 2.4.</p>
+<p>Only used if <a class="reference internal" href="#JULES_DRIVE::l_daily_disagg" title="JULES_DRIVE::l_daily_disagg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_daily_disagg</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::dur_conv_snow">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">dur_conv_snow</code><a class="headerlink" href="#JULES_DRIVE::dur_conv_snow" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">3600.0</td>
+</tr>
+</tbody>
+</table>
+<p>Duration of a convective snowfall event in seconds for use in the disaggregator. See HCTN96 section 2.4.</p>
+<p>Only used if <a class="reference internal" href="#JULES_DRIVE::l_daily_disagg" title="JULES_DRIVE::l_daily_disagg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_daily_disagg</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::dur_ls_snow">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">dur_ls_snow</code><a class="headerlink" href="#JULES_DRIVE::dur_ls_snow" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">3600.0</td>
+</tr>
+</tbody>
+</table>
+<p>Duration of a large-scale snowfall event in seconds for use in the disaggregator. See HCTN96 section 2.4.</p>
+<p>Only used if <a class="reference internal" href="#JULES_DRIVE::l_daily_disagg" title="JULES_DRIVE::l_daily_disagg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_daily_disagg</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_DRIVE::precip_disagg_method">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">precip_disagg_method</code><a class="headerlink" href="#JULES_DRIVE::precip_disagg_method" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">1, 2, 3 or 4</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">2</td>
+</tr>
+</tbody>
+</table>
+<p>Switch controlling the disaggregation method for precipitation. See HCTN96 section 2.4.</p>
+<p>Only used if <a class="reference internal" href="#JULES_DRIVE::l_daily_disagg" title="JULES_DRIVE::l_daily_disagg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_daily_disagg</span></code></a> = TRUE.</p>
+<ol class="arabic simple">
+<li>Do not disaggregate precipitation.</li>
+<li>Disaggregate precipitation using the method implemented in IMOGEN, which allocates the daily precipitation each type into one event of duration <a class="reference internal" href="#JULES_DRIVE::dur_conv_rain" title="JULES_DRIVE::dur_conv_rain"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dur_conv_rain</span></code></a>, <a class="reference internal" href="#JULES_DRIVE::dur_ls_rain" title="JULES_DRIVE::dur_ls_rain"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dur_ls_rain</span></code></a>, <a class="reference internal" href="#JULES_DRIVE::dur_conv_snow" title="JULES_DRIVE::dur_conv_snow"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dur_conv_snow</span></code></a> and <a class="reference internal" href="#JULES_DRIVE::dur_ls_snow" title="JULES_DRIVE::dur_ls_snow"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dur_ls_snow</span></code></a> for convective rain, large-scale rain, convective snow and large-scale snow respectively.
+The start time of this event is randomly distributed from the beginning of the day to the end of the day minus the event duration.
+If the rate of precipitation in any timestep of any type is greater than a hard-coded maximum (currently 350 mm/day), the precipitation is redistributed by the <code class="docutils literal notranslate"><span class="pre">redis</span></code> routine in IMOGEN.</li>
+<li>As for 2, except no upper limit on the precipitation in a timestep.</li>
+<li>The event duration variable is used to determine the fraction of wet and dry timesteps, which are then distributed randomly throughout the day.</li>
+</ol>
+</dd></dl>
+
+</div>
+<div class="admonition-members-used-to-specify-perturbations-to-the-driving-data admonition">
+<p class="first admonition-title">Members used to specify perturbations to the driving data</p>
+<dl class="member">
+<dt id="JULES_DRIVE::l_perturb_driving">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">l_perturb_driving</code><a class="headerlink" href="#JULES_DRIVE::l_perturb_driving" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Apply perturbation to driving data.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::temperature_abs_perturbation">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">temperature_abs_perturbation</code><a class="headerlink" href="#JULES_DRIVE::temperature_abs_perturbation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.0</td>
+</tr>
+</tbody>
+</table>
+<p>Absolute perturbation amount to add to temperature. Can be positive or negative. Only used if <a class="reference internal" href="#JULES_DRIVE::l_perturb_driving" title="JULES_DRIVE::l_perturb_driving"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_perturb_driving</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_DRIVE::precip_rel_perturbation">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">precip_rel_perturbation</code><a class="headerlink" href="#JULES_DRIVE::precip_rel_perturbation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Relative perturbation for precipitation variables (a multiplicative factor). Only used if <a class="reference internal" href="#JULES_DRIVE::l_perturb_driving" title="JULES_DRIVE::l_perturb_driving"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_perturb_driving</span></code></a> = TRUE.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-members-used-to-specify-z1-tq-and-z1-uv admonition">
+<p class="first admonition-title">Members used to specify <code class="docutils literal notranslate"><span class="pre">z1_tq</span></code> and <code class="docutils literal notranslate"><span class="pre">z1_uv</span></code></p>
+<dl class="member">
+<dt id="JULES_DRIVE::z1_uv_in">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">z1_uv_in</code><a class="headerlink" href="#JULES_DRIVE::z1_uv_in" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt; 0.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">10.0</td>
+</tr>
+</tbody>
+</table>
+<p>Constant value for the height (m) at which the wind data are valid for every point. This height is relative to the zero-plane, not the ground.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::z1_tq_vary">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">z1_tq_vary</code><a class="headerlink" href="#JULES_DRIVE::z1_tq_vary" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to indicate whether <code class="docutils literal notranslate"><span class="pre">z1_tq</span></code> (the height (m) at which the temperature and humidity data are valid) should be constant for all points or spatially varying. The height is relative to the zero-plane, not the ground.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Spatially varying <code class="docutils literal notranslate"><span class="pre">z1_tq</span></code> will be read from the file specified in <a class="reference internal" href="#JULES_DRIVE::z1_tq_file" title="JULES_DRIVE::z1_tq_file"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_tq_file</span></code></a>.</dd>
+<dt>FALSE</dt>
+<dd><code class="docutils literal notranslate"><span class="pre">z1_tq</span></code> will be set to a constant value, specified in <a class="reference internal" href="#JULES_DRIVE::z1_tq_in" title="JULES_DRIVE::z1_tq_in"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_tq_in</span></code></a>, at all points.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::z1_tq_in">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">z1_tq_in</code><a class="headerlink" href="#JULES_DRIVE::z1_tq_in" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt; 0.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">10.0</td>
+</tr>
+</tbody>
+</table>
+<p>Constant value for <code class="docutils literal notranslate"><span class="pre">z1_tq</span></code> to be used for every point.</p>
+<p>Only required if <a class="reference internal" href="#JULES_DRIVE::z1_tq_vary" title="JULES_DRIVE::z1_tq_vary"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_tq_vary</span></code></a> = F.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::z1_tq_file">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">z1_tq_file</code><a class="headerlink" href="#JULES_DRIVE::z1_tq_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>File to read spatially varying <code class="docutils literal notranslate"><span class="pre">z1_tq</span></code> from.</p>
+<p>Only required if <a class="reference internal" href="#JULES_DRIVE::z1_tq_vary" title="JULES_DRIVE::z1_tq_vary"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_tq_vary</span></code></a> = T.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_DRIVE::z1_tq_var_name">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">z1_tq_var_name</code><a class="headerlink" href="#JULES_DRIVE::z1_tq_var_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">‘z1_tq_in’</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the variable in <a class="reference internal" href="#JULES_DRIVE::z1_tq_file" title="JULES_DRIVE::z1_tq_file"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_tq_file</span></code></a> containing the data for <code class="docutils literal notranslate"><span class="pre">z1_tq</span></code>.</p>
+<p>The variable should have no levels dimensions and no time dimension.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>This is not used for ASCII files.</p>
+<p class="last">However, since ASCII files can only be used for single-point runs, it is recommended to set <a class="reference internal" href="#JULES_DRIVE::z1_tq_vary" title="JULES_DRIVE::z1_tq_vary"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_tq_vary</span></code></a> = F and use <a class="reference internal" href="#JULES_DRIVE::z1_tq_in" title="JULES_DRIVE::z1_tq_in"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z1_tq_in</span></code></a> anyway.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="admonition-members-used-to-specify-boundary-layer-height admonition">
+<p class="first admonition-title">Members used to specify boundary layer height</p>
+<dl class="last member">
+<dt id="JULES_DRIVE::bl_height">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">bl_height</code><a class="headerlink" href="#JULES_DRIVE::bl_height" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt; 0.0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">1000.0</td>
+</tr>
+</tbody>
+</table>
+<p>Height above ground to top of the atmospheric boundary layer (m). This value is disregarded if <code class="docutils literal notranslate"><span class="pre">bl_height</span></code> is provided as prescribed data (see <a class="reference internal" href="prescribed_data.nml.html#supported-prescribed-variables"><span class="std std-ref">List of supported variables</span></a>).</p>
+</dd></dl>
+
+</div>
+<div class="admonition-members-used-to-specify-the-start-end-and-period-of-the-data admonition">
+<p class="first admonition-title">Members used to specify the start, end and period of the data</p>
+<dl class="member">
+<dt id="JULES_DRIVE::data_start">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">data_start</code><a class="headerlink" href="#JULES_DRIVE::data_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::data_end">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">data_end</code><a class="headerlink" href="#JULES_DRIVE::data_end" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The times of the start of the first timestep of data and the end of the last timestep of data.</p>
+<p>Each run of JULES (configured in <a class="reference internal" href="timesteps.nml.html"><span class="doc">timesteps.nml</span></a>) can use part or all of the specified data. However, there must be data for all times between run start and run end (determined by <a class="reference internal" href="timesteps.nml.html#JULES_TIME::main_run_start" title="JULES_TIME::main_run_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_start</span></code></a>, <a class="reference internal" href="timesteps.nml.html#JULES_TIME::main_run_end" title="JULES_TIME::main_run_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_end</span></code></a>, <a class="reference internal" href="timesteps.nml.html#JULES_SPINUP::spinup_start" title="JULES_SPINUP::spinup_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">spinup_start</span></code></a> and <a class="reference internal" href="timesteps.nml.html#JULES_SPINUP::spinup_end" title="JULES_SPINUP::spinup_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">spinup_end</span></code></a>).</p>
+<p>The times must be given in the format:</p>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;yyyy-mm-dd hh:mm:ss&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_DRIVE::data_period">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">data_period</code><a class="headerlink" href="#JULES_DRIVE::data_period" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">-2, -1 or &gt; 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The period, in seconds, of the data.</p>
+<p>Special cases:</p>
+<div class="line-block">
+<div class="line"><strong>-1:</strong> Monthly data</div>
+<div class="line"><strong>-2:</strong> Yearly data</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="admonition-members-used-to-specify-the-files-containing-the-data admonition">
+<p class="first admonition-title">Members used to specify the files containing the data</p>
+<dl class="member">
+<dt id="JULES_DRIVE::read_list">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">read_list</code><a class="headerlink" href="#JULES_DRIVE::read_list" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch controlling how data file names are determined for a given time.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use a list of data file names with times of first data.</dd>
+<dt>FALSE</dt>
+<dd>Use a single data file for all times or a template describing the names of the data files.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::nfiles">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">nfiles</code><a class="headerlink" href="#JULES_DRIVE::nfiles" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Only used if <a class="reference internal" href="#JULES_DRIVE::read_list" title="JULES_DRIVE::read_list"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">read_list</span></code></a> = TRUE.</p>
+<p>The number of data files to read name and time of first data for.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_DRIVE::file">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">file</code><a class="headerlink" href="#JULES_DRIVE::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>If <a class="reference internal" href="#JULES_DRIVE::read_list" title="JULES_DRIVE::read_list"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">read_list</span></code></a> = TRUE, this is the file to read the list of data file names and times from. Each line should be of the form:</p>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;/data/file&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyy-mm-dd hh:mm:ss&#39;</span>
+</pre></div>
+</div>
+<p>In this case data file names may contain variable name templating only, with the proviso that either no file names use variable name templating or all file names do. The files must appear in chronological order.</p>
+<p>If <a class="reference internal" href="#JULES_DRIVE::read_list" title="JULES_DRIVE::read_list"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">read_list</span></code></a> = FALSE, this is either the single data file (if no templating is used) or a template for data file names. Both <a class="reference internal" href="../input/file-name-templating.html"><span class="doc">time and variable name templating</span></a> may be used.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-members-used-to-specify-the-provided-variables admonition">
+<p class="first admonition-title">Members used to specify the provided variables</p>
+<dl class="member">
+<dt id="JULES_DRIVE::nvars">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">nvars</code><a class="headerlink" href="#JULES_DRIVE::nvars" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of forcing variables that will be provided.</p>
+<p>See <a class="reference internal" href="#list-of-jules-forcing-variables"><span class="std std-ref">List of JULES forcing variables</span></a> for the available forcing variables and their possible configurations.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::var">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">var</code><a class="headerlink" href="#JULES_DRIVE::var" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>List of forcing variable names as recognised by JULES (see <a class="reference internal" href="#list-of-jules-forcing-variables"><span class="std std-ref">List of JULES forcing variables</span></a>). Names are case sensitive.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, variable names must be in the order they appear in the file.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::var_name">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">var_name</code><a class="headerlink" href="#JULES_DRIVE::var_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">‘’ (empty string)</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_DRIVE::var" title="JULES_DRIVE::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a>, this is the name of the variable in the file(s) containing the data.</p>
+<p>If the empty string (the default) is given for any variable, then the corresponding value from <a class="reference internal" href="#JULES_DRIVE::var" title="JULES_DRIVE::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a> is used instead.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this is not used - only the order in the file matters, as described above.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_DRIVE::tpl_name">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">tpl_name</code><a class="headerlink" href="#JULES_DRIVE::tpl_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_DRIVE::var" title="JULES_DRIVE::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a>, this is the string to substitute into the file name(s) in place of the variable name substitution string.</p>
+<p>If the file name(s) do not use variable name templating, this is not used.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_DRIVE::interp">
+<code class="descclassname">JULES_DRIVE::</code><code class="descname">interp</code><a class="headerlink" href="#JULES_DRIVE::interp" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_DRIVE::var" title="JULES_DRIVE::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a>, this indicates how the variable is to be interpolated in time (see <a class="reference internal" href="../input/temporal-interpolation.html"><span class="doc">Temporal interpolation</span></a>).</p>
+</dd></dl>
+
+</div>
+<div class="section" id="list-of-jules-forcing-variables">
+<span id="id1"></span><h3>6.26.1.1. List of JULES forcing variables<a class="headerlink" href="#list-of-jules-forcing-variables" title="Permalink to this headline">¶</a></h3>
+<p>All of the available forcing variables listed in the sections below, are expected to have no levels dimensions, but must have a time dimension called <a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::time_dim_name" title="JULES_INPUT_GRID::time_dim_name"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">time_dim_name</span></code></a>.</p>
+<div class="section" id="pressure-humidity-and-temperature">
+<h4>6.26.1.1.1. Pressure, Humidity and Temperature<a class="headerlink" href="#pressure-humidity-and-temperature" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">pstar</span></code></td>
+<td>Air pressure (Pa).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">q</span></code></td>
+<td>Specific humidity (kg kg<sup>-1</sup>).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">t</span></code></td>
+<td>Air temperature (K).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="radiation-variables">
+<h4>6.26.1.1.2. Radiation variables<a class="headerlink" href="#radiation-variables" title="Permalink to this headline">¶</a></h4>
+<p>The radiation forcing variables can be given in one of four ways:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">sw_down</span></code> and <code class="docutils literal notranslate"><span class="pre">lw_down</span></code></dt>
+<dd>Downward fluxes of short- and longwave radiation are input. <em>This is the preferred option.</em></dd>
+<dt><code class="docutils literal notranslate"><span class="pre">rad_net</span></code> and <code class="docutils literal notranslate"><span class="pre">sw_down</span></code></dt>
+<dd>Downward shortwave and net all wavelength (downward is positive) radiation are input. The modelled albedo and surface temperature are used to calculate the downward longwave flux.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">lw_net</span></code> and <code class="docutils literal notranslate"><span class="pre">sw_net</span></code></dt>
+<dd>Net downward fluxes of short- and longwave radiation are input. The modelled albedo and surface temperature are used to calculate the downward fluxes of shortwave and longwave radiation.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">lw_down</span></code> and <code class="docutils literal notranslate"><span class="pre">sw_net</span></code></dt>
+<dd>Downward flux of longwave radiation and net downward flux of shortwave radiation are input. The modelled albedo is used to calculate the downward flux of shortwave radiation.</dd>
+</dl>
+<p>If any of the four combinations of radiation variables listed above are provided, then these are used to drive JULES. There is no default option. JULES will give a fatal error and stop if there are too many, too few or invalid forcing variables provided in the variable list.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If <a class="reference internal" href="#JULES_DRIVE::l_daily_disagg" title="JULES_DRIVE::l_daily_disagg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_daily_disagg</span></code></a> = TRUE, then the first method must be used.</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">diff_rad</span></code> can be used with any of the four methods. If it is given, diffuse radiation is input from file. If it is not given, <a class="reference internal" href="#JULES_DRIVE::diff_frac_const" title="JULES_DRIVE::diff_frac_const"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">diff_frac_const</span></code></a> is used instead to partition the downward shortwave radiation into diffuse and direct.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">rad_net</span></code></td>
+<td>Net (all wavelength) downward radiation (W m<sup>-2</sup>).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">lw_net</span></code></td>
+<td>Net downward longwave radiation (W m<sup>-2</sup>).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">sw_net</span></code></td>
+<td>Net downward shortwave radiation (W m<sup>-2</sup>).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">lw_down</span></code></td>
+<td>Downward longwave radiation (W m<sup>-2</sup>).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">sw_down</span></code></td>
+<td>Downward shortwave radiation (W m<sup>-2</sup>).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">diff_rad</span></code></td>
+<td>Diffuse radiation (W m<sup>-2</sup>).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="precipitation-variables">
+<h4>6.26.1.1.3. Precipitation variables<a class="headerlink" href="#precipitation-variables" title="Permalink to this headline">¶</a></h4>
+<p>The precipitation variables can be specified in one of four ways:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">precip</span></code></dt>
+<dd>A single precipitation field is input. This represents the total precipitation (rainfall and snowfall). The total is partitioned between snowfall and rainfall using <a class="reference internal" href="#JULES_DRIVE::t_for_snow" title="JULES_DRIVE::t_for_snow"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">t_for_snow</span></code></a>, and rainfall is then further partitioned into large-scale and convective components using <a class="reference internal" href="#JULES_DRIVE::t_for_con_rain" title="JULES_DRIVE::t_for_con_rain"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">t_for_con_rain</span></code></a>. Convective snowfall is assumed to be zero.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tot_rain</span></code> and <code class="docutils literal notranslate"><span class="pre">tot_snow</span></code></dt>
+<dd>Two precipitation fields are input: total rainfall and total snowfall. The rainfall is partitioned between large-scale and convective, using <a class="reference internal" href="#JULES_DRIVE::t_for_con_rain" title="JULES_DRIVE::t_for_con_rain"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">t_for_con_rain</span></code></a>. Convective snowfall is assumed to be zero.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ls_rain</span></code>, <code class="docutils literal notranslate"><span class="pre">con_rain</span></code> and <code class="docutils literal notranslate"><span class="pre">tot_snow</span></code></dt>
+<dd>Three precipitation fields are input: large-scale rainfall, convective rainfall and total snowfall. This cannot be used with <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_point_data" title="JULES_SURFACE::l_point_data"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_point_data</span></code></a> = TRUE. Convective snowfall is assumed to be zero.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ls_rain</span></code>, <code class="docutils literal notranslate"><span class="pre">con_rain</span></code>, <code class="docutils literal notranslate"><span class="pre">ls_snow</span></code> and <code class="docutils literal notranslate"><span class="pre">con_snow</span></code></dt>
+<dd>Four precipitation fields are input: large-scale rainfall, convective rainfall, large-scale snowfall and convective snowfall. This cannot be used with <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_point_data" title="JULES_SURFACE::l_point_data"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_point_data</span></code></a> = TRUE. Note that this is the only option that considers convective snowfall.</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">precip</span></code> is given, the first method is used. If <code class="docutils literal notranslate"><span class="pre">precip</span></code> is <em>not</em> given but <code class="docutils literal notranslate"><span class="pre">tot_rain</span></code> is, the second method is used. If <em>neither</em> <code class="docutils literal notranslate"><span class="pre">precip</span></code> <em>nor</em> <code class="docutils literal notranslate"><span class="pre">tot_rain</span></code> are given but <code class="docutils literal notranslate"><span class="pre">tot_snow</span></code> is, the third method is used. The fourth method is used in all other cases.</p>
+<p>The concept of convective and large-scale (or dynamical) components of precipitation comes from atmospheric models, in which the precipitation from small-scale (convective) and large-scale motions is often calculated separately. If JULES is to be driven by the output from such a model, the driving data might include these components.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If <a class="reference internal" href="#JULES_DRIVE::l_daily_disagg" title="JULES_DRIVE::l_daily_disagg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_daily_disagg</span></code></a> = TRUE, then <a class="reference internal" href="#JULES_DRIVE::interp" title="JULES_DRIVE::interp"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">interp</span></code></a> for each precipitation variable should be <code class="docutils literal notranslate"><span class="pre">f</span></code> or <code class="docutils literal notranslate"><span class="pre">nf</span></code>.</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">precip</span></code></td>
+<td>Precipitation rate (kg m<sup>-2</sup> s<sup>-1</sup>).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">tot_rain</span></code></td>
+<td>Rainfall rate (kg m<sup>-2</sup> s<sup>-1</sup>).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">tot_snow</span></code></td>
+<td>Snowfall rate (kg m<sup>-2</sup> s<sup>-1</sup>).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">ls_rain</span></code></td>
+<td>Large-scale rainfall rate (kg m<sup>-2</sup> s<sup>-1</sup>).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">con_rain</span></code></td>
+<td>Convective rainfall rate (kg m<sup>-2</sup> s<sup>-1</sup>).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">ls_snow</span></code></td>
+<td>Large-scale snowfall rate (kg m<sup>-2</sup> s<sup>-1</sup>).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">con_snow</span></code></td>
+<td>Convective snowfall rate (kg m<sup>-2</sup> s<sup>-1</sup>).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="wind-variables">
+<h4>6.26.1.1.4. Wind variables<a class="headerlink" href="#wind-variables" title="Permalink to this headline">¶</a></h4>
+<p>The wind variables can be given in one of two ways:</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">wind</span></code></dt>
+<dd>The wind speed is input.</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">u</span></code> and <code class="docutils literal notranslate"><span class="pre">v</span></code></dt>
+<dd>The two components of the horizontal wind (e.g. the southerly and westerly components) are input.</dd>
+</dl>
+<p>If <code class="docutils literal notranslate"><span class="pre">wind</span></code> is given, then the first method is used. The second method is used in all other cases.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">wind</span></code></td>
+<td>Total wind speed (m s<sup>-1</sup>).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">u</span></code></td>
+<td>Zonal component of the wind (m s<sup>-1</sup>).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">v</span></code></td>
+<td>Meridional component of the wind (m s<sup>-1</sup>).</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="daily-disaggregator-variables">
+<h4>6.26.1.1.5. Daily disaggregator variables<a class="headerlink" href="#daily-disaggregator-variables" title="Permalink to this headline">¶</a></h4>
+<p>If <a class="reference internal" href="#JULES_DRIVE::l_daily_disagg" title="JULES_DRIVE::l_daily_disagg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_daily_disagg</span></code></a> = TRUE, then the diurnal temperature range is also required:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="79%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">dt_range</span></code></td>
+<td>Diurnal temperature range (K).</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="section" id="examples-of-specifying-driving-data">
+<h2>6.26.2. Examples of specifying driving data<a class="headerlink" href="#examples-of-specifying-driving-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="single-point-ascii-driving-data-for-one-year">
+<h3>6.26.2.1. Single point ASCII driving data for one year<a class="headerlink" href="#single-point-ascii-driving-data-for-one-year" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="nn">&amp;JULES_DRIVE</span>
+  <span class="nv">diff_frac_const</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">,</span>
+
+  <span class="nv">data_start</span>  <span class="o">=</span> <span class="s1">&#39;1997-01-01 00:00:00&#39;</span><span class="p">,</span>
+  <span class="nv">data_end</span>    <span class="o">=</span> <span class="s1">&#39;1998-01-01 00:00:00&#39;</span><span class="p">,</span>
+  <span class="nv">data_period</span> <span class="o">=</span> <span class="mi">1800</span><span class="p">,</span>
+
+  <span class="nv">file</span> <span class="o">=</span> <span class="s2">&quot;met_data.dat&quot;</span><span class="p">,</span>
+
+  <span class="nv">nvars</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="nv">var</span>    <span class="o">=</span> <span class="s1">&#39;sw_down&#39;</span>  <span class="s1">&#39;lw_down&#39;</span>  <span class="s1">&#39;tot_rain&#39;</span>  <span class="s1">&#39;tot_snow&#39;</span>   <span class="s1">&#39;t&#39;</span>  <span class="s1">&#39;wind&#39;</span>  <span class="s1">&#39;pstar&#39;</span>   <span class="s1">&#39;q&#39;</span><span class="p">,</span>
+  <span class="nv">interp</span> <span class="o">=</span>      <span class="s1">&#39;nf&#39;</span>       <span class="s1">&#39;nf&#39;</span>        <span class="s1">&#39;nf&#39;</span>        <span class="s1">&#39;nf&#39;</span>  <span class="s1">&#39;nf&#39;</span>    <span class="s1">&#39;nf&#39;</span>     <span class="s1">&#39;nf&#39;</span>  <span class="s1">&#39;nf&#39;</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="#JULES_DRIVE::data_start" title="JULES_DRIVE::data_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">data_start</span></code></a>, <a class="reference internal" href="#JULES_DRIVE::data_end" title="JULES_DRIVE::data_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">data_end</span></code></a> and <a class="reference internal" href="#JULES_DRIVE::data_period" title="JULES_DRIVE::data_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">data_period</span></code></a> specify that the driving dataset provides one year (1997) of half-hourly data.</p>
+<p><a class="reference internal" href="#JULES_DRIVE::read_list" title="JULES_DRIVE::read_list"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">read_list</span></code></a> is not given, so takes its default value of FALSE. This means that <a class="reference internal" href="#JULES_DRIVE::file" title="JULES_DRIVE::file"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">file</span></code></a> is used as either the single data file or a file name template. In this case there is no templating, so JULES treats the given file as the single data file for all data times.</p>
+<p><code class="docutils literal notranslate"><span class="pre">sw_down</span></code> and <code class="docutils literal notranslate"><span class="pre">lw_down</span></code> are given, so the first radiation scheme (above) is used.</p>
+<p><code class="docutils literal notranslate"><span class="pre">precip</span></code> is not given but <code class="docutils literal notranslate"><span class="pre">tot_rain</span></code> is, so the second precipitation scheme (above) is used.</p>
+<p><code class="docutils literal notranslate"><span class="pre">wind</span></code> is given, so total wind speed is used (first scheme above).</p>
+<p><code class="docutils literal notranslate"><span class="pre">diff_rad</span></code> is not given, so the diffuse radiation is calculated as 0.1 (the value of <a class="reference internal" href="#JULES_DRIVE::diff_frac_const" title="JULES_DRIVE::diff_frac_const"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">diff_frac_const</span></code></a>) times the total shortwave radiation.</p>
+<p>The driving data file (<code class="docutils literal notranslate"><span class="pre">met_data.dat</span></code>) should look similar to:</p>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="c1"># solar   long  rain  snow    temp   wind     press      humid</span>
+    <span class="mf">3.3</span>  <span class="mf">187.8</span>   <span class="mf">0.0</span>   <span class="mf">0.0</span>  <span class="mf">259.10</span>  <span class="mf">3.610</span>  <span class="mf">102400.5</span>  <span class="mf">1.351E-03</span>
+   <span class="mf">89.5</span>  <span class="mf">185.8</span>   <span class="mf">0.0</span>   <span class="mf">0.0</span>  <span class="mf">259.45</span>  <span class="mf">3.140</span>  <span class="mf">102401.9</span>  <span class="mf">1.357E-03</span>
+  <span class="mf">142.3</span>  <span class="mf">186.4</span>   <span class="mf">0.0</span>   <span class="mf">0.0</span>  <span class="mf">259.85</span>  <span class="mf">2.890</span>  <span class="mf">102401.0</span>  <span class="mf">1.369E-03</span>
+<span class="c1"># ----- data for later times ----</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="driving-data-from-netcdf-files-with-one-variable-per-file">
+<h3>6.26.2.2. Driving data from NetCDF files with one variable per file<a class="headerlink" href="#driving-data-from-netcdf-files-with-one-variable-per-file" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="nn">&amp;JULES_DRIVE</span>
+  <span class="nv">data_start</span>  <span class="o">=</span> <span class="s1">&#39;1982-07-01 03:00:00&#39;</span><span class="p">,</span>
+  <span class="nv">data_end</span>    <span class="o">=</span> <span class="s1">&#39;1996-01-01 00:00:00&#39;</span><span class="p">,</span>
+  <span class="nv">data_period</span> <span class="o">=</span> <span class="mi">10800</span><span class="p">,</span>
+
+  <span class="nv">read_list</span> <span class="o">=</span> <span class="ss">T</span><span class="p">,</span>
+  <span class="nv">nfiles</span>    <span class="o">=</span> <span class="mi">162</span><span class="p">,</span>
+
+  <span class="nv">file</span> <span class="o">=</span> <span class="s2">&quot;./file_list.txt&quot;</span><span class="p">,</span>
+
+  <span class="nv">nvars</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
+  <span class="nv">var</span>      <span class="o">=</span> <span class="s1">&#39;sw_down&#39;</span>  <span class="s1">&#39;lw_down&#39;</span>  <span class="s1">&#39;tot_rain&#39;</span>  <span class="s1">&#39;tot_snow&#39;</span>     <span class="s1">&#39;t&#39;</span>  <span class="s1">&#39;wind&#39;</span>  <span class="s1">&#39;pstar&#39;</span>     <span class="s1">&#39;q&#39;</span><span class="p">,</span>
+  <span class="nv">var_name</span> <span class="o">=</span>  <span class="s1">&#39;SWdown&#39;</span>   <span class="s1">&#39;LWdown&#39;</span>     <span class="s1">&#39;Rainf&#39;</span>     <span class="s1">&#39;Snowf&#39;</span>  <span class="s1">&#39;Tair&#39;</span>  <span class="s1">&#39;Wind&#39;</span>  <span class="s1">&#39;PSurf&#39;</span>  <span class="s1">&#39;Qair&#39;</span><span class="p">,</span>
+  <span class="nv">tpl_name</span> <span class="o">=</span>  <span class="s1">&#39;SWdown&#39;</span>   <span class="s1">&#39;LWdown&#39;</span>     <span class="s1">&#39;Rainf&#39;</span>     <span class="s1">&#39;Snowf&#39;</span>  <span class="s1">&#39;Tair&#39;</span>  <span class="s1">&#39;Wind&#39;</span>  <span class="s1">&#39;PSurf&#39;</span>  <span class="s1">&#39;Qair&#39;</span><span class="p">,</span>
+  <span class="nv">interp</span>   <span class="o">=</span>      <span class="s1">&#39;nb&#39;</span>       <span class="s1">&#39;nb&#39;</span>        <span class="s1">&#39;nb&#39;</span>        <span class="s1">&#39;nb&#39;</span>     <span class="s1">&#39;i&#39;</span>     <span class="s1">&#39;i&#39;</span>      <span class="s1">&#39;i&#39;</span>     <span class="s1">&#39;i&#39;</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>In this example, the driving dataset provides 13.5 years of driving data on a 3 hourly timestep.</p>
+<p><a class="reference internal" href="#JULES_DRIVE::read_list" title="JULES_DRIVE::read_list"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">read_list</span></code></a> = TRUE indicates that the names and start times of the data files should be read from <code class="docutils literal notranslate"><span class="pre">file_list.txt</span></code>. The first few lines of this file are:</p>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;met_data/%vv_data/%vv198207.nc&#39;</span><span class="p">,</span> <span class="s1">&#39;1982-07-01 03:00:00&#39;</span>
+<span class="s1">&#39;met_data/%vv_data/%vv198208.nc&#39;</span><span class="p">,</span> <span class="s1">&#39;1982-08-01 03:00:00&#39;</span>
+<span class="s1">&#39;met_data/%vv_data/%vv198209.nc&#39;</span><span class="p">,</span> <span class="s1">&#39;1982-09-01 03:00:00&#39;</span>
+<span class="c1"># ------ rest of file not shown -----</span>
+</pre></div>
+</div>
+<p>The presence of the variable name templating string in each file name shows that we are using <a class="reference internal" href="../input/file-name-templating.html"><span class="doc">variable name templating</span></a>. The dates show that we do in fact have monthly files, but we cannot use time templating for these files because the start time of 03H does not conform to the requirements.</p>
+<p>Furthermore, files for each variable are stored in separate directories. The values from <a class="reference internal" href="#JULES_DRIVE::tpl_name" title="JULES_DRIVE::tpl_name"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">tpl_name</span></code></a> will be substituted into the file name templates in place of the substitution string (<code class="docutils literal notranslate"><span class="pre">%vv</span></code>). For example, pressure is held in files with names like <code class="docutils literal notranslate"><span class="pre">met_data/PSurf_data/PSurf198207.nc</span></code>, and temperature in files like <code class="docutils literal notranslate"><span class="pre">met_data/Tair_data/Tair198207.nc</span></code>.</p>
+<p>The driving variable setup is as the previous example, except that <a class="reference internal" href="#JULES_DRIVE::diff_frac_const" title="JULES_DRIVE::diff_frac_const"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">diff_frac_const</span></code></a> takes its default value of 0.0.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.26. <code class="docutils literal notranslate"><span class="pre">drive.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-JULES_DRIVE">6.26.1. <code class="docutils literal notranslate"><span class="pre">JULES_DRIVE</span></code> namelist members</a><ul>
+<li><a class="reference internal" href="#list-of-jules-forcing-variables">6.26.1.1. List of JULES forcing variables</a><ul>
+<li><a class="reference internal" href="#pressure-humidity-and-temperature">6.26.1.1.1. Pressure, Humidity and Temperature</a></li>
+<li><a class="reference internal" href="#radiation-variables">6.26.1.1.2. Radiation variables</a></li>
+<li><a class="reference internal" href="#precipitation-variables">6.26.1.1.3. Precipitation variables</a></li>
+<li><a class="reference internal" href="#wind-variables">6.26.1.1.4. Wind variables</a></li>
+<li><a class="reference internal" href="#daily-disaggregator-variables">6.26.1.1.5. Daily disaggregator variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#examples-of-specifying-driving-data">6.26.2. Examples of specifying driving data</a><ul>
+<li><a class="reference internal" href="#single-point-ascii-driving-data-for-one-year">6.26.2.1. Single point ASCII driving data for one year</a></li>
+<li><a class="reference internal" href="#driving-data-from-netcdf-files-with-one-variable-per-file">6.26.2.2. Driving data from NetCDF files with one variable per file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fire.nml.html"
+                        title="previous chapter">6.25. <code class="docutils literal notranslate"><span class="pre">fire.nml</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="imogen.nml.html"
+                        title="next chapter">6.27. <code class="docutils literal notranslate"><span class="pre">imogen.nml</span></code></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="imogen.nml.html" title="6.27. imogen.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fire.nml.html" title="6.25. fire.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.6 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>

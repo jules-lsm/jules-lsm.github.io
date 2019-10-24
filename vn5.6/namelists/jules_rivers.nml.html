@@ -1,0 +1,676 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.14. jules_rivers.nml &#8212; Joint UK Land Environment Simulator (JULES) v5.6 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.15. science_fixes.nml" href="science_fixes.nml.html" />
+    <link rel="prev" title="6.13. jules_snow.nml" href="jules_snow.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="science_fixes.nml.html" title="6.15. science_fixes.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_snow.nml.html" title="6.13. jules_snow.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.6 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-rivers-nml">
+<h1>6.14. <code class="docutils literal notranslate"><span class="pre">jules_rivers.nml</span></code><a class="headerlink" href="#jules-rivers-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets the river routing options. It contains two namelists called <a class="reference internal" href="#namelist-JULES_RIVERS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_RIVERS</span></code></a> and <a class="reference internal" href="#namelist-JULES_OVERBANK"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_OVERBANK</span></code></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The river routing code in JULES is still in development. Users should ensure that results are as expected, and provide feedback where deficiencies are identified.</p>
+</div>
+<div class="section" id="namelist-JULES_RIVERS">
+<span id="jules-rivers-namelist-members"></span><h2>6.14.1. <code class="docutils literal notranslate"><span class="pre">JULES_RIVERS</span></code> namelist members<a class="headerlink" href="#namelist-JULES_RIVERS" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_RIVERS::l_rivers">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">l_rivers</code><a class="headerlink" href="#JULES_RIVERS::l_rivers" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for enabling river routing.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use the river routing algorithm specified by <a class="reference internal" href="#JULES_RIVERS::i_river_vn" title="JULES_RIVERS::i_river_vn"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_river_vn</span></code></a> to route runoff along river pathways.</dd>
+<dt>FALSE</dt>
+<dd>No river routing.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RIVERS::l_inland">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">l_inland</code><a class="headerlink" href="#JULES_RIVERS::l_inland" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for enabling re-routing inland basin water back to soil moisture.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Re-routing inland basin water back to soil moisture.</dd>
+<dt>FALSE</dt>
+<dd>No re-routing.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RIVERS::i_river_vn">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">i_river_vn</code><a class="headerlink" href="#JULES_RIVERS::i_river_vn" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">rfm</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to select the river routing algorithm to use for river routing.</p>
+<dl class="docutils">
+<dt><code class="docutils literal notranslate"><span class="pre">1</span></code></dt>
+<dd>Use a UM-coupled JULES implementation of the TRIP model (see Oki et al. 1999). This value is not allowed in standalone JULES</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">2</span></code></dt>
+<dd>Use a standalone JULES implementation of the RFM kinematic wave model (see Dadson and Bell 2010, Bell et al. 2007).</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">3</span></code></dt>
+<dd>Use a standalone JULES implementation of the TRIP model (see Oki et al. 1999).</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RIVERS::nstep_rivers">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">nstep_rivers</code><a class="headerlink" href="#JULES_RIVERS::nstep_rivers" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt; 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">-32768</td>
+</tr>
+</tbody>
+</table>
+<p>The number of model timesteps per routing timestep.</p>
+<p>For example, <a class="reference internal" href="#JULES_RIVERS::nstep_rivers" title="JULES_RIVERS::nstep_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nstep_rivers</span></code></a> = 5 means that runoff will be accumulated for 5 model timesteps before being routed on the 5th timestep.</p>
+</dd></dl>
+
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>The river routing parameter values can be highly dependent on model resolution, so care is required by the user to ensure that appropriate values are selected, tested and adjusted as required.</p>
+<p>Suggested values for global and high-resolution runs are listed below, however these should be treated as a starting point only.</p>
+<p class="last">Values for some typical configurations are included in the <code class="docutils literal notranslate"><span class="pre">jules_riversparm</span></code> module.</p>
+</div>
+<div class="admonition-rfm-parameters-used-if-nml-mem-i-river-vn-2 admonition">
+<p class="first admonition-title">RFM parameters - used if <a class="reference internal" href="#JULES_RIVERS::i_river_vn" title="JULES_RIVERS::i_river_vn"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_river_vn</span></code></a> = <code class="docutils literal notranslate"><span class="pre">2</span></code></p>
+<dl class="member">
+<dt id="JULES_RIVERS::cland">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">cland</code><a class="headerlink" href="#JULES_RIVERS::cland" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.20 m/s</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Suggested:</th><td class="field-body">0.20 m/s (global), 0.40 m/s (1 km resolution, Bell et al. 2007)</td>
+</tr>
+</tbody>
+</table>
+<p>The land wave speed (kinematic wave speed for surface flow in a land grid cell, m s<sup>-1</sup>). This is the speed at which water moves through surface soil in a non-river grid cell (even without major rivers, there are always minor water courses so these cells do still contribute flow to neighbouring cells).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RIVERS::criver">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">criver</code><a class="headerlink" href="#JULES_RIVERS::criver" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.62 m/s</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Suggested:</th><td class="field-body">0.62 m/s (global), 0.50 m/s (1 km resolution, Bell et al. 2007)</td>
+</tr>
+</tbody>
+</table>
+<p>The river wave speed (kinematic wave speed for surface flow in a river grid cell, m s<sup>-1</sup>). This value should be close to the <a class="reference internal" href="#JULES_RIVERS::rivers_speed" title="JULES_RIVERS::rivers_speed"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">rivers_speed</span></code></a> used by TRIP, but not identical because RFM makes different assumptions about e.g. meandering.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RIVERS::cbland">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">cbland</code><a class="headerlink" href="#JULES_RIVERS::cbland" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&lt;= <a class="reference internal" href="#JULES_RIVERS::cland" title="JULES_RIVERS::cland"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">cland</span></code></a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0.10 m/s</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Suggested:</th><td class="field-body">0.10 m/s (global), 0.05 m/s (1 km resolution, Bell et al. 2007)</td>
+</tr>
+</tbody>
+</table>
+<p>The subsurface land wave speed (kinematic wave speed for subsurface flow in a land grid cell, m s<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RIVERS::cbriver">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">cbriver</code><a class="headerlink" href="#JULES_RIVERS::cbriver" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&lt;= <a class="reference internal" href="#JULES_RIVERS::criver" title="JULES_RIVERS::criver"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">criver</span></code></a></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0.15 m/s</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Suggested:</th><td class="field-body">0.15 m/s (global), 0.05 m/s (1 km resolution, Bell et al. 2007)</td>
+</tr>
+</tbody>
+</table>
+<p>The subsurface river wave speed (kinematic wave speed for subsurface flow in a river grid cell, m s<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RIVERS::retl">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">retl</code><a class="headerlink" href="#JULES_RIVERS::retl" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">(-1)-(+1)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0.0</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Suggested:</th><td class="field-body">0.005 (1 km resolution, Bell et al. 2007)</td>
+</tr>
+</tbody>
+</table>
+<p>The (resolution dependent) land return flow fraction. Bell et al. (2007:Table1) suggested value 0.005. On non-river grid cells in the land mask: if retl&gt;0 then fraction retl of the subsurface flow moves to the surface per routing timestep; if retl&lt;0 then fraction retl of the surface flow moves to the subsurface per routing timestep.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RIVERS::retr">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">retr</code><a class="headerlink" href="#JULES_RIVERS::retr" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">(-1)-(+1)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0.005</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Suggested:</th><td class="field-body">0.005 (1 km resolution, Bell et al. 2007)</td>
+</tr>
+</tbody>
+</table>
+<p>The (resolution dependent) river return flow fraction. On river grid cells in the land mask: if retr&gt;0 then fraction retr of the subsurface flow moves to the surface per routing timestep; if retr&lt;0 then fraction retr of the surface flow moves to the subsurface per routing timestep.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RIVERS::slfac">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">slfac</code><a class="headerlink" href="#JULES_RIVERS::slfac" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">(0)-(+1)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0.0</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Suggested:</th><td class="field-body">0.0</td>
+</tr>
+</tbody>
+</table>
+<p>Slope factor</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RIVERS::a_thresh">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">a_thresh</code><a class="headerlink" href="#JULES_RIVERS::a_thresh" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Suggested:</th><td class="field-body">1 (spatial resolution coarser than 20 km gridcells), ~10 (high-resolution)</td>
+</tr>
+</tbody>
+</table>
+<p>The threshold drainage area (specified in number of cells) draining to a gridbox, above which the grid cell is considered to be a river point (see a_T in Bell et al. 2007:541). Remaining points are treated as land (drainage area = 0) or sea (drainage area &lt; 0).</p>
+<p>Remaining points are treated as land (drainage area = 0) or sea (drainage area &lt; 0). See Bell et al. (2007).</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_RIVERS::runoff_factor">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">runoff_factor</code><a class="headerlink" href="#JULES_RIVERS::runoff_factor" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Values !=1.0 are generally used to correct biases in precipitation when the model is forced with observed data <strong>It is highly recommended that this is set to 1.0 (i.e. no runoff adjustment).</strong></p>
+</dd></dl>
+
+</div>
+<div class="admonition-trip-parameters-used-if-nml-mem-i-river-vn-1-3 admonition">
+<p class="first admonition-title">TRIP parameters - used if <a class="reference internal" href="#JULES_RIVERS::i_river_vn" title="JULES_RIVERS::i_river_vn"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_river_vn</span></code></a> = <code class="docutils literal notranslate"><span class="pre">1,3</span></code></p>
+<dl class="member">
+<dt id="JULES_RIVERS::rivers_speed">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">rivers_speed</code><a class="headerlink" href="#JULES_RIVERS::rivers_speed" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.4</td>
+</tr>
+</tbody>
+</table>
+<p>The effective river velocity (m s<sup>-1</sup>). See Oki et al. (1999). <a class="reference internal" href="#JULES_RIVERS::rivers_speed" title="JULES_RIVERS::rivers_speed"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">rivers_speed</span></code></a> should equal (river flow velocity / <a class="reference internal" href="#JULES_RIVERS::rivers_meander" title="JULES_RIVERS::rivers_meander"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">rivers_meander</span></code></a>).</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_RIVERS::rivers_meander">
+<code class="descclassname">JULES_RIVERS::</code><code class="descname">rivers_meander</code><a class="headerlink" href="#JULES_RIVERS::rivers_meander" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.4</td>
+</tr>
+</tbody>
+</table>
+<p>The ratio of the actual to calculated river lengths in a river routing gridbox. See Oki et al. (1999).</p>
+</dd></dl>
+
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Arora VK &amp; Boer GJ (2012). A variable velocity flow routing algorithm for GCMs. Journal of Geophysical Research D 104:30965-30979.</li>
+<li>Bell, V.A. et al. (2007) Development of a high resolution grid-based river flow model for use with regional climate model output. Hydrology and Earth System Sciences. 11 532-549</li>
+<li>Dadson, S.J. and Bell, V.A. (2010) Comparison of Grid-2-Grid and TRIP runoff routing schemes. Centre for Ecology &amp; Hydrology Internal Report <a class="reference external" href="http://nora.nerc.ac.uk/10890/1/dadson_etal_2010_g2gtrip.pdf">http://nora.nerc.ac.uk/10890/1/dadson_etal_2010_g2gtrip.pdf</a></li>
+<li>Dadson S.J. et al. (2011) Evaluation of a grid-based river flow model configured for use in a regional climate model. Journal of Hydrology. 411 238-250</li>
+<li>Falloon, P.D. et al (2007) New global river routing scheme in the Unified Model. Hadley Centre Technical Note 72, available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes">the Met Office Library</a>.</li>
+<li>Jones R., Dadson, S. and Bell, V.A. (2007) Report on European grid-based river-flow modelling for application to Regional Climate Models. Met Office Hadley Centre deliverable report.</li>
+<li>Oki, T., et al (1999) Assessment of annual runoff from land surface models using Total Runoff Integrating Pathways (TRIP). Journal of the Meteorological Society of Japan. 77 235-255</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="namelist-JULES_OVERBANK">
+<span id="jules-overbank-namelist-members"></span><h2>6.14.2. <code class="docutils literal notranslate"><span class="pre">JULES_OVERBANK</span></code> namelist members<a class="headerlink" href="#namelist-JULES_OVERBANK" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>The overbank inundation parameter values can be highly dependent on model resolution, so care is required by the user to ensure that appropriate values are selected, tested and adjusted as required.</p>
+<p class="last">Suggested values for global and high-resolution runs are listed below, however these should be treated as a starting point only.</p>
+</div>
+<dl class="member">
+<dt id="JULES_OVERBANK::l_riv_overbank">
+<code class="descclassname">JULES_OVERBANK::</code><code class="descname">l_riv_overbank</code><a class="headerlink" href="#JULES_OVERBANK::l_riv_overbank" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for enabling river overbank inundation. Only used if <a class="reference internal" href="#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> is TRUE.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Calculate an overbank inundation gridbox fraction (frac_fplain_lp).</dd>
+<dt>FALSE</dt>
+<dd>No overbank inundation calculations</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OVERBANK::l_riv_hypsometry">
+<code class="descclassname">JULES_OVERBANK::</code><code class="descname">l_riv_hypsometry</code><a class="headerlink" href="#JULES_OVERBANK::l_riv_hypsometry" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for enabling use of a hypsometric integral calculation.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Calculate inundated area from a hypsometric integral based on a lognormal area-altitude distribution (<strong>recommended</strong>).</dd>
+<dt>FALSE</dt>
+<dd>Estimate inundated area from simple river width scaling, ignoring topography (only to be used for testing).</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-river-width-allometry-used-if-nml-mem-jules-overbank-l-riv-hypsometry-is-false-or-nml-mem-jules-overbank-use-rosgen-is-true admonition">
+<p class="first admonition-title">River width allometry (used if <a class="reference internal" href="#JULES_OVERBANK::l_riv_hypsometry" title="JULES_OVERBANK::l_riv_hypsometry"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_riv_hypsometry</span></code></a> is false or <a class="reference internal" href="#JULES_OVERBANK::use_rosgen" title="JULES_OVERBANK::use_rosgen"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">use_rosgen</span></code></a> is true)</p>
+<p>Allometry is: (WIDTH in m) = <a class="reference internal" href="#JULES_OVERBANK::riv_a" title="JULES_OVERBANK::riv_a"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">riv_a</span></code></a> * ( (SURFACE RIVER INFLOW in m3 s<sup>-1</sup>) ^ <a class="reference internal" href="#JULES_OVERBANK::riv_b" title="JULES_OVERBANK::riv_b"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">riv_b</span></code></a>) (Leopold &amp; Maddock 1953:eqn1)</p>
+<dl class="member">
+<dt id="JULES_OVERBANK::riv_a">
+<code class="descclassname">JULES_OVERBANK::</code><code class="descname">riv_a</code><a class="headerlink" href="#JULES_OVERBANK::riv_a" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">7.20</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Permitted:</th><td class="field-body">&gt;=0 and &lt;=(1/<a class="reference internal" href="#JULES_OVERBANK::riv_c" title="JULES_OVERBANK::riv_c"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">riv_c</span></code></a>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Suggested:</th><td class="field-body">7.20 (global, from Andreadis et al. 2013)</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient in the allometry for river width (units are (m / ((m3/s)^riv_b)), i.e. dependent on the value of riv_b)</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_OVERBANK::riv_b">
+<code class="descclassname">JULES_OVERBANK::</code><code class="descname">riv_b</code><a class="headerlink" href="#JULES_OVERBANK::riv_b" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.50</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Permitted:</th><td class="field-body">&gt;=0 and &lt;=(1-<a class="reference internal" href="#JULES_OVERBANK::riv_f" title="JULES_OVERBANK::riv_f"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">riv_f</span></code></a>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Suggested:</th><td class="field-body">0.50 (global, from Andreadis et al. 2013)</td>
+</tr>
+</tbody>
+</table>
+<p>Exponent in the allometry for river width (dimensionless)</p>
+</dd></dl>
+
+</div>
+<div class="admonition-river-depth-allometry-used-if-nml-mem-jules-overbank-l-riv-hypsometry-is-true-or-nml-mem-jules-overbank-use-rosgen-is-true admonition">
+<p class="first admonition-title">River depth allometry (used if <a class="reference internal" href="#JULES_OVERBANK::l_riv_hypsometry" title="JULES_OVERBANK::l_riv_hypsometry"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_riv_hypsometry</span></code></a> is true or <a class="reference internal" href="#JULES_OVERBANK::use_rosgen" title="JULES_OVERBANK::use_rosgen"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">use_rosgen</span></code></a> is true)</p>
+<p>Allometry is: (DEPTH in m) = <a class="reference internal" href="#JULES_OVERBANK::riv_c" title="JULES_OVERBANK::riv_c"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">riv_c</span></code></a> * ( (SURFACE RIVER INFLOW in m3 s<sup>-1</sup>) ^ <a class="reference internal" href="#JULES_OVERBANK::riv_f" title="JULES_OVERBANK::riv_f"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">riv_f</span></code></a>) (Leopold &amp; Maddock 1953:eqn2)</p>
+<dl class="member">
+<dt id="JULES_OVERBANK::riv_c">
+<code class="descclassname">JULES_OVERBANK::</code><code class="descname">riv_c</code><a class="headerlink" href="#JULES_OVERBANK::riv_c" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.27</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Permitted:</th><td class="field-body">&gt;=0 and &lt;=(1/<a class="reference internal" href="#JULES_OVERBANK::riv_a" title="JULES_OVERBANK::riv_a"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">riv_a</span></code></a>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Suggested:</th><td class="field-body">0.27 (global, from Andreadis et al. 2013)</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient in the allometry for river depth (units are (m / ((m3/s)^riv_f)), i.e. dependent on the value of riv_f)</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_OVERBANK::riv_f">
+<code class="descclassname">JULES_OVERBANK::</code><code class="descname">riv_f</code><a class="headerlink" href="#JULES_OVERBANK::riv_f" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.30</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Permitted:</th><td class="field-body">&gt;=0 and &lt;=(1-<a class="reference internal" href="#JULES_OVERBANK::riv_b" title="JULES_OVERBANK::riv_b"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">riv_b</span></code></a>)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Suggested:</th><td class="field-body">0.30 (global, from Andreadis et al. 2013)</td>
+</tr>
+</tbody>
+</table>
+<p>Exponent in the allometry for river depth (dimensionless)</p>
+</dd></dl>
+
+</div>
+<div class="admonition-rosgen-stream-classification-parameters-describing-river-channel-morphology-rosgen-1994 admonition">
+<p class="first admonition-title">Rosgen stream classification parameters describing river channel morphology (Rosgen 1994)</p>
+<dl class="member">
+<dt id="JULES_OVERBANK::use_rosgen">
+<code class="descclassname">JULES_OVERBANK::</code><code class="descname">use_rosgen</code><a class="headerlink" href="#JULES_OVERBANK::use_rosgen" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for applying the Rosgen entrenchment ratio approach</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>When inflow rates are lower than bankfull flow, river width is calculated from the River width allometry (above). However, when higher than bankfull flow, river width is constrained so that when river depth = 2 x bankfull depth then width = <a class="reference internal" href="#JULES_OVERBANK::ent_ratio" title="JULES_OVERBANK::ent_ratio"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ent_ratio</span></code></a> * bankfull width.</dd>
+<dt>FALSE</dt>
+<dd>River width follows the allometry specified above whatever the inflow rate.</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-bankfull-flow-allometry-used-if-nml-mem-use-rosgen-is-true admonition">
+<p class="first admonition-title">Bankfull flow allometry (used if <a class="reference internal" href="#JULES_OVERBANK::use_rosgen" title="JULES_OVERBANK::use_rosgen"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">use_rosgen</span></code></a> is true)</p>
+<p>Allometry is: (BANKFULL DISCHARGE RATE QBF in m3 s<sup>-1</sup>) = <a class="reference internal" href="#JULES_OVERBANK::coef_b" title="JULES_OVERBANK::coef_b"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">coef_b</span></code></a> * ( (CONTRIBUTING AREA in km2) ^ <a class="reference internal" href="#JULES_OVERBANK::exp_c" title="JULES_OVERBANK::exp_c"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">exp_c</span></code></a> ) (see e.g. Andreadis et al. 2013)</p>
+<dl class="member">
+<dt id="JULES_OVERBANK::coef_b">
+<code class="descclassname">JULES_OVERBANK::</code><code class="descname">coef_b</code><a class="headerlink" href="#JULES_OVERBANK::coef_b" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.08</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Suggested:</th><td class="field-body">0.08 (for “several drainages in western Washington State, USA”, Cragun 2005)</td>
+</tr>
+</tbody>
+</table>
+<p>Coefficient in the allometry for bankfull flow (see ?en 2018:eqn3.33).</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_OVERBANK::exp_c">
+<code class="descclassname">JULES_OVERBANK::</code><code class="descname">exp_c</code><a class="headerlink" href="#JULES_OVERBANK::exp_c" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.95</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Suggested:</th><td class="field-body">0.95 (for “several drainages in western Washington State, USA”, Cragun 2005)</td>
+</tr>
+</tbody>
+</table>
+<p>Exponent in the allometry for bankfull flow (see ?en 2018:eqn3.33).</p>
+</dd></dl>
+
+</div>
+<dl class="last member">
+<dt id="JULES_OVERBANK::ent_ratio">
+<code class="descclassname">JULES_OVERBANK::</code><code class="descname">ent_ratio</code><a class="headerlink" href="#JULES_OVERBANK::ent_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">2.0</td>
+</tr>
+</tbody>
+</table>
+<p>The Rosgen entrenchment ratio (single value for all water courses in the simulation): when river depth = 2 x bankfull depth then width = <a class="reference internal" href="#JULES_OVERBANK::ent_ratio" title="JULES_OVERBANK::ent_ratio"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ent_ratio</span></code></a> * bankfull width (i.e. <a class="reference internal" href="#JULES_OVERBANK::ent_ratio" title="JULES_OVERBANK::ent_ratio"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ent_ratio</span></code></a> can be used to specify how wide floodplains are allowed to be).</p>
+</dd></dl>
+
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<blockquote class="last">
+<div><ul class="simple">
+<li>Andreadis KM, Schumann GJ &amp; Pavelsky T (2013). A simple global river bankfull width and depth database. Water Resources Research 49:7164-7168</li>
+<li>Cragun WS (2005). Discharge-Area relations from Selected Drainages on the Colorado Plateau: A GIS Application. Utah State University, <a class="reference external" href="http://hydrology.usu.edu/giswr/archive05/scragun/termproject/">http://hydrology.usu.edu/giswr/archive05/scragun/termproject/</a></li>
+<li>Leopold LB &amp; Maddock T (1953). The Hydraulic Geometry of Stream Channels and Some Physiographic Implications. United States Geological Survey Professional Papers 252:1-57</li>
+<li>Rosgen DL (1994). A classification of natural rivers. Catena 22:169-199.</li>
+<li>?en Z (2018). Flood Modeling, Prediction and Mitigation. Springer.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.14. <code class="docutils literal notranslate"><span class="pre">jules_rivers.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-JULES_RIVERS">6.14.1. <code class="docutils literal notranslate"><span class="pre">JULES_RIVERS</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-JULES_OVERBANK">6.14.2. <code class="docutils literal notranslate"><span class="pre">JULES_OVERBANK</span></code> namelist members</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="jules_snow.nml.html"
+                        title="previous chapter">6.13. <code class="docutils literal notranslate"><span class="pre">jules_snow.nml</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="science_fixes.nml.html"
+                        title="next chapter">6.15. <code class="docutils literal notranslate"><span class="pre">science_fixes.nml</span></code></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="science_fixes.nml.html" title="6.15. science_fixes.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_snow.nml.html" title="6.13. jules_snow.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.6 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>

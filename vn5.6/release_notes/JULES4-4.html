@@ -1,0 +1,164 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1.13. JULES version 4.4 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v5.6 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.14. JULES version 4.3 Release Notes" href="JULES4-3.html" />
+    <link rel="prev" title="1.12. JULES version 4.5 Release Notes" href="JULES4-5.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES4-3.html" title="1.14. JULES version 4.3 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-5.html" title="1.12. JULES version 4.5 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.6 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-version-4-4-release-notes">
+<h1>1.13. JULES version 4.4 Release Notes<a class="headerlink" href="#jules-version-4-4-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>The JULES vn4.4 release consists of 31 tickets from 17 authors across 35 commits. Two further tickets were removed from the release due to issues.</p>
+<p>Full details of the tickets committed for JULES vn4.4 can be found on the <a class="reference external" href="https://code.metoffice.gov.uk/trac/jules/query?resolution=fixed&amp;milestone=JULES+v4.4+release">JULES shared repository Trac system</a>.</p>
+<div class="section" id="science-changes">
+<h2>1.13.1. Science changes<a class="headerlink" href="#science-changes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Add an option to set tile elevations to have absolute values above sea-level - see <a class="reference internal" href="../namelists/model_grid.nml.html#JULES_SURF_HGT::l_elev_absolute_height" title="JULES_SURF_HGT::l_elev_absolute_height"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_elev_absolute_height</span></code></a></li>
+<li>Adjustment to downward longwave radiation for elevated tiles - see <a class="reference internal" href="../namelists/jules_surface.nml.html#JULES_SURFACE::l_elev_lw_down" title="JULES_SURFACE::l_elev_lw_down"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_elev_lw_down</span></code></a></li>
+<li>Nitrogen cycling - improved process representation for UKESM</li>
+<li>Use bare soil momentum roughness length, if supplied as an ancillary field</li>
+<li>Irrigation water taken first from deep soil layer then the river (code from the JULES Impact Model)</li>
+<li>Improvements to rivers_type=’trip’,’rfm’: storage in dump and partial parallelisation</li>
+<li>Alternative forms for methane emissions from wetlands, using different substrates</li>
+<li>Allow landuse with variable number of PFTs</li>
+<li>BVOC emissions allowed with trait physiology</li>
+<li>Change multi-layer snow indices of first layer</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="technical-changes">
+<h2>1.13.2. Technical changes<a class="headerlink" href="#technical-changes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>JULES fcm-make configs updated to be incompatible with FCM 2015.07.0 and later</li>
+<li>Rose-stem support for alternative Rose, Cylc and FCM versions</li>
+<li>Addition of OpenMP directives to some JULES code.</li>
+<li>Code coverage metrics for rose-stem suite</li>
+<li>Preparation for JULES memory duplication</li>
+<li>Removed snow_grnd_gb from closures benchmark test</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="bugs-fixed">
+<h2>1.13.3. Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Remove factor of 0.5 from snow albedo temperature dependence</li>
+<li>Fix a bug in the Nitrogen scheme for the implicit update of soil respiration when the soil C pool is exhausted.</li>
+<li>Fix drift in vegetation fractions</li>
+<li>Scaling bug in Taux</li>
+<li>Bug fix for irrig_water diagnostic - between crop seasons this is now zero</li>
+<li>Met Office VM: fix for update-jules-scripts file for JULES 4.3</li>
+<li>JULES namelist broadcasts are out of sync</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.13. JULES version 4.4 Release Notes</a><ul>
+<li><a class="reference internal" href="#science-changes">1.13.1. Science changes</a></li>
+<li><a class="reference internal" href="#technical-changes">1.13.2. Technical changes</a></li>
+<li><a class="reference internal" href="#bugs-fixed">1.13.3. Bugs fixed</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES4-5.html"
+                        title="previous chapter">1.12. JULES version 4.5 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES4-3.html"
+                        title="next chapter">1.14. JULES version 4.3 Release Notes</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES4-3.html" title="1.14. JULES version 4.3 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-5.html" title="1.12. JULES version 4.5 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.6 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>

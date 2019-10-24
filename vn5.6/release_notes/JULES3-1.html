@@ -1,0 +1,144 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1.21. JULES version 3.1 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v5.6 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.22. JULES version 3.0 Release Notes" href="JULES3-0.html" />
+    <link rel="prev" title="1.20. JULES version 3.2 Release Notes" href="JULES3-2.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES3-0.html" title="1.22. JULES version 3.0 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-2.html" title="1.20. JULES version 3.2 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.6 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-version-3-1-release-notes">
+<h1>1.21. JULES version 3.1 Release Notes<a class="headerlink" href="#jules-version-3-1-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>JULES version 3.1 sees little change to the science of JULES, but contains several major developments intended to make development easier going forward.</p>
+<div class="section" id="restructuring-of-the-code">
+<h2>1.21.1. Restructuring of the code<a class="headerlink" href="#restructuring-of-the-code" title="Permalink to this headline">¶</a></h2>
+<p>The directory structure of the JULES code has been changed to be more logical and allow for a cleaner separation between control, initialisation, I/O and science code. This includes the introduction of directories containing UM-specific code for initialisation in the UM. This was done as part of the work to completely remove (MOSES and) JULES code from the UM code repository - it now sits in its own repository.</p>
+</div>
+<div class="section" id="new-i-o-framework">
+<h2>1.21.2. New I/O framework<a class="headerlink" href="#new-i-o-framework" title="Permalink to this headline">¶</a></h2>
+<p>The input and output code has been completely revamped in order to modularise and simplify the code. It allows for data to be input on any timestep and interpolated down to the model timestep. Support for outputting of means and accumulations remains. NetCDF is now the only supported binary format (although it should be relatively simple to write drivers for other output formats if desired), and ASCII files are allowed for data at a single location only. Support for the GrADS flat binary format has been dropped, although the NetCDF output should be usable with GrADS with very little work.</p>
+</div>
+<div class="section" id="user-interface-changes">
+<h2>1.21.3. User Interface changes<a class="headerlink" href="#user-interface-changes" title="Permalink to this headline">¶</a></h2>
+<p>The user interface also sees significant changes. The monolithic .jin run control file has been replaced by several smaller files containing Fortran namelists for input of options and parameters. This is more consistent with the UM, and offers the opportunity to adapt UM tools to provide a GUI for running JULES in the future.</p>
+</div>
+<div class="section" id="other-changes">
+<h2>1.21.4. Other changes<a class="headerlink" href="#other-changes" title="Permalink to this headline">¶</a></h2>
+<p>There are several not-insignificant changes to the science code:</p>
+<ul class="simple">
+<li>Structures are now used for dimensioning variables - this allows for more flexibility of grids than the old system of row_length/rows and halos.</li>
+<li>Move to a new implicit solver - <code class="docutils literal notranslate"><span class="pre">sf_impl2</span></code> is now used rather than <code class="docutils literal notranslate"><span class="pre">sf_impl</span></code> for consistency with the UM. However, the way the implicit coupling is set up means it operates in a similar way to the old scheme.</li>
+<li>A change in the way fresh snow is handled in the multi-layer snow scheme - the density of fresh snow is now prescribed by a new variable (<code class="docutils literal notranslate"><span class="pre">rho_snow_fresh</span></code>). Suggested by Cécile Ménard and implemented by Doug Clark.</li>
+<li>Bug fix from Doug Clark for the multi-layer snow scheme that fixes problems with the model oscillating between 0 and 1 snow layers every timestep, preventing snow melt.</li>
+<li>Changes to the sea-ice surface exchange when operating as part of the UM. This will not affect the majority of users.</li>
+<li>Slight changes to the coupling between the explicit and implicit schemes. The vast majority of users will not need to worry about this.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.21. JULES version 3.1 Release Notes</a><ul>
+<li><a class="reference internal" href="#restructuring-of-the-code">1.21.1. Restructuring of the code</a></li>
+<li><a class="reference internal" href="#new-i-o-framework">1.21.2. New I/O framework</a></li>
+<li><a class="reference internal" href="#user-interface-changes">1.21.3. User Interface changes</a></li>
+<li><a class="reference internal" href="#other-changes">1.21.4. Other changes</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES3-2.html"
+                        title="previous chapter">1.20. JULES version 3.2 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES3-0.html"
+                        title="next chapter">1.22. JULES version 3.0 Release Notes</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES3-0.html" title="1.22. JULES version 3.0 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-2.html" title="1.20. JULES version 3.2 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.6 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>
