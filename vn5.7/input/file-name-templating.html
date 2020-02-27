@@ -1,0 +1,238 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>4.4. File name templating &#8212; Joint UK Land Environment Simulator (JULES) v5.7 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4.5. Temporal interpolation" href="temporal-interpolation.html" />
+    <link rel="prev" title="4.3. NetCDF files" href="netcdf.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="temporal-interpolation.html" title="4.5. Temporal interpolation"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="netcdf.html" title="4.3. NetCDF files"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.7 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="overview.html" accesskey="U">4. Input files for JULES</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="file-name-templating">
+<h1>4.4. File name templating<a class="headerlink" href="#file-name-templating" title="Permalink to this headline">¶</a></h1>
+<p>If the names of input files follow particular patterns, JULES can use a substitution template rather than requiring a potentially long list of file names. Templating comes in two forms, time templating and variable name templating, which can be used separately or together.</p>
+<p>Substitution strings are 3-character strings, starting with <code class="docutils literal notranslate"><span class="pre">%</span></code>. JULES will automatically detect the use of either form of templating by checking for the presence of the substitution strings in file names.</p>
+<div class="section" id="time-templating">
+<h2>4.4.1. Time templating<a class="headerlink" href="#time-templating" title="Permalink to this headline">¶</a></h2>
+<p>If any of the time templating substitution strings are present in a file name, then JULES assumes time-templating is to be used. The valid substitution strings for time templating are:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="19%" />
+<col width="81%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Substitution string</th>
+<th class="head">Replaced with</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">%y4</span></code></td>
+<td>4-digit year</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">%y2</span></code></td>
+<td>2-digit year</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">%m2</span></code></td>
+<td>2-digit month</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">%m1</span></code></td>
+<td>1- or 2-digit month</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">%mc</span></code></td>
+<td>3-character month abbreviation</td>
+</tr>
+</tbody>
+</table>
+<p>JULES will automatically detect the period (or frequency) of files based on the specific substitution strings in the following manner:</p>
+<div class="figure" id="id1">
+<img alt="Time templating flow diagram" src="../_images/time_templating_flow_diagram.png" />
+<p class="caption"><span class="caption-text">Flow diagram showing detection of file period from time templated string</span></p>
+</div>
+<p>This means that monthly files must also have a year substitution string present. Only yearly and monthly files are allowed with time templating, with each file containing a single period (year or month respectively) of data. For yearly files, the first data in each file must apply from 00:00:00 on 1st January for each year. For monthly files, the first data in the file must apply from 00:00:00 on the 1st of the month. Other configurations can be specified using a list of files with their respective start times.</p>
+</div>
+<div class="section" id="variable-name-templating">
+<h2>4.4.2. Variable name templating<a class="headerlink" href="#variable-name-templating" title="Permalink to this headline">¶</a></h2>
+<p>Variable name templating can be used when related variables are stored in separate files with file names that are identical apart from a section that indicates what variable is in each file. Examples of the use of this are given in the next section. JULES will automatically detect if the variable name substitution string - <code class="docutils literal notranslate"><span class="pre">%vv</span></code> - is present in a file name, and apply variable name templating if appropriate.</p>
+</div>
+<div class="section" id="examples-of-file-name-templating">
+<h2>4.4.3. Examples of file name templating<a class="headerlink" href="#examples-of-file-name-templating" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="time-templating-only">
+<h3>4.4.3.1. Time templating only<a class="headerlink" href="#time-templating-only" title="Permalink to this headline">¶</a></h3>
+<p>Data is in monthly files with all related variables in the same file.</p>
+<p>Template:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/data/met_data_%y4%m2.nc
+</pre></div>
+</div>
+<p>Example filenames:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/data/met_data_199001.nc
+/data/met_data_199002.nc
+...
+/data/met_data_200410.nc
+</pre></div>
+</div>
+</div>
+<div class="section" id="variable-name-templating-only">
+<h3>4.4.3.2. Variable name templating only<a class="headerlink" href="#variable-name-templating-only" title="Permalink to this headline">¶</a></h3>
+<p>Ancillary (non-time-varying) data with each variable in similarly named but separate files.</p>
+<p>Template:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/ancil/soil_%vv.nc
+</pre></div>
+</div>
+<p>Example filenames:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/data/soil_satcon.nc
+/data/soil_sathh.nc
+</pre></div>
+</div>
+</div>
+<div class="section" id="time-and-variable-name-templating-together">
+<h3>4.4.3.3. Time and variable name templating together<a class="headerlink" href="#time-and-variable-name-templating-together" title="Permalink to this headline">¶</a></h3>
+<p>Data is in monthly files with each variable in similarly named but separate files.</p>
+<p>Template:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/data/%vv_%y4%mc.nc
+</pre></div>
+</div>
+<p>Example filenames:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>/data/Rain_1990jan.nc
+/data/Wind_1990jan.nc
+...
+/data/Rain_2000oct.nc
+/data/Wind_2000oct.nc
+</pre></div>
+</div>
+</div>
+<div class="section" id="variable-name-templating-with-a-list-of-files">
+<h3>4.4.3.4. Variable name templating with a list of files<a class="headerlink" href="#variable-name-templating-with-a-list-of-files" title="Permalink to this headline">¶</a></h3>
+<p>Data in 6-monthly files with each variable in similarly named but separate files.</p>
+<p>Since the time templating cannot handle 6-monthly files, the files and their start times must be specified as a list. However, variable name templating can still be used.</p>
+<p>Also note that it is possible to use a substitution string more than once in a template.</p>
+<p>Template list:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./%vv/met_%vv_199001.nc
+./%vv/met_%vv_199007.nc
+...
+./%vv/met_%vv_199801.nc
+</pre></div>
+</div>
+<p>Example filenames:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./Rain/met_Rain_199001.nc
+./Wind/met_Wind_199001.nc
+./Rain/met_Rain_199007.nc
+./Wind/met_Wind_199007.nc
+...
+./Rain/met_Rain_199801.nc
+./Wind/met_Wind_199801.nc
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">4.4. File name templating</a><ul>
+<li><a class="reference internal" href="#time-templating">4.4.1. Time templating</a></li>
+<li><a class="reference internal" href="#variable-name-templating">4.4.2. Variable name templating</a></li>
+<li><a class="reference internal" href="#examples-of-file-name-templating">4.4.3. Examples of file name templating</a><ul>
+<li><a class="reference internal" href="#time-templating-only">4.4.3.1. Time templating only</a></li>
+<li><a class="reference internal" href="#variable-name-templating-only">4.4.3.2. Variable name templating only</a></li>
+<li><a class="reference internal" href="#time-and-variable-name-templating-together">4.4.3.3. Time and variable name templating together</a></li>
+<li><a class="reference internal" href="#variable-name-templating-with-a-list-of-files">4.4.3.4. Variable name templating with a list of files</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="netcdf.html"
+                        title="previous chapter">4.3. NetCDF files</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="temporal-interpolation.html"
+                        title="next chapter">4.5. Temporal interpolation</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="temporal-interpolation.html" title="4.5. Temporal interpolation"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="netcdf.html" title="4.3. NetCDF files"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.7 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="overview.html" >4. Input files for JULES</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>

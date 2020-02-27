@@ -1,0 +1,342 @@
+``jules_rivers.nml``
+====================
+
+This file sets the river routing options. It contains two namelists called :nml:lst:`JULES_RIVERS` and :nml:lst:`JULES_OVERBANK`.
+
+.. note::
+   The river routing code in JULES is still in development. Users should ensure that results are as expected, and provide feedback where deficiencies are identified.
+
+
+``JULES_RIVERS`` namelist members
+---------------------------------
+
+.. nml:namelist:: JULES_RIVERS
+
+.. nml:member:: l_rivers
+
+   :type: logical
+   :default: F
+
+   Switch for enabling river routing.
+
+   TRUE
+       Use the river routing algorithm specified by :nml:mem:`i_river_vn` to route runoff along river pathways.
+
+   FALSE
+       No river routing.
+
+
+.. nml:member:: l_inland
+
+   :type: logical
+   :default: F
+
+   Switch for enabling re-routing inland basin water back to soil moisture.
+
+   TRUE
+       Re-routing inland basin water back to soil moisture.
+
+   FALSE
+       No re-routing.
+
+
+.. nml:member:: i_river_vn
+
+   :type: integer
+   :default: rfm
+
+   Switch to select the river routing algorithm to use for river routing.
+
+   ``1``
+       Use a UM-coupled JULES implementation of the TRIP model (see Oki et al. 1999). This value is not allowed in standalone JULES
+
+   ``2``
+       Use a standalone JULES implementation of the RFM kinematic wave model (see Dadson and Bell 2010, Bell et al. 2007).
+
+   ``3``
+       Use a standalone JULES implementation of the TRIP model (see Oki et al. 1999).
+
+.. nml:member:: nstep_rivers
+
+   :type: integer
+   :permitted: > 0
+   :default: -32768
+
+   The number of model timesteps per routing timestep.
+   
+   For example, :nml:mem:`nstep_rivers` = 5 means that runoff will be accumulated for 5 model timesteps before being routed on the 5th timestep.
+
+
+.. warning::
+   The river routing parameter values can be highly dependent on model resolution, so care is required by the user to ensure that appropriate values are selected, tested and adjusted as required.
+   
+   Suggested values for global and high-resolution runs are listed below, however these should be treated as a starting point only.
+   
+   Values for some typical configurations are included in the ``jules_riversparm`` module. 
+
+
+.. nml:group:: RFM parameters - used if :nml:mem:`i_river_vn` = ``2``
+
+   .. nml:member:: cland
+
+      :type: real
+      :default: 0.20 m/s
+      :suggested: 0.20 m/s (global), 0.40 m/s (1 km resolution, Bell et al. 2007)
+
+      The land wave speed (kinematic wave speed for surface flow in a land grid cell, m s\ :sup:`-1`). This is the speed at which water moves through surface soil in a non-river grid cell (even without major rivers, there are always minor water courses so these cells do still contribute flow to neighbouring cells).
+
+
+   .. nml:member:: criver
+
+      :type: real
+      :default: 0.62 m/s
+      :suggested: 0.62 m/s (global), 0.50 m/s (1 km resolution, Bell et al. 2007)
+
+      The river wave speed (kinematic wave speed for surface flow in a river grid cell, m s\ :sup:`-1`). This value should be close to the :nml:mem:`rivers_speed` used by TRIP, but not identical because RFM makes different assumptions about e.g. meandering.
+
+
+   .. nml:member:: cbland
+
+      :type: real
+      :permitted: <= :nml:mem:`cland`
+      :default: 0.10 m/s
+      :suggested: 0.10 m/s (global), 0.05 m/s (1 km resolution, Bell et al. 2007)
+      
+      The subsurface land wave speed (kinematic wave speed for subsurface flow in a land grid cell, m s\ :sup:`-1`).
+
+
+   .. nml:member:: cbriver
+
+      :type: real
+      :permitted: <= :nml:mem:`criver`
+      :default: 0.15 m/s
+      :suggested: 0.15 m/s (global), 0.05 m/s (1 km resolution, Bell et al. 2007)
+
+      The subsurface river wave speed (kinematic wave speed for subsurface flow in a river grid cell, m s\ :sup:`-1`).
+
+
+   .. nml:member:: retl
+
+      :type: real
+      :permitted: (-1)-(+1)
+      :default: 0.0
+      :suggested: 0.005 (1 km resolution, Bell et al. 2007)
+
+      The (resolution dependent) land return flow fraction. Bell et al. (2007:Table1) suggested value 0.005. On non-river grid cells in the land mask: if retl>0 then fraction retl of the subsurface flow moves to the surface per routing timestep; if retl<0 then fraction retl of the surface flow moves to the subsurface per routing timestep.
+      
+
+   .. nml:member:: retr
+
+      :type: real
+      :permitted: (-1)-(+1)
+      :default: 0.005
+      :suggested: 0.005 (1 km resolution, Bell et al. 2007)
+
+      The (resolution dependent) river return flow fraction. On river grid cells in the land mask: if retr>0 then fraction retr of the subsurface flow moves to the surface per routing timestep; if retr<0 then fraction retr of the surface flow moves to the subsurface per routing timestep.
+
+
+   .. nml:member:: slfac
+
+      :type: real
+      :permitted: (0)-(+1)
+      :default: 0.0
+      :suggested: 0.0
+
+      Slope factor
+
+
+   .. nml:member:: a_thresh
+
+      :type: integer
+      :default: 1
+      :suggested: 1 (spatial resolution coarser than 20 km gridcells), ~10 (high-resolution)
+
+      The threshold drainage area (specified in number of cells) draining to a gridbox, above which the grid cell is considered to be a river point (see a_T in Bell et al. 2007:541). Remaining points are treated as land (drainage area = 0) or sea (drainage area < 0).
+      
+      Remaining points are treated as land (drainage area = 0) or sea (drainage area < 0). See Bell et al. (2007).
+
+
+   .. nml:member:: runoff_factor
+
+      :type: real
+      :default: 1.0
+
+      Values !=1.0 are generally used to correct biases in precipitation when the model is forced with observed data **It is highly recommended that this is set to 1.0 (i.e. no runoff adjustment).**
+ 
+ 
+.. nml:group:: TRIP parameters - used if :nml:mem:`i_river_vn` = ``1,3``
+
+   .. nml:member:: rivers_speed
+
+      :type: real
+      :default: 0.4
+
+      The effective river velocity (m s\ :sup:`-1`). See Oki et al. (1999). :nml:mem:`rivers_speed` should equal (river flow velocity / :nml:mem:`rivers_meander`).
+   
+   
+   .. nml:member:: rivers_meander
+
+      :type: real
+      :default: 1.4
+
+      The ratio of the actual to calculated river lengths in a river routing gridbox. See Oki et al. (1999).
+
+
+.. seealso::
+   References:
+   
+      * Arora VK & Boer GJ (2012). A variable velocity flow routing algorithm for GCMs. Journal of Geophysical Research D 104:30965-30979.
+      * Bell, V.A. et al. (2007) Development of a high resolution grid-based river flow model for use with regional climate model output. Hydrology and Earth System Sciences. 11 532-549
+      * Dadson, S.J. and Bell, V.A. (2010) Comparison of Grid-2-Grid and TRIP runoff routing schemes. Centre for Ecology & Hydrology Internal Report http://nora.nerc.ac.uk/10890/1/dadson_etal_2010_g2gtrip.pdf
+      * Dadson S.J. et al. (2011) Evaluation of a grid-based river flow model configured for use in a regional climate model. Journal of Hydrology. 411 238-250
+      * Falloon, P.D. et al (2007) New global river routing scheme in the Unified Model. Hadley Centre Technical Note 72, available from `the Met Office Library <http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes>`_.
+      * Jones R., Dadson, S. and Bell, V.A. (2007) Report on European grid-based river-flow modelling for application to Regional Climate Models. Met Office Hadley Centre deliverable report.
+      * Oki, T., et al (1999) Assessment of annual runoff from land surface models using Total Runoff Integrating Pathways (TRIP). Journal of the Meteorological Society of Japan. 77 235-255
+
+
+
+``JULES_OVERBANK`` namelist members
+-----------------------------------
+
+.. nml:namelist:: JULES_OVERBANK
+
+.. warning::
+   The overbank inundation parameter values can be highly dependent on model resolution, so care is required by the user to ensure that appropriate values are selected, tested and adjusted as required.
+   
+   Suggested values for global and high-resolution runs are listed below, however these should be treated as a starting point only.
+   
+.. nml:member:: l_riv_overbank
+
+   :type: logical
+   :default: F
+
+   Switch for enabling river overbank inundation. Only used if :nml:mem:`JULES_RIVERS::l_rivers` is TRUE.
+
+   TRUE
+       Calculate frac_fplain_lp, i.e. overbank inundation area as a fraction of gridcell area.
+
+   FALSE
+       No overbank inundation calculations
+
+.. note::
+   If :nml:mem:`JULES_OVERBANK::l_riv_overbank` = FALSE, no further variables are needed from this namelist.
+
+.. nml:member:: l_riv_hypsometry
+
+   :type: logical
+   :default: F
+
+   Switch for enabling use of a hypsometric integral calculation.
+
+   TRUE
+       Calculate inundated area from a hypsometric integral based on a lognormal area-altitude distribution (**recommended**).
+
+   FALSE
+       Estimate inundated area from simple river width scaling, ignoring topography (only to be used for testing).
+
+
+.. nml:group:: River depth allometry (used if :nml:mem:`JULES_OVERBANK::l_riv_hypsometry` is TRUE or :nml:mem:`JULES_OVERBANK::use_rosgen` is TRUE)
+
+   Allometry is: (DEPTH in m) = :nml:mem:`riv_c` * ( (SURFACE RIVER INFLOW in m3 s\ :sup:`-1`) ^ :nml:mem:`riv_f`) (Leopold & Maddock 1953:eqn2)
+
+
+   .. nml:member:: riv_c
+
+      :type: real
+      :default: none
+      :permitted: >=0 and <=(1/:nml:mem:`riv_a`)
+      :suggested: 0.27 (global, from Andreadis et al. 2013)
+
+      Coefficient in the allometry for river depth (units are (m / ((m3/s)^riv_f)), i.e. dependent on the value of riv_f)
+
+
+   .. nml:member:: riv_f
+
+      :type: real
+      :default: none
+      :permitted: >=0 and <=(1-:nml:mem:`riv_b`)
+      :suggested: 0.30 (global, from Andreadis et al. 2013)
+
+      Exponent in the allometry for river depth (dimensionless)
+
+
+.. nml:group:: River width scaling (used if :nml:mem:`JULES_OVERBANK::l_riv_hypsometry` is FALSE)
+
+   .. nml:group:: River width allometry
+
+      Allometry is: (WIDTH in m) = :nml:mem:`riv_a` * ( (SURFACE RIVER INFLOW in m3 s\ :sup:`-1`) ^ :nml:mem:`riv_b`) (Leopold & Maddock 1953:eqn1)
+
+
+      .. nml:member:: riv_a
+
+         :type: real
+         :default: none
+         :permitted: >=0 and <=(1/:nml:mem:`riv_c`)
+         :suggested: 7.20 (global, from Andreadis et al. 2013)
+
+         Coefficient in the allometry for river width (units are (m / ((m3/s)^riv_b)), i.e. dependent on the value of riv_b)
+
+
+      .. nml:member:: riv_b
+
+         :type: real
+         :default: none
+         :permitted: >=0 and <=(1-:nml:mem:`riv_f`)
+         :suggested: 0.50 (global, from Andreadis et al. 2013)
+
+         Exponent in the allometry for river width (dimensionless)
+
+
+      .. nml:member:: use_rosgen
+
+         :type: logical
+         :default: F
+
+         Switch for applying the Rosgen entrenchment ratio approach to estimate river width
+
+         TRUE
+             When inflow rates are lower than bankfull flow, river width is calculated from the River width allometry (above). However, when higher than bankfull flow, river width is constrained so that when river depth = 2 x bankfull depth then width = :nml:mem:`ent_ratio` * bankfull width.
+
+         FALSE
+             River width follows the allometry specified above whatever the inflow rate.
+
+
+   .. nml:group:: Bankfull flow allometry (used if :nml:mem:`use_rosgen` is TRUE) (Rosgen 1994)
+
+      Allometry is: (BANKFULL DISCHARGE RATE QBF in m3 s\ :sup:`-1`) = :nml:mem:`coef_b` * ( (CONTRIBUTING AREA in km2) ^ :nml:mem:`exp_c` ) (see e.g. Andreadis et al. 2013)
+
+
+      .. nml:member:: coef_b
+
+         :type: real
+         :default: none
+	 :suggested: 0.08 (for "several drainages in western Washington State, USA", Cragun 2005)
+
+         Coefficient in the allometry for bankfull flow (see Sen 2018:eqn3.33).
+
+
+      .. nml:member:: exp_c
+
+         :type: real
+         :default: none
+	 :suggested: 0.95 (for "several drainages in western Washington State, USA", Cragun 2005)
+
+         Exponent in the allometry for bankfull flow (see Sen 2018:eqn3.33).
+
+   
+      .. nml:member:: ent_ratio
+
+         :type: real
+         :default: none
+
+         The Rosgen entrenchment ratio (single value for all water courses in the simulation): when river depth = 2 x bankfull depth then width = :nml:mem:`ent_ratio` * bankfull width (i.e. :nml:mem:`ent_ratio` can be used to specify how wide floodplains are allowed to be).
+
+
+.. seealso::
+   References:
+   
+      * Andreadis KM, Schumann GJ & Pavelsky T (2013). A simple global river bankfull width and depth database. Water Resources Research 49:7164-7168
+      * Cragun WS (2005). Discharge-Area relations from Selected Drainages on the Colorado Plateau: A GIS Application. Utah State University, http://hydrology.usu.edu/giswr/archive05/scragun/termproject/
+      * Leopold LB & Maddock T (1953). The Hydraulic Geometry of Stream Channels and Some Physiographic Implications. United States Geological Survey Professional Papers 252:1-57
+      * Rosgen DL (1994). A classification of natural rivers. Catena 22:169-199.
+      * Sen Z (2018). Flood Modeling, Prediction and Mitigation. Springer.
