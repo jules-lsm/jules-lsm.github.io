@@ -1,0 +1,175 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1.19. JULES version 4.0 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v5.8 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.20. JULES version 3.4 Release Notes" href="JULES3-4.html" />
+    <link rel="prev" title="1.18. JULES version 4.1 Release Notes" href="JULES4-1.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES3-4.html" title="1.20. JULES version 3.4 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-1.html" title="1.18. JULES version 4.1 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.8 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-version-4-0-release-notes">
+<h1>1.19. JULES version 4.0 Release Notes<a class="headerlink" href="#jules-version-4-0-release-notes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="jules-crop-crop-model">
+<h2>1.19.1. JULES-Crop crop model<a class="headerlink" href="#jules-crop-crop-model" title="Permalink to this headline">¶</a></h2>
+<p>JULES vn4.0 sees the introduction of the JULES-Crop crop model. This has been the result of many years of hard work from Tom Osbourne et. al. at the <a class="reference external" href="http://www.reading.ac.uk/">University of Reading</a>.</p>
+<p>A lot of the work done in getting it ready for the trunk and testing was done in the Met Office by Karina Williams and Jemma Gornall.</p>
+</div>
+<div class="section" id="daily-disaggregator-for-forcing-data">
+<h2>1.19.2. Daily disaggregator for forcing data<a class="headerlink" href="#daily-disaggregator-for-forcing-data" title="Permalink to this headline">¶</a></h2>
+<p>JULES can now be driven with daily forcing data, and the daily disaggregator will disaggregate the daily forcing down onto the model timestep.</p>
+<p>For more information, see <a class="reference internal" href="../namelists/drive.nml.html#JULES_DRIVE::l_daily_disagg" title="JULES_DRIVE::l_daily_disagg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_daily_disagg</span></code></a>.</p>
+</div>
+<div class="section" id="major-namelist-changes">
+<h2>1.19.3. Major namelist changes<a class="headerlink" href="#major-namelist-changes" title="Permalink to this headline">¶</a></h2>
+<p>JULES vn4.0 also sees a major revamp of the science-related namelists. The monolithic JULES_SWITCHES namelist, and various others, are gone, and have been replaced with science section namelists. For more details, see <a class="reference internal" href="../namelists/contents.html"><span class="doc">The JULES namelist files</span></a>.</p>
+<p>This has been with the aim of providing a GUI for editing the JULES namelists using <a class="reference external" href="http://metomi.github.io/rose/doc/html/index.html">Rose</a>, which is now available - see <a class="reference internal" href="../building-and-running/rose.html"><span class="doc">Automatic upgrading and GUI using Rose</span></a>.</p>
+<p>It also has the advantage that the new namelists are cut-and-paste-able between the UM and JULES, which should make it easier to ensure that the same science is being used in online and offline runs.</p>
+</div>
+<div class="section" id="removal-of-gnu-make-build-files">
+<h2>1.19.4. Removal of GNU make build files<a class="headerlink" href="#removal-of-gnu-make-build-files" title="Permalink to this headline">¶</a></h2>
+<p>After a period of supporting two build systems (FCM make and GNU make), it has been decided that support for GNU make should be removed. The overhead of maintaining two build systems was getting too large, and FCM make is preferred for several reasons:</p>
+<dl class="docutils">
+<dt>Directory structure</dt>
+<dd><ul class="first last simple">
+<li>The directory level dependencies used by the JULES Makefile to ensure files are compiled in the correct order forced the directory structure to adapt to it.</li>
+<li>FCM make does automatic dependency analysis for each file to ensure they are compiled in the correct order, meaning the directory structure doesn’t have to be compromised to keep the build system happy.</li>
+</ul>
+</dd>
+<dt>Dependencies</dt>
+<dd><ul class="first last simple">
+<li>The JULES GNU Makefiles required that dependencies be manually maintained, both in terms of the order of sub-makes and actual file dependencies within the sub-makes.</li>
+<li>FCM make automatically detects all dependencies and does things in the correct order.</li>
+</ul>
+</dd>
+<dt>Parallel builds</dt>
+<dd><ul class="first last simple">
+<li>JULES builds with GNU make could not be parallelised, because of the use of directory level sub-makes.</li>
+<li>FCM make considers each individual file, so builds can be parallelised.</li>
+</ul>
+</dd>
+<dt>Integration with Rose</dt>
+<dd><ul class="first last simple">
+<li>FCM make has good integration with Rose, allowing the Rose GUI for JULES to configure and run builds as well as the namelists.</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="bugs-and-other-changes">
+<h2>1.19.5. Bugs and other changes<a class="headerlink" href="#bugs-and-other-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Output for land points not comparing between land_only = T and F runs with 2D grid</li>
+<li>Incorrect behaviour when <code class="docutils literal notranslate"><span class="pre">spinup_end</span></code> == <code class="docutils literal notranslate"><span class="pre">data_end</span></code></li>
+<li>Fixed overflow problem with <code class="docutils literal notranslate"><span class="pre">datetime_diff</span></code> when <code class="docutils literal notranslate"><span class="pre">datetime</span></code>s are too far apart</li>
+<li>Removed old implicit solver and ltimer code</li>
+<li>Unified management of printing and error reporting for UM and standalone</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.19. JULES version 4.0 Release Notes</a><ul>
+<li><a class="reference internal" href="#jules-crop-crop-model">1.19.1. JULES-Crop crop model</a></li>
+<li><a class="reference internal" href="#daily-disaggregator-for-forcing-data">1.19.2. Daily disaggregator for forcing data</a></li>
+<li><a class="reference internal" href="#major-namelist-changes">1.19.3. Major namelist changes</a></li>
+<li><a class="reference internal" href="#removal-of-gnu-make-build-files">1.19.4. Removal of GNU make build files</a></li>
+<li><a class="reference internal" href="#bugs-and-other-changes">1.19.5. Bugs and other changes</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES4-1.html"
+                        title="previous chapter">1.18. JULES version 4.1 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES3-4.html"
+                        title="next chapter">1.20. JULES version 3.4 Release Notes</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES3-4.html" title="1.20. JULES version 3.4 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-1.html" title="1.18. JULES version 4.1 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.8 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>

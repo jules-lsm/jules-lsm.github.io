@@ -1,0 +1,534 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.29. prescribed_data.nml &#8212; Joint UK Land Environment Simulator (JULES) v5.8 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.30. initial_conditions.nml" href="initial_conditions.nml.html" />
+    <link rel="prev" title="6.28. imogen.nml" href="imogen.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="initial_conditions.nml.html" title="6.30. initial_conditions.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="imogen.nml.html" title="6.28. imogen.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.8 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="prescribed-data-nml">
+<h1>6.29. <code class="docutils literal notranslate"><span class="pre">prescribed_data.nml</span></code><a class="headerlink" href="#prescribed-data-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains a variable number of namelists that are used to prescribe time-varying input data that is not meteorological forcing. The namelist <a class="reference internal" href="#namelist-JULES_PRESCRIBED"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_PRESCRIBED</span></code></a> should occur only once at the top of the file. The value of <a class="reference internal" href="#JULES_PRESCRIBED::n_datasets" title="JULES_PRESCRIBED::n_datasets"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">n_datasets</span></code></a> in <a class="reference internal" href="#namelist-JULES_PRESCRIBED"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_PRESCRIBED</span></code></a> then determines how many times the namelist <a class="reference internal" href="#namelist-JULES_PRESCRIBED_DATASET"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_PRESCRIBED_DATASET</span></code></a> should occur.</p>
+<div class="section" id="namelist-JULES_PRESCRIBED">
+<span id="jules-prescribed-namelist-members"></span><h2>6.29.1. <code class="docutils literal notranslate"><span class="pre">JULES_PRESCRIBED</span></code> namelist members<a class="headerlink" href="#namelist-JULES_PRESCRIBED" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_PRESCRIBED::n_datasets">
+<code class="descclassname">JULES_PRESCRIBED::</code><code class="descname">n_datasets</code><a class="headerlink" href="#JULES_PRESCRIBED::n_datasets" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of datasets that will be specified using instances of the <a class="reference internal" href="#namelist-JULES_PRESCRIBED_DATASET"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_PRESCRIBED_DATASET</span></code></a> namelist.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_PRESCRIBED_DATASET">
+<span id="jules-prescribed-dataset-namelist-members"></span><h2>6.29.2. <code class="docutils literal notranslate"><span class="pre">JULES_PRESCRIBED_DATASET</span></code> namelist members<a class="headerlink" href="#namelist-JULES_PRESCRIBED_DATASET" title="Permalink to this headline">¶</a></h2>
+<p>This namelist should occur <a class="reference internal" href="#JULES_PRESCRIBED::n_datasets" title="JULES_PRESCRIBED::n_datasets"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">n_datasets</span></code></a> times. Each occurrence of this namelist contains information about a single dataset (i.e. set of related files).</p>
+<div class="admonition-members-used-to-specify-the-start-end-and-period-of-the-data admonition">
+<p class="first admonition-title">Members used to specify the start, end and period of the data</p>
+<dl class="member">
+<dt id="JULES_PRESCRIBED_DATASET::data_start">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">data_start</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::data_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="JULES_PRESCRIBED_DATASET::data_end">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">data_end</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::data_end" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The times of the start of the first timestep of data and the end of the last timestep of data.</p>
+<p>Each run of JULES (configured in <a class="reference internal" href="timesteps.nml.html"><span class="doc">timesteps.nml</span></a>) can use part or all of the specified data. However, there must be data for all times between run start and run end (determined by <a class="reference internal" href="timesteps.nml.html#JULES_TIME::main_run_start" title="JULES_TIME::main_run_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_start</span></code></a>, <a class="reference internal" href="timesteps.nml.html#JULES_TIME::main_run_end" title="JULES_TIME::main_run_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_end</span></code></a>, <a class="reference internal" href="timesteps.nml.html#JULES_SPINUP::spinup_start" title="JULES_SPINUP::spinup_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">spinup_start</span></code></a> and <a class="reference internal" href="timesteps.nml.html#JULES_SPINUP::spinup_end" title="JULES_SPINUP::spinup_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">spinup_end</span></code></a>).</p>
+<p>The times must be given in the format:</p>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;yyyy-mm-dd hh:mm:ss&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PRESCRIBED_DATASET::data_period">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">data_period</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::data_period" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">-2, -1 or &gt; 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The period, in seconds, of the data.</p>
+<p>Special cases:</p>
+<div class="line-block">
+<div class="line"><strong>-1:</strong> Monthly data</div>
+<div class="line"><strong>-2:</strong> Yearly data</div>
+</div>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_PRESCRIBED_DATASET::is_climatology">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">is_climatology</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::is_climatology" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Indicates whether the data is to be used as a climatology (use the same data for every year).</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Interpret the data as a climatology. <a class="reference internal" href="#JULES_PRESCRIBED_DATASET::data_start" title="JULES_PRESCRIBED_DATASET::data_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">data_start</span></code></a> and <a class="reference internal" href="#JULES_PRESCRIBED_DATASET::data_end" title="JULES_PRESCRIBED_DATASET::data_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">data_end</span></code></a> must be such that exactly one year of data is specified.</dd>
+<dt>FALSE</dt>
+<dd>Do not interpret the data as a climatology.</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="admonition-members-used-to-specify-the-files-containing-the-data admonition">
+<p class="first admonition-title">Members used to specify the files containing the data</p>
+<dl class="member">
+<dt id="JULES_PRESCRIBED_DATASET::read_list">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">read_list</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::read_list" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch controlling how data file names are determined for a given time.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use a list of data file names with times of first data.</dd>
+<dt>FALSE</dt>
+<dd>Use a single data file for all times or a template describing the names of the data files.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PRESCRIBED_DATASET::nfiles">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">nfiles</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::nfiles" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>Only used if <a class="reference internal" href="#JULES_PRESCRIBED_DATASET::read_list" title="JULES_PRESCRIBED_DATASET::read_list"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">read_list</span></code></a> = TRUE.</p>
+<p>The number of data files to read name and time of first data for.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_PRESCRIBED_DATASET::file">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">file</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>If <a class="reference internal" href="#JULES_PRESCRIBED_DATASET::read_list" title="JULES_PRESCRIBED_DATASET::read_list"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">read_list</span></code></a> = TRUE, this is the file to read the list of data file names and times from. Each line should be of the form:</p>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;/data/file&#39;</span><span class="p">,</span> <span class="s1">&#39;yyyy-mm-dd hh:mm:ss&#39;</span>
+</pre></div>
+</div>
+<p>In this case data file names may contain variable name templating only, with the proviso that either no file names use variable name templating or all file names do. The files must appear in chronological order.</p>
+<p>If <a class="reference internal" href="#JULES_PRESCRIBED_DATASET::read_list" title="JULES_PRESCRIBED_DATASET::read_list"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">read_list</span></code></a> = FALSE, this is either the single data file (if no templating is used) or a template for data file names. Both <a class="reference internal" href="../input/file-name-templating.html"><span class="doc">time and variable name templating</span></a> may be used.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-members-used-to-specify-the-provided-variables admonition">
+<p class="first admonition-title">Members used to specify the provided variables</p>
+<dl class="member">
+<dt id="JULES_PRESCRIBED_DATASET::nvars">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">nvars</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::nvars" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of variables that the dataset will provide.</p>
+<p>See <a class="reference internal" href="#supported-prescribed-variables"><span class="std std-ref">List of supported variables</span></a> for the supported variables.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PRESCRIBED_DATASET::var">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">var</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::var" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>List of variable names as recognised by JULES (see <a class="reference internal" href="#supported-prescribed-variables"><span class="std std-ref">List of supported variables</span></a>). Names are case sensitive.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, variable names must be in the order they appear in the file.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PRESCRIBED_DATASET::var_name">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">var_name</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::var_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">‘’ (empty string)</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_PRESCRIBED_DATASET::var" title="JULES_PRESCRIBED_DATASET::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a>, this is the name of the variable in the file(s) containing the data.</p>
+<p>If the empty string (the default) is given for any variable, then the corresponding value from <a class="reference internal" href="#JULES_PRESCRIBED_DATASET::var" title="JULES_PRESCRIBED_DATASET::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a> is used instead.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this is not used - only the order in the file matters, as described above.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PRESCRIBED_DATASET::tpl_name">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">tpl_name</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::tpl_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_PRESCRIBED_DATASET::var" title="JULES_PRESCRIBED_DATASET::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a>, this is the string to substitute into the file name(s) in place of the variable name substitution string.</p>
+<p>If the file name(s) do not use variable name templating, this is not used.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_PRESCRIBED_DATASET::interp">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">interp</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::interp" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each JULES variable specified in <a class="reference internal" href="#JULES_PRESCRIBED_DATASET::var" title="JULES_PRESCRIBED_DATASET::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a>, this indicates how the variable is to be interpolated in time (see <a class="reference internal" href="../input/temporal-interpolation.html"><span class="doc">Temporal interpolation</span></a>).</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_PRESCRIBED_DATASET::prescribed_levels">
+<code class="descclassname">JULES_PRESCRIBED_DATASET::</code><code class="descname">prescribed_levels</code><a class="headerlink" href="#JULES_PRESCRIBED_DATASET::prescribed_levels" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer(n) where n ranges from 1 (one level prescribed) to <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sm_levels</span></code></a> (all levels prescribed)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1, …, <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sm_levels</span></code></a> i.e. all levels prescribed</td>
+</tr>
+</tbody>
+</table>
+<p>Indices of the subset of levels to be prescribed. Currently only implemented for <a class="reference internal" href="#JULES_PRESCRIBED_DATASET::var" title="JULES_PRESCRIBED_DATASET::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a> = <code class="docutils literal notranslate"><span class="pre">sthuf</span></code> and <a class="reference internal" href="#JULES_PRESCRIBED_DATASET::nvars" title="JULES_PRESCRIBED_DATASET::nvars"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nvars</span></code></a> = 1. The numbering of the soil level indices starts at 1 (corresponding to the layer touching the surface). Note that <code class="docutils literal notranslate"><span class="pre">sthuf</span></code> data must be provided for all soil levels, but can be set to dummy values for the levels that are not prescribed.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="list-of-supported-variables">
+<span id="supported-prescribed-variables"></span><h3>6.29.2.1. List of supported variables<a class="headerlink" href="#list-of-supported-variables" title="Permalink to this headline">¶</a></h3>
+<p>All variables input using <a class="reference internal" href="#"><span class="doc">prescribed_data.nml</span></a> must have a time dimension using <a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::time_dim_name" title="JULES_INPUT_GRID::time_dim_name"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">time_dim_name</span></code></a>.</p>
+<p>In theory, any variable with an entry in the subroutine <code class="docutils literal notranslate"><span class="pre">populate_var</span></code> in <code class="docutils literal notranslate"><span class="pre">model_interface_mod</span></code> (see <a class="reference internal" href="../code/io.html"><span class="doc">I/O framework</span></a>) can be updated via this mechanism, and the use of any of these variables is not explicitly prevented. However, it is up to the user to assess whether using this mechanism to update any particular variable is appropriate or desirable.</p>
+<p>The use of the following variables is explicitly supported:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="16%" />
+<col width="48%" />
+<col width="36%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+<th class="head">Levels dimension(s) required in files</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">ozone</span></code></td>
+<td><p class="first">Surface ozone concentration (ppb).</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Required if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_o3_damage" title="JULES_VEGETATION::l_o3_damage"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_o3_damage</span></code></a> = TRUE.</p>
+</div>
+</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">canht</span></code></td>
+<td><p class="first">PFT canopy height (m).</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not possible if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE</p>
+</div>
+</td>
+<td>Single levels dimension of size
+<a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::npft" title="JULES_SURFACE_TYPES::npft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">npft</span></code></a> using
+<a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::pft_dim_name" title="JULES_INPUT_GRID::pft_dim_name"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">pft_dim_name</span></code></a>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">lai</span></code></td>
+<td><p class="first">PFT leaf area index.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Not possible if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE
+or <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_phenol" title="JULES_VEGETATION::l_phenol"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_phenol</span></code></a> = TRUE</p>
+</div>
+</td>
+<td>Single levels dimension of size
+<a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::npft" title="JULES_SURFACE_TYPES::npft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">npft</span></code></a> using
+<a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::pft_dim_name" title="JULES_INPUT_GRID::pft_dim_name"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">pft_dim_name</span></code></a>.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">albobs_sw</span></code></td>
+<td><p class="first">Observed SW diffuse albedo.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Required if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_albedo_obs</span></code></a> = TRUE and
+<a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_spec_albedo</span></code></a> = FALSE.</p>
+</div>
+</td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">albobs_vis</span></code></td>
+<td><p class="first">Observed VIS diffuse albedo.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Required if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_albedo_obs</span></code></a> = TRUE and
+<a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_spec_albedo</span></code></a> = TRUE.</p>
+</div>
+</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">albobs_nir</span></code></td>
+<td><p class="first">Observed NIR diffuse albedo.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Required if <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_albedo_obs" title="JULES_RADIATION::l_albedo_obs"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_albedo_obs</span></code></a> = TRUE and
+<a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_spec_albedo</span></code></a> = TRUE.</p>
+</div>
+</td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">co2_mmr</span></code></td>
+<td><dl class="first docutils">
+<dt>Concentration of atmospheric CO2, expressed as a mass mixing</dt>
+<dd>ratio.</dd>
+</dl>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A single value of co2_mmr is applied globally. Data must be
+supplied for each gridpoint, but only the value of the first
+grid-point is used.</p>
+</div>
+</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">sthuf</span></code></td>
+<td><p class="first">Soil wetness for each soil layer. This is the mass of soil water
+(liquid and frozen), expressed as a fraction of the water
+content at saturation.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Soil wetness will be set to the prescribed value at the
+beginning of each timestep but will be incremented during
+that timestep. Also, it is recommended that the prescribed
+<code class="docutils literal notranslate"><span class="pre">sthuf</span></code> does not exceed one.</p>
+</div>
+</td>
+<td>Single levels dimension of size
+<a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sm_levels</span></code></a> using
+<a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::soil_dim_name" title="JULES_INPUT_GRID::soil_dim_name"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_dim_name</span></code></a>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">frac_agr</span></code></td>
+<td>Fractional area of agricultural land in each gridbox.</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">tracer_field</span></code></td>
+<td>Surface concentration of atmospheric chemical tracers in the
+atmosphere, for calculation of deposition, as mass mixing ratio
+(kg kg <sup>-1</sup>).</td>
+<td>Single levels dimension of size
+<a class="reference internal" href="jules_deposition.nml.html#JULES_DEPOSITION::ndry_dep_species" title="JULES_DEPOSITION::ndry_dep_species"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ndry_dep_species</span></code></a>
+using
+<a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::tracer_dim_name" title="JULES_INPUT_GRID::tracer_dim_name"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">tracer_dim_name</span></code></a>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">bl_height</span></code></td>
+<td>Height above surface of top of atmospheric boundary layer (m).</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">level_separation</span></code></td>
+<td>Separation of boundary layer levels (m).
+The levels are listed starting at the surface and working up.</td>
+<td>Single levels dimension of size
+<a class="reference internal" href="model_grid.nml.html#JULES_NLSIZES::bl_levels" title="JULES_NLSIZES::bl_levels"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">bl_levels</span></code></a> using
+<a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::bl_level_dim_name" title="JULES_INPUT_GRID::bl_level_dim_name"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">bl_level_dim_name</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.29. <code class="docutils literal notranslate"><span class="pre">prescribed_data.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-JULES_PRESCRIBED">6.29.1. <code class="docutils literal notranslate"><span class="pre">JULES_PRESCRIBED</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-JULES_PRESCRIBED_DATASET">6.29.2. <code class="docutils literal notranslate"><span class="pre">JULES_PRESCRIBED_DATASET</span></code> namelist members</a><ul>
+<li><a class="reference internal" href="#list-of-supported-variables">6.29.2.1. List of supported variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="imogen.nml.html"
+                        title="previous chapter">6.28. <code class="docutils literal notranslate"><span class="pre">imogen.nml</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="initial_conditions.nml.html"
+                        title="next chapter">6.30. <code class="docutils literal notranslate"><span class="pre">initial_conditions.nml</span></code></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="initial_conditions.nml.html" title="6.30. initial_conditions.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="imogen.nml.html" title="6.28. imogen.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.8 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>
