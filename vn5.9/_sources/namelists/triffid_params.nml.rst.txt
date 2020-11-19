@@ -1,0 +1,126 @@
+``triffid_params.nml``
+======================
+
+
+This file contains a single namelist called :nml:lst:`JULES_TRIFFID` that sets parameters relevant to the TRIFFID submodel.
+
+
+``JULES_TRIFFID`` namelist members
+----------------------------------
+
+.. nml:namelist:: JULES_TRIFFID
+
+This namelist is used to read PFT parameters that are only needed by the dynamic vegetation model (TRIFFID). Values are not used if TRIFFID is not selected.
+
+.. note:: Where a quantity is said to have units of "/360days", this means that it is an amount per 360 days.
+
+.. note:: If the crop model is on (i.e. :nml:mem:`JULES_SURFACE_TYPES::ncpft` > 0), only ``nnpft = npft - ncpft`` values will be used for each variable.
+
+
+.. nml:member:: crop_io
+
+   :type: integer(npft)
+   :permitted: 0,1,2
+   :default: None
+
+   Flag indicating whether the PFT is natural, crop, or pasture. Only
+   crop / pasture PFTs are allowed to grow in the agricultural
+   area. See :nml:mem:`JULES_VEGETATION::l_trif_crop` for more
+   details.
+
+   | If :nml:mem:`JULES_VEGETATION::l_trif_crop` is FALSE permitted values of ``crop_io`` are 0 and 1.
+
+   0. Natural vegetation (not a crop).
+   1. A crop.
+
+   | If :nml:mem:`JULES_VEGETATION::l_trif_crop` is TRUE permitted values of ``crop_io`` are 0, 1 and 2.
+
+   0. Natural vegetation (neither crop nor pasture).
+   1. Crop.
+   2. Pasture.
+
+.. nml:member:: g_area_io
+
+   :type: real(npft)
+   :default: None
+
+   Disturbance rate (/360days).
+
+
+.. nml:member:: g_grow_io
+
+   :type: real(npft)
+   :default: None
+
+   Rate of leaf growth (/360days).
+
+
+.. nml:member:: g_root_io
+
+   :type: real(npft)
+   :default: None
+
+   Turnover rate for root biomass (/360days).
+
+
+.. nml:member:: g_wood_io
+
+   :type: real(npft)
+   :default: None
+
+   Turnover rate for woody biomass (/360days).
+
+
+.. nml:member:: lai_max_io
+
+   :type: real(npft)
+   :default: None
+
+   Maximum LAI.
+
+
+.. nml:member:: lai_min_io
+
+   :type: real(npft)
+   :default: None
+
+   Minimum LAI.
+
+
+.. nml:member:: alloc_fast_io
+
+   :type: real(npft)
+   :default: None
+
+   Fraction of the carbon flux from vegetation to wood products to add to the rapidly decaying wood products pool (wood_prod_fast).
+
+
+.. nml:member:: alloc_med_io
+
+   :type: real(npft)
+   :default: None
+
+   Fraction of the carbon flux from vegetation to wood products to add to the wood products pool with a moderate decay rate (wood_prod_med).
+
+
+.. nml:member:: alloc_slow_io
+
+   :type: real(npft)
+   :default: None
+
+   Fraction of the carbon flux from vegetation to wood products to add to the slowly decaying wood products pool (wood_prod_slow).
+
+.. nml:member:: retran_l_io
+
+   :type: real(npft)
+   :default: 0.5
+
+   Fraction of retranslocated leaf N.
+
+.. nml:member:: retran_r_io
+
+   :type: real(npft)
+   :default: 0.2
+
+   Fraction of retranslocated root N.
+

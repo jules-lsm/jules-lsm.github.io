@@ -1,0 +1,548 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.7. jules_radiation.nml &#8212; Joint UK Land Environment Simulator (JULES) v5.9 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.8. jules_hydrology.nml" href="jules_hydrology.nml.html" />
+    <link rel="prev" title="6.6. jules_surface.nml" href="jules_surface.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_hydrology.nml.html" title="6.8. jules_hydrology.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_surface.nml.html" title="6.6. jules_surface.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-radiation-nml">
+<h1>6.7. <code class="docutils literal notranslate"><span class="pre">jules_radiation.nml</span></code><a class="headerlink" href="#jules-radiation-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets the radiation options. It contains one namelist called <a class="reference internal" href="#namelist-JULES_RADIATION"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_RADIATION</span></code></a>.</p>
+<div class="section" id="namelist-JULES_RADIATION">
+<span id="jules-radiation-namelist-members"></span><h2>6.7.1. <code class="docutils literal notranslate"><span class="pre">JULES_RADIATION</span></code> namelist members<a class="headerlink" href="#namelist-JULES_RADIATION" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_RADIATION::l_cosz">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">l_cosz</code><a class="headerlink" href="#JULES_RADIATION::l_cosz" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for calculation of solar zenith angle.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Calculate zenith angle.</dd>
+<dt>FALSE</dt>
+<dd>Assume constant zenith angle of zero, meaning sun is directly overhead.</dd>
+</dl>
+<p>n.b. assuming that the sun is directly overhead may overestimate primary productivity if <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE (see GPP on <a class="reference internal" href="../output-variables.html#output-variables-section"><span class="std std-ref">JULES Output variables</span></a>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::l_spec_albedo">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">l_spec_albedo</code><a class="headerlink" href="#JULES_RADIATION::l_spec_albedo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for the two-stream spectral land-surface albedo model.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use spectral albedo with VIS and NIR components.</dd>
+<dt>FALSE</dt>
+<dd>Use a single (averaged) waveband albedo.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::l_spec_alb_bs">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">l_spec_alb_bs</code><a class="headerlink" href="#JULES_RADIATION::l_spec_alb_bs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for albedo model, when spectral albedo is being used.</p>
+<p>Requires <a class="reference internal" href="#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_spec_albedo</span></code></a> = TRUE.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Produces a single albedo for use by both the direct and diffuse beams (a ‘blue’ sky albedo). This currently copies the diffuse beam albedo for the direct beam.</dd>
+<dt>FALSE</dt>
+<dd>Produces both a direct (‘black’ sky) and a diffuse (‘white’ sky) albedo.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::l_niso_direct">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">l_niso_direct</code><a class="headerlink" href="#JULES_RADIATION::l_niso_direct" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for using full non-isotropic expression for direct
+scattering in plant canopies when using the two-stream canopy
+radiation model.</p>
+<p>Requires <a class="reference internal" href="#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_spec_albedo</span></code></a> = TRUE.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use full non-isotropic expression for scattering in plant canopies.</dd>
+<dt>FALSE</dt>
+<dd>Use the original isotropic expression.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::l_snow_albedo">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">l_snow_albedo</code><a class="headerlink" href="#JULES_RADIATION::l_snow_albedo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for using prognostic snow properties, which represents the
+effect of snow aging and soot deposition, in model albedo.</p>
+<p>Requires <a class="reference internal" href="#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_spec_albedo</span></code></a> = TRUE.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use prognostic snow properties for albedo.</dd>
+<dt>FALSE</dt>
+<dd>Calculate albedo of snow using only snow depth.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::l_embedded_snow">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">l_embedded_snow</code><a class="headerlink" href="#JULES_RADIATION::l_embedded_snow" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to account for pft LAI and pft height in calculation of snow albedo.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use the embedded canopy snow albedo model. This is exclusive of <a class="reference internal" href="#JULES_RADIATION::l_snow_albedo" title="JULES_RADIATION::l_snow_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_snow_albedo</span></code></a>.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::l_mask_snow_orog">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">l_mask_snow_orog</code><a class="headerlink" href="#JULES_RADIATION::l_mask_snow_orog" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for orographic masking of snow, which decreases the albedo
+of snow in mountainous regions.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Include orographic masking of snow in calculating albedo.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::l_albedo_obs">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">l_albedo_obs</code><a class="headerlink" href="#JULES_RADIATION::l_albedo_obs" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for applying a scaling factor to the albedo values, on
+tiles, so that the resultant aggregate albedo matches
+observations. The supplied albedos should be from an observed
+climatology or analysis system and be supplied via an ancillary
+file.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd><p class="first">Scale the albedo values on tiles within the physical limits
+supplied in <a class="reference internal" href="pft_params.nml.html#namelist-JULES_PFTPARM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_PFTPARM</span></code></a> and
+<a class="reference internal" href="nveg_params.nml.html#namelist-JULES_NVEGPARM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_NVEGPARM</span></code></a>. When
+<a class="reference internal" href="#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_spec_albedo</span></code></a> = TRUE, VIS and NIR
+components are required and when
+<a class="reference internal" href="#JULES_RADIATION::l_spec_albedo" title="JULES_RADIATION::l_spec_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_spec_albedo</span></code></a> = FALSE the single
+(averaged) waveband albedo is required.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Observed albedo(s) must be prescribed in
+<a class="reference internal" href="prescribed_data.nml.html"><span class="doc">prescribed_data.nml</span></a>.</p>
+</div>
+</dd>
+<dt>FALSE</dt>
+<dd>Do not scale the albedo values on tiles.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::l_spec_sea_alb">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">l_spec_sea_alb</code><a class="headerlink" href="#JULES_RADIATION::l_spec_sea_alb" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to use spectrally varying open sea albedos</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd><p class="first">When <a class="reference internal" href="#JULES_RADIATION::i_sea_alb_method" title="JULES_RADIATION::i_sea_alb_method"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_sea_alb_method</span></code></a> = 1 or 2,
+spectrally varying sea albedos are produced only when the spectral
+file contains 6 SW bands identical to those used in HadGEM1.</p>
+<p class="last">When <a class="reference internal" href="#JULES_RADIATION::i_sea_alb_method" title="JULES_RADIATION::i_sea_alb_method"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_sea_alb_method</span></code></a> = 3, the spectral
+variability is calculated as per the Jin et al. (2011)
+parameterisation.</p>
+</dd>
+<dt>FALSE</dt>
+<dd>Uses the calculated broadband sea albedo instead.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::i_sea_alb_method">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">i_sea_alb_method</code><a class="headerlink" href="#JULES_RADIATION::i_sea_alb_method" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Choice of model for the Ocean Surface Albedo (open water, ice free)</p>
+<ol class="arabic simple">
+<li>Diffuse albedo constant (0.06), direct albedo from Briegleb and
+Ramanathan (1982).</li>
+<li>Diffuse albedo constant (0.06), direct albedo from Barker and
+Li (1995).</li>
+<li>Direct and diffuse albedo from Jin et al. (2011).</li>
+<li>Fixed global value, defined by <a class="reference internal" href="#JULES_RADIATION::fixed_sea_albedo" title="JULES_RADIATION::fixed_sea_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">fixed_sea_albedo</span></code></a>.</li>
+<li>Fixed global value, defined by
+<a class="reference internal" href="#JULES_RADIATION::fixed_sea_albedo" title="JULES_RADIATION::fixed_sea_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">fixed_sea_albedo</span></code></a>, above 271K and
+variable below this to simulate sea-ice following Liu et
+al. (2007), Joshi &amp; Haberle (2012) and Turbet et al. (2016).</li>
+</ol>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::fixed_sea_albedo">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">fixed_sea_albedo</code><a class="headerlink" href="#JULES_RADIATION::fixed_sea_albedo" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The global value of sea albedo to use if <a class="reference internal" href="#JULES_RADIATION::i_sea_alb_method" title="JULES_RADIATION::i_sea_alb_method"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_sea_alb_method</span></code></a> = 4, 5</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::wght_alb">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">wght_alb</code><a class="headerlink" href="#JULES_RADIATION::wght_alb" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(4)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Weights to form the overall albedo from its components (VIS direct,
+VIS diffuse, NIR direct, NIR diffuse)
+(Ideally, if <a class="reference internal" href="#JULES_RADIATION::l_partition_albsoil" title="JULES_RADIATION::l_partition_albsoil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_partition_albsoil</span></code></a> = T,
+<a class="reference internal" href="#JULES_RADIATION::wght_alb" title="JULES_RADIATION::wght_alb"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">wght_alb</span></code></a> and
+<a class="reference internal" href="#JULES_RADIATION::swdn_frac_albsoil" title="JULES_RADIATION::swdn_frac_albsoil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">swdn_frac_albsoil</span></code></a> should be consistent, with
+<a class="reference internal" href="#JULES_RADIATION::swdn_frac_albsoil" title="JULES_RADIATION::swdn_frac_albsoil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">swdn_frac_albsoil</span></code></a> equal to
+<img class="math" src="../_images/math/c46cecb4270bbc3c74fd4d2097cef83b33ca8144.png" alt="\sum_{3,4}"/>
+<a class="reference internal" href="#JULES_RADIATION::wght_alb" title="JULES_RADIATION::wght_alb"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">wght_alb</span></code></a> <img class="math" src="../_images/math/0bf1186fd85c7e4964ec194ccc719a3b989a46be.png" alt="/ \sum_1^4"/>
+<a class="reference internal" href="#JULES_RADIATION::wght_alb" title="JULES_RADIATION::wght_alb"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">wght_alb</span></code></a>.
+However, <a class="reference internal" href="#JULES_RADIATION::swdn_frac_albsoil" title="JULES_RADIATION::swdn_frac_albsoil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">swdn_frac_albsoil</span></code></a>
+is applied only to bare soil and having a single parameter
+is more transparent to the user, while
+<a class="reference internal" href="#JULES_RADIATION::wght_alb" title="JULES_RADIATION::wght_alb"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">wght_alb</span></code></a>
+is used only in diagnostics in standalone JULES and may have
+historical settings. Hence, the consistency of these two variables
+is not enforced.)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::l_hapke_soil">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">l_hapke_soil</code><a class="headerlink" href="#JULES_RADIATION::l_hapke_soil" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to enable Hapke’s model of soil albedo to include a zenith-angle
+dependence</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Apply a zenith-angle dependence to the direct albedo.</dd>
+<dt>FALSE</dt>
+<dd>Use the diffuse albedo for the direct beam as well.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::l_partition_albsoil">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">l_partition_albsoil</code><a class="headerlink" href="#JULES_RADIATION::l_partition_albsoil" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to apply a spectral partitioning to the soil albedo.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Partition the soil albedo between the visible and near infrared parts
+of the spectrum using <a class="reference internal" href="#JULES_RADIATION::ratio_albsoil" title="JULES_RADIATION::ratio_albsoil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ratio_albsoil</span></code></a> and
+<a class="reference internal" href="#JULES_RADIATION::swdn_frac_albsoil" title="JULES_RADIATION::swdn_frac_albsoil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">swdn_frac_albsoil</span></code></a>.</dd>
+<dt>FALSE</dt>
+<dd>Apply the broadband albedo in both spectral regions.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::ratio_albsoil">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">ratio_albsoil</code><a class="headerlink" href="#JULES_RADIATION::ratio_albsoil" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of the NIR to the VIS albedo of bare soil.
+Used if <a class="reference internal" href="#JULES_RADIATION::l_partition_albsoil" title="JULES_RADIATION::l_partition_albsoil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_partition_albsoil</span></code></a> = T.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_RADIATION::swdn_frac_albsoil">
+<code class="descclassname">JULES_RADIATION::</code><code class="descname">swdn_frac_albsoil</code><a class="headerlink" href="#JULES_RADIATION::swdn_frac_albsoil" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>The fraction of the total downward SW radiation assumed to be in the
+NIR part of the spectrum for partitioning the soil albedo.
+Used if <a class="reference internal" href="#JULES_RADIATION::l_partition_albsoil" title="JULES_RADIATION::l_partition_albsoil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_partition_albsoil</span></code></a> = T.
+(Ideally, <a class="reference internal" href="#JULES_RADIATION::wght_alb" title="JULES_RADIATION::wght_alb"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">wght_alb</span></code></a> and
+<a class="reference internal" href="#JULES_RADIATION::swdn_frac_albsoil" title="JULES_RADIATION::swdn_frac_albsoil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">swdn_frac_albsoil</span></code></a> should be consistent, with
+<a class="reference internal" href="#JULES_RADIATION::swdn_frac_albsoil" title="JULES_RADIATION::swdn_frac_albsoil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">swdn_frac_albsoil</span></code></a> equal to
+<img class="math" src="../_images/math/c46cecb4270bbc3c74fd4d2097cef83b33ca8144.png" alt="\sum_{3,4}"/>
+<a class="reference internal" href="#JULES_RADIATION::wght_alb" title="JULES_RADIATION::wght_alb"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">wght_alb</span></code></a> <img class="math" src="../_images/math/0bf1186fd85c7e4964ec194ccc719a3b989a46be.png" alt="/ \sum_1^4"/>
+<a class="reference internal" href="#JULES_RADIATION::wght_alb" title="JULES_RADIATION::wght_alb"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">wght_alb</span></code></a>.
+However, <a class="reference internal" href="#JULES_RADIATION::swdn_frac_albsoil" title="JULES_RADIATION::swdn_frac_albsoil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">swdn_frac_albsoil</span></code></a> is applied
+only to bare soil and having a single parameter is more transparent
+to the user, while <a class="reference internal" href="#JULES_RADIATION::wght_alb" title="JULES_RADIATION::wght_alb"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">wght_alb</span></code></a>
+is used only in diagnostics in standalone JULES and may have
+historical settings. Hence, the consistency of these two variables
+is not enforced.)</p>
+</dd></dl>
+
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Barker, H.W. and Li, Z. (1995), Improved Simulation of Clear-Sky
+Shortwave Radiative Transfer in the CCC-GCM. J. Climate, 8,
+2213–2223, <a class="reference external" href="https://doi.org/10.1175/1520-0442%281995%29008%3C2213%3AISOCSS%3E2.0.CO%3B2">doi:10.1175/1520-0442(1995)008&lt;2213:ISOCSS&gt;2.0.CO;2</a></li>
+<li>Briegleb, B. and Ramanathan, V. (1982), Spectral and Diurnal
+Variations in Clear Sky Planetary Albedo. J. Appl. Meteor., 21,
+1160–1171, <a class="reference external" href="https://doi.org/10.1175/1520-0450%281982%29021%3C1160%3ASADVIC%3E2.0.CO%3B2">doi:10.1175/1520-0450(1982)021&lt;1160:SADVIC&gt;2.0.CO;2</a></li>
+<li>Liu, J. , Zhang, Z. , Inoue, J. and Horton, R. M. (2007),
+Evaluation of snow/ice albedo parameterizations and their impacts
+on sea ice simulations. Int. J. Climatol., 27:
+81-91. <a class="reference external" href="https://doi.org/10.1002/joc.1373">doi:10.1002/joc.1373</a></li>
+<li>Zhonghai Jin, Yanli Qiao, Yingjian Wang, Yonghua Fang, and
+Weining Yi, “A new parameterization of spectral and broadband
+ocean surface albedo”, Opt. Express 19, 26429-26443 (2011),
+<a class="reference external" href="https://doi.org/10.1364/OE.19.026429">doi:10.1364/OE.19.026429</a></li>
+<li>B. Hapke, “Bidirectional reflectance spectroscopy: 1. Theory”,
+J. Geophys. Res. 86(B4), 3039-3054 (1981),
+<a class="reference external" href="http://doi.org/10.1029/JB086iB04p03039">doi:10.1029/JB086iB04p03039</a></li>
+<li>Manoj M. Joshi and
+Robert M. Haberle. Astrobiology. Jan 2012. ahead of print
+<a class="reference external" href="http://doi.org/10.1089/ast.2011.0668">doi:10.1089/ast.2011.0668</a></li>
+<li>Martin Turbet, Jérémy Leconte, Franck Selsis, Emeline Bolmont,
+François Forget, Ignasi Ribas, Sean N. Raymond and Guillem
+Anglada-Escudé (2016), The habitability of Proxima Centauri
+b - II. Possible climates and observability, A&amp;A, 596, A112,
+<a class="reference external" href="https://doi.org/10.1051/0004-6361/201629577">doi:10.1051/0004-6361/201629577</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.7. <code class="docutils literal notranslate"><span class="pre">jules_radiation.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-JULES_RADIATION">6.7.1. <code class="docutils literal notranslate"><span class="pre">JULES_RADIATION</span></code> namelist members</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="jules_surface.nml.html"
+                        title="previous chapter">6.6. <code class="docutils literal notranslate"><span class="pre">jules_surface.nml</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jules_hydrology.nml.html"
+                        title="next chapter">6.8. <code class="docutils literal notranslate"><span class="pre">jules_hydrology.nml</span></code></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_hydrology.nml.html" title="6.8. jules_hydrology.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_surface.nml.html" title="6.6. jules_surface.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>

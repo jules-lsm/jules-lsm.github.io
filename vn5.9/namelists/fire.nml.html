@@ -1,0 +1,222 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.28. fire.nml &#8212; Joint UK Land Environment Simulator (JULES) v5.9 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.29. drive.nml" href="drive.nml.html" />
+    <link rel="prev" title="6.27. urban.nml" href="urban.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="drive.nml.html" title="6.29. drive.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="urban.nml.html" title="6.27. urban.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fire-nml">
+<h1>6.28. <code class="docutils literal notranslate"><span class="pre">fire.nml</span></code><a class="headerlink" href="#fire-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains a single namelist called <a class="reference internal" href="#namelist-FIRE_SWITCHES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">FIRE_SWITCHES</span></code></a> that sets time-invariant parameters for performing wildfire-related calculations.</p>
+<div class="section" id="namelist-FIRE_SWITCHES">
+<span id="fire-switches-namelist-members"></span><h2>6.28.1. <code class="docutils literal notranslate"><span class="pre">FIRE_SWITCHES</span></code> namelist members<a class="headerlink" href="#namelist-FIRE_SWITCHES" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="FIRE_SWITCHES::l_fire">
+<code class="descclassname">FIRE_SWITCHES::</code><code class="descname">l_fire</code><a class="headerlink" href="#FIRE_SWITCHES::l_fire" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to enable the fire module.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>The fire module will be executed according to the settings of subsequent namelist members.</dd>
+<dt>FALSE</dt>
+<dd>The fire module will not be executed and subsequent members of the namelist will have no effect.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="FIRE_SWITCHES::mcarthur_flag">
+<code class="descclassname">FIRE_SWITCHES::</code><code class="descname">mcarthur_flag</code><a class="headerlink" href="#FIRE_SWITCHES::mcarthur_flag" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for calculating the McArthur Forest Fire Danger Index (FFDI).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="FIRE_SWITCHES::mcarthur_opt">
+<code class="descclassname">FIRE_SWITCHES::</code><code class="descname">mcarthur_opt</code><a class="headerlink" href="#FIRE_SWITCHES::mcarthur_opt" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for choosing which method of calculating the soil moisture deficit required for the McArthur Forest Fire Danger Index (FFDI). 1 uses the model soil moisture, 2 uses a fixed value of 120 mm.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="FIRE_SWITCHES::canadian_flag">
+<code class="descclassname">FIRE_SWITCHES::</code><code class="descname">canadian_flag</code><a class="headerlink" href="#FIRE_SWITCHES::canadian_flag" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for calculating the Canadian Fire Weather Index (FWI).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="FIRE_SWITCHES::canadian_hemi_opt">
+<code class="descclassname">FIRE_SWITCHES::</code><code class="descname">canadian_hemi_opt</code><a class="headerlink" href="#FIRE_SWITCHES::canadian_hemi_opt" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>If TRUE, then the month-dependent parameters used in the calculation will be offset by 6 months for the southern hemisphere. This will cause a discontinuity in results when crossing the equator.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="FIRE_SWITCHES::nesterov_flag">
+<code class="descclassname">FIRE_SWITCHES::</code><code class="descname">nesterov_flag</code><a class="headerlink" href="#FIRE_SWITCHES::nesterov_flag" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">boolean</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for calculating the Nesterov Index.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.28. <code class="docutils literal notranslate"><span class="pre">fire.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-FIRE_SWITCHES">6.28.1. <code class="docutils literal notranslate"><span class="pre">FIRE_SWITCHES</span></code> namelist members</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="urban.nml.html"
+                        title="previous chapter">6.27. <code class="docutils literal notranslate"><span class="pre">urban.nml</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="drive.nml.html"
+                        title="next chapter">6.29. <code class="docutils literal notranslate"><span class="pre">drive.nml</span></code></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="drive.nml.html" title="6.29. drive.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="urban.nml.html" title="6.27. urban.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>

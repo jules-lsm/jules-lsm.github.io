@@ -1,0 +1,461 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.16. jules_water_resources.nml &#8212; Joint UK Land Environment Simulator (JULES) v5.9 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.17. jules_irrig.nml" href="jules_irrig.nml.html" />
+    <link rel="prev" title="6.15. jules_rivers.nml" href="jules_rivers.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_irrig.nml.html" title="6.17. jules_irrig.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_rivers.nml.html" title="6.15. jules_rivers.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-water-resources-nml">
+<h1>6.16. <code class="docutils literal notranslate"><span class="pre">jules_water_resources.nml</span></code><a class="headerlink" href="#jules-water-resources-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets options for water resource modelling. It contains a single namelist called <a class="reference internal" href="#namelist-JULES_WATER_RESOURCES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_WATER_RESOURCES</span></code></a>.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The water resource code in JULES is still in development. It should only be used by the developers.</p>
+</div>
+<div class="section" id="namelist-JULES_WATER_RESOURCES">
+<span id="jules-water-resources-namelist-members"></span><h2>6.16.1. <code class="docutils literal notranslate"><span class="pre">JULES_WATER_RESOURCES</span></code> namelist members<a class="headerlink" href="#namelist-JULES_WATER_RESOURCES" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::l_water_resources">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">l_water_resources</code><a class="headerlink" href="#JULES_WATER_RESOURCES::l_water_resources" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to enable modelling of water resources.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Water resources are modelled.
+This also requires that river routing is selected (<a class="reference internal" href="jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE).</dd>
+<dt>FALSE</dt>
+<dd>No water resources. In this case no further values from this namelist are required.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::nstep_water_res">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">nstep_water_res</code><a class="headerlink" href="#JULES_WATER_RESOURCES::nstep_water_res" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt; 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">none</td>
+</tr>
+</tbody>
+</table>
+<p>The number of model timesteps per water resource timestep. (The main model timestep is given by <a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a>.)</p>
+<p>For example, <a class="reference internal" href="#JULES_WATER_RESOURCES::nstep_water_res" title="JULES_WATER_RESOURCES::nstep_water_res"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nstep_water_res</span></code></a> = 12 means that demands for water will be accumulated over 12 model timesteps before the water resource code is called on the 12th timestep.</p>
+<p>The water resource and river routing models must be in synchrony (i.e. be called on the same timesteps).</p>
+</dd></dl>
+
+<div class="admonition-switches-that-control-which-water-sectors-are-considered admonition">
+<p class="first admonition-title">Switches that control which water sectors are considered.</p>
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::l_water_domestic">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">l_water_domestic</code><a class="headerlink" href="#JULES_WATER_RESOURCES::l_water_domestic" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for modelling of water for domestic use.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Consider demand for water for domestic use. This requires that the domestic demand is prescribed as an input to the model (see <a class="reference internal" href="prescribed_data.nml.html"><span class="doc">prescribed_data.nml</span></a>).</dd>
+<dt>FALSE</dt>
+<dd>Do not consider domestic demand.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::l_water_environment">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">l_water_environment</code><a class="headerlink" href="#JULES_WATER_RESOURCES::l_water_environment" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for modelling of water for environmental flow requirements.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Consider demand for water for environmental flows.</dd>
+<dt>FALSE</dt>
+<dd>Do not consider environmental demand.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::l_water_industry">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">l_water_industry</code><a class="headerlink" href="#JULES_WATER_RESOURCES::l_water_industry" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for modelling of water for industrial use. This requires that the industrial demand is prescribed as an input to the model (see <a class="reference internal" href="prescribed_data.nml.html"><span class="doc">prescribed_data.nml</span></a>).</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Consider demand for water for industrial use.</dd>
+<dt>FALSE</dt>
+<dd>Do not consider industrial demand.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::l_water_irrigation">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">l_water_irrigation</code><a class="headerlink" href="#JULES_WATER_RESOURCES::l_water_irrigation" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for modelling of water for irrigation.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Consider demand for water for irrigation.</dd>
+<dt>FALSE</dt>
+<dd>Do not consider irrigation demand.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::l_water_livestock">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">l_water_livestock</code><a class="headerlink" href="#JULES_WATER_RESOURCES::l_water_livestock" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for modelling of water for livestock.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Consider demand for water for livestock. This requires that the livestock demand is prescribed as an input to the model (see <a class="reference internal" href="prescribed_data.nml.html"><span class="doc">prescribed_data.nml</span></a>).</dd>
+<dt>FALSE</dt>
+<dd>Do not consider livestock demand.</dd>
+</dl>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_WATER_RESOURCES::l_water_transfers">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">l_water_transfers</code><a class="headerlink" href="#JULES_WATER_RESOURCES::l_water_transfers" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for modelling of water for transfers.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Consider demand for water for transfers. This requires that the demand for transfers is prescribed as an input to the model (see <a class="reference internal" href="prescribed_data.nml.html"><span class="doc">prescribed_data.nml</span></a>).</dd>
+<dt>FALSE</dt>
+<dd>Do not consider transfers.</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="admonition-switches-that-control-prioritisation-of-demands admonition">
+<p class="first admonition-title">Switches that control prioritisation of demands.</p>
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::l_prioritise">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">l_prioritise</code><a class="headerlink" href="#JULES_WATER_RESOURCES::l_prioritise" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch controlling prioritisation of demands.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Rank demands from sectors in priority order.</dd>
+<dt>FALSE</dt>
+<dd>No prioritisation. No further items from this group are required.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::priority">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">priority</code><a class="headerlink" href="#JULES_WATER_RESOURCES::priority" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">none</td>
+</tr>
+</tbody>
+</table>
+<p>A list of water sector names, in order of decreasing priority - see the table below for valid names. Only used if <a class="reference internal" href="#JULES_WATER_RESOURCES::l_prioritise" title="JULES_WATER_RESOURCES::l_prioritise"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_prioritise</span></code></a> = TRUE. All active sectors (as selected by switches such as <a class="reference internal" href="#JULES_WATER_RESOURCES::l_water_domestic" title="JULES_WATER_RESOURCES::l_water_domestic"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_domestic</span></code></a>) must be represented in this list. The same prioritisation is used for all points in the domain.</p>
+</dd></dl>
+
+<table border="1" class="last docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">dom</span></code></td>
+<td>Domestic use</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">env</span></code></td>
+<td>Environmental flows</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">ind</span></code></td>
+<td>Industrial use</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">irr</span></code></td>
+<td>Irrigation</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">liv</span></code></td>
+<td>Livestock use</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">tra</span></code></td>
+<td>Water transfers</td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::nr_gwater_model">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">nr_gwater_model</code><a class="headerlink" href="#JULES_WATER_RESOURCES::nr_gwater_model" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0,1,2</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">none</td>
+</tr>
+</tbody>
+</table>
+<p>Choice for the model of non-renewable groundwater. Non-renewable groundwater is water that is not otherwise explicitly included in the model. It is an idealised, infinite source of water which is typically intended to allow consideration of pumping of grounwater from deep reserves that are difficult to quantify.</p>
+<p>Possible values are:</p>
+<ol class="arabic" start="0">
+<li><div class="first line-block">
+<div class="line">No non-renewable groundwater is considered.</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Non-renewable groundwater is used as a last resort, when no other sources of water are available.</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Non-renewable groundwater is used as as ‘part of the mix’, in conjunction with other sources of water.</div>
+</div>
+</li>
+</ol>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::rf_domestic">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">rf_domestic</code><a class="headerlink" href="#JULES_WATER_RESOURCES::rf_domestic" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0-1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">none</td>
+</tr>
+</tbody>
+</table>
+<p>The fraction of water that is returned after abstraction for domestic use (via sewage systems etc.). Only used if <a class="reference internal" href="#JULES_WATER_RESOURCES::l_water_domestic" title="JULES_WATER_RESOURCES::l_water_domestic"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_domestic</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::rf_industry">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">rf_industry</code><a class="headerlink" href="#JULES_WATER_RESOURCES::rf_industry" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0-1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">none</td>
+</tr>
+</tbody>
+</table>
+<p>The fraction of water that is returned after abstraction for industrial use. Only used if <a class="reference internal" href="#JULES_WATER_RESOURCES::l_water_industry" title="JULES_WATER_RESOURCES::l_water_industry"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_industry</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_WATER_RESOURCES::rf_livestock">
+<code class="descclassname">JULES_WATER_RESOURCES::</code><code class="descname">rf_livestock</code><a class="headerlink" href="#JULES_WATER_RESOURCES::rf_livestock" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0-1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">none</td>
+</tr>
+</tbody>
+</table>
+<p>The fraction of water that is returned after abstraction for livestock. Only used if <a class="reference internal" href="#JULES_WATER_RESOURCES::l_water_livestock" title="JULES_WATER_RESOURCES::l_water_livestock"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_livestock</span></code></a> = TRUE.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.16. <code class="docutils literal notranslate"><span class="pre">jules_water_resources.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-JULES_WATER_RESOURCES">6.16.1. <code class="docutils literal notranslate"><span class="pre">JULES_WATER_RESOURCES</span></code> namelist members</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="jules_rivers.nml.html"
+                        title="previous chapter">6.15. <code class="docutils literal notranslate"><span class="pre">jules_rivers.nml</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jules_irrig.nml.html"
+                        title="next chapter">6.17. <code class="docutils literal notranslate"><span class="pre">jules_irrig.nml</span></code></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_irrig.nml.html" title="6.17. jules_irrig.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_rivers.nml.html" title="6.15. jules_rivers.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v5.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>
