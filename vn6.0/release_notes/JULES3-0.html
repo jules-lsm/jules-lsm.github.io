@@ -1,0 +1,122 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1.26. JULES version 3.0 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v6.0 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.27. JULES version 2.2 Release Notes" href="JULES2-2.html" />
+    <link rel="prev" title="1.25. JULES version 3.1 Release Notes" href="JULES3-1.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES2-2.html" title="1.27. JULES version 2.2 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-1.html" title="1.25. JULES version 3.1 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.0 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-version-3-0-release-notes">
+<h1>1.26. JULES version 3.0 Release Notes<a class="headerlink" href="#jules-version-3-0-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>The major change in version 3.0 is the introduction of the IMOGEN impacts tool. IMOGEN is a system where JULES is gridded on to surface land points, and is forced with an emulation of climate change using “pattern-scaling” calibrated against the Hadley Centre GCM. This climate change impacts system has the advantage that:</p>
+<ul class="simple">
+<li>The pattern-scaling allows estimates of climate change for a broad range of emissions scenarios.</li>
+<li>New process understanding can be tested for its global implications.</li>
+<li>New process understanding can also be checked for stability before full inclusion in a GCM.</li>
+<li>By adding climate change anomalies to datasets such as the CRU dataset, then GCM biases can be removed.</li>
+</ul>
+<p>It must be recognised that the system is “off-line”, and so if major changes to the land surface occur there might be local and regional feedbacks that can only be predicted using a fully coupled GCM. Hence IMOGEN doesn’t replace GCMs, but it does give a very powerful first-look as to potential land surface changes in an anthropogenically forced varying climate. This was accomplished with help from Mark Lomas at the University of Sheffield and Chris Huntingford at CEH.</p>
+<p>There are also several small bug fixes:</p>
+<ul class="simple">
+<li>A fix effecting fluxes in <cite>sf_stom</cite> from Lina Mercado at CEH. This bug fix was announced on the mailing list.</li>
+<li>Small fixes for potential evaporation and canopy snow depth from the UM.</li>
+<li>A small issue with some memory not being deallocated at the end of a run.</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES3-1.html"
+                        title="previous chapter">1.25. JULES version 3.1 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES2-2.html"
+                        title="next chapter">1.27. JULES version 2.2 Release Notes</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES2-2.html" title="1.27. JULES version 2.2 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-1.html" title="1.25. JULES version 3.1 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.0 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>

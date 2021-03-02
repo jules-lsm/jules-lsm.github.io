@@ -1,0 +1,207 @@
+pre {
+  background-color : #f2f8ff;
+}
+
+tt {
+  background-color : #f1f5f7;
+  border : 1px solid #C6C9CB;
+  padding : 2px 4px;
+}
+
+dt tt:only-child {  
+  display : inline-block;
+  margin-bottom : 2px;
+}
+
+h1 tt, h2 tt, h3 tt, h4 tt, h5 tt, h6 tt, a tt, dl.member dt tt {
+  border : 0;
+  padding : 0;
+  margin : 0;
+}
+
+a tt {
+  color : inherit;
+}
+
+p.rubric {
+  padding-top : 5px;
+  border-top : 1px solid #C6C9CB;
+  padding-left : 10px;
+}
+
+table.footnote {
+  margin : 0px 10px;
+}
+
+div.sphinxsidebar {
+	width : 20%;
+}
+
+div.bodywrapper {
+	margin : 0 0 0 20%;
+}
+
+div.sphinxsidebarwrapper {
+	padding-top : 10px;
+}
+
+div.sphinxsidebar p {
+	padding : 5px 10px;
+	margin-top : 0;
+}
+
+
+/* Namelist member formatting */
+dl {
+  margin : 0;
+}
+
+dl > dd {
+  margin-top : 5px;
+  margin-bottom : 15px;
+}
+
+dl > dd:empty {
+  margin-top : 0px;
+  margin-bottom : 0px;
+}
+
+dl.member > dt {
+  font-size : 1.1em;
+}
+
+dl.member > dd {
+  margin-bottom : 25px;
+}
+
+dl.member > dd:empty {
+  margin-bottom : 0px;
+}
+
+
+/* Admonition stuff */
+div.admonition {
+  padding : 7px 15px 15px;
+  border : 1px solid #C6C9CB;
+}
+
+div.admonition p.admonition-title {
+  position : relative;
+  top : -7px;
+  display : block;
+  background-color : #e1e5e7;
+  border-bottom : 1px solid #C6C9CB;
+  margin : -7px -15px 0px;
+  padding : 5px 15px;
+  font-size : 1.1em;
+}
+
+p.admonition-title:after {
+  content : "";
+}
+
+div.admonition p.admonition-title + p {
+  display : block;
+  margin-top : 5px;
+}
+
+div.admonition p.admonition-title + * {
+  margin-top : 5px;
+}
+
+div.admonition p.last, div.admonition div.last, div.admonition ul.last, div.admonition ol.last {
+  margin-bottom : 0px;
+}
+
+div.admonition dl.last > dd {
+  margin-bottom : 0;
+}
+
+div.admonition dl.last > dd > :last-child {
+  margin-bottom : 0;
+}
+
+tt.descclassname {
+  font-weight : normal;
+}
+
+dt {
+  font-weight : bold;
+}
+
+div.warning {
+  border : 1px solid #ff5050;
+}
+
+div.warning p.admonition-title {
+  border-bottom : 1px solid #ff5050;
+  background-color : #ff8080;
+}
+
+
+/* Tables */
+table.docutils th, table.docutils td {
+  border : 1px solid #C6C9CB !important;
+  padding : 7px 10px;
+}
+
+table.docutils th {
+  background-color : #e1e5e7;
+}
+
+table.docutils td[colspan] {
+  background-color : #ebeff1;
+  font-weight : bold;
+}
+
+table.docutils td .last {
+  margin-bottom : 0;
+}
+
+table.docutils tr.row-odd {
+  background-color : #f2f8ff;
+}
+	
+	
+table.field-list {
+  margin-top : 5px;
+}
+
+table.field-list tr.row-odd {
+  background-color : transparent;
+}
+
+table.field-list th, table.field-list td {
+  padding : 3px 8px 3px 5px;
+}
+
+table.field-list th {
+  text-align : right;
+}
+
+table.field-list td.field-body {
+  text-align : center;
+  min-width : 150px;
+  font-family : monospace;
+}
+
+
+/* Figures */
+div.figure {
+  text-align : center;
+}
+
+div.figure p.caption {
+  font-weight : bold;
+  font-size : 0.9em;
+}
+
+div.figure p.caption:before {
+  content : "Figure: "
+}
+
+div.figure img {
+  border: 1px solid #C6C9CB;
+  box-shadow: 1px 1px 1px #D8D8D8;
+  padding : 10px;
+}

@@ -1,0 +1,572 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.33. output.nml &#8212; Joint UK Land Environment Simulator (JULES) v6.0 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="7. JULES examples" href="../examples.html" />
+    <link rel="prev" title="6.32. initial_conditions.nml" href="initial_conditions.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="../examples.html" title="7. JULES examples"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="initial_conditions.nml.html" title="6.32. initial_conditions.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.0 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="output-nml">
+<h1>6.33. <code class="docutils literal notranslate"><span class="pre">output.nml</span></code><a class="headerlink" href="#output-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains a variable number of namelists that are used to specify the output required by the user. The namelist <a class="reference internal" href="#namelist-JULES_OUTPUT"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_OUTPUT</span></code></a> should occur only once at the top of the file. The value of <a class="reference internal" href="#JULES_OUTPUT::nprofiles" title="JULES_OUTPUT::nprofiles"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nprofiles</span></code></a> in <a class="reference internal" href="#namelist-JULES_OUTPUT"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_OUTPUT</span></code></a> then determines how many times the namelist <a class="reference internal" href="#namelist-JULES_OUTPUT_PROFILE"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_OUTPUT_PROFILE</span></code></a> should appear.</p>
+<div class="section" id="namelist-JULES_OUTPUT">
+<span id="jules-output-namelist-members"></span><h2>6.33.1. <code class="docutils literal notranslate"><span class="pre">JULES_OUTPUT</span></code> namelist members<a class="headerlink" href="#namelist-JULES_OUTPUT" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_OUTPUT::output_dir">
+<code class="descclassname">JULES_OUTPUT::</code><code class="descname">output_dir</code><a class="headerlink" href="#JULES_OUTPUT::output_dir" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The directory used for output files. This can be an absolute or relative path.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT::run_id">
+<code class="descclassname">JULES_OUTPUT::</code><code class="descname">run_id</code><a class="headerlink" href="#JULES_OUTPUT::run_id" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>A name or identifier for the run. This is used to name output files and model dumps.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT::nprofiles">
+<code class="descclassname">JULES_OUTPUT::</code><code class="descname">nprofiles</code><a class="headerlink" href="#JULES_OUTPUT::nprofiles" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of output profiles that will be specified using instances of the <a class="reference internal" href="#namelist-JULES_OUTPUT_PROFILE"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_OUTPUT_PROFILE</span></code></a> namelist.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT::dump_period">
+<code class="descclassname">JULES_OUTPUT::</code><code class="descname">dump_period</code><a class="headerlink" href="#JULES_OUTPUT::dump_period" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">1</td>
+</tr>
+</tbody>
+</table>
+<p>The period between model dumps, unit depends on <a class="reference internal" href="#JULES_OUTPUT::dump_period_unit" title="JULES_OUTPUT::dump_period_unit"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dump_period_unit</span></code></a>.</p>
+<p>In calendar year mode, the number of years between model dumps. Note that the calendar year (date) is used to determine whether a dump is written, not the number of years simulated so far. For example, a run that starts in the year 2012 and with <a class="reference internal" href="#JULES_OUTPUT::dump_period" title="JULES_OUTPUT::dump_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dump_period</span></code></a> = 5 will write dumps at the start of years 2015, 2020, 2025,…</p>
+<p>In second of calendar day mode, the number of seconds between model dumps. Note that this is calculated using the number of seconds into the day, not the number seconds simulated so far. For example, with <a class="reference internal" href="#JULES_OUTPUT::dump_period_unit" title="JULES_OUTPUT::dump_period_unit"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dump_period_unit</span></code></a> = ‘T’ and <a class="reference internal" href="#JULES_OUTPUT::dump_period" title="JULES_OUTPUT::dump_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dump_period</span></code></a> = 10800, a run will write dumps at T00:00, T03:00, T06:00, T09:00, T12:00, T15:00, T18:00 and T21:00 of a calendar day.</p>
+<p>Dumps are also written at the start and end of the main run, and at the start of each cycle of any spin up.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT::dump_period_unit">
+<code class="descclassname">JULES_OUTPUT::</code><code class="descname">dump_period_unit</code><a class="headerlink" href="#JULES_OUTPUT::dump_period_unit" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(1)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">‘Y’, ‘T’</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">‘Y’</td>
+</tr>
+</tbody>
+</table>
+<p>The unit/mode for the model dump period setting <a class="reference internal" href="#JULES_OUTPUT::dump_period" title="JULES_OUTPUT::dump_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dump_period</span></code></a>. If <a class="reference internal" href="#JULES_OUTPUT::dump_period_unit" title="JULES_OUTPUT::dump_period_unit"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dump_period_unit</span></code></a> = ‘Y’, use calendar year mode (default) and <a class="reference internal" href="#JULES_OUTPUT::dump_period" title="JULES_OUTPUT::dump_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dump_period</span></code></a> is in number of years. If <a class="reference internal" href="#JULES_OUTPUT::dump_period_unit" title="JULES_OUTPUT::dump_period_unit"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dump_period_unit</span></code></a> = ‘T’, use second of calendar day mode and <a class="reference internal" href="#JULES_OUTPUT::dump_period" title="JULES_OUTPUT::dump_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dump_period</span></code></a> is in number of seconds.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="namelist-JULES_OUTPUT_PROFILE">
+<span id="jules-output-profile-namelist-members"></span><h2>6.33.2. <code class="docutils literal notranslate"><span class="pre">JULES_OUTPUT_PROFILE</span></code> namelist members<a class="headerlink" href="#namelist-JULES_OUTPUT_PROFILE" title="Permalink to this headline">¶</a></h2>
+<p>This namelist should occur <a class="reference internal" href="#JULES_OUTPUT::nprofiles" title="JULES_OUTPUT::nprofiles"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nprofiles</span></code></a> times. Each occurrence of this namelist contains information about a single output profile, as described in <a class="reference internal" href="../output.html"><span class="doc">JULES output</span></a>.</p>
+<dl class="member">
+<dt id="JULES_OUTPUT_PROFILE::profile_name">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">profile_name</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::profile_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The name of the output profile.</p>
+<p>This is used in file names and should be specified even if there is only one profile. The name for each profile should be unique to avoid overwriting data unintentionally.</p>
+<p>Although any name can be used for a profile, the user may which to choose a name that reflects the variables in the file (e.g. ‘carbon’, ‘water’) or the data frequency (e.g. ‘daily’, ‘monthly’).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT_PROFILE::file_period">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">file_period</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::file_period" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">-2, -1 or 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The period for output files, i.e. the time interval during which all output goes to the same file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In all cases, output during spin-up goes into a separate file for each spin-up cycle and output during the main run goes into its own file(s).</p>
+</div>
+<p>This can be one of three values:</p>
+<dl class="docutils">
+<dt>0</dt>
+<dd>All output goes into the same file.</dd>
+<dt>-1</dt>
+<dd>Monthly files are produced (i.e. all output for a month goes into the same file).</dd>
+<dt>-2</dt>
+<dd>Annual files (calendar years) are produced.</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition-members-used-to-specify-the-times-that-the-profile-will-generate-output admonition">
+<p class="first admonition-title">Members used to specify the times that the profile will generate output</p>
+<dl class="member">
+<dt id="JULES_OUTPUT_PROFILE::output_spinup">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">output_spinup</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::output_spinup" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Determines whether the profile will provide output during model spin-up.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Provide output during spin-up. Output is provided for the whole of the model spin-up. Output from each spin-up cycle goes into separate files.</dd>
+<dt>FALSE</dt>
+<dd>Do not provide any output during spin-up.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT_PROFILE::output_main_run">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">output_main_run</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::output_main_run" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Determines whether the profile will provide output during the main model run (i.e. any part of the run after spin-up).</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Provide output during the main model run. Output will be provided for all times between <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_start" title="JULES_OUTPUT_PROFILE::output_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_start</span></code></a> and <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_end" title="JULES_OUTPUT_PROFILE::output_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_end</span></code></a> below.</dd>
+<dt>FALSE</dt>
+<dd>Do not provide any output during the main model run.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT_PROFILE::output_initial">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">output_initial</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::output_initial" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Determines whether the profile will output initial data for the sections for which it is outputting.</p>
+<p>See <a class="reference internal" href="../output.html#initial-data"><span class="std std-ref">Initial data</span></a> for caveats on the initial data file(s) produced.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd><p class="first">Output initial data for the profile.</p>
+<p>If <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_spinup" title="JULES_OUTPUT_PROFILE::output_spinup"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_spinup</span></code></a> = T, an initial data file will be output at the start of each spinup cycle.</p>
+<p class="last">If <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_main_run" title="JULES_OUTPUT_PROFILE::output_main_run"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_main_run</span></code></a> = T and <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_start" title="JULES_OUTPUT_PROFILE::output_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_start</span></code></a> = <a class="reference internal" href="timesteps.nml.html#JULES_TIME::main_run_start" title="JULES_TIME::main_run_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_start</span></code></a>, an initial data file will be output at the start of the main run.</p>
+</dd>
+<dt>FALSE</dt>
+<dd>Do not output any initial data.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT_PROFILE::output_start">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">output_start</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::output_start" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT_PROFILE::output_end">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">output_end</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::output_end" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body"><a class="reference internal" href="timesteps.nml.html#JULES_TIME::main_run_start" title="JULES_TIME::main_run_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_start</span></code></a>, <a class="reference internal" href="timesteps.nml.html#JULES_TIME::main_run_end" title="JULES_TIME::main_run_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_end</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>The time to start and stop collecting data for output. The times that output is actually produced are determined by <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_period" title="JULES_OUTPUT_PROFILE::output_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_period</span></code></a> below.</p>
+<p>If <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_period" title="JULES_OUTPUT_PROFILE::output_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_period</span></code></a> is monthly, then <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_start" title="JULES_OUTPUT_PROFILE::output_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_start</span></code></a> must be 00:00:00 on the 1st of some month.</p>
+<p>If <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_period" title="JULES_OUTPUT_PROFILE::output_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_period</span></code></a> is yearly, then <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_start" title="JULES_OUTPUT_PROFILE::output_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_start</span></code></a> must be 00:00:00 on the 1st of January for some year.</p>
+<p>If <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_end" title="JULES_OUTPUT_PROFILE::output_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_end</span></code></a> is given such that an output period is not complete when the run reaches <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_end" title="JULES_OUTPUT_PROFILE::output_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_end</span></code></a>, output will not be generated for that final period (e.g. if values are being output monthly but <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_end" title="JULES_OUTPUT_PROFILE::output_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_end</span></code></a> is midday on the 31st December, then output will not be generated for December, even though most of December has been run).</p>
+<p>The times must be given in the format:</p>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;yyyy-mm-dd hh:mm:ss&quot;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT_PROFILE::output_period">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">output_period</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::output_period" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">-2, -1 or &gt; 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body"><a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>The period for output, in seconds. This controls the frequency with which output values are calculated; for time averages this is the length of time over which the average is calculated.</p>
+<p>This must be a multiple of the timestep length, except for the special cases:</p>
+<div class="line-block">
+<div class="line"><strong>-1:</strong> Monthly period</div>
+<div class="line"><strong>-2:</strong> Annual period</div>
+</div>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_OUTPUT_PROFILE::sample_period">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">sample_period</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::sample_period" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt; 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body"><a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a></td>
+</tr>
+</tbody>
+</table>
+<p>The sampling period, in seconds, for time-averages, minima, maxima and accumulations.</p>
+<p>This must be a factor of <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_period" title="JULES_OUTPUT_PROFILE::output_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_period</span></code></a> and a multiple of <a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a>. For the ‘special’ cases of <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_period" title="JULES_OUTPUT_PROFILE::output_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_period</span></code></a> (e.g. monthly and annual outputs), one day must be a mutiple of <a class="reference internal" href="#JULES_OUTPUT_PROFILE::sample_period" title="JULES_OUTPUT_PROFILE::sample_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sample_period</span></code></a>.</p>
+<p><a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_period" title="JULES_OUTPUT_PROFILE::output_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_period</span></code></a> controls the length of time over which any statistic (e.g. an average) is calculated; <a class="reference internal" href="#JULES_OUTPUT_PROFILE::sample_period" title="JULES_OUTPUT_PROFILE::sample_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sample_period</span></code></a> controls how often values are sampled within that time to construct the statistic.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>It is strongly recommended that <a class="reference internal" href="#JULES_OUTPUT_PROFILE::sample_period" title="JULES_OUTPUT_PROFILE::sample_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sample_period</span></code></a> be left at the default value for most applications.</p>
+<p>An example of when intermittent sampling can be useful is to construct a time average of values from particular timesteps, e.g. those on which a particular sub-model is called, for a variable that is reset to zero on other timesteps. Sampling every timestep will average over both the ‘good’ values and the zeros, whereas intermittent sampling can be used to pick up just the ‘good’ values. However, this is very rarely required with JULES.</p>
+<p>Another use for intermittent sampling is to save computational cost (at the expense of losing accuracy), though in practice this is rarely required. In exceptional cases, sampling every timestep can be relatively expensive and acceptable output can be achieved by sampling less frequently. For example, with a large domain, many output diagnostics and a timestep of 30 minutes, a monthly average would be calculated from several hundred values if every timestep was used. For variables that evolve relatively slowly, an acceptable monthly average might be obtained by sampling only every 12 hours.</p>
+<p class="last">If fields are not sampled every timestep, the averages/minima/maxima/accumulations will only be approximations.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="admonition-members-used-to-specify-the-variables-that-the-profile-will-output admonition">
+<p class="first admonition-title">Members used to specify the variables that the profile will output</p>
+<dl class="member">
+<dt id="JULES_OUTPUT_PROFILE::nvars">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">nvars</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::nvars" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of variables that the profile will provide output for.</p>
+<p>The variables available for output are given in <a class="reference internal" href="../output-variables.html"><span class="doc">JULES Output variables</span></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT_PROFILE::var">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">var</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::var" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>List of variable names to output, as recognised by JULES (see <a class="reference internal" href="../output-variables.html"><span class="doc">JULES Output variables</span></a>). Names are case sensitive.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_OUTPUT_PROFILE::var_name">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">var_name</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::var_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">‘’ (empty string)</td>
+</tr>
+</tbody>
+</table>
+<p>For each variable specified in <a class="reference internal" href="#JULES_OUTPUT_PROFILE::var" title="JULES_OUTPUT_PROFILE::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a>, this is the name to give the variable in output files.</p>
+<p>If the empty string (the default) is given for any variable, then the corresponding value from <a class="reference internal" href="#JULES_OUTPUT_PROFILE::var" title="JULES_OUTPUT_PROFILE::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a> is used instead.</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_OUTPUT_PROFILE::output_type">
+<code class="descclassname">JULES_OUTPUT_PROFILE::</code><code class="descname">output_type</code><a class="headerlink" href="#JULES_OUTPUT_PROFILE::output_type" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">‘S’</td>
+</tr>
+</tbody>
+</table>
+<p>For each variable specified in <a class="reference internal" href="#JULES_OUTPUT_PROFILE::var" title="JULES_OUTPUT_PROFILE::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a>, this indicates the type of processing required.</p>
+<p>Recognised values are:</p>
+<dl class="docutils">
+<dt>S</dt>
+<dd>Instantaneous or snapshot value.</dd>
+<dt>M</dt>
+<dd>Time mean value.</dd>
+<dt>N</dt>
+<dd>Time minimum value.</dd>
+<dt>X</dt>
+<dd>Time maximum value.</dd>
+<dt>A</dt>
+<dd>Accumulation over time.</dd>
+</dl>
+<p>For time average/minimum/maximum variables, the period over which each output value is calculated is given by <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_period" title="JULES_OUTPUT_PROFILE::output_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_period</span></code></a>. For time-accumulation variables, <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_period" title="JULES_OUTPUT_PROFILE::output_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_period</span></code></a> gives the period for output of an updated accumulation (i.e. how often the value is reported). For time averages, minima, maxima and accumulations, the sampling frequency is given by <a class="reference internal" href="#JULES_OUTPUT_PROFILE::sample_period" title="JULES_OUTPUT_PROFILE::sample_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sample_period</span></code></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A time-accumulation is initialised at the start of a run and thereafter accumulates until the end of the run. This may mean that accuracy is lost, particularly towards the end of long runs, if small increments are added to an already large sum. Furthermore, before being output the accumulation is multiplied by the number of model timesteps in a sample period. This adjusts the accumulation for any intermittent sampling and is designed so that the time accumulation of a flux (e.g. kg s<sup>-1</sup>) can easily be converted to a total (e.g. kg) by subsequently multiplying by the model timestep length during post processing.</p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="example-of-requesting-output">
+<h2>6.33.3. Example of requesting output<a class="headerlink" href="#example-of-requesting-output" title="Permalink to this headline">¶</a></h2>
+<p>In this example, the user has requested two output profiles. One provides gridbox monthly means for the whole of the main run, the other provides snapshot values of per-tile variables every timestep for a single year. We assume that <a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a> = 1800, <a class="reference internal" href="timesteps.nml.html#JULES_TIME::main_run_start" title="JULES_TIME::main_run_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_start</span></code></a> = ‘1995-01-01 00:00:00’ and <a class="reference internal" href="timesteps.nml.html#JULES_TIME::main_run_end" title="JULES_TIME::main_run_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_end</span></code></a> = ‘2005-01-01 00:00:00’, so that exactly 10 years will be run. There is no spin-up.</p>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="nn">&amp;JULES_OUTPUT</span>
+  <span class="nv">run_id</span> <span class="o">=</span> <span class="s2">&quot;jules_run001&quot;</span><span class="p">,</span>
+
+  <span class="nv">output_dir</span> <span class="o">=</span> <span class="s2">&quot;./output&quot;</span><span class="p">,</span>
+
+  <span class="nv">nprofiles</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_OUTPUT_PROFILE</span>
+  <span class="nv">profile_name</span> <span class="o">=</span> <span class="s2">&quot;month&quot;</span><span class="p">,</span>
+
+  <span class="nv">output_main_run</span> <span class="o">=</span> <span class="ss">T</span><span class="p">,</span>
+
+  <span class="nv">output_period</span> <span class="o">=</span> <span class="mi">-1</span><span class="p">,</span>
+
+  <span class="nv">nvars</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="nv">var</span>         <span class="o">=</span>    <span class="s2">&quot;emis_gb&quot;</span>        <span class="s2">&quot;ftl_gb&quot;</span>  <span class="s2">&quot;snow_mass_gb&quot;</span>  <span class="s2">&quot;tstar_gb&quot;</span><span class="p">,</span>
+  <span class="nv">var_name</span>    <span class="o">=</span> <span class="s2">&quot;Emissivity&quot;</span>  <span class="s2">&quot;SensibleHeat&quot;</span>      <span class="s2">&quot;SnowMass&quot;</span>      <span class="s2">&quot;Temp&quot;</span><span class="p">,</span>
+  <span class="nv">output_type</span> <span class="o">=</span>          <span class="s1">&#39;M&#39;</span>             <span class="s1">&#39;M&#39;</span>             <span class="s1">&#39;M&#39;</span>         <span class="s1">&#39;M&#39;</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_OUTPUT_PROFILE</span>
+  <span class="nv">profile_name</span> <span class="o">=</span> <span class="s2">&quot;tstep&quot;</span><span class="p">,</span>
+
+  <span class="nv">output_main_run</span> <span class="o">=</span> <span class="ss">T</span><span class="p">,</span>
+  <span class="nv">output_start</span>    <span class="o">=</span> <span class="s2">&quot;2000-01-01 00:00:00&quot;</span><span class="p">,</span>
+  <span class="nv">output_end</span>      <span class="o">=</span> <span class="s2">&quot;2001-01-01 00:00:00&quot;</span><span class="p">,</span>
+
+  <span class="nv">nvars</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="nv">var</span>         <span class="o">=</span> <span class="s2">&quot;emis&quot;</span>  <span class="s2">&quot;ftl&quot;</span>  <span class="s2">&quot;snow_mass&quot;</span>  <span class="s2">&quot;tstar&quot;</span><span class="p">,</span>
+  <span class="nv">output_type</span> <span class="o">=</span>    <span class="s1">&#39;S&#39;</span>    <span class="s1">&#39;S&#39;</span>          <span class="s1">&#39;S&#39;</span>      <span class="s1">&#39;S&#39;</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>Or using the alternative list syntax (see <a class="reference internal" href="intro.html"><span class="doc">Introduction to Fortran namelists</span></a>):</p>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="nn">&amp;JULES_OUTPUT</span>
+  <span class="c1"># ... as above ...</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_OUTPUT_PROFILE</span>
+  <span class="c1"># ... as above ...</span>
+
+  <span class="nv">nvars</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;emis_gb&quot;</span><span class="p">,</span>       <span class="nv">var_name</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;Emissivity&quot;</span><span class="p">,</span>    <span class="nv">output_type</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;ftl_gb&quot;</span><span class="p">,</span>        <span class="nv">var_name</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;SensibleHeat&quot;</span><span class="p">,</span>  <span class="nv">output_type</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;snow_mass_gb&quot;</span><span class="p">,</span>  <span class="nv">var_name</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;SnowMass&quot;</span><span class="p">,</span>      <span class="nv">output_type</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;tstar_gb&quot;</span><span class="p">,</span>      <span class="nv">var_name</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;Temp&quot;</span><span class="p">,</span>          <span class="nv">output_type</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;M&#39;</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_OUTPUT_PROFILE</span>
+  <span class="c1"># ... as above ...</span>
+
+  <span class="nv">nvars</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;emis&quot;</span><span class="p">,</span>       <span class="nv">output_type</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;ftl&quot;</span><span class="p">,</span>        <span class="nv">output_type</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;snow_mass&quot;</span><span class="p">,</span>  <span class="nv">output_type</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span>
+  <span class="nv">var</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;tstar&quot;</span><span class="p">,</span>      <span class="nv">output_type</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;S&#39;</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="#namelist-JULES_OUTPUT"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_OUTPUT</span></code></a> namelist is simple - it gives an id for the run, specifies the directory to put output in and specifies the number of profile definitions that follow.</p>
+<p>Each profile is given a unique name. Both profiles want to output part of the main run, so must set <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_main_run" title="JULES_OUTPUT_PROFILE::output_main_run"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_main_run</span></code></a> to TRUE. Since <a class="reference internal" href="#JULES_OUTPUT_PROFILE::sample_period" title="JULES_OUTPUT_PROFILE::sample_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sample_period</span></code></a> is not given for either profile, both will use the default (sample every timestep). The same is true for <a class="reference internal" href="#JULES_OUTPUT_PROFILE::file_period" title="JULES_OUTPUT_PROFILE::file_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">file_period</span></code></a> - since it is not given for either profile, it takes its default value and all output for each profile will go into a single file.</p>
+<p>The first output profile wants to output monthly averages, so <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_period" title="JULES_OUTPUT_PROFILE::output_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_period</span></code></a> is set to -1 (the special value indicating that calendar months should be used for the output period) and <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_type" title="JULES_OUTPUT_PROFILE::output_type"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_type</span></code></a> is set to ‘M’ (for mean) for each variable. The user wants this profile to output for the whole of the main run, so does not need to specify <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_start" title="JULES_OUTPUT_PROFILE::output_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_start</span></code></a> or <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_end" title="JULES_OUTPUT_PROFILE::output_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_end</span></code></a> (note that this is only possible because the main run starts at 00:00:00 on the 1st of a month - if this was not the case, the user would have to specify a different time for <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_start" title="JULES_OUTPUT_PROFILE::output_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_start</span></code></a>). The user has also chosen to supply the names that each variable will use in output files using <a class="reference internal" href="#JULES_OUTPUT_PROFILE::var_name" title="JULES_OUTPUT_PROFILE::var_name"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var_name</span></code></a>.</p>
+<p>The second output profile has specified a section of the main run that it will provide output for using <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_start" title="JULES_OUTPUT_PROFILE::output_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_start</span></code></a> and <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_end" title="JULES_OUTPUT_PROFILE::output_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_end</span></code></a> such that exactly a year of data will be output. Since <a class="reference internal" href="#JULES_OUTPUT_PROFILE::output_period" title="JULES_OUTPUT_PROFILE::output_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_period</span></code></a> is not specified, it takes its default value, and output will be produced every timestep. The user has not specified the names to use in output files for this profile, so the values from <a class="reference internal" href="#JULES_OUTPUT_PROFILE::var" title="JULES_OUTPUT_PROFILE::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a> will be used.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.33. <code class="docutils literal notranslate"><span class="pre">output.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-JULES_OUTPUT">6.33.1. <code class="docutils literal notranslate"><span class="pre">JULES_OUTPUT</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-JULES_OUTPUT_PROFILE">6.33.2. <code class="docutils literal notranslate"><span class="pre">JULES_OUTPUT_PROFILE</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#example-of-requesting-output">6.33.3. Example of requesting output</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="initial_conditions.nml.html"
+                        title="previous chapter">6.32. <code class="docutils literal notranslate"><span class="pre">initial_conditions.nml</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../examples.html"
+                        title="next chapter">7. JULES examples</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="../examples.html" title="7. JULES examples"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="initial_conditions.nml.html" title="6.32. initial_conditions.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.0 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.4.
+    </div>
+
+  </body>
+</html>
