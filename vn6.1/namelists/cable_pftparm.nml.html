@@ -1,0 +1,1019 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.23. cable_pftparm.nml &#8212; Joint UK Land Environment Simulator (JULES) v6.1 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.24. nveg_params.nml" href="nveg_params.nml.html" />
+    <link rel="prev" title="6.22. pft_params.nml" href="pft_params.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.24. nveg_params.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pft_params.nml.html" title="6.22. pft_params.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.1 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cable-pftparm-nml">
+<h1>6.23. <code class="docutils literal notranslate"><span class="pre">cable_pftparm.nml</span></code><a class="headerlink" href="#cable-pftparm-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets the time and space-invariant parameters for plant functional types for the CABLE land surface model. It contains one namelist called <a class="reference internal" href="#namelist-CABLE_PFTPARM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">CABLE_PFTPARM</span></code></a>.</p>
+<div class="section" id="namelist-CABLE_PFTPARM">
+<span id="cable-pftparm-namelist-members"></span><h2>6.23.1. <code class="docutils literal notranslate"><span class="pre">CABLE_PFTPARM</span></code> namelist members<a class="headerlink" href="#namelist-CABLE_PFTPARM" title="Permalink to this headline">¶</a></h2>
+<p>This namelist reads the values of parameters for each of the plant functional types (PFTs) if the CABLE land surface model is being used. These parameters are a function of PFT only. Every member must be given a value for every run.
+CABLE uses the same parameters for veg and non-veg surface types, unlike JULES, and therefore its arrays are of dimension (npft + nnvg).</p>
+<dl class="member">
+<dt id="CABLE_PFTPARM::a1gs_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">a1gs_io</code><a class="headerlink" href="#CABLE_PFTPARM::a1gs_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Represents the sensitivity of stomatal conductance to the assimilation rate (unitless).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::alpha_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">alpha_io</code><a class="headerlink" href="#CABLE_PFTPARM::alpha_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Initial slope of J-Q response curve. Units: mol (electrons) mol<sup>-1</sup> (photons) (C3)
+mol (CO<sub>2</sub>) mol<sup>-1</sup> (photons) (C4)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::canst1_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">canst1_io</code><a class="headerlink" href="#CABLE_PFTPARM::canst1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum intercepted water by canopy. (mm LAI<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::cfrd_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">cfrd_io</code><a class="headerlink" href="#CABLE_PFTPARM::cfrd_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Ratio of day respiration to vcmax</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::clitt_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">clitt_io</code><a class="headerlink" href="#CABLE_PFTPARM::clitt_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf litter (alters resistance to soil evaporation) (tC ha<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::conkc0_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">conkc0_io</code><a class="headerlink" href="#CABLE_PFTPARM::conkc0_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Michaelis-menton constant for carboxylase (bar)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::conko0_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">conko0_io</code><a class="headerlink" href="#CABLE_PFTPARM::conko0_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Michaelis-menton constant for oxygenase (bar)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::convex_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">convex_io</code><a class="headerlink" href="#CABLE_PFTPARM::convex_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Convexity of J-Q response curve (unitless).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::cplant1_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">cplant1_io</code><a class="headerlink" href="#CABLE_PFTPARM::cplant1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon in 1st vegetation carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::cplant2_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">cplant2_io</code><a class="headerlink" href="#CABLE_PFTPARM::cplant2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon in 2nd vegetation carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::cplant3_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">cplant3_io</code><a class="headerlink" href="#CABLE_PFTPARM::cplant3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon in 3rd vegetation carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::csoil1_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">csoil1_io</code><a class="headerlink" href="#CABLE_PFTPARM::csoil1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil carbon in 1st soil carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::csoil2_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">csoil2_io</code><a class="headerlink" href="#CABLE_PFTPARM::csoil2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil carbon in 2nd soil carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::d0gs_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">d0gs_io</code><a class="headerlink" href="#CABLE_PFTPARM::d0gs_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>d0 in stomatal conductance model (kPa)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::ejmax_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">ejmax_io</code><a class="headerlink" href="#CABLE_PFTPARM::ejmax_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum potential electron transport rate top leaf, currently double the assigned value of vcmax. (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::ekc_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">ekc_io</code><a class="headerlink" href="#CABLE_PFTPARM::ekc_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Activation energy for carboxylase (J mol<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::eko_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">eko_io</code><a class="headerlink" href="#CABLE_PFTPARM::eko_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Activation energy for oxygenase (J mol<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::extkn_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">extkn_io</code><a class="headerlink" href="#CABLE_PFTPARM::extkn_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Extinction coefficient for vertical profile of N.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::frac4_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">frac4_io</code><a class="headerlink" href="#CABLE_PFTPARM::frac4_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of c4 plants</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::froot1_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">froot1_io</code><a class="headerlink" href="#CABLE_PFTPARM::froot1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 1st soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::froot2_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">froot2_io</code><a class="headerlink" href="#CABLE_PFTPARM::froot2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 2nd soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::froot3_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">froot3_io</code><a class="headerlink" href="#CABLE_PFTPARM::froot3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 3rd soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::froot4_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">froot4_io</code><a class="headerlink" href="#CABLE_PFTPARM::froot4_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 4th soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::froot5_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">froot5_io</code><a class="headerlink" href="#CABLE_PFTPARM::froot5_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 5th soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::froot6_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">froot6_io</code><a class="headerlink" href="#CABLE_PFTPARM::froot6_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Fraction of root in 6th soil layer.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::g0_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">g0_io</code><a class="headerlink" href="#CABLE_PFTPARM::g0_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Residual stomatal conductance as net assimilation rate reaches zero (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::g1_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">g1_io</code><a class="headerlink" href="#CABLE_PFTPARM::g1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Sensitivity of stomatal conductance to the assimilation rate (kPa).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::gswmin_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">gswmin_io</code><a class="headerlink" href="#CABLE_PFTPARM::gswmin_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Minimal stomatal conductance (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::hc_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">hc_io</code><a class="headerlink" href="#CABLE_PFTPARM::hc_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Height of canopy (m)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::lai_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">lai_io</code><a class="headerlink" href="#CABLE_PFTPARM::lai_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The leaf area index (LAI) of each PFT.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::length_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">length_io</code><a class="headerlink" href="#CABLE_PFTPARM::length_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf length (m)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::ratecp1_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">ratecp1_io</code><a class="headerlink" href="#CABLE_PFTPARM::ratecp1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon pool rate constant in 1st vegetation carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::ratecp2_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">ratecp2_io</code><a class="headerlink" href="#CABLE_PFTPARM::ratecp2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon pool rate constant in 2nd vegetation carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::ratecp3_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">ratecp3_io</code><a class="headerlink" href="#CABLE_PFTPARM::ratecp3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant carbon pool rate constant in 3rd vegetation carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::ratecs1_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">ratecs1_io</code><a class="headerlink" href="#CABLE_PFTPARM::ratecs1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil carbon pool rate constant in 1st soil carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::ratecs2_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">ratecs2_io</code><a class="headerlink" href="#CABLE_PFTPARM::ratecs2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil carbon pool rate constant in 2nd soil carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::refl1_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">refl1_io</code><a class="headerlink" href="#CABLE_PFTPARM::refl1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf reflectance in 1st radiation band.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::refl2_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">refl2_io</code><a class="headerlink" href="#CABLE_PFTPARM::refl2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf reflectance in 2nd radiation band.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::refl3_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">refl3_io</code><a class="headerlink" href="#CABLE_PFTPARM::refl3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf reflectance in 3rd radiation band.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::rp20_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">rp20_io</code><a class="headerlink" href="#CABLE_PFTPARM::rp20_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Plant respiration scaler</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::rpcoef_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">rpcoef_io</code><a class="headerlink" href="#CABLE_PFTPARM::rpcoef_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Temperature coefficient for non-leaf plant respiration (C<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::rs20_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">rs20_io</code><a class="headerlink" href="#CABLE_PFTPARM::rs20_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Soil respiration at 20 deg C</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::shelrb_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">shelrb_io</code><a class="headerlink" href="#CABLE_PFTPARM::shelrb_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Sheltering factor</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::taul1_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">taul1_io</code><a class="headerlink" href="#CABLE_PFTPARM::taul1_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf transmittance in 1st radiation band</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::taul2_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">taul2_io</code><a class="headerlink" href="#CABLE_PFTPARM::taul2_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf transmittance in 2nd radiation band</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::taul3_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">taul3_io</code><a class="headerlink" href="#CABLE_PFTPARM::taul3_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf transmittance in 3rd radiation band</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::tmaxvj_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">tmaxvj_io</code><a class="headerlink" href="#CABLE_PFTPARM::tmaxvj_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum temperature of the start of photosynthesis (deg C)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::tminvj_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">tminvj_io</code><a class="headerlink" href="#CABLE_PFTPARM::tminvj_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum temperature of the start of photosynthesis (deg C)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::vbeta_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">vbeta_io</code><a class="headerlink" href="#CABLE_PFTPARM::vbeta_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Stomatal sensitivity to soil water.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::vcmax_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">vcmax_io</code><a class="headerlink" href="#CABLE_PFTPARM::vcmax_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum RuBP carboxylation rate top leaf. (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::vegcf_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">vegcf_io</code><a class="headerlink" href="#CABLE_PFTPARM::vegcf_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Scalar on soil respiration (place-holder scheme)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::wai_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">wai_io</code><a class="headerlink" href="#CABLE_PFTPARM::wai_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Wood area index (stem + branches + twigs) (not currently used in any calculations)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::width_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">width_io</code><a class="headerlink" href="#CABLE_PFTPARM::width_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf width (m)</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::xalbnir_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">xalbnir_io</code><a class="headerlink" href="#CABLE_PFTPARM::xalbnir_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Not currently used in any calculations.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::xfang_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">xfang_io</code><a class="headerlink" href="#CABLE_PFTPARM::xfang_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Leaf angle parameter</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PFTPARM::zr_io">
+<code class="descclassname">CABLE_PFTPARM::</code><code class="descname">zr_io</code><a class="headerlink" href="#CABLE_PFTPARM::zr_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(npft + nnvg)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">MDI</td>
+</tr>
+</tbody>
+</table>
+<p>Maximum rooting depth (cm)</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.23. <code class="docutils literal notranslate"><span class="pre">cable_pftparm.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-CABLE_PFTPARM">6.23.1. <code class="docutils literal notranslate"><span class="pre">CABLE_PFTPARM</span></code> namelist members</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="pft_params.nml.html"
+                        title="previous chapter">6.22. <code class="docutils literal notranslate"><span class="pre">pft_params.nml</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nveg_params.nml.html"
+                        title="next chapter">6.24. <code class="docutils literal notranslate"><span class="pre">nveg_params.nml</span></code></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.24. nveg_params.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pft_params.nml.html" title="6.22. pft_params.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.1 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.
+    </div>
+
+  </body>
+</html>

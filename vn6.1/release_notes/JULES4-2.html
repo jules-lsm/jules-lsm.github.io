@@ -1,0 +1,159 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1.20. JULES version 4.2 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v6.1 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.21. JULES version 4.1 Release Notes" href="JULES4-1.html" />
+    <link rel="prev" title="1.19. JULES version 4.3 Release Notes" href="JULES4-3.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES4-1.html" title="1.21. JULES version 4.1 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-3.html" title="1.19. JULES version 4.3 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.1 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-version-4-2-release-notes">
+<h1>1.20. JULES version 4.2 Release Notes<a class="headerlink" href="#jules-version-4-2-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>JULES version 4.2 is the first release where all development has taken place in the Met Office collaboration repository. On the whole, this has been a success, with module leaders beginning to use the Trac system to track and approve developments in their areas.</p>
+<p>The JULES vn4.2 release consists of 35 tickets from 13 authors across 39 commits.</p>
+<div class="section" id="science-changes">
+<h2>1.20.1. Science changes<a class="headerlink" href="#science-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>TRIP and RFM river routing (see <a class="reference internal" href="../namelists/jules_rivers.nml.html"><span class="doc">jules_rivers.nml</span></a>)</li>
+<li>Incorporation of widely used fire risk indices (see <a class="reference internal" href="../namelists/fire.nml.html"><span class="doc">fire.nml</span></a>)</li>
+<li>New soil thermal conductivity model that is more appropriate for organic soils (see <a class="reference internal" href="../namelists/jules_soil.nml.html#JULES_SOIL::soilhc_method" title="JULES_SOIL::soilhc_method"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soilhc_method</span></code></a>)</li>
+<li>Addition of “bedrock” column beneath the soil column, in which only thermal diffusion occurs (see <a class="reference internal" href="../namelists/jules_soil.nml.html#JULES_SOIL::l_bedrock" title="JULES_SOIL::l_bedrock"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_bedrock</span></code></a>)</li>
+<li>New canopy radiation scheme in which the nitrogen follows an exponential decay (see <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_rad_mod</span></code></a>)</li>
+<li>Updates to trait PFTs (see <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_trait_phys" title="JULES_VEGETATION::l_trait_phys"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trait_phys</span></code></a>) to ensure that the dynamic and equilibrium solutions for vegetation fraction are equivalent</li>
+<li>Crop model now conserves carbon</li>
+</ul>
+</div>
+<div class="section" id="technical-changes">
+<h2>1.20.2. Technical changes<a class="headerlink" href="#technical-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Added flag to force the model grid to be 1D (see <a class="reference internal" href="../namelists/model_grid.nml.html#JULES_MODEL_GRID::force_1d_grid" title="JULES_MODEL_GRID::force_1d_grid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">force_1d_grid</span></code></a>)</li>
+<li>Several new diagnostics added (see <a class="reference internal" href="../output-variables.html"><span class="doc">JULES Output variables</span></a>)</li>
+<li>New rose-stem regression tests added</li>
+<li>All rose-stem tests migrated to use NetCDF and <code class="docutils literal notranslate"><span class="pre">nccmp</span></code></li>
+<li>Retirement of several include files</li>
+<li>Removal of logging namelist - output location should now be controlled using pipes (i.e. <code class="docutils literal notranslate"><span class="pre">1&gt;/my/file</span> <span class="pre">2&gt;&amp;1</span></code>) or features of your <code class="docutils literal notranslate"><span class="pre">mpiexec</span></code> or <code class="docutils literal notranslate"><span class="pre">mpirun</span></code> program</li>
+<li>Additional consolidation of shared (i.e. standalone and UM) control and initialisation routines</li>
+<li>Optimisation of <code class="docutils literal notranslate"><span class="pre">sf_stom</span></code> and <code class="docutils literal notranslate"><span class="pre">leaf_limits</span></code>, resulting in ~20% speedup for <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_rad_mod</span></code></a> = 4</li>
+</ul>
+</div>
+<div class="section" id="bugs-fixed">
+<h2>1.20.3. Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Bug in calculation of <code class="docutils literal notranslate"><span class="pre">n_leaf</span></code> and <code class="docutils literal notranslate"><span class="pre">n_stem</span></code> in <code class="docutils literal notranslate"><span class="pre">sf_stom</span></code></li>
+<li>Memory overwriting bug in TRIFFID</li>
+<li>Differing error message lengths in UM</li>
+<li><code class="docutils literal notranslate"><span class="pre">hcons</span></code> now passed to the snow scheme instead of <code class="docutils literal notranslate"><span class="pre">hcon(:,0)</span></code></li>
+<li>Several bug fixes for IMOGEN</li>
+<li>Patch to enable collective access for parallel NetCDF in NetCDF 4.2 onwards</li>
+<li><code class="docutils literal notranslate"><span class="pre">soil_hyd</span></code> now declares <code class="docutils literal notranslate"><span class="pre">ksz</span></code> correctly (i.e. <code class="docutils literal notranslate"><span class="pre">ksz(npnts,0:nshyd)</span></code> instead of <code class="docutils literal notranslate"><span class="pre">ksz(npnts,nshyd)</span></code>) - this only affects runs where the soil properties vary for each layer</li>
+<li>Correction to the accumulation of <code class="docutils literal notranslate"><span class="pre">g_leaf_phen</span></code> in-between calls to TRIFFID</li>
+</ul>
+<p>Full details of the tickets committed for JULES vn4.2 can be found on the <a class="reference external" href="https://code.metoffice.gov.uk/trac/jules/query?resolution=fixed&amp;milestone=JULES+v4.2+release">collaboration repository Trac system</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.20. JULES version 4.2 Release Notes</a><ul>
+<li><a class="reference internal" href="#science-changes">1.20.1. Science changes</a></li>
+<li><a class="reference internal" href="#technical-changes">1.20.2. Technical changes</a></li>
+<li><a class="reference internal" href="#bugs-fixed">1.20.3. Bugs fixed</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES4-3.html"
+                        title="previous chapter">1.19. JULES version 4.3 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES4-1.html"
+                        title="next chapter">1.21. JULES version 4.1 Release Notes</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES4-1.html" title="1.21. JULES version 4.1 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-3.html" title="1.19. JULES version 4.3 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.1 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.
+    </div>
+
+  </body>
+</html>

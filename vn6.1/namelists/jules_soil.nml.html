@@ -1,0 +1,529 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.9. jules_soil.nml &#8212; Joint UK Land Environment Simulator (JULES) v6.1 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.10. jules_vegetation.nml" href="jules_vegetation.nml.html" />
+    <link rel="prev" title="6.8. jules_hydrology.nml" href="jules_hydrology.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_vegetation.nml.html" title="6.10. jules_vegetation.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_hydrology.nml.html" title="6.8. jules_hydrology.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.1 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-soil-nml">
+<h1>6.9. <code class="docutils literal notranslate"><span class="pre">jules_soil.nml</span></code><a class="headerlink" href="#jules-soil-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file sets the soil options and parameters. It contains one namelist called <a class="reference internal" href="#namelist-JULES_SOIL"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL</span></code></a>.</p>
+<div class="section" id="namelist-JULES_SOIL">
+<span id="jules-soil-namelist-members"></span><h2>6.9.1. <code class="docutils literal notranslate"><span class="pre">JULES_SOIL</span></code> namelist members<a class="headerlink" href="#namelist-JULES_SOIL" title="Permalink to this headline">¶</a></h2>
+<dl class="member">
+<dt id="JULES_SOIL::sm_levels">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">sm_levels</code><a class="headerlink" href="#JULES_SOIL::sm_levels" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">4</td>
+</tr>
+</tbody>
+</table>
+<p>Number of soil layers.</p>
+<p>A value of 4 is often used, with soil layer depths that have been tuned using this.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ncpft</span></code></a> &gt; 0, <code class="docutils literal notranslate"><span class="pre">sm_levels</span> <span class="pre">&gt;=</span> <span class="pre">3</span></code> is required.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::l_vg_soil">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">l_vg_soil</code><a class="headerlink" href="#JULES_SOIL::l_vg_soil" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for van Genuchten soil hydraulic model.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Use van Genuchten model.</dd>
+<dt>FALSE</dt>
+<dd>Use Brooks and Corey model <a class="footnote-reference" href="#id2" id="id1">[1]</a>.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Brooks, R.H. and A.T. Corey, 1964, Hydraulic properties of porous media. Colorado State University Hydrology Papers 3.</li>
+<li>van Genuchten, M.T., 1980, A Closed-form Equation for Predicting the Hydraulic Conductivity of Unsaturated Soils. Soil Science Society of America Journal, 44:892-898.</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::l_dpsids_dsdz">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">l_dpsids_dsdz</code><a class="headerlink" href="#JULES_SOIL::l_dpsids_dsdz" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to calculate vertical gradient of soil suction with the assumption of linearity only for fractional saturation (consistent with the calculation of hydraulic conductivity).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::l_soil_sat_down">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">l_soil_sat_down</code><a class="headerlink" href="#JULES_SOIL::l_soil_sat_down" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for dealing with supersaturated soil layers. If a soil layer becomes supersaturated, the water in excess of saturation will be put into the layer below or above according to this switch.</p>
+<dl class="docutils">
+<dt>TRUE (Down)</dt>
+<dd>Any excess is put into the layer below. Any excess from the bottom
+layer becomes subsurface runoff.</dd>
+<dt>FALSE (Up)</dt>
+<dd>Any excess is put into the layer above. Any excess from the top layer becomes surface runoff. This option was used in JULES2.0.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::l_holdwater">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">l_holdwater</code><a class="headerlink" href="#JULES_SOIL::l_holdwater" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>This switch fixes a problem in soil hydrology, whereby if a layer goes supersaturated during the implicit calulation, the excess water is pushed out of the soil column (<code class="docutils literal notranslate"><span class="pre">l_holdwater</span> <span class="pre">=</span> <span class="pre">FALSE</span></code>) instead of into an adjacent layer (<code class="docutils literal notranslate"><span class="pre">l_holdwater</span> <span class="pre">=</span> <span class="pre">TRUE</span></code>).</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>Supersaturated soil moisture from implicit calculation goes into an adjacent layer
+(above or below depending on <a class="reference internal" href="#JULES_SOIL::l_soil_sat_down" title="JULES_SOIL::l_soil_sat_down"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_soil_sat_down</span></code></a>). This option was added in JULES 5.1.</dd>
+<dt>FALSE</dt>
+<dd>Supersaturated soil moisture from implicit calculation goes out of the base of the soil column.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::soilhc_method">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">soilhc_method</code><a class="headerlink" href="#JULES_SOIL::soilhc_method" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">1, 2 or 3</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">1</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for soil thermal conductivity model.</p>
+<ol class="arabic">
+<li><div class="first line-block">
+<div class="line">Use approach of Cox et al (1999), as in JULES2.0.</div>
+<div class="line">This is likely to predict values of soil thermal conductivity that are too low (Dharssi et al, 2009).</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Use approach of Dharssi et al (2009), which was adapted from Johansen (1975) and described by Peters-Lidard et al. (1998).</div>
+<div class="line">This is not recommended for organic soils.</div>
+</div>
+</li>
+<li><div class="first line-block">
+<div class="line">Use approach of Chadburn et al (2015).</div>
+<div class="line">This is recommended when using organic soils, which can have a much lower saturated thermal conductivity than mineral soils.</div>
+</div>
+</li>
+</ol>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p>References:</p>
+<ul class="last simple">
+<li>Chadburn et al (2015). An improved representation of physical permafrost dynamics in a global land-surface scheme. Geoscientific Model Development</li>
+<li>Dharssi et al (2009). New soil physical properties implemented in the Unified Model at PS18. Met Office Technical note 528</li>
+<li>Johansen (1975). Thermal conductivity of soils. PhD thesis. University of Trondheim, Norway</li>
+<li>Peters-Lidard et al (1998). The effect of soil thermal conductivity parameterisation on surface energy fluxes and temperatures. J. Atmos. Sci. 55:1209-1224</li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::l_bedrock">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">l_bedrock</code><a class="headerlink" href="#JULES_SOIL::l_bedrock" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">F</td>
+</tr>
+</tbody>
+</table>
+<p>Switch for using a thermal bedrock column beneath the soil column. The bedrock has no hydrological processes - diffusion of heat is the only process represented.</p>
+<p>Properties of the bedrock can be set using <a class="reference internal" href="#JULES_SOIL::ns_deep" title="JULES_SOIL::ns_deep"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ns_deep</span></code></a>, <a class="reference internal" href="#JULES_SOIL::hcapdeep" title="JULES_SOIL::hcapdeep"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">hcapdeep</span></code></a>, <a class="reference internal" href="#JULES_SOIL::hcondeep" title="JULES_SOIL::hcondeep"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">hcondeep</span></code></a> and <a class="reference internal" href="#JULES_SOIL::dzdeep" title="JULES_SOIL::dzdeep"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dzdeep</span></code></a>.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>An additional bedrock column is used below the soil column.</dd>
+<dt>FALSE</dt>
+<dd>No effect.</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">For full details see Chadburn et al. (2015)</p>
+</div>
+</dd></dl>
+
+<div class="admonition-bedrock-parameters-only-used-if-nml-mem-l-bedrock-true admonition">
+<p class="first admonition-title">Bedrock parameters (only used if <a class="reference internal" href="#JULES_SOIL::l_bedrock" title="JULES_SOIL::l_bedrock"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_bedrock</span></code></a> = TRUE)</p>
+<dl class="member">
+<dt id="JULES_SOIL::ns_deep">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">ns_deep</code><a class="headerlink" href="#JULES_SOIL::ns_deep" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">100</td>
+</tr>
+</tbody>
+</table>
+<p>The number of levels in the thermal-only bedrock.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::hcapdeep">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">hcapdeep</code><a class="headerlink" href="#JULES_SOIL::hcapdeep" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">2100000.0</td>
+</tr>
+</tbody>
+</table>
+<p>The heat capacity of the bedrock (J K<sup>-1</sup> m<sup>-3</sup> ).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::hcondeep">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">hcondeep</code><a class="headerlink" href="#JULES_SOIL::hcondeep" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">8.6</td>
+</tr>
+</tbody>
+</table>
+<p>The heat conductivity of the bedrock (W m<sup>-2</sup> K<sup>-1</sup> ).</p>
+</dd></dl>
+
+<dl class="last member">
+<dt id="JULES_SOIL::dzdeep">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">dzdeep</code><a class="headerlink" href="#JULES_SOIL::dzdeep" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">0.5</td>
+</tr>
+</tbody>
+</table>
+<p>The thickness of the bedrock layers (m).</p>
+</dd></dl>
+
+</div>
+<dl class="member">
+<dt id="JULES_SOIL::cs_min">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">cs_min</code><a class="headerlink" href="#JULES_SOIL::cs_min" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">1.0e-6</td>
+</tr>
+</tbody>
+</table>
+<p>Minimum allowed soil carbon (kg m<sup>-2</sup>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::zsmc">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">zsmc</code><a class="headerlink" href="#JULES_SOIL::zsmc" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt; 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>If a depth-averaged soil moisture diagnostic is requested, the average is calculated from the surface to this depth (m).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::zst">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">zst</code><a class="headerlink" href="#JULES_SOIL::zst" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt; 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The depth (0.0-&gt;zst) to which the soil temperature is averaged for use in the calculation of wetland methane emissions (m).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::confrac">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">confrac</code><a class="headerlink" href="#JULES_SOIL::confrac" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">0 &lt;= confrac &lt;= 1</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0.3</td>
+</tr>
+</tbody>
+</table>
+<p>The fraction of the gridbox assumed to be covered by convective precipitation.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::dzsoil_io">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">dzsoil_io</code><a class="headerlink" href="#JULES_SOIL::dzsoil_io" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(sm_levels)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The soil layer depths (m), starting with the uppermost layer.</p>
+<p>Note that the soil layer depths (and hence the total soil depth) are constant across the domain.</p>
+<p>It is recommended that JULES uses layer depths of 0.1, 0.25, 0.65 and 2.0m, giving a total depth of 3.0m, unless there is good reason not to.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::dzsoil_elev">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">dzsoil_elev</code><a class="headerlink" href="#JULES_SOIL::dzsoil_elev" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>Depth of the tiled solid-ice bedrock-type layer used underneath individual ice tiles if <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_elev_land_ice" title="JULES_SURFACE::l_elev_land_ice"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_elev_land_ice</span></code></a> is TRUE.
+Effectively this sets the amount of thermal buffering each tile has to heatfluxes penetrating through the snowpack</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::l_tile_soil">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">l_tile_soil</code><a class="headerlink" href="#JULES_SOIL::l_tile_soil" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">False</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to set the number of soil tiles to equal the number of surface tiles. Each soil tile has independent properties.</p>
+<p>See also <a class="reference internal" href="#JULES_SOIL::l_broadcast_ancils" title="JULES_SOIL::l_broadcast_ancils"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_broadcast_ancils</span></code></a> and <a class="reference internal" href="initial_conditions.nml.html#JULES_INITIAL::l_broadcast_soilt" title="JULES_INITIAL::l_broadcast_soilt"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_broadcast_soilt</span></code></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Setting <a class="reference internal" href="#JULES_SOIL::l_tile_soil" title="JULES_SOIL::l_tile_soil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_tile_soil</span></code></a> = TRUE means a separate soil tile exists for each surface tile (rather than all surface tiles using the same, single soil tile). This also alters the names of many of the soil prognostic and ancillary variables that are used (see elsewhere), with the suffix “_soilt’’ being added to indicate the presence of soil tiling. The switches <a class="reference internal" href="#JULES_SOIL::l_broadcast_ancils" title="JULES_SOIL::l_broadcast_ancils"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_broadcast_ancils</span></code></a> and <a class="reference internal" href="initial_conditions.nml.html#JULES_INITIAL::l_broadcast_soilt" title="JULES_INITIAL::l_broadcast_soilt"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_broadcast_soilt</span></code></a> allow soil tiling to be used with input files that do not contain soil tile information. Setting <a class="reference internal" href="#JULES_SOIL::l_broadcast_ancils" title="JULES_SOIL::l_broadcast_ancils"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_broadcast_ancils</span></code></a> = TRUE means that a soil ancillary file that does not contain soil tiles can be used in a tiled run. Setting <a class="reference internal" href="initial_conditions.nml.html#JULES_INITIAL::l_broadcast_soilt" title="JULES_INITIAL::l_broadcast_soilt"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_broadcast_soilt</span></code></a> = TRUE means an initital state file that does not contain soil tiles can be used to initialise a run with soil tiles.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="JULES_SOIL::l_broadcast_ancils">
+<code class="descclassname">JULES_SOIL::</code><code class="descname">l_broadcast_ancils</code><a class="headerlink" href="#JULES_SOIL::l_broadcast_ancils" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">False</td>
+</tr>
+</tbody>
+</table>
+<p>Switch to allow non-soil tiled ancillary files to be broadcast to all soil tiles. Only active when <a class="reference internal" href="#JULES_SOIL::l_tile_soil" title="JULES_SOIL::l_tile_soil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_tile_soil</span></code></a> is True. When reading ancillaries from the dump file, use <a class="reference internal" href="initial_conditions.nml.html#JULES_INITIAL::l_broadcast_soilt" title="JULES_INITIAL::l_broadcast_soilt"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_broadcast_soilt</span></code></a> instead.</p>
+</dd></dl>
+
+<p class="rubric">Footnotes</p>
+<table class="docutils footnote" frame="void" id="id2" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td><p class="first">In the JULES2.0 User Manual this was described as the ‘Clapp and Hornberger’ model and the JULES code still refers to ‘Clapp and Hornberger’ rather than ‘Brooks and Corey’. In fact there are important differences between these two hydraulic models (Marthews et al. 2014,GMD). There has been confusion in the literature and in past documentation of MOSES/JULES, but JULES uses the Brooks and Corey model when <a class="reference internal" href="#JULES_SOIL::l_vg_soil" title="JULES_SOIL::l_vg_soil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_vg_soil</span></code></a> = FALSE .</p>
+<p class="last">References:
+* Brooks RH &amp; Corey AT (1964). Hydraulic properties of porous media. Colorado State University Hydrology Papers 3.
+* Clapp RB &amp; Hornberger GM (1978). Empirical Equations for Some Soil Hydraulic Properties. Water Resources Research 14:601-604.</p>
+</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.9. <code class="docutils literal notranslate"><span class="pre">jules_soil.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-JULES_SOIL">6.9.1. <code class="docutils literal notranslate"><span class="pre">JULES_SOIL</span></code> namelist members</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="jules_hydrology.nml.html"
+                        title="previous chapter">6.8. <code class="docutils literal notranslate"><span class="pre">jules_hydrology.nml</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="jules_vegetation.nml.html"
+                        title="next chapter">6.10. <code class="docutils literal notranslate"><span class="pre">jules_vegetation.nml</span></code></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_vegetation.nml.html" title="6.10. jules_vegetation.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_hydrology.nml.html" title="6.8. jules_hydrology.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.1 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.
+    </div>
+
+  </body>
+</html>
