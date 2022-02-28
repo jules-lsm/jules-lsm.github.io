@@ -1,0 +1,187 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1.10. JULES version 5.4 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v6.3 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.11. JULES version 5.3 Release Notes" href="JULES5-3.html" />
+    <link rel="prev" title="1.9. JULES version 5.5 Release Notes" href="JULES5-5.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES5-3.html" title="1.11. JULES version 5.3 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES5-5.html" title="1.9. JULES version 5.5 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.3 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-version-5-4-release-notes">
+<h1>1.10. JULES version 5.4 Release Notes<a class="headerlink" href="#jules-version-5-4-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>The JULES vn5.4 release consists of approximately 29 tickets from 13 authors, including work by many other people.</p>
+<p>Full details of the tickets committed for JULES vn5.4 can be found on the <a class="reference external" href="https://code.metoffice.gov.uk/trac/jules/query?resolution=fixed&amp;milestone=JULES+v5.4+release">JULES shared repository Trac system</a>.</p>
+<p>Ticket numbers are indicated below, e.g. #872.</p>
+<div class="section" id="science-changes">
+<h2>1.10.1. Science changes<a class="headerlink" href="#science-changes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Improvements to fire-related vegetation mortality, including the addition of a PFT-specific fire mortality parameter <a class="reference internal" href="../namelists/pft_params.nml.html#JULES_PFTPARM::fire_mort_io" title="JULES_PFTPARM::fire_mort_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">fire_mort_io</span></code></a> (previously mortality was taken directly from the burnt area as diagnosed by INFERNO and did not vary by PFT). (#872)</li>
+<li>Stomatal conductance can be modelled following the approach of <a class="reference external" href="https://doi.org/10.1111/j.1365-2486.2010.02375.x">Medlyn et al. (2011)</a>, via the switch <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::stomata_model" title="JULES_VEGETATION::stomata_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">stomata_model</span></code></a>. A single-parameter version of the model is coded, requiring the PFT-specific parameter <a class="reference internal" href="../namelists/pft_params.nml.html#JULES_PFTPARM::g1_stomata_io" title="JULES_PFTPARM::g1_stomata_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">g1_stomata_io</span></code></a>. (#766)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="general-technical-changes">
+<h2>1.10.2. General/Technical changes<a class="headerlink" href="#general-technical-changes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>The RFM river routing scheme is now available to the UM (atmospheric model), and both standalone and UM runs use the same code. See <a class="reference internal" href="../namelists/jules_rivers.nml.html#namelist-JULES_RIVERS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_RIVERS</span></code></a>. (#876)</li>
+<li>The <a class="reference internal" href="../namelists/jules_rivers.nml.html#namelist-JULES_RIVERS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_RIVERS</span></code></a> namelist now controls river hydrology in both standalone and UM-coupled modes.  (The UM namelist ‘run_rivers’ has been removed.) (#867)</li>
+<li>The surface conductance (<cite>gs</cite>) is now part of the specification of the initial state (and included in dumps) only when it is required (i.e. only if <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_rad_mod</span></code></a> = 1; see <a class="reference internal" href="../namelists/initial_conditions.nml.html#list-of-initial-condition-variables"><span class="std std-ref">List of initial condition variables</span></a>). (#859)</li>
+<li>Use <code class="docutils literal notranslate"><span class="pre">swap_bounds</span></code> routine(s) from <code class="docutils literal notranslate"><span class="pre">halo_exchange_mod</span></code> module (not the old 2C subroutine) in UM runs. (#367)</li>
+<li>Extensive refactoring of <code class="docutils literal notranslate"><span class="pre">surf_couple_extra</span></code>, including removal of <code class="docutils literal notranslate"><span class="pre">ifdef</span></code> in argument list. (#806, 833)</li>
+<li>Tidied/refactorised the photosynthesis code. (#817)</li>
+<li>Improved checking and reporting of the IMOGEN setup. (#850)</li>
+<li>Tidied the header of <code class="docutils literal notranslate"><span class="pre">control.F90</span></code>, removing duplicate and unused variables. (#873)</li>
+<li>Access subroutines <code class="docutils literal notranslate"><span class="pre">set_levels_list</span></code> and <code class="docutils literal notranslate"><span class="pre">set_pseudo_list</span></code> using modules, removing the need for <code class="docutils literal notranslate"><span class="pre">DEPENDS</span> <span class="pre">ON</span></code>. (#880)</li>
+<li>Improved performance of land surface routines in RA and GA configurations. (#861)</li>
+<li>Set up CABLE directory structure and initialise essential variables for <cite>surf_couple_radiation</cite>. (#799)</li>
+<li>Allowed variables used in the build process to have platform-specific defaults which can be overridden by the user. (#853)</li>
+<li>Met Office Cray users: Direct extract of code to the Cray is the default for meto-xc40-cce builds. Users are encouraged to remove fcm_make2 tasks and set <code class="docutils literal notranslate"><span class="pre">JULES_REMOTE</span> <span class="pre">=</span> <span class="pre">local</span></code> to take advantage of faster end-to-end compilations and reduce load on the HPC. Set <code class="docutils literal notranslate"><span class="pre">JULES_REMOTE</span> <span class="pre">=</span> <span class="pre">remote</span></code> to retain builds which require an fcm_make2 task. See <a class="reference internal" href="../building-and-running/fcm.html#fcm-make-environment-variables"><span class="std std-ref">Environment variables used when building JULES using FCM make</span></a>. (#854)</li>
+<li>Reviewed and simplified fcm-make metadata compulsory variables and made current apps validate. (#855)</li>
+<li>Improved selected metadata in the <a class="reference internal" href="../namelists/jules_soil_biogeochem.nml.html#namelist-JULES_SOIL_BIOGEOCHEM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL_BIOGEOCHEM</span></code></a> and <a class="reference internal" href="../namelists/jules_soil_ecosse.nml.html#namelist-JULES_SOIL_ECOSSE"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL_ECOSSE</span></code></a> namelists to prevent errors when using the Rose GUI. (#862)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="bugs-fixed">
+<h2>1.10.3. Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Fixed the radiatively-coupled roof in MORUSES, using the temporary logical <a class="reference internal" href="../namelists/science_fixes.nml.html#JULES_TEMP_FIXES::l_fix_moruses_roof_rad_coupling" title="JULES_TEMP_FIXES::l_fix_moruses_roof_rad_coupling"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_fix_moruses_roof_rad_coupling</span></code></a>, in the new namelist <a class="reference internal" href="../namelists/science_fixes.nml.html#namelist-JULES_TEMP_FIXES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_TEMP_FIXES</span></code></a>. The supposedly radiatively-coupled roof is in fact <strong>uncoupled</strong> without this bug fix.   (#610)</li>
+<li>Corrected initialisation of frozen/unfrozen soil - no longer assumes constant soil properties with depth. (#749)</li>
+<li>Removed a bug in the snow scheme when <a class="reference internal" href="../namelists/jules_surface.nml.html#JULES_SURFACE::l_point_data" title="JULES_SURFACE::l_point_data"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_point_data</span></code></a> = TRUE and <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_model</span></code></a> = 4: the snow covered fraction formulation is now only used for tiles that do not use the snow canopy option (see <a class="reference internal" href="../namelists/jules_snow.nml.html#JULES_SNOW::cansnowpft" title="JULES_SNOW::cansnowpft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">cansnowpft</span></code></a>), rather than for all tiles. (#879)</li>
+<li>Prevent out-of-bounds operations in sf_exch. (#846)</li>
+<li>Ensure that <cite>ntype</cite> is set before use in UM model runs. (#878)</li>
+<li>Corrected the units of the ocean near-surface chlorophyll content (used in the calculation of the ocean surface albedo), using the temporary logical <cite>l_fix_osa_chloro</cite>. Only affects runs with the UM. (#874)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="changes-to-testing">
+<h2>1.10.4. Changes to testing<a class="headerlink" href="#changes-to-testing" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Rose-stem fcm-make tasks will ignore lock files that would otherwise prevent retriggering. (#860)</li>
+<li>Expanded coverage of the rose-stem metadata validation test to include more apps. (#886)</li>
+<li>Upgraded <code class="docutils literal notranslate"><span class="pre">suite_report.py</span></code>. (#889)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="documentation-updates">
+<h2>1.10.5. Documentation updates<a class="headerlink" href="#documentation-updates" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Updates associated with many of the above changes, and release notes. (#881)</li>
+<li>Example namelists point_mead_2_crops have been updated to be consistent with the published JULES-crop runs in <a class="reference external" href="https://doi.org/10.5194/gmd-10-1291-2017">Williams et al. (2017)</a>.</li>
+</ul>
+</div></blockquote>
+<p>Documentation can be viewed on the github page <a class="reference external" href="http://jules-lsm.github.io/">http://jules-lsm.github.io/</a>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.10. JULES version 5.4 Release Notes</a><ul>
+<li><a class="reference internal" href="#science-changes">1.10.1. Science changes</a></li>
+<li><a class="reference internal" href="#general-technical-changes">1.10.2. General/Technical changes</a></li>
+<li><a class="reference internal" href="#bugs-fixed">1.10.3. Bugs fixed</a></li>
+<li><a class="reference internal" href="#changes-to-testing">1.10.4. Changes to testing</a></li>
+<li><a class="reference internal" href="#documentation-updates">1.10.5. Documentation updates</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES5-5.html"
+                        title="previous chapter">1.9. JULES version 5.5 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES5-3.html"
+                        title="next chapter">1.11. JULES version 5.3 Release Notes</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES5-3.html" title="1.11. JULES version 5.3 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES5-5.html" title="1.9. JULES version 5.5 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.3 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.
+    </div>
+
+  </body>
+</html>

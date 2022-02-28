@@ -1,0 +1,155 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1.27. JULES version 3.2 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v6.3 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.28. JULES version 3.1 Release Notes" href="JULES3-1.html" />
+    <link rel="prev" title="1.26. JULES version 3.3 Release Notes" href="JULES3-3.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES3-1.html" title="1.28. JULES version 3.1 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-3.html" title="1.26. JULES version 3.3 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.3 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-version-3-2-release-notes">
+<h1>1.27. JULES version 3.2 Release Notes<a class="headerlink" href="#jules-version-3-2-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>JULES version 3.2 sees several enhancements and bug fixes in both the science and control code.</p>
+<div class="section" id="standard-configurations">
+<h2>1.27.1. Standard Configurations<a class="headerlink" href="#standard-configurations" title="Permalink to this headline">¶</a></h2>
+<p>A set of standard science configurations have been defined. These are based on well tested operational Met Office models, and are intended to cover a wide range of use cases.</p>
+</div>
+<div class="section" id="improvements-to-output">
+<h2>1.27.2. Improvements to output<a class="headerlink" href="#improvements-to-output" title="Permalink to this headline">¶</a></h2>
+<p>In JULES version 3.1, under some circumstances, it was not entirely clear how the timestamps in output files applied to the values. This has been thoroughly addressed in version 3.2.</p>
+<p>Changes have also been made to the attributes of output variables:</p>
+<ul class="simple">
+<li>The units attribute for output variables has been updated to be compliant with <a class="reference external" href="http://www.unidata.ucar.edu/software/udunits/">UDUNITS2</a>.</li>
+<li>A <a class="reference external" href="http://cfconventions.org">CF conventions</a> coordinates attribute has been added to all output variables that explicitly links the latitude and longitude to the data.</li>
+</ul>
+</div>
+<div class="section" id="biogenic-volatile-organic-compound-bvoc-emissions">
+<h2>1.27.3. Biogenic Volatile Organic Compound (BVOC) emissions<a class="headerlink" href="#biogenic-volatile-organic-compound-bvoc-emissions" title="Permalink to this headline">¶</a></h2>
+<p>Code written by Federica Pacifico for isoprene emissions has been implemented and extended to include monoterpene, acetone and methanol emissions. This addition is purely diagnostic in the standalone model (i.e. provides new output variables, but has no feedbacks), but will allow the UM to implement interactive BVOC emissions (i.e. with feedbacks) in the future.</p>
+<p>A paper has been written describing and evaluating the isoprene emission scheme - Pacifico et. al., 2011. Atmos. Chem. and Phys., 11, 4371-4389 (<a class="reference external" href="http://www.atmos-chem-phys.net/11/4371/2011/acp-11-4371-2011.pdf">PDF</a>).</p>
+</div>
+<div class="section" id="alternative-build-system">
+<h2>1.27.4. Alternative build system<a class="headerlink" href="#alternative-build-system" title="Permalink to this headline">¶</a></h2>
+<p>It is now possible to build JULES using FCM make. FCM is a set of tools developed by the Met Office for managing and building source code, with a particular focus on making it easy to build large Fortran programs (such as JULES). FCM is open source software, and can be downloaded for free from <a class="reference external" href="https://github.com/metomi/fcm">Github</a>.</p>
+</div>
+<div class="section" id="bugs-fixed">
+<h2>1.27.5. Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Array bounds error with <code class="docutils literal notranslate"><span class="pre">SICE_INDEX_NCAT</span></code>.</li>
+<li>Incorrect usage of <code class="docutils literal notranslate"><span class="pre">COR_MO_ITER</span></code>.</li>
+<li>Monthly/yearly output files not rolling over properly on certain configurations of GFortran.</li>
+<li>A collection of small memory leaks.</li>
+<li>Not able to read or write ASCII dumps with the new snow scheme on.</li>
+<li>Use fixed dimension names for output files (rather than using those given for input files).</li>
+<li>Using <code class="docutils literal notranslate"><span class="pre">can_rad_mod</span> <span class="pre">=</span> <span class="pre">5</span></code> causes night-time dark respiration to be 0 under certain circumstances.</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.27. JULES version 3.2 Release Notes</a><ul>
+<li><a class="reference internal" href="#standard-configurations">1.27.1. Standard Configurations</a></li>
+<li><a class="reference internal" href="#improvements-to-output">1.27.2. Improvements to output</a></li>
+<li><a class="reference internal" href="#biogenic-volatile-organic-compound-bvoc-emissions">1.27.3. Biogenic Volatile Organic Compound (BVOC) emissions</a></li>
+<li><a class="reference internal" href="#alternative-build-system">1.27.4. Alternative build system</a></li>
+<li><a class="reference internal" href="#bugs-fixed">1.27.5. Bugs fixed</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES3-3.html"
+                        title="previous chapter">1.26. JULES version 3.3 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES3-1.html"
+                        title="next chapter">1.28. JULES version 3.1 Release Notes</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES3-1.html" title="1.28. JULES version 3.1 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-3.html" title="1.26. JULES version 3.3 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.3 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.
+    </div>
+
+  </body>
+</html>

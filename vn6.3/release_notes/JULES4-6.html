@@ -1,0 +1,179 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>1.18. JULES version 4.6 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v6.3 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.19. JULES version 4.5 Release Notes" href="JULES4-5.html" />
+    <link rel="prev" title="1.17. JULES version 4.7 Release Notes" href="JULES4-7.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES4-5.html" title="1.19. JULES version 4.5 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-7.html" title="1.17. JULES version 4.7 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.3 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="jules-version-4-6-release-notes">
+<h1>1.18. JULES version 4.6 Release Notes<a class="headerlink" href="#jules-version-4-6-release-notes" title="Permalink to this headline">¶</a></h1>
+<p>The JULES vn4.6 release consists of 43 tickets from 22 authors across 52 commits.</p>
+<p>Full details of the tickets committed for JULES vn4.6 can be found on the <a class="reference external" href="https://code.metoffice.gov.uk/trac/jules/query?resolution=fixed&amp;milestone=JULES+v4.6+release">JULES shared repository Trac system</a>.</p>
+<div class="section" id="science-changes">
+<h2>1.18.1. Science changes<a class="headerlink" href="#science-changes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Multiple ice tiles in a gridbox to simulate snowpacks at different elevations - see <a class="reference internal" href="../namelists/jules_surface.nml.html#JULES_SURFACE::l_elev_land_ice" title="JULES_SURFACE::l_elev_land_ice"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_elev_land_ice</span></code></a></li>
+<li>Modifications to snowpack physics to better represent deep, compact firn/snow on ice sheets - description at <a class="reference internal" href="../namelists/jules_surface.nml.html#JULES_SURFACE::l_elev_land_ice" title="JULES_SURFACE::l_elev_land_ice"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_elev_land_ice</span></code></a></li>
+<li>Option to link whole-plant maintenance respiration to soil moisture stress - see <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_scale_resp_pm" title="JULES_VEGETATION::l_scale_resp_pm"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_scale_resp_pm</span></code></a></li>
+<li>Read clay content of soil for soil carbon decomposition model from ancillary file - see <a class="reference internal" href="../namelists/ancillaries.nml.html#namelist-JULES_SOIL_PROPS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL_PROPS</span></code></a></li>
+<li>Improved climate downscaling physics for ice elevation tiles</li>
+<li>Calculate FAO Penman-Monteith evapotranspiration for reference crop - see diagnostic fao_et0</li>
+<li>Diagnostic form drag for sea ice (UM only)</li>
+<li>Calculation of new sea ice variables required for CMIP6</li>
+<li>Implement a canopy clumping factor - see <a class="reference internal" href="../namelists/pft_params.nml.html#JULES_PFTPARM::can_struct_a_io" title="JULES_PFTPARM::can_struct_a_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_struct_a_io</span></code></a></li>
+<li>Allow for non-istropic scattering in plant canopies - see <a class="reference internal" href="../namelists/jules_radiation.nml.html#JULES_RADIATION::l_niso_direct" title="JULES_RADIATION::l_niso_direct"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_niso_direct</span></code></a></li>
+<li>Increased flexibility to represent soil moisture stress on vegetation - see <a class="reference internal" href="../namelists/pft_params.nml.html#JULES_PFTPARM::fsmc_mod_io" title="JULES_PFTPARM::fsmc_mod_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">fsmc_mod_io</span></code></a> and <a class="reference internal" href="../namelists/pft_params.nml.html#JULES_PFTPARM::fsmc_p0_io" title="JULES_PFTPARM::fsmc_p0_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">fsmc_p0_io</span></code></a></li>
+<li>Improved parameterisation of crop leaf senescence</li>
+<li>New crop harvest diagnostics</li>
+<li>Lake model FLake beneath multi-layer snow (UM only)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="technical-changes">
+<h2>1.18.2. Technical changes<a class="headerlink" href="#technical-changes" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>JULES-C-1p1 Regression Tests</li>
+<li>Remove the UM_FLAKE CPP macro</li>
+<li>Move sorp and n_inorg_turnover to namelist to enable user input.</li>
+<li>VM rose stem bug fixed.</li>
+<li>Add support for rose-stem on MONSooN</li>
+<li>Move some of the hard-wired crop parameters to <a class="reference internal" href="../namelists/crop_params.nml.html#namelist-JULES_CROPPARM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_CROPPARM</span></code></a></li>
+<li>Remove UM descent.h include file and put values into JULES module descent.F90</li>
+<li>Fix race conditions and improve OpenMP DEFAULTs</li>
+<li>Modularise and header refactor science/snow</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="bugs-fixed">
+<h2>1.18.3. Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Fixed GC3 tstar_sice bug</li>
+<li>Corrected canopy nitrogen profiles - see <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_leaf_n_resp_fix" title="JULES_VEGETATION::l_leaf_n_resp_fix"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_leaf_n_resp_fix</span></code></a>. This increases plant maintenance respiration.</li>
+<li>Reduced stem respiration with trait-based physiology</li>
+<li>Reinstated missing veg parms, for trait initialisation.</li>
+<li>Soil respiration bug resolved</li>
+<li>Corrected mistake in merging of crop PFT changes</li>
+<li>Fixed N diagnostic to avoid runtime crashes</li>
+<li>Fixed calculation of dust deposition exchange coefficient</li>
+<li>Fixed wetland emission of methane with TRIFFID on</li>
+<li>Fixed aerodynamic resistance diagnostic (UM diagnostic)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="documentation-updates">
+<h2>1.18.4. Documentation updates<a class="headerlink" href="#documentation-updates" title="Permalink to this headline">¶</a></h2>
+<p>Coding standards, and documentation can be viewed on the ‘github page &lt;<a class="reference external" href="http://jules-lsm.github.io/">http://jules-lsm.github.io/</a>&gt;_’.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">1.18. JULES version 4.6 Release Notes</a><ul>
+<li><a class="reference internal" href="#science-changes">1.18.1. Science changes</a></li>
+<li><a class="reference internal" href="#technical-changes">1.18.2. Technical changes</a></li>
+<li><a class="reference internal" href="#bugs-fixed">1.18.3. Bugs fixed</a></li>
+<li><a class="reference internal" href="#documentation-updates">1.18.4. Documentation updates</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="JULES4-7.html"
+                        title="previous chapter">1.17. JULES version 4.7 Release Notes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="JULES4-5.html"
+                        title="next chapter">1.19. JULES version 4.5 Release Notes</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES4-5.html" title="1.19. JULES version 4.5 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES4-7.html" title="1.17. JULES version 4.7 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v6.3 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >1. Release notes for JULES</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.
+    </div>
+
+  </body>
+</html>
