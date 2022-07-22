@@ -1,0 +1,305 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>6.22. cable_prognostics.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.0 User Guide</title>
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.23. pft_params.nml" href="pft_params.nml.html" />
+    <link rel="prev" title="6.21. ancillaries.nml" href="ancillaries.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="pft_params.nml.html" title="6.23. pft_params.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ancillaries.nml.html" title="6.21. ancillaries.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.0 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U">6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cable-prognostics-nml">
+<h1>6.22. <code class="docutils literal notranslate"><span class="pre">cable_prognostics.nml</span></code><a class="headerlink" href="#cable-prognostics-nml" title="Permalink to this headline">¶</a></h1>
+<p>This file contains a single namelist called <a class="reference internal" href="#namelist-CABLE_PROGS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">CABLE_PROGS</span></code></a> that is used to set up the initial state of prognostic variables.</p>
+<div class="section" id="namelist-CABLE_PROGS">
+<span id="cable-progs-namelist-members"></span><h2>6.22.1. <code class="docutils literal notranslate"><span class="pre">CABLE_PROGS</span></code> namelist members<a class="headerlink" href="#namelist-CABLE_PROGS" title="Permalink to this headline">¶</a></h2>
+<p>The values of all prognostic variables must be set at the start of a run. This initial state, or initial condition, can be read from a file. Another option is to prescribe a simple or idealised initial state by giving constant values for the prognostic variables directly in the namelist. It is also possible to set some fields using values from a file but to set others to constants given in the namelist.</p>
+<dl class="member">
+<dt id="CABLE_PROGS::file">
+<code class="descclassname">CABLE_PROGS::</code><code class="descname">file</code><a class="headerlink" href="#CABLE_PROGS::file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>The file to read initial values for CABLE prognostic variables from.</p>
+<p>If <a class="reference internal" href="#CABLE_PROGS::use_file" title="CABLE_PROGS::use_file"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">use_file</span></code></a> is FALSE for every variable, this will not be used.</p>
+<p>This file name can use <a class="reference internal" href="../input/file-name-templating.html"><span class="doc">variable name templating</span></a>.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PROGS::nvars">
+<code class="descclassname">CABLE_PROGS::</code><code class="descname">nvars</code><a class="headerlink" href="#CABLE_PROGS::nvars" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">integer</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Permitted:</th><td class="field-body">&gt;= 0</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Default:</th><td class="field-body">0</td>
+</tr>
+</tbody>
+</table>
+<p>The number of prognostic variables that will be provided (see <a class="reference internal" href="#list-of-cable-prognostic-variables"><span class="std std-ref">List of CABLE prognostic variables</span></a>).</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PROGS::var">
+<code class="descclassname">CABLE_PROGS::</code><code class="descname">var</code><a class="headerlink" href="#CABLE_PROGS::var" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>List of CABLE prognostic variable names as recognised by CABLE (see <a class="reference internal" href="#list-of-cable-prognostic-variables"><span class="std std-ref">List of CABLE prognostic variables</span></a>). Names are case sensitive.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, variable names must be in the order they appear in the file.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PROGS::tpl_name">
+<code class="descclassname">CABLE_PROGS::</code><code class="descname">tpl_name</code><a class="headerlink" href="#CABLE_PROGS::tpl_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each CABLE variable specified in <a class="reference internal" href="#CABLE_PROGS::var" title="CABLE_PROGS::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a>, this is the string to substitute into the file name in place of the variable name substitution string.</p>
+<p>If the file name does not use variable name templating, this is not used.</p>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PROGS::use_file">
+<code class="descclassname">CABLE_PROGS::</code><code class="descname">use_file</code><a class="headerlink" href="#CABLE_PROGS::use_file" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">logical(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">T</td>
+</tr>
+</tbody>
+</table>
+<p>For each CABLE variable specified in <a class="reference internal" href="#CABLE_PROGS::var" title="CABLE_PROGS::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a>, this indicates if it should be read from the specified file or whether a constant value is to be used.</p>
+<dl class="docutils">
+<dt>TRUE</dt>
+<dd>The variable will be read from the file.</dd>
+<dt>FALSE</dt>
+<dd>The variable will be set to a constant value everywhere using <a class="reference internal" href="#CABLE_PROGS::const_val" title="CABLE_PROGS::const_val"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">const_val</span></code></a> below.</dd>
+</dl>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PROGS::var_name">
+<code class="descclassname">CABLE_PROGS::</code><code class="descname">var_name</code><a class="headerlink" href="#CABLE_PROGS::var_name" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">character(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">‘’ (empty string)</td>
+</tr>
+</tbody>
+</table>
+<p>For each CABLE variable specified in <a class="reference internal" href="#CABLE_PROGS::var" title="CABLE_PROGS::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a> where <a class="reference internal" href="#CABLE_PROGS::use_file" title="CABLE_PROGS::use_file"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">use_file</span></code></a> = TRUE, this is the name of the variable in the file containing the data.</p>
+<p>If the empty string (the default) is given for any variable, then the corresponding value from <a class="reference internal" href="#CABLE_PROGS::var" title="CABLE_PROGS::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a> is used instead.</p>
+<p>This is not used for variables where <a class="reference internal" href="#CABLE_PROGS::use_file" title="CABLE_PROGS::use_file"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">use_file</span></code></a> = FALSE, but a placeholder must still be given in that case.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For ASCII files, this is not used - only the order in the file matters, as described above.</p>
+</div>
+</dd></dl>
+
+<dl class="member">
+<dt id="CABLE_PROGS::const_val">
+<code class="descclassname">CABLE_PROGS::</code><code class="descname">const_val</code><a class="headerlink" href="#CABLE_PROGS::const_val" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body">real(nvars)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Default:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+<p>For each CABLE variable specified in <a class="reference internal" href="#CABLE_PROGS::var" title="CABLE_PROGS::var"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">var</span></code></a> where <a class="reference internal" href="#CABLE_PROGS::use_file" title="CABLE_PROGS::use_file"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">use_file</span></code></a> = FALSE, this is a constant value that the variable will be set to at every point in every layer.</p>
+<p>This is not used for variables where <a class="reference internal" href="#CABLE_PROGS::use_file" title="CABLE_PROGS::use_file"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">use_file</span></code></a> = TRUE, but a placeholder must still be given in that case.</p>
+</dd></dl>
+
+<div class="section" id="list-of-cable-prognostic-variables">
+<span id="id1"></span><h3>6.22.1.1. List of CABLE prognostic variables<a class="headerlink" href="#list-of-cable-prognostic-variables" title="Permalink to this headline">¶</a></h3>
+<p>Values are set for each tile of each grid point and for each layer of soil or snow.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Name</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">SoilTemp_CABLE</span></code></td>
+<td>Temperature of each soil layer (K).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">SoilMoisture_CABLE</span></code></td>
+<td>Soil moisture content of each soil layer (kg m<sup>-2</sup>).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">FrozenSoilFrac_CABLE</span></code></td>
+<td>Frozen soil moisture content of each soil layer as a fraction of saturation.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">SnowDepth_CABLE</span></code></td>
+<td>Depth of each snow level (m).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">SnowMass_CABLE</span></code></td>
+<td>Mass of each each snow level (kg).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">SnowTemp_CABLE</span></code></td>
+<td>Temperature for each snow layer (K).</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">SnowDensity_CABLE</span></code></td>
+<td>Density for each snow layer (kg m<sup>-3</sup>).</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">SnowAge_CABLE</span></code></td>
+<td>Age of each snow layer</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">OneLyrSnowDensity_CABLE</span></code></td>
+<td>Snow density when all snow treated as one layer. (kg m<sup>-3</sup>)</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">ThreeLayerSnowFlag_CABLE</span></code></td>
+<td>Flag for 3 layer snow pack (0 - false, 1 - true)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">6.22. <code class="docutils literal notranslate"><span class="pre">cable_prognostics.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-CABLE_PROGS">6.22.1. <code class="docutils literal notranslate"><span class="pre">CABLE_PROGS</span></code> namelist members</a><ul>
+<li><a class="reference internal" href="#list-of-cable-prognostic-variables">6.22.1.1. List of CABLE prognostic variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ancillaries.nml.html"
+                        title="previous chapter">6.21. <code class="docutils literal notranslate"><span class="pre">ancillaries.nml</span></code></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="pft_params.nml.html"
+                        title="next chapter">6.23. <code class="docutils literal notranslate"><span class="pre">pft_params.nml</span></code></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="pft_params.nml.html" title="6.23. pft_params.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ancillaries.nml.html" title="6.21. ancillaries.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.0 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" >6. The JULES namelist files</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.8.5.
+    </div>
+
+  </body>
+</html>
