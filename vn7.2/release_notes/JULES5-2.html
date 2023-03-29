@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>1.15. JULES version 5.2 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v7.2 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.16. JULES version 5.1 Release Notes" href="JULES5-1.html" />
+    <link rel="prev" title="1.14. JULES version 5.3 Release Notes" href="JULES5-3.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES5-1.html" title="1.16. JULES version 5.1 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES5-3.html" title="1.14. JULES version 5.3 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.2 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">1. </span>Release notes for JULES</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1.15. </span>JULES version 5.2 Release Notes</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="jules-version-5-2-release-notes">
+<h1><span class="section-number">1.15. </span>JULES version 5.2 Release Notes<a class="headerlink" href="#jules-version-5-2-release-notes" title="Permalink to this heading">¶</a></h1>
+<p>The JULES vn5.2 release consists of approximately 52 tickets from 25 authors, including work by many other people.</p>
+<p>Full details of the tickets committed for JULES vn5.2 can be found on the <a class="reference external" href="https://code.metoffice.gov.uk/trac/jules/query?resolution=fixed&amp;milestone=JULES+v5.2+release">JULES shared repository Trac system</a>.</p>
+<p>Ticket numbers are indicated below, e.g. #754.</p>
+<section id="science-changes">
+<h2><span class="section-number">1.15.1. </span>Science changes<a class="headerlink" href="#science-changes" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Introduced option for vegetation canopy drag with optional correction for the roughness sublayer - see <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_vegdrag_pft" title="JULES_VEGETATION::l_vegdrag_pft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_vegdrag_pft</span></code></a> and <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_rsl_scalar" title="JULES_VEGETATION::l_rsl_scalar"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rsl_scalar</span></code></a>. (#754)</p></li>
+<li><p>Soil decomposition added to the code for the ECOSSE soil model (which is not yet ready for use). (#570)</p></li>
+<li><p>Extension of the screen temperature decoupling diagnostics to screen humidity - only recommended for runs with the UM (atmospheric model). (#508)</p></li>
+<li><p>Added a new option to the sea albedo calculation to simulate the effect of freezing (sea-ice) below 271 K. (#770)</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="general-technical-changes">
+<h2><span class="section-number">1.15.2. </span>General/Technical changes<a class="headerlink" href="#general-technical-changes" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Enabled support for new routines to calculate qsat (the saturated water mixing ratio) which are now the default for standalone JULES. (#685)</p></li>
+<li><p>Improved interface checking in the surface, fire, FLake and river routing routines. (#678, 728, 729)</p></li>
+<li><p>The clay ancillary variable can now have multiple layers (note these are the soil biogeochemistry layers, not soil moisture layers). Users should note that an existing run with <a class="reference internal" href="../namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="JULES_SOIL_BIOGEOCHEM::l_layeredc"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_layeredc</span></code></a> = T that tries to read a single-layered clay variable from a file with <a class="reference internal" href="../namelists/ancillaries.nml.html#JULES_SOIL_PROPS::const_z" title="JULES_SOIL_PROPS::const_z"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">const_z</span></code></a> = F will no longer work; a multi-layered clay field must be provided in this case. All other configurations can be updated. (#687)</p></li>
+<li><p>Added further IMPLICIT NONE statements and fixed subroutine interface issues. (#737)</p></li>
+<li><p>Minor modifications to IMOGEN (#430).</p></li>
+<li><p>Removed the l_flux_bc switch from the UM-coupling argument list and standalone code. (#775)</p></li>
+<li><p>Improved use of coupled model diagnostic code in standalone runs. (#740)</p></li>
+<li><p>Diagnostics from INFERNO (interactive fire model) made available to the UM. (#552)</p></li>
+<li><p>JULES parameters included in the Random Parameter (RP) scheme (for UM runs). (#675)</p></li>
+<li><p>Rationalised some of the code for the reading and writing of dumps. (#763)</p></li>
+<li><p>Alignment of JULES and UM urban control and initialisation code. (#319)</p></li>
+<li><p>Reduced model overhead when running DrHook profiling. (#782)</p></li>
+<li><p>Fixed oddities found while investigating the use of CamFort. (#769)</p></li>
+<li><p>JULES source code fully compliant with the Fortran 2003 standard. (#711)</p></li>
+<li><p>Corrections to code comments and other minor changes. (#725, 690)</p></li>
+<li><p>Clarified units of variables in the vegetation code. (#741)</p></li>
+<li><p>Enable the reading of PFT and soil parameters for CABLE runs via the JULES_PFTPARM_CABLE and JULES_NVEGPARM_CABLE namelists. (#694, 748)</p></li>
+<li><p>Minor edits to ensure future compatibility of .inc files with the umdp3_fixer used in Rose stem tests. (#762)</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="changes-to-testing">
+<h2><span class="section-number">1.15.3. </span>Changes to testing<a class="headerlink" href="#changes-to-testing" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Rose stem testing working on JASMIN. (#744)</p></li>
+<li><p>Improved the output of the umdp3 checker task in rose stem. (#764)</p></li>
+<li><p>Rose stem testing added for IMOGEN and GL7 and GL8 configurations. (#706, 648, 773)</p></li>
+<li><p>Added an OMP vs no-OMP Rose stem test for the ukv config to the MO XC40 and virtual machine platforms. (#732)</p></li>
+<li><p>Allowed the option of setting JULES_REMOTE and JULES_REMOTE_HOST when running on the Met Office Cray (meto-xc40-cce). (#755)</p></li>
+<li><p>Resolved oversubscription problems and rationalised the meto-linux rose stem. (#783)</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="bugs-fixed">
+<h2><span class="section-number">1.15.4. </span>Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Fix to ensure TRIFFID competition does not try to access non-existent surface types. (#647)</p></li>
+<li><p>Fixed array/scalar mismatch in arguments to vegcarb. (#682)</p></li>
+<li><p>Corrected the dimensions given to the frac_prev array in <cite>lotka_eq_jls.F90</cite> (for runs with <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_trif_eq" title="JULES_VEGETATION::l_trif_eq"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trif_eq</span></code></a> = T and <a class="reference internal" href="../namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_ht_compete" title="JULES_VEGETATION::l_ht_compete"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ht_compete</span></code></a> = T). (#765)</p></li>
+<li><p>Fix to prevent floating point errors with CABLE. (#694)</p></li>
+<li><p>Use NINT to guard against imprecision in REAL/INTEGER conversion in routing code. (#726)</p></li>
+<li><p>Fixed bugs relating to windspeed-dependent unloading of snow from vegetation (UM only) and allowing soil rate modifier diagnostics in standalone runs. (#740)</p></li>
+<li><p>Correction related to indexing of snow fields in reconfiguration (UM only). (#676)</p></li>
+<li><p>Fixed certain snow diagnostics (UM stash fields 8,578 to 8,583). (#720)</p></li>
+<li><p>Correction to logic for canopy parameter updating (UM only). (#746)</p></li>
+<li><p>Example namelists updated for vn5.1. (#722)</p></li>
+<li><p>Fix of host specification in <cite>runtime.rc</cite> for site cehwl1. (#731)</p></li>
+<li><p>Updated the configuration for University of Exeter (<cite>uoe-linux-gfortran.cfg</cite>). (#735)</p></li>
+<li><p>Fix so rose stem IMOGEN tests work at NCI. (#792)</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="documentation-updates">
+<h2><span class="section-number">1.15.5. </span>Documentation updates<a class="headerlink" href="#documentation-updates" title="Permalink to this heading">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><p>Removed the science configurations section from the documentation. (#736).</p></li>
+<li><p>Updated the documentation (mainly release notes and hydrological terminology). (#738, 745)</p></li>
+<li><p>Updated documentation of fcm-make JULES_PLATFORM environment variable. (#739)</p></li>
+<li><p>Updated hyperlinks to Rose and FCM in the documentation. (#786)</p></li>
+</ul>
+</div></blockquote>
+<p>Documentation can be viewed on the github page <a class="reference external" href="http://jules-lsm.github.io/">http://jules-lsm.github.io/</a>.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">1.15. JULES version 5.2 Release Notes</a><ul>
+<li><a class="reference internal" href="#science-changes">1.15.1. Science changes</a></li>
+<li><a class="reference internal" href="#general-technical-changes">1.15.2. General/Technical changes</a></li>
+<li><a class="reference internal" href="#changes-to-testing">1.15.3. Changes to testing</a></li>
+<li><a class="reference internal" href="#bugs-fixed">1.15.4. Bugs fixed</a></li>
+<li><a class="reference internal" href="#documentation-updates">1.15.5. Documentation updates</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="JULES5-3.html"
+                          title="previous chapter"><span class="section-number">1.14. </span>JULES version 5.3 Release Notes</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="JULES5-1.html"
+                          title="next chapter"><span class="section-number">1.16. </span>JULES version 5.1 Release Notes</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES5-1.html" title="1.16. JULES version 5.1 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES5-3.html" title="1.14. JULES version 5.3 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.2 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">1. </span>Release notes for JULES</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1.15. </span>JULES version 5.2 Release Notes</a></li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+    </div>
+
+  </body>
+</html>

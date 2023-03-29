@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>6.26. cable_soilparm.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.2 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.27. crop_params.nml" href="crop_params.nml.html" />
+    <link rel="prev" title="6.25. nveg_params.nml" href="nveg_params.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="crop_params.nml.html" title="6.27. crop_params.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.25. nveg_params.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.2 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.26. </span><code class="docutils literal notranslate"><span class="pre">cable_soilparm.nml</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="cable-soilparm-nml">
+<h1><span class="section-number">6.26. </span><code class="docutils literal notranslate"><span class="pre">cable_soilparm.nml</span></code><a class="headerlink" href="#cable-soilparm-nml" title="Permalink to this heading">¶</a></h1>
+<p>This file contains a namelist called <a class="reference internal" href="#namelist-CABLE_SOILPARM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">CABLE_SOILPARM</span></code></a> that sets time-invariant parameters for different soil types for the CABLE land surface model.</p>
+<section id="namelist-CABLE_SOILPARM">
+<span id="cable-soilparm-namelist-members"></span><h2><span class="section-number">6.26.1. </span><code class="docutils literal notranslate"><span class="pre">CABLE_SOILPARM</span></code> namelist members<a class="headerlink" href="#namelist-CABLE_SOILPARM" title="Permalink to this heading">¶</a></h2>
+<p>This namelist reads the values of parameters for each of the soil types if the CABLE land surface model is being used. These parameters are a function of surface type only. All parameters must be defined for any configuration.
+The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and for the current version of CABLE is set to <cite>9</cite>.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_SOILPARM::silt_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">silt_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::silt_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(n_soiltypes)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Fraction of soil which is silt.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_SOILPARM::clay_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">clay_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::clay_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(n_soiltypes)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Fraction of soil which is clay.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_SOILPARM::sand_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">sand_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::sand_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(n_soiltypes)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Fraction of soil which is sand.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_SOILPARM::swilt_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">swilt_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::swilt_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(n_soiltypes)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Volume of H<sub>2</sub>O at wilting (m<sup>3</sup> m<sup>-3</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_SOILPARM::sfc_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">sfc_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::sfc_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(n_soiltypes)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Volume of H<sub>2</sub>O at field capacity (m<sup>3</sup> m<sup>-3</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_SOILPARM::ssat_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">ssat_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::ssat_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(n_soiltypes)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Volume of H<sub>2</sub>O at saturation (m<sup>3</sup> m<sup>-3</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_SOILPARM::bch_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">bch_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::bch_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(n_soiltypes)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Parameter b in Campbell equation.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_SOILPARM::hyds_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">hyds_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::hyds_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(n_soiltypes)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Hydraulic conductivity at saturation (m<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_SOILPARM::sucs_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">sucs_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::sucs_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(n_soiltypes)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Suction at saturation (m).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_SOILPARM::rhosoil_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">rhosoil_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::rhosoil_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(n_soiltypes)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Soil bulk density (kg m<sup>-3</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_SOILPARM::css_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">css_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::css_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(n_soiltypes)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Soil specific heat capacity (J kg<sup>-1</sup> K<sup>-1</sup>).</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">6.26. <code class="docutils literal notranslate"><span class="pre">cable_soilparm.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-CABLE_SOILPARM">6.26.1. <code class="docutils literal notranslate"><span class="pre">CABLE_SOILPARM</span></code> namelist members</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="nveg_params.nml.html"
+                          title="previous chapter"><span class="section-number">6.25. </span><code class="docutils literal notranslate"><span class="pre">nveg_params.nml</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="crop_params.nml.html"
+                          title="next chapter"><span class="section-number">6.27. </span><code class="docutils literal notranslate"><span class="pre">crop_params.nml</span></code></a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="crop_params.nml.html" title="6.27. crop_params.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.25. nveg_params.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.2 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.26. </span><code class="docutils literal notranslate"><span class="pre">cable_soilparm.nml</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+    </div>
+
+  </body>
+</html>

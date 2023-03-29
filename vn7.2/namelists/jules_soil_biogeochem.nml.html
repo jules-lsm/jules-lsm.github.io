@@ -1,0 +1,841 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>6.11. jules_soil_biogeochem.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.2 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.12. jules_soil_ecosse.nml" href="jules_soil_ecosse.nml.html" />
+    <link rel="prev" title="6.10. jules_vegetation.nml" href="jules_vegetation.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_soil_ecosse.nml.html" title="6.12. jules_soil_ecosse.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_vegetation.nml.html" title="6.10. jules_vegetation.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.2 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.11. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_biogeochem.nml</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="jules-soil-biogeochem-nml">
+<h1><span class="section-number">6.11. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_biogeochem.nml</span></code><a class="headerlink" href="#jules-soil-biogeochem-nml" title="Permalink to this heading">¶</a></h1>
+<p>This file sets options and parameters for soil biogeochemistry.</p>
+<p>If using the single-pool or 4-pool soil models, all soil parameters are read from this file.</p>
+<p>If using the ECOSSE soil model, most soil parameters are read from a separate file (<a class="reference internal" href="jules_soil_ecosse.nml.html#jules-soil-ecosse-namelist"><span class="std std-ref">jules_soil_ecosse.nml</span></a>).</p>
+<section id="namelist-JULES_SOIL_BIOGEOCHEM">
+<span id="jules-soil-biogeochem-namelist-members"></span><h2><span class="section-number">6.11.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_SOIL_BIOGEOCHEM</span></code> namelist members<a class="headerlink" href="#namelist-JULES_SOIL_BIOGEOCHEM" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::soil_bgc_model">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">soil_bgc_model</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>1, 2 or 3</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+</dl>
+<p>Choice for model of soil biogeochemistry.</p>
+<p>Possible values are:</p>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line">A single-pool model of soil carbon turnover in which the pool is not prognostic (not updated).</div>
+<div class="line">This must be used when the TRIFFID vegetation model is not selected (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = FALSE).</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">A 4-pool model of soil organic carbon and nitrogen, originally based on the Jenkinson (1990) model, with a single pool of inorganic N.</div>
+<div class="line">Historically this was bundled with the TRIFFID vegetation model.</div>
+<div class="line">This can only be used if the TRIFFID vegetation model is selected (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE).</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">A 4-pool model of soil organic carbon and nitrogen, and 2 inorganic N pools (ammonium and nitrate), based on the ECOSSE model (Smith et al., 2010).</div>
+<div class="line">This can only be used if the TRIFFID vegetation model is selected (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE).</div>
+<div class="line">This can also be run without nitrogen (<a class="reference internal" href="jules_soil_ecosse.nml.html#JULES_SOIL_ECOSSE::l_soil_n" title="JULES_SOIL_ECOSSE::l_soil_n"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_soil_n</span></code></a> = FALSE).</div>
+</div>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The ECOSSE model in JULES is still in development and is not fully functional in this version. The code is included to allow further development. Users should not try to use ECOSSE.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>References:</p>
+<ul class="simple">
+<li><p>Jenkinson, D.S., 1990. The turnover of organic carbon and nitrogen in soil. Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences, 329(1255), pp.361-368. (<a class="reference external" href="https://doi.org/10.1098/rstb.1990.0177">https://doi.org/10.1098/rstb.1990.0177</a>)</p></li>
+<li><p>Smith et al., 2010, Estimating changes in Scottish soil carbon stocks using ECOSSE. I. Model description and uncertainties, Climate Research, 45: 179-192. (<a class="reference external" href="https://doi.org/10.3354/cr00899">https://doi.org/10.3354/cr00899</a>).</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<div class="admonition-parameters-that-can-be-used-with-all-soil-models admonition">
+<p class="admonition-title">Parameters that can be used with all soil models</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::q10_soil">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">q10_soil</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::q10_soil" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>2.0</p>
+</dd>
+</dl>
+<p>Q10 factor for soil respiration.</p>
+<p>With the single-pool or 4-pool models this is only used if <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::l_q10" title="JULES_SOIL_BIOGEOCHEM::l_q10"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_q10</span></code></a> = TRUE.</p>
+<p>With the ECOSSE model this is only used if <a class="reference internal" href="jules_soil_ecosse.nml.html#JULES_SOIL_ECOSSE::temp_modifier" title="JULES_SOIL_ECOSSE::temp_modifier"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">temp_modifier</span></code></a> = 1.</p>
+<p>See Hadley Centre Technical Note 24, Eq.17, available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes">the Met Office Library</a>.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-parameters-for-the-single-pool-model-only-used-if-nml-mem-soil-bgc-model-1 admonition">
+<p class="admonition-title">Parameters for the single-pool model (only used if <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 1)</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::kaps">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">kaps</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::kaps" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.5e-8</p>
+</dd>
+</dl>
+<p>Specific soil respiration rate at 25 degC and optimum soil moisture (s<sup>-1</sup>).</p>
+<p>See Hadley Centre Technical Note 24, Eq.16, available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes">the Met Office Library</a>.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-parameters-for-the-single-pool-and-4-pool-models-only-used-if-nml-mem-soil-bgc-model-1-or-2 admonition">
+<p class="admonition-title">Parameters for the single-pool and 4-pool models (only used if <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 1 or 2)</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::l_q10">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">l_q10</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::l_q10" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p>Switch for use of Q10 approach when calculating soil respiration.</p>
+<dl>
+<dt>TRUE</dt><dd><blockquote>
+<div><p>Use Q10 approach (Equation 65 in Clark et al., 2011).</p>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is always enforced if the single-pool model is selected (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 1) and was used in JULES2.0.</p>
+</div>
+</dd>
+<dt>FALSE</dt><dd><p>Use the approach of Jenkinson (1990) (Equation 66 in Clark et al., 2011).</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>References:</p>
+<ul class="simple">
+<li><p>Jenkinson, D.S., 1990. The turnover of organic carbon and nitrogen in soil. Philosophical Transactions of the Royal Society of London. Series B: Biological Sciences, 329(1255), pp.361-368. (<a class="reference external" href="https://doi.org/10.1098/rstb.1990.0177">https://doi.org/10.1098/rstb.1990.0177</a>)</p></li>
+<li><p>Clark, D. B., Mercado, L. M., Sitch, S., Jones, C. D., Gedney, N., Best, M. J., Pryor, M., Rooney, G. G., Essery, R. L. H., Blyth, E., Boucher, O., Harding, R. J., Huntingford, C., and Cox, P. M.: The Joint UK Land Environment Simulator (JULES), model description – Part 2: Carbon fluxes and vegetation dynamics, Geosci. Model Dev., 4, 701–722, (<a class="reference external" href="https://doi.org/10.5194/gmd-4-701-2011">https://doi.org/10.5194/gmd-4-701-2011</a>), 2011.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::l_soil_resp_lev2">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">l_soil_resp_lev2</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::l_soil_resp_lev2" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch affecting the temperature and moisture used for soil respiration calculation.</p>
+<dl>
+<dt>TRUE</dt><dd><p>Temperature and total (frozen+unfrozen) moisture content of the second soil layer are used.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Temperature and unfrozen moisture content of the first (topmost) soil layer are used.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If layered soil C is used (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="JULES_SOIL_BIOGEOCHEM::l_layeredc"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_layeredc</span></code></a> = TRUE) the temperature and moisture of each soil layer is used to calculation respiration from that layer.</p>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="admonition-parameters-for-the-4-pool-model-only-used-if-nml-mem-soil-bgc-model-2 admonition">
+<p class="admonition-title">Parameters for the 4-pool model (only used if <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2)</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::l_layeredc">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">l_layeredc</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for using the layered soil carbon model.</p>
+<p>If the 4-pool model is used (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2) this uses the approach of Burke et al. (2017) and two extra parameters are required: <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::tau_resp" title="JULES_SOIL_BIOGEOCHEM::tau_resp"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">tau_resp</span></code></a>, <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::tau_lit" title="JULES_SOIL_BIOGEOCHEM::tau_lit"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">tau_lit</span></code></a>.</p>
+<p>Layered soil nitrogen is also available if the nitrogen cycle is switched on (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_nitrogen" title="JULES_VEGETATION::l_nitrogen"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_nitrogen</span></code></a> = TRUE), but this is a highly experimental version which needs further evaluation and so should be used with extreme caution. One additional parameter is required for layered soil nitrogen: <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::diff_n_pft" title="JULES_SOIL_BIOGEOCHEM::diff_n_pft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">diff_n_pft</span></code></a>.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>The number and thickness of layers in the soil carbon model are set equal to those in the soil moisture model (<a class="reference internal" href="jules_soil.nml.html#namelist-JULES_SOIL"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL</span></code></a>).</p>
+</dd>
+<dt>FALSE</dt><dd><p>There are no specific layers in the soil carbon model (a single, bulk pool).</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>References:</p>
+<ul class="simple">
+<li><p>Burke, E. J., Chadburn, S. E., and Ekici, A.: A vertical representation of soil carbon in the JULES land surface scheme (vn4.3_permafrost) with a focus on permafrost regions, Geosci. Model Dev., 10, 959-975, doi:10.5194/gmd-10-959-2017, 2017.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::l_label_frac_cs">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">l_label_frac_cs</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::l_label_frac_cs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for labelling and tracing a subset of the layered soil carbon (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="JULES_SOIL_BIOGEOCHEM::l_layeredc"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_layeredc</span></code></a> = TRUE). It uses the approach of Burke et al.(2017). This requires the 4-pool model to be used (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2). The fraction of labelled soil carbon needs to be specified as part of the model’s initial state.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>A user-defined fraction of soil carbon is labelled.</p>
+</dd>
+<dt>FALSE</dt><dd><p>None of the soil carbon is labelled.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>References:</p>
+<ul class="simple">
+<li><p>Burke, E. J., Chadburn, S. E., and Ekici, A.: A vertical representation of soil carbon in the JULES land surface scheme (vn4.3_permafrost) with a focus on permafrost regions, Geosci. Model Dev., 10, 959-975, doi:10.5194/gmd-10-959-2017, 2017.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::kaps_4pool">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">kaps_4pool</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::kaps_4pool" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(4)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>3.22e-7, 9.65e-9, 2.12e-8, 6.43e-10</p>
+</dd>
+</dl>
+<p>Specific soil respiration rate for the 4-pool submodel for each soil carbon pool (decomposable plant material, resistant plant material, biomass, humus).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::bio_hum_cn">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">bio_hum_cn</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::bio_hum_cn" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>10.0</p>
+</dd>
+</dl>
+<p>Parameter controlling ratio of C to N for BIO and HUM pools.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::sorp">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">sorp</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::sorp" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>10.0</p>
+</dd>
+</dl>
+<p>Parameter controlling the leaching of inorganic N through the soil profile. A factor of 1 means that in a timestep all the inorganic N is available for leaching. The default value of 10 means that 10% of inorganic N is available for leaching.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::n_inorg_turnover">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">n_inorg_turnover</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::n_inorg_turnover" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Parameter controlling the lifetime of the inorganic N pool. A value of 1 implies the whole pool will turnover in 360 days.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::tau_resp">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">tau_resp</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::tau_resp" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>2.0</p>
+</dd>
+</dl>
+<p>Parameter controlling decay of respiration with depth (m-1). Only used with layered soil carbon (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="JULES_SOIL_BIOGEOCHEM::l_layeredc"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_layeredc</span></code></a> = TRUE).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::diff_n_pft">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">diff_n_pft</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::diff_n_pft" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>5.0</p>
+</dd>
+</dl>
+<p>Parameter controlling the rate of re-filling of the available inorganic nitrogen pool (1/360 days). This parameter determines how quickly the inorganic nitrogen reaches the roots after the roots uptake from the soil around them. This should be quicker than the turnover rate of inorganic nitrogen. In addition, it has to be small compared with the triffid timestep (360/triffid_period) otherwise the available inorganic nitrogen becomes unstable. Hence the choice of the default value 5. Only used with layered soil carbon and nitrogen scheme (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="JULES_SOIL_BIOGEOCHEM::l_layeredc"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_layeredc</span></code></a> = TRUE and <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_nitrogen" title="JULES_VEGETATION::l_nitrogen"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_nitrogen</span></code></a> = TRUE). When <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_trif_eq" title="JULES_VEGETATION::l_trif_eq"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trif_eq</span></code></a> = TRUE or <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::diff_n_pft" title="JULES_SOIL_BIOGEOCHEM::diff_n_pft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">diff_n_pft</span></code></a> is greater than (0.5 * 360 / <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::triffid_period" title="JULES_VEGETATION::triffid_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">triffid_period</span></code></a>) then all of the inorganic nitrogen pool is deemed to be available.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-parameters-for-the-4-pool-or-ecosse-based-models-only-used-if-nml-mem-soil-bgc-model-2-or-3 admonition">
+<p class="admonition-title">Parameters for the 4-pool- or ECOSSE-based models (only used if <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3):</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::tau_lit">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">tau_lit</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::tau_lit" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>5.0</p>
+</dd>
+</dl>
+<p>Parameter controlling the decay of litter with depth (m-1).
+With 4-pool, this is only used with layered soil carbon (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="JULES_SOIL_BIOGEOCHEM::l_layeredc"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_layeredc</span></code></a> = TRUE).
+With ECOSSE, this is only used with <a class="reference internal" href="jules_soil_ecosse.nml.html#JULES_SOIL_ECOSSE::plant_input_profile" title="JULES_SOIL_ECOSSE::plant_input_profile"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">plant_input_profile</span></code></a> = 2.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-methane-parameters-and-switches-can-only-be-used-with-the-single-pool-and-4-pool-models-nml-mem-soil-bgc-model-1-or-2 admonition">
+<p class="admonition-title">Methane parameters and switches. Can only be used with the single-pool and 4-pool models (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 1 or 2).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Some parameters may need to be re-tuned for different soil biogeochemistry models.</p>
+</div>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::l_ch4_tlayered">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">l_ch4_tlayered</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::l_ch4_tlayered" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch to calculate methane emissions based on layered soil temperature.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Methane emission is calculated from layered soil temperatures.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Methane emission is calculated from top 1m average soil temperature (default).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::l_ch4_interactive">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">l_ch4_interactive</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::l_ch4_interactive" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch to couple the methane emission into the carbon cycle. In order to use this the methane must be calculated from layered soil temperature (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::l_ch4_tlayered" title="JULES_SOIL_BIOGEOCHEM::l_ch4_tlayered"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ch4_tlayered</span></code></a> = TRUE).</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Methane flux is subtracted from soil carbon stocks.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Methane emission is only diagnostic (default).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::l_ch4_microbe">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">l_ch4_microbe</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::l_ch4_microbe" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch to enable the microbial methane production scheme (represents the dynamics of methanogens and a dissolved substrate pool). See Chadburn et al. (2020).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will only be applied to the methane production from your chosen <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::ch4_substrate" title="JULES_SOIL_BIOGEOCHEM::ch4_substrate"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ch4_substrate</span></code></a>. The scheme has been calibrated with <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::ch4_substrate" title="JULES_SOIL_BIOGEOCHEM::ch4_substrate"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ch4_substrate</span></code></a> = 1.</p>
+</div>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Microbial dynamics simulated in methane scheme.</p>
+</dd>
+<dt>FALSE</dt><dd><p>No microbial dynamics, decomposition of substrate translates immediately to methane emissions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::ch4_substrate">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">ch4_substrate</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::ch4_substrate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>1, 2 or 3</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+</dl>
+<p>Choice of substrate for wetland methane. This controls the calculation method for the methane flux that is used to update soil carbon (only if <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::l_ch4_interactive" title="JULES_SOIL_BIOGEOCHEM::l_ch4_interactive"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ch4_interactive</span></code></a> = TRUE) and to populate the variable fch4_wetl (seen by the atmospheric model in coupled mode).</p>
+<p>Possible values are:</p>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line">Using soil carbon as substrate (default).</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Using NPP as substrate.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Using soil respiration as substrate.</div>
+</div>
+</li>
+</ol>
+<p>This replaces the previous switch l_wetland_ch4_npp.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::t0_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">t0_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::t0_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>273.15</p>
+</dd>
+</dl>
+<p>Reference temperature for the Q10 function CH4 emission calculation</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::const_ch4_cs">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">const_ch4_cs</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::const_ch4_cs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>7.41e-12</p>
+</dd>
+</dl>
+<p>Scale factor for wetland CH4 emissions when soil carbon is taken as the substrate for ch4 emissions (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::ch4_substrate" title="JULES_SOIL_BIOGEOCHEM::ch4_substrate"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ch4_substrate</span></code></a> = 1)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the UM the recommended value depends on <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> as follows:</p>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = FALSE, <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::const_ch4_cs" title="JULES_SOIL_BIOGEOCHEM::const_ch4_cs"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">const_ch4_cs</span></code></a> = 5.41e-12</div>
+<div class="line"><a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE, <a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::const_ch4_cs" title="JULES_SOIL_BIOGEOCHEM::const_ch4_cs"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">const_ch4_cs</span></code></a> = 5.41e-10</div>
+</div>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::q10_ch4_cs">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">q10_ch4_cs</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::q10_ch4_cs" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>3.7</p>
+</dd>
+</dl>
+<p>Q10 value for wetland CH4 emissions when soil carbon is taken as the substrate for ch4 emissions (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::ch4_substrate" title="JULES_SOIL_BIOGEOCHEM::ch4_substrate"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ch4_substrate</span></code></a> = 1)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::const_ch4_npp">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">const_ch4_npp</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::const_ch4_npp" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>9.99e-3</p>
+</dd>
+</dl>
+<p>Scale factor for wetland CH4 emissions when NPP is taken as the substrate for ch4 emissions (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::ch4_substrate" title="JULES_SOIL_BIOGEOCHEM::ch4_substrate"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ch4_substrate</span></code></a> = 2)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::q10_ch4_npp">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">q10_ch4_npp</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::q10_ch4_npp" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>1.5</p>
+</dd>
+</dl>
+<p>Q10 value for wetland CH4 emissions when npp is taken as the substrate for ch4 emissions (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::ch4_substrate" title="JULES_SOIL_BIOGEOCHEM::ch4_substrate"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ch4_substrate</span></code></a> = 2)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::const_ch4_resps">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">const_ch4_resps</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::const_ch4_resps" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>4.36e-3</p>
+</dd>
+</dl>
+<p>Scale factor for wetland CH4 emissions when soil respiration is taken as the substrate for ch4 emissions  (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::ch4_substrate" title="JULES_SOIL_BIOGEOCHEM::ch4_substrate"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ch4_substrate</span></code></a> = 3)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::q10_ch4_resps">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">q10_ch4_resps</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::q10_ch4_resps" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>1.5</p>
+</dd>
+</dl>
+<p>Q10 value for wetland CH4 emissions when soil respiration is taken as the substrate for ch4 emissions (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::ch4_substrate" title="JULES_SOIL_BIOGEOCHEM::ch4_substrate"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ch4_substrate</span></code></a> = 3)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::ch4_cpow">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">ch4_cpow</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::ch4_cpow" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Power of soil carbon used to calculate methane emissions with soil carbon as substrate (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::ch4_substrate" title="JULES_SOIL_BIOGEOCHEM::ch4_substrate"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ch4_substrate</span></code></a> = 1). Methane production is calculated as cs<sup>ch4_cpow</sup>. A value of 1.0 is default, but a value of 2/3 is consistent with an assumption that only the surfaces of the organic matter are accessible.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::const_ch4_cs" title="JULES_SOIL_BIOGEOCHEM::const_ch4_cs"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">const_ch4_cs</span></code></a> will need retuning if this parameter is changed.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="admonition-methane-parameters-only-used-with-layered-soil-temperatures-nml-mem-l-ch4-tlayered-true admonition">
+<p class="admonition-title">Methane parameters only used with layered soil temperatures (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::l_ch4_tlayered" title="JULES_SOIL_BIOGEOCHEM::l_ch4_tlayered"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ch4_tlayered</span></code></a> = TRUE).</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::tau_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">tau_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::tau_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>6.5</p>
+</dd>
+</dl>
+<p>Exponent in the exponential decline of methane emissions with soil depth (m-1).
+This empirically represents methane oxidation/emission processes, which only allow a fraction of the methane produced in the soil to reach the atmosphere.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-methane-parameters-only-used-with-microbial-methane-scheme-nml-mem-l-ch4-microbe-true admonition">
+<p class="admonition-title">Methane parameters only used with microbial methane scheme (<a class="reference internal" href="#JULES_SOIL_BIOGEOCHEM::l_ch4_microbe" title="JULES_SOIL_BIOGEOCHEM::l_ch4_microbe"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ch4_microbe</span></code></a> = TRUE).</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::k2_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">k2_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::k2_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.01</p>
+</dd>
+</dl>
+<p>Baseline methanogenic respiration rate (hr-1).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::kd_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">kd_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::kd_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.0003</p>
+</dd>
+</dl>
+<p>Baseline methanogenic mortality rate (hr-1).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::rho_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">rho_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::rho_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>47.0</p>
+</dd>
+</dl>
+<p>Factor in substrate limitation function (related to half saturation of substrate for methanogenic respiration) ( (mgC/m3)-1 ).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::q10_mic_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">q10_mic_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::q10_mic_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>4.3</p>
+</dd>
+</dl>
+<p>Q10 factor for methanogens.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::cue_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">cue_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::cue_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.03</p>
+</dd>
+</dl>
+<p>Carbon use efficiency of methanogenic growth.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::mu_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">mu_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::mu_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.00042</p>
+</dd>
+</dl>
+<p>Threshold growth rate below which methanogens die (hr-1).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::frz_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">frz_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::frz_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.5</p>
+</dd>
+</dl>
+<p>Factor to reduce CH4 substrate production when soil is sufficiently frozen (only in microbial scheme).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::alpha_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">alpha_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::alpha_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.001</p>
+</dd>
+</dl>
+<p>Ratio between maintenance and growth respiration rates for methanogens.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::ev_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">ev_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::ev_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>5.0</p>
+</dd>
+</dl>
+<p>Timescale over which methanogenic traits adapt to temperature change (yr)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_BIOGEOCHEM::q10_ev_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_BIOGEOCHEM::</span></span><span class="sig-name descname"><span class="pre">q10_ev_ch4</span></span><a class="headerlink" href="#JULES_SOIL_BIOGEOCHEM::q10_ev_ch4" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>2.2</p>
+</dd>
+</dl>
+<p>Q10 for temperature response of methanogenic traits under adaptation</p>
+</dd></dl>
+
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<blockquote>
+<div><p>Reference for microbial methane scheme:</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Chadburn, S. E. et al (2020),
+Modeled Microbial Dynamics Explain the Apparent Temperature Sensitivity
+of Wetland Methane Emissions. Global Biogeochemical Cycles, 34:
+e2020GB006678. <a class="reference external" href="https://doi.org/10.1029/2020GB006678">https://doi.org/10.1029/2020GB006678</a></p></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">6.11. <code class="docutils literal notranslate"><span class="pre">jules_soil_biogeochem.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-JULES_SOIL_BIOGEOCHEM">6.11.1. <code class="docutils literal notranslate"><span class="pre">JULES_SOIL_BIOGEOCHEM</span></code> namelist members</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="jules_vegetation.nml.html"
+                          title="previous chapter"><span class="section-number">6.10. </span><code class="docutils literal notranslate"><span class="pre">jules_vegetation.nml</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="jules_soil_ecosse.nml.html"
+                          title="next chapter"><span class="section-number">6.12. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_ecosse.nml</span></code></a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_soil_ecosse.nml.html" title="6.12. jules_soil_ecosse.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_vegetation.nml.html" title="6.10. jules_vegetation.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.2 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.11. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_biogeochem.nml</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.3.0.
+    </div>
+
+  </body>
+</html>
