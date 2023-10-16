@@ -1,0 +1,810 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>6.12. jules_soil_ecosse.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.3 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.13. jules_deposition.nml" href="jules_deposition.nml.html" />
+    <link rel="prev" title="6.11. jules_soil_biogeochem.nml" href="jules_soil_biogeochem.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_deposition.nml.html" title="6.13. jules_deposition.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_soil_biogeochem.nml.html" title="6.11. jules_soil_biogeochem.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.12. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_ecosse.nml</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="jules-soil-ecosse-nml">
+<span id="jules-soil-ecosse-namelist"></span><h1><span class="section-number">6.12. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_ecosse.nml</span></code><a class="headerlink" href="#jules-soil-ecosse-nml" title="Permalink to this heading">¶</a></h1>
+<p>This file sets options and parameters for the ECOSSE model of soil biogeochemistry. It is used only if the ECOSSE model is chosen (<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 3).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The ECOSSE model in JULES is still in development and is not fully functional in this version. The code is included to allow further development. Users should not try to use ECOSSE.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>References:</p>
+<ul class="simple">
+<li><p>Smith et al., 2010, Estimating changes in Scottish soil carbon stocks using ECOSSE. I. Model description and uncertainties, Climate Research, 45: 179-192. (<a class="reference external" href="https://doi.org/10.3354/cr00899">https://doi.org/10.3354/cr00899</a>).</p></li>
+<li><p>Clark, D. B., Mercado, L. M., Sitch, S., Jones, C. D., Gedney, N., Best, M. J., Pryor, M., Rooney, G. G., Essery, R. L. H., Blyth, E., Boucher, O., Harding, R. J., Huntingford, C., and Cox, P. M.: The Joint UK Land Environment Simulator (JULES), model description – Part 2: Carbon fluxes and vegetation dynamics, Geosci. Model Dev., 4, 701–722, (<a class="reference external" href="https://doi.org/10.5194/gmd-4-701-2011">https://doi.org/10.5194/gmd-4-701-2011</a>), 2011.</p></li>
+</ul>
+</div>
+<section id="namelist-JULES_SOIL_ECOSSE">
+<span id="jules-soil-ecosse-namelist-members"></span><h2><span class="section-number">6.12.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_SOIL_ECOSSE</span></code> namelist members<a class="headerlink" href="#namelist-JULES_SOIL_ECOSSE" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::l_soil_n">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_soil_n</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_soil_n" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p>Switch to include soil nitrogen in ECOSSE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Model soil carbon and nitrogen.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Model only soil carbon.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::l_match_layers">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_match_layers</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_match_layers" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p>Switch to match ECOSSE soil C and N layers to those for soil moisture.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use the same layering as for soil moisture. The number of soil carbon layers will equal <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sm_levels</span></code></a>, with layer thicknesses given by <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::dzsoil_io" title="JULES_SOIL::dzsoil_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dzsoil_io</span></code></a>.</p>
+</dd>
+<dt>FALSE</dt><dd><p>The number of layers will be specified by <a class="reference internal" href="#JULES_SOIL_ECOSSE::dim_cslayer" title="JULES_SOIL_ECOSSE::dim_cslayer"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dim_cslayer</span></code></a> and the thicknesses by <a class="reference internal" href="#JULES_SOIL_ECOSSE::dz_soilc_io" title="JULES_SOIL_ECOSSE::dz_soilc_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dz_soilc_io</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::dim_cslayer">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">dim_cslayer</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::dim_cslayer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>&gt;= 1</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>The number of ECOSSE soil carbon layers. Not used if <a class="reference internal" href="#JULES_SOIL_ECOSSE::l_match_layers" title="JULES_SOIL_ECOSSE::l_match_layers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_match_layers</span></code></a> = TRUE. Despite the similar name, this parameter is unrelated to <a class="reference internal" href="model_grid.nml.html#JULES_INPUT_GRID::sclayer_dim_name" title="JULES_INPUT_GRID::sclayer_dim_name"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sclayer_dim_name</span></code></a>.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::dz_soilc_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">dz_soilc_io</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::dz_soilc_io" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>real(dim_cslayer)</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>&gt; 0</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Thicknesses of the ECOSSE soil carbon layers (m). Not used if <a class="reference internal" href="#JULES_SOIL_ECOSSE::l_match_layers" title="JULES_SOIL_ECOSSE::l_match_layers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_match_layers</span></code></a> = TRUE. In most cases the total depth must equal that of the soil moisture layers (see <a class="reference internal" href="jules_soil.nml.html#JULES_SOIL::dzsoil_io" title="JULES_SOIL::dzsoil_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dzsoil_io</span></code></a>). The exception is the case of a single layer, bulk model (<a class="reference internal" href="#JULES_SOIL_ECOSSE::dim_cslayer" title="JULES_SOIL_ECOSSE::dim_cslayer"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dim_cslayer</span></code></a> = 1), for which dz_soilc(1) is interpreted as the representative or averaging depth for the bulk layer (e.g. the temperature of the bulk model is taken as the average over this depth).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::dt_soilc">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">dt_soilc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::dt_soilc" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>&gt;= <a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a></p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p><a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a></p>
+</dd>
+</dl>
+<p>The timestep length for ECOSSE (seconds). The main JULES timestep length <a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a> must be a multiple of this timestep length, so that ECOSSE is called on JULES timesteps. The TRIFFID timestep length <a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::triffid_period" title="JULES_VEGETATION::triffid_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">triffid_period</span></code></a> (converted to seconds) must also be a multiple of the ECOSSE timestep length.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::l_driver_ave">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_driver_ave</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_driver_ave" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p>Switch controlling the averaging of the physical driving variables that are input to ECOSSE (e.g. soil temperature).</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Average the driving variables over the ECOSSE timestep length.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Use instantaneous values of the driving variables at the time when ECOSSE is called.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::plant_input_profile">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">plant_input_profile</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::plant_input_profile" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>INTEGER</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>1 or 2</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+</dl>
+<p>Switch for the vertical distribution of litterfall inputs of C and N to the soil.</p>
+<p>Possible values are:</p>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line">Fraction <a class="reference internal" href="#JULES_SOIL_ECOSSE::pi_sfc_frac" title="JULES_SOIL_ECOSSE::pi_sfc_frac"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">pi_sfc_frac</span></code></a> of inputs are distributed uniformly in a surface layer of depth <a class="reference internal" href="#JULES_SOIL_ECOSSE::pi_sfc_depth" title="JULES_SOIL_ECOSSE::pi_sfc_depth"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">pi_sfc_depth</span></code></a>, the remainder are distributed according to the distribution of roots.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Inputs decrease exponentially with depth with decay constant <a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::tau_lit" title="JULES_SOIL_BIOGEOCHEM::tau_lit"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">tau_lit</span></code></a>.</div>
+</div>
+</li>
+</ol>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::pi_sfc_frac">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">pi_sfc_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::pi_sfc_frac" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.3</p>
+</dd>
+</dl>
+<p>Fraction of plant litterfall that is added to the surface soil layer of depth <a class="reference internal" href="#JULES_SOIL_ECOSSE::pi_sfc_depth" title="JULES_SOIL_ECOSSE::pi_sfc_depth"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">pi_sfc_depth</span></code></a>. Only used if <a class="reference internal" href="#JULES_SOIL_ECOSSE::plant_input_profile" title="JULES_SOIL_ECOSSE::plant_input_profile"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">plant_input_profile</span></code></a> = 1.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::pi_sfc_depth">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">pi_sfc_depth</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::pi_sfc_depth" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.1</p>
+</dd>
+</dl>
+<p>Depth of soil over which fraction <a class="reference internal" href="#JULES_SOIL_ECOSSE::pi_sfc_frac" title="JULES_SOIL_ECOSSE::pi_sfc_frac"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">pi_sfc_frac</span></code></a> of plant litterfall is added (m). Only used if <a class="reference internal" href="#JULES_SOIL_ECOSSE::plant_input_profile" title="JULES_SOIL_ECOSSE::plant_input_profile"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">plant_input_profile</span></code></a> = 1.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::temp_modifier">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">temp_modifier</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::temp_modifier" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>INTEGER</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>1 or 2</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>2</p>
+</dd>
+</dl>
+<p>Switch for the form of the temperature rate modifier for decomposition.</p>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line">Use a Q10 approach (Eqn. 65 of Clark et al. (2011))</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Use the Smith et al. (2010) form of the modifier (Eqn.1 of Smith et al. (2010))</div>
+</div>
+</li>
+</ol>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::water_modifier">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">water_modifier</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::water_modifier" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">type</dt>
+<dd class="field-odd"><p>INTEGER</p>
+</dd>
+<dt class="field-even">permitted</dt>
+<dd class="field-even"><p>1 or 2</p>
+</dd>
+<dt class="field-odd">default</dt>
+<dd class="field-odd"><p>2</p>
+</dd>
+</dl>
+<p>Switch for the form of the water rate modifier for decomposition and nitrification.</p>
+</div></blockquote>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line">Use the Clark et al. (2011) form of the modifier (Eqn. 67 of Clark et al. (2011)). Note however that only the unfrozen water is considered here.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Use the Smith et al. (2010) form of the modifier.</div>
+</div>
+</li>
+</ol>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_rate">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_rate</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_rate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL(4)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>3.22e-7, 9.65e-9, 2.12e-8, 6.43e-10</p>
+</dd>
+</dl>
+<p>Rate constant for decomposition of each soil carbon pool (s<sup>-1</sup>).</p>
+<p>Note that these default values are also those for use with the 4-pool model (<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::kaps_4pool" title="JULES_SOIL_BIOGEOCHEM::kaps_4pool"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">kaps_4pool</span></code></a>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_ph_rate_min">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_ph_rate_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_ph_rate_min" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.2</p>
+</dd>
+</dl>
+<p>Minimum allowed value of pH rate modifier for decomposition.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_ph_min">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_ph_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_ph_min" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>decomp_ph_min &lt;= decomp_ph_max</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>1.0</p>
+</dd>
+</dl>
+<p>Soil pH below which rate of decomposition is minimum.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_ph_max">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_ph_max</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_ph_max" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>decomp_ph_max &gt;= decomp_ph_min</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>4.5</p>
+</dd>
+</dl>
+<p>Soil pH above which rate of decomposition is maximum.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_temp_coeff_smith">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_temp_coeff_smith</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_temp_coeff_smith" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL(3)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>47.9, 106.0, 18.3</p>
+</dd>
+</dl>
+<p>Constants in the 4-pool from of the decomposition temperature modifier (<a class="reference internal" href="#JULES_SOIL_ECOSSE::temp_modifier" title="JULES_SOIL_ECOSSE::temp_modifier"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">temp_modifier</span></code></a> = 2).</p>
+<p>Note that these default values are also those harwired in the code for use with the 4-pool model (<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2, <a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_q10" title="JULES_SOIL_BIOGEOCHEM::l_q10"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_q10</span></code></a> = F ).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_wrate_min_smith">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_wrate_min_smith</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_wrate_min_smith" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.2</p>
+</dd>
+</dl>
+<p>Minimum allowed value of the water rate modifier for decomposition when the 4-pool form is used (<a class="reference internal" href="#JULES_SOIL_ECOSSE::water_modifier" title="JULES_SOIL_ECOSSE::water_modifier"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">water_modifier</span></code></a> = 2).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_wrate_min_clark">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_wrate_min_clark</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_wrate_min_clark" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.2</p>
+</dd>
+</dl>
+<p>Minimum allowed value of the water rate modifier for decomposition when the Clark et al. (2011) form is used (<a class="reference internal" href="#JULES_SOIL_ECOSSE::water_modifier" title="JULES_SOIL_ECOSSE::water_modifier"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">water_modifier</span></code></a> = 1).</p>
+<p>Note that this default value is also that harwired in the code for use with the 4-pool model (<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2).</p>
+</dd></dl>
+
+<div class="admonition-parameters-for-ecosse-that-are-only-used-if-soil-n-is-included-nml-mem-l-soil-n-true admonition">
+<p class="admonition-title">Parameters for ECOSSE that are only used if soil N is included (<a class="reference internal" href="#JULES_SOIL_ECOSSE::l_soil_n" title="JULES_SOIL_ECOSSE::l_soil_n"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_soil_n</span></code></a> = TRUE).</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::l_decomp_slow">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_decomp_slow</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_decomp_slow" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p>Switch controlling how lack of nitrogen affects soil decomposition.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Reduce the decomposition rate.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Reduce the efficiency of decomposition, so that decomposition results in increased production of CO<sub>2</sub> and decreased production of further soil C. This is the approach used in the standalone version of ECOSSE.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::depo_nit_frac">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">depo_nit_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::depo_nit_frac" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>0 &lt;= depo_nit_frac &lt;= 1</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>1.0</p>
+</dd>
+</dl>
+<p>The fraction of nitrogen deposition that is aded to the soil nitrate pool. The complement is aded to the ammonium pool.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::bacteria_min_frac">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_min_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_min_frac" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>0 &lt;= bacteria_min_frac &lt;= 1</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>0.2</p>
+</dd>
+</dl>
+<p>The minimum fraction of the decomposer community that are bacteria.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::bacteria_max_frac">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_max_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_max_frac" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>bacteria_min_frac &lt;= bacteria_max_frac &lt;= 1</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>0.5</p>
+</dd>
+</dl>
+<p>The maximum fraction of the decomposer community that are bacteria.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::bacteria_min_frac_pH">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_min_frac_pH</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_min_frac_pH" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>4.0</p>
+</dd>
+</dl>
+<p>The soil pH at or below which the fraction of bacteria is at a minimum.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::bacteria_max_frac_pH">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_max_frac_pH</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_max_frac_pH" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>bacteria_min_frac_pH &lt;= bacteria_max_frac_pH</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>5.5</p>
+</dd>
+</dl>
+<p>The soil pH at or above which the fraction of bacteria is at a maximum.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::cn_bacteria">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">cn_bacteria</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::cn_bacteria" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>5.5</p>
+</dd>
+</dl>
+<p>The C:N ratio of soil bacteria.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::cn_fungi">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">cn_fungi</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::cn_fungi" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>5.5</p>
+</dd>
+</dl>
+<p>The C:N ratio of soil fungi.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::depth_nitrif">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">depth_nitrif</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::depth_nitrif" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.25</p>
+</dd>
+</dl>
+<p>Greatest depth at which nitrification and denitrification are allowed (m).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_rate">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_rate</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_rate" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>9.921e-7</p>
+</dd>
+</dl>
+<p>Rate constant for nitrification (s<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_wrate_min">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_wrate_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_wrate_min" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.6</p>
+</dd>
+</dl>
+<p>Minimum allowed value of the water rate modifier for nitrification when 4-pool form is used. Only used if <a class="reference internal" href="#JULES_SOIL_ECOSSE::water_modifier" title="JULES_SOIL_ECOSSE::water_modifier"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">water_modifier</span></code></a> = 2.).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_max_factor">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_max_factor</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_max_factor" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.1</p>
+</dd>
+</dl>
+<p>Shape factor in rate modifier for nitrification (kg m<sup>-3</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_frac_n2o_fc">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_frac_n2o_fc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_frac_n2o_fc" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>0 &lt;= nitrif_frac_n2o_fc &lt;= 1</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>0.02</p>
+</dd>
+</dl>
+<p>Fraction of nitrification lost as N<sub>2</sub>O by partial nitrification at field capacity.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_frac_gas">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_frac_gas</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_frac_gas" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>0 &lt;= nitrif_frac_gas &lt;= 1</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>0.02</p>
+</dd>
+</dl>
+<p>Fraction of nitrification lost as gas through full nitrification.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_frac_no">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_frac_no</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_frac_no" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>0 &lt;= nitrif_frac_no &lt;= 1</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>0.4</p>
+</dd>
+</dl>
+<p>Fraction of nitrification gas loss through full nitrification that is NO.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::denit50">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit50</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit50" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.033</p>
+</dd>
+</dl>
+<p>Amount of nitrate at which denitrification rate is 50% of the potential rate (kg m<sup>-3</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::denit_bio_factor">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_bio_factor</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_bio_factor" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.005</p>
+</dd>
+</dl>
+<p>Factor in denitrification calculation to convert flux of CO<sub>2</sub> into a representation of biological activity (m<sup>2</sup> kg<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::denit_frac_n2_fc">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_frac_n2_fc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_frac_n2_fc" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>0 &lt;= denit_frac_n2_fc &lt;= 1</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>0.55</p>
+</dd>
+</dl>
+<p>Proportion of denitrified N that becomes N<sub>2</sub> when soil moisture is at field capacity.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::denit_nitrate_equal">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_nitrate_equal</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_nitrate_equal" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.4</p>
+</dd>
+</dl>
+<p>Amount of N in soil nitrate at which denitrified N is released as equal amounts of N<sub>2</sub> and N<sub>2`O (kg m:sup:</sub>-3`).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::denit_water_coeff">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_water_coeff</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_water_coeff" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL(3)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.62, 0.38, 1.74</p>
+</dd>
+</dl>
+<p>Constants describing water modifier for denitrification.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::amm_leach_min">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">amm_leach_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::amm_leach_min" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>0.02</p>
+</dd>
+</dl>
+<p>Minimum allowed amount of N in soil ammonium after leaching (kg m<sup>-3</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::n_inorg_max_conc">
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">n_inorg_max_conc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::n_inorg_max_conc" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>REAL</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>-1.0</p>
+</dd>
+</dl>
+<p>Maximum-allowed concentration of inorganic N in a layer (kg m<sup>-3</sup>). A value less than zero means no maximum concentration is imposed.</p>
+</dd></dl>
+
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">6.12. <code class="docutils literal notranslate"><span class="pre">jules_soil_ecosse.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-JULES_SOIL_ECOSSE">6.12.1. <code class="docutils literal notranslate"><span class="pre">JULES_SOIL_ECOSSE</span></code> namelist members</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="jules_soil_biogeochem.nml.html"
+                          title="previous chapter"><span class="section-number">6.11. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_biogeochem.nml</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="jules_deposition.nml.html"
+                          title="next chapter"><span class="section-number">6.13. </span><code class="docutils literal notranslate"><span class="pre">jules_deposition.nml</span></code></a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_deposition.nml.html" title="6.13. jules_deposition.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_soil_biogeochem.nml.html" title="6.11. jules_soil_biogeochem.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.12. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_ecosse.nml</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+    </div>
+
+  </body>
+</html>

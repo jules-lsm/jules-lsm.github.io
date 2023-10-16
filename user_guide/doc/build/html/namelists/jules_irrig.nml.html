@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>6.17. jules_irrig.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.3 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.18. science_fixes.nml" href="science_fixes.nml.html" />
+    <link rel="prev" title="6.16. jules_water_resources.nml" href="jules_water_resources.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="science_fixes.nml.html" title="6.18. science_fixes.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_water_resources.nml.html" title="6.16. jules_water_resources.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.17. </span><code class="docutils literal notranslate"><span class="pre">jules_irrig.nml</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="jules-irrig-nml">
+<h1><span class="section-number">6.17. </span><code class="docutils literal notranslate"><span class="pre">jules_irrig.nml</span></code><a class="headerlink" href="#jules-irrig-nml" title="Permalink to this heading">¶</a></h1>
+<p>This file sets the irrigation options. It contains one namelist called <a class="reference internal" href="#namelist-JULES_IRRIG"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code></a>.</p>
+<section id="namelist-JULES_IRRIG">
+<span id="jules-irrig-namelist-members"></span><h2><span class="section-number">6.17.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code> namelist members<a class="headerlink" href="#namelist-JULES_IRRIG" title="Permalink to this heading">¶</a></h2>
+<p>This namelist specifies the different options available for setting up the irrigation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt>Irrigation can be applied at a constant rate in three ways:</dt><dd><ul class="simple">
+<li><ol class="arabic simple">
+<li><p>To apply a constant irrigation to all surface tiles the irrigation settings are as follows: frac_irrig_all_tiles=T, set_irrfrac_on_irrtiles=F and set a value for <a class="reference internal" href="ancillaries.nml.html#JULES_IRRIG_PROPS::const_frac_irr" title="JULES_IRRIG_PROPS::const_frac_irr"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">const_frac_irr</span></code></a>.</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="2">
+<li><p>To apply a constant irrigation to only specific surface tiles the irrigation settings are as follows: frac_irrig_all_tiles=F and set_irrfrac_on_irrtiles=T and set a value for <a class="reference internal" href="ancillaries.nml.html#JULES_IRRIG_PROPS::const_irrfrac_irrtiles" title="JULES_IRRIG_PROPS::const_irrfrac_irrtiles"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">const_irrfrac_irrtiles</span></code></a>.</p></li>
+</ol>
+</li>
+<li><ol class="arabic simple" start="3">
+<li><p>To apply a constant irrigation to specific surface tiles as an average across the gridbox, which is the way irrigation on specific tiles was done prior to vn5.7, the irrigation settings are as follows: frac_irrig_all_tiles=F, set_irrfrac_on_irrtiles=F and set a value for <a class="reference internal" href="ancillaries.nml.html#JULES_IRRIG_PROPS::const_frac_irr" title="JULES_IRRIG_PROPS::const_frac_irr"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">const_frac_irr</span></code></a>.</p></li>
+</ol>
+</li>
+</ul>
+</dd>
+</dl>
+<p>In both option 2 and 3, <a class="reference internal" href="#JULES_IRRIG::irrigtiles" title="JULES_IRRIG::irrigtiles"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">irrigtiles</span></code></a> is the index of surface tiles you wish to irrigate, the length of which is <a class="reference internal" href="#JULES_IRRIG::nirrtile" title="JULES_IRRIG::nirrtile"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nirrtile</span></code></a> e.g. if you include wheat and maize in your run at index 5 and 6 then irrigtiles=5,6 and nirrtile=2.</p>
+</div>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_IRRIG::l_irrig_dmd">
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">l_irrig_dmd</span></span><a class="headerlink" href="#JULES_IRRIG::l_irrig_dmd" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch controlling the implementation of irrigation demand code.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Tiles are irrigated.</p>
+</dd>
+<dt>FALSE</dt><dd><p>No effect.</p>
+</dd>
+</dl>
+<p>This must be set to TRUE if <a class="reference internal" href="jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_irrigation" title="JULES_WATER_RESOURCES::l_water_irrigation"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_irrigation</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_IRRIG::l_irrig_limit">
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">l_irrig_limit</span></span><a class="headerlink" href="#JULES_IRRIG::l_irrig_limit" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch controlling whether the amount of water used to irrigate tiles is limited.</p>
+<dl>
+<dt>TRUE</dt><dd><p>Water for irrigation is taken first from the deep soil
+(groundwater) store, and then from the river storage when the
+deep soil store is exhausted. Tiles are irrigated up to the
+critical point if the necessary water is available. This option
+requires <a class="reference internal" href="#JULES_IRRIG::l_irrig_dmd" title="JULES_IRRIG::l_irrig_dmd"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_irrig_dmd</span></code></a> = TRUE,
+<a class="reference internal" href="jules_hydrology.nml.html#JULES_HYDROLOGY::l_top" title="JULES_HYDROLOGY::l_top"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_top</span></code></a> = TRUE,
+<a class="reference internal" href="jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE and
+<a class="reference internal" href="jules_rivers.nml.html#JULES_RIVERS::i_river_vn" title="JULES_RIVERS::i_river_vn"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_river_vn</span></code></a> = <code class="docutils literal notranslate"><span class="pre">1,3</span></code>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The irrigation supply code in JULES is still in development,
+and is available in this release to support beta testing
+activities.</p>
+<p>Users should ensure that results are as expected, and provide
+feedback where deficiencies are identified.</p>
+</div>
+</dd>
+<dt>FALSE</dt><dd><p>Tiles will be irrigated to critical point from an unconstrained water supply.</p>
+</dd>
+</dl>
+<p>This must be set to FALSE if <a class="reference internal" href="jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_irrigation" title="JULES_WATER_RESOURCES::l_water_irrigation"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_irrigation</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_IRRIG::irr_crop">
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">irr_crop</span></span><a class="headerlink" href="#JULES_IRRIG::irr_crop" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>0, 1 or 2</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>0</p>
+</dd>
+</dl>
+<ol class="arabic simple" start="0">
+<li><p>Irrigation season (i.e. season in which crops might be growing
+on the gridbox) lasts the entire year.</p></li>
+<li><p>Irrigation season is determined from driving data according to
+<a class="reference internal" href="#references-irrig"><span class="std std-ref">Döll &amp; Siebert (2002)</span></a> method. No irrigation
+is applied outside the irrigation season.</p></li>
+<li><p>Irrigation season is determined by maximum dvi across all
+surface tiles. Requires <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ncpft</span></code></a> &gt; 0. No
+irrigation is applied outside the irrigation season.</p></li>
+</ol>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_IRRIG::frac_irrig_all_tiles">
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">frac_irrig_all_tiles</span></span><a class="headerlink" href="#JULES_IRRIG::frac_irrig_all_tiles" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p>If T, then irrigation fraction is applied to all surface tiles, and F, it is applied only to the surface tiles specified in <a class="reference internal" href="#JULES_IRRIG::irrigtiles" title="JULES_IRRIG::irrigtiles"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">irrigtiles</span></code></a>.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_IRRIG::set_irrfrac_on_irrtiles">
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">set_irrfrac_on_irrtiles</span></span><a class="headerlink" href="#JULES_IRRIG::set_irrfrac_on_irrtiles" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>If F then irrigation is applied as an average across the gridbox and not to specific surface tiles. If T, then the irrigation fraction is only applied to the surface tile specified in <a class="reference internal" href="#JULES_IRRIG::irrigtiles" title="JULES_IRRIG::irrigtiles"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">irrigtiles</span></code></a>. Both <a class="reference internal" href="#JULES_IRRIG::frac_irrig_all_tiles" title="JULES_IRRIG::frac_irrig_all_tiles"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">frac_irrig_all_tiles</span></code></a> and <a class="reference internal" href="#JULES_IRRIG::set_irrfrac_on_irrtiles" title="JULES_IRRIG::set_irrfrac_on_irrtiles"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">set_irrfrac_on_irrtiles</span></code></a> cannot be set to T.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_IRRIG::nirrtile">
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">nirrtile</span></span><a class="headerlink" href="#JULES_IRRIG::nirrtile" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>The number of surface tiles to be irrigated. Only used if <a class="reference internal" href="#JULES_IRRIG::frac_irrig_all_tiles" title="JULES_IRRIG::frac_irrig_all_tiles"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">frac_irrig_all_tiles</span></code></a> = F.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_IRRIG::irrigtiles">
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">irrigtiles</span></span><a class="headerlink" href="#JULES_IRRIG::irrigtiles" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>integer(nirrtile)</p>
+</dd>
+<dt class="field-even">Default</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Indices of the surface tiles to be irrigated. Only used if <a class="reference internal" href="#JULES_IRRIG::frac_irrig_all_tiles" title="JULES_IRRIG::frac_irrig_all_tiles"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">frac_irrig_all_tiles</span></code></a> = F.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_IRRIG::nstep_irrig">
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">nstep_irrig</span></span><a class="headerlink" href="#JULES_IRRIG::nstep_irrig" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted</dt>
+<dd class="field-even"><p>&gt; 0</p>
+</dd>
+<dt class="field-odd">Default</dt>
+<dd class="field-odd"><p>86400/<a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a></p>
+</dd>
+</dl>
+<p>The number of model timesteps per irrigation update step</p>
+<p>Irrigation will be updated every <a class="reference internal" href="#JULES_IRRIG::nstep_irrig" title="JULES_IRRIG::nstep_irrig"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nstep_irrig</span></code></a> timesteps. For example, with a model timestep of 1 hour, <a class="reference internal" href="#JULES_IRRIG::nstep_irrig" title="JULES_IRRIG::nstep_irrig"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nstep_irrig</span></code></a> = 24 means that irrigation will be updated on the 24th timestep, i.e. daily updates.</p>
+<p><a class="reference internal" href="#JULES_IRRIG::nstep_irrig" title="JULES_IRRIG::nstep_irrig"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nstep_irrig</span></code></a> = NINT(frequency of irrigation update (in sec)) / <a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a>)</p>
+</dd></dl>
+
+</section>
+<section id="jules-irrig-references">
+<span id="references-irrig"></span><h2><span class="section-number">6.17.2. </span><code class="docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code> references<a class="headerlink" href="#jules-irrig-references" title="Permalink to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Döll, P., and Siebert, S., Global modeling of irrigation water
+requirements, Water Resour. Res., 38(4),
+<a class="reference external" href="https://doi.org/10.1029/2001WR000355">https://doi.org/10.1029/2001WR000355</a>, 2002.</p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">6.17. <code class="docutils literal notranslate"><span class="pre">jules_irrig.nml</span></code></a><ul>
+<li><a class="reference internal" href="#namelist-JULES_IRRIG">6.17.1. <code class="docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#jules-irrig-references">6.17.2. <code class="docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code> references</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="jules_water_resources.nml.html"
+                          title="previous chapter"><span class="section-number">6.16. </span><code class="docutils literal notranslate"><span class="pre">jules_water_resources.nml</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="science_fixes.nml.html"
+                          title="next chapter"><span class="section-number">6.18. </span><code class="docutils literal notranslate"><span class="pre">science_fixes.nml</span></code></a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="science_fixes.nml.html" title="6.18. science_fixes.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_water_resources.nml.html" title="6.16. jules_water_resources.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.17. </span><code class="docutils literal notranslate"><span class="pre">jules_irrig.nml</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+    </div>
+
+  </body>
+</html>

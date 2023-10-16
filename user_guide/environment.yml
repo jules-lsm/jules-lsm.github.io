@@ -1,0 +1,9 @@
+name: jules-user-guide
+
+channels:
+  - conda-forge
+
+dependencies:
+  - python>3.7
+  - Sphinx==5.0.2
+
