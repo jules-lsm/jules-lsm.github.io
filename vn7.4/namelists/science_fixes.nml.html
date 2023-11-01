@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>6.18. science_fixes.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    <script src="../_static/documentation_options.js?v=f15b9291"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.19. timesteps.nml" href="timesteps.nml.html" />
+    <link rel="prev" title="6.17. jules_irrig.nml" href="jules_irrig.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="timesteps.nml.html" title="6.19. timesteps.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_irrig.nml.html" title="6.17. jules_irrig.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.18. </span><code class="docutils literal notranslate"><span class="pre">science_fixes.nml</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="science-fixes-nml">
+<h1><span class="section-number">6.18. </span><code class="docutils literal notranslate"><span class="pre">science_fixes.nml</span></code><a class="headerlink" href="#science-fixes-nml" title="Link to this heading">¶</a></h1>
+<p>This file contains one namelist called <a class="reference internal" href="#namelist-JULES_TEMP_FIXES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_TEMP_FIXES</span></code></a>.</p>
+<p>This namelist sets ‘short-term’ temporary logicals used to protect science bug
+fixes that lead to alterations in science results. It is expected that these
+logicals will be short lived as the preference should be for all configurations
+to use the corrected code. However, to maintain short term reproducibility of
+results across JULES versions the fixes are protected by logicals until the
+fixes become the default in all model configurations at which point the logical
+is retired. See module for when the switch is due for review.</p>
+<section id="jules-temp-fixes-namelist-members">
+<h2><span class="section-number">6.18.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_TEMP_FIXES</span></code> namelist members<a class="headerlink" href="#jules-temp-fixes-namelist-members" title="Link to this heading">¶</a></h2>
+<dl class="nml member" id="namelist-JULES_TEMP_FIXES">
+<dt class="sig sig-object nml" id="JULES_TEMP_FIXES::ctile_orog_fix">
+<span class="sig-prename descclassname"><span class="pre">JULES_TEMP_FIXES::</span></span><span class="sig-name descname"><span class="pre">ctile_orog_fix</span></span><a class="headerlink" href="#JULES_TEMP_FIXES::ctile_orog_fix" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>0-2</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>2</p>
+</dd>
+</dl>
+<p>If nonzero, corrects the surface exchange calculations in coastally
+tiled grid-boxes, assuming that the lowest level is physically
+terrain following and adjusting the temperature of the land/sea
+portions in accordance with their relative offset from the grid-box
+mean height using a dry/moist lapse rate where appropriate. Option 2
+will only adjust values over the sea.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_TEMP_FIXES::l_accurate_rho">
+<span class="sig-prename descclassname"><span class="pre">JULES_TEMP_FIXES::</span></span><span class="sig-name descname"><span class="pre">l_accurate_rho</span></span><a class="headerlink" href="#JULES_TEMP_FIXES::l_accurate_rho" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>This switch improves the calculation of surface air density in the
+surface turbulent fluxes.  It includes appropriate use of dry air density
+when the atmospheric water vapour is expressed as a mixing ratio
+(l_mr_physics = .TRUE.), otherwise use the wet air density when
+it is expressed as a specific humidity.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_TEMP_FIXES::l_dtcanfix">
+<span class="sig-prename descclassname"><span class="pre">JULES_TEMP_FIXES::</span></span><span class="sig-name descname"><span class="pre">l_dtcanfix</span></span><a class="headerlink" href="#JULES_TEMP_FIXES::l_dtcanfix" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>This switch corrects a bug in the evolution of the skin temperature in
+the implicit solver,
+whereby the change in the skin temperature is
+artificially constrained. This generally has a small effect,
+but can
+cause unphysical results if a canopy with a large heat capacity is
+coupled to an underlying substrate with a small heat capacity.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_TEMP_FIXES::l_fix_alb_ice_thick">
+<span class="sig-prename descclassname"><span class="pre">JULES_TEMP_FIXES::</span></span><span class="sig-name descname"><span class="pre">l_fix_alb_ice_thick</span></span><a class="headerlink" href="#JULES_TEMP_FIXES::l_fix_alb_ice_thick" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>When zero-layer sea ice is used the thermodynamics is calculated in the
+UM through an effective thickness calculated from snow and ice thicknesses
+and associated thermal conductivities. With multi-layer sea ice the
+thermodynamics is calculated in the sea ice component of the model, and
+the effective thickness is no longer required.  However, it was still
+being used erroneously. This fix removes the effective thickness
+adjustment when multi-layer sea ice is used.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_TEMP_FIXES::l_fix_albsnow_ts">
+<span class="sig-prename descclassname"><span class="pre">JULES_TEMP_FIXES::</span></span><span class="sig-name descname"><span class="pre">l_fix_albsnow_ts</span></span><a class="headerlink" href="#JULES_TEMP_FIXES::l_fix_albsnow_ts" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>The original version of the two-stream scheme to calculate the albedo
+of snow in JULES contains a bug in the calculation of the reflection
+coefficient that renders very thin layers of snow too reflective.
+This logical applies the appropriate correction when it is enabled.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_TEMP_FIXES::l_fix_lake_ice_temperatures">
+<span class="sig-prename descclassname"><span class="pre">JULES_TEMP_FIXES::</span></span><span class="sig-name descname"><span class="pre">l_fix_lake_ice_temperatures</span></span><a class="headerlink" href="#JULES_TEMP_FIXES::l_fix_lake_ice_temperatures" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>If true, allows sea ice temperatures in lakes to evolve over time
+for coupled models when the lake is defined as a sea point but is
+not coupled to an ocean model.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_TEMP_FIXES::l_fix_moruses_roof_rad_coupling">
+<span class="sig-prename descclassname"><span class="pre">JULES_TEMP_FIXES::</span></span><span class="sig-name descname"><span class="pre">l_fix_moruses_roof_rad_coupling</span></span><a class="headerlink" href="#JULES_TEMP_FIXES::l_fix_moruses_roof_rad_coupling" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>If true, this switch corrects a bug in the surface energy balance
+when the MORUSES radiative roof coupling is used
+(see <a class="reference internal" href="urban.nml.html#JULES_URBAN::l_moruses_storage" title="JULES_URBAN::l_moruses_storage"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_storage</span></code></a>).
+If false, the thermal conductivity of the soil (hcons) is erroneously
+set to zero, which causes the roof to be effectively uncoupled when
+<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_vegcan_soilfx" title="JULES_VEGETATION::l_vegcan_soilfx"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_vegcan_soilfx</span></code></a>.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_TEMP_FIXES::l_fix_osa_chloro">
+<span class="sig-prename descclassname"><span class="pre">JULES_TEMP_FIXES::</span></span><span class="sig-name descname"><span class="pre">l_fix_osa_chloro</span></span><a class="headerlink" href="#JULES_TEMP_FIXES::l_fix_osa_chloro" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>When set to false, the chlorophyll content used to determine the optical
+properties of water, for the ocean surface albedo, are specified in gm-3
+when the parameterisation they use is defined in mg m-3.
+It is a short term logical until the code becomes the new default.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_TEMP_FIXES::l_fix_snow_frac">
+<span class="sig-prename descclassname"><span class="pre">JULES_TEMP_FIXES::</span></span><span class="sig-name descname"><span class="pre">l_fix_snow_frac</span></span><a class="headerlink" href="#JULES_TEMP_FIXES::l_fix_snow_frac" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>When set to  false, there is the potential to have small snow mass, but a
+zero snow fraction due to machine precision in the calculations. This
+prevents sublimation or snow melt from removing the remaining snow mass,
+hence small values can persist.
+In addition to this there is a conceptual bug in the calculation of
+the fraction of potential evaporation because it does not add in canopy
+evaporation when the snow fraction is less than one.
+When set to true these issues are corrected and in addition the radiation
+calculations for snow fraction are also made consistent.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_TEMP_FIXES::l_fix_ustar_dust">
+<span class="sig-prename descclassname"><span class="pre">JULES_TEMP_FIXES::</span></span><span class="sig-name descname"><span class="pre">l_fix_ustar_dust</span></span><a class="headerlink" href="#JULES_TEMP_FIXES::l_fix_ustar_dust" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>If true, corrects how ustar is calculated in the exchange
+coefficient for dust deposition</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_TEMP_FIXES::l_fix_wind_snow">
+<span class="sig-prename descclassname"><span class="pre">JULES_TEMP_FIXES::</span></span><span class="sig-name descname"><span class="pre">l_fix_wind_snow</span></span><a class="headerlink" href="#JULES_TEMP_FIXES::l_fix_wind_snow" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>If true, ensures that wind speed is calculated for use in snow unloading.
+If false, the wind speed for unloading will be zero on timesteps when
+10m wind diagnostics are not calculated. This will tend to leave more
+snow on the vegetation.
+It is a short term logical until the code becomes the new default.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">6.18. <code class="docutils literal notranslate"><span class="pre">science_fixes.nml</span></code></a><ul>
+<li><a class="reference internal" href="#jules-temp-fixes-namelist-members">6.18.1. <code class="docutils literal notranslate"><span class="pre">JULES_TEMP_FIXES</span></code> namelist members</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="jules_irrig.nml.html"
+                          title="previous chapter"><span class="section-number">6.17. </span><code class="docutils literal notranslate"><span class="pre">jules_irrig.nml</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="timesteps.nml.html"
+                          title="next chapter"><span class="section-number">6.19. </span><code class="docutils literal notranslate"><span class="pre">timesteps.nml</span></code></a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="timesteps.nml.html" title="6.19. timesteps.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_irrig.nml.html" title="6.17. jules_irrig.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.18. </span><code class="docutils literal notranslate"><span class="pre">science_fixes.nml</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+    </div>
+
+  </body>
+</html>

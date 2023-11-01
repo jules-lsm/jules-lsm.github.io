@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>1. Release notes &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
+    <script src="../_static/documentation_options.js?v=f15b9291"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.1. JULES version 7.4 Release Notes" href="JULES7-4.html" />
+    <link rel="prev" title="Joint UK Land Environment Simulator (JULES) User Guide" href="../index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES7-4.html" title="1.1. JULES version 7.4 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Joint UK Land Environment Simulator (JULES) User Guide"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>Release notes</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="release-notes">
+<h1><span class="section-number">1. </span>Release notes<a class="headerlink" href="#release-notes" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JULES7-4.html">1.1. JULES version 7.4 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-4.html#science-changes">1.1.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-4.html#general-technical-changes">1.1.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-4.html#bugs-fixed">1.1.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-4.html#changes-to-testing">1.1.4. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-4.html#documentation-updates">1.1.5. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES7-3.html">1.2. JULES version 7.3 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-3.html#general-technical-changes">1.2.1. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-3.html#bugs-fixed">1.2.2. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-3.html#changes-to-testing">1.2.3. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-3.html#documentation-updates">1.2.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES7-2.html">1.3. JULES version 7.2 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-2.html#general-technical-changes">1.3.1. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-2.html#bugs-fixed">1.3.2. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-2.html#changes-to-testing">1.3.3. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-2.html#documentation-updates">1.3.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES7-1.html">1.4. JULES version 7.1 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-1.html#science-changes">1.4.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-1.html#general-technical-changes">1.4.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-1.html#bugs-fixed">1.4.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-1.html#changes-to-testing">1.4.4. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-1.html#documentation-updates">1.4.5. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES7-0.html">1.5. JULES version 7.0 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-0.html#science-changes">1.5.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-0.html#general-technical-changes">1.5.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-0.html#bugs-fixed">1.5.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-0.html#changes-to-testing">1.5.4. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES7-0.html#documentation-updates">1.5.5. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES6-3.html">1.6. JULES version 6.3 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-3.html#science-changes">1.6.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-3.html#general-technical-changes">1.6.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-3.html#bugs-fixed">1.6.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-3.html#documentation-updates">1.6.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES6-2.html">1.7. JULES version 6.2 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-2.html#science-changes">1.7.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-2.html#general-technical-changes">1.7.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-2.html#bugs-fixed">1.7.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-2.html#documentation-updates">1.7.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES6-1.html">1.8. JULES version 6.1 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-1.html#general-technical-changes">1.8.1. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-1.html#bugs-fixed">1.8.2. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-1.html#changes-to-testing">1.8.3. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-1.html#documentation-updates">1.8.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES6-0.html">1.9. JULES version 6.0 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-0.html#science-changes">1.9.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-0.html#general-technical-changes">1.9.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-0.html#bugs-fixed">1.9.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES6-0.html#documentation-updates">1.9.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES5-9.html">1.10. JULES version 5.9 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-9.html#science-changes">1.10.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-9.html#general-technical-changes">1.10.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-9.html#bugs-fixed">1.10.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-9.html#changes-to-testing">1.10.4. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-9.html#documentation-updates">1.10.5. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES5-8.html">1.11. JULES version 5.8 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-8.html#general-technical-changes">1.11.1. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-8.html#bugs-fixed">1.11.2. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-8.html#changes-to-testing">1.11.3. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-8.html#documentation-updates">1.11.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES5-7.html">1.12. JULES version 5.7 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-7.html#science-changes">1.12.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-7.html#general-technical-changes">1.12.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-7.html#bugs-fixed">1.12.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-7.html#changes-to-testing">1.12.4. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-7.html#documentation-updates">1.12.5. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES5-6.html">1.13. JULES version 5.6 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-6.html#science-changes">1.13.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-6.html#general-technical-changes">1.13.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-6.html#changes-to-testing">1.13.3. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-6.html#documentation-updates">1.13.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES5-5.html">1.14. JULES version 5.5 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-5.html#science-changes">1.14.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-5.html#general-technical-changes">1.14.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-5.html#bugs-fixed">1.14.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-5.html#documentation-updates">1.14.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES5-4.html">1.15. JULES version 5.4 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-4.html#science-changes">1.15.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-4.html#general-technical-changes">1.15.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-4.html#bugs-fixed">1.15.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-4.html#changes-to-testing">1.15.4. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-4.html#documentation-updates">1.15.5. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES5-3.html">1.16. JULES version 5.3 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-3.html#science-changes">1.16.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-3.html#general-technical-changes">1.16.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-3.html#bugs-fixed">1.16.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-3.html#changes-to-testing">1.16.4. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-3.html#documentation-updates">1.16.5. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES5-2.html">1.17. JULES version 5.2 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-2.html#science-changes">1.17.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-2.html#general-technical-changes">1.17.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-2.html#changes-to-testing">1.17.3. Changes to testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-2.html#bugs-fixed">1.17.4. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-2.html#documentation-updates">1.17.5. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES5-1.html">1.18. JULES version 5.1 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-1.html#science-changes">1.18.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-1.html#general-technical-changes">1.18.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-1.html#bugs-fixed">1.18.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-1.html#documentation-updates">1.18.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES5-0.html">1.19. JULES version 5.0 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-0.html#general-technical-changes">1.19.1. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-0.html#bugs-fixed">1.19.2. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES5-0.html#documentation-updates">1.19.3. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES4-9.html">1.20. JULES version 4.9 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-9.html#science-changes">1.20.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-9.html#general-technical-changes">1.20.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-9.html#bugs-fixed">1.20.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-9.html#documentation-updates">1.20.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES4-8.html">1.21. JULES version 4.8 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-8.html#science-changes">1.21.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-8.html#general-technical-changes">1.21.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-8.html#bugs-fixed">1.21.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-8.html#documentation-updates">1.21.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES4-7.html">1.22. JULES version 4.7 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-7.html#science-changes">1.22.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-7.html#general-technical-changes">1.22.2. General/Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-7.html#bugs-fixed">1.22.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-7.html#documentation-updates">1.22.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES4-6.html">1.23. JULES version 4.6 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-6.html#science-changes">1.23.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-6.html#technical-changes">1.23.2. Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-6.html#bugs-fixed">1.23.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-6.html#documentation-updates">1.23.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES4-5.html">1.24. JULES version 4.5 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-5.html#science-changes">1.24.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-5.html#technical-changes">1.24.2. Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-5.html#bugs-fixed">1.24.3. Bugs fixed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-5.html#documentation-updates">1.24.4. Documentation updates</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES4-4.html">1.25. JULES version 4.4 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-4.html#science-changes">1.25.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-4.html#technical-changes">1.25.2. Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-4.html#bugs-fixed">1.25.3. Bugs fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES4-3.html">1.26. JULES version 4.3 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-3.html#science-changes">1.26.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-3.html#technical-changes">1.26.2. Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-3.html#bugs-fixed">1.26.3. Bugs fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES4-2.html">1.27. JULES version 4.2 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-2.html#science-changes">1.27.1. Science changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-2.html#technical-changes">1.27.2. Technical changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-2.html#bugs-fixed">1.27.3. Bugs fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES4-1.html">1.28. JULES version 4.1 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-1.html#irrigation-demand">1.28.1. Irrigation demand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-1.html#carbon-cycle-developments">1.28.2. Carbon cycle developments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-1.html#maximum-and-minimum-output-types">1.28.3. Maximum and minimum output types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-1.html#changes-to-the-coupling-routines">1.28.4. Changes to the coupling routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-1.html#bugs-and-other-changes">1.28.5. Bugs and other changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES4-0.html">1.29. JULES version 4.0 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-0.html#jules-crop-crop-model">1.29.1. JULES-Crop crop model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-0.html#daily-disaggregator-for-forcing-data">1.29.2. Daily disaggregator for forcing data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-0.html#major-namelist-changes">1.29.3. Major namelist changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-0.html#removal-of-gnu-make-build-files">1.29.4. Removal of GNU make build files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES4-0.html#bugs-and-other-changes">1.29.5. Bugs and other changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES3-4.html">1.30. JULES version 3.4 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-4.html#changes-to-semantics-of-output">1.30.1. Changes to semantics of output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-4.html#input-and-or-output-of-variables-with-multiple-levels-dimensions-has-been-improved">1.30.2. Input and/or output of variables with multiple ‘levels’ dimensions has been improved</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-4.html#streamlined-process-for-adding-new-variables-for-input-and-or-output">1.30.3. Streamlined process for adding new variables for input and/or output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-4.html#other-changes">1.30.4. Other changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-4.html#bugs-fixed">1.30.5. Bugs fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES3-3.html">1.31. JULES version 3.3 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-3.html#ability-to-run-jules-in-parallel">1.31.1. Ability to run JULES in parallel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-3.html#changes-to-documentation">1.31.2. Changes to documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-3.html#other-changes">1.31.3. Other changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-3.html#bugs-fixed">1.31.4. Bugs fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES3-2.html">1.32. JULES version 3.2 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-2.html#standard-configurations">1.32.1. Standard Configurations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-2.html#improvements-to-output">1.32.2. Improvements to output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-2.html#biogenic-volatile-organic-compound-bvoc-emissions">1.32.3. Biogenic Volatile Organic Compound (BVOC) emissions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-2.html#alternative-build-system">1.32.4. Alternative build system</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-2.html#bugs-fixed">1.32.5. Bugs fixed</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES3-1.html">1.33. JULES version 3.1 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-1.html#restructuring-of-the-code">1.33.1. Restructuring of the code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-1.html#new-i-o-framework">1.33.2. New I/O framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-1.html#user-interface-changes">1.33.3. User Interface changes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES3-1.html#other-changes">1.33.4. Other changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES3-0.html">1.34. JULES version 3.0 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JULES2-2.html">1.35. JULES version 2.2 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JULES2-1.html">1.36. JULES version 2.1 Release Notes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="JULES2-1.html#process-descriptions">1.36.1. Process descriptions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="JULES2-1.html#control-level-code">1.36.2. Control-level code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JULES2-0.html">1.37. JULES version 2.0 Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JULES1-0.html">1.38. JULES version 1.0</a></li>
+</ul>
+</div>
+<p>For further information about these releases, please see <a class="reference external" href="http://jules.jchmr.org/content/code#archive-versions">here</a>.</p>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../index.html"
+                          title="previous chapter">Joint UK Land Environment Simulator (JULES) User Guide</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="JULES7-4.html"
+                          title="next chapter"><span class="section-number">1.1. </span>JULES version 7.4 Release Notes</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES7-4.html" title="1.1. JULES version 7.4 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Joint UK Land Environment Simulator (JULES) User Guide"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1. </span>Release notes</a></li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+    </div>
+
+  </body>
+</html>

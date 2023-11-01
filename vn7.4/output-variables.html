@@ -1,0 +1,2355 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>9. JULES Output variables &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" href="_static/jules-tweaks.css" type="text/css" />
+    <script src="_static/documentation_options.js?v=f15b9291"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="8.2. Known limitations of the code" href="code/known-limitations.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="code/known-limitations.html" title="8.2. Known limitations of the code"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">9. </span>JULES Output variables</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="jules-output-variables">
+<span id="output-variables-section"></span><h1><span class="section-number">9. </span>JULES Output variables<a class="headerlink" href="#jules-output-variables" title="Link to this heading">¶</a></h1>
+<p>Variables that are available for output from JULES are listed in this section, separated according to the broad area of science. If a variable cannot be found, users should also check in related sections.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Most variables are output on the full model grid (even for variables defined on land points only).</p>
+<p>Most river variables are output on the river routing model grid, which is a 1D grid defined on the valid river routing points only. These are indicated by names ending in <code class="docutils literal notranslate"><span class="pre">_rp</span></code> and have a single spatial dimension of size <code class="docutils literal notranslate"><span class="pre">np_rivers</span></code>. A regridded version of some river variables can also be output on the full model grid.”</p>
+<p>Any points on the grid for which a variable is not defined with be filled with a missing data value.</p>
+<p>Any variables also available on soil tiles are indicated next to their non-soil-tiled analogues, e.g. <code class="docutils literal notranslate"><span class="pre">var[_soilt]</span></code>, in which case they have an additional dimension of size <code class="docutils literal notranslate"><span class="pre">nsoilt</span></code>.</p>
+<p>All variables include a land point dimension, unless specified otherwise.</p>
+<p>The sizes of dimensions are indicated in the tables below using links to other sections of this documentation, wherever possible. Other sizes are discussed in the table below.</p>
+</div>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ch4layer</span></code></p></td>
+<td><p>Number of soil methane layers.</p>
+<p>Equals <a class="reference internal" href="namelists/jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sm_levels</span></code></a> if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_ch4_tlayered" title="JULES_SOIL_BIOGEOCHEM::l_ch4_tlayered"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ch4_tlayered</span></code></a> = TRUE,
+otherwise = 1.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cslayer</span></code></p></td>
+<td><p>Number of layers for soil carbon and nitrogen.</p>
+<p>With the single-pool soil model (<a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 1),
+<code class="docutils literal notranslate"><span class="pre">cslayer</span></code> = 1.</p>
+<p>With 4-pool model (<a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2),
+if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_layeredc" title="JULES_SOIL_BIOGEOCHEM::l_layeredc"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_layeredc</span></code></a> = TRUE <code class="docutils literal notranslate"><span class="pre">cslayer</span></code> = <a class="reference internal" href="namelists/jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sm_levels</span></code></a>,
+otherwise <code class="docutils literal notranslate"><span class="pre">cslayer</span></code> = 1.</p>
+<p>With the ECOSSE model (<a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 3),
+<code class="docutils literal notranslate"><span class="pre">cslayer</span></code> = <a class="reference internal" href="namelists/jules_soil_ecosse.nml.html#JULES_SOIL_ECOSSE::dim_cslayer" title="JULES_SOIL_ECOSSE::dim_cslayer"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dim_cslayer</span></code></a>.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cspool</span></code></p></td>
+<td><p>Number of soil carbon pools.</p>
+<p>=1 with the single-pool soil model (<a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 1).</p>
+<p>=4 with the 4-pool or ECOSSE models (<a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3).</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">land+sea</span></code></p></td>
+<td><p>Variable is available on all points (land and sea).</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ncpft</span></code></p></td>
+<td><p>Number of crop plant functional types - see <a class="reference internal" href="namelists/jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ncpft</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">npft</span></code></p></td>
+<td><p>Number of plant functional types - see <a class="reference internal" href="namelists/jules_surface_types.nml.html#JULES_SURFACE_TYPES::npft" title="JULES_SURFACE_TYPES::npft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">npft</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ns_deep</span></code></p></td>
+<td><p>The number of levels in the thermal-only bedrock - see <a class="reference internal" href="namelists/jules_soil.nml.html#JULES_SOIL::ns_deep" title="JULES_SOIL::ns_deep"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ns_deep</span></code></a>.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nsmax</span></code></p></td>
+<td><p>Maximum-allowed number of snow layers - see <a class="reference internal" href="namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nsmax</span></code></a>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nsoilt</span></code></p></td>
+<td><p>Number of soil tiles.
+<code class="docutils literal notranslate"><span class="pre">nsurft</span></code> if <a class="reference internal" href="namelists/jules_soil.nml.html#JULES_SOIL::l_tile_soil" title="JULES_SOIL::l_tile_soil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_tile_soil</span></code></a> = TRUE, otherwise 1.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nsurft</span></code></p></td>
+<td><p>Number of surface tiles.
+1 if <a class="reference internal" href="namelists/jules_surface.nml.html#JULES_SURFACE::l_aggregate" title="JULES_SURFACE::l_aggregate"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_aggregate</span></code></a> = TRUE, otherwise <code class="docutils literal notranslate"><span class="pre">ntype</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ntype</span></code></p></td>
+<td><p>Number of surface types,
+= <a class="reference internal" href="namelists/jules_surface_types.nml.html#JULES_SURFACE_TYPES::npft" title="JULES_SURFACE_TYPES::npft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">npft</span></code></a> + <a class="reference internal" href="namelists/jules_surface_types.nml.html#JULES_SURFACE_TYPES::nnvg" title="JULES_SURFACE_TYPES::nnvg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nnvg</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sm_levels</span></code></p></td>
+<td><p>Number of soil layers (for soil moisture) - see <a class="reference internal" href="namelists/jules_soil.nml.html#JULES_SOIL::sm_levels" title="JULES_SOIL::sm_levels"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">sm_levels</span></code></a>.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="meteorology">
+<h2><span class="section-number">9.1. </span>Meteorology<a class="headerlink" href="#meteorology" title="Link to this heading">¶</a></h2>
+<p>Unlesss stated otherwise these variables have values at both land and sea points.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">precip</span></code></p></td>
+<td><p>Gridbox precipitation rate (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rainfall</span></code></p></td>
+<td><p>Gridbox rainfall rate (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snowfall</span></code></p></td>
+<td><p>Gridbox snowfall rate (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">con_rain</span></code></p></td>
+<td><p>Gridbox convective rainfall (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">con_snow</span></code></p></td>
+<td><p>Gridbox convective snowfall (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ls_rain</span></code></p></td>
+<td><p>Gridbox large-scale rainfall (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ls_snow</span></code></p></td>
+<td><p>Gridbox large-scale snowfall (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">pstar</span></code></p></td>
+<td><p>Gridbox surface pressure (Pa).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">q1p5m_gb</span></code></p></td>
+<td><p>Gridbox specific humidity at 1.5m height (kg kg<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">qw1</span></code></p></td>
+<td><p>Gridbox specific humidity (total water content) (kg kg<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">q1p5m</span></code></p></td>
+<td><p>Tile specific humidity at 1.5m over land tiles (kg kg<sup>-1</sup>).</p></td>
+<td><p>land,nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lw_down</span></code></p></td>
+<td><p>Gridbox surface downward LW radiation (W m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sw_down</span></code></p></td>
+<td><p>Gridbox surface downward SW radiation (W m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t1p5m_gb</span></code></p></td>
+<td><p>Gridbox temperature at 1.5m height (K).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t1p5m</span></code></p></td>
+<td><p>Tile temperature at 1.5m over land tiles (K).</p></td>
+<td><p>land,nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tl1</span></code></p></td>
+<td><p>Gridbox ice/liquid water temperature (K).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">u1</span></code></p></td>
+<td><p>Gridbox westerly wind component (m s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">u10m</span></code></p></td>
+<td><p>Gridbox westerly wind component at 10 m height (m s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">v1</span></code></p></td>
+<td><p>Gridbox southerly wind component (m s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">v10m</span></code></p></td>
+<td><p>Gridbox southerly wind component at 10m height (m s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wind</span></code></p></td>
+<td><p>Gridbox wind speed (m s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="radiation">
+<h2><span class="section-number">9.2. </span>Radiation<a class="headerlink" href="#radiation" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td colspan="3"><p>Albedos and emissivities</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">albedo_land</span></code></p></td>
+<td><p>Gridbox albedo (as used to calculate net shortwave radiation) (-).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">alb_tile_1</span></code></p></td>
+<td><p>Tile land albedo, waveband 1 (direct beam visible).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">alb_tile_2</span></code></p></td>
+<td><p>Tile land albedo, waveband 2 (diffuse visible).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">alb_tile_3</span></code></p></td>
+<td><p>Tile land albedo, waveband 3 (direct beam NIR).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">alb_tile_4</span></code></p></td>
+<td><p>Tile land albedo, waveband 4 (diffuse NIR).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">land_albedo_1</span></code></p></td>
+<td><p>Gridbox band 1 albedo (direct beam visible).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">land_albedo_2</span></code></p></td>
+<td><p>Gridbox band 2 albedo (diffuse visible).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">land_albedo_3</span></code></p></td>
+<td><p>Gridbox band 3 albedo (direct beam NIR).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">land_albedo_4</span></code></p></td>
+<td><p>Gridbox band 4 albedo (diffuse NIR).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">emis_gb</span></code></p></td>
+<td><p>Gridbox emissivity.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">emis</span></code></p></td>
+<td><p>Tile emissivity.</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Radiation fluxes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">apar</span></code></p></td>
+<td><p>PFT absorbed photosynthetically active radiation (W m<sup>-2</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">apar_gb</span></code></p></td>
+<td><p>Gridbox absorbed photosynthetically active radiation (W m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lw_down_surft</span></code></p></td>
+<td><p>Tile downwelling longwave radiation  (W m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lw_up_surft</span></code></p></td>
+<td><p>Tile upwelling longwave radiation  (W m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lw_net</span></code></p></td>
+<td><p>Gridbox surface net LW radiation (W m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lw_up</span></code></p></td>
+<td><p>Gridbox surface upward LW radiation (W m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rad_net</span></code></p></td>
+<td><p>Surface net radiation (W m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rad_net_tile</span></code></p></td>
+<td><p>Tile surface net radiation (W m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sw_net</span></code></p></td>
+<td><p>Gribox net shortwave radiation at the surface (W m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sw_net_surft</span></code></p></td>
+<td><p>Tile net shortwave radiation  (W m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Other radiation variables</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cosz</span></code></p></td>
+<td><p>Cosine of the zenith angle (-).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">diff_frac</span></code></p></td>
+<td><p>Gridbox fraction of radiation that is diffuse (-).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fapar</span></code></p></td>
+<td><p>PFT fraction of absorbed photosynthetically active radiation (-).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">NDVI_land</span></code></p></td>
+<td><p>Gridbox NDVI (using sum of direct and diffuse for (NIR-VIS)/(NIR+VIS)).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">trad</span></code></p></td>
+<td><p>Gridbox effective radiative temperature (K).</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="energy-and-momentum-fluxes-and-surface-temperatures">
+<h2><span class="section-number">9.3. </span>Energy and momentum fluxes, and surface temperatures<a class="headerlink" href="#energy-and-momentum-fluxes-and-surface-temperatures" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ftl</span></code></p></td>
+<td><p>Tile surface sensible heat flux for land tiles (W m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ftl_gb</span></code></p></td>
+<td><p>Gridbox surface sensible heat flux (W m<sup>-2</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">le</span></code></p></td>
+<td><p>Tile surface latent heat flux for land tiles (W m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">latent_heat</span></code></p></td>
+<td><p>Gridbox surface latent heat flux (W m<sup>-2</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">surf_ht_flux</span></code></p></td>
+<td><p>Downward heat flux for each tile (W m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">surf_ht_store</span></code></p></td>
+<td><p>C*(dT/dt) for each tile (W m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">surf_ht_flux_gb</span></code></p></td>
+<td><p>Gridbox net downward heat flux at surface over land and sea-ice fraction of gridbox
+(W m<sup>-2</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">anthrop_heat</span></code></p></td>
+<td><p>Anthropogenic heat flux for each tile (W m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hf_snow_melt</span></code></p></td>
+<td><p>Gridbox snowmelt heat flux (W m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snomlt_surf_htf</span></code></p></td>
+<td><p>Gridbox heat flux used for surface melting of snow (W m<sup>-2</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snomlt_sub_htf</span></code></p></td>
+<td><p>Gridbox sub-canopy snowmelt heat flux (W m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tstar_gb</span></code></p></td>
+<td><p>Gridbox surface temperature (K).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tstar</span></code></p></td>
+<td><p>Tile surface temperature (K).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tsurf_elev_surft</span></code></p></td>
+<td><p>Tile temperature of elevated subsurface tiles (K).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tau</span></code></p></td>
+<td><p>Tile surface wind stress for land tiles (N m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">taux1</span></code></p></td>
+<td><p>Gridbox westerly component of surface wind stress (N m<sup>-2</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tauy1</span></code></p></td>
+<td><p>Gridbox southerly component of surface wind stress (N m<sup>-2</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tauy_gb</span></code></p></td>
+<td><p>Gridbox scalar magnitude of surface wind stress (N m<sup>-2</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">z0</span></code></p></td>
+<td><p>Tile surface roughness (m).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="soil-moisture-and-temperature-and-soil-characteristics">
+<h2><span class="section-number">9.4. </span>Soil moisture and temperature, and soil characteristics<a class="headerlink" href="#soil-moisture-and-temperature-and-soil-characteristics" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td colspan="3"><p>Soil moisture</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">smcl[_soilt]</span></code></p></td>
+<td><p>Moisture content of each soil layer (kg m<sup>-2</sup>).</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">soil_wet</span></code></p></td>
+<td><p>Total moisture content of each soil layer, as fraction of saturation (-).</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sthu[_soilt]</span></code></p></td>
+<td><p>Unfrozen moisture content of each soil layer as a fraction of saturation (-).</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sthu_irr[_soilt]</span></code></p></td>
+<td><p>Unfrozen moisture content of each soil layer as a fraction of saturation in
+irrigated fraction (-) (only available if l_irrig_dmd = T).</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sthf[_soilt]</span></code></p></td>
+<td><p>Frozen moisture content of each soil layer as a fraction of saturation (-).</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">smc_tot</span></code></p></td>
+<td><p>Gridbox total soil moisture in column (kg m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">swet_liq_tot</span></code></p></td>
+<td><p>Gridbox unfrozen soil moisture as fraction of saturation (-).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">swet_tot</span></code></p></td>
+<td><p>Gridbox soil moisture as fraction of saturation (-).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sthzw[_soilt]</span></code></p></td>
+<td><p>Soil wetness in the deep LSH/TOPMODEL layer (-).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">zw[_soilt]</span></code></p></td>
+<td><p>Gridbox mean depth to water table (m).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Soil temperature</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t_soil[_soilt]</span></code></p></td>
+<td><p>Sub-surface temperature of each layer (K).</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tsoil_deep</span></code></p></td>
+<td><p>Temperature of each bedrock layer (K).
+Only available when <a class="reference internal" href="namelists/jules_soil.nml.html#JULES_SOIL::l_bedrock" title="JULES_SOIL::l_bedrock"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_bedrock</span></code></a> = TRUE.</p></td>
+<td><p>ns_deep</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">depth_frozen</span></code></p></td>
+<td><p>Gridbox depth of frozen ground at surface defined from soil temperature (m).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">depth_frozen_sthf</span></code></p></td>
+<td><p>Gridbox depth of frozen ground at surface defined from soil moisture (m).
+Recommended over <code class="docutils literal notranslate"><span class="pre">depth_frozen</span></code> except where the soil is very dry.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">depth_unfrozen</span></code></p></td>
+<td><p>Gridbox depth of unfrozen ground at surface defined from soil temperature (m).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">depth_unfrozen_sthf</span></code></p></td>
+<td><p>Gridbox depth of unfrozen ground at surface defined from soil moisture (m).
+Recommended over <code class="docutils literal notranslate"><span class="pre">depth_unfrozen</span></code> except where the soil is very dry.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Soil characteristics</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">b[_soilt]</span></code></p></td>
+<td><p>Brooks-Corey exponent for each soil layer (-).</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hcap[_soilt]</span></code></p></td>
+<td><p>Dry soil heat capacity (J K<sup>-1</sup> m<sup>-3</sup>) for each soil layer.</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hcon[_soilt]</span></code></p></td>
+<td><p>Dry soil thermal conductivity (W m<sup>-1</sup> K<sup>-1</sup>) for each soil
+layer.</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">satcon[_soilt]</span></code></p></td>
+<td><p>Saturated hydraulic conductivity (kg m<sup>-2</sup> s<sup>-1</sup>) for each soil
+layer.</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sathh[_soilt]</span></code></p></td>
+<td><p>Saturated soil water pressure (m) for each soil layer.</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sm_crit[_soilt]</span></code></p></td>
+<td><p>Volumetric moisture content at critical point for each soil layer (-),
+as given in <a class="reference internal" href="namelists/ancillaries.nml.html#namelist-JULES_SOIL_PROPS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL_PROPS</span></code></a>.</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sm_sat[_soilt]</span></code></p></td>
+<td><p>Volumetric moisture content at saturation for each soil layer (-).</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sm_wilt[_soilt]</span></code></p></td>
+<td><p>Volumetric moisture content at wilting point for each soil layer (-),
+as given in <a class="reference internal" href="namelists/ancillaries.nml.html#namelist-JULES_SOIL_PROPS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL_PROPS</span></code></a>.</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="hydrology">
+<h2><span class="section-number">9.5. </span>Hydrology<a class="headerlink" href="#hydrology" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td colspan="3"><p>Canopy hydrology</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">canopy_gb</span></code></p></td>
+<td><p>Gridbox canopy water content (kg m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">canopy</span></code></p></td>
+<td><p>Tile surface/canopy water for snow-free land tiles (kg m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">catch</span></code></p></td>
+<td><p>Tile surface/canopy water capacity of snow-free land tiles (kg m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tfall</span></code></p></td>
+<td><p>Gridbox throughfall (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Evaporation and sublimation</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fqw</span></code></p></td>
+<td><p>Tile surface moisture flux for land tiles (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fqw_gb</span></code></p></td>
+<td><p>Gridbox moisture flux from surface (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ecan</span></code></p></td>
+<td><p>Tile evaporation from canopy/surface store for snow-free
+land tiles (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ecan_gb</span></code></p></td>
+<td><p>Gridbox mean evaporation from canopy/surface store (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ei</span></code></p></td>
+<td><p>Tile sublimation from lying snow for land tiles (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ei_gb</span></code></p></td>
+<td><p>Gridbox sublimation from lying snow or sea-ice (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">elake</span></code></p></td>
+<td><p>Gridbox mean evaporation from lakes (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">esoil</span></code></p></td>
+<td><p>Tile surface evapotranspiration from soil moisture store for
+snow-free land tile (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">esoil_gb</span></code></p></td>
+<td><p>Gridbox surface evapotranspiration from soil moisture store (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">et_stom</span></code></p></td>
+<td><p>Tile transpiration (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">et_stom_gb</span></code></p></td>
+<td><p>Gridbox transpiration (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fao_et0</span></code></p></td>
+<td><p>FAO Penman-Monteith evapotranspiration for reference crop (kg m<sup>-2</sup> s<sup>-1</sup>)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gc</span></code></p></td>
+<td><p>Tile surface conductance to evaporation for land tiles (m s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gs</span></code></p></td>
+<td><p>Gridbox surface conductance to evaporation (m s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ext[_soilt]</span></code></p></td>
+<td><p>Extraction of water from each soil layer (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fsmc_gb</span></code></p></td>
+<td><p>Gridbox soil moisture availability factor (beta) (-).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fsmc</span></code></p></td>
+<td><p>PFT soil moisture availability factor (-).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">smc_avail_top</span></code></p></td>
+<td><p>Gridbox available moisture in surface layer of depth given by <a class="reference internal" href="namelists/jules_soil.nml.html#JULES_SOIL::zsmc" title="JULES_SOIL::zsmc"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">zsmc</span></code></a>
+(kg m<sup>-2</sup>). Calculated using <code class="docutils literal notranslate"><span class="pre">sm_wilt</span></code> from <a class="reference internal" href="namelists/ancillaries.nml.html#namelist-JULES_SOIL_PROPS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL_PROPS</span></code></a>.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">smc_avail_tot</span></code></p></td>
+<td><p>Gridbox available moisture in soil column (kg m<sup>-2</sup>).
+Calculated using <code class="docutils literal notranslate"><span class="pre">sm_wilt</span></code> from <a class="reference internal" href="namelists/ancillaries.nml.html#namelist-JULES_SOIL_PROPS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL_PROPS</span></code></a>.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Runoff</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">runoff</span></code></p></td>
+<td><p>Gridbox runoff rate (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sub_surf_roff</span></code></p></td>
+<td><p>Gridbox sub-surface runoff (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">surf_roff</span></code></p></td>
+<td><p>Gridbox surface runoff (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sat_excess_roff[_soilt]</span></code></p></td>
+<td><p>Gridbox saturation excess runoff rate (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">drain[_soilt]</span></code></p></td>
+<td><p>Gridbox drainage at bottom of soil column (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">qbase[_soilt]</span></code></p></td>
+<td><p>Gridbox baseflow (lateral subsurface runoff) (kg m<sup>-2</sup> s<sup>-1</sup>), i.e. the sum of
+surface and subsurface lateral flows from all soil layers (inc. deep LSH/TOPMODEL layer).
+Only available if <a class="reference internal" href="namelists/jules_hydrology.nml.html#JULES_HYDROLOGY::l_top" title="JULES_HYDROLOGY::l_top"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_top</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">qbase_zw[_soilt]</span></code></p></td>
+<td><p>Gridbox baseflow (lateral subsurface runoff) from deep LSH/TOPMODEL layer
+(kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_hydrology.nml.html#JULES_HYDROLOGY::l_top" title="JULES_HYDROLOGY::l_top"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_top</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Other hydrological variables</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fsat[_soilt]</span></code></p></td>
+<td><p>Gridbox surface saturated fraction (-). The fraction of grid cell where the water table is
+above the land surface. Only available if <a class="reference internal" href="namelists/jules_hydrology.nml.html#JULES_HYDROLOGY::l_top" title="JULES_HYDROLOGY::l_top"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_top</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fwetl[_soilt]</span></code></p></td>
+<td><p>Gridbox wetland fraction at end of model timestep (-). The fraction of grid cell where the
+water table is above the land surface, but water is not flowing (stagnant) (fwetl&lt;=fsat).
+Only available if <a class="reference internal" href="namelists/jules_hydrology.nml.html#JULES_HYDROLOGY::l_top" title="JULES_HYDROLOGY::l_top"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_top</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rivers">
+<h2><span class="section-number">9.6. </span>Rivers<a class="headerlink" href="#rivers" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td colspan="3"><p>Output on the river routing model grid</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rflow_rp</span></code></p></td>
+<td><p>River routing gridbox river flow rate (kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE.</p></td>
+<td><p>np_rivers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rrun_rp</span></code></p></td>
+<td><p>River routing gridbox runoff rate received by river routing routine
+(kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE.</p></td>
+<td><p>np_rivers</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rrun_surf_rp</span></code></p></td>
+<td><p>River routing gridbox surface runoff rate received by river routing routine
+(kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE.</p></td>
+<td><p>np_rivers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rrun_sub_surf_rp</span></code></p></td>
+<td><p>River routing gridbox sub-surface runoff rate received by river routing routine
+(kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE.</p></td>
+<td><p>np_rivers</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rfm_surfstore_rp</span></code></p></td>
+<td><p>Surface storage on river points (m<sup>3</sup>).
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE and
+<a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::i_river_vn" title="JULES_RIVERS::i_river_vn"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_river_vn</span></code></a> = 2.</p></td>
+<td><p>np_rivers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rfm_substore_rp</span></code></p></td>
+<td><p>Sub-surface storage on river points (m<sup>3</sup>).
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE and
+<a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::i_river_vn" title="JULES_RIVERS::i_river_vn"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_river_vn</span></code></a> = 2.</p></td>
+<td><p>np_rivers</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rfm_flowin_rp</span></code></p></td>
+<td><p>Surface inflow on river points (m<sup>3</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE and
+<a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::i_river_vn" title="JULES_RIVERS::i_river_vn"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_river_vn</span></code></a> = 2.</p></td>
+<td><p>np_rivers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rfm_bflowin_rp</span></code></p></td>
+<td><p>Sub-surface inflow on river points (m<sup>3</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE and
+<a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::i_river_vn" title="JULES_RIVERS::i_river_vn"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_river_vn</span></code></a> = 2.</p></td>
+<td><p>np_rivers</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rivers_sto_rp</span></code></p></td>
+<td><p>River routing gridbox river storage (kg)
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE and
+<a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::i_river_vn" title="JULES_RIVERS::i_river_vn"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">i_river_vn</span></code></a> = 3.</p></td>
+<td><p>np_rivers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frac_fplain_rp</span></code></p></td>
+<td><p>Overbank inundation area as a fraction of river routing gridcell area.
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_riv_overbank" title="JULES_RIVERS::l_riv_overbank"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_riv_overbank</span></code></a> = TRUE.</p></td>
+<td><p>np_rivers</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Output regridded to the JULES model grid</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rflow</span></code></p></td>
+<td><p>Gridbox river flow rate (kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rrun</span></code></p></td>
+<td><p>Gridbox runoff rate received by river routing routine (kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frac_fplain_lp</span></code></p></td>
+<td><p>Overbank inundation area as a fraction of gridcell area.
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_riv_overbank" title="JULES_RIVERS::l_riv_overbank"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_riv_overbank</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="snow">
+<h2><span class="section-number">9.7. </span>Snow<a class="headerlink" href="#snow" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td colspan="3"><p>Snow state</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_mass</span></code></p></td>
+<td><p>Tile lying snow (total) (kg m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snow_mass_gb</span></code></p></td>
+<td><p>Gridbox snowmass (kg m<sup>-2</sup>).</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_depth</span></code></p></td>
+<td><p>Tile snow depth (m).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snow_depth_gb</span></code></p></td>
+<td><p>Gridbox depth of snow (m).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_can</span></code></p></td>
+<td><p>Tile snow on canopy (kg m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snow_can_gb</span></code></p></td>
+<td><p>Gridbox snow on canopy (kg m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_ground</span></code></p></td>
+<td><p>Tile snow on ground (<code class="docutils literal notranslate"><span class="pre">snow_tile</span></code> or <code class="docutils literal notranslate"><span class="pre">snow_grnd</span></code> depending
+on configuration) (kg m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snow_grnd_gb</span></code></p></td>
+<td><p>Gridbox average snow beneath canopy (snow_grnd) (kg m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_grnd</span></code></p></td>
+<td><p>Tile snow on ground below canopy (kg m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snow_grnd_rho</span></code></p></td>
+<td><p>Tile bulk density of snow on ground (kg m<sup>-3</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_frac</span></code></p></td>
+<td><p>Gridbox snow-covered fraction of land points (-).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snow_ice_tile</span></code></p></td>
+<td><p>Tile total frozen mass in snow on ground (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nsmax</span></code></a> &gt; 0.</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_ice_gb</span></code></p></td>
+<td><p>Gridbox frozen water in snowpack (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nsmax</span></code></a> &gt; 0.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snow_liq_tile</span></code></p></td>
+<td><p>Tile total liquid mass in snow on ground (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nsmax</span></code></a> &gt; 0.</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_liq_gb</span></code></p></td>
+<td><p>Gridbox liquid water in snowpack (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nsmax</span></code></a> &gt; 0.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">nsnow</span></code></p></td>
+<td><p>Tile number of snow layers (-).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rgrain</span></code></p></td>
+<td><p>Tile snow surface grain size (μm).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Snow layer variables</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_ds</span></code></p></td>
+<td><p>Depth of each snow layer for each tile (m).
+Only available if <a class="reference internal" href="namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nsmax</span></code></a> &gt; 0.</p></td>
+<td><p>nsurft,nsmax</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snow_ice</span></code></p></td>
+<td><p>Mass of ice in each snow layer for each tile (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nsmax</span></code></a> &gt; 0.</p></td>
+<td><p>nsurft,nsmax</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_liq</span></code></p></td>
+<td><p>Mass of liquid water in each snow layer for each tile (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nsmax</span></code></a> &gt; 0.</p></td>
+<td><p>nsurft,nsmax</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tsnow</span></code></p></td>
+<td><p>Temperature of each snow layer (K).
+Only available if <a class="reference internal" href="namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nsmax</span></code></a> &gt; 0.</p></td>
+<td><p>nsurft,nsmax</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rgrainl</span></code></p></td>
+<td><p>Grain size in snow layers for each tile (μm).
+Only available if <a class="reference internal" href="namelists/jules_snow.nml.html#JULES_SNOW::nsmax" title="JULES_SNOW::nsmax"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">nsmax</span></code></a> &gt; 0.</p></td>
+<td><p>nsurft,nsmax</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Snow fluxes and rates of change</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_melt</span></code></p></td>
+<td><p>Tile snow melt rate (melt_tile) (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snow_melt_gb</span></code></p></td>
+<td><p>Gridbox rate of snowmelt (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snow_can_melt</span></code></p></td>
+<td><p>Tile melt of snow on canopy (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snice_freez_surft</span></code></p></td>
+<td><p>Tile internal refreezing rate in snowpack (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snice_m_surft</span></code></p></td>
+<td><p>Tile total internal melt rate of snowpack (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snice_runoff_surft</span></code></p></td>
+<td><p>Tile net rate of liquid leaving snowpack on tiles (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snice_sicerate_surft</span></code></p></td>
+<td><p>Tile rate of change of solid mass in snowpack (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snice_sliqrate_surft</span></code></p></td>
+<td><p>Tile rate of change of liquid in snowpack (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">snice_smb_surft</span></code></p></td>
+<td><p>Tile rate of change of snowpack mass (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">snow_soil_htf</span></code></p></td>
+<td><p>Tile downward heat flux after snowpack to subsurface” (W m<sup>-2</sup>).</p></td>
+<td><p>nsurft</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="vegetation-carbon-and-related-fluxes">
+<h2><span class="section-number">9.8. </span>Vegetation carbon and related fluxes<a class="headerlink" href="#vegetation-carbon-and-related-fluxes" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_veg</span></code></p></td>
+<td><dl class="simple">
+<dt>PFT total carbon content of the vegetation at end of model timestep (kg C m<sup>-2</sup>).</dt><dd><p>(including leaf, wood and root carbon, both above and below ground)</p>
+</dd>
+</dl>
+</td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cv</span></code></p></td>
+<td><p>Gridbox mean vegetation carbon at end of model timestep (kg m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">leafC</span></code></p></td>
+<td><p>PFT carbon in leaf biomass (kg m<sup>-2</sup> ).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rootC</span></code></p></td>
+<td><p>PFT carbon in root biomass (kg m<sup>-2</sup> ).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">woodC</span></code></p></td>
+<td><p>PFT carbon in woody biomass (kg m<sup>-2</sup> ).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">frac_agr</span></code></p></td>
+<td><p>Fractional area of agricultural land in each gridbox. If <a class="reference internal" href="namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_trif_crop" title="JULES_VEGETATION::l_trif_crop"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trif_crop</span></code></a>
+is TRUE, frac_agr is the fractional area of crop land in each gridbox.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frac_agr_prev</span></code></p></td>
+<td><p>Fractional area of agricultural land at the previous timestep.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">frac_past</span></code></p></td>
+<td><p>Fractional area of pasture land in each gridbox.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">plantNumDensity</span></code></p></td>
+<td><p>Number density of plants  ( m<sup>-2</sup> ).</p></td>
+<td><p>npft,nmasst</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Fractional cover, leaf area and turnover, and canopy height</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">frac</span></code></p></td>
+<td><p>Fractional cover of each surface type.</p></td>
+<td><p>ntype</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lai</span></code></p></td>
+<td><p>PFT leaf area index (-).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lai_gb</span></code></p></td>
+<td><p>Gridbox leaf area index (-).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lai_bal</span></code></p></td>
+<td><p>PFT balanced leaf area index in sf_stom (-).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lai_phen</span></code></p></td>
+<td><p>PFT leaf area index after phenology (-).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">canht</span></code></p></td>
+<td><p>PFT canopy height (m).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">g_leaf</span></code></p></td>
+<td><p>PFT leaf turnover rate ([360days]<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">g_leaf_day</span></code></p></td>
+<td><p>PFT mean leaf turnover rate for input to PHENOL ([360days]<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">g_leaf_dr_out</span></code></p></td>
+<td><p>PFT mean leaf turnover rate for driving TRIFFID ([360days]<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">g_leaf_phen</span></code></p></td>
+<td><p>PFT mean leaf turnover rate over phenology period([360days]<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>GPP, NPP, respiration</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gpp</span></code></p></td>
+<td><p>PFT gross primary productivity of biomass expressed as carbon
+(kg C m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gpp_gb</span></code></p></td>
+<td><p>Gridbox gross primary productivity of biomass expressed as carbon
+(kg C m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">npp</span></code></p></td>
+<td><p>PFT net primary productivity of biomass expressed as carbon prior to nitrogen limitation
+(kg C m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">npp_n_gb</span></code></p></td>
+<td><p>Gridbox net primary productivity of biomass expressed as carbon after nitrogen limitation
+(kg C m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">npp_n</span></code></p></td>
+<td><p>PFT net primary productivity of biomass expressed as carbon after nitrogen limitation
+(kg C m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">npp_dr_out</span></code></p></td>
+<td><p>PFT mean NPP of biomass expressed as carbon for driving TRIFFID
+(kg C m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">nbp_gb</span></code></p></td>
+<td><p>Gridbox mean net biosphere productivity. This is NPP minus the sum of all carbon fluxes out of
+land: soil respiration, exudates, harvest flux, wood product pool decay fluxes, and loss of
+carbon from vegetation and soil due to fire (kg C m<sup>-2</sup> (360days)<sup>-1</sup>)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resp_p</span></code></p></td>
+<td><p>PFT plant respiration carbon flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resp_p_gb</span></code></p></td>
+<td><p>Gridbox plant respiration carbon flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resp_w_dr_out</span></code></p></td>
+<td><p>PFT mean wood respiration carbon flux for driving TRIFFID
+(kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resp_l</span></code></p></td>
+<td><p>PFT leaf respiration carbon flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resp_r</span></code></p></td>
+<td><p>PFT root respiration carbon flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resp_w</span></code></p></td>
+<td><p>PFT wood respiration carbon flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Litter carbon fluxes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lit_c</span></code></p></td>
+<td><p>PFT carbon litter (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lit_c_mean</span></code></p></td>
+<td><p>Gridbox mean carbon litter (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lit_c_ag</span></code></p></td>
+<td><p>PFT carbon litter from LU/agriculture (kg C m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lit_c_orig</span></code></p></td>
+<td><p>PFT carbon litter including LU (kg C m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">leaf_litC</span></code></p></td>
+<td><p>PFT litter carbon due to leaf turnover (kg m<sup>-2</sup> )(360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">root_litC</span></code></p></td>
+<td><p>PFT litter carbon due to root turnover (kg m<sup>-2</sup> )(360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wood_litC</span></code></p></td>
+<td><p>PFT litter carbon due to wood turnover (kg m<sup>-2</sup> )(360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">plant_input_c_gb</span></code></p></td>
+<td><p>Gridbox input of C to the soil by plant litterfall (kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available with the ECOSSE soil model (<a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 3).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Other carbon fluxes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">exudates</span></code></p></td>
+<td><p>PFT exudates - excess carbon not assimilable into plant due lack of nitrogen
+availability (kg C m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">exudates_gb</span></code></p></td>
+<td><p>Gridbox exudates: excess carbon not assimilable into plant due lack of nitrogen
+(kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">pc_s</span></code></p></td>
+<td><p>PFT net carbon available for spreading in TRIFFID
+(kg m<sup>-2</sup> (360 days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Harvest, wood products and land use</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">root_abandon</span></code></p></td>
+<td><p>PFT carbon flux from roots abandoned during landuse change to soil
+(kg C m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">root_abandon_gb</span></code></p></td>
+<td><p>Carbon from roots abandoned during landuse change to soil kg C m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">harvest</span></code></p></td>
+<td><p>Flux of carbon to product pools due to harvest (kg C m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">harvest_gb</span></code></p></td>
+<td><p>Gridbox flux of carbon to product pools due to harvest (kg C m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">harvest_biocrop</span></code></p></td>
+<td><p>Flux of carbon to product pools due to biocrop harvest (kg C m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">harvest_biocrop_gb</span></code></p></td>
+<td><p>Gridbox flux of carbon to product pools due to biocrop harvest (kg C m<sup>-2</sup>
+(360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wood_prod_fast</span></code></p></td>
+<td><p>Carbon content of the fast decay-rate wood product pool (kg m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">wood_prod_med</span></code></p></td>
+<td><p>Carbon content of the medium decay-rate wood product pool (kg m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wood_prod_slow</span></code></p></td>
+<td><p>Carbon content of the slow decay-rate wood product pool (kg m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WP_fast_in</span></code></p></td>
+<td><p>Carbon flux from vegetation to the fast decay-rate wood product pool
+(kg m<sup>-2</sup> [360days]<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WP_med_in</span></code></p></td>
+<td><p>Carbon flux from vegetation to the medium decay-rate wood product pool
+(kg m<sup>-2</sup> [360days]<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WP_slow_in</span></code></p></td>
+<td><p>Carbon flux from vegetation to the slow decay-rate wood product pool
+(kg m<sup>-2</sup> [360days]<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WP_fast_out</span></code></p></td>
+<td><p>Carbon flux from the fast decay-rate wood product pool to atmosphere
+(kg m<sup>-2</sup> [360days]<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WP_med_out</span></code></p></td>
+<td><p>Carbon flux from the medium decay-rate wood product pool to atmosphere
+(kg m<sup>-2</sup> [360days]<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WP_slow_out</span></code></p></td>
+<td><p>Carbon flux from the slow decay-rate wood product pool to atmosphere
+(kg m<sup>-2</sup> [360days]<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Carbon conservation</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cnsrv_carbon_veg2</span></code></p></td>
+<td><p>Error in land carbon conservation in veg2 routine (kg m-2)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cnsrv_carbon_triffid</span></code></p></td>
+<td><p>Error in land carbon conservation in triffid routine (kg m-2)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cnsrv_veg_triffid</span></code></p></td>
+<td><p>Error in vegetation carbon conservation in triffid routine (kg m-2)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cnsrv_soil_triffid</span></code></p></td>
+<td><p>Error in soil carbon conservation in triffid routine (kg m-2)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cnsrv_prod_triffid</span></code></p></td>
+<td><p>Error in wood product carbon conservation in triffid routine (kg m-2)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Thermal acclimation of photosynthesis</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">t_home_gb</span></code></p></td>
+<td><p>Long-term home temperature for C3 photosynthesis (K).
+Only available if <a class="reference internal" href="namelists/jules_vegetation.nml.html#JULES_VEGETATION::photo_acclim_model" title="JULES_VEGETATION::photo_acclim_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_acclim_model</span></code></a> = 1 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t_growth_gb</span></code></p></td>
+<td><p>Short-term growth temperature for C3 photosynthesis (K).
+Only available if <a class="reference internal" href="namelists/jules_vegetation.nml.html#JULES_VEGETATION::photo_acclim_model" title="JULES_VEGETATION::photo_acclim_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_acclim_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="vegetation-nitrogen-and-related-fluxes">
+<h2><span class="section-number">9.9. </span>Vegetation nitrogen and related fluxes<a class="headerlink" href="#vegetation-nitrogen-and-related-fluxes" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_veg</span></code></p></td>
+<td><p>PFT plant nitrogen content N_LEAF+N_ROOT+N_WOOD from carbon equivalents
+(kg m<sup>-2</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_veg_gb</span></code></p></td>
+<td><p>Gridbox mean plant nitrogen content: n_leaf+n_root+n_wood from carbon equivalents
+(kg m<sup>-2</sup> ).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_leaf</span></code></p></td>
+<td><p>PFT leaf nitrogen scaled by LAI in sf_stom (kg m<sup>-2</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_root</span></code></p></td>
+<td><p>PFT root nitrogen scaled by LAI_BAL in sf_stom (kg m<sup>-2</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_stem</span></code></p></td>
+<td><p>PFT stem nitrogen scaled by LAI in sf_stom; scaled by LAI_BAL if l_stem_resp_fix=T
+(kg m<sup>-2</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Nitrogen fluxes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">deposition_n</span></code></p></td>
+<td><p>Nitrogen deposition (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_demand</span></code></p></td>
+<td><p>PFT total nitrogen demand
+(kg m<sup>-2</sup> (360 days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_demand_gb</span></code></p></td>
+<td><p>Gridbox mean demand for nitrogen (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_fix</span></code></p></td>
+<td><p>PFT fixed nitrogen (kg N m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_fix_gb</span></code></p></td>
+<td><p>Gridbox mean nitrogen fixed by plants (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_uptake</span></code></p></td>
+<td><p>PFT nitrogen taken up by plants (kg m<sup>-2</sup> (360 days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_uptake_gb</span></code></p></td>
+<td><p>Gridbox total nitrogen uptake by plants (kg N m<sup>-2</sup> (360days)<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_demand_growth</span></code></p></td>
+<td><p>PFT nitrogen demand for growth of existing plant biomass
+(kg m<sup>-2</sup> (360 days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_uptake_growth</span></code></p></td>
+<td><p>PFT nitrogen taken up for growth of existing plant biomass
+(kg m<sup>-2</sup> (360 days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_demand_lit</span></code></p></td>
+<td><p>PFT nitrogen demand of litter: nitrogen lost in leaf, wood and root biomass
+(kg m<sup>-2</sup> (360 days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_demand_spread</span></code></p></td>
+<td><p>PFT nitrogen demand for spreading plants across gridbox
+(kg m<sup>-2</sup> (360 days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_fertiliser</span></code></p></td>
+<td><p>Nitrogen addition from fertiliser (kg N m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Nitrogen fluxes in litter, harvest and land use</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lit_n_t</span></code></p></td>
+<td><p>Gridbox mean total nitrogen litter (kg m<sup>-2</sup> (360days)<sup>-1</sup>).
+(kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lit_n</span></code></p></td>
+<td><p>PFT nitrogen litter (kg N m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">leaf_litN</span></code></p></td>
+<td><p>PFT litter nitrogen due to leaf turnover (kg m<sup>-2</sup> )(360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lit_n_ag</span></code></p></td>
+<td><p>PFT nitrogen loss due to LU/agriculture (kg N m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">litterN</span></code></p></td>
+<td><p>PFT local nitrogen litter production (kg N m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lit_n_orig</span></code></p></td>
+<td><p>PFT nitrogen litter including LU (kg N m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">root_litN</span></code></p></td>
+<td><p>PFT nitrogen lost as litter due to root turnover (kg m<sup>-2</sup> )(360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wood_litN</span></code></p></td>
+<td><p>PFT litter nitrogen due to wood turnover (kg m<sup>-2</sup> )(360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">plant_input_n_gb</span></code></p></td>
+<td><p>Gridbox input of N to the soil by plant litterfall (kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available with the ECOSSE soil model (<a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 3).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">harvest_n</span></code></p></td>
+<td><p>flux of nitrogen to atmosphere due to harvest (kg N m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">harvest_n_gb</span></code></p></td>
+<td><p>Gridbox flux of nitrogen to atmosphere due to harvest (kg N m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">harvest_biocrop_n</span></code></p></td>
+<td><p>flux of nitrogen to product pools due to biocrop harvest (kg N m<sup>-2</sup>
+(360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">harvest_biocrop_n_gb</span></code></p></td>
+<td><p>Gridbox flux of nitrogen to product pools due to biocrop harvest (kg N m<sup>-2</sup>
+(360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">root_abandon_n</span></code></p></td>
+<td><p>PFT nitrogen flux from roots abandoned during landuse change to soil
+(kg N m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">root_abandon_n_gb</span></code></p></td>
+<td><p>Nitrogen from roots abandoned during landuse change to soil
+kg N m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Nitrogen conservation</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cnsrv_nitrogen_triffd</span></code></p></td>
+<td><p>Error in land nitrogen conservation in triffid routine (kg m-2)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cnsrv_vegN_triffid</span></code></p></td>
+<td><p>Error in vegetation nitrogen conservation in triffid routine (kg m-2)</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cnsrv_soilN_triffid</span></code></p></td>
+<td><p>Error in soil nitrogen conservation in triffid routine (kg m-2)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cnsrv_n_inorg_triffid</span></code></p></td>
+<td><p>Error in inorganic nitrogen conservation in triffid routine (kg m-2)</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="soil-carbon-and-related-fluxes">
+<h2><span class="section-number">9.10. </span>Soil carbon and related fluxes<a class="headerlink" href="#soil-carbon-and-related-fluxes" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cs[_soilt]</span></code></p></td>
+<td><p>Carbon in each soil pool and each soil biogeochemistry layer
+(kg m<sup>-2</sup>).</p></td>
+<td><p>cspool,cslayer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cs_label</span></code></p></td>
+<td><p>Labelled carbon in each soil pool and each soil biogeochemistry layer (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_label_frac_cs" title="JULES_SOIL_BIOGEOCHEM::l_label_frac_cs"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_label_frac_cs</span></code></a> = TRUE.</p></td>
+<td><p>cspool,cslayer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cs_gb</span></code></p></td>
+<td><p>Gridbox total soil carbon (kg m<sup>-2</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cs_label_gb</span></code></p></td>
+<td><p>Gridbox total labelled soil carbon (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_label_frac_cs" title="JULES_SOIL_BIOGEOCHEM::l_label_frac_cs"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_label_frac_cs</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_bio_gb</span></code></p></td>
+<td><p>Gridbox soil carbon in biomass pool (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_dpm_gb</span></code></p></td>
+<td><p>Gridbox soil carbon in decomposable plant material pool (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_hum_gb</span></code></p></td>
+<td><p>Gridbox soil carbon in humus pool (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">c_rpm_gb</span></code></p></td>
+<td><p>Gridbox soil carbon in resistant plant material pool (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Soil carbon fluxes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">co2_soil_gb</span></code></p></td>
+<td><p>Gridbox C in CO<sub>2</sub> flux from soil to atmosphere (kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available with the ECOSSE soil model (<a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a>
+= 3).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resp_s</span></code></p></td>
+<td><p>Respiration rate from each soil carbon pool each soil biogeochemistry layer
+(kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>cspool,cslayer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resp_label_cs</span></code></p></td>
+<td><p>Respiration rate from each labelled soil carbon pool each soil biogeochemistry layer
+(kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_label_frac_cs" title="JULES_SOIL_BIOGEOCHEM::l_label_frac_cs"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_label_frac_cs</span></code></a> = TRUE.</p></td>
+<td><p>cspool,cslayer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resp_s_gb</span></code></p></td>
+<td><p>Gridbox total soil respiration carbon flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resp_label_cs_gb</span></code></p></td>
+<td><p>Gridbox total labelled soil respiration carbon flux (kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_label_frac_cs" title="JULES_SOIL_BIOGEOCHEM::l_label_frac_cs"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_label_frac_cs</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resp_s_to_atmos_gb</span></code></p></td>
+<td><p>Respired carbon from soil carbon emitted to atmosphere (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resp_s_dr_out</span></code></p></td>
+<td><p>Gridbox mean soil respiration carbon flux for driving TRIFFID
+(kg m<sup>-2</sup> (360days)<sup>-1</sup>)
+This is the gross soil respiration; some of this carbon flux is from one soil carbon pool to
+another.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Other soil carbon variables</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">dpm_ratio</span></code></p></td>
+<td><p>Gridbox DPM:RPM ratio of overall litter input (:).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fsth</span></code></p></td>
+<td><p>Soil moisture modifier of soil respiration rate (-).</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ftemp</span></code></p></td>
+<td><p>Temperature modifier of soil respiration rate (-).</p></td>
+<td><p>sm_levels</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fprf</span></code></p></td>
+<td><p>Modifier of soil respiration rate due to vegetation cover (-).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">soil_CN</span></code></p></td>
+<td><p>Soil C:N in each soil pool and each soil biogeochemistry layer</p></td>
+<td><p>cspool,cslayer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">soil_cn_gb</span></code></p></td>
+<td><p>Gridbox total soil carbon : nitrogen ratio.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Soil methane variables</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fch4_wetl</span></code></p></td>
+<td><p>Gridbox scaled methane flux from wetland fraction using soil carbon as substrate if
+ch4_substrate=1, NPP as substrate if ch4_substrate=2, or soil respiration as substrate if
+ch4_substrate=3 (10<sup>-9</sup> kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fch4_wetl_cs[_soilt]</span></code></p></td>
+<td><p>Gridbox methane flux from wetland fraction using soil carbon as substrate
+(kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fch4_wetl_npp[_soilt]</span></code></p></td>
+<td><p>Gridbox methane flux from wetland fraction using NPP as substrate
+(kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fch4_wetl_resps[_soilt]</span></code></p></td>
+<td><p>Gridbox methane flux from wetland fraction using soil respiration as substrate
+(kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">substr_ch4</span></code></p></td>
+<td><p>Carbon in substrate pool used by methanogens for each soil methane layer
+(kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_ch4_microbe" title="JULES_SOIL_BIOGEOCHEM::l_ch4_microbe"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ch4_microbe</span></code></a> = TRUE.</p></td>
+<td><p>ch4layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">mic_ch4</span></code></p></td>
+<td><p>Carbon in methanogenic biomass for each soil methane layer (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_ch4_microbe" title="JULES_SOIL_BIOGEOCHEM::l_ch4_microbe"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ch4_microbe</span></code></a> = TRUE.</p></td>
+<td><p>ch4layer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">mic_act_ch4</span></code></p></td>
+<td><p>Activity level of methanogenic biomass for each soil methane layer (-).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_ch4_microbe" title="JULES_SOIL_BIOGEOCHEM::l_ch4_microbe"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ch4_microbe</span></code></a> = TRUE.</p></td>
+<td><p>ch4layer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">acclim_ch4</span></code></p></td>
+<td><p>Acclimation factor for methanogenic processes in each soil methane layer (-).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::l_ch4_microbe" title="JULES_SOIL_BIOGEOCHEM::l_ch4_microbe"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ch4_microbe</span></code></a> = TRUE.</p></td>
+<td><p>ch4layer</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="soil-nitrogen-and-related-fluxes">
+<h2><span class="section-number">9.11. </span>Soil nitrogen and related fluxes<a class="headerlink" href="#soil-nitrogen-and-related-fluxes" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_soil_gb</span></code></p></td>
+<td><p>Gridbox total soil nitrogen (organic and inorganic) (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ns</span></code></p></td>
+<td><p>Gridbox organic nitrogen in each soil pool and each soil biogeochemistry
+layer (kg m<sup>-2</sup>).</p></td>
+<td><p>cspool,cslayer</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ns_gb</span></code></p></td>
+<td><p>Gridbox soil organic nitrogen (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_bio_gb</span></code></p></td>
+<td><p>Gridbox soil nitrogen in biomass pool (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_dpm_gb</span></code></p></td>
+<td><p>Gridbox soil nitrogen in decomposable plant material pool (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_rpm_gb</span></code></p></td>
+<td><p>Gridbox soil nitrogen in resistant plant material pool (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_hum_gb</span></code></p></td>
+<td><p>Gridbox soil nitrogen in humus pool (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_amm_gb</span></code></p></td>
+<td><p>Gridbox soil nitrogen in ammonium pool (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_nit_gb</span></code></p></td>
+<td><p>Gridbox soil ammonium in ammonium pool (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_inorg_gb</span></code></p></td>
+<td><p>Gridbox soil inorganic nitrogen (kg m<sup>-2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 2 or 3.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_inorg_avail_pft</span></code></p></td>
+<td><p>PFT inorganic nitrogen pool that is available for plant uptake
+for each soil biogeochemistry layer (kg m<sup>-2</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Soil nitrogen fluxes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">immob_n</span></code></p></td>
+<td><p>Soil nitrogen immobilisation in each soil pool
+and each soil biogeochemistry layer (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>cspool,cslayer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">immob_n_gb</span></code></p></td>
+<td><p>Gridbox mean soil nitrogen immobilisation (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">immob_n_pot</span></code></p></td>
+<td><p>Soil potential nitrogen immobilisation in each soil pool
+and each soil biogeochemistry layer (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>cspool,cslayer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">immob_n_pot_gb</span></code></p></td>
+<td><p>Gridbox mean potential soil nitrogen immobilisation (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">minl_n_pot</span></code></p></td>
+<td><p>Soil potential nitrogen mineralisation in each pool soil pool
+and each soil biogeochemistry layer (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>cspool,cslayer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">minl_n_pot_gb</span></code></p></td>
+<td><p>Gridbox mean potential soil nitrogen mineralisation (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">minl_n</span></code></p></td>
+<td><p>Soil nitrogen mineralisation in each pool soil pool
+and each soil biogeochemistry layer (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td><p>cspool,cslayer</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">minl_gb</span></code></p></td>
+<td><p>Gridbox mean soil nitrogen mineralisation (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_miner_gb</span></code></p></td>
+<td><p>Gribox rate of net mineralisation of soil N (kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available with the ECOSSE soil model (<a class="reference internal" href="namelists/jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a>
+= 3).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_nitrif_gb</span></code></p></td>
+<td><p>Gridbox mean rate of nitrification, expressed as N (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_denitrif_gb</span></code></p></td>
+<td><p>Gridbox mean rate of denitrification, expressed as N (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n2o_nitrif_gb</span></code></p></td>
+<td><p>Gridbox mean N in N<sub>2</sub>O lost during nitrification, including partial nitrification
+(kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n2o_part_nitrif_gb</span></code></p></td>
+<td><p>Gridbox mean N in N<sub>2</sub>O lost by partial nitrification (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n2_denitrif_gb</span></code></p></td>
+<td><p>Gridbox mean N in N<sub>2</sub> lost from soil during denitrification
+(kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n2o_denitrif_gb</span></code></p></td>
+<td><p>Gridbox mean N in N<sub>2</sub>O lost during denitrification (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n2o_soil_gb</span></code></p></td>
+<td><p>Gridbox mean N in N<sub>2</sub>O flux from soil to atmosphere (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">no_soil_gb</span></code></p></td>
+<td><p>Gridbox mean N in NO flux from soil to atmosphere (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_fertiliser_gb</span></code></p></td>
+<td><p>Gridbox nitrogen addition from fertiliser (kg N m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_gas_gb</span></code></p></td>
+<td><p>Gridbox mean mineralised nitrogen gas emissions (kg m<sup>-2</sup> (360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">n_leach</span></code></p></td>
+<td><p>Gridbox leached nitrogen loss term (kg N m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_loss</span></code></p></td>
+<td><p>Gridbox nitrogen loss term (fixed fraction of n_inorg) (kg N m<sup>-2</sup>
+(360days)<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="fire">
+<h2><span class="section-number">9.12. </span>Fire<a class="headerlink" href="#fire" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td colspan="3"><p>Fire indices</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_mcarthur</span></code></p></td>
+<td><p>McArthur Forest Fire Danger Index (No units)</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_canadian</span></code></p></td>
+<td><p>Canadian Fire Weather Index (No units).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_canadian_ffmc</span></code></p></td>
+<td><p>Canadian Fire Weather Index- Fine Fuel Moisture Code (No units).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_canadian_dmc</span></code></p></td>
+<td><p>Canadian Fire Weather Index- Duff Moisture Code (No units).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_canadian_dc</span></code></p></td>
+<td><p>Canadian Fire Weather Index- Drought Code (No units).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_canadian_isi</span></code></p></td>
+<td><p>Canadian Fire Weather Index- Initial Spread Index (No units).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_canadian_bui</span></code></p></td>
+<td><p>Canadian Fire Weather Index- Build-up Index (No units).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_nesterov</span></code></p></td>
+<td><p>Nesterov Fire Index (No units).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td colspan="3"><p>Burnt area</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">burnt_area</span></code></p></td>
+<td><p>PFT burnt area fraction (s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">burnt_area_gb</span></code></p></td>
+<td><p>Gridbox mean burnt area fraction (s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td colspan="3"><p>Fire emissions</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">emitted_carbon</span></code></p></td>
+<td><p>PFT emitted carbon flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">emitted_carbon_gb</span></code></p></td>
+<td><p>Gridbox mean emitted carbon flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">emitted_carbon_DPM</span></code></p></td>
+<td><p>Decomposable Plant Material emitted carbon flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">emitted_carbon_RPM</span></code></p></td>
+<td><p>Resistant Plant Material emitted carbon flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CO2_gb</span></code></p></td>
+<td><p>Gridbox mean fire CO2 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CO2_DPM</span></code></p></td>
+<td><p>Decomposable Plant Material fire CO2 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CO2_RPM</span></code></p></td>
+<td><p>Resistant Plant Material fire CO2 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CO_gb</span></code></p></td>
+<td><p>Gridbox mean fire CO emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CO_DPM</span></code></p></td>
+<td><p>Decomposable Plant Material fire CO emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CO_RPM</span></code></p></td>
+<td><p>Resistant Plant Material fire CO emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CH4_gb</span></code></p></td>
+<td><p>Gridbox mean fire CH4 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CH4_DPM</span></code></p></td>
+<td><p>Decomposable Plant Material fire CH4 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CH4_RPM</span></code></p></td>
+<td><p>Resistant Plant Material fire CH4 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_NOx_gb</span></code></p></td>
+<td><p>Gridbox mean fire NOx emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_NOx_DPM</span></code></p></td>
+<td><p>Decomposable Plant Material fire NOx emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_NOx_RPM</span></code></p></td>
+<td><p>Resistant Plant Material fire NOx emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_SO2_gb</span></code></p></td>
+<td><p>Gridbox mean fire SO2 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_SO2_DPM</span></code></p></td>
+<td><p>Decomposable Plant Material fire SO2 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_SO2_RPM</span></code></p></td>
+<td><p>Resistant Plant Material fire SO2 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_OC_gb</span></code></p></td>
+<td><p>Gridbox mean fire OC emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_OC_DPM</span></code></p></td>
+<td><p>Decomposable Plant Material fire OC emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_OC_RPM</span></code></p></td>
+<td><p>Resistant Plant Material fire OC emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_BC_gb</span></code></p></td>
+<td><p>Gridbox mean fire BC emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_BC_DPM</span></code></p></td>
+<td><p>Decomposable Plant Material fire BC emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_BC_RPM</span></code></p></td>
+<td><p>Resistant Plant Material fire BC emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CO2</span></code></p></td>
+<td><p>PFT fire CO2 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CO</span></code></p></td>
+<td><p>PFT fire CO emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_CH4</span></code></p></td>
+<td><p>PFT fire CH4 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_NOx</span></code></p></td>
+<td><p>PFT fire NOx emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_SO2</span></code></p></td>
+<td><p>PFT fire SO2 emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_OC</span></code></p></td>
+<td><p>PFT fire OC emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">fire_em_BC</span></code></p></td>
+<td><p>PFT fire BC emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="crops">
+<h2><span class="section-number">9.13. </span>Crops<a class="headerlink" href="#crops" title="Link to this heading">¶</a></h2>
+<p>These variables are only available when <a class="reference internal" href="namelists/jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ncpft</span></code></a> &gt; 0.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">croplai</span></code></p></td>
+<td><p>Crop PFT leaf area index (LAI).</p></td>
+<td><p>ncpft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cropcanht</span></code></p></td>
+<td><p>Crop PFT canopy height (m).</p></td>
+<td><p>ncpft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cropleafc</span></code></p></td>
+<td><p>Crop PFT carbon in leaf parts (kg m<sup>-2</sup>).</p></td>
+<td><p>ncpft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cropstemc</span></code></p></td>
+<td><p>Crop PFT carbon in stem parts (kg m<sup>-2</sup>).</p></td>
+<td><p>ncpft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">croprootc</span></code></p></td>
+<td><p>Crop PFT root carbon pool (kg m<sup>-2</sup>).</p></td>
+<td><p>ncpft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cropreservec</span></code></p></td>
+<td><p>Crop PFT carbon in stem reserve pool (kg m<sup>-2</sup>).</p></td>
+<td><p>ncpft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cropharvc</span></code></p></td>
+<td><p>Crop PFT carbon in harvested parts (kg m<sup>-2</sup>).</p></td>
+<td><p>ncpft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cropyield</span></code></p></td>
+<td><p>Crop PFT yield carbon (kg m<sup>-2</sup>).</p>
+<p><code class="docutils literal notranslate"><span class="pre">cropyield</span></code> is zero in every timestep where there is no harvest, so this
+variable will mostly be used with <a class="reference internal" href="namelists/output.nml.html#JULES_OUTPUT_PROFILE::output_type" title="JULES_OUTPUT_PROFILE::output_type"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_type</span></code></a>
+set to ‘A’ or ‘X’.</p>
+</td>
+<td><p>ncpft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cropdvi</span></code></p></td>
+<td><p>Crop PFT developmental index (DVI).</p></td>
+<td><p>ncpft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cropsowdate</span></code></p></td>
+<td><p>PFT sowing date (1.0 to 365.0).</p>
+<p>If <a class="reference internal" href="namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_prescsow" title="JULES_VEGETATION::l_prescsow"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_prescsow</span></code></a> = FALSE then this will always be 0.</p>
+</td>
+<td><p>ncpft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">harvest_counter</span></code></p></td>
+<td><p>1 in a timestep where crop is harvested, 0 otherwise.</p>
+<p>When used with <a class="reference internal" href="namelists/output.nml.html#JULES_OUTPUT_PROFILE::output_type" title="JULES_OUTPUT_PROFILE::output_type"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_type</span></code></a> = ‘A’, will count
+the number of harvests since the beginning of the run.</p>
+</td>
+<td><p>ncpft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">harvest_trigger</span></code></p></td>
+<td><p>Indicates which condition triggered the harvest:</p>
+<ol class="arabic simple" start="0">
+<li><p>No harvest in timestep.</p></li>
+<li><p>Crop reached maturity (DVI=2).</p></li>
+<li><p>Crop leaf area index became too high (LAI&gt;15).</p></li>
+<li><p>Crop has flowered (DVI&gt;1) and temperature in the second soil layer dropped
+below <a class="reference internal" href="namelists/crop_params.nml.html#JULES_CROPPARM::t_mort_io" title="JULES_CROPPARM::t_mort_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">t_mort_io</span></code></a>.</p></li>
+<li><p>Crop has flowered (DVI&gt;1), <code class="docutils literal notranslate"><span class="pre">cropharvc</span></code> &gt; 0 and
+(<code class="docutils literal notranslate"><span class="pre">croprootc</span></code> + <code class="docutils literal notranslate"><span class="pre">cropleafc</span></code> + <code class="docutils literal notranslate"><span class="pre">cropstemc</span></code> + <code class="docutils literal notranslate"><span class="pre">cropreservec</span></code>) &lt;
+<a class="reference internal" href="namelists/crop_params.nml.html#JULES_CROPPARM::initial_carbon_io" title="JULES_CROPPARM::initial_carbon_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">initial_carbon_io</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="namelists/jules_vegetation.nml.html#JULES_VEGETATION::l_prescsow" title="JULES_VEGETATION::l_prescsow"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_prescsow</span></code></a> = T, crop has emerged (DVI&gt;=0), and
+the day of year is the day before the sowing date.</p></li>
+</ol>
+</td>
+<td><p>ncpft</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="trace-gas-concentrations-and-fluxes">
+<h2><span class="section-number">9.14. </span>Trace gas concentrations and fluxes<a class="headerlink" href="#trace-gas-concentrations-and-fluxes" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">co2_mmr</span></code></p></td>
+<td><p>Concentration of atmospheric CO2, expressed as a mass mixing ratio.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">flux_o3_stom</span></code></p></td>
+<td><p>PFT flux of O3 to stomata (nmol m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">o3_exp_fac</span></code></p></td>
+<td><p>PFT ozone exposure factor.</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">acetone</span></code></p></td>
+<td><p>PFT monoterpene emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">acetone_gb</span></code></p></td>
+<td><p>Gridbox mean monoterpene emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">isoprene</span></code></p></td>
+<td><p>PFT isoprene emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">isoprene_gb</span></code></p></td>
+<td><p>Gridbox mean isoprene emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">methanol</span></code></p></td>
+<td><p>PFT methanol emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">methanol_gb</span></code></p></td>
+<td><p>Gridbox mean methanol emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">terpene</span></code></p></td>
+<td><p>PFT monoterpene emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td><p>npft</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">terpene_gb</span></code></p></td>
+<td><p>Gridbox mean monoterpene emission flux (kg m<sup>-2</sup> s<sup>-1</sup>).</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="water-resources">
+<h2><span class="section-number">9.15. </span>Water resources<a class="headerlink" href="#water-resources" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">water_demand</span></code></p></td>
+<td><p>Demand for water across all water resource sectors (kg).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_resources" title="JULES_WATER_RESOURCES::l_water_resources"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_resources</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">demand_domestic</span></code></p></td>
+<td><p>Demand for water for domestic use (kg).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_domestic" title="JULES_WATER_RESOURCES::l_water_domestic"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_domestic</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">demand_environment</span></code></p></td>
+<td><p>Demand for water for environmental use (kg).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_environment" title="JULES_WATER_RESOURCES::l_water_environment"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_environment</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">demand_industry</span></code></p></td>
+<td><p>Demand for water for industrial use (kg).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_industry" title="JULES_WATER_RESOURCES::l_water_industry"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_industry</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">demand_irrigation</span></code></p></td>
+<td><p>Demand for water for irrigation (kg).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_irrigation" title="JULES_WATER_RESOURCES::l_water_irrigation"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_irrigation</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">demand_livestock</span></code></p></td>
+<td><p>Demand for water for livestock use (kg).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_livestock" title="JULES_WATER_RESOURCES::l_water_livestock"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_livestock</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">demand_transfers</span></code></p></td>
+<td><p>Demand for water for transfers (kg).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_transfers" title="JULES_WATER_RESOURCES::l_water_transfers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_transfers</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">demand_rate_domestic</span></code></p></td>
+<td><p>Demand rate for water for domestic use (kg s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_irrigation" title="JULES_WATER_RESOURCES::l_water_irrigation"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_irrigation</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">demand_rate_industry</span></code></p></td>
+<td><p>Demand rate for water for industrial use (kg s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_industry" title="JULES_WATER_RESOURCES::l_water_industry"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_industry</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">demand_rate_livestock</span></code></p></td>
+<td><p>Demand rate for water for livestock use (kg s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_livestock" title="JULES_WATER_RESOURCES::l_water_livestock"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_livestock</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">demand_rate_transfers</span></code></p></td>
+<td><p>Demand rate for water for transfers (kg s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_transfers" title="JULES_WATER_RESOURCES::l_water_transfers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_transfers</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">irrig_water</span></code></p></td>
+<td><p>Water applied as irrigation (kg m<sup>-2</sup> s<sup>-1</sup>).
+Only available if <a class="reference internal" href="namelists/jules_irrig.nml.html#JULES_IRRIG::l_irrig_dmd" title="JULES_IRRIG::l_irrig_dmd"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_irrig_dmd</span></code></a> = TRUE.</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="urban">
+<h2><span class="section-number">9.16. </span>Urban<a class="headerlink" href="#urban" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wrr</span></code></p></td>
+<td><p>Urban morphology: Repeating width ratio (or canyon fraction, W/R).
+Calculated if <a class="reference internal" href="namelists/urban.nml.html#JULES_URBAN::l_urban_empirical" title="JULES_URBAN::l_urban_empirical"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_urban_empirical</span></code></a> = TRUE,
+otherwise it will be the same as the input value (see <a class="reference internal" href="namelists/ancillaries.nml.html#list-of-urban-properties"><span class="std std-ref">List of urban properties</span></a>).</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hwr</span></code></p></td>
+<td><p>Urban morphology: Height-to-width ratio (H/W). See for <code class="docutils literal notranslate"><span class="pre">wrr</span></code> above.
+Only used by MORUSES.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hgt</span></code></p></td>
+<td><p>Urban morphology: Building height (H). See for <code class="docutils literal notranslate"><span class="pre">wrr</span></code> above. Only used by MORUSES.</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="imogen">
+<h2><span class="section-number">9.17. </span>IMOGEN<a class="headerlink" href="#imogen" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">c_emiss_out</span></code></p></td>
+<td><p>Prescribed carbon emissions in IMOGEN (Gt / year).
+This is a global value repeated over all land points and is only
+available when IMOGEN is switched on.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">d_land_atmos_co2</span></code></p></td>
+<td><p>Change in atmospheric CO2 concentration from land-atmosphere.
+CO2 feedbacks in IMOGEN (ppm / year). This is a global value
+repeated over all land points and is only available when IMOGEN
+is switched on.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">d_ocean_atmos</span></code></p></td>
+<td><p>Change in atmospheric CO2 concentration from ocean-atmosphere
+CO2 feedbacks in IMOGEN (ppm / year). This is a global value
+repeated over all land points and is only available when IMOGEN is
+switched on.</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="grid-and-indexing-variables">
+<h2><span class="section-number">9.18. </span>Grid and indexing variables<a class="headerlink" href="#grid-and-indexing-variables" title="Link to this heading">¶</a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Dimensions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">grid_area</span></code></p></td>
+<td><p>Gridbox surface area (m<sup>2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_water_resources.nml.html#JULES_WATER_RESOURCES::l_water_irrigation" title="JULES_WATER_RESOURCES::l_water_irrigation"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_water_irrigation</span></code></a> = TRUE.</p></td>
+<td><p>land+sea</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">grid_area_rp</span></code></p></td>
+<td><p>River routing gridbox surface area (m<sup>2</sup>).
+Only available if <a class="reference internal" href="namelists/jules_rivers.nml.html#JULES_RIVERS::l_rivers" title="JULES_RIVERS::l_rivers"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rivers</span></code></a> = TRUE.
+Note that this is defined on the river routing model grid, not on the land point grid.</p></td>
+<td><p>np_rivers</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">land_index</span></code></p></td>
+<td><p>Index (gridbox number) of land points.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lice_index</span></code></p></td>
+<td><p>Index (gridbox number) of land ice points.</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">soil_index</span></code></p></td>
+<td><p>Index (gridbox number) of soil points.</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tile_index</span></code></p></td>
+<td><p>Index (gridbox number) of land points with each surface type.</p></td>
+<td><p>ntype</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/jules_logo_html.png" alt="Logo"/>
+            </a></p>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">9. JULES Output variables</a><ul>
+<li><a class="reference internal" href="#meteorology">9.1. Meteorology</a></li>
+<li><a class="reference internal" href="#radiation">9.2. Radiation</a></li>
+<li><a class="reference internal" href="#energy-and-momentum-fluxes-and-surface-temperatures">9.3. Energy and momentum fluxes, and surface temperatures</a></li>
+<li><a class="reference internal" href="#soil-moisture-and-temperature-and-soil-characteristics">9.4. Soil moisture and temperature, and soil characteristics</a></li>
+<li><a class="reference internal" href="#hydrology">9.5. Hydrology</a></li>
+<li><a class="reference internal" href="#rivers">9.6. Rivers</a></li>
+<li><a class="reference internal" href="#snow">9.7. Snow</a></li>
+<li><a class="reference internal" href="#vegetation-carbon-and-related-fluxes">9.8. Vegetation carbon and related fluxes</a></li>
+<li><a class="reference internal" href="#vegetation-nitrogen-and-related-fluxes">9.9. Vegetation nitrogen and related fluxes</a></li>
+<li><a class="reference internal" href="#soil-carbon-and-related-fluxes">9.10. Soil carbon and related fluxes</a></li>
+<li><a class="reference internal" href="#soil-nitrogen-and-related-fluxes">9.11. Soil nitrogen and related fluxes</a></li>
+<li><a class="reference internal" href="#fire">9.12. Fire</a></li>
+<li><a class="reference internal" href="#crops">9.13. Crops</a></li>
+<li><a class="reference internal" href="#trace-gas-concentrations-and-fluxes">9.14. Trace gas concentrations and fluxes</a></li>
+<li><a class="reference internal" href="#water-resources">9.15. Water resources</a></li>
+<li><a class="reference internal" href="#urban">9.16. Urban</a></li>
+<li><a class="reference internal" href="#imogen">9.17. IMOGEN</a></li>
+<li><a class="reference internal" href="#grid-and-indexing-variables">9.18. Grid and indexing variables</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="code/known-limitations.html"
+                          title="previous chapter"><span class="section-number">8.2. </span>Known limitations of the code</a></p>
+  </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="code/known-limitations.html" title="8.2. Known limitations of the code"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">9. </span>JULES Output variables</a></li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Crown Copyright 2019.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+    </div>
+
+  </body>
+</html>
