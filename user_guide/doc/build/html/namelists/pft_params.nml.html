@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>6.23. pft_params.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.3 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <title>6.23. pft_params.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script src="../_static/documentation_options.js?v=f15b9291"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.24. cable_pftparm.nml" href="cable_pftparm.nml.html" />
@@ -35,7 +32,7 @@
         <li class="right" >
           <a href="cable_prognostics.nml.html" title="6.22. cable_prognostics.nml"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.23. </span><code class="docutils literal notranslate"><span class="pre">pft_params.nml</span></code></a></li> 
       </ul>
@@ -47,15 +44,15 @@
           <div class="body" role="main">
             
   <section id="pft-params-nml">
-<h1><span class="section-number">6.23. </span><code class="docutils literal notranslate"><span class="pre">pft_params.nml</span></code><a class="headerlink" href="#pft-params-nml" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">6.23. </span><code class="docutils literal notranslate"><span class="pre">pft_params.nml</span></code><a class="headerlink" href="#pft-params-nml" title="Link to this heading">¶</a></h1>
 <p>This file sets the time and space-invariant parameters for plant functional types for the JULES land surface model. It contains one namelist called <a class="reference internal" href="#namelist-JULES_PFTPARM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_PFTPARM</span></code></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If the crop model is on (i.e. <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ncpft</span></code></a> &gt; 0), the order of PFTs must be natural PFTs followed by crop PFTs.</p>
 </div>
-<section id="namelist-JULES_PFTPARM">
-<span id="jules-pftparm-namelist-members"></span><h2><span class="section-number">6.23.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_PFTPARM</span></code> namelist members<a class="headerlink" href="#namelist-JULES_PFTPARM" title="Permalink to this heading">¶</a></h2>
-<p>This namelist reads the values of parameters for each of the plant functional types (PFTs) if the JULES land surface model is being used. These parameters are a function of PFT only. Parameters that also vary with time and location can be prescribed in <a class="reference internal" href="prescribed_data.nml.html"><span class="doc">prescribed_data.nml</span></a>. Parameters that are only required if the dynamic vegetation (TRIFFID) or phenology sections are requested are read separately in <a class="reference internal" href="triffid_params.nml.html"><span class="doc">triffid_params.nml</span></a>. Every member must be given a value for every run.</p>
+<section id="jules-pftparm-namelist-members">
+<h2><span class="section-number">6.23.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_PFTPARM</span></code> namelist members<a class="headerlink" href="#jules-pftparm-namelist-members" title="Link to this heading">¶</a></h2>
+<p id="namelist-JULES_PFTPARM">This namelist reads the values of parameters for each of the plant functional types (PFTs) if the JULES land surface model is being used. These parameters are a function of PFT only. Parameters that also vary with time and location can be prescribed in <a class="reference internal" href="prescribed_data.nml.html"><span class="doc">prescribed_data.nml</span></a>. Parameters that are only required if the dynamic vegetation (TRIFFID) or phenology sections are requested are read separately in <a class="reference internal" href="triffid_params.nml.html"><span class="doc">triffid_params.nml</span></a>. Every member must be given a value for every run.</p>
 <p>HCTN24 and 30 refer to Hadley Centre technical notes 24 and 30,
 available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes">the Met Office Library</a>. For
 ease the direct links to these documents are:</p>
@@ -65,12 +62,12 @@ ease the direct links to these documents are:</p>
 </ul>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::canht_ft_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">canht_ft_io</span></span><a class="headerlink" href="#JULES_PFTPARM::canht_ft_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">canht_ft_io</span></span><a class="headerlink" href="#JULES_PFTPARM::canht_ft_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -84,12 +81,12 @@ ease the direct links to these documents are:</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::lai_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">lai_io</span></span><a class="headerlink" href="#JULES_PFTPARM::lai_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">lai_io</span></span><a class="headerlink" href="#JULES_PFTPARM::lai_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -103,12 +100,12 @@ ease the direct links to these documents are:</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::c3_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">c3_io</span></span><a class="headerlink" href="#JULES_PFTPARM::c3_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">c3_io</span></span><a class="headerlink" href="#JULES_PFTPARM::c3_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -121,12 +118,12 @@ ease the direct links to these documents are:</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::orient_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">orient_io</span></span><a class="headerlink" href="#JULES_PFTPARM::orient_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">orient_io</span></span><a class="headerlink" href="#JULES_PFTPARM::orient_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -139,12 +136,12 @@ ease the direct links to these documents are:</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::can_struct_a_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">can_struct_a_io</span></span><a class="headerlink" href="#JULES_PFTPARM::can_struct_a_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">can_struct_a_io</span></span><a class="headerlink" href="#JULES_PFTPARM::can_struct_a_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -153,12 +150,12 @@ ease the direct links to these documents are:</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::a_wl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">a_wl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::a_wl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">a_wl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::a_wl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -168,12 +165,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::a_ws_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">a_ws_io</span></span><a class="headerlink" href="#JULES_PFTPARM::a_ws_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">a_ws_io</span></span><a class="headerlink" href="#JULES_PFTPARM::a_ws_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -182,12 +179,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::albsnc_max_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">albsnc_max_io</span></span><a class="headerlink" href="#JULES_PFTPARM::albsnc_max_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">albsnc_max_io</span></span><a class="headerlink" href="#JULES_PFTPARM::albsnc_max_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -197,12 +194,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::albsnc_min_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">albsnc_min_io</span></span><a class="headerlink" href="#JULES_PFTPARM::albsnc_min_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">albsnc_min_io</span></span><a class="headerlink" href="#JULES_PFTPARM::albsnc_min_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -212,12 +209,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::albsnf_max_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">albsnf_max_io</span></span><a class="headerlink" href="#JULES_PFTPARM::albsnf_max_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">albsnf_max_io</span></span><a class="headerlink" href="#JULES_PFTPARM::albsnf_max_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -227,12 +224,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::albsnf_maxu_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">albsnf_maxu_io</span></span><a class="headerlink" href="#JULES_PFTPARM::albsnf_maxu_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">albsnf_maxu_io</span></span><a class="headerlink" href="#JULES_PFTPARM::albsnf_maxu_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -242,12 +239,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::albsnf_maxl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">albsnf_maxl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::albsnf_maxl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">albsnf_maxl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::albsnf_maxl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -257,12 +254,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::alpha_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alpha_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alpha_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alpha_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alpha_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -271,12 +268,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::alnir_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alnir_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alnir_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alnir_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alnir_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -287,12 +284,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::alniru_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alniru_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alniru_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alniru_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alniru_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -303,12 +300,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::alnirl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alnirl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alnirl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alnirl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alnirl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -319,12 +316,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::alpar_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alpar_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alpar_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alpar_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alpar_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -335,12 +332,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::alparu_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alparu_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alparu_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alparu_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alparu_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -351,12 +348,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::alparl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alparl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alparl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alparl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alparl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -367,12 +364,12 @@ leaf area index (kg carbon m<sup>-2</sup>)  (Clark et al., 2011; Table 7)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::b_wl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">b_wl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::b_wl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">b_wl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::b_wl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -383,12 +380,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::catch0_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">catch0_io</span></span><a class="headerlink" href="#JULES_PFTPARM::catch0_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">catch0_io</span></span><a class="headerlink" href="#JULES_PFTPARM::catch0_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -398,12 +395,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::dcatch_dlai_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dcatch_dlai_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dcatch_dlai_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dcatch_dlai_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dcatch_dlai_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -413,12 +410,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::dgl_dm_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dgl_dm_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dgl_dm_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dgl_dm_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dgl_dm_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -427,12 +424,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::dgl_dt_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dgl_dt_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dgl_dt_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dgl_dt_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dgl_dt_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -442,12 +439,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::dqcrit_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dqcrit_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dqcrit_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dqcrit_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dqcrit_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -457,12 +454,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::dz0v_dh_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dz0v_dh_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dz0v_dh_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dz0v_dh_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dz0v_dh_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -473,12 +470,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::z0v_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">z0v_io</span></span><a class="headerlink" href="#JULES_PFTPARM::z0v_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">z0v_io</span></span><a class="headerlink" href="#JULES_PFTPARM::z0v_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -488,12 +485,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::eta_sl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">eta_sl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::eta_sl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">eta_sl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::eta_sl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -502,12 +499,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fd_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fd_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fd_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fd_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fd_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -516,12 +513,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fsmc_of_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fsmc_of_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fsmc_of_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fsmc_of_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fsmc_of_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -530,12 +527,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::f0_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">f0_io</span></span><a class="headerlink" href="#JULES_PFTPARM::f0_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">f0_io</span></span><a class="headerlink" href="#JULES_PFTPARM::f0_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -545,12 +542,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::g1_stomata_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">g1_stomata_io</span></span><a class="headerlink" href="#JULES_PFTPARM::g1_stomata_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">g1_stomata_io</span></span><a class="headerlink" href="#JULES_PFTPARM::g1_stomata_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -560,12 +557,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::g_leaf_0_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">g_leaf_0_io</span></span><a class="headerlink" href="#JULES_PFTPARM::g_leaf_0_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">g_leaf_0_io</span></span><a class="headerlink" href="#JULES_PFTPARM::g_leaf_0_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -574,12 +571,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::glmin_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">glmin_io</span></span><a class="headerlink" href="#JULES_PFTPARM::glmin_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">glmin_io</span></span><a class="headerlink" href="#JULES_PFTPARM::glmin_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -588,12 +585,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::infil_f_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">infil_f_io</span></span><a class="headerlink" href="#JULES_PFTPARM::infil_f_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">infil_f_io</span></span><a class="headerlink" href="#JULES_PFTPARM::infil_f_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -604,12 +601,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::gsoil_f_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">gsoil_f_io</span></span><a class="headerlink" href="#JULES_PFTPARM::gsoil_f_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">gsoil_f_io</span></span><a class="headerlink" href="#JULES_PFTPARM::gsoil_f_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -619,12 +616,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::hw_sw_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">hw_sw_io</span></span><a class="headerlink" href="#JULES_PFTPARM::hw_sw_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">hw_sw_io</span></span><a class="headerlink" href="#JULES_PFTPARM::hw_sw_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -634,12 +631,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::kext_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">kext_io</span></span><a class="headerlink" href="#JULES_PFTPARM::kext_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">kext_io</span></span><a class="headerlink" href="#JULES_PFTPARM::kext_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -648,12 +645,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::kpar_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">kpar_io</span></span><a class="headerlink" href="#JULES_PFTPARM::kpar_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">kpar_io</span></span><a class="headerlink" href="#JULES_PFTPARM::kpar_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -662,12 +659,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::lai_alb_lim_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">lai_alb_lim_io</span></span><a class="headerlink" href="#JULES_PFTPARM::lai_alb_lim_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">lai_alb_lim_io</span></span><a class="headerlink" href="#JULES_PFTPARM::lai_alb_lim_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -676,12 +673,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::neff_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">neff_io</span></span><a class="headerlink" href="#JULES_PFTPARM::neff_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">neff_io</span></span><a class="headerlink" href="#JULES_PFTPARM::neff_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -691,12 +688,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::nl0_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">nl0_io</span></span><a class="headerlink" href="#JULES_PFTPARM::nl0_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">nl0_io</span></span><a class="headerlink" href="#JULES_PFTPARM::nl0_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -706,12 +703,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::nr_nl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">nr_nl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::nr_nl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">nr_nl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::nr_nl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -720,12 +717,12 @@ al. (2011, Table 7).</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::nr_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">nr_io</span></span><a class="headerlink" href="#JULES_PFTPARM::nr_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">nr_io</span></span><a class="headerlink" href="#JULES_PFTPARM::nr_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -735,12 +732,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::ns_nl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ns_nl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ns_nl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ns_nl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ns_nl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -749,12 +746,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::nsw_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">nsw_io</span></span><a class="headerlink" href="#JULES_PFTPARM::nsw_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">nsw_io</span></span><a class="headerlink" href="#JULES_PFTPARM::nsw_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -766,10 +763,10 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 <dt class="sig sig-object nml">
 <span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">hw_sw_io</span></span></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -779,12 +776,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::omega_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omega_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omega_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omega_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omega_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -795,12 +792,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::omegau_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omegau_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omegau_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omegau_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omegau_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -811,12 +808,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::omegal_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omegal_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omegal_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omegal_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omegal_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -827,12 +824,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::omnir_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omnir_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omnir_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omnir_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omnir_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -843,12 +840,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::omniru_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omniru_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omniru_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omniru_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omniru_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -859,12 +856,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::omnirl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omnirl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omnirl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">omnirl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::omnirl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -875,12 +872,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::r_grow_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">r_grow_io</span></span><a class="headerlink" href="#JULES_PFTPARM::r_grow_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">r_grow_io</span></span><a class="headerlink" href="#JULES_PFTPARM::r_grow_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -889,12 +886,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fsmc_mod_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fsmc_mod_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fsmc_mod_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fsmc_mod_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fsmc_mod_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -907,12 +904,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::psi_open_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">psi_open_io</span></span><a class="headerlink" href="#JULES_PFTPARM::psi_open_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">psi_open_io</span></span><a class="headerlink" href="#JULES_PFTPARM::psi_open_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -921,12 +918,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::psi_close_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">psi_close_io</span></span><a class="headerlink" href="#JULES_PFTPARM::psi_close_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">psi_close_io</span></span><a class="headerlink" href="#JULES_PFTPARM::psi_close_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -935,12 +932,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::rootd_ft_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">rootd_ft_io</span></span><a class="headerlink" href="#JULES_PFTPARM::rootd_ft_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">rootd_ft_io</span></span><a class="headerlink" href="#JULES_PFTPARM::rootd_ft_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -950,12 +947,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fsmc_p0_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fsmc_p0_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fsmc_p0_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fsmc_p0_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fsmc_p0_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -964,12 +961,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::sigl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">sigl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::sigl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">sigl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::sigl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -979,12 +976,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::tleaf_of_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">tleaf_of_io</span></span><a class="headerlink" href="#JULES_PFTPARM::tleaf_of_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">tleaf_of_io</span></span><a class="headerlink" href="#JULES_PFTPARM::tleaf_of_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -993,12 +990,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::tlow_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">tlow_io</span></span><a class="headerlink" href="#JULES_PFTPARM::tlow_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">tlow_io</span></span><a class="headerlink" href="#JULES_PFTPARM::tlow_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1008,12 +1005,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::tupp_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">tupp_io</span></span><a class="headerlink" href="#JULES_PFTPARM::tupp_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">tupp_io</span></span><a class="headerlink" href="#JULES_PFTPARM::tupp_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1023,12 +1020,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::emis_pft_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">emis_pft_io</span></span><a class="headerlink" href="#JULES_PFTPARM::emis_pft_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">emis_pft_io</span></span><a class="headerlink" href="#JULES_PFTPARM::emis_pft_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1037,12 +1034,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::z0hm_pft_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">z0hm_pft_io</span></span><a class="headerlink" href="#JULES_PFTPARM::z0hm_pft_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">z0hm_pft_io</span></span><a class="headerlink" href="#JULES_PFTPARM::z0hm_pft_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1052,12 +1049,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::z0hm_classic_pft_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">z0hm_classic_pft_io</span></span><a class="headerlink" href="#JULES_PFTPARM::z0hm_classic_pft_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">z0hm_classic_pft_io</span></span><a class="headerlink" href="#JULES_PFTPARM::z0hm_classic_pft_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1070,12 +1067,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fl_o3_ct_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fl_o3_ct_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fl_o3_ct_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fl_o3_ct_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fl_o3_ct_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1084,12 +1081,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::dfp_dcuo_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dfp_dcuo_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dfp_dcuo_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">dfp_dcuo_io</span></span><a class="headerlink" href="#JULES_PFTPARM::dfp_dcuo_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1098,12 +1095,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::ief_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ief_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ief_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ief_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ief_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1112,12 +1109,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::tef_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">tef_io</span></span><a class="headerlink" href="#JULES_PFTPARM::tef_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">tef_io</span></span><a class="headerlink" href="#JULES_PFTPARM::tef_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1126,12 +1123,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::mef_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">mef_io</span></span><a class="headerlink" href="#JULES_PFTPARM::mef_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">mef_io</span></span><a class="headerlink" href="#JULES_PFTPARM::mef_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1140,12 +1137,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::aef_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">aef_io</span></span><a class="headerlink" href="#JULES_PFTPARM::aef_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">aef_io</span></span><a class="headerlink" href="#JULES_PFTPARM::aef_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1154,12 +1151,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::ci_st_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ci_st_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ci_st_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ci_st_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ci_st_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Tybe</dt>
+<dt class="field-odd">Tybe<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1172,12 +1169,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::gpp_st_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">gpp_st_io</span></span><a class="headerlink" href="#JULES_PFTPARM::gpp_st_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">gpp_st_io</span></span><a class="headerlink" href="#JULES_PFTPARM::gpp_st_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Tybe</dt>
+<dt class="field-odd">Tybe<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1190,12 +1187,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::nmass_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">nmass_io</span></span><a class="headerlink" href="#JULES_PFTPARM::nmass_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">nmass_io</span></span><a class="headerlink" href="#JULES_PFTPARM::nmass_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1205,12 +1202,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::lma_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">lma_io</span></span><a class="headerlink" href="#JULES_PFTPARM::lma_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">lma_io</span></span><a class="headerlink" href="#JULES_PFTPARM::lma_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1220,12 +1217,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::vint_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">vint_io</span></span><a class="headerlink" href="#JULES_PFTPARM::vint_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">vint_io</span></span><a class="headerlink" href="#JULES_PFTPARM::vint_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1237,12 +1234,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::vsl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">vsl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::vsl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">vsl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::vsl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1253,12 +1250,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::kn_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">kn_io</span></span><a class="headerlink" href="#JULES_PFTPARM::kn_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">kn_io</span></span><a class="headerlink" href="#JULES_PFTPARM::kn_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
 </dd>
 </dl>
@@ -1267,12 +1264,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::knl_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">knl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::knl_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">knl_io</span></span><a class="headerlink" href="#JULES_PFTPARM::knl_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
 </dd>
 </dl>
@@ -1281,12 +1278,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::q10_leaf_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">q10_leaf_io</span></span><a class="headerlink" href="#JULES_PFTPARM::q10_leaf_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">q10_leaf_io</span></span><a class="headerlink" href="#JULES_PFTPARM::q10_leaf_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None.</p>
 </dd>
 </dl>
@@ -1300,12 +1297,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fef_co2_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_co2_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_co2_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_co2_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_co2_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1314,12 +1311,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fef_co_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_co_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_co_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_co_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_co_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1328,12 +1325,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fef_ch4_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_ch4_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_ch4_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_ch4_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_ch4_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1342,12 +1339,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fef_nox_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_nox_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_nox_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_nox_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_nox_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1356,12 +1353,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fef_so2_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_so2_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_so2_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_so2_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_so2_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1370,12 +1367,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fef_oc_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_oc_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_oc_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_oc_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_oc_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1384,12 +1381,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fef_bc_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_bc_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_bc_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fef_bc_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fef_bc_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1398,12 +1395,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::ccleaf_min_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ccleaf_min_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ccleaf_min_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ccleaf_min_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ccleaf_min_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1412,12 +1409,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::ccleaf_max_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ccleaf_max_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ccleaf_max_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ccleaf_max_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ccleaf_max_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1426,12 +1423,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::ccwood_min_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ccwood_min_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ccwood_min_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ccwood_min_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ccwood_min_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1440,12 +1437,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::ccwood_max_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ccwood_max_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ccwood_max_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ccwood_max_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ccwood_max_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1454,12 +1451,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::avg_ba_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">avg_ba_io</span></span><a class="headerlink" href="#JULES_PFTPARM::avg_ba_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">avg_ba_io</span></span><a class="headerlink" href="#JULES_PFTPARM::avg_ba_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1468,12 +1465,12 @@ Only used if <a class="reference internal" href="jules_vegetation.nml.html#JULES
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::fire_mort_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fire_mort_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fire_mort_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">fire_mort_io</span></span><a class="headerlink" href="#JULES_PFTPARM::fire_mort_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1500,12 +1497,12 @@ models, J. Geophys. Res., 111, D02116,
 <p class="admonition-title">Only used with the Farquhar model of leaf photosynthesis (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::photo_model" title="JULES_VEGETATION::photo_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_model</span></code></a> = 2). A value is required for each PFT, but only those for C<sub>3</sub> plants are used (since only C<sub>3</sub> plants use the Farquhar model). Below, J<sub>max</sub> is the potential rate of electron transport, and V<sub>cmax</sub> is the maximum rate of carboxylation of Rubisco.</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::act_jmax_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">act_jmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::act_jmax_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">act_jmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::act_jmax_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1514,12 +1511,12 @@ models, J. Geophys. Res., 111, D02116,
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::act_vcmax_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">act_vcmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::act_vcmax_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">act_vcmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::act_vcmax_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1532,12 +1529,12 @@ models, J. Geophys. Res., 111, D02116,
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::alpha_elec_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alpha_elec_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alpha_elec_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alpha_elec_io</span></span><a class="headerlink" href="#JULES_PFTPARM::alpha_elec_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1546,12 +1543,12 @@ models, J. Geophys. Res., 111, D02116,
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::deact_jmax_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">deact_jmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::deact_jmax_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">deact_jmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::deact_jmax_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1560,12 +1557,12 @@ models, J. Geophys. Res., 111, D02116,
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::deact_vcmax_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">deact_vcmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::deact_vcmax_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">deact_vcmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::deact_vcmax_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1574,12 +1571,12 @@ models, J. Geophys. Res., 111, D02116,
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::jv25_ratio_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">jv25_ratio_io</span></span><a class="headerlink" href="#JULES_PFTPARM::jv25_ratio_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">jv25_ratio_io</span></span><a class="headerlink" href="#JULES_PFTPARM::jv25_ratio_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1595,12 +1592,12 @@ models, J. Geophys. Res., 111, D02116,
 <p class="admonition-title">Only used if thermal adaptation or acclimation of photosynthetic capacity is NOT modelled (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::photo_acclim_model" title="JULES_VEGETATION::photo_acclim_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_acclim_model</span></code></a> = 0). A value is required for each PFT, but only those for C<sub>3</sub> plants are used (since only C<sub>3</sub> plants use the Farquhar model).</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::ds_jmax_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ds_jmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ds_jmax_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ds_jmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ds_jmax_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -1609,16 +1606,61 @@ models, J. Geophys. Res., 111, D02116,
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_PFTPARM::ds_vcmax_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ds_vcmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ds_vcmax_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ds_vcmax_io</span></span><a class="headerlink" href="#JULES_PFTPARM::ds_vcmax_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(npft)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
 <p>Entropy factor for temperature reponse of  V<sub>cmax</sub> (J mol<sup>-1</sup> K<sup>-1</sup>).</p>
+</dd></dl>
+
+</div>
+<div class="admonition-only-used-if-the-respiration-is-modelled-using-the-sugar-carbohydrate-model-nml-mem-jules-vegetation-l-sugar-t-a-value-is-required-for-each-pft admonition">
+<p class="admonition-title">Only used if the respiration is modelled using the SUGAR carbohydrate model (<a class="reference internal" href="jules_vegetation.nml.html#JULES_VEGETATION::l_sugar" title="JULES_VEGETATION::l_sugar"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_sugar</span></code></a> = T). A value is required for each PFT.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_PFTPARM::sug_grec_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">sug_grec_io</span></span><a class="headerlink" href="#JULES_PFTPARM::sug_grec_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Specific structural carbon recycling rate (kg carbon m<sup>-2</sup> s<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_PFTPARM::sug_g0_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">sug_g0_io</span></span><a class="headerlink" href="#JULES_PFTPARM::sug_g0_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Specific structural carbon production rate (kg carbon m<sup>-2</sup> s<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_PFTPARM::sug_yg_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">sug_yg_io</span></span><a class="headerlink" href="#JULES_PFTPARM::sug_yg_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Growth yield for SUGAR model</p>
 </dd></dl>
 
 </div>
@@ -1639,7 +1681,7 @@ models, J. Geophys. Res., 111, D02116,
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.23. <code class="docutils literal notranslate"><span class="pre">pft_params.nml</span></code></a><ul>
-<li><a class="reference internal" href="#namelist-JULES_PFTPARM">6.23.1. <code class="docutils literal notranslate"><span class="pre">JULES_PFTPARM</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#jules-pftparm-namelist-members">6.23.1. <code class="docutils literal notranslate"><span class="pre">JULES_PFTPARM</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -1684,14 +1726,14 @@ models, J. Geophys. Res., 111, D02116,
         <li class="right" >
           <a href="cable_prognostics.nml.html" title="6.22. cable_prognostics.nml"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.23. </span><code class="docutils literal notranslate"><span class="pre">pft_params.nml</span></code></a></li> 
       </ul>
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
     </div>
 
   </body>

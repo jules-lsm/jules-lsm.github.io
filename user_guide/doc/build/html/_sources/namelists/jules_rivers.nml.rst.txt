@@ -44,6 +44,23 @@ River routing introduces two more grids to a JULES run: the river routing input 
    ``3``
        Use a standalone JULES implementation of the TRIP model (see Oki et al. 1999).
 
+.. nml:member:: l_riv_overbank
+
+   :type: logical
+   :default: F
+
+   Switch for enabling river overbank inundation. Only used if :nml:mem:`JULES_RIVERS::l_rivers` is TRUE.
+
+   TRUE
+       Calculate frac_fplain_lp, i.e. overbank inundation area as a fraction of gridcell area.
+
+   FALSE
+       No overbank inundation calculations
+
+.. note::
+   If :nml:mem:`JULES_RIVERS::l_riv_overbank` = FALSE, then optional namelist :nml:lst:`JULES_OVERBANK` is not required.
+
+
 .. nml:member:: nstep_rivers
 
    :type: integer
@@ -162,6 +179,21 @@ River routing introduces two more grids to a JULES run: the river routing input 
 
       The ratio of the actual to calculated river lengths in a river routing gridbox. See Oki et al. (1999). Oki & Sud (1998) called this the Meandering Ratio r_M and suggested an average global value of 1.4.
 
+.. nml:group:: TRIP parameters - used if :nml:mem:`i_river_vn` = ``1``
+
+   .. nml:member:: lake_water_conserve_method
+
+      :type: integer
+      :default: 1
+
+      Selects different fields for use in water conservation of lake evaporation
+
+      ``1``
+          fqw_surft: This is the moisture flux on each tile, in which case the inland water tile is used. Snow sublimation has already been removed from fqw_surft at the point in the code that this is used.
+
+      ``2``
+          elake_surft: This is the lake evaporation component of fqw_surft. This avoids the impact that snow melt has on modifying fqw_surft.
+
 
 .. seealso::
    References:
@@ -195,29 +227,37 @@ River routing introduces two more grids to a JULES run: the river routing input 
    Switch for enabling river overbank inundation. Only used if :nml:mem:`JULES_RIVERS::l_rivers` is TRUE.
 
    TRUE
-       Calculate frac_fplain_lp, i.e. overbank inundation area as a fraction of gridcell area.
+       Calculate overbank inundation area as a fraction of gridcell area.
 
    FALSE
        No overbank inundation calculations
 
 .. note::
-   If :nml:mem:`JULES_OVERBANK::l_riv_overbank` = FALSE, no further variables are needed from this namelist.
+   If :nml:mem:`l_riv_overbank` = FALSE, no further variables are needed from this namelist.
 
-.. nml:member:: l_riv_hypsometry
+.. nml:member:: overbank_model
 
-   :type: logical
-   :default: F
+   :type: integer
+   :permitted: 1, 2, 3
+   :default: none
 
-   Switch for enabling use of a hypsometric integral calculation.
+   Choice of model of overbank inundation.
 
-   TRUE
-       Calculate inundated area from a hypsometric integral based on a lognormal area-altitude distribution (**recommended**).
+   1. Simple model using an allometric (scaling) relationship to estimate river width, without use of
+      topographic data.
 
-   FALSE
-       Estimate inundated area from simple river width scaling, ignoring topography (only to be used for testing).
+   2. Simple model using allometric relationships to estimate river width and depth, and the
+      Rosgen (1994) entrenchment ratio, without use of topographic data. When river flow rates are
+      higher than the estimated bankfull flow, river width is constrained so that when river
+      depth = 2 x bankfull depth then width = :nml:mem:`ent_ratio` * bankfull width.
+
+   3. The inundated area is calculated using a hypsometric integral based on a lognormal area-altitude
+      distribution and an allometric relationship to estimate river depth.
+      The parameters of the lognormal distribution are specified via :nml:lst:`JULES_OVERBANK_PROPS`.
+      (**This is the recommended approach.**)
 
 
-.. nml:group:: River depth allometry (used if :nml:mem:`JULES_OVERBANK::l_riv_hypsometry` is TRUE or :nml:mem:`JULES_OVERBANK::use_rosgen` is TRUE)
+.. nml:group:: River depth allometry (used if :nml:mem:`overbank_model` = 2 or 3)
 
    Allometry is: (DEPTH in m) = :nml:mem:`riv_c` * ( (SURFACE RIVER INFLOW in m3 s\ :sup:`-1`) ^ :nml:mem:`riv_f`) (Leopold & Maddock 1953:eqn2)
 
@@ -242,7 +282,7 @@ River routing introduces two more grids to a JULES run: the river routing input 
       Exponent in the allometry for river depth (dimensionless)
 
 
-.. nml:group:: River width scaling (used if :nml:mem:`JULES_OVERBANK::l_riv_hypsometry` is FALSE)
+.. nml:group:: River width scaling (used if :nml:mem:`overbank_model` = 1 or 2)
 
    .. nml:group:: River width allometry
 
@@ -269,21 +309,7 @@ River routing introduces two more grids to a JULES run: the river routing input 
          Exponent in the allometry for river width (dimensionless)
 
 
-      .. nml:member:: use_rosgen
-
-         :type: logical
-         :default: F
-
-         Switch for applying the Rosgen entrenchment ratio approach to estimate river width
-
-         TRUE
-             When inflow rates are lower than bankfull flow, river width is calculated from the River width allometry (above). However, when higher than bankfull flow, river width is constrained so that when river depth = 2 x bankfull depth then width = :nml:mem:`ent_ratio` * bankfull width.
-
-         FALSE
-             River width follows the allometry specified above whatever the inflow rate.
-
-
-   .. nml:group:: Bankfull flow allometry (used if :nml:mem:`use_rosgen` is TRUE) (Rosgen 1994)
+   .. nml:group:: Bankfull flow allometry (used if :nml:mem:`overbank_model` = 2)
 
       Allometry is: (BANKFULL DISCHARGE RATE QBF in m3 s\ :sup:`-1`) = :nml:mem:`coef_b` * ( (CONTRIBUTING AREA in km2) ^ :nml:mem:`exp_c` ) (see e.g. Andreadis et al. 2013)
 

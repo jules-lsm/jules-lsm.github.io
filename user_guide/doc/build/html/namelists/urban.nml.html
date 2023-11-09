@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>6.29. urban.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.3 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <title>6.29. urban.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script src="../_static/documentation_options.js?v=f15b9291"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.30. fire.nml" href="fire.nml.html" />
@@ -35,7 +32,7 @@
         <li class="right" >
           <a href="triffid_params.nml.html" title="6.28. triffid_params.nml"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.29. </span><code class="docutils literal notranslate"><span class="pre">urban.nml</span></code></a></li> 
       </ul>
@@ -47,7 +44,7 @@
           <div class="body" role="main">
             
   <section id="urban-nml">
-<h1><span class="section-number">6.29. </span><code class="docutils literal notranslate"><span class="pre">urban.nml</span></code><a class="headerlink" href="#urban-nml" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">6.29. </span><code class="docutils literal notranslate"><span class="pre">urban.nml</span></code><a class="headerlink" href="#urban-nml" title="Link to this heading">¶</a></h1>
 <p>This file contains one namelist called <a class="reference internal" href="#namelist-JULES_URBAN"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_URBAN</span></code></a>.</p>
 <p>This section predominantly sets the options available for the two-tile urban scheme MORUSES. These namelists are only read if <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_urban2t" title="JULES_SURFACE::l_urban2t"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_urban2t</span></code></a>, which requires both the <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_canyon</span></code></a> and <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_roof</span></code></a> surface types to be used. MORUSES provides parameters for: snow free canyon albedo (<a class="reference internal" href="#JULES_URBAN::l_moruses_albedo" title="JULES_URBAN::l_moruses_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_albedo</span></code></a>), canyon emissivity (<a class="reference internal" href="#JULES_URBAN::l_moruses_emissivity" title="JULES_URBAN::l_moruses_emissivity"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_emissivity</span></code></a>), roughness length for heat (<a class="reference internal" href="#JULES_URBAN::l_moruses_rough" title="JULES_URBAN::l_moruses_rough"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_rough</span></code></a>), roughness length for momentum (<a class="reference internal" href="#JULES_URBAN::l_moruses_macdonald" title="JULES_URBAN::l_moruses_macdonald"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_macdonald</span></code></a>) and thermal inertia (<a class="reference internal" href="#JULES_URBAN::l_moruses_storage" title="JULES_URBAN::l_moruses_storage"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_storage</span></code></a>). Ancillary data, predominantly required for MORUSES, is read in via <a class="reference internal" href="ancillaries.nml.html#namelist-URBAN_PROPERTIES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">URBAN_PROPERTIES</span></code></a>.</p>
 <p>For all other parameters that MORUSES does not provide, and for any MORUSES parametrisations that are turned off, values from <a class="reference internal" href="nveg_params.nml.html"><span class="doc">nveg_params.nml</span></a> will be used instead. See the switches below for more information.</p>
@@ -61,16 +58,16 @@
 </ul>
 </div>
 </div></blockquote>
-<section id="namelist-JULES_URBAN">
-<span id="jules-urban-namelist-members"></span><h2><span class="section-number">6.29.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_URBAN</span></code> namelist members<a class="headerlink" href="#namelist-JULES_URBAN" title="Permalink to this heading">¶</a></h2>
-<dl class="nml member">
+<section id="jules-urban-namelist-members">
+<h2><span class="section-number">6.29.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_URBAN</span></code> namelist members<a class="headerlink" href="#jules-urban-namelist-members" title="Link to this heading">¶</a></h2>
+<dl class="nml member" id="namelist-JULES_URBAN">
 <dt class="sig sig-object nml" id="JULES_URBAN::anthrop_heat_scale">
-<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">anthrop_heat_scale</span></span><a class="headerlink" href="#JULES_URBAN::anthrop_heat_scale" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">anthrop_heat_scale</span></span><a class="headerlink" href="#JULES_URBAN::anthrop_heat_scale" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>1.0</p>
 </dd>
 </dl>
@@ -89,12 +86,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_albedo">
-<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_albedo</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_albedo" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_albedo</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_albedo" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -111,12 +108,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_emissivity">
-<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_emissivity</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_emissivity" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_emissivity</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_emissivity" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -133,12 +130,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_rough">
-<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_rough</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_rough" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_rough</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_rough" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -162,12 +159,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_storage">
-<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_storage</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_storage" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_storage</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_storage" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -177,10 +174,6 @@
 Consists of two walls and a road where the road only is coupled to the underlying soil. The walls are uncoupled and have a zero-flux boundary condition. The coupling of the road is therefore parametrised using a canyon scaling factor. The nature of the canyon (or road surface) coupling is specified as follows:</p>
 <dl>
 <dt><a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::vf_nvg_io" title="JULES_NVEGPARM::vf_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">vf_nvg_io</span></code></a> (<a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_canyon</span></code></a>):</dt><dd><table class="docutils align-default">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 95%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p>0</p></td>
 <td><p>conductively coupled</p></td>
@@ -196,10 +189,6 @@ Consists of two walls and a road where the road only is coupled to the underlyin
 As the roof is not in direct contact with the soil, it physically cannot be conductively coupled. It can either be radiatively coupled or uncoupled. To allow for no coupling, MORUSES modifies the code to change the meaning of conductively coupled to <strong>NOT</strong> coupled. The nature of the coupling is therefore specified as follows:</p>
 <dl>
 <dt><a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::vf_nvg_io" title="JULES_NVEGPARM::vf_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">vf_nvg_io</span></code></a> (<a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_roof</span></code></a>):</dt><dd><table class="docutils align-default">
-<colgroup>
-<col style="width: 5%" />
-<col style="width: 95%" />
-</colgroup>
 <tbody>
 <tr class="row-odd"><td><p>0</p></td>
 <td><p><strong>NOT</strong> coupled</p></td>
@@ -219,12 +208,12 @@ As the roof is not in direct contact with the soil, it physically cannot be cond
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_storage_thin">
-<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_storage_thin</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_storage_thin" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_storage_thin</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_storage_thin" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -240,12 +229,12 @@ As the roof is not in direct contact with the soil, it physically cannot be cond
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_macdonald">
-<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_macdonald</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_macdonald" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_macdonald</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_macdonald" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -271,12 +260,12 @@ As the roof is not in direct contact with the soil, it physically cannot be cond
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_URBAN::l_urban_empirical">
-<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_urban_empirical</span></span><a class="headerlink" href="#JULES_URBAN::l_urban_empirical" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_urban_empirical</span></span><a class="headerlink" href="#JULES_URBAN::l_urban_empirical" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -319,7 +308,7 @@ As the roof is not in direct contact with the soil, it physically cannot be cond
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.29. <code class="docutils literal notranslate"><span class="pre">urban.nml</span></code></a><ul>
-<li><a class="reference internal" href="#namelist-JULES_URBAN">6.29.1. <code class="docutils literal notranslate"><span class="pre">JULES_URBAN</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#jules-urban-namelist-members">6.29.1. <code class="docutils literal notranslate"><span class="pre">JULES_URBAN</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -364,14 +353,14 @@ As the roof is not in direct contact with the soil, it physically cannot be cond
         <li class="right" >
           <a href="triffid_params.nml.html" title="6.28. triffid_params.nml"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.29. </span><code class="docutils literal notranslate"><span class="pre">urban.nml</span></code></a></li> 
       </ul>
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
     </div>
 
   </body>

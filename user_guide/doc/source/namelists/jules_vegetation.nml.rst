@@ -754,6 +754,23 @@ This file sets the vegetation options. It contains one namelist called :nml:lst:
    FALSE
        Vegetation areal heat capacity unlimited.
 
+.. nml:member:: l_sugar
+
+   :type: logical
+   :default: F
+
+   Switch for using the SUGAR carbohydrate model (:ref:`Jones et al., (2020)<References_vegetation>`)
+
+   TRUE
+       Respiration is calculated using the SUGAR carbohydrate model
+
+   FALSE
+       SUGAR is not used
+
+   .. note:: The option :nml:mem:`JULES_VEGETATION::l_sugar` = T
+             is still in development. Users should ensure that results
+             are as expected, and provide feedback where deficiencies
+             are identified.
 
 
 .. nml:group:: Only used with the Farquhar model of leaf photosynthesis (:nml:mem:`photo_model` = 2).
@@ -988,3 +1005,7 @@ This file sets the vegetation options. It contains one namelist called :nml:lst:
   Developing a sequential cropping capability in the JULESvn5.2
   land–surface model, Geosci. Model Dev. Discuss.,
   https://doi.org/10.5194/gmd-2019-85, in review, 2019.
+* Jones et al., 2020, The impact of a simple representation of 
+  non-structural carbohydrates on the simulated response of tropical 
+  forests to drought, Biogeosciences, 17: 3589--3612. 
+  https://doi.org/10.5194/bg-17-3589-2020

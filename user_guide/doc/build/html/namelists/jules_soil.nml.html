@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>6.9. jules_soil.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.3 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <title>6.9. jules_soil.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script src="../_static/documentation_options.js?v=f15b9291"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.10. jules_vegetation.nml" href="jules_vegetation.nml.html" />
@@ -35,7 +32,7 @@
         <li class="right" >
           <a href="jules_hydrology.nml.html" title="6.8. jules_hydrology.nml"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.9. </span><code class="docutils literal notranslate"><span class="pre">jules_soil.nml</span></code></a></li> 
       </ul>
@@ -47,21 +44,21 @@
           <div class="body" role="main">
             
   <section id="jules-soil-nml">
-<h1><span class="section-number">6.9. </span><code class="docutils literal notranslate"><span class="pre">jules_soil.nml</span></code><a class="headerlink" href="#jules-soil-nml" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">6.9. </span><code class="docutils literal notranslate"><span class="pre">jules_soil.nml</span></code><a class="headerlink" href="#jules-soil-nml" title="Link to this heading">¶</a></h1>
 <p>This file sets the soil options and parameters. It contains one namelist called <a class="reference internal" href="#namelist-JULES_SOIL"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL</span></code></a>.</p>
-<section id="namelist-JULES_SOIL">
-<span id="jules-soil-namelist-members"></span><h2><span class="section-number">6.9.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_SOIL</span></code> namelist members<a class="headerlink" href="#namelist-JULES_SOIL" title="Permalink to this heading">¶</a></h2>
-<dl class="nml member">
+<section id="jules-soil-namelist-members">
+<h2><span class="section-number">6.9.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_SOIL</span></code> namelist members<a class="headerlink" href="#jules-soil-namelist-members" title="Link to this heading">¶</a></h2>
+<dl class="nml member" id="namelist-JULES_SOIL">
 <dt class="sig sig-object nml" id="JULES_SOIL::sm_levels">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">sm_levels</span></span><a class="headerlink" href="#JULES_SOIL::sm_levels" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">sm_levels</span></span><a class="headerlink" href="#JULES_SOIL::sm_levels" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted</dt>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
 <dd class="field-even"><p>&gt;= 1</p>
 </dd>
-<dt class="field-odd">Default</dt>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p>4</p>
 </dd>
 </dl>
@@ -75,12 +72,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::l_vg_soil">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_vg_soil</span></span><a class="headerlink" href="#JULES_SOIL::l_vg_soil" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_vg_soil</span></span><a class="headerlink" href="#JULES_SOIL::l_vg_soil" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -88,7 +85,7 @@
 <dl class="simple">
 <dt>TRUE</dt><dd><p>Use van Genuchten model.</p>
 </dd>
-<dt>FALSE</dt><dd><p>Use Brooks and Corey model <a class="footnote-reference brackets" href="#id2" id="id1">1</a>.</p>
+<dt>FALSE</dt><dd><p>Use Brooks and Corey model <a class="footnote-reference brackets" href="#id2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>.</p>
 </dd>
 </dl>
 <div class="admonition seealso">
@@ -103,12 +100,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::l_dpsids_dsdz">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_dpsids_dsdz</span></span><a class="headerlink" href="#JULES_SOIL::l_dpsids_dsdz" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_dpsids_dsdz</span></span><a class="headerlink" href="#JULES_SOIL::l_dpsids_dsdz" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -117,12 +114,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::l_soil_sat_down">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_soil_sat_down</span></span><a class="headerlink" href="#JULES_SOIL::l_soil_sat_down" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_soil_sat_down</span></span><a class="headerlink" href="#JULES_SOIL::l_soil_sat_down" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -138,12 +135,12 @@ layer becomes subsurface runoff.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::l_holdwater">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_holdwater</span></span><a class="headerlink" href="#JULES_SOIL::l_holdwater" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_holdwater</span></span><a class="headerlink" href="#JULES_SOIL::l_holdwater" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -159,15 +156,15 @@ layer becomes subsurface runoff.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::soilhc_method">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">soilhc_method</span></span><a class="headerlink" href="#JULES_SOIL::soilhc_method" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">soilhc_method</span></span><a class="headerlink" href="#JULES_SOIL::soilhc_method" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted</dt>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
 <dd class="field-even"><p>1, 2 or 3</p>
 </dd>
-<dt class="field-odd">Default</dt>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p>1</p>
 </dd>
 </dl>
@@ -203,12 +200,12 @@ layer becomes subsurface runoff.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::l_bedrock">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_bedrock</span></span><a class="headerlink" href="#JULES_SOIL::l_bedrock" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_bedrock</span></span><a class="headerlink" href="#JULES_SOIL::l_bedrock" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -230,15 +227,15 @@ layer becomes subsurface runoff.</p>
 <p class="admonition-title">Bedrock parameters (only used if <a class="reference internal" href="#JULES_SOIL::l_bedrock" title="JULES_SOIL::l_bedrock"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_bedrock</span></code></a> = TRUE)</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::ns_deep">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">ns_deep</span></span><a class="headerlink" href="#JULES_SOIL::ns_deep" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">ns_deep</span></span><a class="headerlink" href="#JULES_SOIL::ns_deep" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted</dt>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
 <dd class="field-even"><p>&gt;= 1</p>
 </dd>
-<dt class="field-odd">Default</dt>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p>100</p>
 </dd>
 </dl>
@@ -247,12 +244,12 @@ layer becomes subsurface runoff.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::hcapdeep">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">hcapdeep</span></span><a class="headerlink" href="#JULES_SOIL::hcapdeep" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">hcapdeep</span></span><a class="headerlink" href="#JULES_SOIL::hcapdeep" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>2100000.0</p>
 </dd>
 </dl>
@@ -261,12 +258,12 @@ layer becomes subsurface runoff.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::hcondeep">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">hcondeep</span></span><a class="headerlink" href="#JULES_SOIL::hcondeep" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">hcondeep</span></span><a class="headerlink" href="#JULES_SOIL::hcondeep" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>8.6</p>
 </dd>
 </dl>
@@ -275,12 +272,12 @@ layer becomes subsurface runoff.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::dzdeep">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">dzdeep</span></span><a class="headerlink" href="#JULES_SOIL::dzdeep" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">dzdeep</span></span><a class="headerlink" href="#JULES_SOIL::dzdeep" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>0.5</p>
 </dd>
 </dl>
@@ -290,12 +287,12 @@ layer becomes subsurface runoff.</p>
 </div>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::cs_min">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">cs_min</span></span><a class="headerlink" href="#JULES_SOIL::cs_min" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">cs_min</span></span><a class="headerlink" href="#JULES_SOIL::cs_min" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>1.0e-6</p>
 </dd>
 </dl>
@@ -304,15 +301,15 @@ layer becomes subsurface runoff.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::zsmc">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">zsmc</span></span><a class="headerlink" href="#JULES_SOIL::zsmc" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">zsmc</span></span><a class="headerlink" href="#JULES_SOIL::zsmc" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Permitted</dt>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
 <dd class="field-even"><p>&gt; 0</p>
 </dd>
-<dt class="field-odd">Default</dt>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p>1.0</p>
 </dd>
 </dl>
@@ -321,15 +318,15 @@ layer becomes subsurface runoff.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::zst">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">zst</span></span><a class="headerlink" href="#JULES_SOIL::zst" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">zst</span></span><a class="headerlink" href="#JULES_SOIL::zst" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Permitted</dt>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
 <dd class="field-even"><p>&gt; 0</p>
 </dd>
-<dt class="field-odd">Default</dt>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p>1.0</p>
 </dd>
 </dl>
@@ -338,15 +335,15 @@ layer becomes subsurface runoff.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::confrac">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">confrac</span></span><a class="headerlink" href="#JULES_SOIL::confrac" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">confrac</span></span><a class="headerlink" href="#JULES_SOIL::confrac" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Permitted</dt>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
 <dd class="field-even"><p>0 &lt;= confrac &lt;= 1</p>
 </dd>
-<dt class="field-odd">Default</dt>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p>0.3</p>
 </dd>
 </dl>
@@ -355,12 +352,12 @@ layer becomes subsurface runoff.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::dzsoil_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">dzsoil_io</span></span><a class="headerlink" href="#JULES_SOIL::dzsoil_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">dzsoil_io</span></span><a class="headerlink" href="#JULES_SOIL::dzsoil_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(sm_levels)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -371,12 +368,12 @@ layer becomes subsurface runoff.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::dzsoil_elev">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">dzsoil_elev</span></span><a class="headerlink" href="#JULES_SOIL::dzsoil_elev" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">dzsoil_elev</span></span><a class="headerlink" href="#JULES_SOIL::dzsoil_elev" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -386,12 +383,12 @@ Effectively this sets the amount of thermal buffering each surface tile has to h
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::l_tile_soil">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_tile_soil</span></span><a class="headerlink" href="#JULES_SOIL::l_tile_soil" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_tile_soil</span></span><a class="headerlink" href="#JULES_SOIL::l_tile_soil" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>False</p>
 </dd>
 </dl>
@@ -405,12 +402,12 @@ Effectively this sets the amount of thermal buffering each surface tile has to h
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL::l_broadcast_ancils">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_broadcast_ancils</span></span><a class="headerlink" href="#JULES_SOIL::l_broadcast_ancils" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL::</span></span><span class="sig-name descname"><span class="pre">l_broadcast_ancils</span></span><a class="headerlink" href="#JULES_SOIL::l_broadcast_ancils" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>False</p>
 </dd>
 </dl>
@@ -418,14 +415,15 @@ Effectively this sets the amount of thermal buffering each surface tile has to h
 </dd></dl>
 
 <p class="rubric">Footnotes</p>
-<dl class="footnote brackets">
-<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>In the JULES2.0 User Manual this was described as the ‘Clapp and Hornberger’ model and the JULES code still refers to ‘Clapp and Hornberger’ rather than ‘Brooks and Corey’. In fact there are important differences between these two hydraulic models (Marthews et al. 2014,GMD). There has been confusion in the literature and in past documentation of MOSES/JULES, but JULES uses the Brooks and Corey model when <a class="reference internal" href="#JULES_SOIL::l_vg_soil" title="JULES_SOIL::l_vg_soil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_vg_soil</span></code></a> = FALSE .</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id2" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>In the JULES2.0 User Manual this was described as the ‘Clapp and Hornberger’ model and the JULES code still refers to ‘Clapp and Hornberger’ rather than ‘Brooks and Corey’. In fact there are important differences between these two hydraulic models (Marthews et al. 2014,GMD). There has been confusion in the literature and in past documentation of MOSES/JULES, but JULES uses the Brooks and Corey model when <a class="reference internal" href="#JULES_SOIL::l_vg_soil" title="JULES_SOIL::l_vg_soil"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_vg_soil</span></code></a> = FALSE .</p>
 <p>References:
 * Brooks RH &amp; Corey AT (1964). Hydraulic properties of porous media. Colorado State University Hydrology Papers 3.
 * Clapp RB &amp; Hornberger GM (1978). Empirical Equations for Some Soil Hydraulic Properties. Water Resources Research 14:601-604.</p>
-</dd>
-</dl>
+</aside>
+</aside>
 </section>
 </section>
 
@@ -443,7 +441,7 @@ Effectively this sets the amount of thermal buffering each surface tile has to h
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.9. <code class="docutils literal notranslate"><span class="pre">jules_soil.nml</span></code></a><ul>
-<li><a class="reference internal" href="#namelist-JULES_SOIL">6.9.1. <code class="docutils literal notranslate"><span class="pre">JULES_SOIL</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#jules-soil-namelist-members">6.9.1. <code class="docutils literal notranslate"><span class="pre">JULES_SOIL</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -488,14 +486,14 @@ Effectively this sets the amount of thermal buffering each surface tile has to h
         <li class="right" >
           <a href="jules_hydrology.nml.html" title="6.8. jules_hydrology.nml"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.9. </span><code class="docutils literal notranslate"><span class="pre">jules_soil.nml</span></code></a></li> 
       </ul>
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
     </div>
 
   </body>

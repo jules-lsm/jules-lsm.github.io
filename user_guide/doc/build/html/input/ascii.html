@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>4.2. ASCII files &#8212; Joint UK Land Environment Simulator (JULES) v7.3 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <title>4.2. ASCII files &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script src="../_static/documentation_options.js?v=f15b9291"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4.3. NetCDF files" href="netcdf.html" />
@@ -35,7 +32,7 @@
         <li class="right" >
           <a href="principles.html" title="4.1. General principles"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="overview.html" accesskey="U"><span class="section-number">4. </span>Input files for JULES</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">4.2. </span>ASCII files</a></li> 
       </ul>
@@ -47,7 +44,7 @@
           <div class="body" role="main">
             
   <section id="ascii-files">
-<h1><span class="section-number">4.2. </span>ASCII files<a class="headerlink" href="#ascii-files" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">4.2. </span>ASCII files<a class="headerlink" href="#ascii-files" title="Link to this heading">¶</a></h1>
 <p>JULES only supports the use of ASCII files for data at a single location. In this case, the input grid can be specified either as a 1D grid with length 1 or as a 2D grid of size 1 x 1. The data should be laid out in columns with one timestep of data per row (with time increasing with the number of rows). For variables with additional ‘levels’ dimensions (e.g. soil layers), the values for each level should be in consecutive columns.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -55,9 +52,9 @@
 </div>
 <p>If the first character of a line is either <code class="docutils literal notranslate"><span class="pre">#</span></code> or <code class="docutils literal notranslate"><span class="pre">!</span></code>, the line is taken to be a comment. JULES reads no information from comments - they are purely for annotating the dataset for users.</p>
 <section id="example-ascii-input">
-<h2><span class="section-number">4.2.1. </span>Example ASCII input<a class="headerlink" href="#example-ascii-input" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">4.2.1. </span>Example ASCII input<a class="headerlink" href="#example-ascii-input" title="Link to this heading">¶</a></h2>
 <section id="ascii-meteorological-forcing-data">
-<h3><span class="section-number">4.2.1.1. </span>ASCII meteorological forcing data<a class="headerlink" href="#ascii-meteorological-forcing-data" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">4.2.1.1. </span>ASCII meteorological forcing data<a class="headerlink" href="#ascii-meteorological-forcing-data" title="Link to this heading">¶</a></h3>
 <div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="c1"># Meteorological data for Loobos, 1997.</span>
 <span class="c1"># One year of 30 minute data.</span>
 <span class="c1">#   Down  Down      Rainfall      Snowfall     Air       Wind                 Specific</span>
@@ -72,7 +69,7 @@
 <p>Each row represents a timestep of data. Each column represents a variable. Driving variables have no additional dimension.</p>
 </section>
 <section id="initial-conditions">
-<h3><span class="section-number">4.2.1.2. </span>Initial conditions<a class="headerlink" href="#initial-conditions" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">4.2.1.2. </span>Initial conditions<a class="headerlink" href="#initial-conditions" title="Link to this heading">¶</a></h3>
 <div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="c1"># sthuf(1:sm_levels)            t_soil(1:sm_levels)</span>
   <span class="mf">0.749</span>  <span class="mf">0.743</span>  <span class="mf">0.754</span>  <span class="mf">0.759</span>    <span class="mf">276.78</span>  <span class="mf">277.46</span>  <span class="mf">278.99</span>  <span class="mf">282.48</span>
 </pre></div>
@@ -81,7 +78,7 @@
 for data at a single point.</p>
 </section>
 <section id="time-varying-data-with-an-additional-dimension">
-<h3><span class="section-number">4.2.1.3. </span>Time varying data with an additional dimension<a class="headerlink" href="#time-varying-data-with-an-additional-dimension" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">4.2.1.3. </span>Time varying data with an additional dimension<a class="headerlink" href="#time-varying-data-with-an-additional-dimension" title="Link to this heading">¶</a></h3>
 <div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="c1"># lai(1:npft)                canht(1:npft)</span>
   <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.2</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.6</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
   <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.2</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">0.0</span>  <span class="mf">0.6</span>  <span class="mf">0.0</span>  <span class="mf">0.0</span>
@@ -158,14 +155,14 @@ for data at a single point.</p>
         <li class="right" >
           <a href="principles.html" title="4.1. General principles"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="overview.html" ><span class="section-number">4. </span>Input files for JULES</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">4.2. </span>ASCII files</a></li> 
       </ul>
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
     </div>
 
   </body>

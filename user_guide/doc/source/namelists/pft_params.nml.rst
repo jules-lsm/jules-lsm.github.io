@@ -973,4 +973,29 @@ ease the direct links to these documents are:
 
       Entropy factor for temperature reponse of  V\ :sub:`cmax` (J mol\ :sup:`-1` K\ :sup:`-1`).
 
+.. nml:group:: Only used if the respiration is modelled using the SUGAR carbohydrate model (:nml:mem:`JULES_VEGETATION::l_sugar` = T). A value is required for each PFT.
+
+
+   .. nml:member:: sug_grec_io
+
+      :type: real(npft)
+      :default: None
+
+      Specific structural carbon recycling rate (kg carbon m\ :sup:`-2` s\ :sup:`-1`).
+
+
+   .. nml:member:: sug_g0_io
+
+      :type: real(npft)
+      :default: None
+
+      Specific structural carbon production rate (kg carbon m\ :sup:`-2` s\ :sup:`-1`).
+
+   .. nml:member:: sug_yg_io
+
+      :type: real(npft)
+      :default: None
+
+      Growth yield for SUGAR model
+
 .. |mu| unicode:: &#x03BC; .. u

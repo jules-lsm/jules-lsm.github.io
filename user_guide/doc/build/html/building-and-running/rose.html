@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>3.5. Automatic upgrading and GUI using Rose &#8212; Joint UK Land Environment Simulator (JULES) v7.3 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <title>3.5. Automatic upgrading and GUI using Rose &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script src="../_static/documentation_options.js?v=f15b9291"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. Input files for JULES" href="../input/overview.html" />
@@ -35,7 +32,7 @@
         <li class="right" >
           <a href="running-jules.html" title="3.4. Running JULES"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="intro.html" accesskey="U"><span class="section-number">3. </span>Building and running JULES</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">3.5. </span>Automatic upgrading and GUI using Rose</a></li> 
       </ul>
@@ -47,7 +44,7 @@
           <div class="body" role="main">
             
   <section id="automatic-upgrading-and-gui-using-rose">
-<h1><span class="section-number">3.5. </span>Automatic upgrading and GUI using Rose<a class="headerlink" href="#automatic-upgrading-and-gui-using-rose" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">3.5. </span>Automatic upgrading and GUI using Rose<a class="headerlink" href="#automatic-upgrading-and-gui-using-rose" title="Link to this heading">¶</a></h1>
 <p><a class="reference external" href="http://metomi.github.io/rose/doc/html/index.html">Rose</a> is a collection of tools for managing the building and running of scientific applications.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
@@ -62,7 +59,7 @@
 <p>JULES uses Rose primarily to provide a graphical interface for configuring and running JULES, but also to allow automatic upgrading of JULES runs from one version to the next.</p>
 <p>A Rose suite for JULES will normally contain two applications - an <code class="docutils literal notranslate"><span class="pre">fcm_make</span></code> application for building JULES and a <code class="docutils literal notranslate"><span class="pre">jules</span></code> application for configuring the namelists and running JULES.</p>
 <section id="creating-a-rose-suite-from-existing-namelists">
-<h2><span class="section-number">3.5.1. </span>Creating a Rose suite from existing namelists<a class="headerlink" href="#creating-a-rose-suite-from-existing-namelists" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.5.1. </span>Creating a Rose suite from existing namelists<a class="headerlink" href="#creating-a-rose-suite-from-existing-namelists" title="Link to this heading">¶</a></h2>
 <p>To enable users to quickly transition to Rose and the extra functionality it provides, a tool is distributed with JULES that can convert existing namelists to a Rose suite.</p>
 <p>To convert vn3.4 namelists to a vn4.7 Rose suite, run the following command in the directory containing the namelists:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>create_rose_app<span class="w"> </span>vn3.4<span class="w"> </span>vn4.7<span class="w"> </span>namelist_path<span class="w"> </span>suite_name<span class="w"> </span>jules_dir
@@ -74,7 +71,7 @@
 <p>To convert namelists to a Rose suite without upgrading the version, just give the same version for both.</p>
 </section>
 <section id="using-rose-to-upgrade-existing-namelists">
-<h2><span class="section-number">3.5.2. </span>Using Rose to upgrade existing namelists<a class="headerlink" href="#using-rose-to-upgrade-existing-namelists" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.5.2. </span>Using Rose to upgrade existing namelists<a class="headerlink" href="#using-rose-to-upgrade-existing-namelists" title="Link to this heading">¶</a></h2>
 <p>It is not necessary to use Rose to configure and run JULES - Rose can be used just to upgrade existing namelists (at vn3.4 or later).</p>
 <p>In order to use Rose to upgrade existing namelists from vn3.4 to vn4.0, just execute the following commands in the directory containing your namelists:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creates a Rose suite at rose-suite</span>
@@ -92,7 +89,7 @@ rm<span class="w"> </span>-rf<span class="w"> </span>rose-suite<span class="w"> 
 </div>
 </section>
 <section id="upgrading-an-existing-jules-rose-suite">
-<h2><span class="section-number">3.5.3. </span>Upgrading an existing JULES Rose suite<a class="headerlink" href="#upgrading-an-existing-jules-rose-suite" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.5.3. </span>Upgrading an existing JULES Rose suite<a class="headerlink" href="#upgrading-an-existing-jules-rose-suite" title="Link to this heading">¶</a></h2>
 <p>Upgrading an existing JULES Rose suite is even more simple than upgrading the namelist files directly. To see the versions it is possible to upgrade to, run the command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>rose<span class="w"> </span>app-upgrade<span class="w"> </span>-M<span class="w"> </span><span class="nv">$JULES_ROOT</span>/rose-meta<span class="w"> </span>-C<span class="w"> </span>/path/to/rose/suite/app/jules<span class="w"> </span>--all-versions
 <span class="o">&amp;&amp;</span><span class="w"> </span>rose<span class="w"> </span>macro<span class="w"> </span>--fix<span class="w"> </span>-C<span class="w"> </span>app/jules
@@ -111,7 +108,7 @@ rm<span class="w"> </span>-rf<span class="w"> </span>rose-suite<span class="w"> 
 </div>
 </section>
 <section id="configuring-jules-with-a-graphical-interface">
-<h2><span class="section-number">3.5.4. </span>Configuring JULES with a graphical interface<a class="headerlink" href="#configuring-jules-with-a-graphical-interface" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.5.4. </span>Configuring JULES with a graphical interface<a class="headerlink" href="#configuring-jules-with-a-graphical-interface" title="Link to this heading">¶</a></h2>
 <p>Using a Rose suite to run JULES has the advantage that it can be configured graphically using <a class="reference external" href="http://metomi.github.io/rose/doc/html/api/command-reference.html#rose-config-edit">Rose Config Edit</a>.</p>
 <p>To launch the graphical editor, the following command is used:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># To edit the whole suite, including build configuration</span>
@@ -125,9 +122,9 @@ rose<span class="w"> </span>config-edit<span class="w"> </span>-M<span class="w"
 <p>Clicking on a variable name in the editor opens the corresponding page in this documentation.</p>
 </section>
 <section id="running-a-jules-rose-suite">
-<h2><span class="section-number">3.5.5. </span>Running a JULES Rose suite<a class="headerlink" href="#running-a-jules-rose-suite" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">3.5.5. </span>Running a JULES Rose suite<a class="headerlink" href="#running-a-jules-rose-suite" title="Link to this heading">¶</a></h2>
 <section id="without-cylc">
-<h3><span class="section-number">3.5.5.1. </span>Without Cylc<a class="headerlink" href="#without-cylc" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">3.5.5.1. </span>Without Cylc<a class="headerlink" href="#without-cylc" title="Link to this heading">¶</a></h3>
 <p>To run JULES from a Rose suite without Cylc, we just use Rose to generate the namelists. JULES is then built and run as normal - see <a class="reference internal" href="intro.html"><span class="doc">Building and running JULES</span></a>.</p>
 <p>To generate namelists in the current directory from a Rose suite at <code class="docutils literal notranslate"><span class="pre">/path/to/rose/suite</span></code>, use the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rose<span class="w"> </span>app-run<span class="w"> </span>-i<span class="w"> </span>-C<span class="w"> </span>/path/to/rose/suite/app/jules
@@ -135,7 +132,7 @@ rose<span class="w"> </span>config-edit<span class="w"> </span>-M<span class="w"
 </div>
 </section>
 <section id="with-cylc">
-<h3><span class="section-number">3.5.5.2. </span>With Cylc<a class="headerlink" href="#with-cylc" title="Permalink to this heading">¶</a></h3>
+<h3><span class="section-number">3.5.5.2. </span>With Cylc<a class="headerlink" href="#with-cylc" title="Link to this heading">¶</a></h3>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>This requires Cylc to be installed and configured.</p>
@@ -216,14 +213,14 @@ rose<span class="w"> </span>config-edit<span class="w"> </span>-M<span class="w"
         <li class="right" >
           <a href="running-jules.html" title="3.4. Running JULES"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="intro.html" ><span class="section-number">3. </span>Building and running JULES</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">3.5. </span>Automatic upgrading and GUI using Rose</a></li> 
       </ul>
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
     </div>
 
   </body>

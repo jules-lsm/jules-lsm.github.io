@@ -458,7 +458,7 @@ Rivers
 |                               | :nml:mem:`JULES_RIVERS::i_river_vn` = 3.                                                      |            |
 +-------------------------------+-----------------------------------------------------------------------------------------------+------------+
 | ``frac_fplain_rp``            | Overbank inundation area as a fraction of river routing gridcell area.                        | np_rivers  |
-|                               | Only available if :nml:mem:`JULES_OVERBANK::l_riv_overbank` = TRUE.                           |            |
+|                               | Only available if :nml:mem:`JULES_RIVERS::l_riv_overbank` = TRUE.                             |            |
 +-------------------------------+-----------------------------------------------------------------------------------------------+------------+
 | Output regridded to the JULES model grid                                                                                                   |
 +-------------------------------+-----------------------------------------------------------------------------------------------+------------+
@@ -469,7 +469,7 @@ Rivers
 |                               | Only available if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE                                    |            |
 +-------------------------------+-----------------------------------------------------------------------------------------------+------------+
 | ``frac_fplain_lp``            | Overbank inundation area as a fraction of gridcell area.                                      |            |
-|                               | Only available if :nml:mem:`JULES_OVERBANK::l_riv_overbank` = TRUE.                           |            |
+|                               | Only available if :nml:mem:`JULES_RIVERS::l_riv_overbank` = TRUE.                             |            |
 +-------------------------------+-----------------------------------------------------------------------------------------------+------------+
 
 
@@ -634,6 +634,10 @@ Vegetation carbon and related fluxes
 +--------------------------+---------------------------------------------------------------------------------------------------+------------+
 | ``npp_dr_out``           | PFT mean NPP of biomass expressed as carbon for driving TRIFFID                                   | npft       |
 |                          | (kg C m\ :sup:`-2` (360days)\ :sup:`-1`).                                                         |            |
++--------------------------+---------------------------------------------------------------------------------------------------+------------+
+| ``nbp_gb``               | Gridbox mean net biosphere productivity. This is NPP minus the sum of all carbon fluxes out of    |            |
+|                          | land: soil respiration, exudates, harvest flux, wood product pool decay fluxes, and loss of       |            |
+|                          | carbon from vegetation and soil due to fire (kg C m\ :sup:`-2` (360days)\ :sup:`-1`)              |            |
 +--------------------------+---------------------------------------------------------------------------------------------------+------------+
 | ``resp_p``               | PFT plant respiration carbon flux (kg m\ :sup:`-2` s\ :sup:`-1`).                                 | npft       |
 +--------------------------+---------------------------------------------------------------------------------------------------+------------+

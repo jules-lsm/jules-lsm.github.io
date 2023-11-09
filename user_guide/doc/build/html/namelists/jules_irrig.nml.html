@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>6.17. jules_irrig.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.3 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <title>6.17. jules_irrig.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script src="../_static/documentation_options.js?v=f15b9291"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.18. science_fixes.nml" href="science_fixes.nml.html" />
@@ -35,7 +32,7 @@
         <li class="right" >
           <a href="jules_water_resources.nml.html" title="6.16. jules_water_resources.nml"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.17. </span><code class="docutils literal notranslate"><span class="pre">jules_irrig.nml</span></code></a></li> 
       </ul>
@@ -47,11 +44,11 @@
           <div class="body" role="main">
             
   <section id="jules-irrig-nml">
-<h1><span class="section-number">6.17. </span><code class="docutils literal notranslate"><span class="pre">jules_irrig.nml</span></code><a class="headerlink" href="#jules-irrig-nml" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">6.17. </span><code class="docutils literal notranslate"><span class="pre">jules_irrig.nml</span></code><a class="headerlink" href="#jules-irrig-nml" title="Link to this heading">¶</a></h1>
 <p>This file sets the irrigation options. It contains one namelist called <a class="reference internal" href="#namelist-JULES_IRRIG"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code></a>.</p>
-<section id="namelist-JULES_IRRIG">
-<span id="jules-irrig-namelist-members"></span><h2><span class="section-number">6.17.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code> namelist members<a class="headerlink" href="#namelist-JULES_IRRIG" title="Permalink to this heading">¶</a></h2>
-<p>This namelist specifies the different options available for setting up the irrigation.</p>
+<section id="jules-irrig-namelist-members">
+<h2><span class="section-number">6.17.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code> namelist members<a class="headerlink" href="#jules-irrig-namelist-members" title="Link to this heading">¶</a></h2>
+<p id="namelist-JULES_IRRIG">This namelist specifies the different options available for setting up the irrigation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <dl class="simple">
@@ -75,12 +72,12 @@
 </div>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_IRRIG::l_irrig_dmd">
-<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">l_irrig_dmd</span></span><a class="headerlink" href="#JULES_IRRIG::l_irrig_dmd" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">l_irrig_dmd</span></span><a class="headerlink" href="#JULES_IRRIG::l_irrig_dmd" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -96,12 +93,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_IRRIG::l_irrig_limit">
-<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">l_irrig_limit</span></span><a class="headerlink" href="#JULES_IRRIG::l_irrig_limit" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">l_irrig_limit</span></span><a class="headerlink" href="#JULES_IRRIG::l_irrig_limit" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -132,15 +129,15 @@ feedback where deficiencies are identified.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_IRRIG::irr_crop">
-<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">irr_crop</span></span><a class="headerlink" href="#JULES_IRRIG::irr_crop" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">irr_crop</span></span><a class="headerlink" href="#JULES_IRRIG::irr_crop" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted</dt>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
 <dd class="field-even"><p>0, 1 or 2</p>
 </dd>
-<dt class="field-odd">Default</dt>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p>0</p>
 </dd>
 </dl>
@@ -158,12 +155,12 @@ irrigation is applied outside the irrigation season.</p></li>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_IRRIG::frac_irrig_all_tiles">
-<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">frac_irrig_all_tiles</span></span><a class="headerlink" href="#JULES_IRRIG::frac_irrig_all_tiles" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">frac_irrig_all_tiles</span></span><a class="headerlink" href="#JULES_IRRIG::frac_irrig_all_tiles" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -172,12 +169,12 @@ irrigation is applied outside the irrigation season.</p></li>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_IRRIG::set_irrfrac_on_irrtiles">
-<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">set_irrfrac_on_irrtiles</span></span><a class="headerlink" href="#JULES_IRRIG::set_irrfrac_on_irrtiles" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">set_irrfrac_on_irrtiles</span></span><a class="headerlink" href="#JULES_IRRIG::set_irrfrac_on_irrtiles" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -186,12 +183,12 @@ irrigation is applied outside the irrigation season.</p></li>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_IRRIG::nirrtile">
-<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">nirrtile</span></span><a class="headerlink" href="#JULES_IRRIG::nirrtile" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">nirrtile</span></span><a class="headerlink" href="#JULES_IRRIG::nirrtile" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -200,12 +197,12 @@ irrigation is applied outside the irrigation season.</p></li>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_IRRIG::irrigtiles">
-<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">irrigtiles</span></span><a class="headerlink" href="#JULES_IRRIG::irrigtiles" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">irrigtiles</span></span><a class="headerlink" href="#JULES_IRRIG::irrigtiles" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer(nirrtile)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -214,15 +211,15 @@ irrigation is applied outside the irrigation season.</p></li>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_IRRIG::nstep_irrig">
-<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">nstep_irrig</span></span><a class="headerlink" href="#JULES_IRRIG::nstep_irrig" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_IRRIG::</span></span><span class="sig-name descname"><span class="pre">nstep_irrig</span></span><a class="headerlink" href="#JULES_IRRIG::nstep_irrig" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted</dt>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
 <dd class="field-even"><p>&gt; 0</p>
 </dd>
-<dt class="field-odd">Default</dt>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p>86400/<a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a></p>
 </dd>
 </dl>
@@ -233,7 +230,7 @@ irrigation is applied outside the irrigation season.</p></li>
 
 </section>
 <section id="jules-irrig-references">
-<span id="references-irrig"></span><h2><span class="section-number">6.17.2. </span><code class="docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code> references<a class="headerlink" href="#jules-irrig-references" title="Permalink to this heading">¶</a></h2>
+<span id="references-irrig"></span><h2><span class="section-number">6.17.2. </span><code class="docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code> references<a class="headerlink" href="#jules-irrig-references" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Döll, P., and Siebert, S., Global modeling of irrigation water
 requirements, Water Resour. Res., 38(4),
@@ -256,7 +253,7 @@ requirements, Water Resour. Res., 38(4),
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.17. <code class="docutils literal notranslate"><span class="pre">jules_irrig.nml</span></code></a><ul>
-<li><a class="reference internal" href="#namelist-JULES_IRRIG">6.17.1. <code class="docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#jules-irrig-namelist-members">6.17.1. <code class="docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code> namelist members</a></li>
 <li><a class="reference internal" href="#jules-irrig-references">6.17.2. <code class="docutils literal notranslate"><span class="pre">JULES_IRRIG</span></code> references</a></li>
 </ul>
 </li>
@@ -302,14 +299,14 @@ requirements, Water Resour. Res., 38(4),
         <li class="right" >
           <a href="jules_water_resources.nml.html" title="6.16. jules_water_resources.nml"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.17. </span><code class="docutils literal notranslate"><span class="pre">jules_irrig.nml</span></code></a></li> 
       </ul>
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
     </div>
 
   </body>

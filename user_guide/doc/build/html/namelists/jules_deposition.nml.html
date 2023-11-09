@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>6.13. jules_deposition.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.3 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <title>6.13. jules_deposition.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script src="../_static/documentation_options.js?v=f15b9291"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.14. jules_snow.nml" href="jules_snow.nml.html" />
@@ -35,7 +32,7 @@
         <li class="right" >
           <a href="jules_soil_ecosse.nml.html" title="6.12. jules_soil_ecosse.nml"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.13. </span><code class="docutils literal notranslate"><span class="pre">jules_deposition.nml</span></code></a></li> 
       </ul>
@@ -47,22 +44,22 @@
           <div class="body" role="main">
             
   <section id="jules-deposition-nml">
-<h1><span class="section-number">6.13. </span><code class="docutils literal notranslate"><span class="pre">jules_deposition.nml</span></code><a class="headerlink" href="#jules-deposition-nml" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">6.13. </span><code class="docutils literal notranslate"><span class="pre">jules_deposition.nml</span></code><a class="headerlink" href="#jules-deposition-nml" title="Link to this heading">¶</a></h1>
 <p>This file contains options and parameters for modelling of dry deposition of atmospheric trace constituents. It contains a variable number of namelists depending on the required model configuration. The namelist <a class="reference internal" href="#namelist-JULES_DEPOSITION"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code></a> is always required, and one or more instances of the namelist <a class="reference internal" href="#namelist-JULES_DEPOSITION_SPECIES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES</span></code></a> is required if dry deposition has been selected.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Atmospheric deposition in JULES is still in development and is far from fully functional in this version - the code is included to allow further development. Users should not try to activate the deposition code: leave <a class="reference internal" href="#JULES_DEPOSITION::l_deposition" title="JULES_DEPOSITION::l_deposition"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_deposition</span></code></a> as FALSE.</p>
 </div>
-<section id="namelist-JULES_DEPOSITION">
-<span id="jules-deposition-namelist-members"></span><h2><span class="section-number">6.13.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code> namelist members<a class="headerlink" href="#namelist-JULES_DEPOSITION" title="Permalink to this heading">¶</a></h2>
-<dl class="nml member">
+<section id="jules-deposition-namelist-members">
+<h2><span class="section-number">6.13.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code> namelist members<a class="headerlink" href="#jules-deposition-namelist-members" title="Link to this heading">¶</a></h2>
+<dl class="nml member" id="namelist-JULES_DEPOSITION">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION::l_deposition">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_deposition</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_deposition" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_deposition</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_deposition" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>FALSE</p>
 </dd>
 </dl>
@@ -79,15 +76,15 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION::l_deposition" title="JULES_DEPOSITION::l_deposition"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_deposition</span></code></a> = TRUE.</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION::dry_dep_model">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">dry_dep_model</span></span><a class="headerlink" href="#JULES_DEPOSITION::dry_dep_model" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">dry_dep_model</span></span><a class="headerlink" href="#JULES_DEPOSITION::dry_dep_model" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted</dt>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
 <dd class="field-even"><p>1</p>
 </dd>
-<dt class="field-odd">Default</dt>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p>none</p>
 </dd>
 </dl>
@@ -103,12 +100,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION::l_deposition_flux">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_deposition_flux</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_deposition_flux" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_deposition_flux</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_deposition_flux" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>FALSE</p>
 </dd>
 </dl>
@@ -126,15 +123,15 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION::l_deposition" title="JULES_DEPOSITION::l_deposition"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_deposition</span></code></a> = TRUE and <a class="reference internal" href="#JULES_DEPOSITION::dry_dep_model" title="JULES_DEPOSITION::dry_dep_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dry_dep_model</span></code></a> = 1 (UKCA).</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION::ndry_dep_species">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">ndry_dep_species</span></span><a class="headerlink" href="#JULES_DEPOSITION::ndry_dep_species" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">ndry_dep_species</span></span><a class="headerlink" href="#JULES_DEPOSITION::ndry_dep_species" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted</dt>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
 <dd class="field-even"><p>&gt;= 1</p>
 </dd>
-<dt class="field-odd">Default</dt>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
 <dd class="field-odd"><p>none</p>
 </dd>
 </dl>
@@ -143,12 +140,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION::l_ukca_ddep_lev1">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_ukca_ddep_lev1</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_ukca_ddep_lev1" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_ukca_ddep_lev1</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_ukca_ddep_lev1" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>FALSE</p>
 </dd>
 </dl>
@@ -163,12 +160,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION::tundra_s_limit">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">tundra_s_limit</span></span><a class="headerlink" href="#JULES_DEPOSITION::tundra_s_limit" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">tundra_s_limit</span></span><a class="headerlink" href="#JULES_DEPOSITION::tundra_s_limit" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -177,12 +174,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION::dzl_const">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">dzl_const</span></span><a class="headerlink" href="#JULES_DEPOSITION::dzl_const" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">dzl_const</span></span><a class="headerlink" href="#JULES_DEPOSITION::dzl_const" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -192,23 +189,23 @@
 </div>
 </section>
 <section id="notes-on-the-jules-deposition-namelist">
-<h2><span class="section-number">6.13.2. </span>Notes on the <code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code> namelist<a class="headerlink" href="#notes-on-the-jules-deposition-namelist" title="Permalink to this heading">¶</a></h2>
+<h2><span class="section-number">6.13.2. </span>Notes on the <code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code> namelist<a class="headerlink" href="#notes-on-the-jules-deposition-namelist" title="Link to this heading">¶</a></h2>
 <p>The height of the atmospheric boundary layer is required and is set to a default constant value of 1000 m. This value can be overridden via the namelist variable <a class="reference internal" href="drive.nml.html#JULES_DRIVE::bl_height" title="JULES_DRIVE::bl_height"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">bl_height</span></code></a>, or can be prescribed (i.e. allowed to vary in time and/or space) by providing <code class="docutils literal notranslate"><span class="pre">bl_height</span></code> as prescribed data (see <a class="reference internal" href="prescribed_data.nml.html#supported-prescribed-variables"><span class="std std-ref">List of supported variables</span></a>).</p>
 <p>The number of model levels in the boundary layer is required and is set to a default balues of 1. This can be overridden via the namelist variable <a class="reference internal" href="model_grid.nml.html#JULES_NLSIZES::bl_levels" title="JULES_NLSIZES::bl_levels"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">bl_levels</span></code></a>. The number of levels is only used to communicate with the atmospheric model (e.g. UKCA).</p>
 <p>The separation of the model levels in the boundary layer is required and is set to a constant value via <a class="reference internal" href="#JULES_DEPOSITION::dzl_const" title="JULES_DEPOSITION::dzl_const"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dzl_const</span></code></a>. The separation can be prescribed (i.e. allowed to vary in time and/or space) by providing <code class="docutils literal notranslate"><span class="pre">level_separation</span></code> as prescribed data (see <a class="reference internal" href="prescribed_data.nml.html#supported-prescribed-variables"><span class="std std-ref">List of supported variables</span></a>). This can be considered as the representative depth for tracer concentration and the depth over which the deposition flux is removed.</p>
 <p>If deposition fluxes (rather than deposition velocities) are to be calculated (see <a class="reference internal" href="#JULES_DEPOSITION::l_deposition_flux" title="JULES_DEPOSITION::l_deposition_flux"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_deposition_flux</span></code></a>), the concentrations of atmospheric tracer species need to be prescribed (see <code class="docutils literal notranslate"><span class="pre">tracer_field</span></code> in <a class="reference internal" href="prescribed_data.nml.html#supported-prescribed-variables"><span class="std std-ref">List of supported variables</span></a>).</p>
 </section>
-<section id="namelist-JULES_DEPOSITION_SPECIES">
-<span id="jules-deposition-species-namelist-members"></span><h2><span class="section-number">6.13.3. </span><code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES</span></code> namelist members<a class="headerlink" href="#namelist-JULES_DEPOSITION_SPECIES" title="Permalink to this heading">¶</a></h2>
-<p>This namelist should occur <a class="reference internal" href="#JULES_DEPOSITION::ndry_dep_species" title="JULES_DEPOSITION::ndry_dep_species"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ndry_dep_species</span></code></a> times, with each occurence containing parameters for an atmospheric tracer species that is to be considered in dry deposition.</p>
+<section id="jules-deposition-species-namelist-members">
+<h2><span class="section-number">6.13.3. </span><code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES</span></code> namelist members<a class="headerlink" href="#jules-deposition-species-namelist-members" title="Link to this heading">¶</a></h2>
+<p id="namelist-JULES_DEPOSITION_SPECIES">This namelist should occur <a class="reference internal" href="#JULES_DEPOSITION::ndry_dep_species" title="JULES_DEPOSITION::ndry_dep_species"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ndry_dep_species</span></code></a> times, with each occurence containing parameters for an atmospheric tracer species that is to be considered in dry deposition.</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::dep_species_name_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">dep_species_name_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">dep_species_name_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -217,12 +214,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::diffusion_coeff_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">diffusion_coeff_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::diffusion_coeff_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">diffusion_coeff_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::diffusion_coeff_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -231,12 +228,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::rsurf_std_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">rsurf_std_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::rsurf_std_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">rsurf_std_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::rsurf_std_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(ntype)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -247,12 +244,12 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">NO2</span></code>, <code class="docutils literal notranslate"><span class="pre">O3</span></code>, <code class="docutils literal notranslate"><span class="pre">PAN</span></code>, <code class="docutils literal notranslate"><span class="pre">PPAN</span></code>, <code class="docutils literal notranslate"><span class="pre">MPAN</span></code> or <code class="docutils literal notranslate"><span class="pre">ONITU</span></code>. Values provided for other species will be ignored.</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::diffusion_corr_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">diffusion_corr_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::diffusion_corr_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">diffusion_corr_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::diffusion_corr_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -264,12 +261,12 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">CO</span></code>, <code class="docutils literal notranslate"><span class="pre">NO2</span></code>, <code class="docutils literal notranslate"><span class="pre">O3</span></code>, <code class="docutils literal notranslate"><span class="pre">PAN</span></code>, <code class="docutils literal notranslate"><span class="pre">PPAN</span></code>, <code class="docutils literal notranslate"><span class="pre">MPAN</span></code> or <code class="docutils literal notranslate"><span class="pre">ONITU</span></code>. Values provided for other species will be ignored.</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::r_tundra_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">r_tundra_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::r_tundra_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">r_tundra_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::r_tundra_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -281,12 +278,12 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">CH4</span></code>.</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::ch4_scaling_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">ch4_scaling_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::ch4_scaling_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">ch4_scaling_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::ch4_scaling_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -295,12 +292,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::ch4dd_tundra_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">ch4dd_tundra_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::ch4dd_tundra_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">ch4dd_tundra_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::ch4dd_tundra_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(4)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -312,12 +309,12 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">H2</span></code>.</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::h2dd_c_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">h2dd_c_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::h2dd_c_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">h2dd_c_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::h2dd_c_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(ntype)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -326,12 +323,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::h2dd_m_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">h2dd_m_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::h2dd_m_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">h2dd_m_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::h2dd_m_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(ntype)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -340,12 +337,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::h2dd_q_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">h2dd_q_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::h2dd_q_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">h2dd_q_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::h2dd_q_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(ntype)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -357,12 +354,12 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">HNO3</span></code>, <code class="docutils literal notranslate"><span class="pre">HONO2</span></code> or <code class="docutils literal notranslate"><span class="pre">ISON</span></code>.</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::dd_ice_coeff">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">dd_ice_coeff</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::dd_ice_coeff" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">dd_ice_coeff</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::dd_ice_coeff" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real(3)</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -374,12 +371,12 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">O3</span></code>.</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::cuticle_o3_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">cuticle_o3_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::cuticle_o3_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">cuticle_o3_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::cuticle_o3_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -388,12 +385,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::r_wet_soil_o3_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">r_wet_soil_o3_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::r_wet_soil_o3_io" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">r_wet_soil_o3_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::r_wet_soil_o3_io" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>none</p>
 </dd>
 </dl>
@@ -418,9 +415,9 @@
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.13. <code class="docutils literal notranslate"><span class="pre">jules_deposition.nml</span></code></a><ul>
-<li><a class="reference internal" href="#namelist-JULES_DEPOSITION">6.13.1. <code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#jules-deposition-namelist-members">6.13.1. <code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code> namelist members</a></li>
 <li><a class="reference internal" href="#notes-on-the-jules-deposition-namelist">6.13.2. Notes on the <code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code> namelist</a></li>
-<li><a class="reference internal" href="#namelist-JULES_DEPOSITION_SPECIES">6.13.3. <code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#jules-deposition-species-namelist-members">6.13.3. <code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -465,14 +462,14 @@
         <li class="right" >
           <a href="jules_soil_ecosse.nml.html" title="6.12. jules_soil_ecosse.nml"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.13. </span><code class="docutils literal notranslate"><span class="pre">jules_deposition.nml</span></code></a></li> 
       </ul>
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
     </div>
 
   </body>

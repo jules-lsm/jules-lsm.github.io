@@ -1,20 +1,17 @@
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>6.30. fire.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.3 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
+    <title>6.30. fire.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <script src="../_static/documentation_options.js?v=f15b9291"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.31. drive.nml" href="drive.nml.html" />
@@ -35,7 +32,7 @@
         <li class="right" >
           <a href="urban.nml.html" title="6.29. urban.nml"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.30. </span><code class="docutils literal notranslate"><span class="pre">fire.nml</span></code></a></li> 
       </ul>
@@ -47,18 +44,18 @@
           <div class="body" role="main">
             
   <section id="fire-nml">
-<h1><span class="section-number">6.30. </span><code class="docutils literal notranslate"><span class="pre">fire.nml</span></code><a class="headerlink" href="#fire-nml" title="Permalink to this heading">¶</a></h1>
+<h1><span class="section-number">6.30. </span><code class="docutils literal notranslate"><span class="pre">fire.nml</span></code><a class="headerlink" href="#fire-nml" title="Link to this heading">¶</a></h1>
 <p>This file contains a single namelist called <a class="reference internal" href="#namelist-FIRE_SWITCHES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">FIRE_SWITCHES</span></code></a> that sets time-invariant parameters for performing wildfire-related calculations.</p>
-<section id="namelist-FIRE_SWITCHES">
-<span id="fire-switches-namelist-members"></span><h2><span class="section-number">6.30.1. </span><code class="docutils literal notranslate"><span class="pre">FIRE_SWITCHES</span></code> namelist members<a class="headerlink" href="#namelist-FIRE_SWITCHES" title="Permalink to this heading">¶</a></h2>
-<dl class="nml member">
+<section id="fire-switches-namelist-members">
+<h2><span class="section-number">6.30.1. </span><code class="docutils literal notranslate"><span class="pre">FIRE_SWITCHES</span></code> namelist members<a class="headerlink" href="#fire-switches-namelist-members" title="Link to this heading">¶</a></h2>
+<dl class="nml member" id="namelist-FIRE_SWITCHES">
 <dt class="sig sig-object nml" id="FIRE_SWITCHES::l_fire">
-<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">l_fire</span></span><a class="headerlink" href="#FIRE_SWITCHES::l_fire" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">l_fire</span></span><a class="headerlink" href="#FIRE_SWITCHES::l_fire" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -73,12 +70,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="FIRE_SWITCHES::mcarthur_flag">
-<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">mcarthur_flag</span></span><a class="headerlink" href="#FIRE_SWITCHES::mcarthur_flag" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">mcarthur_flag</span></span><a class="headerlink" href="#FIRE_SWITCHES::mcarthur_flag" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>boolean</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -87,12 +84,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="FIRE_SWITCHES::mcarthur_opt">
-<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">mcarthur_opt</span></span><a class="headerlink" href="#FIRE_SWITCHES::mcarthur_opt" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">mcarthur_opt</span></span><a class="headerlink" href="#FIRE_SWITCHES::mcarthur_opt" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -101,12 +98,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="FIRE_SWITCHES::canadian_flag">
-<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">canadian_flag</span></span><a class="headerlink" href="#FIRE_SWITCHES::canadian_flag" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">canadian_flag</span></span><a class="headerlink" href="#FIRE_SWITCHES::canadian_flag" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>boolean</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -115,12 +112,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="FIRE_SWITCHES::canadian_hemi_opt">
-<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">canadian_hemi_opt</span></span><a class="headerlink" href="#FIRE_SWITCHES::canadian_hemi_opt" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">canadian_hemi_opt</span></span><a class="headerlink" href="#FIRE_SWITCHES::canadian_hemi_opt" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>boolean</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -129,12 +126,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="FIRE_SWITCHES::nesterov_flag">
-<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">nesterov_flag</span></span><a class="headerlink" href="#FIRE_SWITCHES::nesterov_flag" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">FIRE_SWITCHES::</span></span><span class="sig-name descname"><span class="pre">nesterov_flag</span></span><a class="headerlink" href="#FIRE_SWITCHES::nesterov_flag" title="Link to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type</dt>
+<dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>boolean</p>
 </dd>
-<dt class="field-even">Default</dt>
+<dt class="field-even">Default<span class="colon">:</span></dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -158,7 +155,7 @@
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.30. <code class="docutils literal notranslate"><span class="pre">fire.nml</span></code></a><ul>
-<li><a class="reference internal" href="#namelist-FIRE_SWITCHES">6.30.1. <code class="docutils literal notranslate"><span class="pre">FIRE_SWITCHES</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#fire-switches-namelist-members">6.30.1. <code class="docutils literal notranslate"><span class="pre">FIRE_SWITCHES</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -203,14 +200,14 @@
         <li class="right" >
           <a href="urban.nml.html" title="6.29. urban.nml"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.3 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.4 User Guide</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.30. </span><code class="docutils literal notranslate"><span class="pre">fire.nml</span></code></a></li> 
       </ul>
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
     </div>
 
   </body>

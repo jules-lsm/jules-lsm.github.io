@@ -55,7 +55,7 @@ If using either URBAN-2T or MORUSES then the total *urban* fraction can be speci
    .. note::
        The open water fraction of this array (given by :nml:mem:`JULES_SURFACE_TYPES::lake`) should contain permanent water, and wetland extents that are not being otherwise simulated.
        If groundwater inundation is being simulated (i.e. TOPMODEL is active :nml:mem:`JULES_HYDROLOGY::l_top` = TRUE and therefore fsat is being calculated) then all groundwater-maintained wetlands must be excluded from :nml:mem:`JULES_FRAC::frac_name`.
-       If overbank inundation is being simulated (i.e. :nml:mem:`JULES_OVERBANK::l_riv_overbank` = TRUE) then all fluvial wetlands must be excluded from :nml:mem:`JULES_FRAC::frac_name`.
+       If overbank inundation is being simulated (i.e. :nml:mem:`JULES_RIVERS::l_riv_overbank` = TRUE) then all fluvial wetlands must be excluded from :nml:mem:`JULES_FRAC::frac_name`.
        Finally, note that simulation of a potential future climate scenario with greatly reduced areas for lakes that are currently 'permanent' would require suitable modification of the ancillary provided here.
 
    In the file, the variable must have a single levels dimension of size ``ntype`` called :nml:mem:`JULES_INPUT_GRID::type_dim_name`, and should not have a time dimension.
@@ -729,34 +729,34 @@ If the TRIFFID vegetation model is used, the fractional area of agricultural lan
 .. nml:group:: Used if :nml:mem:`zero_biocrop` = FALSE and the input grid consists of a single location
 
    .. nml:member:: frac_biocrop
-  
+
       :type: real
       :default: None
-  
+
       The bioenergy fraction for the single location.
 
 
 .. nml:group:: Used if :nml:mem:`zero_biocrop` = FALSE and the input grid consists of more than one location
 
    .. nml:member:: file_biocrop
-  
+
       :type: character
       :default: None
-  
+
       The name of the file to read bioenergy fraction data from.
-  
-  
+
+
    .. nml:member:: biocrop_name
-  
+
       :type: character
       :default: 'frac_biocrop'
-  
+
       The name of the variable containing the bioenergy fraction data.
-  
+
        In the file, the variable must have no levels dimensions and no time dimension.
 
 
-.. nml:group:: Specify the day of year on which harvesting occurs. Only used if :nml:mem:`JULES_VEGETATION::l_trif_biocrop` = TRUE. A placeholder value must be set for all PFTs, though will only be used for PFTs with :nml:mem:`JULES_TRIFFID::harvest_type_io` = 2. 
+.. nml:group:: Specify the day of year on which harvesting occurs. Only used if :nml:mem:`JULES_VEGETATION::l_trif_biocrop` = TRUE. A placeholder value must be set for all PFTs, though will only be used for PFTs with :nml:mem:`JULES_TRIFFID::harvest_type_io` = 2.
 
 
   .. nml:member:: read_harvest_doy_from_dump
@@ -1014,43 +1014,30 @@ This namelist specifies the options available for initialising irrigated fractio
 
 This namelist specifies how spatially varying river routing properties should be set.
 
-.. note:: ``read_from_dump`` is not currently implemented for this namelist, although initial condition variables can be read from a dump file if :nml:mem:`JULES_RIVERS::i_river_vn` is ``1``, ``2``,  or ``3`` (see :nml:lst:`JULES_INITIAL`).
-
-.. note::
-   The river routing code in JULES is still in development. Users should ensure that results are as expected, and provide feedback where deficiencies are identified.
+.. note:: ``read_from_dump`` is not currently implemented for this namelist, meaning that river ancillary variables cannot be read from a dump file. Initial values of river prognostic variables can however be read from a dump file (see :nml:lst:`JULES_INITIAL`).
 
 .. note::
    The grid on which the river routing will run, and on which river routing ancillaries must be provided, could potentially differ from the input/model grid specified in :doc:`model_grid.nml`.
 
-   For the duration of this document, the following nomenclature will be used:
+   For the duration of this section, the following nomenclature will be used:
 
    *  **Model input grid** - The full JULES input grid specified in :nml:lst:`JULES_INPUT_GRID`.
-   *  **River routing input grid** - The grid on which river routing ancillaries will be provided
+   *  **Land grid** - The grid that JULES runs on (not rivers) - this is the grid that includes land points. If JULES is using a 1-D grid internally, the land grid is the notional 2D grid across which the points can be scattered.
+   *  **River routing input grid** - The grid on which river routing ancillaries are provided.
      
-   Currently, information about the river routing input grid and its relationship to the model input grid is specified in :nml:lst:`JULES_RIVERS_PROPS`.
+   Information about the river routing input grid and its relationship to the land grid is specified in this namelist. In all cases river routing is only possible if the land and river grids are regular, in that they have a constant spacing between rows and columns (but see note below about 1D model input grids).
 
-   While the model input can be defined on a 1D grid, the river routing input grid must be defined on a 2D grid, as defined through the x and y dimensions of the rivers ancillary file. See :nml:mem:`x_dim_name` and :nml:mem:`y_dim_name` for further details. If a non-regular model and river routing input grid is used, both the x and y dimensions and corresponding latitude and longitude values must be specified for each grid point.
+   The river routing input grid must always be defined on a 2D grid, as defined through the x and y dimensions of the rivers ancillary file (see :nml:mem:`x_dim_name` and :nml:mem:`y_dim_name` for further details). If the model input is defined on a 1D grid, those points must be a subset of a regular grid (meaning one with constant spacing of points in each of the 2 dimensions) if river routing is to be activated. 
 
-   However, internally JULES converts the river routing input grid to a 1D river routing model grid, with length ``np_rivers``, which is the number of valid routing points in the river routing ancillaries. All river routing output is either defined on the 1D river routing model grid or is regridded to the model grid.
+   JULES calculates runoff on the land grid and this information is then transferred to the river grid by either regridding (when the grids are not coincident) or remapping (between coincident grids). Here coincident means grids of the same resolution and for which points in each grid coincide. Hence land and river grids of different resolution are linked through regridding (interpolation), while a simpler remapping can be used when the gridboxes coincide. Note that functionality to regrid only currently exists for grids that are defined by latitude and longitude coordinates; all other coordinate systems have to be handled through remapping.
 
-   For some applications, the model input and river routing input grids may not be coincident. Note that functionality only currently exists to regrid between regular (but non-identical) model input and river routing input grids. If a non-regular model input grid is specified, it is assumed that the model input and river routing input grids will be coincident.
+   Internally JULES converts the river routing input grid to a 1D river routing model grid, with length ``np_rivers``, which is the number of valid routing points in the domain of interest. All river routing output is either defined on the 1D river routing model grid or is regridded to the land grid.
+
+   The most satisfactory situation is one in which the areas covered by land and river gridboxes are identical (though the resolutions can differ). In that case all the runoff that is generated on the land is correctly captured by the river network, and each river length has a well-defined input of local runoff. However there are situations in which the user might be prepared to allow other configurations - e.g. if studying a particular catchment, land in headwaters of surrounding catchments might not be covered by the river ancillary.
 
 
 
 .. nml:group:: Members used to define the river routing input grid
-
-   .. nml:member:: rivers_reglatlon
-
-      :type: logical
-      :default: T
-
-      Flag indicating if the river routing input grid is regular in latitude and longitude.
-
-      TRUE
-         River routing input grid is regular in latitude and longitude.
-
-      FALSE
-         River routing input grid is not regular in latitude and longitude (e.g. grid defined relative to a rotated pole, Ordnance Survey (British) National Grid (BNG) OSGB36, etc). Only :nml:mem:`JULES_RIVERS::i_river_vn` = ``2`` should be used in this case. Note that the model input and river routing input grids must be coincident in this case and :nml:mem:`rivers_regrid` must also be set to false.
 
 
    .. nml:member:: coordinate_file
@@ -1066,10 +1053,10 @@ This namelist specifies how spatially varying river routing properties should be
       :type: character
       :default: None
 
-      The name of the x dimension for the river routing input grid (it may, but does not have to, coincide with :nml:mem:`JULES_INPUT_GRID::x_dim_name`).
+      The name of the x dimension for the river routing input grid (it may, but does not have to, be the same as :nml:mem:`JULES_INPUT_GRID::x_dim_name`). The coordinate system used to define the river input grid must be the same as that used for the main model grid - see :nml:mem:`JULES_LATLON::l_coord_latlon`.
 
       .. note:: For ASCII files, this can be anything. For NetCDF files, it should be the name of the dimension in :nml:mem:`file` (if that does not include :doc:`variable-name templating </input/file-name-templating>`) or in :nml:mem:`coordinate_file` (if :nml:mem:`file` includes templating).
-      .. warning:: Values for the x dimension of the river routing input grid will need to be read from the input file to define the grid, so it is assumed that the file contains a variable of the same name. If a non-regular river routing input grid is used, a 2D longitude field will also be needed to define the x-location of each grid point, read in via the longitude_2d ancillary field.
+      .. note:: Values for the coordinates along the x dimension of the river routing input grid will be read from the input file to define the river grid, and it is assumed that the file contains a variable with the same name as the dimension (x_dim_name).
 
 
    .. nml:member:: y_dim_name
@@ -1077,112 +1064,131 @@ This namelist specifies how spatially varying river routing properties should be
       :type: character
       :default: None
 
-      The name of the y dimension for the river routing input grid (it may, but does not have to, coincide with :nml:mem:`JULES_INPUT_GRID::y_dim_name`).
+      The name of the y dimension for the river routing input grid (it may, but does not have to, be the same as :nml:mem:`JULES_INPUT_GRID::y_dim_name`). The coordinate system used to define the river input grid must be the same as that used for the main model grid - see :nml:mem:`JULES_LATLON::l_coord_latlon`.
 
       .. note:: For ASCII files, this can be anything. For NetCDF files, it should be the name of the dimension in :nml:mem:`file` (if that does not include :doc:`variable-name templating </input/file-name-templating>`) or in :nml:mem:`coordinate_file` (if :nml:mem:`file` includes templating).
-      .. warning:: Values for the y dimension of the river routing input grid will need to be read from the input file to define the grid, so it is assumed that the file contains a variable of the same name. If a non-regular river routing input grid is used, a 2D latitude field will also be needed to define the y-location of each grid point, read in via the latitude_2d ancillary field.
+      .. note:: Values for the coordinates along the y dimension of the river routing input grid will be read from the input file to define the river grid, and it is assumed that the file contains a variable with the same name as the dimension (y_dim_name).
 
-   .. nml:member:: nx
+   .. nml:member:: nx_rivers
 
       :type: integer
-      :permitted: >= 1
+      :permitted: >= 2
       :default: None
 
       The size of the x dimension of the river routing input grid.
 
-   .. nml:member:: ny
+   .. nml:member:: ny_rivers
 
       :type: integer
-      :permitted: >= 1
+      :permitted: >= 2
       :default: None
 
       The size of the y dimension of the river routing input grid.
 
 
-.. nml:group:: Members used to define the relationship between the model input grid and the river routing input grid
+.. nml:group:: Members used to describe the land grid
 
-   .. nml:member:: rivers_regrid
+   .. nml:member:: nx_land_grid
 
-      :type: logical
-      :default: T
+      :type: integer
+      :permitted: >= 1
+      :default: none
 
-      Flag indicating if the model input and river routing input grids are identical, i.e. whether regridding of variables to and from the river routing input grid is required. Note this is only currently possible if :nml:mem:`rivers_reglatlon` is TRUE.
+      The size of the x dimension of the 2D land grid. This should be large enough to include all land points that are being modelled.
 
-      TRUE
-         River routing input and model input grids differ and regridding is required.
+   .. nml:member:: ny_land_grid
 
-      FALSE
-         River routing input and model input grids are identical.
+      :type: integer
+      :permitted: >= 1
+      :default: none
 
-   .. warning::
-      Currently, regridding between model input and river routing input grids must only be used with regular lat/lon model input and river routing input grids.
+      The size of the y dimension of the 2D land grid. This should be large enough to include all land points that are being modelled.
 
-      *  If a 1D model input grid is specified in :nml:lst:`JULES_INPUT_GRID`, it must be possible to define a 2D regular lat/lon grid containing all the points in the model input grid. This is done using the variables below.
-
-      An example with the GSWP2 (land points only) forcing data is given below.
-
-
-   .. nml:group:: Only used when :nml:mem:`JULES_INPUT_GRID::grid_is_1d <JULES_INPUT_GRID::grid_is_1d>` = TRUE or for a parallel standalone run.
-
-      .. nml:member:: nx_grid
-
-         :type: integer
-         :permitted: >= 1
-         :default: :nml:mem:`JULES_RIVERS_PROPS::nx <JULES_RIVERS_PROPS::nx>`
-
-         The size of the x dimension of the 2D regular lat/lon grid containing the model input grid.
-
-
-      .. nml:member:: ny_grid
-
-         :type: integer
-         :permitted: >= 1
-         :default: :nml:mem:`JULES_RIVERS_PROPS::ny <JULES_RIVERS_PROPS::ny>`
-
-         The size of the y dimension of the 2D regular lat/lon grid containing the model input grid.
-
-
-      .. nml:member:: reg_lat1
-
-         :type: real
-         :default: Latitude of lower-left corner of river routing input grid
-
-         The latitude of the lower-left corner of the 2D regular lat-lon grid containing the model input grid.
-
-
-      .. nml:member:: reg_lon1
-
-         :type: real
-         :default: Longitude of lower-left corner of river routing input grid
-
-         The longitude of the lower-left corner of the 2D regular lat/lon grid containing the model input grid.
-
-
-      .. nml:member:: reg_dlat
-
-         :type: real
-         :default: Latitude spacing of river routing input grid
-
-         The latitude spacing of the 2D regular lat/lon grid containing the model input grid.
-
-
-      .. nml:member:: reg_dlon
-
-         :type: real
-         :default: Longitude spacing of river routing input grid
-
-         The longitude spacing of the 2D regular lat/lon grid containing the model input grid.
-
-
-.. nml:group:: Only used when :nml:mem:`JULES_RIVERS_PROPS::rivers_reglatlon` = FALSE
-
-   .. nml:member:: rivers_dx
+   .. nml:member:: land_dx
 
       :type: real
+      :default: None
       :permitted: > 0
-      :default: 0
 
-      The constant size of the rivers grid (in m) if non-regular in latitude/longitude (e.g. if defined in Ordnance Survey (British) National Grid (BNG) OSGB36 coordinates).
+      The gridbox size in the x direction of the 2D land grid. The units of this are the same as for the model grid - see :nml:mem:`JULES_LATLON::l_coord_latlon`.
+
+   .. nml:member:: land_dy
+
+      :type: real
+      :default: None
+      :permitted: > 0
+
+      The gridbox size in the y direction of the 2D land grid. The units of this are the same as for the model grid - see :nml:mem:`JULES_LATLON::l_coord_latlon`.
+
+   .. nml:member:: x1_land_grid
+
+      :type: real
+      :default: none
+
+      The x coordinate of the "western-most" (i.e. first) column of gridpoints in the land grid. The units of this are the same as for the model grid - see :nml:mem:`JULES_LATLON::l_coord_latlon`.
+
+   .. nml:member:: y1_land_grid
+
+      :type: real
+      :default: none
+
+      The y coordinate of the "southern-most" (i.e. first) row of gridpoints in the land grid. The units of this are the same as for the model grid - see :nml:mem:`JULES_LATLON::l_coord_latlon`.
+
+   .. note:: Although the values in this section (:nml:mem:`nx_land_grid`, :nml:mem:`ny_land_grid`, :nml:mem:`land_dx`, :nml:mem:`land_dy`,  :nml:mem:`x1_land_grid` and :nml:mem:`y1_land_grid`) describe the land grid, they are also used to calculate the area that will be searched for river points. The area to be searched is the rectangle defined by x=x1_land_grid to x1_land_grid+(nx_land_grid*land_dx), y=y1_land_grid to y1_land_grid+(ny_land_grid*land_dy).
+
+
+.. nml:member:: rivers_regrid
+
+   :type: logical
+   :default: T
+
+   Flag indicating if variables on the land grid need to be regridded (interpolated) to the river routing grid. This is currently only possible for grids that are regular in latitude and longituide. We distinguish between regridding (which is used between land and river grids of different resolution, or the same resolution but staggered relative to one another) and remapping (between consistent grids of the same resolution).
+
+Grids are considered consistent (and therefore regridding is not required) if they are of the same resolution and points on one coincide with points on the other. We do not require that all locations have to be in both grids (though that is desirable), nor do the points need to be presented in the same order in both grids.
+
+   TRUE
+      River routing and land grids differ and regridding is required.
+
+   FALSE
+      River routing and land grids are consistent and regridding is not required.
+
+.. note::
+   In principle consistent grids with the same resolution can be handled via regridding, but the recommended approach in that case is to use the simpler remapping.
+
+.. warning::
+   Currently, regridding between land and river routing grids must only be used with regular lat/lon grids.
+
+   If a 1D model input grid is specified in :nml:lst:`JULES_INPUT_GRID`, it must be possible to define a 2D regular lat/lon grid containing all the points in the model input grid.
+
+   An example with the GSWP2 (land points only) forcing data is given below.
+
+
+.. nml:member:: rivers_length
+
+   :type: real
+   :default: None
+
+   The constant size of the rivers grid (m). This value is used in several ways, as explained below.
+
+   If the coordinate system used is not latitude and longitude (:nml:mem:`JULES_LATLON::l_coord_latlon` = F) river_length must be provided and its value must be >0. This is used to calculate gridbox areas, assuming square gridboxes.
+
+   If the coordinate system used is latitude and longitude, and a run is using RFM (:nml:mem:`JULES_RIVERS::i_river_vn` = 2) and/or overbank inundation without hypsometry (:nml:mem:`JULES_OVERBANK::l_riv_overbank` = T and :nml:mem:`JULES_OVERBANK::overbank_model` = 1 or 2), rivers_length is again required, but in this case a value <= 0 can be used to trigger calculation of a value based on the latitudinal size of gridboxes (this is so as to mimic the behaviour of older versions of the code). In these cases rivers_length is used as a length scale (the distance between points) for RFM and as a length scale (relative to a gridbox) for overbank inundation.
+
+
+.. nml:group:: Members only used with RFM (:nml:mem:`JULES_RIVERS::i_river_vn` = 2).
+
+   .. nml:member:: l_use_area
+
+   :type: logical
+   :default: F
+
+   Switch to control whether a drainage area ancillary field is used to distinguish between land and river points (for the purpose of setting routing parameter values).
+
+   TRUE
+     An ancillary field will be used to define the area draining to each point. See "area" in :ref:`list-of-rivers-params`.
+
+   FALSE
+     No ancillary field will be used and all points will be given river parameter values.
 
 
 .. nml:group:: Members used to determine how river routing variables are set
@@ -1206,10 +1212,6 @@ This namelist specifies how spatially varying river routing properties should be
       :default: 0
 
       The number of river routing property variables that will be provided (see :ref:`list-of-rivers-params`).
-
-      *  For RFM, at least direction is currently required
-      *  For TRIP, at least direction and sequence are required
-
 
 
    .. nml:member:: var
@@ -1270,54 +1272,12 @@ This namelist specifies how spatially varying river routing properties should be
       This is not used for variables where :nml:mem:`use_file` = TRUE, but a placeholder must still be given in that case.
 
 
-Example
-~~~~~~~
-
-The following gives an example of how you would set up the namelists to use routing with the GSWP2 forcing data.
-
-The model input grid is the GSWP2 grid, i.e. a land-points-only, 1D grid where points lie on a 1\ |deg| x 1\ |deg| grid. The river routing input grid is a 2D 1\ |deg| x 1\ |deg| grid.
-
-Since both grids are 1\ |deg| x 1\ |deg|, we define the 2D regular lat-lon grid containing the model input grid to be the river routing input grid, which means we don't need any regridding of variables. ::
-
-    &JULES_INPUT_GRID
-      grid_is_1d    = T,
-      npoints       = 15238,
-      grid_dim_name = "land"
-      # ...
-    /
-
-    # ...
-
-    &JULES_RIVERS_PROPS
-      # Define the river routing input grid to be a 2D regular lat-lon grid
-      rivers_reglatlon = T,
-      x_dim_name = "longitude",
-      nx         = 360,
-      y_dim_name = "latitude",
-      ny         = 180,
-
-      # Define the 2D regular lat-lon grid containing the model input grid to be a 2D 1\ |deg| x 1\ |deg| grid
-      nx_grid  = 360,
-      ny_grid  = 180,
-      reg_lat1 = -89.5,
-      reg_lon1 = -179.5,
-      reg_dlat = 1.0,
-      reg_dlon = 1.0,
-
-      # No regridding required since the river routing input grid is the same as the 2D regular lat-lon grid containing the model input grid
-      rivers_regrid = F
-    /
-
-
-.. |deg| unicode:: U+00B0
-
-
 .. _list-of-rivers-params:
 
 List of rivers properties
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following table summarises river routing input grid properties required to run RFM or TRIP river routing algorithms, specified from an ancillary file if :nml:mem:`JULES_RIVERS_PROPS::use_file` = TRUE.
+The following table summarises river routing properties required to run RFM or TRIP river routing algorithms, specified from an ancillary file if :nml:mem:`JULES_RIVERS_PROPS::use_file` = TRUE.
 
 .. tabularcolumns:: |p{2.5cm}|L|
 
@@ -1326,10 +1286,11 @@ The following table summarises river routing input grid properties required to r
 +============================+===========================================================================================================+
 | ``area``                   | Drainage area (in number of grid boxes) draining into a given grid box.                                   |
 |                            |                                                                                                           |
-|                            | This is used if :nml:mem:`JULES_RIVERS::i_river_vn` = ``2`` to distinguish between river and land points  |
-|                            | using the :nml:mem:`JULES_RIVERS::a_thresh` parameter. Points with drainage area >                        |
+|                            | This is used with RFM (:nml:mem:`JULES_RIVERS::i_river_vn` = ``2``) to distinguish between river and land |
+|                            | points using the :nml:mem:`JULES_RIVERS::a_thresh` parameter. Points with drainage area >                 |
 |                            | :nml:mem:`JULES_RIVERS::a_thresh` are treated as rivers, all others as land. These two classes of points  |
 |                            | use different wave speeds (e.g. :nml:mem:`JULES_RIVERS::cland` and :nml:mem:`JULES_RIVERS::criver`).      |
+|                            | Note that these "river" and "land" classes together comprise the total number of river routing points.    |
 |                            |                                                                                                           |
 |                            | If this field is not available, all points are treated as rivers.                                         |
 |                            |                                                                                                           |
@@ -1363,10 +1324,58 @@ The following table summarises river routing input grid properties required to r
 |                            | Used by TRIP river routing only (i.e. :nml:mem:`JULES_RIVERS::i_river_vn` = ``1,3``).                     |
 |                            | See Oki et al. (1999) for details.                                                                        |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
-| ``latitude_2d``            | If :nml:mem:`rivers_reglatlon` = FALSE, the unique 2D location of each river grid point must be specified.|
+| ``latitude_2d``            | The latitude of each river grid point must be specified. This field is required only if the model         |
+|                            | coordinates are latitude and longitude, i.e. if :nml:mem:`JULES_LATLON::l_coord_latlon` = FALSE.          |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
-| ``longitude_2d``           | If :nml:mem:`rivers_reglatlon` = FALSE, the unique 2D location of each river grid point must be specified.|
+| ``longitude_2d``           | The longitude of each river grid point must be specified. This field is required only if the model        |
+|                            | coordinates are latitude and longitude, i.e. if :nml:mem:`JULES_LATLON::l_coord_latlon` = FALSE.          |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
+
+
+
+Example of how to set up the river grid
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following gives an example of how you would set up the namelists to use routing with the GSWP2 forcing data.
+
+The model input grid is the GSWP2 grid, i.e. a land-points-only, 1D grid where points lie on a 1\ |deg| x 1\ |deg| grid. The river routing input grid is a 2D 1\ |deg| x 1\ |deg| grid.
+
+Since both grids are 1\ |deg| x 1\ |deg|, we define the 2D regular lat-lon grid containing the land points to be the river routing input grid, which means we don't need any regridding of variables. ::
+
+    &JULES_INPUT_GRID
+      grid_is_1d    = T,
+      npoints       = 15238,
+      grid_dim_name = "land"
+      # ...
+    /
+
+    &JULES_LATLON
+      l_coord_latlon = T,
+    /
+
+    &JULES_RIVERS_PROPS
+      # Define the river routing input grid
+      x_dim_name = "longitude",
+      nx_rivers  = 360,
+      y_dim_name = "latitude",
+      ny_rivers  = 180,
+
+      # Define the 2D regular lat-lon grid containing the model input grid to be a 2D 1\ |deg| x 1\ |deg| grid
+      nx_land_grid = 360,
+      ny_land_grid = 180,
+      x1_land_grid = -179.5,
+      y1_land_grid = -89.5,
+      land_dx      = 1.0,
+      land_dy      = 1.0,
+
+      # No regridding required since the river routing input grid and the land grid are consistent grids with the same resolution
+      rivers_regrid = F
+    /
+
+
+.. |deg| unicode:: U+00B0
+
+
 
 .. seealso::
       References:
@@ -1479,14 +1488,14 @@ The following table summarises overbank inundation grid properties, specified fr
 +============================+===========================================================================================================+
 | ``logn_mean``              | Mean of ln(elevation-elev_min) for each grid cell (in units ln(m))                                        |
 |                            |                                                                                                           |
-|                            | This is only used if :nml:mem:`JULES_OVERBANK::l_riv_hypsometry` = TRUE                                   |
+|                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 3.                                       |
 |                            |                                                                                                           |
 |                            | Note that elev_min is DEM minimum, not river/lake bed level (therefore large values close to water        |
-|                            | bodies can occur in floodplain gridcells)                                                                 |
+|                            | bodies can occur in floodplain gridcells).                                                                |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
 | ``logn_stdev``             | Standard deviation of ln(elevation-elev_min) for each grid cell (in units ln(m))                          |
 |                            |                                                                                                           |
-|                            | This is only used if :nml:mem:`JULES_OVERBANK::l_riv_hypsometry` = TRUE                                   |
+|                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 3.                                       |
 |                            |                                                                                                           |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
 
