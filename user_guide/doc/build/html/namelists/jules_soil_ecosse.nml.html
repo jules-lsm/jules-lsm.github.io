@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>6.12. jules_soil_ecosse.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script src="../_static/documentation_options.js?v=f15b9291"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.13. jules_deposition.nml" href="jules_deposition.nml.html" />
@@ -44,7 +47,7 @@
           <div class="body" role="main">
             
   <section id="jules-soil-ecosse-nml">
-<span id="jules-soil-ecosse-namelist"></span><h1><span class="section-number">6.12. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_ecosse.nml</span></code><a class="headerlink" href="#jules-soil-ecosse-nml" title="Link to this heading">¶</a></h1>
+<span id="jules-soil-ecosse-namelist"></span><h1><span class="section-number">6.12. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_ecosse.nml</span></code><a class="headerlink" href="#jules-soil-ecosse-nml" title="Permalink to this heading">¶</a></h1>
 <p>This file sets options and parameters for the ECOSSE model of soil biogeochemistry. It is used only if the ECOSSE model is chosen (<a class="reference internal" href="jules_soil_biogeochem.nml.html#JULES_SOIL_BIOGEOCHEM::soil_bgc_model" title="JULES_SOIL_BIOGEOCHEM::soil_bgc_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">soil_bgc_model</span></code></a> = 3).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -58,16 +61,16 @@
 <li><p>Clark, D. B., Mercado, L. M., Sitch, S., Jones, C. D., Gedney, N., Best, M. J., Pryor, M., Rooney, G. G., Essery, R. L. H., Blyth, E., Boucher, O., Harding, R. J., Huntingford, C., and Cox, P. M.: The Joint UK Land Environment Simulator (JULES), model description – Part 2: Carbon fluxes and vegetation dynamics, Geosci. Model Dev., 4, 701–722, (<a class="reference external" href="https://doi.org/10.5194/gmd-4-701-2011">https://doi.org/10.5194/gmd-4-701-2011</a>), 2011.</p></li>
 </ul>
 </div>
-<section id="jules-soil-ecosse-namelist-members">
-<h2><span class="section-number">6.12.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_SOIL_ECOSSE</span></code> namelist members<a class="headerlink" href="#jules-soil-ecosse-namelist-members" title="Link to this heading">¶</a></h2>
-<dl class="nml member" id="namelist-JULES_SOIL_ECOSSE">
+<section id="namelist-JULES_SOIL_ECOSSE">
+<span id="jules-soil-ecosse-namelist-members"></span><h2><span class="section-number">6.12.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_SOIL_ECOSSE</span></code> namelist members<a class="headerlink" href="#namelist-JULES_SOIL_ECOSSE" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::l_soil_n">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_soil_n</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_soil_n" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_soil_n</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_soil_n" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -82,12 +85,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::l_match_layers">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_match_layers</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_match_layers" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_match_layers</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_match_layers" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -102,15 +105,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::dim_cslayer">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">dim_cslayer</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::dim_cslayer" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">dim_cslayer</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::dim_cslayer" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>&gt;= 1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>None</p>
 </dd>
 </dl>
@@ -119,15 +122,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::dz_soilc_io">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">dz_soilc_io</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::dz_soilc_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">dz_soilc_io</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::dz_soilc_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(dim_cslayer)</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>&gt; 0</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>None</p>
 </dd>
 </dl>
@@ -136,15 +139,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::dt_soilc">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">dt_soilc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::dt_soilc" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">dt_soilc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::dt_soilc" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>&gt;= <a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a></p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p><a class="reference internal" href="timesteps.nml.html#JULES_TIME::timestep_len" title="JULES_TIME::timestep_len"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">timestep_len</span></code></a></p>
 </dd>
 </dl>
@@ -153,12 +156,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::l_driver_ave">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_driver_ave</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_driver_ave" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_driver_ave</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_driver_ave" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -173,15 +176,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::plant_input_profile">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">plant_input_profile</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::plant_input_profile" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">plant_input_profile</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::plant_input_profile" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>INTEGER</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>1 or 2</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>1</p>
 </dd>
 </dl>
@@ -201,12 +204,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::pi_sfc_frac">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">pi_sfc_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::pi_sfc_frac" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">pi_sfc_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::pi_sfc_frac" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.3</p>
 </dd>
 </dl>
@@ -215,12 +218,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::pi_sfc_depth">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">pi_sfc_depth</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::pi_sfc_depth" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">pi_sfc_depth</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::pi_sfc_depth" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.1</p>
 </dd>
 </dl>
@@ -229,15 +232,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::temp_modifier">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">temp_modifier</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::temp_modifier" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">temp_modifier</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::temp_modifier" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>INTEGER</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>1 or 2</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>2</p>
 </dd>
 </dl>
@@ -256,16 +259,16 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::water_modifier">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">water_modifier</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::water_modifier" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">water_modifier</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::water_modifier" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
 <div><dl class="field-list simple">
-<dt class="field-odd">type<span class="colon">:</span></dt>
+<dt class="field-odd">type</dt>
 <dd class="field-odd"><p>INTEGER</p>
 </dd>
-<dt class="field-even">permitted<span class="colon">:</span></dt>
+<dt class="field-even">permitted</dt>
 <dd class="field-even"><p>1 or 2</p>
 </dd>
-<dt class="field-odd">default<span class="colon">:</span></dt>
+<dt class="field-odd">default</dt>
 <dd class="field-odd"><p>2</p>
 </dd>
 </dl>
@@ -285,12 +288,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_rate">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_rate</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_rate" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_rate</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_rate" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL(4)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>3.22e-7, 9.65e-9, 2.12e-8, 6.43e-10</p>
 </dd>
 </dl>
@@ -300,12 +303,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_ph_rate_min">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_ph_rate_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_ph_rate_min" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_ph_rate_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_ph_rate_min" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.2</p>
 </dd>
 </dl>
@@ -314,15 +317,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_ph_min">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_ph_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_ph_min" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_ph_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_ph_min" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>decomp_ph_min &lt;= decomp_ph_max</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>1.0</p>
 </dd>
 </dl>
@@ -331,15 +334,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_ph_max">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_ph_max</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_ph_max" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_ph_max</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_ph_max" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>decomp_ph_max &gt;= decomp_ph_min</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>4.5</p>
 </dd>
 </dl>
@@ -348,12 +351,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_temp_coeff_smith">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_temp_coeff_smith</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_temp_coeff_smith" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_temp_coeff_smith</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_temp_coeff_smith" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL(3)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>47.9, 106.0, 18.3</p>
 </dd>
 </dl>
@@ -363,12 +366,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_wrate_min_smith">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_wrate_min_smith</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_wrate_min_smith" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_wrate_min_smith</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_wrate_min_smith" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.2</p>
 </dd>
 </dl>
@@ -377,12 +380,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::decomp_wrate_min_clark">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_wrate_min_clark</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_wrate_min_clark" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">decomp_wrate_min_clark</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::decomp_wrate_min_clark" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.2</p>
 </dd>
 </dl>
@@ -394,12 +397,12 @@
 <p class="admonition-title">Parameters for ECOSSE that are only used if soil N is included (<a class="reference internal" href="#JULES_SOIL_ECOSSE::l_soil_n" title="JULES_SOIL_ECOSSE::l_soil_n"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_soil_n</span></code></a> = TRUE).</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::l_decomp_slow">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_decomp_slow</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_decomp_slow" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">l_decomp_slow</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::l_decomp_slow" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -414,15 +417,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::depo_nit_frac">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">depo_nit_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::depo_nit_frac" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">depo_nit_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::depo_nit_frac" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>0 &lt;= depo_nit_frac &lt;= 1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>1.0</p>
 </dd>
 </dl>
@@ -431,15 +434,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::bacteria_min_frac">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_min_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_min_frac" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_min_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_min_frac" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>0 &lt;= bacteria_min_frac &lt;= 1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>0.2</p>
 </dd>
 </dl>
@@ -448,15 +451,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::bacteria_max_frac">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_max_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_max_frac" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_max_frac</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_max_frac" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>bacteria_min_frac &lt;= bacteria_max_frac &lt;= 1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>0.5</p>
 </dd>
 </dl>
@@ -465,12 +468,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::bacteria_min_frac_pH">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_min_frac_pH</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_min_frac_pH" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_min_frac_pH</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_min_frac_pH" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>4.0</p>
 </dd>
 </dl>
@@ -479,15 +482,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::bacteria_max_frac_pH">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_max_frac_pH</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_max_frac_pH" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">bacteria_max_frac_pH</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::bacteria_max_frac_pH" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>bacteria_min_frac_pH &lt;= bacteria_max_frac_pH</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>5.5</p>
 </dd>
 </dl>
@@ -496,12 +499,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::cn_bacteria">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">cn_bacteria</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::cn_bacteria" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">cn_bacteria</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::cn_bacteria" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>5.5</p>
 </dd>
 </dl>
@@ -510,12 +513,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::cn_fungi">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">cn_fungi</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::cn_fungi" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">cn_fungi</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::cn_fungi" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>5.5</p>
 </dd>
 </dl>
@@ -524,12 +527,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::depth_nitrif">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">depth_nitrif</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::depth_nitrif" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">depth_nitrif</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::depth_nitrif" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.25</p>
 </dd>
 </dl>
@@ -538,12 +541,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_rate">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_rate</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_rate" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_rate</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_rate" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>9.921e-7</p>
 </dd>
 </dl>
@@ -552,12 +555,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_wrate_min">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_wrate_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_wrate_min" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_wrate_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_wrate_min" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.6</p>
 </dd>
 </dl>
@@ -566,12 +569,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_max_factor">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_max_factor</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_max_factor" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_max_factor</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_max_factor" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.1</p>
 </dd>
 </dl>
@@ -580,15 +583,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_frac_n2o_fc">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_frac_n2o_fc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_frac_n2o_fc" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_frac_n2o_fc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_frac_n2o_fc" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>0 &lt;= nitrif_frac_n2o_fc &lt;= 1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>0.02</p>
 </dd>
 </dl>
@@ -597,15 +600,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_frac_gas">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_frac_gas</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_frac_gas" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_frac_gas</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_frac_gas" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>0 &lt;= nitrif_frac_gas &lt;= 1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>0.02</p>
 </dd>
 </dl>
@@ -614,15 +617,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::nitrif_frac_no">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_frac_no</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_frac_no" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">nitrif_frac_no</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::nitrif_frac_no" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>0 &lt;= nitrif_frac_no &lt;= 1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>0.4</p>
 </dd>
 </dl>
@@ -631,12 +634,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::denit50">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit50</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit50" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit50</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit50" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.033</p>
 </dd>
 </dl>
@@ -645,12 +648,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::denit_bio_factor">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_bio_factor</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_bio_factor" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_bio_factor</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_bio_factor" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.005</p>
 </dd>
 </dl>
@@ -659,15 +662,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::denit_frac_n2_fc">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_frac_n2_fc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_frac_n2_fc" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_frac_n2_fc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_frac_n2_fc" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>0 &lt;= denit_frac_n2_fc &lt;= 1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>0.55</p>
 </dd>
 </dl>
@@ -676,12 +679,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::denit_nitrate_equal">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_nitrate_equal</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_nitrate_equal" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_nitrate_equal</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_nitrate_equal" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.4</p>
 </dd>
 </dl>
@@ -690,12 +693,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::denit_water_coeff">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_water_coeff</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_water_coeff" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">denit_water_coeff</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::denit_water_coeff" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL(3)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.62, 0.38, 1.74</p>
 </dd>
 </dl>
@@ -704,12 +707,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::amm_leach_min">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">amm_leach_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::amm_leach_min" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">amm_leach_min</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::amm_leach_min" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.02</p>
 </dd>
 </dl>
@@ -718,12 +721,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SOIL_ECOSSE::n_inorg_max_conc">
-<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">n_inorg_max_conc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::n_inorg_max_conc" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SOIL_ECOSSE::</span></span><span class="sig-name descname"><span class="pre">n_inorg_max_conc</span></span><a class="headerlink" href="#JULES_SOIL_ECOSSE::n_inorg_max_conc" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>REAL</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>-1.0</p>
 </dd>
 </dl>
@@ -748,7 +751,7 @@
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.12. <code class="docutils literal notranslate"><span class="pre">jules_soil_ecosse.nml</span></code></a><ul>
-<li><a class="reference internal" href="#jules-soil-ecosse-namelist-members">6.12.1. <code class="docutils literal notranslate"><span class="pre">JULES_SOIL_ECOSSE</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-JULES_SOIL_ECOSSE">6.12.1. <code class="docutils literal notranslate"><span class="pre">JULES_SOIL_ECOSSE</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -800,7 +803,7 @@
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>

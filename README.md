@@ -8,7 +8,7 @@ For first time users, please create the production environment to build the docs
 conda env create -f environment.yml
 ```
 
-Activate the enviroment:
+Activate the environment:
 
 ```
 conda activate jules-user-guide

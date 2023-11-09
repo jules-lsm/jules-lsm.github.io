@@ -1,0 +1,25 @@
+*~
+__pycache__/
+results/*.png
+results/*.txt
+processed_data/*.dat
+.*.sw?
+
+#ignore envs
+venv/
+
+#ignore build output
+/build/
+_build/
+
+#ignore VS Code files
+/.idea
+
+#ignore envs
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

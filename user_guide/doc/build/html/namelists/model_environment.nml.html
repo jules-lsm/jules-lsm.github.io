@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>6.5. model_environment.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script src="../_static/documentation_options.js?v=f15b9291"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.6. jules_surface.nml" href="jules_surface.nml.html" />
@@ -44,7 +47,7 @@
           <div class="body" role="main">
             
   <section id="model-environment-nml">
-<h1><span class="section-number">6.5. </span><code class="docutils literal notranslate"><span class="pre">model_environment.nml</span></code><a class="headerlink" href="#model-environment-nml" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">6.5. </span><code class="docutils literal notranslate"><span class="pre">model_environment.nml</span></code><a class="headerlink" href="#model-environment-nml" title="Permalink to this heading">¶</a></h1>
 <p>This file sets the model environment options e.g. whether JULES is
 coupled to the UM or run in a standalone environment. It contains one
 namelist called <a class="reference internal" href="#namelist-JULES_MODEL_ENVIRONMENT"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_MODEL_ENVIRONMENT</span></code></a>.</p>
@@ -62,16 +65,16 @@ gui. Warnings can also be issued if options are inappropriately set.</p>
 being used. CABLE is in the process of being incorporated into JULES
 and other flavours of JULES is in development e.g. a standalone rivers
 app.</p>
-<section id="jules-model-environment-namelist-members">
-<h2><span class="section-number">6.5.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_MODEL_ENVIRONMENT</span></code> namelist members<a class="headerlink" href="#jules-model-environment-namelist-members" title="Link to this heading">¶</a></h2>
-<dl class="nml member" id="namelist-JULES_MODEL_ENVIRONMENT">
+<section id="namelist-JULES_MODEL_ENVIRONMENT">
+<span id="jules-model-environment-namelist-members"></span><h2><span class="section-number">6.5.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_MODEL_ENVIRONMENT</span></code> namelist members<a class="headerlink" href="#namelist-JULES_MODEL_ENVIRONMENT" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_MODEL_ENVIRONMENT::l_jules_parent">
-<span class="sig-prename descclassname"><span class="pre">JULES_MODEL_ENVIRONMENT::</span></span><span class="sig-name descname"><span class="pre">l_jules_parent</span></span><a class="headerlink" href="#JULES_MODEL_ENVIRONMENT::l_jules_parent" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_MODEL_ENVIRONMENT::</span></span><span class="sig-name descname"><span class="pre">l_jules_parent</span></span><a class="headerlink" href="#JULES_MODEL_ENVIRONMENT::l_jules_parent" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>imdi</p>
 </dd>
 </dl>
@@ -81,6 +84,10 @@ available in the specified model environment, to be trigger ignored
 and checked that they are set appropriately at run-time.</p>
 <blockquote>
 <div><table class="docutils align-default">
+<colgroup>
+<col style="width: 1%" />
+<col style="width: 99%" />
+</colgroup>
 <tbody>
 <tr class="row-odd"><td><p>0</p></td>
 <td><p>JULES is being run standalone. <br />
@@ -120,18 +127,22 @@ they are completed.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_MODEL_ENVIRONMENT::lsm_id">
-<span class="sig-prename descclassname"><span class="pre">JULES_MODEL_ENVIRONMENT::</span></span><span class="sig-name descname"><span class="pre">lsm_id</span></span><a class="headerlink" href="#JULES_MODEL_ENVIRONMENT::lsm_id" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_MODEL_ENVIRONMENT::</span></span><span class="sig-name descname"><span class="pre">lsm_id</span></span><a class="headerlink" href="#JULES_MODEL_ENVIRONMENT::lsm_id" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
 <p>Switch for land surface model flavour.</p>
 <blockquote>
 <div><table class="docutils align-default">
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 96%" />
+</colgroup>
 <tbody>
 <tr class="row-odd"><td><p>1</p></td>
 <td><p>JULES land surface model</p></td>
@@ -165,7 +176,7 @@ they are completed.</p>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.5. <code class="docutils literal notranslate"><span class="pre">model_environment.nml</span></code></a><ul>
-<li><a class="reference internal" href="#jules-model-environment-namelist-members">6.5.1. <code class="docutils literal notranslate"><span class="pre">JULES_MODEL_ENVIRONMENT</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-JULES_MODEL_ENVIRONMENT">6.5.1. <code class="docutils literal notranslate"><span class="pre">JULES_MODEL_ENVIRONMENT</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -217,7 +228,7 @@ they are completed.</p>
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>

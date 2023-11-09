@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="./">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>5. JULES output &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/nature.css" />
     <link rel="stylesheet" href="_static/jules-tweaks.css" type="text/css" />
-    <script src="_static/documentation_options.js?v=f15b9291"></script>
-    <script src="_static/doctools.js?v=888ff710"></script>
-    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="6. The JULES namelist files" href="namelists/contents.html" />
@@ -43,7 +46,7 @@
           <div class="body" role="main">
             
   <section id="jules-output">
-<h1><span class="section-number">5. </span>JULES output<a class="headerlink" href="#jules-output" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">5. </span>JULES output<a class="headerlink" href="#jules-output" title="Permalink to this heading">¶</a></h1>
 <p>JULES separates output into one or more output ‘profiles’. Within each profile, all variables selected for output are written to the same file with the same frequency (also referred to as the ‘output period’). The output period can be any multiple of the model timestep, including calendar months or years.</p>
 <p>Most output is provided on the model grid only. Some variables are provided on the river routing model grid instead. Each output profile can contain <strong>either</strong> model grid <strong>or</strong> river routing model grid variables, but not both.</p>
 <p>Each output file contains the latitude and longitude of each point to allow the points to be located in a grid if desired (e.g. for visualisation). Output files also contain two time related variables to locate the values in time (this is described in more detail <a class="reference external" href="#associating-output-values-with-the-correct-time">below</a>).</p>
@@ -56,7 +59,7 @@
 </ul>
 <p>All output files will be NetCDF if JULES is compiled with ‘proper’ NetCDF libraries (see <a class="reference internal" href="building-and-running/intro.html"><span class="doc">Building and running JULES</span></a>). Otherwise all output will be in columnar ASCII files.</p>
 <section id="associating-output-values-with-the-correct-time">
-<h2><span class="section-number">5.1. </span>Associating output values with the correct time<a class="headerlink" href="#associating-output-values-with-the-correct-time" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">5.1. </span>Associating output values with the correct time<a class="headerlink" href="#associating-output-values-with-the-correct-time" title="Permalink to this heading">¶</a></h2>
 <p>JULES output files contain two time related variables to allow model output to be associated with the correct model time:</p>
 <dl>
 <dt><code class="docutils literal notranslate"><span class="pre">time</span></code></dt><dd><p>For each output period, this variable contains the time of the end of the output period. This is the time that any snapshot values apply at.</p>
@@ -76,7 +79,7 @@
 <p>Due to the way the model equations work, this ensures that all output at a given timestep in the output files is consistent.</p>
 </section>
 <section id="initial-data">
-<span id="id1"></span><h2><span class="section-number">5.2. </span>Initial data<a class="headerlink" href="#initial-data" title="Link to this heading">¶</a></h2>
+<span id="id1"></span><h2><span class="section-number">5.2. </span>Initial data<a class="headerlink" href="#initial-data" title="Permalink to this heading">¶</a></h2>
 <p>With the formulation given above, the initial state of the model (i.e. the state at the beginning of the first timestep of a section) is never output (except to dump files). For the majority of users, this will not be an issue. If the initial state is required, it is possible for an output profile to output the initial state for each section of a run (i.e. initial state of each spinup cycle and the main run) to a separate file - see <a class="reference internal" href="namelists/output.nml.html#JULES_OUTPUT_PROFILE::output_initial" title="JULES_OUTPUT_PROFILE::output_initial"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">output_initial</span></code></a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -84,7 +87,7 @@
 </div>
 </section>
 <section id="dump-files">
-<h2><span class="section-number">5.3. </span>Dump files<a class="headerlink" href="#dump-files" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">5.3. </span>Dump files<a class="headerlink" href="#dump-files" title="Permalink to this heading">¶</a></h2>
 <p>JULES writes dump files (a snapshot of the current model state) at several points during a run. These can be used to restart the model from that point if desired. The times that dump files are written are:</p>
 <ul class="simple">
 <li><p>After initialisation is complete, immediately before the start of the run (initial state).</p></li>
@@ -165,7 +168,7 @@
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>

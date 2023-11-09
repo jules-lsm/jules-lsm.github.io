@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>1.29. JULES version 4.0 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script src="../_static/documentation_options.js?v=f15b9291"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1.30. JULES version 3.4 Release Notes" href="JULES3-4.html" />
@@ -44,25 +47,25 @@
           <div class="body" role="main">
             
   <section id="jules-version-4-0-release-notes">
-<h1><span class="section-number">1.29. </span>JULES version 4.0 Release Notes<a class="headerlink" href="#jules-version-4-0-release-notes" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">1.29. </span>JULES version 4.0 Release Notes<a class="headerlink" href="#jules-version-4-0-release-notes" title="Permalink to this heading">¶</a></h1>
 <section id="jules-crop-crop-model">
-<h2><span class="section-number">1.29.1. </span>JULES-Crop crop model<a class="headerlink" href="#jules-crop-crop-model" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.29.1. </span>JULES-Crop crop model<a class="headerlink" href="#jules-crop-crop-model" title="Permalink to this heading">¶</a></h2>
 <p>JULES vn4.0 sees the introduction of the JULES-Crop crop model. This has been the result of many years of hard work from Tom Osbourne et. al. at the <a class="reference external" href="http://www.reading.ac.uk/">University of Reading</a>.</p>
 <p>A lot of the work done in getting it ready for the trunk and testing was done in the Met Office by Karina Williams and Jemma Gornall.</p>
 </section>
 <section id="daily-disaggregator-for-forcing-data">
-<h2><span class="section-number">1.29.2. </span>Daily disaggregator for forcing data<a class="headerlink" href="#daily-disaggregator-for-forcing-data" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.29.2. </span>Daily disaggregator for forcing data<a class="headerlink" href="#daily-disaggregator-for-forcing-data" title="Permalink to this heading">¶</a></h2>
 <p>JULES can now be driven with daily forcing data, and the daily disaggregator will disaggregate the daily forcing down onto the model timestep.</p>
 <p>For more information, see <a class="reference internal" href="../namelists/drive.nml.html#JULES_DRIVE::l_daily_disagg" title="JULES_DRIVE::l_daily_disagg"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_daily_disagg</span></code></a>.</p>
 </section>
 <section id="major-namelist-changes">
-<h2><span class="section-number">1.29.3. </span>Major namelist changes<a class="headerlink" href="#major-namelist-changes" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.29.3. </span>Major namelist changes<a class="headerlink" href="#major-namelist-changes" title="Permalink to this heading">¶</a></h2>
 <p>JULES vn4.0 also sees a major revamp of the science-related namelists. The monolithic JULES_SWITCHES namelist, and various others, are gone, and have been replaced with science section namelists. For more details, see <a class="reference internal" href="../namelists/contents.html"><span class="doc">The JULES namelist files</span></a>.</p>
 <p>This has been with the aim of providing a GUI for editing the JULES namelists using <a class="reference external" href="http://metomi.github.io/rose/doc/html/index.html">Rose</a>, which is now available - see <a class="reference internal" href="../building-and-running/rose.html"><span class="doc">Automatic upgrading and GUI using Rose</span></a>.</p>
 <p>It also has the advantage that the new namelists are cut-and-paste-able between the UM and JULES, which should make it easier to ensure that the same science is being used in online and offline runs.</p>
 </section>
 <section id="removal-of-gnu-make-build-files">
-<h2><span class="section-number">1.29.4. </span>Removal of GNU make build files<a class="headerlink" href="#removal-of-gnu-make-build-files" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.29.4. </span>Removal of GNU make build files<a class="headerlink" href="#removal-of-gnu-make-build-files" title="Permalink to this heading">¶</a></h2>
 <p>After a period of supporting two build systems (FCM make and GNU make), it has been decided that support for GNU make should be removed. The overhead of maintaining two build systems was getting too large, and FCM make is preferred for several reasons:</p>
 <dl class="simple">
 <dt>Directory structure</dt><dd><ul class="simple">
@@ -87,7 +90,7 @@
 </dl>
 </section>
 <section id="bugs-and-other-changes">
-<h2><span class="section-number">1.29.5. </span>Bugs and other changes<a class="headerlink" href="#bugs-and-other-changes" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.29.5. </span>Bugs and other changes<a class="headerlink" href="#bugs-and-other-changes" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Output for land points not comparing between land_only = T and F runs with 2D grid</p></li>
 <li><p>Incorrect behaviour when <code class="docutils literal notranslate"><span class="pre">spinup_end</span></code> == <code class="docutils literal notranslate"><span class="pre">data_end</span></code></p></li>
@@ -168,7 +171,7 @@
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>

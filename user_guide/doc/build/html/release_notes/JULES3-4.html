@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>1.30. JULES version 3.4 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script src="../_static/documentation_options.js?v=f15b9291"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1.31. JULES version 3.3 Release Notes" href="JULES3-3.html" />
@@ -44,16 +47,16 @@
           <div class="body" role="main">
             
   <section id="jules-version-3-4-release-notes">
-<h1><span class="section-number">1.30. </span>JULES version 3.4 Release Notes<a class="headerlink" href="#jules-version-3-4-release-notes" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">1.30. </span>JULES version 3.4 Release Notes<a class="headerlink" href="#jules-version-3-4-release-notes" title="Permalink to this heading">¶</a></h1>
 <p>n.b. A critical memory leak was found in JULES v3.4 that necessitated a new release, designated v3.4.1.</p>
 <section id="changes-to-semantics-of-output">
-<h2><span class="section-number">1.30.1. </span>Changes to semantics of output<a class="headerlink" href="#changes-to-semantics-of-output" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.30.1. </span>Changes to semantics of output<a class="headerlink" href="#changes-to-semantics-of-output" title="Permalink to this heading">¶</a></h2>
 <p>The output semantics used since JULES vn3.2 (i.e. state variables captured at the start of a timestep, flux variables captured at the end) were confusing some users. The semi-implicit scheme in JULES is designed so that the state and fluxes at the end of a timestep are consistent with each other, but under the previous semantics these were staggered by one timestep in output files.</p>
 <p>All variables are now captured at the end of a timestep, so state and flux variables at a particular timestep in output files will be consistent with each other. A new option has been added to request the output of initial state, however very few users will have a use for this. It is still the case that the value in the <code class="docutils literal notranslate"><span class="pre">time</span></code> variable can be used to place snapshot data in time, and the values in <code class="docutils literal notranslate"><span class="pre">time_bounds</span></code> represent the interval over which a mean or accumulation applies.</p>
 <p>More details can be found at <a class="reference internal" href="../output.html"><span class="doc">JULES output</span></a>.</p>
 </section>
 <section id="input-and-or-output-of-variables-with-multiple-levels-dimensions-has-been-improved">
-<h2><span class="section-number">1.30.2. </span>Input and/or output of variables with multiple ‘levels’ dimensions has been improved<a class="headerlink" href="#input-and-or-output-of-variables-with-multiple-levels-dimensions-has-been-improved" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.30.2. </span>Input and/or output of variables with multiple ‘levels’ dimensions has been improved<a class="headerlink" href="#input-and-or-output-of-variables-with-multiple-levels-dimensions-has-been-improved" title="Permalink to this heading">¶</a></h2>
 <p>In previous versions of JULES since vn3.1, variables could only be input or output with a single ‘levels’ dimension. In particular, this caused problems with variables in the new snow scheme, which have two ‘levels’ dimensions on top of the grid dimensions (tiles and snow levels). This led to compromises being made with the snow layer variables:</p>
 <ul class="simple">
 <li><p>It was only possible to initialise the snow layer variables using a constant value, from a previous dump or using <a class="reference internal" href="../namelists/initial_conditions.nml.html#JULES_INITIAL::total_snow" title="JULES_INITIAL::total_snow"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">total_snow</span></code></a></p></li>
@@ -62,11 +65,11 @@
 <p>This problem is solved in JULES vn3.4 - it is now possible to input and output variables with multiple ‘levels’ dimensions (there is not even a restriction to two ‘levels’ dimensions). This means that both compromises for snow layer variables detailed above have been removed.</p>
 </section>
 <section id="streamlined-process-for-adding-new-variables-for-input-and-or-output">
-<h2><span class="section-number">1.30.3. </span>Streamlined process for adding new variables for input and/or output<a class="headerlink" href="#streamlined-process-for-adding-new-variables-for-input-and-or-output" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.30.3. </span>Streamlined process for adding new variables for input and/or output<a class="headerlink" href="#streamlined-process-for-adding-new-variables-for-input-and-or-output" title="Permalink to this heading">¶</a></h2>
 <p>Although fairly simple, the process for adding a new variable for input and/or output in JULES vn3.1 - vn3.3 required several edits to be made, and hence provided many opportunities to make mistakes. This process is simplified in JULES vn3.4 to require fewer edits. More details can be found at <a class="reference internal" href="../code/io.html#implementing-new-variables-for-input-and-output"><span class="std std-ref">Implementing new variables for input and output</span></a>.</p>
 </section>
 <section id="other-changes">
-<h2><span class="section-number">1.30.4. </span>Other changes<a class="headerlink" href="#other-changes" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.30.4. </span>Other changes<a class="headerlink" href="#other-changes" title="Permalink to this heading">¶</a></h2>
 <dl class="simple">
 <dt>Tidying of boundary layer code</dt><dd><p>Some small changes have been made to tidy up some of the boundary layer code (i.e. routines in <code class="docutils literal notranslate"><span class="pre">src/science/surface</span></code>) - this is mostly removing unused variables and tidying up subroutine argument lists.</p>
 </dd>
@@ -75,7 +78,7 @@
 </dl>
 </section>
 <section id="bugs-fixed">
-<h2><span class="section-number">1.30.5. </span>Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.30.5. </span>Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Output (including dump files) not correctly generated for the last spin-up cycle when spin-up fails and <a class="reference internal" href="../namelists/timesteps.nml.html#JULES_SPINUP::terminate_on_spinup_fail" title="JULES_SPINUP::terminate_on_spinup_fail"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">terminate_on_spinup_fail</span></code></a> = TRUE</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lw_net</span></code> diagnostic does not include the contribution from the reflected incoming longwave if the emissivity is less than zero</p></li>
@@ -153,7 +156,7 @@
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>

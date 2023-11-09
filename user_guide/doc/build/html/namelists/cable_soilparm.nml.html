@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>6.26. cable_soilparm.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script src="../_static/documentation_options.js?v=f15b9291"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.27. crop_params.nml" href="crop_params.nml.html" />
@@ -44,20 +47,20 @@
           <div class="body" role="main">
             
   <section id="cable-soilparm-nml">
-<h1><span class="section-number">6.26. </span><code class="docutils literal notranslate"><span class="pre">cable_soilparm.nml</span></code><a class="headerlink" href="#cable-soilparm-nml" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">6.26. </span><code class="docutils literal notranslate"><span class="pre">cable_soilparm.nml</span></code><a class="headerlink" href="#cable-soilparm-nml" title="Permalink to this heading">¶</a></h1>
 <p>This file contains a namelist called <a class="reference internal" href="#namelist-CABLE_SOILPARM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">CABLE_SOILPARM</span></code></a> that sets time-invariant parameters for different soil types for the CABLE land surface model.</p>
-<section id="cable-soilparm-namelist-members">
-<h2><span class="section-number">6.26.1. </span><code class="docutils literal notranslate"><span class="pre">CABLE_SOILPARM</span></code> namelist members<a class="headerlink" href="#cable-soilparm-namelist-members" title="Link to this heading">¶</a></h2>
-<p id="namelist-CABLE_SOILPARM">This namelist reads the values of parameters for each of the soil types if the CABLE land surface model is being used. These parameters are a function of surface type only. All parameters must be defined for any configuration.
+<section id="namelist-CABLE_SOILPARM">
+<span id="cable-soilparm-namelist-members"></span><h2><span class="section-number">6.26.1. </span><code class="docutils literal notranslate"><span class="pre">CABLE_SOILPARM</span></code> namelist members<a class="headerlink" href="#namelist-CABLE_SOILPARM" title="Permalink to this heading">¶</a></h2>
+<p>This namelist reads the values of parameters for each of the soil types if the CABLE land surface model is being used. These parameters are a function of surface type only. All parameters must be defined for any configuration.
 The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and for the current version of CABLE is set to <cite>9</cite>.</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="CABLE_SOILPARM::silt_io">
-<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">silt_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::silt_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">silt_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::silt_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(n_soiltypes)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -66,12 +69,12 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="CABLE_SOILPARM::clay_io">
-<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">clay_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::clay_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">clay_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::clay_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(n_soiltypes)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -80,12 +83,12 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="CABLE_SOILPARM::sand_io">
-<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">sand_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::sand_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">sand_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::sand_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(n_soiltypes)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -94,12 +97,12 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="CABLE_SOILPARM::swilt_io">
-<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">swilt_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::swilt_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">swilt_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::swilt_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(n_soiltypes)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -108,12 +111,12 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="CABLE_SOILPARM::sfc_io">
-<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">sfc_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::sfc_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">sfc_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::sfc_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(n_soiltypes)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -122,12 +125,12 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="CABLE_SOILPARM::ssat_io">
-<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">ssat_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::ssat_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">ssat_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::ssat_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(n_soiltypes)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -136,12 +139,12 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="CABLE_SOILPARM::bch_io">
-<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">bch_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::bch_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">bch_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::bch_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(n_soiltypes)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -150,12 +153,12 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="CABLE_SOILPARM::hyds_io">
-<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">hyds_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::hyds_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">hyds_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::hyds_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(n_soiltypes)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -164,12 +167,12 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="CABLE_SOILPARM::sucs_io">
-<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">sucs_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::sucs_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">sucs_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::sucs_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(n_soiltypes)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -178,12 +181,12 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="CABLE_SOILPARM::rhosoil_io">
-<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">rhosoil_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::rhosoil_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">rhosoil_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::rhosoil_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(n_soiltypes)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -192,12 +195,12 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="CABLE_SOILPARM::css_io">
-<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">css_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::css_io" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">CABLE_SOILPARM::</span></span><span class="sig-name descname"><span class="pre">css_io</span></span><a class="headerlink" href="#CABLE_SOILPARM::css_io" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(n_soiltypes)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -221,7 +224,7 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.26. <code class="docutils literal notranslate"><span class="pre">cable_soilparm.nml</span></code></a><ul>
-<li><a class="reference internal" href="#cable-soilparm-namelist-members">6.26.1. <code class="docutils literal notranslate"><span class="pre">CABLE_SOILPARM</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-CABLE_SOILPARM">6.26.1. <code class="docutils literal notranslate"><span class="pre">CABLE_SOILPARM</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -273,7 +276,7 @@ The number of soil types is stored in the <cite>n_soiltypes</cite> parameter and
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>

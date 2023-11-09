@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>6.6. jules_surface.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script src="../_static/documentation_options.js?v=f15b9291"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.7. jules_radiation.nml" href="jules_radiation.nml.html" />
@@ -44,21 +47,21 @@
           <div class="body" role="main">
             
   <section id="jules-surface-nml">
-<h1><span class="section-number">6.6. </span><code class="docutils literal notranslate"><span class="pre">jules_surface.nml</span></code><a class="headerlink" href="#jules-surface-nml" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">6.6. </span><code class="docutils literal notranslate"><span class="pre">jules_surface.nml</span></code><a class="headerlink" href="#jules-surface-nml" title="Permalink to this heading">¶</a></h1>
 <p>This file sets the surface options. It contains one namelist called <a class="reference internal" href="#namelist-JULES_SURFACE"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SURFACE</span></code></a>.</p>
-<section id="jules-surface-namelist-members">
-<h2><span class="section-number">6.6.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_SURFACE</span></code> namelist members<a class="headerlink" href="#jules-surface-namelist-members" title="Link to this heading">¶</a></h2>
-<dl class="nml member" id="namelist-JULES_SURFACE">
+<section id="namelist-JULES_SURFACE">
+<span id="jules-surface-namelist-members"></span><h2><span class="section-number">6.6.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_SURFACE</span></code> namelist members<a class="headerlink" href="#namelist-JULES_SURFACE" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::all_tiles">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">all_tiles</span></span><a class="headerlink" href="#JULES_SURFACE::all_tiles" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">all_tiles</span></span><a class="headerlink" href="#JULES_SURFACE::all_tiles" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>0,1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>0</p>
 </dd>
 </dl>
@@ -71,15 +74,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::cor_mo_iter">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">cor_mo_iter</span></span><a class="headerlink" href="#JULES_SURFACE::cor_mo_iter" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">cor_mo_iter</span></span><a class="headerlink" href="#JULES_SURFACE::cor_mo_iter" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>1-4</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>1</p>
 </dd>
 </dl>
@@ -98,12 +101,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::beta_cnv_bl">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">beta_cnv_bl</span></span><a class="headerlink" href="#JULES_SURFACE::beta_cnv_bl" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">beta_cnv_bl</span></span><a class="headerlink" href="#JULES_SURFACE::beta_cnv_bl" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>&gt;=0.0</p>
 </dd>
 </dl>
@@ -118,12 +121,12 @@ Parametrization of Boundary Layer Processes” (section 8.1)</a>.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::l_aggregate">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_aggregate</span></span><a class="headerlink" href="#JULES_SURFACE::l_aggregate" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_aggregate</span></span><a class="headerlink" href="#JULES_SURFACE::l_aggregate" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -139,15 +142,15 @@ Parametrization of Boundary Layer Processes” (section 8.1)</a>.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::i_aggregate_opt">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">i_aggregate_opt</span></span><a class="headerlink" href="#JULES_SURFACE::i_aggregate_opt" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">i_aggregate_opt</span></span><a class="headerlink" href="#JULES_SURFACE::i_aggregate_opt" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>0-1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>0</p>
 </dd>
 </dl>
@@ -164,12 +167,12 @@ Parametrization of Boundary Layer Processes” (section 8.1)</a>.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::l_epot_corr">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_epot_corr</span></span><a class="headerlink" href="#JULES_SURFACE::l_epot_corr" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_epot_corr</span></span><a class="headerlink" href="#JULES_SURFACE::l_epot_corr" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -183,12 +186,12 @@ Parametrization of Boundary Layer Processes” (section 8.1)</a>.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::l_point_data">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_point_data</span></span><a class="headerlink" href="#JULES_SURFACE::l_point_data" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_point_data</span></span><a class="headerlink" href="#JULES_SURFACE::l_point_data" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -203,12 +206,12 @@ Parametrization of Boundary Layer Processes” (section 8.1)</a>.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::l_land_ice_imp">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_land_ice_imp</span></span><a class="headerlink" href="#JULES_SURFACE::l_land_ice_imp" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_land_ice_imp</span></span><a class="headerlink" href="#JULES_SURFACE::l_land_ice_imp" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -223,12 +226,12 @@ Parametrization of Boundary Layer Processes” (section 8.1)</a>.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::l_anthrop_heat_src">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_anthrop_heat_src</span></span><a class="headerlink" href="#JULES_SURFACE::l_anthrop_heat_src" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_anthrop_heat_src</span></span><a class="headerlink" href="#JULES_SURFACE::l_anthrop_heat_src" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -243,15 +246,15 @@ Parametrization of Boundary Layer Processes” (section 8.1)</a>.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::iscrntdiag">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">iscrntdiag</span></span><a class="headerlink" href="#JULES_SURFACE::iscrntdiag" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">iscrntdiag</span></span><a class="headerlink" href="#JULES_SURFACE::iscrntdiag" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>0-3 (standalone: 0 or 1 only)</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>0</p>
 </dd>
 </dl>
@@ -276,12 +279,12 @@ is undergoing development and additional testing.</p></li>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::l_elev_lw_down">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_elev_lw_down</span></span><a class="headerlink" href="#JULES_SURFACE::l_elev_lw_down" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_elev_lw_down</span></span><a class="headerlink" href="#JULES_SURFACE::l_elev_lw_down" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>false</p>
 </dd>
 </dl>
@@ -294,12 +297,12 @@ scaled such that the sum over all surface tiles conserves the gridbox mean energ
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::l_elev_land_ice">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_elev_land_ice</span></span><a class="headerlink" href="#JULES_SURFACE::l_elev_land_ice" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_elev_land_ice</span></span><a class="headerlink" href="#JULES_SURFACE::l_elev_land_ice" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>false</p>
 </dd>
 </dl>
@@ -323,12 +326,12 @@ as with any surface tile.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::l_flake_model">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_flake_model</span></span><a class="headerlink" href="#JULES_SURFACE::l_flake_model" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_flake_model</span></span><a class="headerlink" href="#JULES_SURFACE::l_flake_model" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>false</p>
 </dd>
 </dl>
@@ -339,12 +342,12 @@ as with any surface tile.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::l_urban2t">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_urban2t</span></span><a class="headerlink" href="#JULES_SURFACE::l_urban2t" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_urban2t</span></span><a class="headerlink" href="#JULES_SURFACE::l_urban2t" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>false</p>
 </dd>
 </dl>
@@ -354,12 +357,12 @@ Additional parameters must be supplied via <a class="reference internal" href="n
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::l_mo_buoyancy_calc">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_mo_buoyancy_calc</span></span><a class="headerlink" href="#JULES_SURFACE::l_mo_buoyancy_calc" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">l_mo_buoyancy_calc</span></span><a class="headerlink" href="#JULES_SURFACE::l_mo_buoyancy_calc" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>false</p>
 </dd>
 </dl>
@@ -374,12 +377,12 @@ any unrealistic surface temperatures.</p>
 <p class="admonition-title">Surface parameters</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::hleaf">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">hleaf</span></span><a class="headerlink" href="#JULES_SURFACE::hleaf" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">hleaf</span></span><a class="headerlink" href="#JULES_SURFACE::hleaf" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>5.7e4</p>
 </dd>
 </dl>
@@ -389,12 +392,12 @@ any unrealistic surface temperatures.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::hwood">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">hwood</span></span><a class="headerlink" href="#JULES_SURFACE::hwood" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">hwood</span></span><a class="headerlink" href="#JULES_SURFACE::hwood" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>1.1e4</p>
 </dd>
 </dl>
@@ -404,12 +407,12 @@ any unrealistic surface temperatures.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::beta1">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">beta1</span></span><a class="headerlink" href="#JULES_SURFACE::beta1" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">beta1</span></span><a class="headerlink" href="#JULES_SURFACE::beta1" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.83</p>
 </dd>
 </dl>
@@ -419,12 +422,12 @@ any unrealistic surface temperatures.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::beta2">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">beta2</span></span><a class="headerlink" href="#JULES_SURFACE::beta2" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">beta2</span></span><a class="headerlink" href="#JULES_SURFACE::beta2" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.93</p>
 </dd>
 </dl>
@@ -434,12 +437,12 @@ any unrealistic surface temperatures.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::fwe_c3">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">fwe_c3</span></span><a class="headerlink" href="#JULES_SURFACE::fwe_c3" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">fwe_c3</span></span><a class="headerlink" href="#JULES_SURFACE::fwe_c3" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.5</p>
 </dd>
 </dl>
@@ -449,12 +452,12 @@ any unrealistic surface temperatures.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SURFACE::fwe_c4">
-<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">fwe_c4</span></span><a class="headerlink" href="#JULES_SURFACE::fwe_c4" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE::</span></span><span class="sig-name descname"><span class="pre">fwe_c4</span></span><a class="headerlink" href="#JULES_SURFACE::fwe_c4" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>20000.0</p>
 </dd>
 </dl>
@@ -480,7 +483,7 @@ any unrealistic surface temperatures.</p>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.6. <code class="docutils literal notranslate"><span class="pre">jules_surface.nml</span></code></a><ul>
-<li><a class="reference internal" href="#jules-surface-namelist-members">6.6.1. <code class="docutils literal notranslate"><span class="pre">JULES_SURFACE</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-JULES_SURFACE">6.6.1. <code class="docutils literal notranslate"><span class="pre">JULES_SURFACE</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -532,7 +535,7 @@ any unrealistic surface temperatures.</p>
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>

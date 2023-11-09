@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>6.8. jules_hydrology.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script src="../_static/documentation_options.js?v=f15b9291"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.9. jules_soil.nml" href="jules_soil.nml.html" />
@@ -44,18 +47,18 @@
           <div class="body" role="main">
             
   <section id="jules-hydrology-nml">
-<h1><span class="section-number">6.8. </span><code class="docutils literal notranslate"><span class="pre">jules_hydrology.nml</span></code><a class="headerlink" href="#jules-hydrology-nml" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">6.8. </span><code class="docutils literal notranslate"><span class="pre">jules_hydrology.nml</span></code><a class="headerlink" href="#jules-hydrology-nml" title="Permalink to this heading">¶</a></h1>
 <p>This file sets the hydrology options. It contains one namelist called <a class="reference internal" href="#namelist-JULES_HYDROLOGY"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_HYDROLOGY</span></code></a>.</p>
-<section id="jules-hydrology-namelist-members">
-<h2><span class="section-number">6.8.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_HYDROLOGY</span></code> namelist members<a class="headerlink" href="#jules-hydrology-namelist-members" title="Link to this heading">¶</a></h2>
-<dl class="nml member" id="namelist-JULES_HYDROLOGY">
+<section id="namelist-JULES_HYDROLOGY">
+<span id="jules-hydrology-namelist-members"></span><h2><span class="section-number">6.8.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_HYDROLOGY</span></code> namelist members<a class="headerlink" href="#namelist-JULES_HYDROLOGY" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::l_top">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">l_top</span></span><a class="headerlink" href="#JULES_HYDROLOGY::l_top" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">l_top</span></span><a class="headerlink" href="#JULES_HYDROLOGY::l_top" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -78,12 +81,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::l_pdm">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">l_pdm</span></span><a class="headerlink" href="#JULES_HYDROLOGY::l_pdm" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">l_pdm</span></span><a class="headerlink" href="#JULES_HYDROLOGY::l_pdm" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -111,12 +114,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::l_limit_gsoil">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">l_limit_gsoil</span></span><a class="headerlink" href="#JULES_HYDROLOGY::l_limit_gsoil" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">l_limit_gsoil</span></span><a class="headerlink" href="#JULES_HYDROLOGY::l_limit_gsoil" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -132,12 +135,12 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_HYDROLOGY::l_top" title="JULES_HYDROLOGY::l_top"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_top</span></code></a> = TRUE</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::zw_max">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">zw_max</span></span><a class="headerlink" href="#JULES_HYDROLOGY::zw_max" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">zw_max</span></span><a class="headerlink" href="#JULES_HYDROLOGY::zw_max" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -147,12 +150,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::ti_max">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">ti_max</span></span><a class="headerlink" href="#JULES_HYDROLOGY::ti_max" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">ti_max</span></span><a class="headerlink" href="#JULES_HYDROLOGY::ti_max" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -161,12 +164,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::ti_wetl">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">ti_wetl</span></span><a class="headerlink" href="#JULES_HYDROLOGY::ti_wetl" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">ti_wetl</span></span><a class="headerlink" href="#JULES_HYDROLOGY::ti_wetl" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -180,12 +183,12 @@
 </div>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::nfita">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">nfita</span></span><a class="headerlink" href="#JULES_HYDROLOGY::nfita" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">nfita</span></span><a class="headerlink" href="#JULES_HYDROLOGY::nfita" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -196,12 +199,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::l_wetland_unfrozen">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">l_wetland_unfrozen</span></span><a class="headerlink" href="#JULES_HYDROLOGY::l_wetland_unfrozen" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">l_wetland_unfrozen</span></span><a class="headerlink" href="#JULES_HYDROLOGY::l_wetland_unfrozen" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -218,12 +221,12 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_HYDROLOGY::l_pdm" title="JULES_HYDROLOGY::l_pdm"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_pdm</span></code></a> = TRUE</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::dz_pdm">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">dz_pdm</span></span><a class="headerlink" href="#JULES_HYDROLOGY::dz_pdm" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">dz_pdm</span></span><a class="headerlink" href="#JULES_HYDROLOGY::dz_pdm" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -233,12 +236,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::b_pdm">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">b_pdm</span></span><a class="headerlink" href="#JULES_HYDROLOGY::b_pdm" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">b_pdm</span></span><a class="headerlink" href="#JULES_HYDROLOGY::b_pdm" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -247,12 +250,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::l_spdmvar">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">l_spdmvar</span></span><a class="headerlink" href="#JULES_HYDROLOGY::l_spdmvar" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">l_spdmvar</span></span><a class="headerlink" href="#JULES_HYDROLOGY::l_spdmvar" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -269,12 +272,12 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_HYDROLOGY::l_spdmvar" title="JULES_HYDROLOGY::l_spdmvar"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_spdmvar</span></code></a> = TRUE</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::slope_pdm_max">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">slope_pdm_max</span></span><a class="headerlink" href="#JULES_HYDROLOGY::slope_pdm_max" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">slope_pdm_max</span></span><a class="headerlink" href="#JULES_HYDROLOGY::slope_pdm_max" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -288,17 +291,17 @@
 <p class="admonition-title">Only used if <a class="reference internal" href="#JULES_HYDROLOGY::l_spdmvar" title="JULES_HYDROLOGY::l_spdmvar"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_spdmvar</span></code></a> = FALSE</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_HYDROLOGY::s_pdm">
-<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">s_pdm</span></span><a class="headerlink" href="#JULES_HYDROLOGY::s_pdm" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_HYDROLOGY::</span></span><span class="sig-name descname"><span class="pre">s_pdm</span></span><a class="headerlink" href="#JULES_HYDROLOGY::s_pdm" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="field-list simple">
-<dt class="field-odd">type<span class="colon">:</span></dt>
+<dt class="field-odd">type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">permitted<span class="colon">:</span></dt>
+<dt class="field-even">permitted</dt>
 <dd class="field-even"><p>0-1</p>
 </dd>
-<dt class="field-odd">default<span class="colon">:</span></dt>
+<dt class="field-odd">default</dt>
 <dd class="field-odd"><p>None</p>
 </dd>
 </dl>
@@ -325,7 +328,7 @@ no surface runoff is produced until the soil is 50% saturated.</p>
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.8. <code class="docutils literal notranslate"><span class="pre">jules_hydrology.nml</span></code></a><ul>
-<li><a class="reference internal" href="#jules-hydrology-namelist-members">6.8.1. <code class="docutils literal notranslate"><span class="pre">JULES_HYDROLOGY</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-JULES_HYDROLOGY">6.8.1. <code class="docutils literal notranslate"><span class="pre">JULES_HYDROLOGY</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -377,7 +380,7 @@ no surface runoff is produced until the soil is 50% saturated.</p>
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>

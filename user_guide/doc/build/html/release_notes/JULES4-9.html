@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>1.20. JULES version 4.9 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script src="../_static/documentation_options.js?v=f15b9291"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="1.21. JULES version 4.8 Release Notes" href="JULES4-8.html" />
@@ -44,12 +47,12 @@
           <div class="body" role="main">
             
   <section id="jules-version-4-9-release-notes">
-<h1><span class="section-number">1.20. </span>JULES version 4.9 Release Notes<a class="headerlink" href="#jules-version-4-9-release-notes" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">1.20. </span>JULES version 4.9 Release Notes<a class="headerlink" href="#jules-version-4-9-release-notes" title="Permalink to this heading">¶</a></h1>
 <p>The JULES vn4.9 release consists of approximately 60 tickets from 19 authors, including work by many other people.</p>
 <p>Full details of the tickets committed for JULES vn4.9 can be found on the <a class="reference external" href="https://code.metoffice.gov.uk/trac/jules/query?resolution=fixed&amp;milestone=JULES+v4.9+release">JULES shared repository Trac system</a>.</p>
 <p>Ticket numbers are indicated below, e.g. #262.</p>
 <section id="science-changes">
-<h2><span class="section-number">1.20.1. </span>Science changes<a class="headerlink" href="#science-changes" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.20.1. </span>Science changes<a class="headerlink" href="#science-changes" title="Permalink to this heading">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li><p>New parameter <a class="reference internal" href="../namelists/jules_hydrology.nml.html#JULES_HYDROLOGY::s_pdm" title="JULES_HYDROLOGY::s_pdm"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">s_pdm</span></code></a> represents the minimum soil wetness below which there is no saturation excess surface runoff from the PDM model. s_pdm can be made slope-dependent using <a class="reference internal" href="../namelists/jules_hydrology.nml.html#JULES_HYDROLOGY::l_spdmvar" title="JULES_HYDROLOGY::l_spdmvar"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_spdmvar</span></code></a>, with additional parameter <a class="reference internal" href="../namelists/jules_hydrology.nml.html#JULES_HYDROLOGY::slope_pdm_max" title="JULES_HYDROLOGY::slope_pdm_max"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">slope_pdm_max</span></code></a>. (#262)</p></li>
@@ -66,7 +69,7 @@
 </div></blockquote>
 </section>
 <section id="general-technical-changes">
-<h2><span class="section-number">1.20.2. </span>General/Technical changes<a class="headerlink" href="#general-technical-changes" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.20.2. </span>General/Technical changes<a class="headerlink" href="#general-technical-changes" title="Permalink to this heading">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li><p>Further preparatory work for soil tiling, including i/o.</p></li>
@@ -88,7 +91,7 @@
 </div></blockquote>
 </section>
 <section id="bugs-fixed">
-<h2><span class="section-number">1.20.3. </span>Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.20.3. </span>Bugs fixed<a class="headerlink" href="#bugs-fixed" title="Permalink to this heading">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li><p>Corrected mismatches between certain subroutine interfaces and subroutine calls. (#471, #544)</p></li>
@@ -108,7 +111,7 @@
 </div></blockquote>
 </section>
 <section id="documentation-updates">
-<h2><span class="section-number">1.20.4. </span>Documentation updates<a class="headerlink" href="#documentation-updates" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">1.20.4. </span>Documentation updates<a class="headerlink" href="#documentation-updates" title="Permalink to this heading">¶</a></h2>
 <p>Coding standards, and documentation can be viewed on the github page <a class="reference external" href="http://jules-lsm.github.io/">http://jules-lsm.github.io/</a>.</p>
 </section>
 </section>
@@ -182,7 +185,7 @@
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>

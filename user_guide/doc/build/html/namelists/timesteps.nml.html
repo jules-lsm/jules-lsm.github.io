@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>6.19. timesteps.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script src="../_static/documentation_options.js?v=f15b9291"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.20. model_grid.nml" href="model_grid.nml.html" />
@@ -44,22 +47,22 @@
           <div class="body" role="main">
             
   <section id="timesteps-nml">
-<h1><span class="section-number">6.19. </span><code class="docutils literal notranslate"><span class="pre">timesteps.nml</span></code><a class="headerlink" href="#timesteps-nml" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">6.19. </span><code class="docutils literal notranslate"><span class="pre">timesteps.nml</span></code><a class="headerlink" href="#timesteps-nml" title="Permalink to this heading">¶</a></h1>
 <p>This file sets the start and end time of the run. It can also be used to specify an optional spin-up procedure. It contains two namelists called <a class="reference internal" href="#namelist-JULES_TIME"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_TIME</span></code></a> and <a class="reference internal" href="#namelist-JULES_SPINUP"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SPINUP</span></code></a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>It is recommended that all times use not local time, but Coordinated Universal Time (UTC; known in some countries as Greenwich Mean Time GMT). The correct specification of the time is essential if the options causing the surface albedo to depend on the solar zenith angle are set. If the data are provided in local solar time, <a class="reference internal" href="#JULES_TIME::l_local_solar_time" title="JULES_TIME::l_local_solar_time"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_local_solar_time</span></code></a> should be set to TRUE to assume local solar time throughout the model.</p>
 </div>
-<section id="jules-time-namelist-members">
-<h2><span class="section-number">6.19.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_TIME</span></code> namelist members<a class="headerlink" href="#jules-time-namelist-members" title="Link to this heading">¶</a></h2>
-<dl class="nml member" id="namelist-JULES_TIME">
+<section id="namelist-JULES_TIME">
+<span id="jules-time-namelist-members"></span><h2><span class="section-number">6.19.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_TIME</span></code> namelist members<a class="headerlink" href="#namelist-JULES_TIME" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_TIME::l_360">
-<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">l_360</span></span><a class="headerlink" href="#JULES_TIME::l_360" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">l_360</span></span><a class="headerlink" href="#JULES_TIME::l_360" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -74,12 +77,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_TIME::l_leap">
-<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">l_leap</span></span><a class="headerlink" href="#JULES_TIME::l_leap" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">l_leap</span></span><a class="headerlink" href="#JULES_TIME::l_leap" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -94,12 +97,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_TIME::l_local_solar_time">
-<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">l_local_solar_time</span></span><a class="headerlink" href="#JULES_TIME::l_local_solar_time" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">l_local_solar_time</span></span><a class="headerlink" href="#JULES_TIME::l_local_solar_time" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -114,15 +117,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_TIME::timestep_len">
-<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">timestep_len</span></span><a class="headerlink" href="#JULES_TIME::timestep_len" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">timestep_len</span></span><a class="headerlink" href="#JULES_TIME::timestep_len" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>&gt;= 1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>None</p>
 </dd>
 </dl>
@@ -136,17 +139,17 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_TIME::main_run_start">
-<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">main_run_start</span></span><a class="headerlink" href="#JULES_TIME::main_run_start" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">main_run_start</span></span><a class="headerlink" href="#JULES_TIME::main_run_start" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_TIME::main_run_end">
-<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">main_run_end</span></span><a class="headerlink" href="#JULES_TIME::main_run_end" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">main_run_end</span></span><a class="headerlink" href="#JULES_TIME::main_run_end" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -160,15 +163,15 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_TIME::print_step">
-<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">print_step</span></span><a class="headerlink" href="#JULES_TIME::print_step" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_TIME::</span></span><span class="sig-name descname"><span class="pre">print_step</span></span><a class="headerlink" href="#JULES_TIME::print_step" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>&gt;= 1</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>1</p>
 </dd>
 </dl>
@@ -176,19 +179,19 @@
 </dd></dl>
 
 </section>
-<section id="jules-spinup-namelist-members">
-<h2><span class="section-number">6.19.2. </span><code class="docutils literal notranslate"><span class="pre">JULES_SPINUP</span></code> namelist members<a class="headerlink" href="#jules-spinup-namelist-members" title="Link to this heading">¶</a></h2>
-<dl class="nml member" id="namelist-JULES_SPINUP">
+<section id="namelist-JULES_SPINUP">
+<span id="jules-spinup-namelist-members"></span><h2><span class="section-number">6.19.2. </span><code class="docutils literal notranslate"><span class="pre">JULES_SPINUP</span></code> namelist members<a class="headerlink" href="#namelist-JULES_SPINUP" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SPINUP::max_spinup_cycles">
-<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">max_spinup_cycles</span></span><a class="headerlink" href="#JULES_SPINUP::max_spinup_cycles" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">max_spinup_cycles</span></span><a class="headerlink" href="#JULES_SPINUP::max_spinup_cycles" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>&gt;= 0</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>0</p>
 </dd>
 </dl>
@@ -205,17 +208,17 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SPINUP::spinup_start">
-<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">spinup_start</span></span><a class="headerlink" href="#JULES_SPINUP::spinup_start" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">spinup_start</span></span><a class="headerlink" href="#JULES_SPINUP::spinup_start" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SPINUP::spinup_end">
-<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">spinup_end</span></span><a class="headerlink" href="#JULES_SPINUP::spinup_end" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">spinup_end</span></span><a class="headerlink" href="#JULES_SPINUP::spinup_end" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -229,12 +232,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SPINUP::terminate_on_spinup_fail">
-<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">terminate_on_spinup_fail</span></span><a class="headerlink" href="#JULES_SPINUP::terminate_on_spinup_fail" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">terminate_on_spinup_fail</span></span><a class="headerlink" href="#JULES_SPINUP::terminate_on_spinup_fail" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -252,15 +255,15 @@
 <p class="admonition-title">Variables used to specify spin-up conditions</p>
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SPINUP::nvars">
-<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">nvars</span></span><a class="headerlink" href="#JULES_SPINUP::nvars" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">nvars</span></span><a class="headerlink" href="#JULES_SPINUP::nvars" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dt class="field-even">Permitted</dt>
 <dd class="field-even"><p>&gt;= 0</p>
 </dd>
-<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dt class="field-odd">Default</dt>
 <dd class="field-odd"><p>0</p>
 </dd>
 </dl>
@@ -270,12 +273,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SPINUP::var">
-<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">var</span></span><a class="headerlink" href="#JULES_SPINUP::var" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">var</span></span><a class="headerlink" href="#JULES_SPINUP::var" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character(nvars)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -296,12 +299,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SPINUP::use_percent">
-<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">use_percent</span></span><a class="headerlink" href="#JULES_SPINUP::use_percent" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">use_percent</span></span><a class="headerlink" href="#JULES_SPINUP::use_percent" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical(nvars)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -317,12 +320,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_SPINUP::tolerance">
-<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">tolerance</span></span><a class="headerlink" href="#JULES_SPINUP::tolerance" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_SPINUP::</span></span><span class="sig-name descname"><span class="pre">tolerance</span></span><a class="headerlink" href="#JULES_SPINUP::tolerance" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(nvars)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -334,7 +337,7 @@
 </div>
 </section>
 <section id="note-on-time-conventions">
-<h2><span class="section-number">6.19.3. </span>Note on time conventions<a class="headerlink" href="#note-on-time-conventions" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">6.19.3. </span>Note on time conventions<a class="headerlink" href="#note-on-time-conventions" title="Permalink to this heading">¶</a></h2>
 <p>When specifying start times (e.g. <a class="reference internal" href="#JULES_TIME::main_run_start" title="JULES_TIME::main_run_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_start</span></code></a>, <a class="reference internal" href="#JULES_SPINUP::spinup_start" title="JULES_SPINUP::spinup_start"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">spinup_start</span></code></a>), the time is taken to be the <em>start of the first timestep</em>. When specifying end times (e.g. <a class="reference internal" href="#JULES_TIME::main_run_end" title="JULES_TIME::main_run_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">main_run_end</span></code></a>, <a class="reference internal" href="#JULES_SPINUP::spinup_end" title="JULES_SPINUP::spinup_end"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">spinup_end</span></code></a>), the time is taken to be the <em>end of the last timestep</em>. Also, the time “00:00:00” always refers to midnight at the <em>start</em> of the day concerned. Take the following setup:</p>
 <div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="nn">&amp;JULES_TIME</span>
   <span class="nv">timestep_len</span>   <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
@@ -351,14 +354,14 @@
 <p>Note that all times are recommended to be in Coordinated Universal Time (UTC), not local time (see Warning at top of this page). Note also the limitations on timestep mentioned in <a class="reference internal" href="../input/temporal-interpolation.html"><span class="doc">Temporal interpolation</span></a> and on run length mentioned in <a class="reference internal" href="../code/known-limitations.html"><span class="doc">Known limitations of the code</span></a>.</p>
 </section>
 <section id="note-on-solar-zenith-angle">
-<h2><span class="section-number">6.19.4. </span>Note on solar zenith angle<a class="headerlink" href="#note-on-solar-zenith-angle" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">6.19.4. </span>Note on solar zenith angle<a class="headerlink" href="#note-on-solar-zenith-angle" title="Permalink to this heading">¶</a></h2>
 <p>When the characteristics of the surface relevant to solar radiation are represented in a simple manner, the cosine of the solar zenith angle itself is not required and all that is needed is the downward shortwave flux provided by the forcing data. In such cases it is sufficient to set <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_cosz" title="JULES_RADIATION::l_cosz"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_cosz</span></code></a> = FALSE, which will set the cosine of the solar zenith angle to a default value of 1.0.</p>
 <p>However, more elaborate treatments of the surface albedo and of solar radiative transfer in plant canopies do depend on the actual value of the cosine of the solar zenith angle, as well as the downward flux, so it is more realistic to set <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_cosz" title="JULES_RADIATION::l_cosz"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_cosz</span></code></a> = TRUE, and, indeed, the results obtained with <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_cosz" title="JULES_RADIATION::l_cosz"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_cosz</span></code></a> = FALSE may be significantly in error. To calculate the cosine of the zenith angle, the times of the forcing data must be specified accurately.  The consistent use of UTC is strongly recommended. Nevertheless, certain forcing data, widely used within the land-surface community, are specified in local solar time, even though the metadata in the file may refer to UTC. In such cases <a class="reference internal" href="#JULES_TIME::l_local_solar_time" title="JULES_TIME::l_local_solar_time"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_local_solar_time</span></code></a> should be set to TRUE when <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_cosz" title="JULES_RADIATION::l_cosz"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_cosz</span></code></a> = TRUE.</p>
 </section>
 <section id="examples">
-<h2><span class="section-number">6.19.5. </span>Examples<a class="headerlink" href="#examples" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">6.19.5. </span>Examples<a class="headerlink" href="#examples" title="Permalink to this heading">¶</a></h2>
 <section id="a-run-without-spin-up">
-<h3><span class="section-number">6.19.5.1. </span>A run without spin-up<a class="headerlink" href="#a-run-without-spin-up" title="Link to this heading">¶</a></h3>
+<h3><span class="section-number">6.19.5.1. </span>A run without spin-up<a class="headerlink" href="#a-run-without-spin-up" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="nn">&amp;JULES_TIME</span>
   <span class="nv">timestep_len</span>   <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
   <span class="nv">main_run_start</span> <span class="o">=</span> <span class="s2">&quot;1997-01-01 00:00:00&quot;</span><span class="p">,</span>
@@ -373,7 +376,7 @@
 <p>This specifies a run with a timestep length of one hour. The run will begin at midnight on 1st January 1997 and end at 01:00 UTC on 1st January 1999. <a class="reference internal" href="#JULES_SPINUP::max_spinup_cycles" title="JULES_SPINUP::max_spinup_cycles"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">max_spinup_cycles</span></code></a> = 0 means there is no spin-up.</p>
 </section>
 <section id="a-run-with-spin-up-over-a-period-that-immediately-precedes-the-main-run">
-<h3><span class="section-number">6.19.5.2. </span>A run with spin-up over a period that immediately precedes the main run<a class="headerlink" href="#a-run-with-spin-up-over-a-period-that-immediately-precedes-the-main-run" title="Link to this heading">¶</a></h3>
+<h3><span class="section-number">6.19.5.2. </span>A run with spin-up over a period that immediately precedes the main run<a class="headerlink" href="#a-run-with-spin-up-over-a-period-that-immediately-precedes-the-main-run" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="nn">&amp;JULES_TIME</span>
   <span class="nv">timestep_len</span>   <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
   <span class="nv">main_run_start</span> <span class="o">=</span> <span class="s2">&quot;1997-01-01 00:00:00&quot;</span><span class="p">,</span>
@@ -392,7 +395,7 @@
 <p>This specifies a spin-up period from midnight on 1st January 1996 to midnight on 1st January 1997. This spin-up will be repeated up to 5 times, before the main run from midnight on 1st January 1997 until 01:00 UTC on 1st January 1999.</p>
 </section>
 <section id="a-run-with-spin-up-over-a-period-that-overlaps-the-main-run">
-<h3><span class="section-number">6.19.5.3. </span>A run with spin-up over a period that overlaps the main run<a class="headerlink" href="#a-run-with-spin-up-over-a-period-that-overlaps-the-main-run" title="Link to this heading">¶</a></h3>
+<h3><span class="section-number">6.19.5.3. </span>A run with spin-up over a period that overlaps the main run<a class="headerlink" href="#a-run-with-spin-up-over-a-period-that-overlaps-the-main-run" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="nn">&amp;JULES_TIME</span>
   <span class="nv">timestep_len</span>   <span class="o">=</span> <span class="mi">3600</span><span class="p">,</span>
   <span class="nv">main_run_start</span> <span class="o">=</span> <span class="s2">&quot;1997-01-01 00:00:00&quot;</span><span class="p">,</span>
@@ -411,7 +414,7 @@
 <p>This specifies a spin-up period from midnight on 1st January 1997 to midnight on 1st January 1998. This spin-up will be repeated up to 5 times, before the main run from midnight on 1st January 1997 until 01:00 UTC on 1st January 1999.</p>
 </section>
 <section id="example-of-specifying-requirements-for-spin-up">
-<h3><span class="section-number">6.19.5.4. </span>Example of specifying requirements for spin-up<a class="headerlink" href="#example-of-specifying-requirements-for-spin-up" title="Link to this heading">¶</a></h3>
+<h3><span class="section-number">6.19.5.4. </span>Example of specifying requirements for spin-up<a class="headerlink" href="#example-of-specifying-requirements-for-spin-up" title="Permalink to this heading">¶</a></h3>
 <div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="nn">&amp;JULES_SPINUP</span>
   <span class="c1"># &lt;spinup time specification&gt;</span>
 
@@ -428,7 +431,7 @@
 </section>
 </section>
 <section id="notes-on-spin-up">
-<h2><span class="section-number">6.19.6. </span>Notes on spin-up<a class="headerlink" href="#notes-on-spin-up" title="Link to this heading">¶</a></h2>
+<h2><span class="section-number">6.19.6. </span>Notes on spin-up<a class="headerlink" href="#notes-on-spin-up" title="Permalink to this heading">¶</a></h2>
 <p>Spin-up is assessed using the difference between instantaneous values at the end of consecutive cycles of spin-up. For example, if the spin-up period is from 2005-01-01 00:00:00 to 2006-01-01 00:00:00 then every time the model gets to the end of 2005 the spin-up variables are compared with their value at the end of the previous cycle. The model is considered spun-up when <em>all</em> the spin-up variables are spun-up at <em>all</em> points. A spin-up variable is considered spun-up if, at each point, the absolute value of the change (percentage change if <a class="reference internal" href="#JULES_SPINUP::use_percent" title="JULES_SPINUP::use_percent"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">use_percent</span></code></a> = TRUE) over the spin-up cycle is less than or equal to the given tolerance.</p>
 <p>At present the analysis of whether the model has spun up or not is limited to aspects of the ‘physical’ state of the system, and does not explicitly consider carbon stores, making it less useful for runs with interactive vegetation (the equilibrium mode of TRIFFID is designed to spin-up TRIFFID) or prognostic soil carbon.</p>
 <p>During the spin-up phase of a run, JULES provides the correct driving data (for example, meteorological data) as the model time ‘cycles’ round over the spin-up period. Consider the case of a spin-up from 2005-01-01 00:00:00 to 2006-01-01 00:00:00. At or near the end of 31st December 2005 during the spin-up, the driving data will start to adjust to the values for 1st January 2005. The calculated driving data may vary slightly between the start or end of the first cycle and similar times in later cycles, because of the need to match the data at the end of each cycle to that at the start of the next cycle. When the main run begins after a period of spin-up, the driving data is reset to the start of the main run - no effort is made to adjust the data for a smooth transition. Generally this does not cause a problem.</p>
@@ -454,8 +457,8 @@
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.19. <code class="docutils literal notranslate"><span class="pre">timesteps.nml</span></code></a><ul>
-<li><a class="reference internal" href="#jules-time-namelist-members">6.19.1. <code class="docutils literal notranslate"><span class="pre">JULES_TIME</span></code> namelist members</a></li>
-<li><a class="reference internal" href="#jules-spinup-namelist-members">6.19.2. <code class="docutils literal notranslate"><span class="pre">JULES_SPINUP</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-JULES_TIME">6.19.1. <code class="docutils literal notranslate"><span class="pre">JULES_TIME</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-JULES_SPINUP">6.19.2. <code class="docutils literal notranslate"><span class="pre">JULES_SPINUP</span></code> namelist members</a></li>
 <li><a class="reference internal" href="#note-on-time-conventions">6.19.3. Note on time conventions</a></li>
 <li><a class="reference internal" href="#note-on-solar-zenith-angle">6.19.4. Note on solar zenith angle</a></li>
 <li><a class="reference internal" href="#examples">6.19.5. Examples</a><ul>
@@ -517,7 +520,7 @@
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>

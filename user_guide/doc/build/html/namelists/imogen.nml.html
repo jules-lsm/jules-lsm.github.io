@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>6.32. imogen.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script src="../_static/documentation_options.js?v=f15b9291"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.33. prescribed_data.nml" href="prescribed_data.nml.html" />
@@ -44,7 +47,7 @@
           <div class="body" role="main">
             
   <section id="imogen-nml">
-<h1><span class="section-number">6.32. </span><code class="docutils literal notranslate"><span class="pre">imogen.nml</span></code><a class="headerlink" href="#imogen-nml" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">6.32. </span><code class="docutils literal notranslate"><span class="pre">imogen.nml</span></code><a class="headerlink" href="#imogen-nml" title="Permalink to this heading">¶</a></h1>
 <p>This file contains three namelists called <a class="reference internal" href="#namelist-IMOGEN_ONOFF_SWITCH"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">IMOGEN_ONOFF_SWITCH</span></code></a>, <a class="reference internal" href="#namelist-IMOGEN_RUN_LIST"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">IMOGEN_RUN_LIST</span></code></a> and <a class="reference internal" href="#namelist-IMOGEN_ANLG_VALS_LIST"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">IMOGEN_ANLG_VALS_LIST</span></code></a>. Values from this section are only used if IMOGEN is enabled. This is done via the following switch: <a class="reference internal" href="#IMOGEN_ONOFF_SWITCH::l_imogen" title="IMOGEN_ONOFF_SWITCH::l_imogen"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_imogen</span></code></a> = TRUE.</p>
 <p>Since IMOGEN calculates the forcing for an entire year at once, an IMOGEN run must have a start time of 00:00:00 on the 1st of January for some year.</p>
 <p>IMOGEN is currently restricted to run only on the HadCM3LC grid, i.e. there are 96 x 56 grid cells where each cell has size 3.75 degrees longitude by 2.5 degrees latitude with no Antarctica. This means that:</p>
@@ -77,16 +80,16 @@ Geoscientific Model Development 11.2: 541-560.
 <a class="reference external" href="https://doi.org/10.5194/gmd-11-541-2018">https://doi.org/10.5194/gmd-11-541-2018</a></p></li>
 </ul>
 </div>
-<section id="imogen-onoff-switch-namelist-members">
-<h2><span class="section-number">6.32.1. </span><code class="docutils literal notranslate"><span class="pre">IMOGEN_ONOFF_SWITCH</span></code> namelist members<a class="headerlink" href="#imogen-onoff-switch-namelist-members" title="Link to this heading">¶</a></h2>
-<dl class="nml member" id="namelist-IMOGEN_ONOFF_SWITCH">
+<section id="namelist-IMOGEN_ONOFF_SWITCH">
+<span id="imogen-onoff-switch-namelist-members"></span><h2><span class="section-number">6.32.1. </span><code class="docutils literal notranslate"><span class="pre">IMOGEN_ONOFF_SWITCH</span></code> namelist members<a class="headerlink" href="#namelist-IMOGEN_ONOFF_SWITCH" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ONOFF_SWITCH::l_imogen">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ONOFF_SWITCH::</span></span><span class="sig-name descname"><span class="pre">l_imogen</span></span><a class="headerlink" href="#IMOGEN_ONOFF_SWITCH::l_imogen" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ONOFF_SWITCH::</span></span><span class="sig-name descname"><span class="pre">l_imogen</span></span><a class="headerlink" href="#IMOGEN_ONOFF_SWITCH::l_imogen" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -104,16 +107,16 @@ Geoscientific Model Development 11.2: 541-560.
 </dd></dl>
 
 </section>
-<section id="imogen-run-list-namelist-members">
-<h2><span class="section-number">6.32.2. </span><code class="docutils literal notranslate"><span class="pre">IMOGEN_RUN_LIST</span></code> namelist members<a class="headerlink" href="#imogen-run-list-namelist-members" title="Link to this heading">¶</a></h2>
-<dl class="nml member" id="namelist-IMOGEN_RUN_LIST">
+<section id="namelist-IMOGEN_RUN_LIST">
+<span id="imogen-run-list-namelist-members"></span><h2><span class="section-number">6.32.2. </span><code class="docutils literal notranslate"><span class="pre">IMOGEN_RUN_LIST</span></code> namelist members<a class="headerlink" href="#namelist-IMOGEN_RUN_LIST" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::co2_init_ppmv">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">co2_init_ppmv</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::co2_init_ppmv" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">co2_init_ppmv</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::co2_init_ppmv" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>286.085</p>
 </dd>
 </dl>
@@ -122,12 +125,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::file_scen_emits">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">file_scen_emits</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::file_scen_emits" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">file_scen_emits</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::file_scen_emits" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -137,12 +140,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::file_non_co2_radf">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">file_non_co2_radf</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::file_non_co2_radf" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">file_non_co2_radf</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::file_non_co2_radf" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -152,12 +155,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::nyr_non_co2">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">nyr_non_co2</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::nyr_non_co2" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">nyr_non_co2</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::nyr_non_co2" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>21</p>
 </dd>
 </dl>
@@ -166,12 +169,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::file_scen_co2_ppmv">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">file_scen_co2_ppmv</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::file_scen_co2_ppmv" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">file_scen_co2_ppmv</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::file_scen_co2_ppmv" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -181,12 +184,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::ch4_init_ppbv">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">ch4_init_ppbv</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::ch4_init_ppbv" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">ch4_init_ppbv</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::ch4_init_ppbv" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>774.1</p>
 </dd>
 </dl>
@@ -196,12 +199,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::yr_fch4_ref">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">yr_fch4_ref</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::yr_fch4_ref" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">yr_fch4_ref</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::yr_fch4_ref" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>2000</p>
 </dd>
 </dl>
@@ -211,12 +214,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::ch4_ppbv_ref">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">ch4_ppbv_ref</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::ch4_ppbv_ref" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">ch4_ppbv_ref</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::ch4_ppbv_ref" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>1751.02</p>
 </dd>
 </dl>
@@ -226,12 +229,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::tau_ch4_ref">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">tau_ch4_ref</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::tau_ch4_ref" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">tau_ch4_ref</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::tau_ch4_ref" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>8.4</p>
 </dd>
 </dl>
@@ -241,12 +244,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::fch4_ref">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">fch4_ref</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::fch4_ref" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">fch4_ref</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::fch4_ref" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>180.0</p>
 </dd>
 </dl>
@@ -256,12 +259,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::file_ch4_n2o">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">file_ch4_n2o</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::file_ch4_n2o" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">file_ch4_n2o</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::file_ch4_n2o" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -271,12 +274,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::nyr_ch4_n2o">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">nyr_ch4_n2o</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::nyr_ch4_n2o" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">nyr_ch4_n2o</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::nyr_ch4_n2o" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>241</p>
 </dd>
 </dl>
@@ -286,12 +289,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::anlg">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">anlg</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::anlg" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">anlg</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::anlg" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -300,12 +303,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::anom">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">anom</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::anom" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">anom</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::anom" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -314,12 +317,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::c_emissions">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">c_emissions</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::c_emissions" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">c_emissions</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::c_emissions" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -328,12 +331,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::include_co2">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">include_co2</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::include_co2" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">include_co2</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::include_co2" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -342,12 +345,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::include_non_co2_radf">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">include_non_co2_radf</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::include_non_co2_radf" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">include_non_co2_radf</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::include_non_co2_radf" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -356,12 +359,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::l_drive_with_global_temps">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">l_drive_with_global_temps</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::l_drive_with_global_temps" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">l_drive_with_global_temps</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::l_drive_with_global_temps" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -370,12 +373,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::land_feed_co2">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">land_feed_co2</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::land_feed_co2" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">land_feed_co2</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::land_feed_co2" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -384,12 +387,12 @@ Geoscientific Model Development 11.2: 541-560.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::land_feed_ch4">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">land_feed_ch4</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::land_feed_ch4" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">land_feed_ch4</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::land_feed_ch4" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -412,12 +415,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::ocean_feed">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">ocean_feed</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::ocean_feed" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">ocean_feed</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::ocean_feed" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -426,12 +429,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::nyr_emiss">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">nyr_emiss</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::nyr_emiss" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">nyr_emiss</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::nyr_emiss" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>241</p>
 </dd>
 </dl>
@@ -440,12 +443,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::file_points_order">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">file_points_order</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::file_points_order" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">file_points_order</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::file_points_order" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -454,12 +457,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::initialise_from_dump">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">initialise_from_dump</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::initialise_from_dump" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">initialise_from_dump</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::initialise_from_dump" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -474,12 +477,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_RUN_LIST::dump_file">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">dump_file</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::dump_file" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_RUN_LIST::</span></span><span class="sig-name descname"><span class="pre">dump_file</span></span><a class="headerlink" href="#IMOGEN_RUN_LIST::dump_file" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -488,16 +491,16 @@ Nature Geoscience 11(8): 568-573.
 </dd></dl>
 
 </section>
-<section id="imogen-anlg-vals-list-namelist-members">
-<h2><span class="section-number">6.32.3. </span><code class="docutils literal notranslate"><span class="pre">IMOGEN_ANLG_VALS_LIST</span></code> namelist members<a class="headerlink" href="#imogen-anlg-vals-list-namelist-members" title="Link to this heading">¶</a></h2>
-<dl class="nml member" id="namelist-IMOGEN_ANLG_VALS_LIST">
+<section id="namelist-IMOGEN_ANLG_VALS_LIST">
+<span id="imogen-anlg-vals-list-namelist-members"></span><h2><span class="section-number">6.32.3. </span><code class="docutils literal notranslate"><span class="pre">IMOGEN_ANLG_VALS_LIST</span></code> namelist members<a class="headerlink" href="#namelist-IMOGEN_ANLG_VALS_LIST" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ANLG_VALS_LIST::diff_frac_const_imogen">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">diff_frac_const_imogen</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::diff_frac_const_imogen" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">diff_frac_const_imogen</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::diff_frac_const_imogen" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.4</p>
 </dd>
 </dl>
@@ -506,12 +509,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ANLG_VALS_LIST::q2co2">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">q2co2</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::q2co2" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">q2co2</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::q2co2" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>3.74</p>
 </dd>
 </dl>
@@ -520,12 +523,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ANLG_VALS_LIST::f_ocean">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">f_ocean</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::f_ocean" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">f_ocean</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::f_ocean" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.711</p>
 </dd>
 </dl>
@@ -534,12 +537,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ANLG_VALS_LIST::kappa_o">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">kappa_o</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::kappa_o" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">kappa_o</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::kappa_o" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>383.8</p>
 </dd>
 </dl>
@@ -548,12 +551,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ANLG_VALS_LIST::lambda_l">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">lambda_l</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::lambda_l" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">lambda_l</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::lambda_l" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>0.52</p>
 </dd>
 </dl>
@@ -562,12 +565,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ANLG_VALS_LIST::lambda_o">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">lambda_o</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::lambda_o" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">lambda_o</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::lambda_o" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>1.75</p>
 </dd>
 </dl>
@@ -576,12 +579,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ANLG_VALS_LIST::mu">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">mu</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::mu" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">mu</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::mu" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>1.87</p>
 </dd>
 </dl>
@@ -590,12 +593,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ANLG_VALS_LIST::t_ocean_init">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">t_ocean_init</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::t_ocean_init" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">t_ocean_init</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::t_ocean_init" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>289.28</p>
 </dd>
 </dl>
@@ -604,12 +607,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ANLG_VALS_LIST::dir_patt">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">dir_patt</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::dir_patt" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">dir_patt</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::dir_patt" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -619,12 +622,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ANLG_VALS_LIST::dir_clim">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">dir_clim</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::dir_clim" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">dir_clim</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::dir_clim" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -634,12 +637,12 @@ Nature Geoscience 11(8): 568-573.
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="IMOGEN_ANLG_VALS_LIST::dir_anom">
-<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">dir_anom</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::dir_anom" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">IMOGEN_ANLG_VALS_LIST::</span></span><span class="sig-name descname"><span class="pre">dir_anom</span></span><a class="headerlink" href="#IMOGEN_ANLG_VALS_LIST::dir_anom" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>character</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -664,9 +667,9 @@ Nature Geoscience 11(8): 568-573.
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.32. <code class="docutils literal notranslate"><span class="pre">imogen.nml</span></code></a><ul>
-<li><a class="reference internal" href="#imogen-onoff-switch-namelist-members">6.32.1. <code class="docutils literal notranslate"><span class="pre">IMOGEN_ONOFF_SWITCH</span></code> namelist members</a></li>
-<li><a class="reference internal" href="#imogen-run-list-namelist-members">6.32.2. <code class="docutils literal notranslate"><span class="pre">IMOGEN_RUN_LIST</span></code> namelist members</a></li>
-<li><a class="reference internal" href="#imogen-anlg-vals-list-namelist-members">6.32.3. <code class="docutils literal notranslate"><span class="pre">IMOGEN_ANLG_VALS_LIST</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-IMOGEN_ONOFF_SWITCH">6.32.1. <code class="docutils literal notranslate"><span class="pre">IMOGEN_ONOFF_SWITCH</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-IMOGEN_RUN_LIST">6.32.2. <code class="docutils literal notranslate"><span class="pre">IMOGEN_RUN_LIST</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-IMOGEN_ANLG_VALS_LIST">6.32.3. <code class="docutils literal notranslate"><span class="pre">IMOGEN_ANLG_VALS_LIST</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -718,7 +721,7 @@ Nature Geoscience 11(8): 568-573.
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>

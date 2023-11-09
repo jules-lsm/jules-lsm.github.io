@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 
-<html lang="en" data-content_root="../">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>6.7. jules_radiation.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.4 User Guide</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=601dbdee" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css" />
     <link rel="stylesheet" href="../_static/jules-tweaks.css" type="text/css" />
-    <script src="../_static/documentation_options.js?v=f15b9291"></script>
-    <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6.8. jules_hydrology.nml" href="jules_hydrology.nml.html" />
@@ -44,18 +47,18 @@
           <div class="body" role="main">
             
   <section id="jules-radiation-nml">
-<h1><span class="section-number">6.7. </span><code class="docutils literal notranslate"><span class="pre">jules_radiation.nml</span></code><a class="headerlink" href="#jules-radiation-nml" title="Link to this heading">¶</a></h1>
+<h1><span class="section-number">6.7. </span><code class="docutils literal notranslate"><span class="pre">jules_radiation.nml</span></code><a class="headerlink" href="#jules-radiation-nml" title="Permalink to this heading">¶</a></h1>
 <p>This file sets the radiation options. It contains one namelist called <a class="reference internal" href="#namelist-JULES_RADIATION"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_RADIATION</span></code></a>.</p>
-<section id="jules-radiation-namelist-members">
-<h2><span class="section-number">6.7.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_RADIATION</span></code> namelist members<a class="headerlink" href="#jules-radiation-namelist-members" title="Link to this heading">¶</a></h2>
-<dl class="nml member" id="namelist-JULES_RADIATION">
+<section id="namelist-JULES_RADIATION">
+<span id="jules-radiation-namelist-members"></span><h2><span class="section-number">6.7.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_RADIATION</span></code> namelist members<a class="headerlink" href="#namelist-JULES_RADIATION" title="Permalink to this heading">¶</a></h2>
+<dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::l_cosz">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_cosz</span></span><a class="headerlink" href="#JULES_RADIATION::l_cosz" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_cosz</span></span><a class="headerlink" href="#JULES_RADIATION::l_cosz" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>T</p>
 </dd>
 </dl>
@@ -71,12 +74,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::l_spec_albedo">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_spec_albedo</span></span><a class="headerlink" href="#JULES_RADIATION::l_spec_albedo" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_spec_albedo</span></span><a class="headerlink" href="#JULES_RADIATION::l_spec_albedo" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -91,12 +94,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::l_spec_alb_bs">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_spec_alb_bs</span></span><a class="headerlink" href="#JULES_RADIATION::l_spec_alb_bs" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_spec_alb_bs</span></span><a class="headerlink" href="#JULES_RADIATION::l_spec_alb_bs" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -112,12 +115,12 @@
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::l_niso_direct">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_niso_direct</span></span><a class="headerlink" href="#JULES_RADIATION::l_niso_direct" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_niso_direct</span></span><a class="headerlink" href="#JULES_RADIATION::l_niso_direct" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -135,12 +138,12 @@ radiation model.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::l_snow_albedo">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_snow_albedo</span></span><a class="headerlink" href="#JULES_RADIATION::l_snow_albedo" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_snow_albedo</span></span><a class="headerlink" href="#JULES_RADIATION::l_snow_albedo" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -157,12 +160,12 @@ effect of snow aging and soot deposition, in model albedo.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::l_embedded_snow">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_embedded_snow</span></span><a class="headerlink" href="#JULES_RADIATION::l_embedded_snow" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_embedded_snow</span></span><a class="headerlink" href="#JULES_RADIATION::l_embedded_snow" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -177,12 +180,12 @@ effect of snow aging and soot deposition, in model albedo.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::l_mask_snow_orog">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_mask_snow_orog</span></span><a class="headerlink" href="#JULES_RADIATION::l_mask_snow_orog" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_mask_snow_orog</span></span><a class="headerlink" href="#JULES_RADIATION::l_mask_snow_orog" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -198,12 +201,12 @@ of snow in mountainous regions.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::l_albedo_obs">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_albedo_obs</span></span><a class="headerlink" href="#JULES_RADIATION::l_albedo_obs" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_albedo_obs</span></span><a class="headerlink" href="#JULES_RADIATION::l_albedo_obs" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -233,12 +236,12 @@ components are required and when
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::l_spec_sea_alb">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_spec_sea_alb</span></span><a class="headerlink" href="#JULES_RADIATION::l_spec_sea_alb" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_spec_sea_alb</span></span><a class="headerlink" href="#JULES_RADIATION::l_spec_sea_alb" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -258,12 +261,12 @@ parameterisation.</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::i_sea_alb_method">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">i_sea_alb_method</span></span><a class="headerlink" href="#JULES_RADIATION::i_sea_alb_method" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">i_sea_alb_method</span></span><a class="headerlink" href="#JULES_RADIATION::i_sea_alb_method" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>integer</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -284,12 +287,12 @@ al. (2007), Joshi &amp; Haberle (2012) and Turbet et al. (2016).</p></li>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::fixed_sea_albedo">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">fixed_sea_albedo</span></span><a class="headerlink" href="#JULES_RADIATION::fixed_sea_albedo" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">fixed_sea_albedo</span></span><a class="headerlink" href="#JULES_RADIATION::fixed_sea_albedo" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>None</p>
 </dd>
 </dl>
@@ -298,12 +301,12 @@ al. (2007), Joshi &amp; Haberle (2012) and Turbet et al. (2016).</p></li>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::wght_alb">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">wght_alb</span></span><a class="headerlink" href="#JULES_RADIATION::wght_alb" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">wght_alb</span></span><a class="headerlink" href="#JULES_RADIATION::wght_alb" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real(4)</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -327,12 +330,12 @@ is not enforced.)</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::l_hapke_soil">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_hapke_soil</span></span><a class="headerlink" href="#JULES_RADIATION::l_hapke_soil" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_hapke_soil</span></span><a class="headerlink" href="#JULES_RADIATION::l_hapke_soil" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -348,12 +351,12 @@ dependence</p>
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::l_partition_albsoil">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_partition_albsoil</span></span><a class="headerlink" href="#JULES_RADIATION::l_partition_albsoil" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">l_partition_albsoil</span></span><a class="headerlink" href="#JULES_RADIATION::l_partition_albsoil" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>logical</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>F</p>
 </dd>
 </dl>
@@ -370,12 +373,12 @@ of the spectrum using <a class="reference internal" href="#JULES_RADIATION::rati
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::ratio_albsoil">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">ratio_albsoil</span></span><a class="headerlink" href="#JULES_RADIATION::ratio_albsoil" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">ratio_albsoil</span></span><a class="headerlink" href="#JULES_RADIATION::ratio_albsoil" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -385,12 +388,12 @@ Used if <a class="reference internal" href="#JULES_RADIATION::l_partition_albsoi
 
 <dl class="nml member">
 <dt class="sig sig-object nml" id="JULES_RADIATION::swdn_frac_albsoil">
-<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">swdn_frac_albsoil</span></span><a class="headerlink" href="#JULES_RADIATION::swdn_frac_albsoil" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">JULES_RADIATION::</span></span><span class="sig-name descname"><span class="pre">swdn_frac_albsoil</span></span><a class="headerlink" href="#JULES_RADIATION::swdn_frac_albsoil" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dt class="field-odd">Type</dt>
 <dd class="field-odd"><p>real</p>
 </dd>
-<dt class="field-even">Default<span class="colon">:</span></dt>
+<dt class="field-even">Default</dt>
 <dd class="field-even"><p>MDI</p>
 </dd>
 </dl>
@@ -459,7 +462,7 @@ b - II. Possible climates and observability, A&amp;A, 596, A112,
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">6.7. <code class="docutils literal notranslate"><span class="pre">jules_radiation.nml</span></code></a><ul>
-<li><a class="reference internal" href="#jules-radiation-namelist-members">6.7.1. <code class="docutils literal notranslate"><span class="pre">JULES_RADIATION</span></code> namelist members</a></li>
+<li><a class="reference internal" href="#namelist-JULES_RADIATION">6.7.1. <code class="docutils literal notranslate"><span class="pre">JULES_RADIATION</span></code> namelist members</a></li>
 </ul>
 </li>
 </ul>
@@ -511,7 +514,7 @@ b - II. Possible climates and observability, A&amp;A, 596, A112,
     </div>
     <div class="footer">
       &copy; Crown Copyright 2019.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 7.2.6.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 5.0.2.
     </div>
 
   </body>
