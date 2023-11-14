@@ -8,6 +8,8 @@ processed_data/*.dat
 #ignore build output
 /build/
 _build/
+user_guide/doc/_build
+user_guide/doc/build
 
 #ignore VS Code files
 /.idea
