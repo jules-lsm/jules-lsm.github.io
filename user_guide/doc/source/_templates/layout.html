@@ -1,0 +1,25 @@
+{% extends "!layout.html" %}
+<!-- Warning: builder.css_files is deprecated. Please use --
+  -- app.add_stylesheet() instead. Got this error message; may be why --
+  -- the contents isn't working correctly. -->
+{% set css_files = css_files + ["_static/jules-tweaks.css"] %}
+
+{% block sidebartoc %}
+    <h3><a href="{{ pathto(master_doc) }}">{{ _('Table Of Contents') }}</a></h3>
+    {{ toctree() }}
+{% endblock %}
+
+
+{% block footer %}
+    <div class="footer">
+    {%- if show_copyright %}
+      &copy; Crown Copyright {{ copyright }}.
+    {%- endif %}
+    {%- if last_updated %}
+      {% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}
+    {%- endif %}
+    {%- if show_sphinx %}
+      {% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> {{ sphinx_version }}.{% endtrans %}
+    {%- endif %}
+    </div>
+{% endblock %}
