@@ -49,7 +49,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'Joint UK Land Environment Simulator (JULES)'
-copyright = u'2019'
+copyright = u'2023'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -131,6 +131,12 @@ html_logo = "jules_logo_html.png"
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# Add extra CSS files here to remove the need for a layout.html
+# template override file
+html_css_files = [
+    'jules-tweaks.css',
+]
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
