@@ -6,11 +6,9 @@ This file contains three namelists called :nml:lst:`IMOGEN_ONOFF_SWITCH`, :nml:l
 
 Since IMOGEN calculates the forcing for an entire year at once, an IMOGEN run must have a start time of 00:00:00 on the 1st of January for some year.
 
-IMOGEN is currently restricted to run only on the HadCM3LC grid, i.e. there are 96 x 56 grid cells where each cell has size 3.75 degrees longitude by 2.5 degrees latitude with no Antarctica. This means that:
+IMOGEN uses the netcdf read functions in JULES to load the driving data. It also needs grid-area read in as an ancillary. 
 
-* :nml:mem:`JULES_INPUT_GRID::nx` = 96 and :nml:mem:`JULES_INPUT_GRID::ny` = 56.
-
-IMOGEN also uses its own I/O, so it expects IMOGEN specific files in a different format to JULES - this may change in the future. Examples of IMOGEN input files can be found in the data provided to run the 'rose stem' test suites on supported platforms (e.g. JASMIN).
+IMOGEN still reads the 1d data from ascii files within the code - this will change in the future.
 
 .. seealso::
    References:
@@ -49,7 +47,7 @@ IMOGEN also uses its own I/O, so it expects IMOGEN specific files in a different
    Switch for IMOGEN.
 
    TRUE
-       IMOGEN is used to generate meteorological forcing data.
+       IMOGEN is used to generate meteorological forcing data and drive JULES.
 
    FALSE
        No effect.
@@ -276,14 +274,6 @@ IMOGEN also uses its own I/O, so it expects IMOGEN specific files in a different
    Number of years of emission data in file.
 
 
-.. nml:member:: file_points_order
-
-   :type: character
-   :default: None
-
-   File containing the mapping of IMOGEN global grid points onto IMOGEN land points (different from the JULES land points).
-
-
 .. nml:member:: initialise_from_dump
 
    :type: logical
@@ -380,35 +370,28 @@ IMOGEN also uses its own I/O, so it expects IMOGEN specific files in a different
    Initial ocean temperature (K).
 
 
-.. nml:member:: dir_patt
+.. nml:member:: file_patt
 
    :type: character
    :default: None
 
-   Directory containing the patterns.
-
-   Files in this directory are expected to be in a specific format - see the IMOGEN example.
+   Netcdf file containing the patterns.  It should be monthly data (12 months total) with the dimension 'imogen_drive' representing time. 
 
 
-.. nml:member:: dir_clim
+.. nml:member:: file_clim
 
    :type: character
    :default: None
 
-   Directory containing initialising climatology.
-
-   Files in this directory are expected to be in a specific format - see the IMOGEN example.
+   Netcdf file containing initialising climatology. It should be monthly data (12 months total) with the dimension 'imogen_drive' representing time.
 
 
-.. nml:member:: dir_anom
+.. nml:member:: file_base_anom
 
    :type: character
    :default: None
 
-   Directory containing prescribed anomalies.
-
-   Files in this directory are expected to be in a specific format - see the IMOGEN example.
-
+   Netcdf files containing prescribed anomalies. There should be one for each year and should be in the form 'file_base_anom' followed by 'year' (4 digits) and '.nc'
 
 
 
