@@ -194,6 +194,18 @@ River routing introduces two more grids to a JULES run: the river routing input 
       ``2``
           elake_surft: This is the lake evaporation component of fqw_surft. This avoids the impact that snow melt has on modifying fqw_surft.
 
+   .. nml:member:: trip_globe_shape
+
+      :type: integer
+      :default: 2
+
+      The shape of the Earth in the TRIP river routing scheme.
+
+      ``1``
+          Spherical: Consistent with other component models (e.g. UM and NEMO) and is better at conserving water when passing water between these other models.
+
+      ``2``
+          Ellipsoidal: Closer to the actual shape of the Earth.
 
 .. seealso::
    References:
