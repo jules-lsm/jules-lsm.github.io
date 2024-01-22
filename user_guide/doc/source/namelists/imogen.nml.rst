@@ -6,9 +6,9 @@ This file contains three namelists called :nml:lst:`IMOGEN_ONOFF_SWITCH`, :nml:l
 
 Since IMOGEN calculates the forcing for an entire year at once, an IMOGEN run must have a start time of 00:00:00 on the 1st of January for some year.
 
-IMOGEN uses the netcdf read functions in JULES to load the driving data. It also needs grid-area read in as an ancillary. 
+IMOGEN uses the netcdf read functions in JULES to load the driving data. It also needs ``grid_area`` read in via :nml:lst:`JULES_LATLON`. 
 
-IMOGEN still reads the 1d data from ascii files within the code - this will change in the future.
+IMOGEN still reads the 1d data from ascii files within the code - this will change in the near future.
 
 .. seealso::
    References:

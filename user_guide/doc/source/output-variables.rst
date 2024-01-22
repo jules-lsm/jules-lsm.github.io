@@ -1340,7 +1340,8 @@ Grid and indexing variables
 | Name               | Description                                                                            | Dimensions |
 +====================+========================================================================================+============+
 | ``grid_area``      | Gridbox surface area (m\ :sup:`2`).                                                    | land+sea   |
-|                    | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_irrigation` = TRUE.         |            |
+|                    | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_irrigation` = TRUE.  or     |            |
+|                    | Only available if :nml:mem:`IMOGEN_ONOFF_SWITCH::l_imogen` = TRUE.                     |            |
 +--------------------+----------------------------------------------------------------------------------------+------------+
 | ``grid_area_rp``   | River routing gridbox surface area (m\ :sup:`2`).                                      | np_rivers  |
 |                    | Only available if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE.                            |            |
