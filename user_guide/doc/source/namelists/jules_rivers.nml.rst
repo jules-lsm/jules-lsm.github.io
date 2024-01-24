@@ -179,7 +179,7 @@ River routing introduces two more grids to a JULES run: the river routing input 
 
       The ratio of the actual to calculated river lengths in a river routing gridbox. See Oki et al. (1999). Oki & Sud (1998) called this the Meandering Ratio r_M and suggested an average global value of 1.4.
 
-.. nml:group:: TRIP parameters - used if :nml:mem:`i_river_vn` = ``1``
+.. nml:group:: TRIP parameters for UM-TRIP only - i.e. only used if :nml:mem:`i_river_vn` = ``1``
 
    .. nml:member:: lake_water_conserve_method
 
@@ -199,7 +199,7 @@ River routing introduces two more grids to a JULES run: the river routing input 
       :type: integer
       :default: 2
 
-      The shape of the Earth in the TRIP river routing scheme.
+      The shape of the Earth in the UM-TRIP river routing scheme.
 
       ``1``
           Spherical: Consistent with other component models (e.g. UM and NEMO) and is better at conserving water when passing water between these other models.
