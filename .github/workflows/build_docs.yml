@@ -1,0 +1,30 @@
+# This workflow ensures that required environment is activated, and ensures
+# that the JULES Sphinx documenation builds correctly.
+
+name: build_docs
+
+# Controls when the action will run
+on: 
+    push:
+    pull_request:
+
+    # Enables manual running from the Actions tab
+    workflow_dispatch:
+
+jobs:
+    build-and-deploy:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: checkout
+          uses: actions/checkout@v2
+
+        - name: Build documentation
+          run: |
+            conda update conda
+            conda env create -f environment.yml  
+            eval "$(conda shell.bash hook)"
+            conda activate jules-user-guide
+            cd user_guide/doc
+            make html
+
