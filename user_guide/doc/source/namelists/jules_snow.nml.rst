@@ -39,16 +39,16 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
    FALSE
        No effect.
-       
-       
+
+
 .. nml:member:: frac_snow_subl_melt
 
    :type: integer
    :permitted: 0 or 1
    :default: 0
-   
+
    Switch for use of snow-cover fraction in the calculation of sublimation and melting.
-   
+
    0. Off
    1. On
 
@@ -56,24 +56,24 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 .. nml:member:: graupel_options
 
    :type: integer
-   :permitted: 0 or 1 or 2
+   :permitted: 0, 1 or 2
    :default: 0
-   
+
    Switch for treatment of graupel in the snow scheme
-   
+
    0. Include graupel as snowfall
    1. Ignore graupel in the surface snowfall
    2. Treat graupel separately
 
-   Always "Include graupel as snowfall" (option 0) in standalone JULES because 
+   Always "Include graupel as snowfall" (option 0) in standalone JULES because
    separate snow and graupel driving data are not available.
-   If graupel is included in the UM surface snowfall diagnostic 
-   then JULES can either include this graupel as snow in the surface scheme (option 0), 
+   If graupel is included in the UM surface snowfall diagnostic
+   then JULES can either include this graupel as snow in the surface scheme (option 0),
    ignore this graupel completely, thereby breaking conservation
-   of water and energy in the coupled land-atmosphere model (option 1) or 
-   treat graupel seperately (currently this only means allowing graupel to
+   of water and energy in the coupled land-atmosphere model (option 1) or
+   treat graupel separately (currently this only means allowing graupel to
    fall straight through the canopy)
-   
+
 
 .. nml:member:: dzsnow
 
@@ -104,7 +104,7 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
    Only used if :nml:mem:`JULES_VEGETATION::can_model` = 4.
 
-   The model of snow under the canopy is currently only suitable for coniferous trees.
+   The model of snow under the canopy is currently only suitable for trees.
 
    TRUE
        Snow can be held under the canopy.
@@ -122,7 +122,7 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Grain size for fresh snow (\ |mu|\ m).
 
-      Only used if :nml:mem:`JULES_RADIATION::l_snow_albedo` = TRUE. See HCTN30 Eq.15.
+      Only used if :nml:mem:`JULES_RADIATION::l_snow_albedo` = TRUE or :nml:mem:`JULES_RADIATION::l_embedded_snow` = TRUE.
 
 
    .. nml:member:: rmax
@@ -132,7 +132,7 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Maximum snow grain size (\ |mu|\ m).
 
-      Only used if :nml:mem:`JULES_RADIATION::l_snow_albedo` = TRUE. See HCTN30 p4.
+      Only used if :nml:mem:`JULES_RADIATION::l_snow_albedo` = TRUE or :nml:mem:`JULES_RADIATION::l_embedded_snow` = TRUE.
 
 
    .. nml:member:: snow_ggr
@@ -142,9 +142,24 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Snow grain area growth rates (\ |mu|\ m\ :sup:`2` s\ :sup:`-1`).
 
-      Only used if :nml:mem:`JULES_RADIATION::l_snow_albedo` = TRUE. See HCTN30 Eq.16.
+      Only used if :nml:mem:`JULES_RADIATION::l_snow_albedo` = TRUE or
+      :nml:mem:`JULES_RADIATION::l_embedded_snow` = TRUE, and requires
+      a snow grain size to calculate the albedo.
 
-      The 3 values are for melting snow, cold fresh snow and cold aged snow respectively.
+      The three values are for melting snow, cold fresh snow and cold
+      aged snow respectively, the use of which depends on the setting
+      :nml:mem:`i_grain_growth_opt` as follows:
+
+      ============================= ========================= =================================================================
+      :nml:mem:`i_grain_growth_opt` Growth rates used         Notes
+      ============================= ========================= =================================================================
+      0                             :nml:mem:`snow_ggr` (1:3) Uses all values; melting snow, cold fresh snow and cold aged snow
+      1                             :nml:mem:`snow_ggr` (1)   Uses values for melting snow only.
+
+                                                              For cold snow a separate scheme is used following
+                                                              :ref:`Taillandier et al. (2007)<References_snow>`, where the
+                                                              parameters are currently hard-wired.
+      ============================= ========================= =================================================================
 
 
    .. nml:member:: amax
@@ -154,10 +169,26 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Maximum albedo for fresh snow.
 
-      Only used if :nml:mem:`JULES_RADIATION::l_snow_albedo` or :nml:mem:`JULES_SURFACE::l_elev_land_ice`
-      are true
+      Only used if :nml:mem:`JULES_RADIATION::l_snow_albedo` or
+      :nml:mem:`JULES_SURFACE::l_elev_land_ice` is TRUE.
 
       Values 1 and 2 are for VIS and NIR wavebands respectively.
+
+      When:
+
+      :nml:mem:`JULES_RADIATION::l_snow_albedo` = TRUE
+	   These parameters are used as limits at all snow-covered
+	   grid points.
+
+      :nml:mem:`JULES_RADIATION::l_embedded_snow` = TRUE
+	   These parameters are not used.
+
+      :nml:mem:`JULES_SURFACE::l_elev_land_ice` = TRUE
+	   Irrespective of whether either of the two previous options
+	   are selected, these parameters are used to adjust the albedo
+	   of dense snow to a value more appropriate for firn. See
+	   also :nml:mem:`aicemax`.
+
 
    .. nml:member:: aicemax
 
@@ -166,7 +197,8 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Maximum albedo for bare ice
 
-      Only used if :nml:mem:`JULES_SURFACE::l_elev_land_ice` = TRUE. See also `rho_firn_albedo`
+      Only used if :nml:mem:`JULES_SURFACE::l_elev_land_ice` =
+      TRUE. See also :nml:mem:`rho_firn_albedo`.
 
       Values 1 and 2 are for VIS and NIR wavebands respectively.
 
@@ -176,7 +208,15 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
       :type: real
       :default: 50.0
 
-      Used in exponent of equation weighting snow-covered and snow-free albedo.
+      Used in the calculation of the weighting factor for snow in the
+      setting of the overall surface albedo, the surface resistance
+      and surface melting. It represents the inverse of the e-folding
+      depth for masking by snow. A higher value indicates that masking
+      by snow is more effective.
+
+      N.B. This was originally used to multiply the snow mass (with a
+      standard value of 0.2), but is now used to multiply the snow
+      depth.
 
 
    .. nml:member:: dtland
@@ -186,7 +226,12 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Degrees Celsius below zero at which snow albedo equals cold deep snow albedo.
 
-      Only used if :nml:mem:`JULES_RADIATION::l_snow_albedo` = FALSE. This is 2.0 in HCTN30 Eq4.
+      This is used only if the diagnostic snow albedo scheme is
+      selected, i.e. if :nml:mem:`JULES_RADIATION::l_snow_albedo` =
+      FALSE and :nml:mem:`JULES_RADIATION::l_embedded_snow` =
+      FALSE. This is 2.0 in HCTN30 Eq4.
+
+      Must not be zero.
 
 
    .. nml:member:: kland_numerator
@@ -196,11 +241,13 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Used in snow-ageing effect on albedo.
 
-      Only used if :nml:mem:`JULES_RADIATION::l_snow_albedo` = FALSE.
+      This is used only if the diagnostic snow albedo scheme is
+      selected, i.e. if :nml:mem:`JULES_RADIATION::l_snow_albedo` =
+      FALSE and :nml:mem:`JULES_RADIATION::l_embedded_snow` =
+      FALSE. This is 2.0 in HCTN30 Eq4.
 
-      Must not be zero.
-
-      ``kland`` is computed by dividing this value by :nml:mem:`dtland` - see HCTN30 Eq4.
+      ``kland`` is computed by dividing this value by
+      :nml:mem:`dtland` - see HCTN30 Eq4.
 
 
    .. nml:member:: can_clump
@@ -210,13 +257,18 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Clumping parameter for snow on the canopy in calculation of albedo.
 
-      Only used if :nml:mem:`JULES_VEGETATION::can_model` = 4, :nml:mem:`JULES_SNOW::cansnowpft` = TRUE on that surface tile and :nml:mem:`JULES_RADIATION::l_embedded_snow` = TRUE.
+      Only used if :nml:mem:`JULES_VEGETATION::can_model` = 4,
+      :nml:mem:`JULES_RADIATION::l_embedded_snow` = TRUE and
+      :nml:mem:`cansnowpft` = TRUE on that surface tile.
 
       The model of snow under the canopy is currently only suitable
-      for coniferous trees.
+      for trees.
 
       The inverse of this parameter specifies the fraction of the
-      canopy over which snow is distributed when calculating the albedo.
+      canopy over which snow is distributed when calculating the
+      albedo. It should not be less than 1 and higher values indicate
+      that snow on a canopy is more clumped, leaving more of the bare
+      canopy exposed.
 
 
    .. nml:member:: n_lai_exposed
@@ -228,8 +280,8 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       A power-law distribution of leaf area density is assumed within
       the canopy for calculating masking of snow by vegetation using
-      the embedded scheme. Larger values imply greater densities
-      toward the base of the canopy.
+      the embedded scheme. Higher values indicate that snow is more
+      effective in covering vegetation.
 
       Only used if :nml:mem:`JULES_RADIATION::l_embedded_snow` = TRUE.
 
@@ -241,14 +293,16 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Minimum LAI in calculation of albedo in the presence of snow.
 
-      A minimum albedo is imposed when calculating the albedo of
-      plant canopies (historically 0.5). This parameter allows it
-      to be set for each PFT in the presence of snow. A separate variable,
-      :nml:mem:`JULES_PFTPARM::lai_alb_lim_io` is used in the absence of snow.
+      A minimum albedo is imposed when calculating the albedo of plant
+      canopies (historically 0.5). This parameter allows it to be set
+      for each PFT in the presence of snow. Crudely, it represents the
+      stem area of vegetation remaining when the true LAI is 0. A
+      separate variable, :nml:mem:`JULES_PFTPARM::lai_alb_lim_io` is
+      used in the absence of snow.
 
 
 .. nml:group:: Other snow parameters
-   
+
    .. nml:member:: rho_snow_const
 
       :type: real
@@ -256,10 +310,12 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Constant density of lying snow (kg m\ :sup:`-3`).
 
-      This value is used if :nml:mem:`nsmax` = 0, in which case all
-      snow is modelled as a single layer of constant density. If
-      :nml:mem:`nsmax` > 0, snow density is prognostic.
+      If :nml:mem:`nsmax` = 0, snow is modelled as a single layer of
+      constant density using this value.
 
+      If :nml:mem:`nsmax` > 0, snow density is prognostic, except for
+      snow on the canopy when :nml:mem:`cansnowpft` is TRUE, and for
+      thin layers of snow when :nml:mem:`nsmax` > 0.
 
 
    .. nml:member:: rho_snow_fresh
@@ -269,17 +325,22 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Density of fresh snow (kg m\ :sup:`-3`).
 
-      This value is only used if :nml:mem:`nsmax` > 0.
+      Only used if :nml:mem:`nsmax` > 0.
 
    .. nml:member:: rho_firn_albedo
 
       :type: real
       :default: 550.0
 
-      If :nml:mem:`JULES_SURFACE::l_elev_land_ice` = TRUE, this is the threshold density (as measured over the ~top 10cm, depending
-      on how the dzsnow layers are specified) at which the grain-size calculation of prognostic snow albedo will switch to one
-      dependent on the surface density of the snowpack. Albedo is linearly scaled between `amax` for `rho_snow_const` and `aicemax` 
-      for rho_ice=917 kg/m^3. 
+      Only used if :nml:mem:`JULES_SURFACE::l_elev_land_ice` = TRUE.
+
+      This is the threshold density (as measured over the ~top 10 cm,
+      depending on how the :nml:mem:`dzsnow` layers are specified) at
+      which the grain-size calculation of prognostic snow albedo will
+      switch to one dependent on the surface density of the
+      snowpack. Albedo is linearly scaled between :nml:mem:`amax` for
+      :nml:mem:`rho_snow_const` and :nml:mem:`aicemax` for density the
+      of ice (917 kg m\ :sup:`-3`).
 
 
    .. nml:member:: snow_hcon
@@ -287,9 +348,12 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
       :type: real
       :default: 0.265
 
-      Thermal conductivity of lying snow (W m\ :sup:`-1` K\ :sup:`-1`).
+      Thermal conductivity of lying snow (W m\ :sup:`-1` K\
+      :sup:`-1`).
 
-      See HCTN30 Eq.42.
+      This value is used for all snow if :nml:mem:`nsmax` = 0, but only
+      for thin snow if :nml:mem:`nsmax` > 0.  See HCTN30 Eq.42. for its
+      application.
 
 
    .. nml:member:: snow_hcap
@@ -345,9 +409,12 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
       :type: real(npft)
       :default: MDI
 
-      Constant term in the background unloading rate for snow on the canopy.
+      Constant term in the background unloading rate for snow on the
+      canopy. Snow is unloaded from the canopy as a background process
+      or because it is melting.
 
-      Only used if :nml:mem:`JULES_VEGETATION::can_model` = 4 and :nml:mem:`JULES_SNOW::cansnowpft` = TRUE on that surface tile.
+      Only used if :nml:mem:`JULES_VEGETATION::can_model` = 4 and
+      :nml:mem:`cansnowpft` = TRUE on that surface tile.
 
 
    .. nml:member:: unload_rate_u
@@ -355,9 +422,11 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
       :type: real(npft)
       :default: MDI
 
-      Term proportional to wind speed in unloading rate for snow on the canopy.
+      Term proportional to wind speed in the background unloading rate
+      for snow on the canopy.
 
-      Only used if :nml:mem:`JULES_VEGETATION::can_model` = 4 and :nml:mem:`JULES_SNOW::cansnowpft` = TRUE on that surface tile.
+      Only used if :nml:mem:`JULES_VEGETATION::can_model` = 4 and
+      :nml:mem:`cansnowpft` = TRUE on that surface tile.
 
 
    .. nml:member:: i_snow_cond_parm
@@ -368,16 +437,14 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Scheme used to calculate the conductivity of snow
 
+      Only used if :nml:mem:`nsmax` > 0.
+
       Two parametrizations of snow conductivity are available
       taken from the papers of :ref:`Yen (1981)<References_snow>` and
       :ref:`Calonne et al. (2011)<References_snow>`.
 
-      Only used if :nml:mem:`JULES_SNOW::nsmax` > 0.
-
-      = =====================
-      0 Yen (1981)
-      1 Calonne et al. (2011)
-      = =====================
+      0. :ref:`Yen (1981)<References_snow>`
+      1. :ref:`Calonne et al. (2011)<References_snow>`
 
 
    .. nml:member:: l_et_metamorph
@@ -385,13 +452,16 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
       :type: logical
       :default: F
 
+      This parametrization follows the form used by e.g. :ref:`Dutra
+      et al. (2010)<References_snow>`.
+
+      Only used if :nml:mem:`nsmax` > 0.
+
       TRUE
           Include the effect of thermal metamorphism on the snow density.
 
       FALSE
           No effect.
-
-      This parametrization follows the form used by eg. Dutra et al. (2010)
 
 
    .. nml:member:: l_snow_infilt
@@ -399,8 +469,11 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
       :type: logical
       :default: F
 
+      Only used if :nml:mem:`nsmax` > 0.
+
       TRUE
-          Pass rainfall and melting from the canopy to the snowpack as infiltration.
+          Pass rainfall and melting from the canopy to the snowpack as
+	  infiltration.
 
       FALSE
           No effect.
@@ -411,11 +484,13 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
       :type: logical
       :default: F
 
+      Only used if :nml:mem:`nsmax` > 0.
+
       TRUE
           Do not include the canopy heat capacity in the surface energy balance at the top of the snow pack on surface tiles without a canopy snow model.
 
       FALSE
-          The canopy heat capacity is include in the surface energy balance at the top of the snow pack.
+          The canopy heat capacity is included in the surface energy balance at the top of the snow pack.
 
 
    .. nml:member:: a_snow_et
@@ -425,7 +500,7 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Constant in parametrization of thermal metamorphism.
 
-      Only used if :nml:mem:`JULES_SNOW::l_et_metamorph` = TRUE. 
+      Only used if :nml:mem:`l_et_metamorph` = TRUE.
 
    .. nml:member:: b_snow_et
 
@@ -434,7 +509,7 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Constant in parametrization of thermal metamorphism.
 
-      Only used if :nml:mem:`JULES_SNOW::l_et_metamorph` = TRUE. 
+      Only used if :nml:mem:`l_et_metamorph` = TRUE.
 
    .. nml:member:: c_snow_et
 
@@ -443,7 +518,7 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Constant in parametrization of thermal metamorphism.
 
-      Only used if :nml:mem:`JULES_SNOW::l_et_metamorph` = TRUE. 
+      Only used if :nml:mem:`l_et_metamorph` = TRUE.
 
    .. nml:member:: rho_snow_et_crit
 
@@ -452,7 +527,7 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Critical density in parametrization of thermal metamorphism.
 
-      Only used if :nml:mem:`JULES_SNOW::l_et_metamorph` = TRUE. 
+      Only used if :nml:mem:`l_et_metamorph` = TRUE.
 
 
    .. nml:member:: i_grain_growth_opt
@@ -463,13 +538,14 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Scheme used to calculate the rate of growth of snow grains.
 
-      Setting this to 0 invokes the original scheme based on Marshall (1989),
-      with no dependence of the rate of growth of small grains on the
-      temperature.
+      0. Invokes the original scheme based on :ref:`Marshall
+	 (1989)<References_snow>`, with no dependence of the rate of
+	 growth of small grains on the temperature.
 
-      Setting it to 1 invokes the scheme for growth of snow grains proposed
-      by Taillandier et al. (2007) for equitemperature metamorphism. This
-      is significantly slower than the default scheme at low temperatures.
+      1. Invokes the scheme for growth of snow grains proposed by
+	 :ref:`Taillandier et al. (2007)<References_snow>` for
+	 equitemperature metamorphism. Growth is significantly
+	 slower than the default scheme at low temperatures.
 
 
    .. nml:member:: i_relayer_opt
@@ -478,14 +554,17 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
       :permitted: 0 or 1
       :default: 0
 
-      Scheme used to relayer the snowpack. Setting the option to 0 invokes
-      the original scheme with relayering of the grain size involving the
-      grain size itself, while setting it to 1 causes the relayering to be 
-      done using the inverse of the grain size. This is more consistent
-      with conserving the SSA, though full conservation would require
-      mass weighting to be invoked during regridding.
+      Scheme used to relayer the snowpack.
 
-      Only used if :nml:mem:`JULES_SNOW::nsmax` > 0.
+      Only used if :nml:mem:`nsmax` > 0.
+
+      0. Invokes the original scheme with relayering of the grain size
+	 involving the grain size itself.
+      1. Relayering is done using the inverse of the grain size. This
+	 is more consistent with conserving the specific surface area
+	 of snow, though full conservation would require mass
+	 weighting to be invoked during regridding.
+
 
    .. nml:member:: i_basal_melting_opt
 
@@ -493,17 +572,19 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
       :permitted: 0 or 1
       :default: 0
 
-      Option to treat basal melting of the snow pack. When snow falls
-      on warm ground, it will melt from the base of the snowpack, 
-      where the temperature of the snow will rise to the melting point.
-      The 0-layer snow scheme, which is used for thin snow even when the
-      multilayer scheme is selected, did not represent this process and
-      included only melting at the surface. This option allows 
-      basal melting to be omitted if it is set to the defaut value of 0, 
-      but offers an alternative setting of 1, which results in basal 
-      melting taking place instantaneously if the temperature of the
-      first soil layer is above freezing, until the snow is removed or
-      the temperature of soil layer is reduced to freezing.
+      Option to treat basal melting of the snow pack.
+
+      When snow falls on warm ground, it will melt from the base of
+      the snowpack, where the temperature of the snow will rise to the
+      melting point. The 0-layer snow scheme, which is used for thin
+      snow even when the multilayer scheme is selected, did not
+      represent this process and included only melting at the surface.
+
+      0. Default: Basal melting is omitted.
+      1. Basal melting takes place instantaneously if the temperature
+	 of the first soil layer is above freezing, until the snow is
+	 removed or the temperature of soil layer is reduced to
+	 freezing.
 
 
 
@@ -512,7 +593,7 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 Example of the evolution of snow layer thickness
 ------------------------------------------------
 
-The table below gives an example of how the number and thickness of snow layers varies with total snow depth for the case of :nml:mem:`JULES_SNOW::nsmax` = 3 and ``dzsnow = (0.1, 0.15, 0.2)``. Note that if the values given by the user for :nml:mem:`JULES_SNOW::dzsnow` are a decreasing series with ``dzsnow(i) <= 2 * dzsnow(i - 1)``, the algorithm will result in layers ``i`` and ``i + 1`` being added at the same time. Don't panic - this should not be a problem for the simulation.
+The table below gives an example of how the number and thickness of snow layers varies with total snow depth for the case of :nml:mem:`nsmax` = 3 and ``dzsnow = (0.1, 0.15, 0.2)``. Note that if the values given by the user for :nml:mem:`dzsnow` are a decreasing series with ``dzsnow(i) <= 2 * dzsnow(i - 1)``, the algorithm will result in layers ``i`` and ``i + 1`` being added at the same time. Don't panic - this should not be a problem for the simulation.
 
 .. tabularcolumns:: |p{3cm}|p{1.5cm}|p{3cm}|p{7cm}|
 
@@ -545,10 +626,23 @@ The table below gives an example of how the number and thickness of snow layers 
 -------------------------------
 
 * Calonne, N., Flin, F., Morin, S., Lesaffre, B., du
-  Roscoat, S. Rolland, and Geindreau, C. (2011), Numerical and
+  Roscoat, S. Rolland, and Geindreau, C. (2011). Numerical and
   experimental investigations of the effective thermal conductivity of
   snow, Geophys. Res. Lett., 38, L23501,
   https://doi.org/10.1029/2011GL049234.
+* Dutra, E., Balsamo, G., Viterbo, P., Miranda, P. M., Beljaars, A.,
+  Schar, C., and Elder, K. (2010). An improved snow scheme for the ECMWF land
+  surface model: Description and ofﬂine validation, J. Hydrometeorol.,
+  11, 899–916, https://doi.org/10.1175/2010JHM1249.1.
+* Marshall, S.E. (1989). A physical parameterization of snow albedo for
+  use in climate models. NCAR Cooperative Thesis 123. Boulder, CO :
+  National Center for Atmospheric
+  Research. https://atmos.washington.edu/~sgw/PAPERS/1989_Marshall.pdf
+* Taillandier, A.-S., F. Domine, W. R. Simpson, M. Sturm,
+  and T. A. Douglas (2007). Rate of decrease of the specific surface
+  area of dry snow: Isothermal and temperature gradient
+  conditions, J. Geophys. Res., 112, F03003,
+  https://doi.org/10.1029/2006JF000514.
 * Yen, Y.-C. (1981). Review of thermal properties of snow, ice and sea
   ice. Cold Regions Research and Engineering Laboratory (CRREL) Report
   81-10.  https://hdl.handle.net/11681/9469
