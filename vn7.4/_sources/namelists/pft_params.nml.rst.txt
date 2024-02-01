@@ -337,31 +337,6 @@ ease the direct links to these documents are:
    Only used with the Medlyn model of stomatal conductance (:nml:mem:`JULES_VEGETATION::stomata_model` = 2).
 
 
-.. nml:group:: Only used with the SOX (Eller et al. 2020) model of stomatal conductance (:nml:mem:`JULES_VEGETATION::stomata_model` = 3). A value is required for each PFT.
-
-
-   .. nml:member:: sox_a_io
-
-      :type: real(npft)
-      :default: None
-
-      The shape parameter in the xylem vulnerability curve.
-
-   .. nml:member:: sox_p50_io
-
-      :type: real(npft)
-      :default: None
-
-      Xlem water potential at which xylem hydraulic conductance is half its maximum value (MPa).
-
-   .. nml:member:: sox_rp_min_io
-
-      :type: real(npft)
-      :default: None
-
-      Plant minimum hydraulic resistance (m2 s MPa/mol).
-
-
 .. nml:member:: g_leaf_0_io
 
    :type: real(npft)
