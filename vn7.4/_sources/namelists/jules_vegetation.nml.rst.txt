@@ -554,6 +554,7 @@ This file sets the vegetation options. It contains one namelist called :nml:lst:
       Eqn.11 of that paper, and :ref:`Medlyn et al
       (2012)<References_vegetation>`. Note that as implemented the model uses a
       single parameter (g\ :sub:`1`, assuming that g\ :sub:`0` = 0).
+   3. The SOX model of :ref:`Eller et al. (2020)<References_vegetation>`
 
    .. warning::
 
@@ -940,6 +941,10 @@ This file sets the vegetation options. It contains one namelist called :nml:lst:
   model description – Part 2: Carbon fluxes and vegetation dynamics,
   Geosci. Model Dev., 4, 701-722,
   https://doi.org/10.5194/gmd-4-701-2011
+* Eller et al. (2020), Stomatal optimization based on xylem hydraulics
+  (SOX) improves land surface model simulation of vegetation responses
+  to climate. New Phytologist 226:
+  1622–1637 https://doi.org/10.1111/nph.16419
 * Harman, I.N. & Finnigan, J.J. (2007), A simple unified theory for
   flow in the canopy and roughness sublayer. Boundary-Layer Meteorol.
   123: 339. https://doi.org/10.1007/s10546-006-9145-6
