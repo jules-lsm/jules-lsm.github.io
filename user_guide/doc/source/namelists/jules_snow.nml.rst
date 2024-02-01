@@ -632,7 +632,7 @@ The table below gives an example of how the number and thickness of snow layers 
   https://doi.org/10.1029/2011GL049234.
 * Dutra, E., Balsamo, G., Viterbo, P., Miranda, P. M., Beljaars, A.,
   Schar, C., and Elder, K. (2010). An improved snow scheme for the ECMWF land
-  surface model: Description and ofﬂine validation, J. Hydrometeorol.,
+  surface model: Description and offline validation, J. Hydrometeorol.,
   11, 899–916, https://doi.org/10.1175/2010JHM1249.1.
 * Marshall, S.E. (1989). A physical parameterization of snow albedo for
   use in climate models. NCAR Cooperative Thesis 123. Boulder, CO :
