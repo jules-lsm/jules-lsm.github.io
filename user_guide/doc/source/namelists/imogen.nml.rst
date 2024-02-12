@@ -6,7 +6,9 @@ This file contains three namelists called :nml:lst:`IMOGEN_ONOFF_SWITCH`, :nml:l
 
 Since IMOGEN calculates the forcing for an entire year at once, an IMOGEN run must have a start time of 00:00:00 on the 1st of January for some year.
 
-IMOGEN uses the netcdf read functions in JULES to load the driving data. The required driving data is specific humidity (kg/kg), precipitaion (kg/m2/s), wind speed (m/s), incoming shortwave radiation (W/m2), incoming longwave radiation (W/m2), air temeprature (K) and diurnal range of air temperature (K). IMOGEN also needs ``grid_area`` read in via :nml:lst:`JULES_LATLON`. 
+IMOGEN uses the netcdf read functions in JULES to load the driving data. The required driving data is specific humidity (kg/kg), precipitation (kg/m2/s), wind speed (m/s), incoming shortwave radiation (W/m2), incoming longwave radiation (W/m2), air temeprature (K) and diurnal range of air temperature (K). IMOGEN also needs ``grid_area`` read in via :nml:lst:`JULES_LATLON`. 
+
+The meteorological driving data used for IMOGEN are at monthly resolution. IMOGEN requires a monthly climatology and then can use either anomalies from that climatology (:nml:mem:`IMOGEN_RUN_LIST::anlg` set to FALSE and :nml:mem:`IMOGEN_RUN_LIST::anom` set to TRUE) or spatial patterns of changes in each meteorological driving variable per degree of global temperature change (:nml:mem:`IMOGEN_RUN_LIST::anlg` set to TRUE and :nml:mem:`IMOGEN_RUN_LIST::anom` set to TRUE). Patterns can be derived at the required spatial resolution using ESMValTool <https://esmvaltool.org/>.
 
 IMOGEN still reads the 1d data from ascii files within the code - this will change in the near future.
 
