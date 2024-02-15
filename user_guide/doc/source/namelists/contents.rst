@@ -32,6 +32,7 @@ These files have specific names, and JULES expects all these files to exist for 
    jules_deposition.nml
    jules_snow.nml
    jules_rivers.nml
+   oasis_rivers.nml
    jules_water_resources.nml
    jules_irrig.nml
    science_fixes.nml
@@ -52,4 +53,3 @@ These files have specific names, and JULES expects all these files to exist for 
    prescribed_data.nml
    initial_conditions.nml
    output.nml
-   oasis_rivers.nml
