@@ -17,7 +17,7 @@ This file contains a single namelists called :nml:lst:`OASIS_RIVERS`, which indi
    :permitted: 2
    :default: imdi
 
-   The number of fields that are received from other models via OASIS coupling. 
+   The number of fields that are received from other models via OASIS coupling.
 
 .. nml:member:: np_send
 
@@ -25,7 +25,7 @@ This file contains a single namelists called :nml:lst:`OASIS_RIVERS`, which indi
    :permitted: 0,1
    :default: imdi
 
-   The number of fields that are sent to other models via OASIS coupling. 
+   The number of fields that are sent to other models via OASIS coupling.
 
 .. nml:member:: cpl_freq
 
@@ -40,12 +40,12 @@ This file contains a single namelists called :nml:lst:`OASIS_RIVERS`, which indi
 .. nml:member:: send_fields
 
    :type: character(:)
-   :permitted: 'rflow_outflow'
+   :permitted: 'outflow_per_river'
    :default: ''
 
    List of fields to be sent via coupling from the river executable to other models. Names are case sensitive
 
-.. note::  The only field that can be sent via coupling is the total river runoff (`rflow_outflow`).
+.. note::  The only field that can be sent via coupling is the total river runoff (`outflow_per_river`).
 
 .. nml:member:: receive_fields
 
