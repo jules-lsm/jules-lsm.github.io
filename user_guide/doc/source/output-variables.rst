@@ -425,6 +425,15 @@ Rivers
 | ``rflow_rp``                  | River routing gridbox river flow rate (kg m\ :sup:`-2` s\ :sup:`-1`).                         | np_rivers  |
 |                               | Only available if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE.                                   |            |
 +-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``rivers_outflow_rp``         | River outflow on river routing grid (kg s\ :sup:`-1`).                                        | np_rivers  |
+|                               | Only available if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE.                                   |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``outflow_per_river``         | River outflow into the ocean for each river (kg s\ :sup:`-1`).                                | np_rivers  |
+|                               | Only available if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE.                                   |            |
+|                               |                                                                                               |            |
+|                               | This technically has dimensions of "np_rivers", although only ``[1:n_rivers]``, defined by    |            |
+|                               | the :nml:mem:`JULES_RIVERS_PROPS::riv_number_file`, is populated.                             |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
 | ``rrun_rp``                   | River routing gridbox runoff rate received by river routing routine                           | np_rivers  |
 |                               | (kg m\ :sup:`-2` s\ :sup:`-1`).                                                               |            |
 |                               | Only available if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE.                                   |            |

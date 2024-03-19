@@ -44,7 +44,7 @@ The values of all prognostic variables must be set at the start of a run. This i
 .. nml:group:: Members used to set up spatially varying properties
 
    .. nml:member:: file
-   
+ 
       :type: character
       :default: None
    
@@ -54,7 +54,7 @@ The values of all prognostic variables must be set at the start of a run. This i
 
       If :nml:mem:`dump_file` = TRUE, this should be a JULES dump file.
       
-      If :nml:mem:`dump_file` = FALSE, this should be a file conforming to the :doc:`JULES input requirements </input/overview>`. This file name may use :doc:`variable name templating </input/file-name-templating>`.    
+      If :nml:mem:`dump_file` = FALSE, this should be a file conforming to the :doc:`JULES input requirements </input/overview>`. This file name may use :doc:`variable name templating </input/file-name-templating>`.
    
    
    .. nml:member:: nvars
@@ -271,17 +271,17 @@ The required variables for a particular configuration, along with their 'type' a
 | ``sthu_irr``                     | Unfrozen soil wetness of each layer as a fraction of saturation in irrigated fraction.  | soil    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | Required if :nml:mem:`JULES_SURFACE_TYPES::ncpft` > 0                                                                                |
-+----------------------------------+-----------------------------------------------------------------------------------------+---------+ 
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``cropdvi``                      | Development index for each crop pft.                                                    | cpft    |
-+----------------------------------+-----------------------------------------------------------------------------------------+---------+ 
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``croprootc``                    | Root carbon pool for each crop pft (kg m\ :sup:`-2`).                                   | cpft    |
-+----------------------------------+-----------------------------------------------------------------------------------------+---------+ 
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``cropharvc``                    | Carbon in 'harvest parts' pool for each crop pft (kg m\ :sup:`-2`) .                    | cpft    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+ 
 | ``cropreservec``                 | Carbon in stem reserves pool for each crop pft (kg m\ :sup:`-2`).                       | cpft    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+ 
 | ``croplai``                      | Leaf area index of each crop pft.                                                       | cpft    |
-+----------------------------------+-----------------------------------------------------------------------------------------+---------+ 
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``cropcanht``                    | Height (m) of each crop pft.                                                            | cpft    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | Required if :nml:mem:`JULES_HYDROLOGY::l_top` = TRUE                                                                                 |
@@ -294,7 +294,7 @@ The required variables for a particular configuration, along with their 'type' a
 | ``zw``                           | Depth from the surface to the water table (m).                                          | None    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | Required if :nml:mem:`JULES_SOIL::l_bedrock` = TRUE                                                                                  |
-+----------------------------------+-----------------------------------------------------------------------------------------+---------+ 
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``tsoil_deep``                   | Temperature of each bedrock layer (K)                                                   | bedrock |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | Required if :nml:mem:`JULES_RADIATION::l_snow_albedo` = TRUE                                                                         |
@@ -412,9 +412,15 @@ The required variables for a particular configuration, along with their 'type' a
 | ``rfm_bflowin_rp``               | Sub-surface flow into a grid box on river routing points (m3)                           | none    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | Required if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '1,3' and                                |
-| :nml:mem:`JULES_INITIAL::dump_file` = TRUE                                                                                           |         
+| :nml:mem:`JULES_INITIAL::dump_file` = TRUE                                                                                           |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``rivers_sto_rp``                | Water storage (kg)                                                                      | none    |
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
+| Required if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '3',                                     |
+| :nml:mem:`JULES_INITIAL::dump_file` = TRUE and :nml:mem:`OASIS_RIVERS::send_fields` or                                               |
+| :nml:mem:`JULES_OUTPUT_PROFILE::var` contains 'outflow_per_river'                                                                    |
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
+| ``rivers_outflow_rp``            | River outflow on river routing points (kg s\ :sup:`-1`)                                 | none    | 
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | Required if :nml:mem:`JULES_VEGETATION::photo_acclim_model` = 2 or 3                                                                 |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
@@ -426,7 +432,7 @@ The required variables for a particular configuration, along with their 'type' a
   if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '2' and :nml:mem:`JULES_INITIAL::dump_file` = FALSE,
     rfm_surfstore_rp, rfm_substore_rp, rfm_flowin_rp and rfm_bflowin are initialised to zero.
 
-.. warning:: 
+.. warning::
   if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '1,3' and :nml:mem:`JULES_INITIAL::dump_file` = FALSE, 
   rivers_sto_rp is initialised to zero.
 
