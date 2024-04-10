@@ -367,11 +367,12 @@ The following table summarises ancillary fields that give the location and relat
 |                            | This is only required if :nml:mem:`l_coord_latlon` = FALSE.                              |
 |                            | Note that these can have any valid unit.                                                 |
 +----------------------------+------------------------------------------------------------------------------------------+
-| ``grid_area``              | The area of each gridbox (m\ :sup`2`)                                                    |
-|                            | This is only requred if irrigation is being modelled with                                |
+| ``grid_area``              | The area of each gridbox (m\ :sup`2`).                                                   |
+|                            | This is requred if irrigation is being modelled with                                     |
 |                            | :nml:mem:`JULES_WATER_RESOURCES::l_water_resources` = TRUE and                           |
 |                            | :nml:mem:`JULES_WATER_RESOURCES::l_water_irrigation` = TRUE.                             |
-|                            |                                                                                          |
+|                            | It is also required when using IMOGEN:                                                   |
+|                            | :nml:mem:`IMOGEN_ONOFF_SWITCH::l_imogen` = TRUE                                          |
 +----------------------------+------------------------------------------------------------------------------------------+
 
 Examples of how to specify the model domain using through this namelist are provided at the end of this section.
@@ -387,6 +388,9 @@ Land fraction is the fraction of each gridbox that is land. Currently, JULES con
 .. warning::
    When the input grid consists of a single location (1D and :nml:mem:`JULES_INPUT_GRID::npoints` = 1 or 2D and :nml:mem:`JULES_INPUT_GRID::nx` = :nml:mem:`JULES_INPUT_GRID::ny` = 1), that single location is assumed to be 100% land.
    
+   IMOGEN also currently assumes 100% land for each land grid cell.
+
+
 For any input grid with more than a single location, the following are used:
 
 

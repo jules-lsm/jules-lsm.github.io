@@ -1155,7 +1155,7 @@ This namelist specifies how spatially varying river routing properties should be
 .. nml:member:: rivers_regrid
 
    :type: logical
-   :default: T
+   :default: F
 
    Flag indicating if variables on the land grid need to be regridded (interpolated) to the river routing grid. This is currently only possible for grids that are regular in latitude and longituide. We distinguish between regridding (which is used between land and river grids of different resolution, or the same resolution but staggered relative to one another) and remapping (between consistent grids of the same resolution).
 
@@ -1285,6 +1285,16 @@ Grids are considered consistent (and therefore regridding is not required) if th
       For each JULES variable specified in :nml:mem:`var` where :nml:mem:`use_file` = FALSE, this is a constant value that the variable will be set to at every point.
 
       This is not used for variables where :nml:mem:`use_file` = TRUE, but a placeholder must still be given in that case.
+
+
+.. nml:group:: Additional ancillaries, which may be required depending on requested options
+ 	
+   .. nml:member:: riv_number_file
+	
+      :type: character
+      :default: ''
+	
+      Ancillary file containing river numbers, which assign each river mouth on the Rivers grid, to the river which discharges into it. The river number is used in the calculation of 'outflow_per_river' (River outflow into the ocean for each river; kg s\ :sup:`-1`), when it is requested either as a JULES output (:nml:mem:`JULES_OUTPUT_PROFILE::var`) or as a send field when coupled to OASIS (:nml:mem:`OASIS_RIVERS::send_fields`). The river outflow for each river is calculated as the sum of the river outflows corresponding to that river. When passed to the ocean model via OASIS the river outflow is distributed over the corresponding river outflow points on the ocean grid. This is to ensure that water is conserved and rivers discharge into the correct ocean grid points.
 
 
 .. _list-of-rivers-params:
