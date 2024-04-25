@@ -34,8 +34,8 @@ class JulesDocsRelease:
         vn_pattern = re.compile(r"\s*(release|version)\s*=\s*.([\d\.]+).")
 
         with FileInput(target, inplace=True) as fd:
-            # An in-place update the copyright and version number in
-            # the sphinx configuration file.
+            # Update the copyright and version information in the
+            # sphinx config file
 
             for line in fd:
                 if match := cr_pattern.match(line):
@@ -144,15 +144,17 @@ def commit_changes(args):
     message = last_log_message(args.trunk_name)
     message = f"Docs build for {message}"
 
+    if args.no_commit:
+        # Skip the commit and push commands
+        logging.info("Need to commit change for %r", message)
+        return
+
     cmd = ["git", "commit", "--no-gpg-sign", "-a", "--quiet", "-m", message]
 
-    if not args.no_commit:
-        run(cmd, check=True)
-        logging.info("Committed change %r", message)
-        run(["git", "push"], check=True)
-        logging.info("Pushed automatic commit")
-    else:
-        logging.info("Need to commit change for %r", message)
+    run(cmd, check=True)
+    logging.info("Committed change %r", message)
+    run(["git", "push"], check=True)
+    logging.info("Pushed automatic commit")
 
     return
 

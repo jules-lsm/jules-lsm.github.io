@@ -50,7 +50,8 @@ jobs:
               exit 1
             fi
             popd
-          if: ${{ github.repository != 't00sa/jules-docs' || github.ref != 'refs/heads/master' }}
+          if: ${{ github.repository != 'jules-lsm/jules-lsm.github.io'
+                  || github.ref != 'refs/heads/master' }}
 
         - name: Deploy documentation
           run: |
