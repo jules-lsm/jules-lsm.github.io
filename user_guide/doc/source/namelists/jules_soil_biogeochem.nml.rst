@@ -212,7 +212,7 @@ If using the ECOSSE soil model, most soil parameters are read from a separate fi
       :type: real
       :default: 0.2
 
-      Parameter controlling the depth to which fire burns soil litter carbon in meters. At depths shallower than this value, the fire can burn soil carbon in the two litter pools (dpm and rpm). If z_burn_max falls within a layer only a proportion of the soil carbon is burnt. Only used with layered soil carbon scheme (:nml:mem:`l_layeredc` = TRUE) and fire (either :nml:mem:`JULES_VEGETATION::l_trif_fire` or :nml:mem:`JULES_VEGETATION::l_inferno` or both). 
+      Parameter controlling the depth to which fire burns soil litter carbon in meters. At depths shallower than this value, the fire can burn soil carbon in the two litter pools (dpm and rpm). If z_burn_max falls within a layer only a proportion of the soil carbon is burnt. Only used with layered soil carbon scheme (:nml:mem:`l_layeredc` = TRUE) and fire (either :nml:mem:`JULES_VEGETATION::l_trif_fire` or :nml:mem:`JULES_VEGETATION::l_inferno` or both). In reality the burn depth varies so please check whether the default value of 0.2 is suitable for your application. 
 
 
 .. nml:group:: Parameters for the 4-pool- or ECOSSE-based models (only used if :nml:mem:`soil_bgc_model` = 2 or 3):
