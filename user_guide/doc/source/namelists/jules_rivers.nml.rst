@@ -5,9 +5,6 @@ This file sets the river routing options. It contains two namelists called :nml:
 
 River routing introduces two more grids to a JULES run: the river routing input grid and the river routing model grid. The river routing input grid must always be specified as a 2D grid in :nml:lst:`JULES_RIVERS_PROPS`. This is not required to be identical to the input or the model grid. Internally the model compresses this to the river routing model grid, which is a 1D grid with length ``np_rivers``, which is the number of valid routing points in the river routing input grid. All river routing output will be on the river routing model grid, or will be regridded to the model grid.
 
-.. note::
-   The river routing code in JULES is still in development. Users should ensure that results are as expected, and provide feedback where deficiencies are identified.
-
 
 ``JULES_RIVERS`` namelist members
 ---------------------------------
@@ -44,12 +41,16 @@ River routing introduces two more grids to a JULES run: the river routing input 
    ``3``
        Use a standalone JULES implementation of the TRIP model (see Oki et al. 1999).
 
+   ``4``
+       Use a standalone JULES implementation of the local inertial equation version of the CaMa-Flood model (see Yamazaki et al., 2011, 2013). At present this must be selected in combination with :nml:mem:`l_riv_overbank` = TRUE and :nml:mem:`JULES_OVERBANK::overbank_model` = 4. This approach is still in development and should **NOT** be used. 
+
+
 .. nml:member:: l_riv_overbank
 
    :type: logical
    :default: F
 
-   Switch for enabling river overbank inundation. Only used if :nml:mem:`JULES_RIVERS::l_rivers` is TRUE.
+   Switch for enabling river overbank inundation. Only used if :nml:mem:`l_rivers` is TRUE.
 
    TRUE
        Calculate frac_fplain_lp, i.e. overbank inundation area as a fraction of gridcell area.
@@ -58,7 +59,7 @@ River routing introduces two more grids to a JULES run: the river routing input 
        No overbank inundation calculations
 
 .. note::
-   If :nml:mem:`JULES_RIVERS::l_riv_overbank` = FALSE, then optional namelist :nml:lst:`JULES_OVERBANK` is not required.
+   If :nml:mem:`l_riv_overbank` = FALSE, then optional namelist :nml:lst:`JULES_OVERBANK` is not required.
 
 
 .. nml:member:: nstep_rivers
@@ -67,9 +68,9 @@ River routing introduces two more grids to a JULES run: the river routing input 
    :permitted: > 0
    :default: None
 
-   The number of model timesteps per routing timestep.
+   The number of model timesteps between calls to river routing.
 
-   For example, :nml:mem:`nstep_rivers` = 5 means that runoff will be accumulated for 5 model timesteps before being routed on the 5th timestep.
+   For example, :nml:mem:`nstep_rivers` = 5 means that runoff will be accumulated for 5 model timesteps before being routed on the 5th timestep. For the RFM and TRIP models (:nml:mem:`i_river_vn` = 1, 2 or 3) the timestep length for river routing is then :nml:mem:`nstep_rivers` * :nml:mem:`JULES_TIME::timestep_len` seconds. For the CaMa-Flood model (:nml:mem:`i_river_vn` = 4) the river routing timestep length is specified using :nml:mem:`dt_rivers` .
 
 
 .. warning::
@@ -207,6 +208,92 @@ River routing introduces two more grids to a JULES run: the river routing input 
       ``2``
           Ellipsoidal: Closer to the actual shape of the Earth.
 
+
+.. nml:group:: CaMa-Flood parameters - i.e. only used if :nml:mem:`i_river_vn` = ``4``
+
+
+   .. nml:member:: dt_rivers
+   
+      :type: real
+      :permitted: > 0 and must be a factor of :nml:mem:`nstep_rivers` * :nml:mem:`JULES_TIME::timestep_len`
+      :default: none
+
+      Maximum timestep length for CaMa-Flood river routing (s). If an adaptve timestep length is selected (:nml:mem:`l_adapt_timestep` = TRUE) the model will decide if a shorter timestep should be used.
+
+
+   .. nml:member:: l_adapt_timestep
+   
+      :type: logical
+      :default: F
+
+      Switch to select an adaptive timestep length.
+      
+      TRUE
+          Use an adaptive timestep. This is calculated on every call to river routing using an approximate stability condition (see Yamazaki et al., 2013).
+
+      FALSE
+          Use a fixed timestep of length :nml:mem:`dt_rivers`.
+
+
+   .. nml:member:: l_sea_level
+   
+      :type: logical
+      :default: F
+
+      Switch controlling the boundary condition for water level at river mouths.
+
+      TRUE
+          The water level at river mouths equals mean sea level (which is specified via :nml:lst:`JULES_RIVERS_PROPS`).
+      FALSE
+          The water level at river mouths is set to the top of the river channel at the mouth.
+
+      In both cases the value can be modified by :nml:mem:`l_vary_sea_level`.
+
+
+   .. nml:member:: l_vary_sea_level
+   
+      :type: logical
+      :default: F
+
+      Switch activating time variation of the boundary condition for water level at river mouths.
+
+      TRUE
+          The water level at mouths includes a time-varying component (which is specified via :nml:lst:`JULES_PRESCRIBED`).
+      FALSE
+          The water level at mouths is constant in time.
+
+
+   .. nml:member:: length_mouth
+   
+      :type: real
+      :permitted: > 0
+      :default: none
+
+      Length scale used for calculations at river mouths and inland drainage points, replacing the distance to the next downstream point (m).
+
+
+   .. nml:member:: manning_flood
+   
+      :type: real
+      :permitted: > 0
+      :default: none
+
+      Manning coefficient for flow on the floodplain.
+
+
+   .. nml:group:: Only used if :nml:mem:`l_adapt_timestep` = TRUE
+
+      .. nml:member:: alpha_stability
+   
+         :type: real
+         :permitted: 0 to 1
+         :default: none
+
+         Coefficient used to improve stability by reducing timestep length below that calculated from the CFL condition. Yamazaki et al. (2013) suggest a value of 0.9.
+
+     
+
+
 .. seealso::
    References:
 
@@ -218,6 +305,8 @@ River routing introduces two more grids to a JULES run: the river routing input 
       * Jones R., Dadson, S. and Bell, V.A. (2007) Report on European grid-based river-flow modelling for application to Regional Climate Models. Met Office Hadley Centre deliverable report.
       * Oki, T. and Sud, Y.C. (1998) Design of Total Runoff Integrating Pathways (TRIP)—A Global River Channel Network. Earth Interactions, 2: 1-37.
       * Oki, T., et al (1999) Assessment of annual runoff from land surface models using Total Runoff Integrating Pathways (TRIP). Journal of the Meteorological Society of Japan. 77 235-255
+      * Yamazaki, D. et al. (2011), A physically based description of floodplain inundation dynamics in a global river routing model, Water Resour. Res., 47, W04501, doi:10.1029/2010WR009726
+      * Yamazaki, D., et al. (2013), Improving computational efficiency in global river models by implementing the local inertial flow equation and a vector-based river network map, Water Resour. Res., 49, 7221–7235, doi:10.1002/wrcr.20552
 
 
 
@@ -226,31 +315,19 @@ River routing introduces two more grids to a JULES run: the river routing input 
 
 .. nml:namelist:: JULES_OVERBANK
 
+.. note::
+   If :nml:mem:`JULES_RIVERS::l_riv_overbank` = FALSE this namelist is not required.
+
 .. warning::
    The overbank inundation parameter values can be highly dependent on model resolution, so care is required by the user to ensure that appropriate values are selected, tested and adjusted as required.
 
    Suggested values for global and high-resolution runs are listed below, however these should be treated as a starting point only.
 
-.. nml:member:: l_riv_overbank
-
-   :type: logical
-   :default: F
-
-   Switch for enabling river overbank inundation. Only used if :nml:mem:`JULES_RIVERS::l_rivers` is TRUE.
-
-   TRUE
-       Calculate overbank inundation area as a fraction of gridcell area.
-
-   FALSE
-       No overbank inundation calculations
-
-.. note::
-   If :nml:mem:`l_riv_overbank` = FALSE, no further variables are needed from this namelist.
 
 .. nml:member:: overbank_model
 
    :type: integer
-   :permitted: 1, 2, 3
+   :permitted: 1, 2, 3, 4
    :default: none
 
    Choice of model of overbank inundation.
@@ -267,6 +344,8 @@ River routing introduces two more grids to a JULES run: the river routing input 
       distribution and an allometric relationship to estimate river depth.
       The parameters of the lognormal distribution are specified via :nml:lst:`JULES_OVERBANK_PROPS`.
       (**This is the recommended approach.**)
+
+   4. The inundated area is calculated using quantiles of elevation. This approach is still in development and should **NOT** be used. 
 
 
 .. nml:group:: River depth allometry (used if :nml:mem:`overbank_model` = 2 or 3)
@@ -330,7 +409,7 @@ River routing introduces two more grids to a JULES run: the river routing input 
 
          :type: real
          :default: none
-	 :suggested: 0.08 (for "several drainages in western Washington State, USA", Cragun 2005)
+         :suggested: 0.08 (for "several drainages in western Washington State, USA", Cragun 2005)
 
          Coefficient in the allometry for bankfull flow (see Sen 2018:eqn3.33).
 
@@ -339,7 +418,7 @@ River routing introduces two more grids to a JULES run: the river routing input 
 
          :type: real
          :default: none
-	 :suggested: 0.95 (for "several drainages in western Washington State, USA", Cragun 2005)
+         :suggested: 0.95 (for "several drainages in western Washington State, USA", Cragun 2005)
 
          Exponent in the allometry for bankfull flow (see Sen 2018:eqn3.33).
 
@@ -350,6 +429,17 @@ River routing introduces two more grids to a JULES run: the river routing input 
          :default: none
 
          The Rosgen entrenchment ratio (single value for all water courses in the simulation): when river depth = 2 x bankfull depth then width = :nml:mem:`ent_ratio` * bankfull width (i.e. :nml:mem:`ent_ratio` can be used to specify how wide floodplains are allowed to be).
+
+
+   .. nml:group:: Elevation quantiles (used if :nml:mem:`overbank_model` = 4)
+
+      .. nml:member:: nquantile_hypso
+
+         :type: integer
+         :permitted: > 0
+         :default: none
+
+         Number of quantiles used to describe the elevation profile (the hypsometric curve).
 
 
 .. seealso::

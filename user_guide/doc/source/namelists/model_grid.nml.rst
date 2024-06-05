@@ -207,6 +207,16 @@ In most cases, the model grid will be represented internally as a vector of poin
    The dimension name used when variables have an additional dimension of size  :nml:mem:`JULES_SOIL::ns_deep`.
 
    .. note:: For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).
+   
+   
+.. nml:member:: quantile_dim_name
+
+   :type: character
+   :default: "quantile"
+
+   The dimension name used when variables have an additional dimension of size  :nml:mem:`JULES_OVERBANK::nquantile_hypso`.
+
+   .. note:: For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).
 
 
 .. nml:member:: tracer_dim_name

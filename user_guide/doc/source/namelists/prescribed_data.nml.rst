@@ -285,4 +285,20 @@ The use of the following variables is explicitly supported:
 |                           |   Required if :nml:mem:`JULES_WATER_RESOURCES::l_water_transfers` |                                                   |
 |                           |   = TRUE.                                                         |                                                   |
 +---------------------------+-------------------------------------------------------------------+---------------------------------------------------+
+| ``sea_level_lp``          | Sea level at river mouth, relative to top of river channel (m).   | None                                              |
+|                           |                                                                   |                                                   |
+|                           | .. note::                                                         |                                                   |
+|                           |   Required if :nml:mem:`JULES_RIVERS::l_vary_sea_level` = TRUE.   |                                                   |
+|                           |   This field (which is on the model input grid) is used as a means|                                                   |
+|                           |   to provide a time-varying sea level at river mouths (on the     |                                                   |
+|                           |   river grid) while JULES does not have the capability of reading |                                                   |
+|                           |   that information directly on the river grid. JULES internally   |                                                   |
+|                           |   regrid this field onto the river grid and it is critical that   |                                                   |
+|                           |   this results in corect values at all river mouths. This is      |                                                   |
+|                           |   easiest to ensure when the land and river grids are consistent  |                                                   |
+|                           |   (:nml:mem:`JULES_RIVERS_PROPS::rivers_regrid` = FALSE) in       |                                                   |
+|                           |   which case there is a 1:1 mappping from land to river points;   |                                                   |
+|                           |   otherwise the user should check that the regridding results in  |                                                   |
+|                           |   a correct value for each river mouth.                           |                                                   |
++---------------------------+-------------------------------------------------------------------+---------------------------------------------------+
 

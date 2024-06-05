@@ -428,6 +428,9 @@ Rivers
 | ``rivers_outflow_rp``         | River outflow on river routing grid (kg s\ :sup:`-1`).                                        | np_rivers  |
 |                               | Only available if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE.                                   |            |
 +-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``river_flow``                | River flow (in channel and on floodplain) (m\ :sup:`3` s\ :sup:`-1`).                         | np_rivers  |
+|                               | Only available with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                     |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
 | ``outflow_per_river``         | River outflow into the ocean for each river (kg s\ :sup:`-1`).                                | np_rivers  |
 |                               | Only available if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE.                                   |            |
 |                               |                                                                                               |            |
@@ -462,9 +465,36 @@ Rivers
 |                               | Only available if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE and                                |            |
 |                               | :nml:mem:`JULES_RIVERS::i_river_vn` = 2.                                                      |            |
 +-------------------------------+-----------------------------------------------------------------------------------------------+------------+
-| ``rivers_sto_rp``             | River routing gridbox river storage (kg)                                                      | np_rivers  |
+| ``rivers_sto_rp``             | River routing gridbox river storage (kg).                                                     | np_rivers  |
 |                               | Only available if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE and                                |            |
 |                               | :nml:mem:`JULES_RIVERS::i_river_vn` = 3.                                                      |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``river_elevation``           | Elevation of top of river channel (m).                                                        | np_rivers  |
+|                               | Only available with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                     |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``channel_bed_elevation``     | Elevation of bed of river channel (m).                                                        | np_rivers  |
+|                               | Only available with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                     |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``channel_depth``             | River channel depth (to bankfull level) (m).                                                  | np_rivers  |
+|                               | Only available with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                     |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``channel_width``             | River channel width (at bankfull level) (m).                                                  | np_rivers  |
+|                               | Only available with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                     |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``flood_flow``                | Flow on floodplain (m\ :sup:`3` s\ :sup:`-1`).                                                | np_rivers  |
+|                               | Only available with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                     |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``flood_storage``             | Water stored on floodplain (m\ :sup:`3`).                                                     | np_rivers  |
+|                               | Only available with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                     |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``river_channel_flow``        | Flow in river channel (m\ :sup:`3` s\ :sup:`-1`).                                             | np_rivers  |
+|                               | Only available with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                     |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``river_channel_storage``     | River channel storage (m\ :sup:`3`).                                                          | np_rivers  |
+|                               | Only available with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                     |            |
++-------------------------------+-----------------------------------------------------------------------------------------------+------------+
+| ``river_depth``               | Depth of water in river channel (m).                                                          | np_rivers  |
+|                               | Only available with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                     |            |
 +-------------------------------+-----------------------------------------------------------------------------------------------+------------+
 | ``frac_fplain_rp``            | Overbank inundation area as a fraction of river routing gridcell area.                        | np_rivers  |
 |                               | Only available if :nml:mem:`JULES_RIVERS::l_riv_overbank` = TRUE.                             |            |
