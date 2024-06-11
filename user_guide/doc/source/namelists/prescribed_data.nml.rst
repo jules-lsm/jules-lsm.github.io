@@ -294,7 +294,7 @@ The use of the following variables is explicitly supported:
 |                           |   river grid) while JULES does not have the capability of reading |                                                   |
 |                           |   that information directly on the river grid. JULES internally   |                                                   |
 |                           |   regrid this field onto the river grid and it is critical that   |                                                   |
-|                           |   this results in corect values at all river mouths. This is      |                                                   |
+|                           |   this results in correct values at all river mouths. This is     |                                                   |
 |                           |   easiest to ensure when the land and river grids are consistent  |                                                   |
 |                           |   (:nml:mem:`JULES_RIVERS_PROPS::rivers_regrid` = FALSE) in       |                                                   |
 |                           |   which case there is a 1:1 mappping from land to river points;   |                                                   |
