@@ -153,7 +153,12 @@ def commit_changes(args):
 
     run(cmd, check=True)
     logging.info("Committed change %r", message)
-    run(["git", "push"], check=True)
+
+    # Push the update to the upstream repo and branch
+    cmd = ["git", "push", "origin"]
+    if args.gh_pages:
+        cmd.append("gh-pages")
+    run(cmd, check=True)
     logging.info("Pushed automatic commit")
 
     return
@@ -170,6 +175,9 @@ def main():
     parser.add_argument(
         "--no-commit", action="store_true", help="do not commit the changes"
     )
+    parser.add_argument(
+        "--gh-pages", action="store_true", help="deploy to a gh-pages branch"
+    )
     parser.add_argument("release", type=str, help="github release reference")
     args = parser.parse_args()
 
@@ -185,6 +193,16 @@ def main():
     release = JulesDocsRelease(vnumber)
 
     try:
+        if args.gh_pages:
+            # Create a new gh-pages branch and replace the contents
+            # with the current trunk before checking it out
+            cmd = ["git", "branch", "-C", "gh-pages"]
+            run(cmd, check=True)
+            logging.info("Created new gh-pages branch")
+            cmd = ["git", "checkout", "gh-pages"]
+            run(cmd, check=True)
+            logging.info("Checking out gh-pages branch")
+            
         release.update_config("user_guide/doc/source/conf.py")
         release.mkdocs()
         release.update_index("index.html")
