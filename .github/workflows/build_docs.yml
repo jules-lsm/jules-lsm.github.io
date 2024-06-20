@@ -78,7 +78,6 @@ jobs:
                echo ":speech_balloon: Documentation for $TAG is up to date" >> $GITHUB_STEP_SUMMARY
             fi
             exit 0
-          if: ${{ github.repository == 'jules-lsm/jules-lsm.github.io'
-                  && github.ref == 'refs/heads/master'
+          if: ${{ github.ref == 'refs/heads/master'
                   && (github.event_name == 'push'
                       || github.event_name == 'workflow_dispatch') }}
