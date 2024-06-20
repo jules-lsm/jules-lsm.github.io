@@ -66,7 +66,7 @@ jobs:
             # Capture the output status of the command, no matter what
             # it is, without causing the workflow to fail if it is
             # non-zero
-            python3 .github/scripts/release.py --verbose $TAG && STATUS=$? || STATUS=$?
+            python3 .github/scripts/release.py --verbose $TAG --gh-pages && STATUS=$? || STATUS=$?
 
             # Add a message to the summary
             if [[ $STATUS = 0 ]]; then
