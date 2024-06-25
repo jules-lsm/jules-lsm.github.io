@@ -137,7 +137,7 @@ This file sets the surface options. It contains one namelist called :nml:lst:`JU
        No effect.
 
 
-.. nml:member:: anthrop_cycle_opt
+.. nml:member:: anthrop_heat_option
 
    :type: integer
    :permitted: 0-1
@@ -145,7 +145,7 @@ This file sets the surface options. It contains one namelist called :nml:lst:`JU
 
    Switch for how urban anthropogenic heat is calculated. Only used if :nml:mem:`JULES_SURFACE::l_anthrop_heat_src` = TRUE.
 
-   0. Linear interpolation of 1995-2003 monthly averages from the Digest of UK Energy Statistics, converted to W/m2 and adjusted to fraction dissipated in urban areas. Fixed annual cycle with no diurnal variation and no geographical dependence.
+   0. Linear interpolation of 1995-2003 monthly averages from the Digest of UK Energy Statistics (DUKES), converted to W/m2 and adjusted to fraction dissipated in urban areas. Fixed annual cycle with no diurnal variation and no geographical dependence.
    1. Use the `Flanner (2009) <https://doi.org/10.1029/2008GL036465>`_ scheme, which applies functional diurnal and annual cycles to a baseline mean anthropogenic heat flux set by :nml:mem:`JULES_SURFACE::anthrop_heat_mean`. Magnitude of the annual cycle increases with latitude and is absent for latitudes within 33 degrees north and south of the equator.
 
 
@@ -154,7 +154,7 @@ This file sets the surface options. It contains one namelist called :nml:lst:`JU
    :type: real
    :default: 20.0
 
-   The baseline mean anthropogenic heat flux in W/m2 used in the `Flanner (2009) <https://doi.org/10.1029/2008GL036465>`_ scheme. Only used if :nml:mem:`JULES_SURFACE::anthrop_cycle_opt` = 1.
+   The baseline mean anthropogenic heat flux in W/m2 used in the `Flanner (2009) <https://doi.org/10.1029/2008GL036465>`_ scheme. Only used if :nml:mem:`JULES_SURFACE::anthrop_heat_option` = 1.
 
 
 .. nml:member:: iscrntdiag
