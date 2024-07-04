@@ -7,13 +7,6 @@ Full details of the tickets committed for JULES vn7.6 can be found on the `JULES
 
 Ticket numbers are indicated below, e.g. #1512.
 
-
-Science changes
--------------------------
-
- *  The ...
-
-
 General/Technical changes
 -------------------------
 
