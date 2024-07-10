@@ -18,7 +18,7 @@ General/Technical changes
 -------------------------
 
  *  Added water tracers to the hydrology and snow schemes - part of ongoing work to add water tracers/isotopes to JULES. (#1391, 1465)
- *  For runs with rivers, the new option :nml:mem:`JULES_RIVERS::l_find_grid` can be used to avoid requiring values for variables related to the model grid. This also revises how the area searched for river points is set up. (#1380)
+ *  For runs with rivers, the new option :nml:mem:`JULES_RIVERS_PROPS::l_find_grid` can be used to avoid requiring values for variables related to the model grid. This also revises how the area searched for river points is set up. (#1380)
  *  IMOGEN now reads netcdf files for driving data. (#1265)
  *  :nml:mem:`JULES_RIVERS::trip_globe_shape` allows the TRIP river routing scheme to consider the Earth as either spherical or ellipsoidal (a more accurate approximation but inconsistent with other component models - e.g. UM and NEMO - which assume the Earth is spherical. Note that this change only affects the UM version of TRIP. (#1374)
  *  Optimisation and OpenMP efficiency improvements in various places. (#1471)
