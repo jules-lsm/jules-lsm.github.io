@@ -16,7 +16,6 @@ from fileinput import FileInput
 from subprocess import run, Popen, STDOUT, PIPE, CalledProcessError
 
 
-
 class JulesDocsRelease:
     """Class which deploys the jules docs."""
 
@@ -153,8 +152,37 @@ def commit_changes(args):
 
     run(cmd, check=True)
     logging.info("Committed change %r", message)
-    run(["git", "push"], check=True)
+
+    # Push the update to the upstream repo and branch
+    cmd = ["git", "push", "--force", "origin"]
+    if args.gh_pages:
+        cmd.append("gh-pages")
+    run(cmd, check=True)
     logging.info("Pushed automatic commit")
+
+    return
+
+
+def setup_pages_branch(args, branch):
+    """Setup pages branch for documentation build."""
+
+    # Check out the docs branch or create it if it doesn't exist
+    cmd = ["git", "checkout", branch]
+    result = run(cmd, check=False)
+    if result.returncode == 0:
+        logging.info("Checking out %s branch", branch)
+    else:
+        # Add the branch option and retry the checkout
+        cmd.insert(-1, "-b")
+        run(cmd, check=True)
+        logging.info("Created branch %s", branch)
+
+    # Merge changes from the trunk into the docs branch but defer
+    # committing until the docs have been built.  If there is a
+    # conflict, resolve by overwriting with the copy from the trunk
+    cmd = ["git", "merge", "-v", "-X", "theirs", "--no-commit", args.trunk_name]
+    run(cmd, check=True)
+    logging.info("Merging changes from %s to %s branch", args.trunk_name, branch)
 
     return
 
@@ -169,6 +197,9 @@ def main():
     )
     parser.add_argument(
         "--no-commit", action="store_true", help="do not commit the changes"
+    )
+    parser.add_argument(
+        "--gh-pages", action="store_true", help="deploy to a gh-pages branch"
     )
     parser.add_argument("release", type=str, help="github release reference")
     args = parser.parse_args()
@@ -185,10 +216,13 @@ def main():
     release = JulesDocsRelease(vnumber)
 
     try:
+        if args.gh_pages:
+            setup_pages_branch(args, "gh-pages")
+
         release.update_config("user_guide/doc/source/conf.py")
         release.mkdocs()
         release.update_index("index.html")
-    except (FileNotFoundError, CalledProcessError)  as error:
+    except (FileNotFoundError, CalledProcessError) as error:
         logging.error(str(error))
         raise SystemExit(1) from error
 
