@@ -214,7 +214,7 @@ In most cases, the model grid will be represented internally as a vector of poin
    :type: character
    :default: "quantile"
 
-   The dimension name used when variables have an additional dimension of size  :nml:mem:`JULES_OVERBANK::nquantile_hypso` (with :nml:mem:`JULES_OVERBANK::over_bank_model` = 4).
+   The dimension name used when variables have an additional dimension of size  :nml:mem:`JULES_OVERBANK::nquantile_hypso` (with :nml:mem:`JULES_OVERBANK::overbank_model` = 4).
 
    .. note:: For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).
 
