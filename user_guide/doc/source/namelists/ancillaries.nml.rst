@@ -1347,7 +1347,7 @@ The following table summarises river routing properties required to run RFM or T
 | ``river_nextx_grid``,      | x and y indices of the next point downstream of each river routing grid, defining the next grid box into  |
 | ``river_nexty_grid``       | which river water will be routed. Used with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).         |
 |                            |                                                                                                           |
-|                            | Values should lie in the range 1 to :nml:mem:`nx_rivers` and 1 to :nml:mem:`nx_rivers` for                |
+|                            | Values should lie in the range 1 to :nml:mem:`nx_rivers` and 1 to :nml:mem:`ny_rivers` for                |
 |                            | ``river_nextx_grid`` and ``rivers_nexty_grid`` respectively. For grids that are cyclic in one or both     |
 |                            | dimensions (e.g. a global grid) flows across this edge of the river input grid should still follow this   |
 |                            | range of values - e.g. a global grid with flow to the west from x=1 should use ``river_nextx_grid`` =     |
@@ -1377,7 +1377,7 @@ The following table summarises river routing properties required to run RFM or T
 |                            |                                                                                                           |
 |                            | Used with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                                           |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
-| ``chanel_depth_grid``      | River channel depth (to bankfull level) (m).                                                              |
+| ``channel_depth_grid``     | River channel depth (to bankfull level) (m).                                                              |
 |                            |                                                                                                           |
 |                            | Used with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).                                           |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+

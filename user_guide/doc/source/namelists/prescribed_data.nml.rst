@@ -293,11 +293,11 @@ The use of the following variables is explicitly supported:
 |                           |   to provide a time-varying sea level at river mouths (on the     |                                                   |
 |                           |   river grid) while JULES does not have the capability of reading |                                                   |
 |                           |   that information directly on the river grid. JULES internally   |                                                   |
-|                           |   regrid this field onto the river grid and it is critical that   |                                                   |
+|                           |   regrids this field onto the river grid and it is critical that  |                                                   |
 |                           |   this results in correct values at all river mouths. This is     |                                                   |
 |                           |   easiest to ensure when the land and river grids are consistent  |                                                   |
 |                           |   (:nml:mem:`JULES_RIVERS_PROPS::rivers_regrid` = FALSE) in       |                                                   |
-|                           |   which case there is a 1:1 mappping from land to river points;   |                                                   |
+|                           |   which case there is a 1:1 mapping from land to river points;    |                                                   |
 |                           |   otherwise the user should check that the regridding results in  |                                                   |
 |                           |   a correct value for each river mouth.                           |                                                   |
 +---------------------------+-------------------------------------------------------------------+---------------------------------------------------+

@@ -70,7 +70,7 @@ River routing introduces two more grids to a JULES run: the river routing input 
 
    The number of model timesteps between calls to river routing.
 
-   For example, :nml:mem:`nstep_rivers` = 5 means that runoff will be accumulated for 5 model timesteps before being routed on the 5th timestep. For the RFM and TRIP models (:nml:mem:`i_river_vn` = 1, 2 or 3) the timestep length for river routing is then :nml:mem:`nstep_rivers` * :nml:mem:`JULES_TIME::timestep_len` seconds. For the CaMa-Flood model (:nml:mem:`i_river_vn` = 4) the river routing timestep length is specified using :nml:mem:`dt_rivers` .
+   For example, :nml:mem:`nstep_rivers` = 5 means that runoff will be accumulated for 5 model timesteps before being routed on the 5th timestep. The relationship between :nml:mem:`nstep_rivers` and the timestep length for river routing depends on the model configuration. For the RFM and TRIP models (:nml:mem:`i_river_vn` = 1, 2 or 3) the timestep length for river routing is :nml:mem:`nstep_rivers` * :nml:mem:`JULES_TIME::timestep_len` seconds (i.e. there is a single timestep per call). For the CaMa-Flood model (:nml:mem:`i_river_vn` = 4) the river routing timestep length is specified separately using :nml:mem:`dt_rivers` and typically there will be many river timsteps per call to the river routing.
 
 
 .. warning::
