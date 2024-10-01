@@ -29,7 +29,7 @@ This namelist is used to read PFT parameters that are only needed by the Robust 
    :type: real(npft)
    :default: None
 
-   The lowest PFT crown area, value corresponds to the mass0 class (m\ :sup:'2').
+   The lowest PFT crown area, value corresponds to the mass0 class (m\ :sup:`2`).
 
 
 .. nml:member:: height0
@@ -45,7 +45,7 @@ This namelist is used to read PFT parameters that are only needed by the Robust 
    :type: real(npft)
    :default: None
 
-   The lowest PFT balanced LAI, which corresponds to the mass0 class (m\ :sup:'2'/m\ :sup:'2').
+   The lowest PFT balanced LAI, which corresponds to the mass0 class (m\ :sup:`2`/m\ :sup:`2`).
 
 
 .. nml:member:: mass0
