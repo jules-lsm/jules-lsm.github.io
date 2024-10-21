@@ -24,7 +24,7 @@ This namelist is used to read PFT parameters that are only needed by the Robust 
    The fraction of PFT carbon assimilate devoted to reproduction.
 
 
-.. nml:member:: crown_area0
+.. nml:member:: crwn_area0
 
    :type: real(npft)
    :default: None
