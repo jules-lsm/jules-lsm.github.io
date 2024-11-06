@@ -1,0 +1,86 @@
+---
+# This workflow builds the JULES Sphinx documenation.
+#
+# Where the triggering event does not match the master branch on the
+# main jules docs repository, the action limits itself to a test
+# build.
+#
+# Where the event is a push to master on the main repository, the
+# workflow checks for documentation that matches the most recent
+# release tag and adds it to the gh-pages branch as necessary.  The
+# documentation can be published by configuring the repository to
+# use the gh-pages branch.
+
+name: build_docs
+
+# Controls when the action will run
+on: 
+    push:
+    pull_request:
+
+    # Enables manual running from the Actions tab
+    workflow_dispatch:
+
+jobs:
+    build-and-deploy:
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+            fetch-tags: true
+
+        - name: Setup conda
+          run: |
+            conda update conda
+            conda env create -f environment.yml
+            echo ":heavy_check_mark: Set up conda environment" >> $GITHUB_STEP_SUMMARY
+
+        - name: Test documentation
+          run: |
+            eval "$(conda shell.bash hook)"
+            conda activate jules-user-guide
+            pushd user_guide/doc
+            # Add status of tests to the summary
+            if make html; then
+              echo ":heavy_check_mark: Documentation tests passed" >> $GITHUB_STEP_SUMMARY
+            else
+              echo ":x: Documentation tests failed" >> $GITHUB_STEP_SUMMARY
+              exit 1
+            fi
+            popd
+          if: ${{ github.repository != 'jules-lsm/jules-lsm.github.io'
+                  || github.ref != 'refs/heads/master' }}
+
+        - name: Deploy documentation
+          run: |
+            eval "$(conda shell.bash hook)"
+            conda activate jules-user-guide
+
+            # Setup some git things
+            git config --global user.email "umsysteam@metoffice.gov.uk"
+            git config --global user.name "Jules Bot"
+            TAG=$( git describe --tags | sed "s/-.*//" )
+
+            # Capture the output status of the command, no matter what
+            # it is, without causing the workflow to fail if it is
+            # non-zero
+            python3 .github/scripts/release.py --verbose --gh-pages $TAG \
+                && STATUS=$? || STATUS=$?
+
+            # Add a message to the summary
+            if [[ $STATUS = 0 ]]; then
+              echo ":heavy_check_mark: Documentation for $TAG deployed"  >> $GITHUB_STEP_SUMMARY
+            elif [[ $STATUS = 1 ]]; then
+              echo ":x: Documentation for $TAG failed" >> $GITHUB_STEP_SUMMARY
+              exit 1
+            elif [[ $STATUS = 2 ]]; then
+               echo ":speech_balloon: Documentation for $TAG is up to date" >> $GITHUB_STEP_SUMMARY
+            fi
+            exit 0
+          if: ${{ github.repository == 'jules-lsm/jules-lsm.github.io'
+                  && github.ref == 'refs/heads/master'
+                  && (github.event_name == 'push'
+                      || github.event_name == 'workflow_dispatch') }}

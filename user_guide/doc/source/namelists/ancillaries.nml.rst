@@ -1024,6 +1024,7 @@ This namelist specifies how spatially varying river routing properties should be
    *  **Model input grid** - The full JULES input grid specified in :nml:lst:`JULES_INPUT_GRID`.
    *  **Land grid** - The grid that JULES runs on (not rivers) - this is the grid that includes land points. If JULES is using a 1-D grid internally, the land grid is the notional 2D grid across which the points can be scattered.
    *  **River routing input grid** - The grid on which river routing ancillaries are provided.
+   *  **River domain** - That part of the river input grid that is selected for modelling.
      
    Information about the river routing input grid and its relationship to the land grid is specified in this namelist. In all cases river routing is only possible if the land and river grids are regular, in that they have a constant spacing between rows and columns (but see note below about 1D model input grids).
 
@@ -1086,23 +1087,21 @@ This namelist specifies how spatially varying river routing properties should be
       The size of the y dimension of the river routing input grid.
 
 
+.. nml:member:: l_find_grid
+
+   :type: logical
+   :default: none
+
+   Switch controlling how characteristics of the land grid and the river domain are determined.
+
+   FALSE
+      Use namelist values for the variables :nml:mem:`nx_land_grid`, :nml:mem:`ny_land_grid`, :nml:mem:`x1_land_grid` and :nml:mem:`y1_land_grid` to describe the land grid. This value is required so as to recreate some historical results but necessarily requires that the input values are correct and, for some configurations, has deficencies such as producing a river domain that is larger than required.
+
+   TRUE
+      Calculate details of the land grid from the known coordinates of land points. This also triggers differences in how the river domain is set up, including better treatment of cases in which the resolutions of the land and river grids differ and/or land points (e.g. from a regional domain) straddle the longitudinal edges of a global river input grid (a smaller river domain can be identified).
+
+
 .. nml:group:: Members used to describe the land grid
-
-   .. nml:member:: nx_land_grid
-
-      :type: integer
-      :permitted: >= 1
-      :default: none
-
-      The size of the x dimension of the 2D land grid. This should be large enough to include all land points that are being modelled.
-
-   .. nml:member:: ny_land_grid
-
-      :type: integer
-      :permitted: >= 1
-      :default: none
-
-      The size of the y dimension of the 2D land grid. This should be large enough to include all land points that are being modelled.
 
    .. nml:member:: land_dx
 
@@ -1120,27 +1119,43 @@ This namelist specifies how spatially varying river routing properties should be
 
       The gridbox size in the y direction of the 2D land grid. The units of this are the same as for the model grid - see :nml:mem:`JULES_LATLON::l_coord_latlon`.
 
-   .. nml:member:: x1_land_grid
+   .. nml:group:: Only used with l_find_grid = FALSE
 
-      :type: real
-      :default: none
+      .. nml:member:: nx_land_grid
 
-      The x coordinate of the "western-most" (i.e. first) column of gridpoints in the land grid. The units of this are the same as for the model grid - see :nml:mem:`JULES_LATLON::l_coord_latlon`.
+         :type: integer
+         :permitted: >= 1
+         :default: none
 
-   .. nml:member:: y1_land_grid
+         The size of the x dimension of the 2D land grid. This should be large enough to include all land points that are being modelled.
 
-      :type: real
-      :default: none
+      .. nml:member:: ny_land_grid
 
-      The y coordinate of the "southern-most" (i.e. first) row of gridpoints in the land grid. The units of this are the same as for the model grid - see :nml:mem:`JULES_LATLON::l_coord_latlon`.
+         :type: integer
+         :permitted: >= 1
+         :default: none
 
-   .. note:: Although the values in this section (:nml:mem:`nx_land_grid`, :nml:mem:`ny_land_grid`, :nml:mem:`land_dx`, :nml:mem:`land_dy`,  :nml:mem:`x1_land_grid` and :nml:mem:`y1_land_grid`) describe the land grid, they are also used to calculate the area that will be searched for river points. The area to be searched is the rectangle defined by x=x1_land_grid to x1_land_grid+(nx_land_grid*land_dx), y=y1_land_grid to y1_land_grid+(ny_land_grid*land_dy).
+      .. nml:member:: x1_land_grid
+
+         :type: real
+         :default: none
+
+         The x coordinate of the "western-most" (i.e. first) column of gridpoints in the land grid. The units of this are the same as for the model grid - see :nml:mem:`JULES_LATLON::l_coord_latlon`.
+
+      .. nml:member:: y1_land_grid
+
+         :type: real
+         :default: none
+
+         The y coordinate of the "southern-most" (i.e. first) row of gridpoints in the land grid. The units of this are the same as for the model grid - see :nml:mem:`JULES_LATLON::l_coord_latlon`.
+
+   .. note:: With :nml:mem:`l_find_grid` = F, although :nml:mem:`nx_land_grid`, :nml:mem:`ny_land_grid`, :nml:mem:`land_dx`, :nml:mem:`land_dy`, :nml:mem:`x1_land_grid` and :nml:mem:`y1_land_grid` describe the land grid, they are also used to calculate the area that will be searched for river points (the river domain). The area to be searched is the rectangle defined by x=x1_land_grid to x1_land_grid+(nx_land_grid*land_dx) and y=y1_land_grid to y1_land_grid+(ny_land_grid*land_dy). With :nml:mem:`l_find_grid` = T the model internally seeks to define a river domain that includes all land gridboxes.
 
 
 .. nml:member:: rivers_regrid
 
    :type: logical
-   :default: T
+   :default: F
 
    Flag indicating if variables on the land grid need to be regridded (interpolated) to the river routing grid. This is currently only possible for grids that are regular in latitude and longituide. We distinguish between regridding (which is used between land and river grids of different resolution, or the same resolution but staggered relative to one another) and remapping (between consistent grids of the same resolution).
 
@@ -1270,6 +1285,16 @@ Grids are considered consistent (and therefore regridding is not required) if th
       For each JULES variable specified in :nml:mem:`var` where :nml:mem:`use_file` = FALSE, this is a constant value that the variable will be set to at every point.
 
       This is not used for variables where :nml:mem:`use_file` = TRUE, but a placeholder must still be given in that case.
+
+
+.. nml:group:: Additional ancillaries, which may be required depending on requested options
+ 	
+   .. nml:member:: riv_number_file
+	
+      :type: character
+      :default: ''
+	
+      Ancillary file containing river numbers, which assign each river mouth on the Rivers grid, to the river which discharges into it. The river number is used in the calculation of 'outflow_per_river' (River outflow into the ocean for each river; kg s\ :sup:`-1`), when it is requested either as a JULES output (:nml:mem:`JULES_OUTPUT_PROFILE::var`) or as a send field when coupled to OASIS (:nml:mem:`OASIS_RIVERS::send_fields`). The river outflow for each river is calculated as the sum of the river outflows corresponding to that river. When passed to the ocean model via OASIS the river outflow is distributed over the corresponding river outflow points on the ocean grid. This is to ensure that water is conserved and rivers discharge into the correct ocean grid points.
 
 
 .. _list-of-rivers-params:

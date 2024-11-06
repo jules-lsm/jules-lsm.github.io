@@ -99,6 +99,22 @@ is retired. See module for when the switch is due for review.
    set to zero, which causes the roof to be effectively uncoupled when
    :nml:mem:`JULES_VEGETATION::l_vegcan_soilfx`.
 
+.. nml:member:: l_fix_neg_snow
+
+   :type: logical
+   :default: F
+
+   When set to  false, the original formulations of melting, interception
+   and unloading of canopy snow are used. These may result in the generation
+   of negative snow amounts. Firstly, the original formulation of the
+   melting of canopy snow is incorrect and excessive melting may be
+   generated, reducing the mass of snow below 0. This fix corrects this.
+   Secondly,the interception of snow on an overloaded canopy will, under
+   the original method of calculation, be negative. With the fix, this is
+   set to 0 and any snow above the canopy snow capacity is unloaded.
+   Overloaded canopies may be produced by changess in the snow amounts or
+   by reductions in the LAI from which the canopy capacity is calculated.
+
 .. nml:member:: l_fix_osa_chloro
 
    :type: logical
