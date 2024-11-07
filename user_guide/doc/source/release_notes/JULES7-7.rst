@@ -1,11 +1,11 @@
 JULES version 7.7 Release Notes
 ===============================
 
-The JULES vn7.7 release consists of approximately XX tickets from XX authors, including work by many other people.
+The JULES vn7.7 release consists of approximately 7 tickets from 5 authors, including work by many other people.
 
 Full details of the tickets committed for JULES vn7.7 can be found on the `JULES shared repository Trac system <https://code.metoffice.gov.uk/trac/jules/query?resolution=fixed&milestone=JULES+v7.7+(Oct-24)>`_.
 
-Ticket numbers are indicated below, e.g. #XXX.
+Ticket numbers are indicated below, e.g. #1000.
 
 General/Technical changes
 -------------------------
@@ -16,8 +16,8 @@ General/Technical changes
 Bugs fixed
 ----------
 
- *  Fixed a bug that prevented the calculation of time-mean river-point variables in MPI runs. (#1544)
- *  Enables the lake_evap field to be populated in LFRic-based models, even when river routing is not selected. (#1546)
+ *  Fix for a bug that prevented the calculation of time-mean river-point variables in MPI runs. (#1544)
+ *  Enable the lake_evap field to be populated in LFRic-based models, even when river routing is not selected. (#1546)
 
 
 Changes to testing
@@ -29,6 +29,7 @@ Changes to testing
 Documentation updates
 ---------------------
 
+ *  Included a set of changes previously missed. (#1559)
  *  Updates associated with many of the above changes, and release notes. (#1567)
 
 
