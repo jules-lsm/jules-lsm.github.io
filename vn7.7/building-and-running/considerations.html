@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3.1. Considerations &#8212; Joint UK Land Environment Simulator (JULES) v7.7 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=0f882399" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css?v=c7813d96" />
+    <script src="../_static/documentation_options.js?v=c6a318fb"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.2. Required software" href="required-software.html" />
+    <link rel="prev" title="3. Building and running JULES" href="intro.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="required-software.html" title="3.2. Required software"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="3. Building and running JULES"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.7 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="intro.html" accesskey="U"><span class="section-number">3. </span>Building and running JULES</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3.1. </span>Considerations</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="considerations">
+<h1><span class="section-number">3.1. </span>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">¶</a></h1>
+<p>Depending on your use case, there are two main things that you need to consider:</p>
+<section id="do-i-need-netcdf">
+<h2><span class="section-number">3.1.1. </span>Do I need NetCDF?<a class="headerlink" href="#do-i-need-netcdf" title="Link to this heading">¶</a></h2>
+<p><a class="reference external" href="http://www.unidata.ucar.edu/software/netcdf/">NetCDF</a> is a data format (and associated software libraries) specifically designed for large-scale scientific data. It has two major benefits over raw binary data:</p>
+<ol class="arabic simple">
+<li><p>It is machine-independent, so <a class="reference external" href="http://en.wikipedia.org/wiki/Endianness">endianness</a> is not an issue when moving datasets between machines</p></li>
+<li><p>It is self-describing, so as well as containing raw data, NetCDF files also contain metadata describing the data (e.g. variable names, units, origin). Many tools are capable of exploiting this metadata to simplify processing.</p></li>
+</ol>
+<p>JULES can be built with or without NetCDF, however <em>building JULES without NetCDF limits the functionality of JULES</em>. Without NetCDF, JULES will use a dummy NetCDF library which allows the program to build but provides no functionality. Any attempt to use NetCDF files as input with this option will result in a runtime error. All input files must be columnar ASCII, meaning that the user is restricted to running at a single point only. Output files will automatically use a columnar ASCII format with headers. File formats are discussed in more detail in <a class="reference internal" href="../input/overview.html"><span class="doc">Input files for JULES</span></a>.</p>
+</section>
+<section id="do-i-need-parallel-processing">
+<h2><span class="section-number">3.1.2. </span>Do I need parallel processing?<a class="headerlink" href="#do-i-need-parallel-processing" title="Link to this heading">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For running JULES at a single point, parallel processing provides no advantage. However, if JULES is already compiled with OpenMP or MPI enabled, it is still possible to run a single point by simply specifying the number of OpenMP threads and/or MPI tasks to be 1.</p>
+</div>
+<p>JULES is capable of exploiting parallel processing techniques to reduce processing time for distributed/gridded simulations. There are two different methods JULES can use:</p>
+<dl>
+<dt>OpenMP</dt><dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/OpenMP">OpenMP</a> is a form of compiler-assisted parallelisation that uses directives for shared-memory, loop-level parallelism across multiple cores on a machine (OpenMP is <em>not</em> capable of utilising a cluster of machines).</p>
+<p>This form of parallelism is not as effective as MPI, but may provide some speedup and does not require a specially compiled NetCDF library.</p>
+</dd>
+<dt>MPI</dt><dd><p><a class="reference external" href="http://en.wikipedia.org/wiki/Message_Passing_Interface">MPI (Message Passing Interface)</a> is a standardised message passing interface. MPI coordinates the running of multiple ‘tasks’ in parallel, potentially on several machines (or nodes), and provides mechanisms for these tasks to communicate with each other.</p>
+<p>JULES takes advantage of the parallel I/O features available in <a class="reference external" href="http://www.hdfgroup.org/HDF5/">HDF5</a> and <a class="reference external" href="http://www.unidata.ucar.edu/software/netcdf/">NetCDF4</a>, which enable multiple MPI tasks to read from and write to the same NetCDF file(s) at the same time. These features must be explicitly enabled when NetCDF is compiled (see <a class="reference internal" href="required-software.html"><span class="doc">Required software</span></a>).</p>
+</dd>
+</dl>
+<p>It is also possible to use MPI and OpenMP together, where each MPI task has a number of OpenMP threads, however this is very advanced and beyond the scope of this document.</p>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p><h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="intro.html"
+                          title="previous chapter"><span class="section-number">3. </span>Building and running JULES</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="required-software.html"
+                          title="next chapter"><span class="section-number">3.2. </span>Required software</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="required-software.html" title="3.2. Required software"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="3. Building and running JULES"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.7 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="intro.html" ><span class="section-number">3. </span>Building and running JULES</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3.1. </span>Considerations</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

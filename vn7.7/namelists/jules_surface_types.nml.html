@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.3. jules_surface_types.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.7 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=0f882399" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css?v=c7813d96" />
+    <script src="../_static/documentation_options.js?v=c6a318fb"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.4. cable_surface_types.nml" href="cable_surface_types.nml.html" />
+    <link rel="prev" title="6.2. jules_prnt_control.nml" href="jules_prnt_control.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="cable_surface_types.nml.html" title="6.4. cable_surface_types.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_prnt_control.nml.html" title="6.2. jules_prnt_control.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.7 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.3. </span><code class="docutils literal notranslate"><span class="pre">jules_surface_types.nml</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="jules-surface-types-nml">
+<h1><span class="section-number">6.3. </span><code class="docutils literal notranslate"><span class="pre">jules_surface_types.nml</span></code><a class="headerlink" href="#jules-surface-types-nml" title="Link to this heading">¶</a></h1>
+<p id="top-jules-surface-types">This file configures the surface types used by JULES. It contains one
+namelist called <a class="reference internal" href="#namelist-JULES_SURFACE_TYPES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SURFACE_TYPES</span></code></a>.</p>
+<p>The surface type IDs, which were introduced in the UM in order to
+identify the surface types present in input and output, have been made
+available to standalone. The defined surface type IDs are given in the
+description here in brackets (#). In order to keep the GUI from
+appearing cluttered, the surface types have been added with
+<code class="docutils literal notranslate"><span class="pre">compulsory=false</span></code>, unless they are attached to specific science
+options allowing them to be triggered off, which would be the
+preferred method. A <code class="docutils literal notranslate"><span class="pre">compulsory=false</span></code> surface type, can be added
+and removed in the GUI window as described in the table below. To:</p>
+<blockquote>
+<div><table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>Add</p></td>
+<td><p>“Add latent variable” using the right click menu, which opens a list of defined surface types.</p></td>
+</tr>
+<tr class="row-even"><td><p>Remove</p></td>
+<td><p>“Remove” the variable using the cog menu.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please be aware that while the surface type IDs have been
+made available and are used to check the surface type
+configuration at runtime, they are not yet used by the JULES
+I/O.</p>
+</div>
+<section id="jules-surface-types-namelist-members">
+<h2><span class="section-number">6.3.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_SURFACE_TYPES</span></code> namelist members<a class="headerlink" href="#jules-surface-types-namelist-members" title="Link to this heading">¶</a></h2>
+<div class="admonition note" id="namelist-JULES_SURFACE_TYPES">
+<p class="admonition-title">Note</p>
+<p>The total number of surface types to be modelled is called <code class="docutils literal notranslate"><span class="pre">ntype</span></code>, and is given by <code class="docutils literal notranslate"><span class="pre">ntype</span> <span class="pre">=</span> <span class="pre">npft</span> <span class="pre">+</span> <span class="pre">nnvg</span></code>.</p>
+<p>In the original setup, JULES models 5 vegetation types and 4 non-vegetation types (<code class="docutils literal notranslate"><span class="pre">npft</span> <span class="pre">=</span> <span class="pre">5</span></code>, <code class="docutils literal notranslate"><span class="pre">nnvg</span> <span class="pre">=</span> <span class="pre">4</span></code>). However, the model domain need not contain all 9 types, e.g. the domain could consist of a single point with 100% grass. The amount of each type in the domain is normally set in <a class="reference internal" href="ancillaries.nml.html#namelist-JULES_FRAC"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_FRAC</span></code></a>.</p>
+<p>If the crop model is active (i.e. <code class="docutils literal notranslate"><span class="pre">ncpft</span></code> &gt; 0), then <code class="docutils literal notranslate"><span class="pre">nnpft</span> <span class="pre">=</span> <span class="pre">npft</span> <span class="pre">-</span> <span class="pre">ncpft</span></code> where <code class="docutils literal notranslate"><span class="pre">nnpft</span></code> is the number of natural PFTs.</p>
+<p>Vegetation surfaces must always be present first in any list of surfaces.</p>
+</div>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::npft">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">npft</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::npft" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>&gt;= 1</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>The number of plant functional types (PFTs) to be modelled.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::ncpft">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">ncpft</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::ncpft" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>&lt; npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0</p>
+</dd>
+</dl>
+<p>The number of crop plant functional types to be modelled.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::nnvg">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">nnvg</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::nnvg" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>&gt;= 1</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>The number of non-plant surface types to be modelled.</p>
+</dd></dl>
+
+<div class="admonition-non-vegetated-surface-types admonition">
+<p class="admonition-title">Non-vegetated surface types</p>
+<p>A negative value, when permitted, indicates that the surface type
+is not in use.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::urban">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">urban</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::urban" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>-1, npft+1:ntype</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of the urban surface type (#6).</p>
+<p>Can only be used if <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_urban2t" title="JULES_SURFACE::l_urban2t"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_urban2t</span></code></a> = FALSE.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::lake">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">lake</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::lake" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>npft+1:ntype</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of the lake surface type (#7).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::soil">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">soil</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::soil" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>npft+1:ntype</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of the soil surface type (#8).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A soil surface type must be given (although the fraction may be set to zero).</p>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::ice">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">ice</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::ice" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>npft+1:ntype</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of the ice surface type (#9).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the UM the ice surface type must be specified (although the fraction may be set to zero).</p>
+</div>
+</dd></dl>
+
+<div class="admonition-multiple-ice-tiles-allowed-to-exist-in-an-ice-gridbox admonition">
+<p class="admonition-title">Multiple ice tiles allowed to exist in an ice gridbox</p>
+<p>These surface types can only be used when multiple ice tiles are
+allowed in a gridbox i.e. when
+<a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_elev_land_ice" title="JULES_SURFACE::l_elev_land_ice"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_elev_land_ice</span></code></a> = TRUE.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::elev_ice">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">elev_ice</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::elev_ice" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>-1,npft+1:ntype</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Indices of the elevated ice types (#901-925).</p>
+<p>Must be grouped together with values <code class="docutils literal notranslate"><span class="pre">npft</span> <span class="pre">&lt;</span> <span class="pre">elev_ice</span> <span class="pre">&lt;=</span>
+<span class="pre">ntype</span></code> OR <code class="docutils literal notranslate"><span class="pre">elev_ice</span> <span class="pre">=</span> <span class="pre">-1</span></code> to indicate they are not used
+(i.e. all elevated rock instead).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::elev_rock">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">elev_rock</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::elev_rock" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>-1,npft+1:ntype</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Indices of the elevated non-glaciated bedrock types
+(#926-950).</p>
+<p>Must be grouped together, with values <code class="docutils literal notranslate"><span class="pre">npft</span> <span class="pre">&lt;</span> <span class="pre">elev_rock</span> <span class="pre">&lt;=</span>
+<span class="pre">ntype</span></code> OR <code class="docutils literal notranslate"><span class="pre">elev_rock</span> <span class="pre">=</span> <span class="pre">-1</span></code> to indicate they are not used
+(i.e. all elevated ice instead).</p>
+</dd></dl>
+
+</div>
+<div class="admonition-two-tile-urban-schemes-including-moruses admonition">
+<p class="admonition-title">Two-tile urban schemes including MORUSES</p>
+<p>These surface types can only be used when <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_urban2t" title="JULES_SURFACE::l_urban2t"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_urban2t</span></code></a> = TRUE.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::urban_canyon">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">urban_canyon</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::urban_canyon" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>npft+1:ntype</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of the urban canyon surface type (#601).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::urban_roof">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">urban_roof</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::urban_roof" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>npft+1:ntype</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of the urban roof surface type (#602).</p>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When giving urban fraction data (see <a class="reference internal" href="ancillaries.nml.html#namelist-JULES_FRAC"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_FRAC</span></code></a>), total <em>urban</em> fraction may be given instead of the separate canyon and roof fractions by entering it under the canyon fraction. When initialising if the roof fraction is zero, the canyon fraction will be interpreted as the total <em>urban</em> fraction and be partitioned according to the canyon fraction (W/R, see <a class="reference internal" href="ancillaries.nml.html#namelist-URBAN_PROPERTIES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">URBAN_PROPERTIES</span></code></a>).</p>
+</div>
+</div>
+</div>
+<div class="admonition-surface-types-with-compulsory-false admonition">
+<p class="admonition-title">Surface types with <code class="docutils literal notranslate"><span class="pre">compulsory=false</span></code></p>
+<p>These are required to allow the surface type configuration to be
+checked at runtime and for surface types to be identified in the
+output headers. These are added as a latent variable. Remove the
+surface type if it is not required (see explanation at the
+<a class="reference internal" href="#top-jules-surface-types"><span class="std std-ref">top</span></a> of this page).</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::usr_type">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">usr_type</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::usr_type" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:ntype</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of user specified surface type (#10-99).</p>
+<p>A user surface type can be used when experimenting with new
+surface configurations without a code change. These can be
+either vegetated or non-vegetated and are used solely to assign an
+ID number.</p>
+</dd></dl>
+
+<div class="admonition-vegetated-surface-types admonition">
+<p class="admonition-title">Vegetated surface types</p>
+<p>A negative value, when permitted, indicates that the surface
+type is not in use.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::brd_leaf">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">brd_leaf</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::brd_leaf" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of the original broadleaf PFT surface type (#1).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::brd_leaf_dec">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">brd_leaf_dec</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::brd_leaf_dec" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of broadleaf (decidous) PFT surface type (#101)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::brd_leaf_eg_trop">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">brd_leaf_eg_trop</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::brd_leaf_eg_trop" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of broadleaf (evergreen tropical) PFT surface type (#102).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::brd_leaf_eg_temp">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">brd_leaf_eg_temp</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::brd_leaf_eg_temp" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of broadleaf (evergreen temperate) PFT surface type (#103).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::ndl_leaf">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">ndl_leaf</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::ndl_leaf" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of original needleleaf PFT surface type (#2).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::ndl_leaf_dec">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">ndl_leaf_dec</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::ndl_leaf_dec" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of needleleaf (deciduous) PFT surface type (#201).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::ndl_leaf_eg">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">ndl_leaf_eg</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::ndl_leaf_eg" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of needleleaf (evergreen) PFT surface type (#202).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::c3_grass">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">c3_grass</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::c3_grass" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of original C3 grass PFT surface type (#3).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::c3_crop">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">c3_crop</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::c3_crop" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of C3 crop PFT surface type (#301).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::c3_pasture">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">c3_pasture</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::c3_pasture" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of C3 pasture PFT surface type (#302).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::c4_grass">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">c4_grass</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::c4_grass" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of original C4 grass PFT surface type (#4).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::c4_crop">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">c4_crop</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::c4_crop" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of C4 crop PFT surface type (#401).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::c4_pasture">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">c4_pasture</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::c4_pasture" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of C4 pasture PFT surface type (#402).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::shrub">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">shrub</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::shrub" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of original shrub PFT surface type (#5).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::shrub_dec">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">shrub_dec</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::shrub_dec" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of shrub (deciduous) PFT surface type (#501).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_SURFACE_TYPES::shrub_eg">
+<span class="sig-prename descclassname"><span class="pre">JULES_SURFACE_TYPES::</span></span><span class="sig-name descname"><span class="pre">shrub_eg</span></span><a class="headerlink" href="#JULES_SURFACE_TYPES::shrub_eg" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1:npft</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>-32768</p>
+</dd>
+</dl>
+<p>Index of shrub (evergreen) PFT surface type (#502).</p>
+</dd></dl>
+
+</div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p><h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="jules_prnt_control.nml.html"
+                          title="previous chapter"><span class="section-number">6.2. </span><code class="docutils literal notranslate"><span class="pre">jules_prnt_control.nml</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="cable_surface_types.nml.html"
+                          title="next chapter"><span class="section-number">6.4. </span><code class="docutils literal notranslate"><span class="pre">cable_surface_types.nml</span></code></a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="cable_surface_types.nml.html" title="6.4. cable_surface_types.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_prnt_control.nml.html" title="6.2. jules_prnt_control.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.7 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.3. </span><code class="docutils literal notranslate"><span class="pre">jules_surface_types.nml</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2023.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>
