@@ -87,16 +87,34 @@ Note that Leaf Area Index and vegetation height are specified elsewhere - see :n
       Use the other namelist members to determine how to populate variables.
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read vegetation properties from.
+   The file (or list of files) from which to read the vegetation properties.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
    If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
 
 .. nml:member:: nvars
@@ -220,16 +238,34 @@ This namelist specifies how spatially varying soil properties should be set.
        Soil characteristics vary with depth. For any variable this is ignored if a constant value is to be used (see :nml:mem:`const_val`).
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read soil properties from.
+   The file (or list of files) from which to read the soil properties.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
    If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
 
 .. nml:member:: nvars
@@ -395,16 +431,34 @@ This namelist reads spatially varying parameter values for the TOPMODEL-type par
       Use the other namelist members to determine how to populate variables.
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read TOPMODEL properties from.
+   The file (or list of files) from which to read the TOPMODEL properties.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
    If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
 
 .. nml:member:: nvars
@@ -511,16 +565,34 @@ All of the TOPMODEL variables listed below are expected to have no levels dimens
 This namelist reads spatially varying parameter values for the PDM-type parameterisation of runoff. The values are only used if :nml:mem:`JULES_HYDROLOGY::l_pdm` = TRUE. The description below is very brief. For further details, see the references under :nml:mem:`JULES_HYDROLOGY::l_pdm`.
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read PDM properties from.
+   The file (or list of files) from which to read the PDM properties.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
    If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
 
 .. nml:member:: nvars
@@ -809,16 +881,34 @@ If the TRIFFID vegetation model is used, the fractional area of agricultural lan
       Use the other namelist members to determine how to populate variables.
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file from which crop properties are read.
+   The file (or list of files) from which to read the crop properties.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
    If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
 
 .. nml:member:: nvars
@@ -1229,7 +1319,7 @@ Grids are considered consistent (and therefore regridding is not required) if th
       :type: character
       :default: None
 
-      The file (or list of files) from which to read river routing & overbank inundation properties.
+      The file (or list of files) from which to read the river routing & overbank inundation properties.
 
       If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
 
@@ -1462,16 +1552,35 @@ This namelist specifies how the water resource ancillary properties should be se
       FALSE
          Use the other namelist members to determine how to populate variables.
 
+   .. nml:member:: read_list
+
+      :type: logical
+      :default: F
+
+      Switch controlling how ancillary file names are determined.
+
+      TRUE
+          Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+      FALSE
+          Use a single file for variables or use variable name template.
+
+      For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
    .. nml:member:: file
 
       :type: character
       :default: None
 
-      The file to read water resource ancillary properties from.
+      The file (or list of files) from which to read the water resource ancillary properties.
+
+      If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+      If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
       If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
 
-      This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
    .. nml:member:: nvars
 
@@ -1570,16 +1679,34 @@ The following table summarises ancillary fields for the water resources code, sp
 .. nml:namelist:: URBAN_PROPERTIES
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read urban properties from.
+   The file (or list of files) from which to read the urban properties.
 
-   If :nml:mem:`use_file` (see below) is FALSE for every variable, this will not be used.
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
 
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
+
+   If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
 
 
 .. nml:member:: nvars
@@ -1736,12 +1863,35 @@ All of the urban property variables listed below are expected to have no levels 
    FALSE
       Use the other namelist members to determine how to populate variables.
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read the FLake parameters from.
+   The file (or list of files) from which to read the FLake parameters.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
+
+   If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
+
 
 .. nml:member:: nvars
 
