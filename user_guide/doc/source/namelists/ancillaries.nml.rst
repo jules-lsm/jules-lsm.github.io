@@ -2,7 +2,7 @@
 ===================
 
 
-This file sets up spatially varying ancillary values. It contains the following namelists: :nml:lst:`JULES_FRAC`, :nml:lst:`JULES_VEGETATION_PROPS`, :nml:lst:`JULES_SOIL_PROPS`, :nml:lst:`JULES_TOP`, :nml:lst:`JULES_PDM`, :nml:lst:`JULES_AGRIC`, :nml:lst:`JULES_CROP_PROPS`, :nml:lst:`JULES_IRRIG_PROPS`, :nml:lst:`JULES_RIVERS_PROPS`, :nml:lst:`JULES_OVERBANK_PROPS`, :nml:lst:`JULES_WATER_RESOURCES_PROPS`, :nml:lst:`URBAN_PROPERTIES` , :nml:lst:`JULES_CO2` and :nml:lst:`JULES_FLAKE`.
+This file sets up spatially varying ancillary values. It contains the following namelists: :nml:lst:`JULES_FRAC`, :nml:lst:`JULES_VEGETATION_PROPS`, :nml:lst:`JULES_SOIL_PROPS`, :nml:lst:`JULES_TOP`, :nml:lst:`JULES_PDM`, :nml:lst:`JULES_AGRIC`, :nml:lst:`JULES_CROP_PROPS`, :nml:lst:`JULES_IRRIG_PROPS`, :nml:lst:`JULES_RIVERS_PROPS`, :nml:lst:`JULES_WATER_RESOURCES_PROPS`, :nml:lst:`URBAN_PROPERTIES` , :nml:lst:`JULES_CO2` and :nml:lst:`JULES_FLAKE`.
 
 Data associated with each of these namelists can optionally be read from the dump file (if present) by setting ``read_from_dump`` to true. This functionality provides closer alignment with UM functionality and can help ensure that the correct ancillary data remain associated with the model state.
 
@@ -87,16 +87,34 @@ Note that Leaf Area Index and vegetation height are specified elsewhere - see :n
       Use the other namelist members to determine how to populate variables.
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read vegetation properties from.
+   The file (or list of files) from which to read the vegetation properties.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
    If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
 
 .. nml:member:: nvars
@@ -220,16 +238,34 @@ This namelist specifies how spatially varying soil properties should be set.
        Soil characteristics vary with depth. For any variable this is ignored if a constant value is to be used (see :nml:mem:`const_val`).
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read soil properties from.
+   The file (or list of files) from which to read the soil properties.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
    If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
 
 .. nml:member:: nvars
@@ -395,16 +431,34 @@ This namelist reads spatially varying parameter values for the TOPMODEL-type par
       Use the other namelist members to determine how to populate variables.
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read TOPMODEL properties from.
+   The file (or list of files) from which to read the TOPMODEL properties.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
    If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
 
 .. nml:member:: nvars
@@ -511,16 +565,34 @@ All of the TOPMODEL variables listed below are expected to have no levels dimens
 This namelist reads spatially varying parameter values for the PDM-type parameterisation of runoff. The values are only used if :nml:mem:`JULES_HYDROLOGY::l_pdm` = TRUE. The description below is very brief. For further details, see the references under :nml:mem:`JULES_HYDROLOGY::l_pdm`.
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read PDM properties from.
+   The file (or list of files) from which to read the PDM properties.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
    If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
 
 .. nml:member:: nvars
@@ -809,16 +881,34 @@ If the TRIFFID vegetation model is used, the fractional area of agricultural lan
       Use the other namelist members to determine how to populate variables.
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file from which crop properties are read.
+   The file (or list of files) from which to read the crop properties.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
    If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
 
 .. nml:member:: nvars
@@ -1012,7 +1102,7 @@ This namelist specifies the options available for initialising irrigated fractio
 
 .. nml:namelist:: JULES_RIVERS_PROPS
 
-This namelist specifies how spatially varying river routing properties should be set.
+This namelist specifies how spatially varying river routing properties including overbank inundation should be set.
 
 .. note:: ``read_from_dump`` is not currently implemented for this namelist, meaning that river ancillary variables cannot be read from a dump file. Initial values of river prognostic variables can however be read from a dump file (see :nml:lst:`JULES_INITIAL`).
 
@@ -1046,7 +1136,7 @@ This namelist specifies how spatially varying river routing properties should be
       :type: character
       :default: None
 
-      The file from which to read coordinate information for the river routing input grid. This is only used when :nml:mem:`file` includes :doc:`variable-name templating </input/file-name-templating>`, i.e. it is only used when ancillary variables will come from multiple files, in which case this variable is used to provide clarity as to where the coordinates are read from.
+      The file from which to read coordinate information for the river routing input grid. This is only used when :nml:mem:`file` includes :doc:`variable-name templating </input/file-name-templating>` or when :nml:mem:`read_list` = TRUE, i.e. it is only used when ancillary variables will come from multiple files, in which case this variable is used to provide clarity as to where the coordinates are read from.
 
 
    .. nml:member:: x_dim_name
@@ -1206,18 +1296,36 @@ Grids are considered consistent (and therefore regridding is not required) if th
      No ancillary field will be used and all points will be given river parameter values.
 
 
-.. nml:group:: Members used to determine how river routing variables are set
+.. nml:group:: Members used to determine how river routing and overbank inundation variables are set.
+
+   .. nml:member:: read_list
+
+      :type: logical
+      :default: F
+
+      Switch controlling how ancillary file names are determined.
+
+      TRUE
+          Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+      FALSE
+          Use a single file for variables or use variable name template.
+
+      For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
 
    .. nml:member:: file
 
       :type: character
       :default: None
 
-      The file to read river routing properties from.
+      The file (or list of files) from which to read the river routing & overbank inundation properties.
+
+      If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+      If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
       If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-      This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
 
    .. nml:member:: nvars
@@ -1226,7 +1334,7 @@ Grids are considered consistent (and therefore regridding is not required) if th
       :permitted: >= 0
       :default: 0
 
-      The number of river routing property variables that will be provided (see :ref:`list-of-rivers-params`).
+      The number of river routing and overbank inundation property variables that will be provided (see :ref:`list-of-rivers-params`).
 
 
    .. nml:member:: var
@@ -1234,7 +1342,7 @@ Grids are considered consistent (and therefore regridding is not required) if th
       :type: character(nvars)
       :default: None
 
-      List of river routing variable names as recognised by JULES (see :ref:`list-of-rivers-params`). Names are case sensitive.
+      List of river routing and overbank inundation variable names as recognised by JULES (see :ref:`list-of-rivers-params`). Names are case sensitive.
 
       .. note:: For ASCII files, variable names must be in the order they appear in the file.
 
@@ -1287,22 +1395,12 @@ Grids are considered consistent (and therefore regridding is not required) if th
       This is not used for variables where :nml:mem:`use_file` = TRUE, but a placeholder must still be given in that case.
 
 
-.. nml:group:: Additional ancillaries, which may be required depending on requested options
-
-   .. nml:member:: riv_number_file
-
-      :type: character
-      :default: ''
-
-      Ancillary file containing river numbers, which assign each river mouth on the Rivers grid, to the river which discharges into it. The river number is used in the calculation of 'outflow_per_river' (River outflow into the ocean for each river; kg s\ :sup:`-1`), when it is requested either as a JULES output (:nml:mem:`JULES_OUTPUT_PROFILE::var`) or as a send field when coupled to OASIS (:nml:mem:`OASIS_RIVERS::send_fields`). The river outflow for each river is calculated as the sum of the river outflows corresponding to that river. When passed to the ocean model via OASIS the river outflow is distributed over the corresponding river outflow points on the ocean grid. This is to ensure that water is conserved and rivers discharge into the correct ocean grid points.
-
-
 .. _list-of-rivers-params:
 
-List of rivers properties
-~~~~~~~~~~~~~~~~~~~~~~~~~
+List of rivers and overbank indundation properties
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following table summarises river routing properties required to run RFM or TRIP river routing algorithms, specified from an ancillary file if :nml:mem:`JULES_RIVERS_PROPS::use_file` = TRUE.
+The following table summarises river routing properties required to run RFM or TRIP river routing algorithms and overbank inundation properties, specified from an ancillary file if :nml:mem:`JULES_RIVERS_PROPS::use_file` = TRUE.
 
 .. tabularcolumns:: |p{2.5cm}|L|
 
@@ -1355,6 +1453,29 @@ The following table summarises river routing properties required to run RFM or T
 | ``longitude_2d``           | The longitude of each river grid point must be specified. This field is required only if the model        |
 |                            | coordinates are latitude and longitude, i.e. if :nml:mem:`JULES_LATLON::l_coord_latlon` = FALSE.          |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``logn_mean``              | Mean of ln(elevation-elev_min) for each grid cell (in units ln(m))                                        |
+|                            |                                                                                                           |
+|                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 3.                                       |
+|                            |                                                                                                           |
+|                            | Note that elev_min is DEM minimum, not river/lake bed level (therefore large values close to water        |
+|                            | bodies can occur in floodplain gridcells).                                                                |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``logn_stdev``             | Standard deviation of ln(elevation-elev_min) for each grid cell (in units ln(m))                          |
+|                            |                                                                                                           |
+|                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 3.                                       |
+|                            |                                                                                                           |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``rivers_outflow_number``  | Number assigned to each river mouth on the Rivers grid, to identify the river which discharges into it.   |
+|                            |                                                                                                           |
+|                            | The river outflow number is used in the calculation of                                                    |
+|                            | 'outflow_per_river' (River outflow into the ocean for each river; kg s\ :sup:`-1`)                        |
+|                            |                                                                                                           |
+|                            | This can either be requested as a JULES output (:nml:mem:`JULES_OUTPUT_PROFILE::var`) or as a send field  |
+|                            | when coupled to OASIS (:nml:mem:`OASIS_RIVERS::send_fields`). The river outflow for each river is         |
+|                            | calculated as the sum of the river outflows corresponding to that river. When passed to the ocean model   |
+|                            | via OASIS the river outflow is distributed over the corresponding river outflow points on the ocean grid. |
+|                            | This is to ensure that water is conserved and rivers discharge into the correct ocean grid points.        |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
 
 
 
@@ -1405,130 +1526,9 @@ Since both grids are 1\ |deg| x 1\ |deg|, we define the 2D regular lat-lon grid 
 .. seealso::
       References:
 
+      * Appx B of Lewis HW, Castillo Sanchez JM, Graham J, Saulter A, Bornemann J, Arnold A, Fallmann J, Harris C, Pearson D, Ramsdale S, Martínez de la Torre A, Bricheno L, Blyth E, Bell VA, Davies H, Marthews TR, O'Neill C, Rumbold H, O'Dea E, Brereton A, Guihou K, Hines A, Butenschon M, Dadson SJ, Palmer T, Holt J, Reynard N, Best M, Edwards J & Siddorn J (2018). The UKC2 regional coupled environmental prediction system. Geoscientific Model Development 11:1-42.
       * Bell, V.A. et al. (2007) Development of a high resolution grid-based river flow model for use with regional climate model output. Hydrology and Earth System Sciences. 11 532-549
       * Oki, T., et al (1999) Assessment of annual runoff from land surface models using Total Runoff Integrating Pathways (TRIP). Journal of the Meteorological Society of Japan. 77 235-255
-
-``JULES_OVERBANK_PROPS`` namelist members
------------------------------------------
-
-.. nml:namelist:: JULES_OVERBANK_PROPS
-
-This namelist specifies how the river overbank inundation properties should be set.
-
-.. note:: ``read_from_dump`` is not currently implemented for this namelist.
-
-.. note::
-   The grid here MUST coincide exactly with the river routing input grid specified in :nml:lst:`JULES_RIVERS_PROPS`.
-
-.. nml:group:: Members used to determine how overbank inundation variables are set
-
-   .. nml:member:: file
-
-      :type: character
-      :default: None
-
-      The file to read overbank inundation properties from (can be the same file as specified in :nml:lst:`JULES_RIVERS_PROPS`).
-
-      If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
-
-      This file name can use :doc:`variable name templating </input/file-name-templating>`.
-
-   .. nml:member:: nvars
-
-      :type: integer
-      :permitted: >= 0
-      :default: 0
-
-      The number of overbank inundation property variables that will be provided (see :ref:`list-of-overbank-params`).
-
-
-   .. nml:member:: var
-
-      :type: character(nvars)
-      :default: None
-
-      List of overbank inundation variable names as recognised by JULES (see :ref:`list-of-overbank-params`). Names are case sensitive.
-
-      .. note:: For ASCII files, variable names must be in the order they appear in the file.
-
-
-   .. nml:member:: use_file
-
-      :type: logical(nvars)
-      :default: T
-
-      For each JULES variable specified in :nml:mem:`var`, this indicates if it should be read from the specified file or whether a constant value is to be used.
-
-      TRUE
-         The variable will be read from the file.
-
-      FALSE
-         The variable will be set to a constant value everywhere using :nml:mem:`const_val` below.
-
-
-   .. nml:member:: var_name
-
-      :type: character(nvars)
-      :default: '' (empty string)
-
-      For each JULES variable specified in :nml:mem:`var` where :nml:mem:`use_file` = TRUE, this is the name of the variable in the file containing the data.
-
-      If the empty string (the default) is given for any variable, then the corresponding value from :nml:mem:`var` is used instead.
-
-      This is not used for variables where :nml:mem:`use_file` = FALSE, but a placeholder must still be given in that case.
-
-      .. note:: For ASCII files, this is not used - only the order in the file matters, as described above.
-
-
-   .. nml:member:: tpl_name
-
-      :type: character(nvars)
-      :default: None
-
-      For each JULES variable specified in :nml:mem:`var`, this is the string to substitute into the file name in place of the variable name substitution string.
-
-      If the file name does not use variable name templating, this is not used.
-
-
-   .. nml:member:: const_val
-
-      :type: real(nvars)
-      :default: None
-
-      For each JULES variable specified in :nml:mem:`var` where :nml:mem:`use_file` = FALSE, this is a constant value that the variable will be set to at every point.
-
-      This is not used for variables where :nml:mem:`use_file` = TRUE, but a placeholder must still be given in that case.
-
-.. _list-of-overbank-params:
-
-List of overbank inundation properties
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The following table summarises overbank inundation grid properties, specified from an ancillary file if :nml:mem:`JULES_OVERBANK_PROPS::use_file` = TRUE.
-
-.. tabularcolumns:: |p{2.5cm}|L|
-
-+----------------------------+-----------------------------------------------------------------------------------------------------------+
-| Name                       | Description                                                                                               |
-+============================+===========================================================================================================+
-| ``logn_mean``              | Mean of ln(elevation-elev_min) for each grid cell (in units ln(m))                                        |
-|                            |                                                                                                           |
-|                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 3.                                       |
-|                            |                                                                                                           |
-|                            | Note that elev_min is DEM minimum, not river/lake bed level (therefore large values close to water        |
-|                            | bodies can occur in floodplain gridcells).                                                                |
-+----------------------------+-----------------------------------------------------------------------------------------------------------+
-| ``logn_stdev``             | Standard deviation of ln(elevation-elev_min) for each grid cell (in units ln(m))                          |
-|                            |                                                                                                           |
-|                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 3.                                       |
-|                            |                                                                                                           |
-+----------------------------+-----------------------------------------------------------------------------------------------------------+
-
-.. seealso::
-      References:
-
-      * Appx B of Lewis HW, Castillo Sanchez JM, Graham J, Saulter A, Bornemann J, Arnold A, Fallmann J, Harris C, Pearson D, Ramsdale S, Martínez de la Torre A, Bricheno L, Blyth E, Bell VA, Davies H, Marthews TR, O'Neill C, Rumbold H, O'Dea E, Brereton A, Guihou K, Hines A, Butenschon M, Dadson SJ, Palmer T, Holt J, Reynard N, Best M, Edwards J & Siddorn J (2018). The UKC2 regional coupled environmental prediction system. Geoscientific Model Development 11:1-42.
-
 
 
 ``JULES_WATER_RESOURCES_PROPS`` namelist members
@@ -1552,16 +1552,35 @@ This namelist specifies how the water resource ancillary properties should be se
       FALSE
          Use the other namelist members to determine how to populate variables.
 
+   .. nml:member:: read_list
+
+      :type: logical
+      :default: F
+
+      Switch controlling how ancillary file names are determined.
+
+      TRUE
+          Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+      FALSE
+          Use a single file for variables or use variable name template.
+
+      For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
    .. nml:member:: file
 
       :type: character
       :default: None
 
-      The file to read water resource ancillary properties from.
+      The file (or list of files) from which to read the water resource ancillary properties.
+
+      If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+      If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
 
       If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
 
-      This file name can use :doc:`variable name templating </input/file-name-templating>`.
 
    .. nml:member:: nvars
 
@@ -1660,16 +1679,34 @@ The following table summarises ancillary fields for the water resources code, sp
 .. nml:namelist:: URBAN_PROPERTIES
 
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read urban properties from.
+   The file (or list of files) from which to read the urban properties.
 
-   If :nml:mem:`use_file` (see below) is FALSE for every variable, this will not be used.
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
 
-   This file name can use :doc:`variable name templating </input/file-name-templating>`.
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
+
+   If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
 
 
 .. nml:member:: nvars
@@ -1826,12 +1863,35 @@ All of the urban property variables listed below are expected to have no levels 
    FALSE
       Use the other namelist members to determine how to populate variables.
 
+.. nml:member:: read_list
+
+   :type: logical
+   :default: F
+
+   Switch controlling how ancillary file names are determined.
+
+   TRUE
+       Use list of file names; one per line for each of :nml:mem:`nvars`. Files in list cannot use :doc:`variable name templating </input/file-name-templating>`.
+
+   FALSE
+       Use a single file for variables or use variable name template.
+
+   For an example where :nml:mem:`read_list` = TRUE, please see the ``OASIS_RIVERS`` :ref:`Example of coupling request<example_coupling_request>`.
+
+
 .. nml:member:: file
 
    :type: character
    :default: None
 
-   The file to read the FLake parameters from.
+   The file (or list of files) from which to read the FLake parameters.
+
+   If :nml:mem:`read_list` is TRUE, this is the file from which to read the list of file names; one per line for each of :nml:mem:`nvars` variables. The file names cannot use :doc:`variable name templating </input/file-name-templating>`. If :nml:mem:`use_file` is FALSE for a particular variable, the line may contain ''.
+
+   If :nml:mem:`read_list` is FALSE, this is the file or :doc:`file name template </input/file-name-templating>`.
+
+   If :nml:mem:`use_file` is FALSE for every variable, this will not be used.
+
 
 .. nml:member:: nvars
 
