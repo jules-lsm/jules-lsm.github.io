@@ -8,7 +8,9 @@ Since IMOGEN calculates the forcing for an entire year at once, an IMOGEN run mu
 
 IMOGEN uses the netcdf read functions in JULES to load the driving data. The required driving data is specific humidity (kg/kg), precipitation (kg/m2/s), wind speed (m/s), incoming shortwave radiation (W/m2), incoming longwave radiation (W/m2), air temeprature (K) and diurnal range of air temperature (K). IMOGEN also needs ``grid_area`` read in via :nml:lst:`JULES_LATLON`. 
 
-The meteorological driving data used for IMOGEN are at monthly resolution. IMOGEN requires a monthly climatology and then can use either anomalies from that climatology (:nml:mem:`IMOGEN_RUN_LIST::anlg` set to FALSE and :nml:mem:`IMOGEN_RUN_LIST::anom` set to TRUE) or spatial patterns of changes in each meteorological driving variable per degree of global temperature change (:nml:mem:`IMOGEN_RUN_LIST::anlg` set to TRUE and :nml:mem:`IMOGEN_RUN_LIST::anom` set to TRUE). Patterns can be derived at the required spatial resolution using ESMValTool <https://esmvaltool.org/>.
+IMOGEN can either take a daily or a monthly climatology to drive JULES. This is controlled by :nml:mem:`IMOGEN_RUN_LIST::l_daily_metdata_climatol`. If the driving data changes during runtime (:nml:mem:`IMOGEN_RUN_LIST::l_change_metdata` = TRUE) there are different methods for changing it (:nml:mem:`IMOGEN_RUN_LIST::change_metdata_method`).
+
+If :nml:mem:`IMOGEN_RUN_LIST::change_metdata_method` = 2, then use anomalies from the given climatology otherwise use spatial patterns of changes in each meteorological driving variable per degree of global temperature change (:nml:mem:`IMOGEN_RUN_LIST::change_metdata_method` set to 1 or 3). Patterns can be derived at the required spatial resolution using ESMValTool <https://esmvaltool.org/>.
 
 IMOGEN still reads the 1d data from ascii files within the code - this will change in the near future.
 
@@ -180,20 +182,28 @@ IMOGEN still reads the 1d data from ascii files within the code - this will chan
    Only if :nml:mem:`land_feed_ch4` = TRUE.
 
 
-.. nml:member:: anlg
+.. nml:member:: l_change_metdata
 
    :type: logical
    :default: T
 
-   If TRUE, then use the GCM analogue model.
+   If TRUE, then the driving data is changed according to the value of :nml:mem:`change_metdata_method`.
 
 
-.. nml:member:: anom
+.. nml:member:: change_metdata_method
 
-   :type: logical
-   :default: T
+   :type: integer
+   :default: None
 
-   If TRUE, then incorporate anomalies.
+    If 1 use imogen to provide jules forcing based on the analogue model and spatial patterns of sensitivity to global mean temperature change.
+    If 2 use anomaly data from input (requires CO2 concentration data)
+    If 3 use imogen to provide jules forcing based on the global mean temperature change and the climate patterns  (requires CO2 concentration data).
+
+   .. seealso::
+      References:
+
+      * Mathison CT, Burke EJ, Kovacs E, Munday G, Huntingford C, Jones CD, Smith CJ, Steinert NJ, Wiltshire AJ, Gohar LK, Varney RM. A rapid application emissions-to-impacts tool for scenario assessment: Probabilistic Regional Impacts from Model patterns and Emissions (PRIME). https://doi.org/10.5194/egusphere-2023-2932
+.
 
 
 .. nml:member:: c_emissions
@@ -218,14 +228,6 @@ IMOGEN still reads the 1d data from ascii files within the code - this will chan
    :default: T
 
    If TRUE, include adjustments to non-CO2 radiative forcing.
-
-
-.. nml:member:: l_drive_with_global_temps
-
-   :type: logical
-   :default: F
-
-   If TRUE, use imogen to provide jules forcing based on the global mean temperature change and the climate patterns.
 
 
 
