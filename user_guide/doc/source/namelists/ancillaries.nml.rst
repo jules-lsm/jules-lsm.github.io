@@ -1025,10 +1025,10 @@ This namelist specifies how spatially varying river routing properties should be
    *  **Land grid** - The grid that JULES runs on (not rivers) - this is the grid that includes land points. If JULES is using a 1-D grid internally, the land grid is the notional 2D grid across which the points can be scattered.
    *  **River routing input grid** - The grid on which river routing ancillaries are provided.
    *  **River domain** - That part of the river input grid that is selected for modelling.
-     
+
    Information about the river routing input grid and its relationship to the land grid is specified in this namelist. In all cases river routing is only possible if the land and river grids are regular, in that they have a constant spacing between rows and columns (but see note below about 1D model input grids).
 
-   The river routing input grid must always be defined on a 2D grid, as defined through the x and y dimensions of the rivers ancillary file (see :nml:mem:`x_dim_name` and :nml:mem:`y_dim_name` for further details). If the model input is defined on a 1D grid, those points must be a subset of a regular grid (meaning one with constant spacing of points in each of the 2 dimensions) if river routing is to be activated. 
+   The river routing input grid must always be defined on a 2D grid, as defined through the x and y dimensions of the rivers ancillary file (see :nml:mem:`x_dim_name` and :nml:mem:`y_dim_name` for further details). If the model input is defined on a 1D grid, those points must be a subset of a regular grid (meaning one with constant spacing of points in each of the 2 dimensions) if river routing is to be activated.
 
    JULES calculates runoff on the land grid and this information is then transferred to the river grid by either regridding (when the grids are not coincident) or remapping (between coincident grids). Here coincident means grids of the same resolution and for which points in each grid coincide. Hence land and river grids of different resolution are linked through regridding (interpolation), while a simpler remapping can be used when the gridboxes coincide. Note that functionality to regrid only currently exists for grids that are defined by latitude and longitude coordinates; all other coordinate systems have to be handled through remapping.
 
@@ -1288,12 +1288,12 @@ Grids are considered consistent (and therefore regridding is not required) if th
 
 
 .. nml:group:: Additional ancillaries, which may be required depending on requested options
- 	
+
    .. nml:member:: riv_number_file
-	
+
       :type: character
       :default: ''
-	
+
       Ancillary file containing river numbers, which assign each river mouth on the Rivers grid, to the river which discharges into it. The river number is used in the calculation of 'outflow_per_river' (River outflow into the ocean for each river; kg s\ :sup:`-1`), when it is requested either as a JULES output (:nml:mem:`JULES_OUTPUT_PROFILE::var`) or as a send field when coupled to OASIS (:nml:mem:`OASIS_RIVERS::send_fields`). The river outflow for each river is calculated as the sum of the river outflows corresponding to that river. When passed to the ocean model via OASIS the river outflow is distributed over the corresponding river outflow points on the ocean grid. This is to ensure that water is conserved and rivers discharge into the correct ocean grid points.
 
 

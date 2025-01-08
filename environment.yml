@@ -4,6 +4,6 @@ channels:
   - conda-forge
 
 dependencies:
-  - python>3.7
-  - Sphinx==5.0.2
+  - python=3.11.8
+  - Sphinx==7.3.7
 
