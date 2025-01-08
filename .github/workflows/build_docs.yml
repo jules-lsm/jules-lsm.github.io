@@ -7,8 +7,9 @@
 #
 # Where the event is a push to master on the main repository, the
 # workflow checks for documentation that matches the most recent
-# release tag, install it if necessary, and commits any changes to
-# make the documentation visible via github pages.
+# release tag and adds it to the gh-pages branch as necessary.  The
+# documentation can be published by configuring the repository to
+# use the gh-pages branch.
 
 name: build_docs
 
@@ -66,7 +67,8 @@ jobs:
             # Capture the output status of the command, no matter what
             # it is, without causing the workflow to fail if it is
             # non-zero
-            python3 .github/scripts/release.py --verbose $TAG && STATUS=$? || STATUS=$?
+            python3 .github/scripts/release.py --verbose --gh-pages $TAG \
+                && STATUS=$? || STATUS=$?
 
             # Add a message to the summary
             if [[ $STATUS = 0 ]]; then

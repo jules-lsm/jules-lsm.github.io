@@ -44,94 +44,94 @@ The values of all prognostic variables must be set at the start of a run. This i
 .. nml:group:: Members used to set up spatially varying properties
 
    .. nml:member:: file
- 
+
       :type: character
       :default: None
-   
+
       The file to read initial conditions from.
-      
+
       If :nml:mem:`use_file` (see below) is FALSE for every variable, this will not be used.
 
       If :nml:mem:`dump_file` = TRUE, this should be a JULES dump file.
-      
+
       If :nml:mem:`dump_file` = FALSE, this should be a file conforming to the :doc:`JULES input requirements </input/overview>`. This file name may use :doc:`variable name templating </input/file-name-templating>`.
-   
-   
+
+
    .. nml:member:: nvars
-   
+
       :type: integer
       :permitted: >= 0
       :default: 0
-   
+
       The number of initial condition variables that will be provided.
-   
+
       See :ref:`list-of-initial-condition-variables` for those required for a particular configuration.
-   
+
       .. note:: If :nml:mem:`dump_file` = TRUE and :nml:mem:`nvars` = 0, then the model will attempt to initialise all required variables from the given dump file.
-   
-   
+
+
    .. nml:member:: var
-   
+
       :type: character(nvars)
       :default: None
-   
+
       List of initial condition variable names as recognised by JULES (see :ref:`list-of-initial-condition-variables`). Names are case sensitive.
-   
+
       .. note:: For ASCII files, variable names must be in the order they appear in the file.
-   
-   
+
+
    .. nml:member:: use_file
-   
+
       :type: logical(nvars)
       :default: T
-   
+
       For each JULES variable specified in :nml:mem:`var`, this indicates if it should be read from the specified file or whether a constant value is to be used.
-   
+
       TRUE
           The variable will be read from the file.
-   
+
       FALSE
           The variable will be set to a constant value everywhere using :nml:mem:`const_val` below.
-   
-   
+
+
    .. nml:member:: var_name
-   
+
       :type: character(nvars)
       :default: '' (empty string)
-   
+
       For each JULES variable specified in :nml:mem:`var` where :nml:mem:`use_file` = TRUE, this is the name of the variable in the file containing the data.
 
       If the empty string (the default) is given for any variable, then the corresponding value from :nml:mem:`var` is used instead.
-   
+
       This is not used for variables where :nml:mem:`use_file` = FALSE, but a placeholder must still be given in that case.
-   
+
       .. note:: For ASCII files, this is not used - only the order in the file matters, as described above.
-   
-   
+
+
    .. nml:member:: tpl_name
-   
+
       :type: character(nvars)
       :default: None
-   
+
       For each JULES variable specified in :nml:mem:`var`, this is the string to substitute into the file name in place of the variable name substitution string.
-   
+
       If the file name does not use variable name templating, this is not used.
-   
-   
+
+
    .. nml:member:: const_val
-   
+
       :type: real(nvars)
       :default: None
-   
+
       For each JULES variable specified in :nml:mem:`var` where :nml:mem:`use_file` = FALSE, this is a constant value that the variable will be set to at every point in every layer.
-   
+
       This is not used for variables where :nml:mem:`use_file` = TRUE, but a placeholder must still be given.
 
    .. nml:member:: l_broadcast_soilt
-   
+
       :type: logical
       :default: False
-   
+
       Switch to allow non-soil tiled initial condition data to be broadcast to all soil tiles. This is only used when :nml:mem:`JULES_SOIL::l_tile_soil` is enabled. This helps distribute the model state, for example from a non-soil tiled run into a new run with soil tiling. Spin up of the model state should be considered when using this option.
 
       Note that if :nml:mem:`JULES_SOIL::l_tile_soil` = TRUE and values on soil tiles are available to define the initial state (e.g. from a previous run with soil tiling), :nml:mem:`l_broadcast_soilt` should be set to FALSE. Setting it to TRUE will result in the run failing because it will attempt to read a non-tiled variable.
@@ -277,9 +277,9 @@ The required variables for a particular configuration, along with their 'type' a
 | ``croprootc``                    | Root carbon pool for each crop pft (kg m\ :sup:`-2`).                                   | cpft    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``cropharvc``                    | Carbon in 'harvest parts' pool for each crop pft (kg m\ :sup:`-2`) .                    | cpft    |
-+----------------------------------+-----------------------------------------------------------------------------------------+---------+ 
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``cropreservec``                 | Carbon in stem reserves pool for each crop pft (kg m\ :sup:`-2`).                       | cpft    |
-+----------------------------------+-----------------------------------------------------------------------------------------+---------+ 
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``croplai``                      | Leaf area index of each crop pft.                                                       | cpft    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``cropcanht``                    | Height (m) of each crop pft.                                                            | cpft    |
@@ -420,7 +420,7 @@ The required variables for a particular configuration, along with their 'type' a
 | :nml:mem:`JULES_INITIAL::dump_file` = TRUE and :nml:mem:`OASIS_RIVERS::send_fields` or                                               |
 | :nml:mem:`JULES_OUTPUT_PROFILE::var` contains 'outflow_per_river'                                                                    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
-| ``rivers_outflow_rp``            | River outflow on river routing points (kg s\ :sup:`-1`)                                 | none    | 
+| ``rivers_outflow_rp``            | River outflow on river routing points (kg s\ :sup:`-1`)                                 | none    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | Required if :nml:mem:`JULES_VEGETATION::photo_acclim_model` = 2 or 3                                                                 |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
@@ -433,7 +433,7 @@ The required variables for a particular configuration, along with their 'type' a
     rfm_surfstore_rp, rfm_substore_rp, rfm_flowin_rp and rfm_bflowin are initialised to zero.
 
 .. warning::
-  if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '1,3' and :nml:mem:`JULES_INITIAL::dump_file` = FALSE, 
+  if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '1,3' and :nml:mem:`JULES_INITIAL::dump_file` = FALSE,
   rivers_sto_rp is initialised to zero.
 
 .. |mu| unicode:: &#x03BC; .. u
@@ -510,4 +510,3 @@ In this example, we use an existing dump file (from a previous run) to set the i
 :nml:mem:`JULES_INITIAL::file` specifies the dump file to read (in this case a NetCDF dump file).
 
 Since it is not specified, :nml:mem:`JULES_INITIAL::nvars` takes its default value of 0, which indicates that JULES should attempt to read all required variables from the given dump file.
-
