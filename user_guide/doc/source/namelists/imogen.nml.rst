@@ -8,7 +8,7 @@ Since IMOGEN calculates the forcing for an entire year at once, an IMOGEN run mu
 
 IMOGEN uses the netcdf read functions in JULES to load the files to derive the driving data. The driving data is derived from: specific humidity (kg/kg), precipitation (kg/m2/s), wind speed (m/s), incoming shortwave radiation (W/m2), incoming longwave radiation (W/m2), air temeprature (K) and diurnal range of air temperature (K). IMOGEN also needs ``grid_area`` read in via :nml:lst:`JULES_LATLON`. 
 
-IMOGEN can either take a daily or a monthly climatology to drive JULES. This is controlled by :nml:mem:`IMOGEN_RUN_LIST::l_daily_metdata_climatol`. If the driving data changes during runtime (:nml:mem:`IMOGEN_RUN_LIST::l_change_metdata` = TRUE) there are different methods for changing it (:nml:mem:`IMOGEN_RUN_LIST::change_metdata_method`).
+IMOGEN can either take a daily or a monthly climatology to drive JULES. This is controlled by :nml:mem:`IMOGEN_ONOFF_SWITCH::l_daily_metdata_climatol`. If the driving data changes during runtime (:nml:mem:`IMOGEN_RUN_LIST::l_change_metdata` = TRUE) there are different methods for changing it (:nml:mem:`IMOGEN_RUN_LIST::change_metdata_method`).
 
 If :nml:mem:`IMOGEN_RUN_LIST::change_metdata_method` = 2, then use anomalies from the given climatology. Otherwise (:nml:mem:`IMOGEN_RUN_LIST::change_metdata_method` set to 1 or 3) use pattern-scaling (spatial patterns of changes in each meteorological driving variable per degree of global temperature change). Patterns can be derived at the required spatial resolution using ESMValTool <https://esmvaltool.org/>.
 
@@ -63,6 +63,15 @@ If :nml:mem:`IMOGEN_RUN_LIST::change_metdata_method` = 3, then IMOGEN reads the 
     
    .. note::
       If IMOGEN is enabled, at most only :nml:mem:`JULES_DRIVE::z1_tq_vary`, :nml:mem:`JULES_DRIVE::z1_tq_in`, :nml:mem:`JULES_DRIVE::z1_uv_in`, :nml:mem:`JULES_DRIVE::z1_tq_file` and :nml:mem:`JULES_DRIVE::z1_tq_var_name` are used from the :nml:lst:`JULES_DRIVE` namelist.
+
+
+.. nml:member:: l_daily_metdata_climatol
+
+   :type: logical
+   :default: F
+
+   If TRUE, then the driving climatology is supplied as daily data with a 360 day calendar otherwise the driving climatology is supplied as monthly data.
+
 
 
 ``IMOGEN_RUN_LIST`` namelist members
@@ -216,14 +225,6 @@ If :nml:mem:`IMOGEN_RUN_LIST::change_metdata_method` = 3, then IMOGEN reads the 
       | Requires CO2 concentration data (:nml:mem:`include_co2` = TRUE and :nml:mem:`c_emissions` = False)
       | Currently no feedbacks included
 
-
-
-.. nml:member:: l_daily_metdata_climatol
-
-   :type: logical
-   :default: F
-
-   If TRUE, then the driving climatology is supplied as daily data with a 360 day calendar otherwise the driving climatology is supplied as monthly data.
 
 
 .. nml:member:: c_emissions
