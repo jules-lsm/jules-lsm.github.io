@@ -60,7 +60,7 @@ The values of all prognostic variables must be set at the start of a run. This i
    .. nml:member:: nvars
 
       :type: integer
-      :permitted: >= 0
+      :permitted: >=0
       :default: 0
 
       The number of initial condition variables that will be provided.
@@ -403,18 +403,38 @@ The required variables for a particular configuration, along with their 'type' a
 | Required if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '2' and                                  |
 | :nml:mem:`JULES_INITIAL::dump_file` = TRUE                                                                                           |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
-| ``rfm_surfstore_rp``             | Surface water storage on river routing points (m3)                                      | none    |
+| ``rfm_surfstore_rp``             | Surface water storage on river routing points (m\ :sup:`3`)                             | none    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
-| ``rfm_substore_rp``              | Sub-surface water storage on river routing points (m3)                                  | none    |
+| ``rfm_substore_rp``              | Sub-surface water storage on river routing points (m\ :sup:`3`)                         | none    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
-| ``rfm_flowin_rp``                | Surface flow into a grid box on river routing points (m3)                               | none    |
+| ``rfm_flowin_rp``                | Surface flow into a grid box on river routing points (m\ :sup:`3`)                      | none    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
-| ``rfm_bflowin_rp``               | Sub-surface flow into a grid box on river routing points (m3)                           | none    |
+| ``rfm_bflowin_rp``               | Sub-surface flow into a grid box on river routing points (m\ :sup:`3`)                  | none    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | Required if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '1,3' and                                |
 | :nml:mem:`JULES_INITIAL::dump_file` = TRUE                                                                                           |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``rivers_sto_rp``                | Water storage (kg)                                                                      | none    |
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
+| Required if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '4' and                                  |
+| :nml:mem:`JULES_INITIAL::dump_file` = TRUE                                                                                           |
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
+| ``flood_flow``                   | Flow on floodplain (m\ :sup:`3` s\ :sup:`-1`)                                           | none    |
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
+| ``flood_flow_prev``              | Flow on floodplain on previous timestep (m\ :sup:`3` s\ :sup:`-1`)                      | none    |
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
+| ``flood_storage``                | Floodplain storage (m\ :sup:`3`)                                                        | none    |
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
+| ``flood_storage_prev``           | Floodplain storage at start of previous timestep (m\ :sup:`3`)                          | none    |
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
+| ``river_channel_flow``           | Flow in river channel  (m\ :sup:`3` s\ :sup:`-1`)                                       | none    |
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
+| ``river_flow_prev``              | Flow in river channel on previous timestep (m\ :sup:`3` s\ :sup:`-1`)                   | none    |
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
+| ``river_channel_storage``        | River channel storage - including storage above bankfull level over the river channel   | none    |
+|                                  | (m\ :sup:`3`))                                                                          |         |
++----------------------------------+-----------------------------------------------------------------------------------------+---------+
+| ``river_depth_prev``             | Depth of water in river channel at start of previous timestep (m)                       | none    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | Required if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '3',                                     |
 | :nml:mem:`JULES_INITIAL::dump_file` = TRUE and :nml:mem:`OASIS_RIVERS::send_fields` or                                               |
@@ -427,14 +447,18 @@ The required variables for a particular configuration, along with their 'type' a
 | ``t_growth_gb``                  | Running mean air temperature (K)                                                        | none    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 
-
 .. warning::
   if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '2' and :nml:mem:`JULES_INITIAL::dump_file` = FALSE,
     rfm_surfstore_rp, rfm_substore_rp, rfm_flowin_rp and rfm_bflowin are initialised to zero.
 
-.. warning::
-  if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '1,3' and :nml:mem:`JULES_INITIAL::dump_file` = FALSE,
+.. warning:: 
+  if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '1,3' and :nml:mem:`JULES_INITIAL::dump_file` = FALSE, 
   rivers_sto_rp is initialised to zero.
+
+.. warning::
+  if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '4' and :nml:mem:`JULES_INITIAL::dump_file` = FALSE, 
+  flood_flow, flood_flow_prev, flood_storage, flood_storage_prev, river_channel_flow, river_flow_prev, river_channel_storage and river_depth_prev
+  are initialised to zero.
 
 .. |mu| unicode:: &#x03BC; .. u
 

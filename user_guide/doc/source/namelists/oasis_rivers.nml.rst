@@ -40,12 +40,12 @@ This file contains a single namelists called :nml:lst:`OASIS_RIVERS`, which indi
 .. nml:member:: send_fields
 
    :type: character(:)
-   :permitted: 'outflow_per_river'
+   :permitted: 'rflow_outflow','outflow_per_river'
    :default: ''
 
    List of fields to be sent via coupling from the river executable to other models. Names are case sensitive
 
-.. note::  The only field that can be sent via coupling is the total river runoff (`outflow_per_river`).
+.. note::  The only fields that can be sent via coupling are the total river runoff `rflow_outflow` and the outflow per river `outflow_per_river`.
 
 .. nml:member:: receive_fields
 
@@ -61,7 +61,7 @@ This file contains a single namelists called :nml:lst:`OASIS_RIVERS`, which indi
 Example of coupling request
 ----------------------------
 
-In this example, the user has requested receiving the surface and sub-surface runoffs, and sending the total river runoff via coupling. The coupling exchanges take place every hour.
+In this example, the user has requested receiving the surface and sub-surface runoffs, and sending the total river runoff via coupling. The coupling exchanges take place every hour (of simulation time).
 
 ::
 
