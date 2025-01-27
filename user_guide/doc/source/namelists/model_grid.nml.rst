@@ -229,6 +229,16 @@ In most cases, the model grid will be represented internally as a vector of poin
    .. note:: For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).
 
 
+.. nml:member:: quantile_dim_name
+
+   :type: character
+   :default: "elev"
+
+   The dimension name used when variables have an additional dimension of size :nml:mem:`JULES_OVERBANK::nquantile_elev` (with :nml:mem:`JULES_OVERBANK::overbank_model` = 4).
+
+   .. note:: For ASCII files, this can be anything. For NetCDF files, it should the name of the dimension in input file(s).
+
+
 ``JULES_LATLON`` namelist members
 ---------------------------------
 

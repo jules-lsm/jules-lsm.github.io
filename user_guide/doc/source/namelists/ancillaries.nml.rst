@@ -1049,6 +1049,14 @@ This namelist specifies how spatially varying river routing properties should be
       The file from which to read coordinate information for the river routing input grid. This is only used when :nml:mem:`file` includes :doc:`variable-name templating </input/file-name-templating>`, i.e. it is only used when ancillary variables will come from multiple files, in which case this variable is used to provide clarity as to where the coordinates are read from.
 
 
+   .. nml:member:: riv_number_file
+
+      :type: character
+      :default: ''
+
+      Ancillary file containing the river number. This information is necessary when sending via coupling the total runoff (:nml:mem:`OASIS_RIVERS::send_fields` = 'rflow_outflow'), so that rivers discharge into the right ocean grid point. The ancillary file identifies the river in which the river outflow on each grid point will discharge, so the total runoff for each river is calculated as the sum of the river outflow corresponding to that river.
+
+
    .. nml:member:: x_dim_name
 
       :type: character
@@ -1344,17 +1352,81 @@ The following table summarises river routing properties required to run RFM or T
 |                            | Note that at present any river flow at an inland drainage point is NOT added to the soil moisture (in     |
 |                            | standalone JULES).                                                                                        |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``river_nextx_grid``,      | x and y indices of the next point downstream of each river routing grid, defining the next grid box into  |
+| ``river_nexty_grid``       | which river water will be routed. Used with CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4).         |
+|                            |                                                                                                           |
+|                            | Values should lie in the range 1 to :nml:mem:`nx_rivers` and 1 to :nml:mem:`ny_rivers` for                |
+|                            | ``river_nextx_grid`` and ``rivers_nexty_grid`` respectively. For grids that are cyclic in one or both     |
+|                            | dimensions (e.g. a global grid) flows across this edge of the river input grid should still follow this   |
+|                            | range of values - e.g. a global grid with flow to the west from x=1 should use ``river_nextx_grid`` =     |
+|                            | nx_rivers (not 0).                                                                                        |
+|                            |                                                                                                           |
+|                            | Other values:                                                                                             |
+|                            |                                                                                                           |
+|                            |  0:  sea                                                                                                  |
+|                            |                                                                                                           |
+|                            | -9:  river mouth (outflow to sea)                                                                         |
+|                            |                                                                                                           |
+|                            | -10: inland drainage point (an endorheic catchment; no outflow from grid box)                             |
+|                            |                                                                                                           |
+|                            | There is no requirement that flows pass to an immediate neighbour - it is permissible for flows to "jump" |
+|                            | to a more distant location, which can be useful when trying to represent accurately a river network on    |
+|                            | the grid.                                                                                                 |
+|                            |                                                                                                           |
+|                            | Note that at present any river flow at an inland drainage point is NOT added to the soil moisture (in     |
+|                            | standalone JULES).                                                                                        |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
 | ``sequence``               | River routing network pathway number.                                                                     |
 |                            |                                                                                                           |
 |                            | Used by TRIP river routing only (i.e. :nml:mem:`JULES_RIVERS::i_river_vn` = ``1,3``).                     |
 |                            | See Oki et al. (1999) for details.                                                                        |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
 | ``latitude_2d``            | The latitude of each river grid point must be specified. This field is required only if the model         |
-|                            | coordinates are latitude and longitude, i.e. if :nml:mem:`JULES_LATLON::l_coord_latlon` = FALSE.          |
+|                            | coordinates are not latitude and longitude, i.e. if :nml:mem:`JULES_LATLON::l_coord_latlon` = FALSE.      |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
 | ``longitude_2d``           | The longitude of each river grid point must be specified. This field is required only if the model        |
-|                            | coordinates are latitude and longitude, i.e. if :nml:mem:`JULES_LATLON::l_coord_latlon` = FALSE.          |
+|                            | coordinates are not latitude and longitude, i.e. if :nml:mem:`JULES_LATLON::l_coord_latlon` = FALSE.      |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``channel_depth_grid``     | River channel depth (m) at bankfull flow conditions                                                       |
+|                            |                                                                                                           |
+|                            | This is only used for CaMa-Flood routing (:nml:mem:`JULES_RIVERS::i_river_vn` = 4)                        |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``channel_width_grid``     | River channel width (m) at bankfull flow conditions                                                       |
+|                            |                                                                                                           |
+|                            | This is only used for CaMa-Flood routing (:nml:mem:`JULES_RIVERS::i_river_vn` = 4)                        |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``river_length_grid``      | Distance from gridpoint centre to downstream gridpoint centre (m), i.e., river length without any         |
+|                            | meandering (used to calculate floodplain flow speed)                                                      |
+|                            |                                                                                                           |
+|                            | This is only used for CaMa-Flood routing (:nml:mem:`JULES_RIVERS::i_river_vn` = 4)                        |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``river_distance_grid``    | Distance along river within the gridcell, following the channel (m) (used to calculate river flow speed)  |
+|                            |                                                                                                           |
+|                            | This is only used for CaMa-Flood routing (:nml:mem:`JULES_RIVERS::i_river_vn` = 4)                        |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``river_elevation_grid``   | River water surface height at bankfull flow conditions (m above mean sea level - see note below),         |
+|                            | i.e. ( river_elevation_grid - channel_depth_grid ) is the elevation of the river bed in each              |
+|                            | gridcell (m amsl). If river_elevation_grid is smaller than the DEM land surface elevation, then the       |
+|                            | river is incised at this point.                                                                           |
+|                            |                                                                                                           |
+|                            | This is only used for CaMa-Flood routing (:nml:mem:`JULES_RIVERS::i_river_vn` = 4)                        |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``river_manning_grid``     | Gauckler–Manning roughness coefficient for river channel flow (s.(m^(-1/3)))                              |
+|                            |                                                                                                           |
+|                            | This is only used for CaMa-Flood routing (:nml:mem:`JULES_RIVERS::i_river_vn` = 4)                        |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+|``coastal_level_diff_grid`` | The difference (in m) between mean coastal sea level (see note below) and the surface elevation of the    |
+|                            | land gridcell closest to the sea. Values may be negative (e.g., cliffs) or positive (e.g., artificial     |
+|                            | embankments or levees).                                                                                   |
+|                            |                                                                                                           |
+|                            | This is only used for CaMa-Flood routing (:nml:mem:`JULES_RIVERS::i_river_vn` = 4) in the case where      |
+|                            | :nml:mem:`JULES_RIVERS::l_sea_level` is TRUE.                                                             |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+
+.. note:: In this documentation we make a difference between "mean sea level" being the standard elevation datum used by a particular country and "mean coastal sea level" being an average level of the actual sea at a particular location. For example, in the UK the standard datum was set at Newlyn, Cornwall, in 1921 (and 10 m elevation in a DEM for the UK will mean 10 m above that datum). However, sea level rise since 1921 has been approximately 2.0 m, so "mean coastal sea level" at Newlyn is currently approximately 2.0 m amsl.
+
+.. note:: For runs using CaMa-Flood (:nml:mem:`JULES_RIVERS::i_river_vn` = 4) there must be no flows across the edge of the river domain because of the need to set a downstream lateral boundary value. The model code checks for such flow during initialisation and will abort a run that doesn't meet this condition. A possible workaround would be to create a new ancillary file in which flows across the edge of the domain are replaced by river mouths (or inland drainage points), though that will have some impact on the simulated flows.
+
 
 
 
@@ -1521,6 +1593,26 @@ The following table summarises overbank inundation grid properties, specified fr
 | ``logn_stdev``             | Standard deviation of ln(elevation-elev_min) for each grid cell (in units ln(m))                          |
 |                            |                                                                                                           |
 |                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 3.                                       |
+|                            |                                                                                                           |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``elev_quantiles_grid``    | An ancillary indexed by :nml:mem:`JULES_INPUT_GRID::quantile_dim_name` describing the elevation           |
+|                            | quantiles of each gridcell.                                                                               |
+|                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 4.                                       |
+|                            |                                                                                                           |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``channel_depth_grid``     | See description in :ref:`list-of-rivers-params`.                                                          |
+|                            |                                                                                                           |
+|                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 4.                                       |
+|                            |                                                                                                           |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``channel_width_grid``     | See description in :ref:`list-of-rivers-params`.                                                          |
+|                            |                                                                                                           |
+|                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 4.                                       |
+|                            |                                                                                                           |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
+| ``river_length_grid``      | See description in :ref:`list-of-rivers-params`.                                                          |
+|                            |                                                                                                           |
+|                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 4.                                       |
 |                            |                                                                                                           |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
 
