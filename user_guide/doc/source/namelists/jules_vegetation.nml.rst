@@ -773,6 +773,21 @@ This file sets the vegetation options. It contains one namelist called :nml:lst:
              are as expected, and provide feedback where deficiencies
              are identified.
 
+.. nml:member:: l_red
+
+   :type: logical
+   :default: F
+
+   Switch for using the Robust Ecosystem Demography model (:ref:`Argles et al., (2020)<References_vegetation>`)
+
+   TRUE
+       Robust Ecosystem Demography is used.
+
+   FALSE
+       Robust Ecosystem Demography is not used.
+
+   Only use if :nml:mem:`l_triffid` = TRUE.
+
 
 .. nml:group:: Only used with the Farquhar model of leaf photosynthesis (:nml:mem:`photo_model` = 2).
 
