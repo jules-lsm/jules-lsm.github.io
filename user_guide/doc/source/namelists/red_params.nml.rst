@@ -14,7 +14,7 @@ This namelist is used to read PFT parameters that are only needed by the Robust 
 
 .. note:: Where a quantity is said to have units of "/360days", this means that it is an amount per 360 days.
 
-.. nml:group:: Only used when :nml:mem:`JULES_VEGETATION::l_veg3 = TRUE  
+.. nml:group:: Only used when :nml:mem:`JULES_VEGETATION::l_red = TRUE  
 
 .. nml:member:: alpha_recrt
 
