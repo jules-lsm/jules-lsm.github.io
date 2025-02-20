@@ -45,9 +45,9 @@ jobs:
             pushd user_guide/doc
             # Add status of tests to the summary
             if make html; then
-              echo ":heavy_check_mark: Documentation tests passed" >> $GITHUB_STEP_SUMMARY
+              echo ":heavy_check_mark: Documentation build test passed" >> $GITHUB_STEP_SUMMARY
             else
-              echo ":x: Documentation tests failed" >> $GITHUB_STEP_SUMMARY
+              echo ":x: Documentation build test failed" >> $GITHUB_STEP_SUMMARY
               exit 1
             fi
             if make linkcheck; then
