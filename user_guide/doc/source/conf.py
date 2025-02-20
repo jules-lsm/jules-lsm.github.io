@@ -260,3 +260,14 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+# Linkcheck options
+# Initially, ignore all broken links
+linkcheck_ignore = [
+    r"https://code.metoffice.gov.uk/.*",
+    r"https://www.nag.co.uk/nag-compiler",
+    r"https://doi.org/10.3354/cr00899",
+    r"https://puma.nerc.ac.uk/trac/JULES",
+    r"https://doi.org/10.1007/BF0038623",
+    r"http://.*",
+    ]
