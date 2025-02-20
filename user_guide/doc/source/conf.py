@@ -280,3 +280,6 @@ linkcheck_ignore = [
     r"https://royalsocietypublishing.org/.*",
     ]
 
+# Bump the limit up a bit
+linkcheck_retries = 3
+
