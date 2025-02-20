@@ -278,6 +278,7 @@ linkcheck_ignore = [
     r"https://.*wiley.com/.*",
     r"https://www.liebertpub.com/.*",
     r"https://royalsocietypublishing.org/.*",
+    r"https?://www.gnu.org/.*",
     ]
 
 # Bump the limit up a bit
