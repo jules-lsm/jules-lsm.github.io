@@ -276,5 +276,7 @@ linkcheck_ignore = [
     r"http://www.borenv.net/BER/pdfs/ber15/ber15-501.pdf",
     r"http://www.unidata.ucar.edu/software/netcdf/docs/.*",
     r"https://.*wiley.com/.*",
+    r"https://www.liebertpub.com/.*",
+    r"https://royalsocietypublishing.org/.*",
     ]
 
