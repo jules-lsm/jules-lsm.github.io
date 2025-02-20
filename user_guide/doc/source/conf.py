@@ -275,5 +275,6 @@ linkcheck_ignore = [
     r"http://nora.nerc.ac.uk/10890/1/dadson_etal_2010_g2gtrip.pdf",
     r"http://www.borenv.net/BER/pdfs/ber15/ber15-501.pdf",
     r"http://www.unidata.ucar.edu/software/netcdf/docs/.*",
+    r"https://.*wiley.com/.*",
     ]
 
