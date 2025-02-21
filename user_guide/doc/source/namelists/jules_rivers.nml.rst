@@ -265,7 +265,7 @@ River routing introduces two more grids to a JULES run: the river routing input 
 
    3. The inundated area is calculated using a hypsometric integral based on a lognormal area-altitude
       distribution and an allometric relationship to estimate river depth.
-      The parameters of the lognormal distribution are specified via :nml:lst:`JULES_OVERBANK_PROPS`.
+      The parameters of the lognormal distribution are specified via :nml:lst:`JULES_RIVERS_PROPS`.
       (**This is the recommended approach.**)
 
 
