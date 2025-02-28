@@ -260,3 +260,28 @@ texinfo_documents = [
 
 # How to display URL addresses: 'footnote', 'no', or 'inline'.
 #texinfo_show_urls = 'footnote'
+
+# Linkcheck options
+# Initially, ignore all broken links
+linkcheck_ignore = [
+    r"https?://code.metoffice.gov.uk/.*",
+    r"https?://www.nag.co.uk/nag-compiler",
+    r"https?://doi.org/10.3354/cr00899",
+    r"https?://puma.nerc.ac.uk/trac/JULES",
+    r"https?://doi.org/10.1007/BF0038623",
+    r"https?://docs.cray.com/.*",
+    r"https?://cylc.github.io/cylc/",
+    r"https?://jules.jchmr.org/content/.*",
+    r"https?://nora.nerc.ac.uk/10890/1/dadson_etal_2010_g2gtrip.pdf",
+    r"https?://www.borenv.net/BER/pdfs/ber15/ber15-501.pdf",
+    r"https?://www.unidata.ucar.edu/software/netcdf/docs/.*",
+    r"https?://.*wiley.com/.*",
+    r"https?://www.liebertpub.com/.*",
+    r"https?://royalsocietypublishing.org/.*",
+    r"https?://www.gnu.org/.*",
+    r"https?://software.intel.com/.*",
+    ]
+
+# Bump the limit up a bit
+linkcheck_retries = 3
+
