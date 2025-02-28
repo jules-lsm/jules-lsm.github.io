@@ -39,7 +39,7 @@ River routing introduces two more grids to a JULES run: the river routing input 
        Use a UM-coupled JULES implementation of the TRIP model (see Oki et al. 1999). This value is not allowed in standalone JULES
 
    ``2``
-       Use a standalone JULES implementation of the RFM kinematic wave model (see Dadson and Bell 2010, Bell et al. 2007).
+       Use a standalone or UM-coupled JULES implementation of the RFM kinematic wave model (see Dadson and Bell 2010, Bell et al. 2007).
 
    ``3``
        Use a standalone JULES implementation of the TRIP model (see Oki et al. 1999).
@@ -265,7 +265,7 @@ River routing introduces two more grids to a JULES run: the river routing input 
 
    3. The inundated area is calculated using a hypsometric integral based on a lognormal area-altitude
       distribution and an allometric relationship to estimate river depth.
-      The parameters of the lognormal distribution are specified via :nml:lst:`JULES_OVERBANK_PROPS`.
+      The parameters of the lognormal distribution are specified via :nml:lst:`JULES_RIVERS_PROPS`.
       (**This is the recommended approach.**)
 
 
