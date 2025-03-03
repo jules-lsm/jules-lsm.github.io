@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1.39. JULES version 2.2 Release Notes &#8212; Joint UK Land Environment Simulator (JULES) v7.8 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=0f882399" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css?v=c7813d96" />
+    <script src="../_static/documentation_options.js?v=2eb9bb39"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="1.40. JULES version 2.1 Release Notes" href="JULES2-1.html" />
+    <link rel="prev" title="1.38. JULES version 3.0 Release Notes" href="JULES3-0.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES2-1.html" title="1.40. JULES version 2.1 Release Notes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-0.html" title="1.38. JULES version 3.0 Release Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.8 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">1. </span>Release notes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1.39. </span>JULES version 2.2 Release Notes</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="jules-version-2-2-release-notes">
+<h1><span class="section-number">1.39. </span>JULES version 2.2 Release Notes<a class="headerlink" href="#jules-version-2-2-release-notes" title="Link to this heading">¶</a></h1>
+<p>Along with fixes for known bugs, the changes made for version 2.2 mostly consist of several small additions to the science code. Changes to the control code have mostly been limited to bug-fixes.</p>
+<ul class="simple">
+<li><p>New options for treatment of urban tiles - inclusion of the Met Office Reading Urban Surface Exchange Scheme (MORUSES) and a simple two tile urban scheme.</p></li>
+<li><p>Effects of ozone damage on stomata from Stephen Sitch at the University of Leeds.</p></li>
+<li><p>New treatment of direct/diffuse radiation in the canopy from Lina Mercado at CEH.</p></li>
+<li><p>A new switch allows the competing vegetation portion of TRIFFID to be switched on and off independently of the rest of TRIFFID (i.e. it is now possible to use the RothC soil carbon without having changing vegetation fractions).</p></li>
+</ul>
+<p>There have also been changes made to the way JULES is compiled, due to the re-integration with the Met Office Unified Model (UM). The UM uses preprocessor directives to compile different versions of routines depending on the selected science options. For compatibility with this system, JULES will now require a compiler with a preprocessor. This should not be noticed by the majority of users - most modern compilers include a preprocessor and the Makefile deals with setting up the appropriate preprocessor options.</p>
+<p>Finally, JULES was added to the UM code repository as a mirror of the JULES repository at (UM version vn7.5, JULES vn2.2).</p>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo"/>
+            </a></p><h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">1. Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="JULES3-0.html"
+                          title="previous chapter"><span class="section-number">1.38. </span>JULES version 3.0 Release Notes</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="JULES2-1.html"
+                          title="next chapter"><span class="section-number">1.40. </span>JULES version 2.1 Release Notes</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="JULES2-1.html" title="1.40. JULES version 2.1 Release Notes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="JULES3-0.html" title="1.38. JULES version 3.0 Release Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.8 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">1. </span>Release notes</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">1.39. </span>JULES version 2.2 Release Notes</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>
