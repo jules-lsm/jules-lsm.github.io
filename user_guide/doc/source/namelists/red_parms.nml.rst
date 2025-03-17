@@ -1,5 +1,3 @@
-``red_parms.nml``
-======================
 
 
 This file contains a single namelist called :nml:lst:`JULES_RED` that sets parameters relevant to the Robust Ecosystem Demography submodel (RED version 1.0) <https://gmd.copernicus.org/articles/13/4067/2020/>`_.
@@ -30,6 +28,15 @@ This namelist is used to read PFT parameters that are only needed by the Robust 
    :default: None
 
    The lowest PFT crown area, value corresponds to the mass0 class (m\ :sup:`2`).
+
+
+.. nml:member:: dom_order
+
+   :type: integer(npft)
+   :default: None
+
+   The value that describes the competitive hierarchy of PFTs competition in
+   JULES-RED, the higher the value the more dominant: 3 (trees), 2 (shrubs), 1 (grass).
 
 
 .. nml:member:: height0
