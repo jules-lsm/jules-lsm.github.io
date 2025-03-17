@@ -790,6 +790,21 @@ This file sets the vegetation options. It contains one namelist called :nml:lst:
              are as expected, and provide feedback where deficiencies
              are identified.
 
+.. nml:member:: l_red
+
+   :type: logical
+   :default: F
+
+   Switch for using the Robust Ecosystem Demography model (:ref:`Argles et al., (2020)<References_vegetation>`)
+
+   TRUE
+       Robust Ecosystem Demography is used.
+
+   FALSE
+       Robust Ecosystem Demography is not used.
+
+   Only use if :nml:mem:`l_triffid` = TRUE.
+
 
 .. nml:group:: Only used with the Farquhar model of leaf photosynthesis (:nml:mem:`photo_model` = 2).
 
@@ -950,7 +965,11 @@ This file sets the vegetation options. It contains one namelist called :nml:lst:
 
 ``JULES_VEGETATION`` references
 -------------------------------
-
+* Argles, A. P. K., Moore, J. R., Huntingford, C., Wiltshire, A. J., 
+  Harper, A. B., Jones, C. D., and Cox, P. M.: Robust Ecosystem Demography 
+  (RED version 1.0): a parsimonious approach to modelling vegetation 
+  dynamics in Earth system models, Geosci. Model Dev., 13, 4067–4089, 
+  https://doi.org/10.5194/gmd-13-4067-2020
 * Best et al., 2011, The Joint UK Land Environment Simulator (JULES),
   model description – Part 1: Energy and water fluxes, Geosci. Model
   Dev., https://doi.org/10.5194/gmd-4-677-2011.
