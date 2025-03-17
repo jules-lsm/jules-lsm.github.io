@@ -1,20 +1,20 @@
-``red_params.nml``
+``red_parms.nml``
 ======================
 
 
 This file contains a single namelist called :nml:lst:`JULES_RED` that sets parameters relevant to the Robust Ecosystem Demography submodel (RED version 1.0) <https://gmd.copernicus.org/articles/13/4067/2020/>`_.
-
+Activate RED in the :nml:mem:`JULES_VEGETATION::l_red.
 
 ``JULES_RED`` namelist members
 ----------------------------------
 
-.. nml:namelist:: JULES_RED
+.. nml:namelist:: RED_PARMS
 
 This namelist is used to read PFT parameters that are only needed by the Robust Ecosystem Demography (RED). Values are not used if RED is not selected.
 
 .. note:: Where a quantity is said to have units of "/360days", this means that it is an amount per 360 days.
 
-.. nml:group:: Only used when :nml:mem:`JULES_VEGETATION::l_veg3 = TRUE  
+.. nml:group:: Only used when :nml:mem:`JULES_VEGETATION::l_red = TRUE  
 
 .. nml:member:: alpha_recrt
 
