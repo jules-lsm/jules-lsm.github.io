@@ -11,6 +11,37 @@ This file sets the hydrology options. It contains one namelist called :nml:lst:`
 
 .. nml:namelist:: JULES_HYDROLOGY
 
+
+.. nml:member:: l_hydrology
+
+   :type: logical
+   :default: F
+
+   Switch to enable soil hydrology.
+
+   TRUE
+       Use the JULES hydrology scheme to represent surface runoff, groundwater infiltration and soil evolution.
+
+   FALSE
+       No hydrology scheme.
+
+
+.. nml:member:: l_var_rainfrac
+
+   :type: logical
+   :default: F
+
+   Switch to enable variable large scale and convective rain fractions. This is intended for use with COUPLED MODELS ONLY.
+
+   TRUE
+       In coupled models, the large-scale and convective rain fractions calculated by the atmosphere are used in throughfall and runoff calculations.
+
+       In standalone, this is equivalent to **FALSE** with **0.5** for large-scale and :nml:mem:`JULES_SOIL::confrac` for convective rain as the functionality to supply the large-scale and convective rain fractions via the driving data does not exist.
+
+   FALSE
+       These are assumed to be **1.0** for large-scale and :nml:mem:`JULES_SOIL::confrac` for convective rain.
+
+
 .. nml:member:: l_top
 
    :type: logical
