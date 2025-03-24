@@ -7,7 +7,7 @@ To be able to automatically upgrade namelists between JULES versions or use a GU
 
 All of this software is freely available:
 
-*   GFortran, the GNU GCC Fortran compiler - http://www.gnu.org/software/gcc/fortran
+*   GFortran, the GNU GCC Fortran compiler - https://www.gnu.org/software/gcc/fortran
 *   FCM - http://metomi.github.io/fcm/doc
 *   Rose - http://metomi.github.io/rose/doc/html/index.html
 *   NetCDF libraries - http://www.unidata.ucar.edu/software/netcdf
