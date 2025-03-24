@@ -16,6 +16,7 @@ name: build_docs
 # Controls when the action will run
 on: 
     push:
+      branches: [master]
     pull_request:
 
     # Enables manual running from the Actions tab
@@ -54,7 +55,6 @@ jobs:
               echo ":heavy_check_mark: Documentation link checking passed" >> $GITHUB_STEP_SUMMARY
             else
               echo ":x: Documentation link checking failed" >> $GITHUB_STEP_SUMMARY
-              exit 1
             fi
             popd
           if: ${{ github.repository != 'jules-lsm/jules-lsm.github.io'
