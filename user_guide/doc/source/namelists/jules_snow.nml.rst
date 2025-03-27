@@ -293,7 +293,7 @@ HCTN30 refers to Hadley Centre technical note 30, available from `the Met Office
 
       Minimum LAI in calculation of albedo in the presence of snow.
 
-      A minimum albedo is imposed when calculating the albedo of plant
+      A minimum LAI is imposed when calculating the albedo of plant
       canopies (historically 0.5). This parameter allows it to be set
       for each PFT in the presence of snow. Crudely, it represents the
       stem area of vegetation remaining when the true LAI is 0. A
