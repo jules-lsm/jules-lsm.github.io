@@ -429,14 +429,7 @@ ease the direct links to these documents are:
    :type: real(npft)
    :default: None
 
-   Minimum LAI in calculation of albedo in the absence of snow.
-
-   A minimum LAI is imposed when calculating the albedo of plant
-   canopies (historically 0.5). This parameter allows it to be set
-   for each PFT in the absence of snow. Crudely, it represents the
-   stem area of vegetation remaining when the true LAI is 0. A
-   separate variable, :nml:mem:`JULES_SNOW::lai_alb_lim_sn` is
-   used in the presence of snow.
+   Minimum LAI permitted in calculation of the albedo in snow-free conditions.
 
 
 .. nml:member:: neff_io
