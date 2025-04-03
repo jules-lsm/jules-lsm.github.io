@@ -184,3 +184,16 @@ This file sets the hydrology options. It contains one namelist called :nml:lst:`
       e.g. A value of 0 indicates that surface saturation can occur for any
       value of water storage. A value of 0.5 would indicate that
       no surface runoff is produced until the soil is 50% saturated.
+
+   .. nml:member:: l_inland
+
+      :type: logical
+      :default: F
+
+      Switch to enable inland basin flow water to feed into soil moisture. This is only applicable when the rivers are run within the UM or if the rivers are run standalone and coupled to another model via OASIS.
+
+      TRUE
+          Send inland basin flow water to soil moisture
+      FALSE
+          Do not send inland basin flow water anywhere
+
