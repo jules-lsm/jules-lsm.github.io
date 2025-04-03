@@ -190,10 +190,10 @@ This file sets the hydrology options. It contains one namelist called :nml:lst:`
       :type: logical
       :default: F
 
-      Switch to enable inland basin flow water to feed into soil moisture. This is only applicable when the rivers are run within the UM or if the rivers are run standalone and coupled to another model via OASIS.
+      Switch to enable inland basin flow water to feed into soil moisture. This is only applicable when there is a supply of inland water from the rivers.
 
       TRUE
           Send inland basin flow water to soil moisture
       FALSE
-          Do not send inland basin flow water anywhere
+          Do not send inland basin flow water to soil moisture
 
