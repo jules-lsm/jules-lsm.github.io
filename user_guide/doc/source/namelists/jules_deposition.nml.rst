@@ -371,6 +371,7 @@ Example
 The following gives an example of how you would set up the :nml:lst:`JULES_DEPOSITION` namelist for atmospheric deposition for a JULES standalone run. ::
 
  [namelist:jules_deposition]
+ dep_h2_soil_scheme=1
  dry_dep_model=2
  dzl_const=50.0
  l_deposition=.true.
