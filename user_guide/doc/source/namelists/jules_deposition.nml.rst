@@ -48,6 +48,22 @@ This file contains options and parameters for modelling of dry deposition of atm
       2. | Parameterisation based on the interactive dry deposition scheme in the UKCA, with the restriction on the allowable surface tile configuration removed.
 
 
+   .. nml:member:: dep_h2_soil_scheme
+
+      :type: integer
+      :permitted: 1, 2
+      :default: none
+
+      Choice for scheme for soil uptake of H2 from the atmosphere.
+
+      Possible values are:
+
+      1. | Parameterisation based on Conrad & Seiler uptake scheme in the UKCA.
+      2. | Parameterisation based on Paulot et al. scheme.
+
+      Note: The Paulot et al. scheme is currently not available in UM-coupled JULES applications. 
+
+
    .. nml:member:: l_deposition_flux
 
       :type: logical
