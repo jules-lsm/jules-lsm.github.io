@@ -1247,6 +1247,41 @@ Trace gas concentrations and fluxes
 
 
 
+Trace gas dry deposition parameters and fluxes
+-------------------------------------------------------------------
+
+.. tabularcolumns:: |p{4.5cm}|p{8.8cm}|p{2.2cm}|
+
++---------------------------+--------------------------------------------------------------------------------+------------+
+| Name                      | Description                                                                    | Dimensions |
++===========================+================================================================================+============+
+| ``deposition_ra``         | Aerodynamic resistance (Ra) by surface type (s m\ :sup:`-1`).                  | ntype      |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``deposition_rb``         | Quasi-laminar resistance (Rb) by chemical tracer (s m\ :sup:`-1`).             | tracer     |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``deposition_rc``         | Surface resistance (Rc) by surface type and chemical tracer (s m\ :sup:`-1`).  | ntype,     |  
+|                           |                                                                                | tracer     |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``deposition_rc_stom``    | Stomatal component of surface resistance (Rc) by surface type and              | ntype,     |
+|                           | chemical tracer (s m\ :sup:`-1`).                                              | tracer     |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``deposition_rc_nonstom`` | Non-stomatal component of surface resistance (Rc) by surface type and          | ntype,     |
+|                           | chemical tracer (s m\ :sup:`-1`).                                              | tracer     |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``deposition_vd``         | Deposition velocity by surface type and chemical tracer (m s\ :sup:`-1`).      | ntype,     |
+|                           |                                                                                | tracer     |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``deposition_lossrate``   | Deposition loss rate by chemical tracer (s\ :sup:`-1`)                         | tracer     |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``deposition_flux``       | Deposition flux by chemical tracer (kg m\ :sup:`-3` s\ :sup:`-1`)              | tracer     |
+|                           |                                                                                |            |
+|                           | Only available if :nml:mem:`JULES_DEPOSITION::l_deposition_flux` = TRUE        |            |
+|                           |                                                                                |            |
+|                           | Requires surface atmospheric concentrations for each deposited species.        |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+
+
+
 Water resources
 -------------------------------------------------------------------
 
