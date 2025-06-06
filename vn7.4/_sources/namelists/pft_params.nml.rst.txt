@@ -838,6 +838,55 @@ ease the direct links to these documents are:
 
    Fire BC Emission Factor (g kg\ :sup:`-1`).
 
+.. nml:member:: fef_c2h4_io
+
+   :type: real(npft)
+   :default: None
+
+   Fire C2H4 Emission Factor (g kg\ :sup:`-1`).
+
+.. nml:member:: fef_c2h6_io
+
+   :type: real(npft)
+   :default: None
+
+   Fire C2H6 Emission Factor (g kg\ :sup:`-1`).
+
+.. nml:member:: fef_c3h8_io
+
+   :type: real(npft)
+   :default: None
+
+   Fire C3H8 Emission Factor (g kg\ :sup:`-1`).
+
+.. nml:member:: fef_hcho_io
+
+   :type: real(npft)
+   :default: None
+
+   Fire HCHO Emission Factor (g kg\ :sup:`-1`).
+
+.. nml:member:: fef_mecho_io
+
+   :type: real(npft)
+   :default: None
+
+   Fire MeCHO Emission Factor (g kg\ :sup:`-1`).
+
+.. nml:member:: fef_nh3_io
+
+   :type: real(npft)
+   :default: None
+
+   Fire NH3 Emission Factor (g kg\ :sup:`-1`).
+
+.. nml:member:: fef_dms_io
+
+   :type: real(npft)
+   :default: None
+
+   Fire DMS Emission Factor (g kg\ :sup:`-1`).
+
 .. nml:member:: ccleaf_min_io
 
    :type: real(npft)
