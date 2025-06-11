@@ -368,45 +368,52 @@ This namelist is used for deposition parameters specific to a single deposited s
 Example
 ~~~~~~~
 
-The following gives an example of how you would set up the :nml:lst:`JULES_DEPOSITION` namelist for atmospheric deposition for a JULES standalone run. ::
+The following gives an example of how you would set up the :nml:lst:`JULES_DEPOSITION` namelist for atmospheric deposition for a JULES standalone run.
 
- [namelist:jules_deposition]
- dep_h2_soil_scheme=1
- dry_dep_model=2
- dzl_const=50.0
- l_deposition=.true.
- l_deposition_flux=.false.
- l_deposition_from_ukca=.false.
- l_deposition_gc_corr=.false.
- l_ukca_ddep_lev1=.false.
- !!l_ukca_ddepo3_ocean=.false.
- !!l_ukca_dry_dep_so2wet=.false.
- l_ukca_emsdrvn_ch4=.false.
- ndry_dep_species=7
- tundra_s_limit=0.866
+.. code-block::
+
+    &JULES_DEPOSITION
+      dep_h2_soil_scheme=1
+      dry_dep_model=2
+      dzl_const=50.0
+      l_deposition=.true.
+      l_deposition_flux=.false.
+      l_deposition_from_ukca=.false.
+      l_deposition_gc_corr=.false.
+      l_ukca_ddep_lev1=.false.
+      !!l_ukca_ddepo3_ocean=.false.
+      !!l_ukca_dry_dep_so2wet=.false.
+      l_ukca_emsdrvn_ch4=.false.
+      ndry_dep_species=1
+      tundra_s_limit=0.866
+    /
 
 Note: :nml:mem:`JULES_DEPOSITION::l_deposition_from_ukca` should be false for JULES standalone and true for UM-coupled JULES. :nml:mem:`JULES_DEPOSITION::l_ukca_ddepo3_ocean` and :nml:mem:`JULES_DEPOSITION::l_ukca_dry_dep_so2wet` are not available for JULES standalone applications.
 
-The following gives an example of how to set-up the :nml:lst:`JULES_DEPOSITION_SPECIES` and :nml:lst:`JULES_DEPOSITION_SPECIES_SPECIFIC` for the standard 5 pft/9 tile configuration for a single chemical species 'O3'. In general, there will be ndry_dep_species :nml:lst:`JULES_DEPOSITION_SPECIES` namelists, one for each atmospheric species that is deposited. Some deposition parameters are required for all chemical species, others are species specific and not available (e.g. dd_ice_coeff for ``O3``). ::
+The following gives an example of how to set-up the :nml:lst:`JULES_DEPOSITION_SPECIES` and :nml:lst:`JULES_DEPOSITION_SPECIES_SPECIFIC` for the standard 5 pft/9 tile configuration for a single chemical species 'O3'. In general, ndry_dep_species will be greater than 1 and there will be :nml:lst:`JULES_DEPOSITION_SPECIES` namelists, one for each atmospheric species that is deposited. Some deposition parameters are required for all chemical species, others are species specific and not available (e.g. dd_ice_coeff for ``O3``).
 
- [namelist:jules_deposition_species(1)]
- !!dd_ice_coeff_io=-13.57,6841.9,-857410.6
- dep_species_name_io='O3'
- dep_species_rmm_io=48.0
- diffusion_coeff_io=1.400000e-05
- diffusion_corr_io=1.6
- r_tundra_io=800.0
- rsurf_std_io=200.0,200.0,200.0,200.0,400.0,800.0,2200.0,800.0,2500.0
+.. code-block::
 
- [namelist:jules_deposition_species_specific]
- ch4_mml_io=1.008e5
- ch4_scaling_io=15.0
- ch4_up_flux_io=39.5,50.0,30.0,37.0,27.5,0.0,0.0,27.5,0.0
- ch4dd_tundra_io=-4.757e-6,4.0288e-3,-1.13592,106.636
- cuticle_o3_io=5000.0
- h2dd_c_io=0.00197,0.00197,0.00177,1.2346,0.0001,0.0,0.0,0.0,0.0
- h2dd_m_io=-0.00419,-0.00419,-0.00414,-0.472,5*0.0
- h2dd_q_io=0.0,0.0,0.0,0.27,5*0.0
- r_wet_soil_o3_io=500.0
+    &JULES_DEPOSITION_SPECIES(1)
+      !!dd_ice_coeff_io=-13.57,6841.9,-857410.6
+      dep_species_name_io='O3'
+      dep_species_rmm_io=48.0
+      diffusion_coeff_io=1.400000e-05
+      diffusion_corr_io=1.6
+      r_tundra_io=800.0
+      rsurf_std_io=200.0,200.0,200.0,200.0,400.0,800.0,2200.0,800.0,2500.0
+    /
+
+    &JULES_DEPOSITION_SPECIES_SPECIFIC
+      ch4_mml_io=1.008e5
+      ch4_scaling_io=15.0
+      ch4_up_flux_io=39.5,50.0,30.0,37.0,27.5,0.0,0.0,27.5,0.0
+      ch4dd_tundra_io=-4.757e-6,4.0288e-3,-1.13592,106.636
+      cuticle_o3_io=5000.0
+      h2dd_c_io=0.00197,0.00197,0.00177,1.2346,0.0001,0.0,0.0,0.0,0.0
+      h2dd_m_io=-0.00419,-0.00419,-0.00414,-0.472,5*0.0
+      h2dd_q_io=0.0,0.0,0.0,0.27,5*0.0
+      r_wet_soil_o3_io=500.0
+    /
 
 .. |mu| unicode:: &#x03BC; .. u
