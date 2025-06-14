@@ -390,12 +390,11 @@ The following gives an example of how you would set up the :nml:lst:`JULES_DEPOS
 
 Note: :nml:mem:`JULES_DEPOSITION::l_deposition_from_ukca` should be false for JULES standalone and true for UM-coupled JULES. :nml:mem:`JULES_DEPOSITION::l_ukca_ddepo3_ocean` and :nml:mem:`JULES_DEPOSITION::l_ukca_dry_dep_so2wet` are not available for JULES standalone applications.
 
-The following gives an example of how to set-up the :nml:lst:`JULES_DEPOSITION_SPECIES` and :nml:lst:`JULES_DEPOSITION_SPECIES_SPECIFIC` for the standard 5 pft/9 tile configuration for a single chemical species 'O3'. In general, ndry_dep_species will be greater than 1 and there will be :nml:lst:`JULES_DEPOSITION_SPECIES` namelists, one for each atmospheric species that is deposited. Some deposition parameters are required for all chemical species, others are species specific and not available (e.g. dd_ice_coeff for ``O3``).
+The following gives an example of how to set-up the :nml:lst:`JULES_DEPOSITION_SPECIES` and :nml:lst:`JULES_DEPOSITION_SPECIES_SPECIFIC` for the standard 5 pft/9 tile configuration for a single chemical species 'O3'. In general, ndry_dep_species will be greater than 1 and there will be :nml:lst:`JULES_DEPOSITION_SPECIES` namelists, one for each atmospheric species that is deposited. Some deposition parameters are required for all chemical species, others are species specific and not available (e.g. dd_ice_coeff_io for ``O3``).
 
 .. code-block::
 
-    &JULES_DEPOSITION_SPECIES(1)
-      !!dd_ice_coeff_io=-13.57,6841.9,-857410.6
+    &JULES_DEPOSITION_SPECIES
       dep_species_name_io='O3'
       dep_species_rmm_io=48.0
       diffusion_coeff_io=1.400000e-05
