@@ -159,3 +159,38 @@ is retired. See module for when the switch is due for review.
    snow on the vegetation.
    It is a short term logical until the code becomes the new default.
 
+.. nml:group:: For UM-coupled JULES applications, the following switches are set during the run to be equivalent to the corresponding switches in the UKCA (which are set in the UM run_ukca namelist).
+
+  .. nml:member:: l_fix_drydep_so2_water
+
+     :type: logical
+     :default: FALSE
+
+     Switch in UKCA to correct the surface resistance of SO2 to water when calculating
+     the dry deposition of SO2. If true, a surface resistance value of 10 s m-1
+     is used. If false, an incorrect surface resistance value of 148.9 s m-1 is used.
+     Note: this is being maintained as it was used in UKESM1.0.
+
+  .. nml:member:: l_fix_improve_drydep
+
+     :type: logical
+     :default: FALSE
+
+     Switch in UKCA to make the surface resistance terms for the 9-tile configuration
+     consistent with those of the 13, 17 and 27 tile configurations. If true, use
+     surface resistance terms for the 9-tile configuration that are consistent
+     with those for the other allowed surface tile configurations. If false, use
+     the original surface resistance terms for the 9-tile configuration.
+
+     The switch also adjusts the surface resistance terms and hence dry deposition velocities
+     for the following chemical species: HCl, HOCl, HBr, HOBr, H2SO4, MeOH and Sec_Org.
+
+  .. nml:member:: l_fix_ukca_h2dd_x
+
+     :type: logical
+     :default: FALSE
+
+     Switch in UKCA to correct a bug in the elements of h2dd_c and h2dd_m used for the calculation of
+     the H2 dry deposition to shrub and bare soil. If true, use the corrected elements of
+     h2dd_c and h2dd_m. If false, use the original elements of h2dd_c and h2dd_m.
+
