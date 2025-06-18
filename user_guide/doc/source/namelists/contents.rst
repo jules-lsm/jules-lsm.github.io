@@ -46,6 +46,7 @@ These files have specific names, and JULES expects all these files to exist for 
    cable_soilparm.nml
    crop_params.nml
    triffid_params.nml
+   red_params.nml
    urban.nml
    fire.nml
    drive.nml
