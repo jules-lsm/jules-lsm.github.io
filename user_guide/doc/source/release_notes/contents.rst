@@ -3,6 +3,7 @@ Release notes
 =============
 
 .. toctree::
+   JULES7-9
    JULES7-8
    JULES7-7
    JULES7-6
