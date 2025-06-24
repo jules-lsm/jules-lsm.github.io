@@ -31,9 +31,8 @@ Bugs fixed
 ----------
 
  *  Bug fix to prevent possible array-bounds error when reading a list of ancillary file names from file. (#1607)
- *  Fix for rose stem on azspice at Met Office. (#1600)
  *  Tidy the use of USE with LFRic. (#1604)
- *  Enable rivers coupled to LFRic to run on the EX machines at Met Office. (#1608)
+ *  Fix to enable rivers coupled to LFRic to run on the EX machines at Met Office. (#1608)
 
 
 Changes to testing
@@ -41,6 +40,7 @@ Changes to testing
 
  *  Add a remote initialisation task as part of moving to cylc8. (#1605)
  *  Allow rose stem to use both EX Host Zones at Met Office. (#1599)
+ *  Fix for rose stem on azspice at Met Office. (#1600)
  *  Remove spice and xc40 rose-stem set ups. (#1602)
 
 
