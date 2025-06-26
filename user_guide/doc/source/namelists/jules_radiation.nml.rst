@@ -174,12 +174,12 @@ This file sets the radiation options. It contains one namelist called :nml:lst:`
    1. Diffuse albedo constant (0.06), direct albedo from Briegleb and
       Ramanathan (1982).
 
-   2. Diffuse albedo constant (0.06), direct albedo from Barker and
+   2. **'barker'** - Diffuse albedo constant (0.06), direct albedo from Barker and
       Li (1995).
 
-   3. Direct and diffuse albedo from Jin et al. (2011).
+   3. **'jin'** - Direct and diffuse albedo from Jin et al. (2011).
 
-   4. Fixed global value, defined by :nml:mem:`JULES_RADIATION::fixed_sea_albedo`.
+   4. **'fixed'** - Fixed global value, defined by :nml:mem:`JULES_RADIATION::fixed_sea_albedo`.
 
    5. Fixed global value, defined by
       :nml:mem:`JULES_RADIATION::fixed_sea_albedo`, above 271K and
