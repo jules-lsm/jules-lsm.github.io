@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.30. urban.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.9 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css?v=c7813d96" />
+    <script src="../_static/documentation_options.js?v=8ac13f20"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.31. fire.nml" href="fire.nml.html" />
+    <link rel="prev" title="6.29. triffid_params.nml" href="triffid_params.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="fire.nml.html" title="6.31. fire.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="triffid_params.nml.html" title="6.29. triffid_params.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.30. </span><code class="docutils literal notranslate"><span class="pre">urban.nml</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="urban-nml">
+<h1><span class="section-number">6.30. </span><code class="docutils literal notranslate"><span class="pre">urban.nml</span></code><a class="headerlink" href="#urban-nml" title="Link to this heading">¶</a></h1>
+<p>This file contains one namelist called <a class="reference internal" href="#namelist-JULES_URBAN"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_URBAN</span></code></a>.</p>
+<p>This section predominantly sets the options available for the two-tile urban scheme MORUSES. These namelists are only read if <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_urban2t" title="JULES_SURFACE::l_urban2t"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_urban2t</span></code></a>, which requires both the <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_canyon</span></code></a> and <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_roof</span></code></a> surface types to be used. MORUSES provides parameters for: snow free canyon albedo (<a class="reference internal" href="#JULES_URBAN::l_moruses_albedo" title="JULES_URBAN::l_moruses_albedo"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_albedo</span></code></a>), canyon emissivity (<a class="reference internal" href="#JULES_URBAN::l_moruses_emissivity" title="JULES_URBAN::l_moruses_emissivity"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_emissivity</span></code></a>), roughness length for heat (<a class="reference internal" href="#JULES_URBAN::l_moruses_rough" title="JULES_URBAN::l_moruses_rough"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_rough</span></code></a>), roughness length for momentum (<a class="reference internal" href="#JULES_URBAN::l_moruses_macdonald" title="JULES_URBAN::l_moruses_macdonald"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_macdonald</span></code></a>) and thermal inertia (<a class="reference internal" href="#JULES_URBAN::l_moruses_storage" title="JULES_URBAN::l_moruses_storage"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_storage</span></code></a>). Ancillary data, predominantly required for MORUSES, is read in via <a class="reference internal" href="ancillaries.nml.html#namelist-URBAN_PROPERTIES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">URBAN_PROPERTIES</span></code></a>.</p>
+<p>For all other parameters that MORUSES does not provide, and for any MORUSES parametrisations that are turned off, values from <a class="reference internal" href="nveg_params.nml.html"><span class="doc">nveg_params.nml</span></a> will be used instead. See the switches below for more information.</p>
+<blockquote>
+<div><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>References:</p>
+<ul class="simple">
+<li><p>Porson, A., et al. (2010), Implementation of a new urban energy budget scheme in the MetUM. Part I: Description and idealized simulations, Quarterly Journal of the Royal Meteorological Society, 136: 1514-1529. doi: 10.1002/qj.668</p></li>
+<li><p>Porson, A., et al. (2010), Implementation of a new urban energy budget scheme into MetUM. Part II: Validation against observations and model Intercomparison, Quarterly Journal of the Royal Meteorological Society, 136: 1530-1542. doi: 10.1002/qj.572</p></li>
+</ul>
+</div>
+</div></blockquote>
+<section id="jules-urban-namelist-members">
+<h2><span class="section-number">6.30.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_URBAN</span></code> namelist members<a class="headerlink" href="#jules-urban-namelist-members" title="Link to this heading">¶</a></h2>
+<dl class="nml member" id="namelist-JULES_URBAN">
+<dt class="sig sig-object nml" id="JULES_URBAN::anthrop_heat_scale">
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">anthrop_heat_scale</span></span><a class="headerlink" href="#JULES_URBAN::anthrop_heat_scale" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Distribution scaling factor, which allows the anthropogenic heat flux to be spread between the <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_canyon</span></code></a> and <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_roof</span></code></a> surface tiles such that:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">H_roof</span> <span class="pre">=</span> <span class="pre">anthrop_heat_scale</span> <span class="pre">x</span> <span class="pre">H_canyon</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">H_canyon</span> <span class="pre">x</span> <span class="pre">(W/R)</span> <span class="pre">+</span> <span class="pre">H_roof</span> <span class="pre">x</span> <span class="pre">(</span> <span class="pre">1.0</span> <span class="pre">-</span> <span class="pre">W/R</span> <span class="pre">)</span> <span class="pre">=</span> <span class="pre">anthrop_heat</span></code></p></li>
+</ul>
+<p>Has a value between 0.0 and 1.0 where the extremes correspond to:</p>
+<ul class="simple">
+<li><p>0.0 = all released within the canyon.</p></li>
+<li><p>1.0 = evenly spread between canyon and roof.</p></li>
+</ul>
+<p>Only used if <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_anthrop_heat_src" title="JULES_SURFACE::l_anthrop_heat_src"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_anthrop_heat_src</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_albedo">
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_albedo</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_albedo" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>MORUSES switch for effective canyon albedo parameterisation (snow free).</p>
+<p>Shortwave radiative exchange in the form of an effective canyon albedo, including shading and multiple reflections, which depends on building materials, geometry and zenith angle.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use MORUSES parameterisation. Requires that <a class="reference internal" href="jules_radiation.nml.html#JULES_RADIATION::l_cosz" title="JULES_RADIATION::l_cosz"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_cosz</span></code></a> = TRUE. Also, check whether the data are provided in UTC or local solar time. To assume local solar time set <a class="reference internal" href="timesteps.nml.html#JULES_TIME::l_local_solar_time" title="JULES_TIME::l_local_solar_time"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_local_solar_time</span></code></a> = TRUE.</p>
+</dd>
+<dt>FALSE</dt><dd><p>The snow free canyon albedo is taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::albsnf_nvg_io" title="JULES_NVEGPARM::albsnf_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">albsnf_nvg_io</span></code></a>.</p>
+</dd>
+</dl>
+<p>In all cases the snow covered albedo is <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::albsnc_nvg_io" title="JULES_NVEGPARM::albsnc_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">albsnc_nvg_io</span></code></a>. MORUSES does not parameterise the roof albedo, so this is also taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::albsnf_nvg_io" title="JULES_NVEGPARM::albsnf_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">albsnf_nvg_io</span></code></a>.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_emissivity">
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_emissivity</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_emissivity" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>MORUSES switch for effective canyon emissivity parameterisation.</p>
+<p>Long-wave radiative exchange in the form of an effective canyon emissivity, including multiple reflections, which depends on building materials and geometry.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use MORUSES parameterisation.</p>
+</dd>
+<dt>FALSE</dt><dd><p>The canyon emissivity is taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::emis_nvg_io" title="JULES_NVEGPARM::emis_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">emis_nvg_io</span></code></a>.</p>
+</dd>
+</dl>
+<p>In either case, the roof emissivity is taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::emis_nvg_io" title="JULES_NVEGPARM::emis_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">emis_nvg_io</span></code></a>.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_rough">
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_rough</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_rough" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>MORUSES switch for effective roughness length for heat parameterisation.</p>
+<p>The effective roughness length for heat has a physical basis and is not calculated as a fraction of momentum. It depends on the geometry of the canyon, which affects the recirculation of the jet within the canyon. Flow within the canyon can be broken down into two regions; the recirculation and ventilation regions, where the recirculation region forms in the wake of each building. Three different flow regimes are represented:</p>
+<ol class="arabic simple">
+<li><p>Isolated roughness - Canyon has separate recirculation and ventilation regions</p></li>
+<li><p>Wake interference - Recirculation region begins to impinge on the downstream building</p></li>
+<li><p>Skimming flow - Recirculation region fills the entire canyon</p></li>
+</ol>
+<div class="line-block">
+<div class="line">The effective roughness length for heat is calculated using a resistance network within these regions.</div>
+</div>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use MORUSES parameterisation for canyon and roof.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Values for canyon and roof are taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::z0_nvg_io" title="JULES_NVEGPARM::z0_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z0_nvg_io</span></code></a> and <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::z0hm_nvg_io" title="JULES_NVEGPARM::z0hm_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z0hm_nvg_io</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_storage">
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_storage</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_storage" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>MORUSES switch for thermal inertia and coupling with the underlying soil for canyon and roof.</p>
+<p>MORUSES consists of two surfaces; a canyon (<a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_canyon</span></code></a>) and a roof (<a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_roof</span></code></a>). This MORUSES parametrisation calculates the heat capacity of each of these surface types and also modifies how they are coupled with the underlying soil. The heat capacities of the canyon and roof are calculated using the properties of the urban fabric and the geometry of the canyon. The roof has a lower thermal inertia and can respond more rapidly to changes in forcing. The nature of the coupling (radiative, conductive or none) is controlled via <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::vf_nvg_io" title="JULES_NVEGPARM::vf_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">vf_nvg_io</span></code></a> as descibed below.</p>
+<p><strong>The canyon</strong>:
+Consists of two walls and a road where the road only is coupled to the underlying soil. The walls are uncoupled and have a zero-flux boundary condition. The coupling of the road is therefore parametrised using a canyon scaling factor. The nature of the canyon (or road surface) coupling is specified as follows:</p>
+<dl>
+<dt><a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::vf_nvg_io" title="JULES_NVEGPARM::vf_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">vf_nvg_io</span></code></a> (<a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_canyon" title="JULES_SURFACE_TYPES::urban_canyon"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_canyon</span></code></a>):</dt><dd><table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>conductively coupled</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>radiatively coupled</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+<p><strong>The roof</strong>:
+As the roof is not in direct contact with the soil, it physically cannot be conductively coupled. It can either be radiatively coupled or uncoupled. To allow for no coupling, MORUSES modifies the code to change the meaning of conductively coupled to <strong>NOT</strong> coupled. The nature of the coupling is therefore specified as follows:</p>
+<dl>
+<dt><a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::vf_nvg_io" title="JULES_NVEGPARM::vf_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">vf_nvg_io</span></code></a> (<a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::urban_roof" title="JULES_SURFACE_TYPES::urban_roof"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">urban_roof</span></code></a>):</dt><dd><table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p><strong>NOT</strong> coupled</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>radiatively coupled</p></td>
+</tr>
+</tbody>
+</table>
+</dd>
+<dt>TRUE</dt><dd><p>Use MORUSES parameterisation as described above.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Values for canyon and roof are taken from <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::ch_nvg_io" title="JULES_NVEGPARM::ch_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ch_nvg_io</span></code></a> and <a class="reference internal" href="nveg_params.nml.html#JULES_NVEGPARM::vf_nvg_io" title="JULES_NVEGPARM::vf_nvg_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">vf_nvg_io</span></code></a> (with no modifications to coupling).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_storage_thin">
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_storage_thin</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_storage_thin" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>MORUSES switch to use a thin roof to simulate the effects of insulation.</p>
+<p>Only used if <a class="reference internal" href="#JULES_URBAN::l_moruses_storage" title="JULES_URBAN::l_moruses_storage"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_storage</span></code></a> = TRUE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use thin, insulated roof.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Use damping depth diffusivity of roofing materials.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_URBAN::l_moruses_macdonald">
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_moruses_macdonald</span></span><a class="headerlink" href="#JULES_URBAN::l_moruses_macdonald" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>MORUSES switch for using MacDonald et al. (1998) to calculate effective roughness length of urban areas and displacement height from urban geometry.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use MacDonald et al. (1998) formulations.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Appropriate data needs to be supplied instead.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <a class="reference internal" href="#JULES_URBAN::l_urban_empirical" title="JULES_URBAN::l_urban_empirical"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_urban_empirical</span></code></a> = TRUE then <a class="reference internal" href="#JULES_URBAN::l_moruses_macdonald" title="JULES_URBAN::l_moruses_macdonald"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_moruses_macdonald</span></code></a> should also be TRUE, to keep the roughness length and displacement height consistent with the morphology.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>References:</p>
+<ul class="simple">
+<li><p>Macdonald RW, Griffiths RF, Hall D. 1998. An improved method for the estimation of surface roughness of obstacle arrays. Atmos. Env. 32: 1857-1864</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_URBAN::l_urban_empirical">
+<span class="sig-prename descclassname"><span class="pre">JULES_URBAN::</span></span><span class="sig-name descname"><span class="pre">l_urban_empirical</span></span><a class="headerlink" href="#JULES_URBAN::l_urban_empirical" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch to use empirical relationships for urban geometry, based on total urban fraction. Dimensions calculated are W/R, H/W and H.</p>
+<p>If no MORUSES parametrisations are used, i.e. the basic URBAN-2T, then only W/R is required.</p>
+<p>If the roof fraction is not supplied i.e. canyon fraction = total urban fraction, then W/R will be used to calculate the canyon and roof fractions. W/R is also used to distribute anthropogenic heat between the roof and the canyon if <a class="reference internal" href="jules_surface.nml.html#JULES_SURFACE::l_anthrop_heat_src" title="JULES_SURFACE::l_anthrop_heat_src"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_anthrop_heat_src</span></code></a> = TRUE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use empirical relationships for urban geometry.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Appropriate data needs to be supplied instead.</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>These are only valid for high resolutions (~1 km).</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>References:</p>
+<ul class="simple">
+<li><p>Bohnenstengel SI, Evans S, Clark P, Belcher SE (2010). Simulations of the London urban heat island, Quarterly Journal of the Royal Meteorological Society (submitted)</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo of Joint UK Land Environment Simulator (JULES)"/>
+            </a></p><h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="triffid_params.nml.html"
+                          title="previous chapter"><span class="section-number">6.29. </span><code class="docutils literal notranslate"><span class="pre">triffid_params.nml</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="fire.nml.html"
+                          title="next chapter"><span class="section-number">6.31. </span><code class="docutils literal notranslate"><span class="pre">fire.nml</span></code></a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="fire.nml.html" title="6.31. fire.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="triffid_params.nml.html" title="6.29. triffid_params.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.30. </span><code class="docutils literal notranslate"><span class="pre">urban.nml</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.0.
+    </div>
+  </body>
+</html>

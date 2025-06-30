@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.10. jules_vegetation.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.9 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css?v=c7813d96" />
+    <script src="../_static/documentation_options.js?v=8ac13f20"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.11. jules_soil_biogeochem.nml" href="jules_soil_biogeochem.nml.html" />
+    <link rel="prev" title="6.9. jules_soil.nml" href="jules_soil.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_soil_biogeochem.nml.html" title="6.11. jules_soil_biogeochem.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_soil.nml.html" title="6.9. jules_soil.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.10. </span><code class="docutils literal notranslate"><span class="pre">jules_vegetation.nml</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="jules-vegetation-nml">
+<h1><span class="section-number">6.10. </span><code class="docutils literal notranslate"><span class="pre">jules_vegetation.nml</span></code><a class="headerlink" href="#jules-vegetation-nml" title="Link to this heading">¶</a></h1>
+<p>This file sets the vegetation options. It contains one namelist called <a class="reference internal" href="#namelist-JULES_VEGETATION"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_VEGETATION</span></code></a>.</p>
+<section id="jules-vegetation-namelist-members">
+<h2><span class="section-number">6.10.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_VEGETATION</span></code> namelist members<a class="headerlink" href="#jules-vegetation-namelist-members" title="Link to this heading">¶</a></h2>
+<dl class="nml member" id="namelist-JULES_VEGETATION">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_trait_phys">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_trait_phys</span></span><a class="headerlink" href="#JULES_VEGETATION::l_trait_phys" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for using trait-based physiology.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Vcmax is calculated based on observed leaf traits. Leaf
+nitrogen (nmass: kgN kgLeaf<sup>-1</sup>) and leaf mass (LMA:
+kgLeaf m<sup>-2</sup>) can be based on observations from the TRY
+database. Vcmax (umol CO<sub>2</sub> m<sup>-2</sup> s<sup>-1</sup>) is based
+on linear regressions as in <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Kattge et al. 2009</span></a>. Two additional
+parameters are needed: vint and vsl - the intercept and slope,
+respectively, that relate the leaf nitrogen to vcmax. Sigl is
+replaced with LMA (sigl=LMA*Cmass, where Cmass is the
+kgC kgLeaf<sup>-1</sup> and is 0.4).</p>
+</dd>
+<dt>FALSE</dt><dd><p>Vcmax is calculated based on parameters nl0 (kgN kgC<sup>-1</sup>) and neff.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_phenol">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_phenol</span></span><a class="headerlink" href="#JULES_VEGETATION::l_phenol" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for vegetation phenology model.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use phenology model.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Do not use phenology model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_triffid">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_triffid</span></span><a class="headerlink" href="#JULES_VEGETATION::l_triffid" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for dynamic vegetation model (TRIFFID) except for competition.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use TRIFFID. In this case soil carbon is modelled using four pools
+(biomass, humus, decomposable plant material, resistant plant material).</p>
+</dd>
+<dt>FALSE</dt><dd><p>Do not use TRIFFID. A single soil carbon pool is used.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_veg_compete">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_veg_compete</span></span><a class="headerlink" href="#JULES_VEGETATION::l_veg_compete" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p>Switch for competing vegetation.</p>
+<p>Only used if <a class="reference internal" href="#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>TRIFFID will let the different PFTs compete against each other and modify the vegetation fractions.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Vegetation fractions do not change.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_ht_compete">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_ht_compete</span></span><a class="headerlink" href="#JULES_VEGETATION::l_ht_compete" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Only used if <a class="reference internal" href="#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE.</p>
+<dl>
+<dt>TRUE</dt><dd><p>Use height-based vegetation competition (recommended).</p>
+<p>This allows for a generic number of PFTs. When
+<a class="reference internal" href="#JULES_VEGETATION::l_trif_eq" title="JULES_VEGETATION::l_trif_eq"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trif_eq</span></code></a> = TRUE, this is implemented by
+<code class="docutils literal notranslate"><span class="pre">lotka_eq_jls.F90</span></code>. When <a class="reference internal" href="#JULES_VEGETATION::l_trif_eq" title="JULES_VEGETATION::l_trif_eq"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trif_eq</span></code></a> = FALSE, it is
+implemented in <code class="docutils literal notranslate"><span class="pre">lotka_noeq_jls.F90</span></code> when
+<a class="reference internal" href="#JULES_VEGETATION::l_trif_crop" title="JULES_VEGETATION::l_trif_crop"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trif_crop</span></code></a> = FALSE and in
+<code class="docutils literal notranslate"><span class="pre">lotka_noeq_subset_jls.F90</span></code> when <a class="reference internal" href="#JULES_VEGETATION::l_trif_crop" title="JULES_VEGETATION::l_trif_crop"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trif_crop</span></code></a> =
+TRUE.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Use the vegetation competition described in <a class="reference internal" href="#references-vegetation"><span class="std std-ref">HCTN24</span></a>.</p>
+<p>This is hard-wired for 5 PFTs (BT, NT, C3, C4, SH, in that
+order) with co-competition for grasses and trees in
+<code class="docutils literal notranslate"><span class="pre">lokta_jls.F90</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_nitrogen">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_nitrogen</span></span><a class="headerlink" href="#JULES_VEGETATION::l_nitrogen" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Only used if <a class="reference internal" href="#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Enable Nitrogen limitation of carbon uptake. A nitrogen
+deposition field should be provided otherwise no N deposition is
+assumed.</p>
+</dd>
+<dt>FALSE</dt><dd><p>No Nitrogen limitation. Nitrogen fluxes are calculated as diagnostics only.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_trif_eq">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_trif_eq</span></span><a class="headerlink" href="#JULES_VEGETATION::l_trif_eq" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p>Switch for equilibrium vegetation model (i.e., an equilibrium solution of TRIFFID).</p>
+<p>Only used if <a class="reference internal" href="#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use equilibrium TRIFFID.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Do not use equilibrium TRIFFID.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::phenol_period">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">phenol_period</span></span><a class="headerlink" href="#JULES_VEGETATION::phenol_period" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>&gt;= 1</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Period for calls to phenology model in <em>days</em>. Only relevant if <a class="reference internal" href="#JULES_VEGETATION::l_phenol" title="JULES_VEGETATION::l_phenol"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_phenol</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::triffid_period">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">triffid_period</span></span><a class="headerlink" href="#JULES_VEGETATION::triffid_period" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>&gt;= 1</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Period for calls to TRIFFID model in <em>days</em>. Only relevant if one of <a class="reference internal" href="#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> or <a class="reference internal" href="#JULES_VEGETATION::l_trif_eq" title="JULES_VEGETATION::l_trif_eq"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trif_eq</span></code></a> is TRUE.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_gleaf_fix">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_gleaf_fix</span></span><a class="headerlink" href="#JULES_VEGETATION::l_gleaf_fix" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p>Switch for fixing a bug in the accumulation of <code class="docutils literal notranslate"><span class="pre">g_leaf_phen_acc</span></code>.</p>
+<p>This bug occurs because <code class="docutils literal notranslate"><span class="pre">veg2</span></code> is called on TRIFFID timesteps and
+<code class="docutils literal notranslate"><span class="pre">veg1</span></code> is called on phenol timesteps, but <code class="docutils literal notranslate"><span class="pre">veg1</span></code> did not
+previously accumulate <code class="docutils literal notranslate"><span class="pre">g_leaf_phen_acc</span></code> in the same way as
+<code class="docutils literal notranslate"><span class="pre">veg2</span></code>.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p><code class="docutils literal notranslate"><span class="pre">veg1</span></code> accumulates <code class="docutils literal notranslate"><span class="pre">g_leaf_phen_acc</span></code> between calls to
+TRIFFID. This is important if <a class="reference internal" href="#JULES_VEGETATION::triffid_period" title="JULES_VEGETATION::triffid_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">triffid_period</span></code></a> &gt;
+<a class="reference internal" href="#JULES_VEGETATION::phenol_period" title="JULES_VEGETATION::phenol_period"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">phenol_period</span></code></a>.</p>
+</dd>
+<dt>FALSE</dt><dd><p><code class="docutils literal notranslate"><span class="pre">veg1</span></code> does not accumulate <code class="docutils literal notranslate"><span class="pre">g_leaf_phen_acc</span></code> between calls to TRIFFID.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_bvoc_emis">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_bvoc_emis</span></span><a class="headerlink" href="#JULES_VEGETATION::l_bvoc_emis" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch to enable calculation of BVOC emissions.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>BVOC emissions diagnostics will be calculated.</p>
+</dd>
+<dt>FALSE</dt><dd><p>BVOC emissions diagnostics will not be calculated.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_o3_damage">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_o3_damage</span></span><a class="headerlink" href="#JULES_VEGETATION::l_o3_damage" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for ozone damage.</p>
+<dl>
+<dt>TRUE</dt><dd><p>Ozone damage is on.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ozone concentration in ppb must be prescribed in <a class="reference internal" href="prescribed_data.nml.html"><span class="doc">prescribed_data.nml</span></a>.</p>
+</div>
+</dd>
+<dt>FALSE</dt><dd><p>No effect.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_stem_resp_fix">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_stem_resp_fix</span></span><a class="headerlink" href="#JULES_VEGETATION::l_stem_resp_fix" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for bug fix for stem respiration to use balanced LAI to
+derive respiring stem mass. The switch is included for backwards
+compatibility with existing configurations. Future updates should
+include this change.</p>
+<dl>
+<dt>TRUE</dt><dd><p>Respiring stem mass is derived allometrically.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Respiring stem mass varies with seasonal LAI.</p>
+<p>In the case of a Broadleaf tree in the winter (no leaves) this
+would mean stem respiration is scaled to 0.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_scale_resp_pm">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_scale_resp_pm</span></span><a class="headerlink" href="#JULES_VEGETATION::l_scale_resp_pm" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Scale whole plant maintenance respiration by the soil moisture
+stress factor, instead of only scaling leaf respiration.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Soil moisture stress reduces leaf, root, and stem maintenance respiration.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Soil moisture stress only reduces leaf maintenance respiration.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::fsmc_shape">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">fsmc_shape</span></span><a class="headerlink" href="#JULES_VEGETATION::fsmc_shape" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>0,1</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>0</p>
+</dd>
+</dl>
+<p>Shape of soil moisture stress function on vegetation (fsmc).</p>
+<ol class="arabic simple" start="0">
+<li><p>Piece-wise linear in vol. soil moisture.</p></li>
+<li><p>Piece-wise linear in soil potential. Currently only allowed when
+<a class="reference internal" href="ancillaries.nml.html#JULES_SOIL_PROPS::const_z" title="JULES_SOIL_PROPS::const_z"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">const_z</span></code></a> = T and
+<a class="reference internal" href="#JULES_VEGETATION::l_use_pft_psi" title="JULES_VEGETATION::l_use_pft_psi"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_use_pft_psi</span></code></a> = T.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The option <a class="reference internal" href="#JULES_VEGETATION::fsmc_shape" title="JULES_VEGETATION::fsmc_shape"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">fsmc_shape</span></code></a> = 1 is
+still in development. Users should ensure that results
+are as expected, and provide feedback where deficiencies
+are identified.</p>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_use_pft_psi">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_use_pft_psi</span></span><a class="headerlink" href="#JULES_VEGETATION::l_use_pft_psi" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for parameters in the soil moisture stress on vegetation function (fsmc).</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Fsmc is calculated from <a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::psi_close_io" title="JULES_PFTPARM::psi_close_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">psi_close_io</span></code></a>
+and <a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::psi_open_io" title="JULES_PFTPARM::psi_open_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">psi_open_io</span></code></a>.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Fsmc is calculated from <code class="docutils literal notranslate"><span class="pre">sm_wilt</span></code> and <code class="docutils literal notranslate"><span class="pre">sm_crit</span></code> in
+<a class="reference internal" href="ancillaries.nml.html#namelist-JULES_SOIL_PROPS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL_PROPS</span></code></a> and
+<a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::fsmc_p0_io" title="JULES_PFTPARM::fsmc_p0_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">fsmc_p0_io</span></code></a>.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Soil respiration and surface conductance of bare soil
+respectively will depend on <code class="docutils literal notranslate"><span class="pre">sm_wilt</span></code> and <code class="docutils literal notranslate"><span class="pre">sm_crit</span></code>
+in <a class="reference internal" href="ancillaries.nml.html#namelist-JULES_SOIL_PROPS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SOIL_PROPS</span></code></a>, regardless of the setting
+of <a class="reference internal" href="#JULES_VEGETATION::fsmc_shape" title="JULES_VEGETATION::fsmc_shape"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">fsmc_shape</span></code></a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The option <a class="reference internal" href="#JULES_VEGETATION::l_use_pft_psi" title="JULES_VEGETATION::l_use_pft_psi"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_use_pft_psi</span></code></a> = T
+is still in development. Users should ensure that results
+are as expected, and provide feedback where deficiencies
+are identified.</p>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_vegcan_soilfx">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_vegcan_soilfx</span></span><a class="headerlink" href="#JULES_VEGETATION::l_vegcan_soilfx" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for enhancement to canopy model to allow for conduction in
+the soil below the vegetative canopy, reducing coupling between the
+soil and the canopy.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Allow for conduction in the soil.</p>
+</dd>
+<dt>FALSE</dt><dd><p>No effect.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_leaf_n_resp_fix">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_leaf_n_resp_fix</span></span><a class="headerlink" href="#JULES_VEGETATION::l_leaf_n_resp_fix" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for bug fix for leaf nitrogen content used in the
+calculation of plant maintenance respiration. The switch is
+included for backwards compatibility with existing
+configurations. Runs with <a class="reference internal" href="#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_rad_mod</span></code></a> = 1, 4 or 5 are
+affected.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use correct forms for canopy-average leaf N content.</p>
+</dd>
+<dt>FALSE</dt><dd><p>No effect.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_landuse">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_landuse</span></span><a class="headerlink" href="#JULES_VEGETATION::l_landuse" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for using landuse change in conjunction with TRIFFID</p>
+<p>Only used if <a class="reference internal" href="#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Land use change is implemented within TRIFFID. Litter fluxes
+are split between soil and wood product pools. Requires
+additional prognostics covering the product pools and the
+agricultural fraction from the previous TRIFFID call.</p>
+</dd>
+<dt>FALSE</dt><dd><p>All litter fluxes enter the soil</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_recon">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_recon</span></span><a class="headerlink" href="#JULES_VEGETATION::l_recon" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>T</p>
+</dd>
+</dl>
+<p>Switch for reconfiguring vegetation fractions. Also initialises
+vegetation and soil biogeochemistry at land ice points. With the
+ECOSSE soil model this switch also ensures that the initial
+condition for soil biogeochemistry is internally consistent.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>For soil points (land points with no ice) ensure vegetation
+fractions are at least a minimum value and reduce other
+fractions accordingly.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Do not apply the minimum vegetation fractions. This is useful
+when some points are 100% lake and urban, in which case
+reconfiguration leads to a total surface tile fraction of greater
+than 1.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_prescsow">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_prescsow</span></span><a class="headerlink" href="#JULES_VEGETATION::l_prescsow" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch that determines how crop sowing dates are defined. Only used
+if <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ncpft</span></code></a> &gt; 0.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Sowing dates prescribed in <a class="reference internal" href="ancillaries.nml.html#namelist-JULES_CROP_PROPS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_CROP_PROPS</span></code></a> are used.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Sowing dates are determined by the model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_trif_crop">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_trif_crop</span></span><a class="headerlink" href="#JULES_VEGETATION::l_trif_crop" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch controlling the treatment of agricultural PFTs. Where
+agricultural PFTs are defined by the
+<a class="reference internal" href="triffid_params.nml.html#JULES_TRIFFID::crop_io" title="JULES_TRIFFID::crop_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">crop_io</span></code></a> parameter.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>In the non-agricultural area natural PFT competition is
+calculated by a call to a new version of the lotka routine and
+in each agricultural area agricultural-PFT competition is
+calculated by an additional call to the new version of the
+lotka routine. Crop and pasture areas are defined by the
+<a class="reference internal" href="ancillaries.nml.html#JULES_AGRIC::frac_agr" title="JULES_AGRIC::frac_agr"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">frac_agr</span></code></a> and
+<a class="reference internal" href="ancillaries.nml.html#JULES_AGRIC::frac_past" title="JULES_AGRIC::frac_past"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">frac_past</span></code></a> variables
+respectively. Additionally, to represent harvesting, a fraction
+of crop litter is added to the fast wood products pool instead
+of the soil carbon pools.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Vegetation competition is calculated for natural and crop PFTs
+together, with natural PFTs excluded from the agricultural area
+that is defined by the <a class="reference internal" href="ancillaries.nml.html#JULES_AGRIC::frac_agr" title="JULES_AGRIC::frac_agr"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">frac_agr</span></code></a>
+variable. Agricultural PFTs can also grow in natural areas
+where they are interpreted as natural grasses.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_trif_biocrop">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_trif_biocrop</span></span><a class="headerlink" href="#JULES_VEGETATION::l_trif_biocrop" title="Link to this definition">¶</a></dt>
+<dd><blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Allows for representation of bioenergy crops with continuous or periodic harvesting of agricultural PFTs at prescribed intervals. Requires <a class="reference internal" href="#JULES_VEGETATION::l_trif_crop" title="JULES_VEGETATION::l_trif_crop"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trif_crop</span></code></a> = TRUE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Crop, pasture, and bioenergy crop areas are defined by the <a class="reference internal" href="ancillaries.nml.html#JULES_AGRIC::frac_agr" title="JULES_AGRIC::frac_agr"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">frac_agr</span></code></a>, <a class="reference internal" href="ancillaries.nml.html#JULES_AGRIC::frac_past" title="JULES_AGRIC::frac_past"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">frac_past</span></code></a>, <a class="reference internal" href="ancillaries.nml.html#JULES_AGRIC::frac_biocrop" title="JULES_AGRIC::frac_biocrop"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">frac_biocrop</span></code></a> variables respectively. Harvests are permitted from any land class and enabled for each PFT separately using the <a class="reference internal" href="triffid_params.nml.html#JULES_TRIFFID::harvest_type_io" title="JULES_TRIFFID::harvest_type_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">harvest_type_io</span></code></a> variable. Harvesting may be continuous (as per the existing scheme in  <a class="reference internal" href="#JULES_VEGETATION::l_trif_crop" title="JULES_VEGETATION::l_trif_crop"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trif_crop</span></code></a>, when <a class="reference internal" href="triffid_params.nml.html#JULES_TRIFFID::harvest_type_io" title="JULES_TRIFFID::harvest_type_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">harvest_type_io</span></code></a> is 1), or performed at prescribed intervals defined using the <a class="reference internal" href="triffid_params.nml.html#JULES_TRIFFID::harvest_freq_io" title="JULES_TRIFFID::harvest_freq_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">harvest_freq_io</span></code></a> and <a class="reference internal" href="triffid_params.nml.html#JULES_TRIFFID::harvest_ht_io" title="JULES_TRIFFID::harvest_ht_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">harvest_ht_io</span></code></a> variables (when <a class="reference internal" href="triffid_params.nml.html#JULES_TRIFFID::harvest_type_io" title="JULES_TRIFFID::harvest_type_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">harvest_type_io</span></code></a> is 2).</p>
+</dd>
+<dt>FALSE</dt><dd><p>Land use classes, PFT partitioning, and harvests are as defined by the <a class="reference internal" href="#JULES_VEGETATION::l_trif_crop" title="JULES_VEGETATION::l_trif_crop"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_trif_crop</span></code></a> switch.</p>
+</dd>
+</dl>
+</div></blockquote>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>References:</p>
+<ul class="simple">
+<li><p>Littleton et al., 2020, JULES-BE: representation of bioenergy crops and harvesting in the Joint UK Land Environment Simulator vn5.1, Geosci. Model Dev., <a class="reference external" href="https://doi.org/10.5194/gmd-13-1123-2020">https://doi.org/10.5194/gmd-13-1123-2020</a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_ag_expand">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_ag_expand</span></span><a class="headerlink" href="#JULES_VEGETATION::l_ag_expand" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Allows for assisted expansion of agricultural crop areas. Requires <a class="reference internal" href="#JULES_VEGETATION::l_landuse" title="JULES_VEGETATION::l_landuse"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_landuse</span></code></a> = TRUE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Automatically plant out new crop areas with target PFTs.</p>
+</dd>
+<dt>FALSE</dt><dd><p>No automatic increase of PFT fraction when land class fraction increases.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::can_model">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">can_model</span></span><a class="headerlink" href="#JULES_VEGETATION::can_model" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1-4</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>4</p>
+</dd>
+</dl>
+<p>Choice of canopy model for vegetation:</p>
+<ol class="arabic simple">
+<li><p>No distinct canopy (i.e. surface is represented as a single entity for radiative processes).</p></li>
+<li><p>Radiative canopy with no heat capacity.</p></li>
+<li><p>Radiative canopy with heat capacity. This option is deprecated, with 4 preferred.</p></li>
+<li><p>As 3 but with a representation of snow beneath the canopy. This option is preferred to 3.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#JULES_VEGETATION::can_model" title="JULES_VEGETATION::can_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_model</span></code></a> = 1 does not mean that there is no</dt><dd><p>vegetation canopy. It means that the surface is
+represented as a single entity, rather than having
+distinct surface and canopy levels for the purposes of
+radiative processes.</p>
+</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::can_rad_mod">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">can_rad_mod</span></span><a class="headerlink" href="#JULES_VEGETATION::can_rad_mod" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1, 4, 5, 6</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>4</p>
+</dd>
+</dl>
+<p>Options for treatment of canopy radiation.</p>
+<ol class="arabic simple">
+<li><p>A single canopy layer for which radiation absorption is
+calculated using Beer’s law. Leaf-level photosynthesis is scaled
+to the canopy level using the ‘big leaf’ approach. Leaf
+nitrogen, photosynthetic capacity, i.e the Vcmax parameter, and
+leaf photosynthesis vary exponentially through the canopy with
+radiation.</p></li>
+</ol>
+<ol class="arabic simple" start="4">
+<li><p>Multi-layer approach for radiation interception following the
+two-stream approach of <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Sellers et
+al. (1992)</span></a>. This approach takes into account leaf
+angle distribution, zenith angle, and differentiates absorption
+of direct and diffuse radiation. It has an exponential decline
+of leaf N through the canopy and includes inhibition of leaf
+respiration in the light. Canopy photosynthesis and conductance
+are calculated as the sum over all layers.</p></li>
+<li><p>This is an improvement of option 4, including:</p>
+<ul class="simple">
+<li><p>Sunfleck penetration though the canopy.</p></li>
+<li><p>Division of sunlit and shaded leaves within each canopy level.</p></li>
+<li><p>A modified version of inhibition of leaf respiration in the light.</p></li>
+</ul>
+</li>
+<li><p>This is an improvement of option 5, including an exponential
+decline of leaf N with canopy height proportional to LAI,
+following Beer’s law.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_rad_mod</span></code></a> = 1 and 6 are recommended.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When using <a class="reference internal" href="#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_rad_mod</span></code></a> = 4, 5 or 6 it is
+recommended to use driving data that contains direct and
+diffuse radiation separately rather than a constant
+diffuse fraction.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Descriptions of option 1 can be found in
+<a class="reference internal" href="#references-vegetation"><span class="std std-ref">Jogireddy et al. (2006)</span></a>, and an
+application of option 4 can be found in <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Mercado
+et al. (2007)</span></a>. Options 1 to 5 are
+described in <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Clark et al (2011)</span></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::ilayers">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">ilayers</span></span><a class="headerlink" href="#JULES_VEGETATION::ilayers" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>&gt;= 0</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>10</p>
+</dd>
+</dl>
+<p>Number of layers for canopy radiation model. Only used for <a class="reference internal" href="#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_rad_mod</span></code></a> = 4, 5 or 6.</p>
+<p>These layers are used for the calculations of radiation interception and photosynthesis.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::photo_model">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">photo_model</span></span><a class="headerlink" href="#JULES_VEGETATION::photo_model" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 or 2</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>none</p>
+</dd>
+</dl>
+<p>Choice for model of leaf photosynthesis.</p>
+<p>Possible values are:</p>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line">C<sub>3</sub> and C<sub>4</sub> plants use the models of Collatz et al., 1991 and 1992, respectively. These were used in the original JULES model.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">C<sub>3</sub> plants use the model of Farquhar et al. (1980); C<sub>4</sub> plants use the model of Collatz et al. (1992).</div>
+</div>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The Farquhar model can only be used if <a class="reference internal" href="#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_rad_mod</span></code></a> = 1, 5 or 6. Code has not been written for other values of <a class="reference internal" href="#JULES_VEGETATION::can_rad_mod" title="JULES_VEGETATION::can_rad_mod"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">can_rad_mod</span></code></a>.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>References:</p>
+<ul class="simple">
+<li><p>Collatz et al., 1991, Physiological and environmental regulation of stomatal conductance, photosynthesis, and transpiration – a model that includes a laminar boundary layer, Agricultural and Forest Meteorology, <a class="reference external" href="https://doi.org/10.1016/0168-1923(91)90002-8">https://doi.org/10.1016/0168-1923(91)90002-8</a>.</p></li>
+<li><p>Collatz et al., 1992, Coupled Photosynthesis-Stomatal Conductance Model for Leaves of C<sub>4</sub> Plants, Australian Journal of Plant Physiology, <a class="reference external" href="https://doi.org/10.1071/PP9920519">https://doi.org/10.1071/PP9920519</a>.</p></li>
+<li><p>Farquhar et al., 1980, A biochemical model of photosynthetic CO<sub>2</sub> assimilation in leaves of C<sub>3</sub> species, Planta, <a class="reference external" href="https://doi.org/10.1007/BF0038623">https://doi.org/10.1007/BF0038623</a>.</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::stomata_model">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">stomata_model</span></span><a class="headerlink" href="#JULES_VEGETATION::stomata_model" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1, 2, OR 3</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+</dl>
+<p>Choice for model of stomatal conductance.</p>
+<p>Possible values are:</p>
+<ol class="arabic simple">
+<li><p>The original JULES model, including the Jacobs closure - see
+Eqn.9 of <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Best et al. (2011)</span></a>.</p></li>
+<li><p>The model of <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Medlyn et al. (2011)</span></a> - see
+Eqn.11 of that paper, and <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Medlyn et al
+(2012)</span></a>. Note that as implemented the model uses a
+single parameter (g<sub>1</sub>, assuming that g<sub>0</sub> = 0).</p></li>
+<li><p>The SOX model of <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Eller et al. (2020)</span></a></p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Only the original (Jacobs) model can currently be used with the
+UM (Option 1).</p>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::frac_min">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">frac_min</span></span><a class="headerlink" href="#JULES_VEGETATION::frac_min" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0e-6</p>
+</dd>
+</dl>
+<p>Minimum fraction that a PFT is allowed to cover if TRIFFID is used.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::frac_seed">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">frac_seed</span></span><a class="headerlink" href="#JULES_VEGETATION::frac_seed" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>0.01</p>
+</dd>
+</dl>
+<p>Seed fraction for TRIFFID.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::pow">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">pow</span></span><a class="headerlink" href="#JULES_VEGETATION::pow" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>5.241e-4</p>
+</dd>
+</dl>
+<p>Power in sigmodial function used to get competition coefficients.</p>
+<p>See Hadley Centre Technical Note 24, Eq.3.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_inferno">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_inferno</span></span><a class="headerlink" href="#JULES_VEGETATION::l_inferno" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch that determines whether interactive fires (INFERNO) is
+used. This allows for the diagnostic of burnt area, burnt carbon
+and a variety of fire emissions.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>INFERNO is used to provide diagnostic fire variables</p>
+</dd>
+<dt>FALSE</dt><dd><p>INFERNO is not used.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::ignition_method">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">ignition_method</span></span><a class="headerlink" href="#JULES_VEGETATION::ignition_method" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1, 2, 3</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>1</p>
+</dd>
+</dl>
+<p>Switch to determine the type of ignition used (ubiquitous or prescribed with population and lightning)</p>
+<ol class="arabic simple">
+<li><p>INFERNO uses ubiquitous (constant) ignitions, of 1.67 fires km<sup>-2</sup> s<sup>-1</sup> (1.5 from humans, 0.17 from lightning).</p></li>
+<li><p>INFERNO uses prescribed lightning ignitions, either from an ancillary or the UM.
+Meanwhile humans are assumed to ignite 1.5 fires km<sup>-2</sup> s<sup>-1</sup>.</p></li>
+<li><p>INFERNO uses prescribed ignition using Population Density and Lightning Frequency (Cloud-to-Ground).
+These must be provided as prescribed data to the JULES run.</p></li>
+</ol>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_trif_fire">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_trif_fire</span></span><a class="headerlink" href="#JULES_VEGETATION::l_trif_fire" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch that determines whether interactive fire is used. This allows for burnt area to link with dynamic
+vegetation.</p>
+<p>Only used if <a class="reference internal" href="#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Burnt area is calculated in INFERNO and passed to TRIFFID to
+calculate vegetation dynamics. Carbon is also removed from DPM
+and RPM pools in SOILCARB.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Burnt area is zero unless prescribed via an ancillary file.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_vegdrag_pft">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_vegdrag_pft</span></span><a class="headerlink" href="#JULES_VEGETATION::l_vegdrag_pft" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical(npft)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for using vegetation canopy drag scheme on each PFT.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use a vegetative drag scheme. This is based on <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Harman and Finnigan (2007)</span></a>.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Do not use vegetative drag scheme.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_red">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_red</span></span><a class="headerlink" href="#JULES_VEGETATION::l_red" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch to use the Robust Ecosystem Demography (RED).
+This is based on <span class="xref std std-ref">Argles, Arthur PK, et al.
+(2020)</span>.</p>
+<p>Only use if any <a class="reference internal" href="#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use the Robust Ecosystem Demography.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Do not use the Robust Ecosystem Demography.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_rsl_scalar">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_rsl_scalar</span></span><a class="headerlink" href="#JULES_VEGETATION::l_rsl_scalar" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for using a roughness sublayer correction scheme in scalar
+variables. This is based on <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Harman and Finnigan
+(2008)</span></a>.</p>
+<p>Only use if any <a class="reference internal" href="#JULES_VEGETATION::l_vegdrag_pft" title="JULES_VEGETATION::l_vegdrag_pft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_vegdrag_pft</span></code></a> = TRUE.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use a roughness sublayer correction scheme in scalar variables.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Do not use a roughness sublayer correction scheme in scalar variables.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::c1_usuh">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">c1_usuh</span></span><a class="headerlink" href="#JULES_VEGETATION::c1_usuh" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>&gt;= 0</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>u*/U(h) at the top of dense canopy. See <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Massman (1997)</span></a>.</p>
+<p>Only use if any <a class="reference internal" href="#JULES_VEGETATION::l_vegdrag_pft" title="JULES_VEGETATION::l_vegdrag_pft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_vegdrag_pft</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::c2_usuh">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">c2_usuh</span></span><a class="headerlink" href="#JULES_VEGETATION::c2_usuh" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>&gt;= 0</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>u*/U(h) at substrate under canopy. See <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Massman (1997)</span></a>.</p>
+<p>Only use if any <a class="reference internal" href="#JULES_VEGETATION::l_vegdrag_pft" title="JULES_VEGETATION::l_vegdrag_pft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_vegdrag_pft</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::c3_usuh">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">c3_usuh</span></span><a class="headerlink" href="#JULES_VEGETATION::c3_usuh" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>&gt;= 0</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>This is used in the exponent of equation weighting dense and sparse
+vegetation to get u*/U(h) in neutral condition. See <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Massman
+(1997)</span></a>. The default value is taken from <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Wang
+(2012)</span></a>.</p>
+<p>Only use if any <a class="reference internal" href="#JULES_VEGETATION::l_vegdrag_pft" title="JULES_VEGETATION::l_vegdrag_pft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_vegdrag_pft</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::cd_leaf">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">cd_leaf</span></span><a class="headerlink" href="#JULES_VEGETATION::cd_leaf" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>0:1</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Leaf level drag coefficient.</p>
+<p>Only use if any <a class="reference internal" href="#JULES_VEGETATION::l_vegdrag_pft" title="JULES_VEGETATION::l_vegdrag_pft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_vegdrag_pft</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::stanton_leaf">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">stanton_leaf</span></span><a class="headerlink" href="#JULES_VEGETATION::stanton_leaf" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>0:1</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Leaf-level Stanton number</p>
+<p>Only use if <a class="reference internal" href="#JULES_VEGETATION::l_rsl_scalar" title="JULES_VEGETATION::l_rsl_scalar"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_rsl_scalar</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_spec_veg_z0">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_spec_veg_z0</span></span><a class="headerlink" href="#JULES_VEGETATION::l_spec_veg_z0" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for using specified values of the vegetation roughness
+length rather than being determined by the canopy height.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Vegetation roughness lengths are specified for each PFT in
+<a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::z0v_io" title="JULES_PFTPARM::z0v_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">z0v_io</span></code></a>.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Vegetation roughness lengths are calculated using canopy
+heights and parameter <a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::dz0v_dh_io" title="JULES_PFTPARM::dz0v_dh_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dz0v_dh_io</span></code></a>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_limit_canhc">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_limit_canhc</span></span><a class="headerlink" href="#JULES_VEGETATION::l_limit_canhc" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for limiting the canopy heat capacity for vegetation, which
+is calculated from the canopy height.</p>
+<p>Using the SIMARD canopy height ancillary gives very large heat
+capacities in the Amazon, so this switch limits the areal heat
+capacity to 1.15e5 J kg<sup>-1</sup> m<sup>-2</sup>, which is the value
+calculated by the default broadleaf tree height of 19.01 m.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Vegetation areal heat capacity limited.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Vegetation areal heat capacity unlimited.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_sugar">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_sugar</span></span><a class="headerlink" href="#JULES_VEGETATION::l_sugar" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for using the SUGAR carbohydrate model (<a class="reference internal" href="#references-vegetation"><span class="std std-ref">Jones et al., (2020)</span></a>)</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Respiration is calculated using the SUGAR carbohydrate model</p>
+</dd>
+<dt>FALSE</dt><dd><p>SUGAR is not used</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The option <a class="reference internal" href="#JULES_VEGETATION::l_sugar" title="JULES_VEGETATION::l_sugar"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_sugar</span></code></a> = T
+is still in development. Users should ensure that results
+are as expected, and provide feedback where deficiencies
+are identified.</p>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_red</span></span></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch for using the Robust Ecosystem Demography model (<a class="reference internal" href="#references-vegetation"><span class="std std-ref">Argles et al., (2020)</span></a>)</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Robust Ecosystem Demography is used.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Robust Ecosystem Demography is not used.</p>
+</dd>
+</dl>
+<p>Only use if <a class="reference internal" href="#JULES_VEGETATION::l_triffid" title="JULES_VEGETATION::l_triffid"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_triffid</span></code></a> = TRUE.</p>
+</dd></dl>
+
+<div class="admonition-only-used-with-the-farquhar-model-of-leaf-photosynthesis-nml-mem-photo-model-2 admonition">
+<p class="admonition-title">Only used with the Farquhar model of leaf photosynthesis (<a class="reference internal" href="#JULES_VEGETATION::photo_model" title="JULES_VEGETATION::photo_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_model</span></code></a> = 2).</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::photo_acclim_model">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">photo_acclim_model</span></span><a class="headerlink" href="#JULES_VEGETATION::photo_acclim_model" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>0, 1, 2, or 3</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Choice for model of thermal response of photosynthetic capacity.
+Possible values are:</p>
+<ol class="arabic" start="0">
+<li><div class="line-block">
+<div class="line">No adaptation or acclimation.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Thermal adaptation - plant response to temperature varies geographically in response to a static “home” temperature.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Thermal acclimation - plant response to temperature varies geographically and temporally in response to a dynamic “growth” temperature.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Thermal adaptation and acclimation - plant response to temperature varies geographically and temporally in response to a static “home” temperature and a dynamic “growth” temperature.</div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When <a class="reference internal" href="#JULES_VEGETATION::photo_acclim_model" title="JULES_VEGETATION::photo_acclim_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_acclim_model</span></code></a> = 1 or 3 is used, the user must supply the long-term home temperature as ancillary field <code class="docutils literal notranslate"><span class="pre">t_home_gb</span></code> in <a class="reference internal" href="ancillaries.nml.html#namelist-JULES_VEGETATION_PROPS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_VEGETATION_PROPS</span></code></a>.  When <a class="reference internal" href="#JULES_VEGETATION::photo_acclim_model" title="JULES_VEGETATION::photo_acclim_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_acclim_model</span></code></a> = 2 or 3 is used, the user must supply the running mean growth temperature as initial condition <code class="docutils literal notranslate"><span class="pre">t_growth_gb</span></code> in <a class="reference internal" href="initial_conditions.nml.html#namelist-JULES_INITIAL"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_INITIAL</span></code></a>.</p>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::photo_act_model">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">photo_act_model</span></span><a class="headerlink" href="#JULES_VEGETATION::photo_act_model" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 or 2</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Choice of model for the activation energies of J<sub>max</sub> and V<sub>cmax</sub>.</p>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line">Activation energies vary by PFT but not by land point, and are NOT subject to acclimation.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Activation energies vary by land point but not by PFT, and are subject to acclimation.</div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When <a class="reference internal" href="#JULES_VEGETATION::photo_act_model" title="JULES_VEGETATION::photo_act_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_act_model</span></code></a> = 1 is used, activation energies are calculated using <a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::act_jmax_io" title="JULES_PFTPARM::act_jmax_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">act_jmax_io</span></code></a> and <a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::act_vcmax_io" title="JULES_PFTPARM::act_vcmax_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">act_vcmax_io</span></code></a>.  When <a class="reference internal" href="#JULES_VEGETATION::photo_act_model" title="JULES_VEGETATION::photo_act_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_act_model</span></code></a> = 2 is used, activation energies are calculated using <a class="reference internal" href="#JULES_VEGETATION::act_j_coef" title="JULES_VEGETATION::act_j_coef"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">act_j_coef</span></code></a> and <a class="reference internal" href="#JULES_VEGETATION::act_v_coef" title="JULES_VEGETATION::act_v_coef"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">act_v_coef</span></code></a>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A value of 1 (PFT-dependent) must be used if <a class="reference internal" href="#JULES_VEGETATION::photo_acclim_model" title="JULES_VEGETATION::photo_acclim_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_acclim_model</span></code></a> = 0 (no adaptation or acclimation).</p>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::photo_jv_model">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">photo_jv_model</span></span><a class="headerlink" href="#JULES_VEGETATION::photo_jv_model" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1 or 2</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+<p>Choice for model of for the variation of J<sub>25</sub>/V<sub>25</sub>.</p>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line">J<sub>25</sub> is found by scaling V<sub>25</sub> by the given ratio J<sub>25</sub>/V<sub>25</sub>, that is, all the variation in the ratio comes from varying J<sub>25</sub> (while V<sub>25</sub> remains fixed).</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">J25 and V25 are calculated assuming that the total amount of nitrogen allocated to photosynthesis remains constant, thus any change in J25 requires a compensatory change in V25 - as used in <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Mercado et al. (2018)</span></a>.</div>
+</div>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>A value of 1 (simple scaling) must be used if <a class="reference internal" href="#JULES_VEGETATION::photo_acclim_model" title="JULES_VEGETATION::photo_acclim_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_acclim_model</span></code></a> = 0 (no adaptation or acclimation).</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="admonition-only-used-with-nml-mem-photo-jv-model-2 admonition">
+<p class="admonition-title">Only used with <a class="reference internal" href="#JULES_VEGETATION::photo_jv_model" title="JULES_VEGETATION::photo_jv_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_jv_model</span></code></a> = 2.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::n_alloc_jmax">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">n_alloc_jmax</span></span><a class="headerlink" href="#JULES_VEGETATION::n_alloc_jmax" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Constant relating nitrogen allocation to J<sub>max</sub> (mol CO<sup>2</sup> m<sup>-2</sup> s<sup>-1</sup> [kg m<sup>-2</sup>]<sup>-1</sup>). This is 5.3 in Eq.5 of <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Mercado et al. (2018)</span></a>.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::n_alloc_vcmax">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">n_alloc_vcmax</span></span><a class="headerlink" href="#JULES_VEGETATION::n_alloc_vcmax" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Constant relating nitrogen allocation to V<sub>cmax</sub> (mol CO<sup>2</sup> m<sup>-2</sup> s<sup>-1</sup> [kg m<sup>-2</sup>]<sup>-1</sup>). This is 3.8 in Eq.5 of <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Mercado et al. (2018)</span></a>.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-only-used-with-thermal-adaptation-or-acclimation-of-photosynthesis-nml-mem-photo-acclim-model-1-2-or-3 admonition">
+<p class="admonition-title">Only used with thermal adaptation or acclimation of photosynthesis (<a class="reference internal" href="#JULES_VEGETATION::photo_acclim_model" title="JULES_VEGETATION::photo_acclim_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_acclim_model</span></code></a> = 1, 2 or 3).</p>
+<p>The thermal adaptation/acclimation scheme in JULES is structured following Eq. 13 of <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Kumarathunge et al. (2019)</span></a>, in which C3 photosynthetic capacity is allowed to vary at each land point as a function of a static home temperature (T<sub>h</sub>) and a dynamic growth temperature (T<sub>g</sub>).  This is achieved by calculating five parameters used in the Farquhar photosynthesis scheme as functions of those temperature fields, rather than using fixed parameters from <a class="reference internal" href="pft_params.nml.html#namelist-JULES_PFTPARM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_PFTPARM</span></code></a>.  Each parameter, Q, is calculated as a linear function of T<sub>h</sub> and T<sub>g</sub>:</p>
+<p>Q(T<sub>h</sub>, T<sub>g</sub>) = Q<sub>coef</sub>(0) + Q<sub>coef</sub>(1) T<sub>h</sub> + Q<sub>coef</sub>(2) T<sub>g</sub>.</p>
+<p>The following namelist members specify the coefficients, Q<sub>coef</sub>, used for each parameter.  Note that, in each case, the units for Q<sub>coef</sub>(1) and Q<sub>coef</sub>(2) have an extra factor K<sup>-1</sup> relative to the units for Q<sub>coef</sub>(0).  This structure can be configured to represent the acclimation scheme of <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Kattge and Knorr (2007)</span></a>, as used by <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Mercado et al. (2018)</span></a>, and the scheme of <a class="reference internal" href="#references-vegetation"><span class="std std-ref">Kumarathunge et al. (2019)</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <a class="reference internal" href="#JULES_VEGETATION::photo_acclim_model" title="JULES_VEGETATION::photo_acclim_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_acclim_model</span></code></a> = 1 is used all Q<sub>coef</sub>(2) must equal 0.0, and if <a class="reference internal" href="#JULES_VEGETATION::photo_acclim_model" title="JULES_VEGETATION::photo_acclim_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_acclim_model</span></code></a> = 2 is used all Q<sub>coef</sub>(1) must equal 0.0.</p>
+</div>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::act_j_coef">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">act_j_coef</span></span><a class="headerlink" href="#JULES_VEGETATION::act_j_coef" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(3)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Coefficients for the activation energy for J<sub>max</sub> (J mol<sup>-1</sup> and J mol<sup>-1</sup> K<sup>-1</sup>).  Replaces the use of <a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::act_jmax_io" title="JULES_PFTPARM::act_jmax_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">act_jmax_io</span></code></a>.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::act_v_coef">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">act_v_coef</span></span><a class="headerlink" href="#JULES_VEGETATION::act_v_coef" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(3)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Coefficients for the activation energy for V<sub>cmax</sub> (J mol<sup>-1</sup> and J mol<sup>-1</sup> K<sup>-1</sup>).  Replaces the use of <a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::act_vcmax_io" title="JULES_PFTPARM::act_vcmax_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">act_vcmax_io</span></code></a>.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::dsj_coef">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">dsj_coef</span></span><a class="headerlink" href="#JULES_VEGETATION::dsj_coef" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(3)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Coefficients for entropy factor for J<sub>max</sub> (J mol<sup>-1</sup> K<sup>-1</sup> and J mol<sup>-1</sup> K<sup>-2</sup>).  Replaces the use of <a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::deact_jmax_io" title="JULES_PFTPARM::deact_jmax_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">deact_jmax_io</span></code></a>.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::dsv_coef">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">dsv_coef</span></span><a class="headerlink" href="#JULES_VEGETATION::dsv_coef" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(3)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Coefficients for the entropy factor for V<sub>cmax</sub> (J mol<sup>-1</sup> K<sup>-1</sup> and J mol<sup>-1</sup> K<sup>-2</sup>).  Replaces the use of <a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::deact_vcmax_io" title="JULES_PFTPARM::deact_vcmax_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">deact_vcmax_io</span></code></a>.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::jv25_coef">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">jv25_coef</span></span><a class="headerlink" href="#JULES_VEGETATION::jv25_coef" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(3)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Coefficients for the ratio J<sub>25</sub>/V<sub>25</sub> (mol electrons [mol<sup>-1</sup> CO<sub>2</sub>] and (mol electrons [mol<sup>-1</sup> CO<sub>2</sub>] K<sup>-1</sup>).  Replaces the use of <a class="reference internal" href="pft_params.nml.html#JULES_PFTPARM::jv25_ratio_io" title="JULES_PFTPARM::jv25_ratio_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">jv25_ratio_io</span></code></a>.</p>
+</dd></dl>
+
+</div>
+<div class="admonition-only-used-with-thermal-acclimation-of-photosynthesis-nml-mem-photo-acclim-model-2-or-3 admonition">
+<p class="admonition-title">Only used with thermal acclimation of photosynthesis (<a class="reference internal" href="#JULES_VEGETATION::photo_acclim_model" title="JULES_VEGETATION::photo_acclim_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">photo_acclim_model</span></code></a> = 2 or 3).</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::n_day_photo_acclim">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">n_day_photo_acclim</span></span><a class="headerlink" href="#JULES_VEGETATION::n_day_photo_acclim" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>Time constant (days) for the exponential moving average of temperature that is used as the growth temperature. Given a step function as input, the smoothed output has fallen to 1/e (approx. 37%) of the initial value after this number of days.</p>
+</dd></dl>
+
+</div>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_VEGETATION::l_croprotate">
+<span class="sig-prename descclassname"><span class="pre">JULES_VEGETATION::</span></span><span class="sig-name descname"><span class="pre">l_croprotate</span></span><a class="headerlink" href="#JULES_VEGETATION::l_croprotate" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>F</p>
+</dd>
+</dl>
+<p>Switch that enables sequential cropping (crop rotations).
+Only used
+if <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ncpft" title="JULES_SURFACE_TYPES::ncpft"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ncpft</span></code></a> &gt; 0 and
+if <a class="reference internal" href="#JULES_VEGETATION::l_prescsow" title="JULES_VEGETATION::l_prescsow"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_prescsow</span></code></a> = T.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Sowing dates and latest harvest dates prescribed in
+<a class="reference internal" href="ancillaries.nml.html#namelist-JULES_CROP_PROPS"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_CROP_PROPS</span></code></a> are used. The method is implemented in
+<a class="reference internal" href="#references-vegetation"><span class="std std-ref">Mathison et al. (2019)</span></a>.</p>
+</dd>
+<dt>FALSE</dt><dd><p>The crop model is used in its standard form with a single crop per year</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="jules-vegetation-references">
+<span id="references-vegetation"></span><h2><span class="section-number">6.10.2. </span><code class="docutils literal notranslate"><span class="pre">JULES_VEGETATION</span></code> references<a class="headerlink" href="#jules-vegetation-references" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Argles, A. P. K., Moore, J. R., Huntingford, C., Wiltshire, A. J.,
+Harper, A. B., Jones, C. D., and Cox, P. M.: Robust Ecosystem Demography
+(RED version 1.0): a parsimonious approach to modelling vegetation
+dynamics in Earth system models, Geosci. Model Dev., 13, 4067–4089,
+<a class="reference external" href="https://doi.org/10.5194/gmd-13-4067-2020">https://doi.org/10.5194/gmd-13-4067-2020</a></p></li>
+<li><p>Best et al., 2011, The Joint UK Land Environment Simulator (JULES),
+model description – Part 1: Energy and water fluxes, Geosci. Model
+Dev., <a class="reference external" href="https://doi.org/10.5194/gmd-4-677-2011">https://doi.org/10.5194/gmd-4-677-2011</a>.</p></li>
+<li><p>Clark et al., 2011, The Joint UK Land Environment Simulator (JULES)
+model description – Part 2: Carbon fluxes and vegetation dynamics,
+Geosci. Model Dev., 4, 701-722,
+<a class="reference external" href="https://doi.org/10.5194/gmd-4-701-2011">https://doi.org/10.5194/gmd-4-701-2011</a></p></li>
+<li><p>Eller et al. (2020), Stomatal optimization based on xylem hydraulics
+(SOX) improves land surface model simulation of vegetation responses
+to climate. New Phytologist 226:
+1622–1637 <a class="reference external" href="https://doi.org/10.1111/nph.16419">https://doi.org/10.1111/nph.16419</a></p></li>
+<li><p>Harman, I.N. &amp; Finnigan, J.J. (2007), A simple unified theory for
+flow in the canopy and roughness sublayer. Boundary-Layer Meteorol.
+123: 339. <a class="reference external" href="https://doi.org/10.1007/s10546-006-9145-6">https://doi.org/10.1007/s10546-006-9145-6</a></p></li>
+<li><p>Harman, I.N. &amp; Finnigan, J.J. (2008), Scalar Concentration Profiles in the
+Canopy and Roughness Sublayer. Boundary-Layer Meteorol.
+129: 323. <a class="reference external" href="https://doi.org/10.1007/s10546-008-9328-4">https://doi.org/10.1007/s10546-008-9328-4</a></p></li>
+<li><p>HCTN24, Hadley Centre Technical Note 24, available from <a class="reference external" href="http://www.metoffice.gov.uk/learning/library/publications/science/climate-science-technical-notes">the Met Office Library</a>.
+For ease the direct link to this document is:
+<a class="reference external" href="https://digital.nmla.metoffice.gov.uk/IO_cc8f146a-d524-4243-88fc-e3a3bcd782e7">HCTN24 “Description of the “TRIFFID” Dynamic Global Vegetation Model”</a>.</p></li>
+<li><p>Jogireddy, V., Cox, P. M., Huntingford, C., Harding, R. J., and
+Mercado, L. M.:  An improved description of canopy light
+interception for use in a GCM land-surface scheme: calibration and
+testing against carbon fluxes at a coniferous forest, Hadley Centre
+Technical Note 63, Hadley Centre, Met Office, Exeter,
+UK, 2006. <a class="reference external" href="https://digital.nmla.metoffice.gov.uk/IO_7873ea05-61ec-4615-b030-6bc33397d675">https://digital.nmla.metoffice.gov.uk/IO_7873ea05-61ec-4615-b030-6bc33397d675</a></p></li>
+<li><p>Kattge, J. and Knorr, W., 2007,
+Temperature acclimation in a biochemical model of photosynthesis:
+a reanalysis of data from 36 species,
+Plant, Cell and Environment, 30: 1176–1190,
+<a class="reference external" href="https://doi.org/10.1111/j.1365-3040.2007.01690.x">https://doi.org/10.1111/j.1365-3040.2007.01690.x</a>.</p></li>
+<li><p>Kattge, J. , Knorr, W. , Raddatz, T. and Wirth, C. (2009),
+Quantifying photosynthetic capacity and its relationship to leaf
+nitrogen content for global-scale terrestrial biosphere
+models. Global Change Biology, 15:
+976-991. <a class="reference external" href="https://doi.org/doi:10.1111/j.1365-2486.2008.01744.x">https://doi.org/doi:10.1111/j.1365-2486.2008.01744.x</a></p></li>
+<li><p>Kumarathunge, D. P. et al (2019), Acclimation and adaptation components of
+the temperature dependence of plant photosynthesis at the global scale, New
+Phytologist, 222: 768-784, <a class="reference external" href="https://doi.org/10.1111/nph.15668">https://doi.org/10.1111/nph.15668</a></p></li>
+<li><p>Massman, W. J. (1997), An Analytical One-Dimensional Model of
+Momentum Transfer by Vegetation of Arbitrary Structure,
+Boundary-Layer Meteorol. 83: 407-421.</p></li>
+<li><p>Medlyn, B. E., Duursma, R. A., Eamus, D. , Ellsworth, D. S.,
+Prentice, I. C., Barton, C. V., Crous, K. Y., De angelis, P.,
+Freeman, M. and Wingate, L. (2011), Reconciling the optimal and
+empirical approaches to modelling stomatal conductance. Global
+Change Biology, 17:
+2134-2144. <a class="reference external" href="https://doi.org/10.1111/j.1365-2486.2010.02375.x">https://doi.org/10.1111/j.1365-2486.2010.02375.x</a></p></li>
+<li><p>Medlyn, B. E., Duursma, R. A., Eamus, D. , Ellsworth, D. S.,
+Prentice, I. C., Barton, C. V., Crous, K. Y., De angelis, P.,
+Freeman, M. and Wingate, L. (2012), Reconciling the optimal and
+empirical approaches to modelling stomatal conductance. Global
+Change Biology, 18:
+3476-3476. <a class="reference external" href="https://doi.org/10.1111/j.1365-2486.2012.02790.x">https://doi.org/10.1111/j.1365-2486.2012.02790.x</a>.</p></li>
+<li><p>Mercado, L. M., Huntingford, C., Gash, J. H. C., Cox, P. M., and
+Jogireddy, V.: Improving the representation of radiative
+interception and photosynthesis for climate model applications,
+Tellus B, 59,
+553–565, 2007. <a class="reference external" href="https://doi.org/10.1111/j.1600-0889.2007.00256.x">https://doi.org/10.1111/j.1600-0889.2007.00256.x</a></p></li>
+<li><p>Mercado et al., 2018, Large sensitivity in land carbon storage due to
+geographical and temporal variation in the thermal response of
+photosynthetic capacity, New Phytologist, 218: 1462–1477,
+<a class="reference external" href="https://doi.org/10.1111/nph.15100">https://doi.org/10.1111/nph.15100</a>.</p></li>
+<li><p>Sellers et al., 1992, Canopy reflectance, photosynthesis, and
+transpiration. III. A reanalysis using improved leaf models and a
+new canopy integration scheme. Remote Sens. Environ., 42, 187-216,
+<a class="reference external" href="https://doi.org/10.1016/0034-4257(92)90102-P">https://doi.org/10.1016/0034-4257(92)90102-P</a></p></li>
+<li><p>Wang, W. (2012), An Analytical Model for Mean Wind Profiles in
+Sparse Canopies. Boundary-Layer Meteorol
+142: 383. <a class="reference external" href="https://doi.org/10.1007/s10546-011-9687-0">https://doi.org/10.1007/s10546-011-9687-0</a></p></li>
+<li><p>Mathison, C , Challinor, A. J., Deva, C., Falloon, P., Garrigues, S.,
+Moulin, S., Williams, K., and Wiltshire, A. (2019),
+Developing a sequential cropping capability in the JULESvn5.2
+land–surface model, Geosci. Model Dev. Discuss.,
+<a class="reference external" href="https://doi.org/10.5194/gmd-2019-85">https://doi.org/10.5194/gmd-2019-85</a>, in review, 2019.</p></li>
+<li><p>Jones et al., 2020, The impact of a simple representation of
+non-structural carbohydrates on the simulated response of tropical
+forests to drought, Biogeosciences, 17: 3589–3612.
+<a class="reference external" href="https://doi.org/10.5194/bg-17-3589-2020">https://doi.org/10.5194/bg-17-3589-2020</a></p></li>
+</ul>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo of Joint UK Land Environment Simulator (JULES)"/>
+            </a></p><h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="jules_soil.nml.html"
+                          title="previous chapter"><span class="section-number">6.9. </span><code class="docutils literal notranslate"><span class="pre">jules_soil.nml</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="jules_soil_biogeochem.nml.html"
+                          title="next chapter"><span class="section-number">6.11. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_biogeochem.nml</span></code></a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_soil_biogeochem.nml.html" title="6.11. jules_soil_biogeochem.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_soil.nml.html" title="6.9. jules_soil.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.10. </span><code class="docutils literal notranslate"><span class="pre">jules_vegetation.nml</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.0.
+    </div>
+  </body>
+</html>

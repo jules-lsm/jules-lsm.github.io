@@ -1,0 +1,11 @@
+Overview
+========
+
+This section provides a brief overview of JULES, largely so as to provide background information and introduce terms used in the rest of the manual. Further details can be found at the `JULES website <http://jules.jchmr.org/>`_ and in the two `JULES description papers <http://jules.jchmr.org/content/about>`_ (Best et al., 2011, GMD and Clark et al., 2011, GMD).
+
+For both gridded and single point runs, JULES views each gridbox as consisting of a number of surface types. The fractional area of each surface type is either prescribed by the user or modelled by the TRIFFID sub-model. Each surface type is represented by a surface tile, and a separate energy balance is calculated for each surface tile. The gridbox average energy balance is found by weighting the values from each surface tile. In its standard form, JULES recognises nine surface types: broadleaf trees, needleleaf trees, C3 (temperate) grass, C4 (tropical) grass, shrubs, urban, inland water, bare soil and ice. These 9 types are modelled as 9 surface tiles. A land gridbox is either any mixture of the first 8 surface types, or is land ice. Note that, from version 2.0, one is not limited to these 9 standard surface types (unless running TRIFFID).
+
+Soil processes are modelled in several layers. Each surface tile can be associated with its own soil tile, or all surface tiles can interact with a shared soil column. Each gridbox requires meteorological driving variables (such as air temperature) and variables that describe the soil properties at that location. It is also possible to prescribe certain characteristics of the vegetation, such as Leaf Area Index, to vary between gridboxes.
+
+JULES can be run for any number of gridboxes from one upwards. The number of gridboxes is limited by the availability of computing power and suitable input data. When run on a grid, JULES models the average state of the land surface within the area of the gridbox and most quantities are taken to be homogeneous within the gridbox (with options to include subgrid-scale variability of a few, such as rainfall). In that case, the input data are also area averages. JULES can also be run "at a point", with inputs that are taken to represent conditions at that point - this configuration might be used when field measurements of meteorological conditions are available.
+

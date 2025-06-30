@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.25. cable_pftparm.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.9 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css?v=c7813d96" />
+    <script src="../_static/documentation_options.js?v=8ac13f20"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.26. nveg_params.nml" href="nveg_params.nml.html" />
+    <link rel="prev" title="6.24. pft_params.nml" href="pft_params.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.26. nveg_params.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="pft_params.nml.html" title="6.24. pft_params.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.25. </span><code class="docutils literal notranslate"><span class="pre">cable_pftparm.nml</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="cable-pftparm-nml">
+<h1><span class="section-number">6.25. </span><code class="docutils literal notranslate"><span class="pre">cable_pftparm.nml</span></code><a class="headerlink" href="#cable-pftparm-nml" title="Link to this heading">¶</a></h1>
+<p>This file sets the time and space-invariant parameters for plant functional types for the CABLE land surface model. It contains one namelist called <a class="reference internal" href="#namelist-CABLE_PFTPARM"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">CABLE_PFTPARM</span></code></a>.</p>
+<section id="cable-pftparm-namelist-members">
+<h2><span class="section-number">6.25.1. </span><code class="docutils literal notranslate"><span class="pre">CABLE_PFTPARM</span></code> namelist members<a class="headerlink" href="#cable-pftparm-namelist-members" title="Link to this heading">¶</a></h2>
+<p id="namelist-CABLE_PFTPARM">This namelist reads the values of parameters for each of the plant functional types (PFTs) if the CABLE land surface model is being used. These parameters are a function of PFT only. Every member must be given a value for every run.
+CABLE uses the same parameters for veg and non-veg surface types, unlike JULES, and therefore its arrays are of dimension (npft + nnvg).</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::a1gs_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">a1gs_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::a1gs_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Represents the sensitivity of stomatal conductance to the assimilation rate (unitless).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::alpha_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">alpha_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::alpha_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Initial slope of J-Q response curve. Units: mol (electrons) mol<sup>-1</sup> (photons) (C3)
+mol (CO<sub>2</sub>) mol<sup>-1</sup> (photons) (C4)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::canst1_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">canst1_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::canst1_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Maximum intercepted water by canopy. (mm LAI<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::cfrd_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">cfrd_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::cfrd_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Ratio of day respiration to vcmax</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::clitt_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">clitt_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::clitt_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Leaf litter (alters resistance to soil evaporation) (tC ha<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::conkc0_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">conkc0_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::conkc0_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Michaelis-menton constant for carboxylase (bar)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::conko0_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">conko0_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::conko0_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Michaelis-menton constant for oxygenase (bar)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::convex_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">convex_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::convex_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Convexity of J-Q response curve (unitless).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::cplant1_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">cplant1_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::cplant1_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Plant carbon in 1st vegetation carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::cplant2_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">cplant2_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::cplant2_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Plant carbon in 2nd vegetation carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::cplant3_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">cplant3_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::cplant3_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Plant carbon in 3rd vegetation carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::csoil1_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">csoil1_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::csoil1_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Soil carbon in 1st soil carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::csoil2_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">csoil2_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::csoil2_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Soil carbon in 2nd soil carbon store (g C m<sup>-2</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::d0gs_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">d0gs_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::d0gs_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>d0 in stomatal conductance model (kPa)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::ejmax_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ejmax_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::ejmax_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Maximum potential electron transport rate top leaf, currently double the assigned value of vcmax. (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::ekc_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ekc_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::ekc_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Activation energy for carboxylase (J mol<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::eko_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">eko_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::eko_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Activation energy for oxygenase (J mol<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::extkn_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">extkn_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::extkn_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Extinction coefficient for vertical profile of N.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::frac4_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">frac4_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::frac4_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Fraction of c4 plants</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::froot1_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">froot1_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::froot1_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Fraction of root in 1st soil layer.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::froot2_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">froot2_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::froot2_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Fraction of root in 2nd soil layer.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::froot3_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">froot3_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::froot3_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Fraction of root in 3rd soil layer.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::froot4_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">froot4_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::froot4_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Fraction of root in 4th soil layer.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::froot5_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">froot5_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::froot5_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Fraction of root in 5th soil layer.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::froot6_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">froot6_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::froot6_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Fraction of root in 6th soil layer.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::g0_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">g0_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::g0_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Residual stomatal conductance as net assimilation rate reaches zero (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::g1_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">g1_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::g1_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Sensitivity of stomatal conductance to the assimilation rate (kPa).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::gswmin_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">gswmin_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::gswmin_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Minimal stomatal conductance (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::hc_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">hc_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::hc_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Height of canopy (m)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::lai_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">lai_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::lai_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+<p>The leaf area index (LAI) of each PFT.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::length_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">length_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::length_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Leaf length (m)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::ratecp1_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ratecp1_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::ratecp1_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Plant carbon pool rate constant in 1st vegetation carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::ratecp2_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ratecp2_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::ratecp2_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Plant carbon pool rate constant in 2nd vegetation carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::ratecp3_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ratecp3_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::ratecp3_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Plant carbon pool rate constant in 3rd vegetation carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::ratecs1_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ratecs1_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::ratecs1_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Soil carbon pool rate constant in 1st soil carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::ratecs2_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">ratecs2_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::ratecs2_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Soil carbon pool rate constant in 2nd soil carbon store (year<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::refl1_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">refl1_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::refl1_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Leaf reflectance in 1st radiation band.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::refl2_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">refl2_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::refl2_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Leaf reflectance in 2nd radiation band.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::refl3_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">refl3_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::refl3_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Leaf reflectance in 3rd radiation band.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::rp20_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">rp20_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::rp20_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Plant respiration scaler</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::rpcoef_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">rpcoef_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::rpcoef_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Temperature coefficient for non-leaf plant respiration (C<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::rs20_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">rs20_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::rs20_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Soil respiration at 20 deg C</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::shelrb_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">shelrb_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::shelrb_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Sheltering factor</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::taul1_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">taul1_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::taul1_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Leaf transmittance in 1st radiation band</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::taul2_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">taul2_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::taul2_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Leaf transmittance in 2nd radiation band</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::taul3_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">taul3_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::taul3_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Leaf transmittance in 3rd radiation band</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::tmaxvj_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">tmaxvj_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::tmaxvj_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Maximum temperature of the start of photosynthesis (deg C)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::tminvj_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">tminvj_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::tminvj_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Minimum temperature of the start of photosynthesis (deg C)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::vbeta_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">vbeta_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::vbeta_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Stomatal sensitivity to soil water.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::vcmax_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">vcmax_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::vcmax_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Maximum RuBP carboxylation rate top leaf. (mol m<sup>-2</sup> s<sup>-1</sup>)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::vegcf_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">vegcf_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::vegcf_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Scalar on soil respiration (place-holder scheme)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::wai_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">wai_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::wai_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Wood area index (stem + branches + twigs) (not currently used in any calculations)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::width_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">width_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::width_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Leaf width (m)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::xalbnir_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">xalbnir_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::xalbnir_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Not currently used in any calculations.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::xfang_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">xfang_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::xfang_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Leaf angle parameter</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="CABLE_PFTPARM::zr_io">
+<span class="sig-prename descclassname"><span class="pre">CABLE_PFTPARM::</span></span><span class="sig-name descname"><span class="pre">zr_io</span></span><a class="headerlink" href="#CABLE_PFTPARM::zr_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(npft + nnvg)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Maximum rooting depth (cm)</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo of Joint UK Land Environment Simulator (JULES)"/>
+            </a></p><h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="pft_params.nml.html"
+                          title="previous chapter"><span class="section-number">6.24. </span><code class="docutils literal notranslate"><span class="pre">pft_params.nml</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="nveg_params.nml.html"
+                          title="next chapter"><span class="section-number">6.26. </span><code class="docutils literal notranslate"><span class="pre">nveg_params.nml</span></code></a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="nveg_params.nml.html" title="6.26. nveg_params.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="pft_params.nml.html" title="6.24. pft_params.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.25. </span><code class="docutils literal notranslate"><span class="pre">cable_pftparm.nml</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.0.
+    </div>
+  </body>
+</html>

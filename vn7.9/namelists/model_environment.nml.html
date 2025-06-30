@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.5. model_environment.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.9 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css?v=c7813d96" />
+    <script src="../_static/documentation_options.js?v=8ac13f20"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.6. jules_surface.nml" href="jules_surface.nml.html" />
+    <link rel="prev" title="6.4. cable_surface_types.nml" href="cable_surface_types.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_surface.nml.html" title="6.6. jules_surface.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cable_surface_types.nml.html" title="6.4. cable_surface_types.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.5. </span><code class="docutils literal notranslate"><span class="pre">model_environment.nml</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="model-environment-nml">
+<h1><span class="section-number">6.5. </span><code class="docutils literal notranslate"><span class="pre">model_environment.nml</span></code><a class="headerlink" href="#model-environment-nml" title="Link to this heading">¶</a></h1>
+<p>This file sets the model environment options e.g. whether JULES is
+coupled to the UM or run in a standalone environment. It contains one
+namelist called <a class="reference internal" href="#namelist-JULES_MODEL_ENVIRONMENT"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_MODEL_ENVIRONMENT</span></code></a>.</p>
+<p>There are many JULES science options that are in shared namelists, so
+they can be read both by standalone and by a model driving JULES
+e.g. the UM. However some options either make no scientific sense or
+the necessary input data are not available to the environment in which
+JULES is being driven as the plumbing has not yet been done. This
+causes problems for example when creating standalone apps from UM
+configurations. This namelist allows the environment in which JULES is
+being run to be specified so that options that are unavailable can be
+made inaccessible via the metadata and thus will not appear in the
+gui. Warnings can also be issued if options are inappropriately set.</p>
+<p>This namelist also describes the flavour of the land surface model
+being used. CABLE is in the process of being incorporated into JULES
+and other flavours of JULES is in development e.g. a standalone rivers
+app.</p>
+<section id="jules-model-environment-namelist-members">
+<h2><span class="section-number">6.5.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_MODEL_ENVIRONMENT</span></code> namelist members<a class="headerlink" href="#jules-model-environment-namelist-members" title="Link to this heading">¶</a></h2>
+<dl class="nml member" id="namelist-JULES_MODEL_ENVIRONMENT">
+<dt class="sig sig-object nml" id="JULES_MODEL_ENVIRONMENT::l_jules_parent">
+<span class="sig-prename descclassname"><span class="pre">JULES_MODEL_ENVIRONMENT::</span></span><span class="sig-name descname"><span class="pre">l_jules_parent</span></span><a class="headerlink" href="#JULES_MODEL_ENVIRONMENT::l_jules_parent" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>imdi</p>
+</dd>
+</dl>
+<p>Switch to identify the environment in which JULES is being run. The
+switch should only be used to allow science options, which are not
+available in the specified model environment, to be trigger ignored
+and checked that they are set appropriately at run-time.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>0</p></td>
+<td><p>JULES is being run standalone. <br />
+Any options that are only available to the parent model (e.g. the UM) will be trigger ignored.</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>JULES is being run coupled to the UM. <br /></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>JULES is being run coupled via OASIS (available to Rivers-only executable only). <br />
+Options not available to the UM are trigger-ignored.</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>No science code should be associated with this switch, only what
+science options are available.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The metadata of the parent model only actually allows the
+appropriate option to be specified i.e. in standalone only 0 is
+permitted and in the UM only 1 is permitted. Any other parent
+models are listed here for information only. It is not
+appropriate to include a list of the unavailable options
+here. However, information for namelists that have been
+consolidated will appear in the following checking routines as
+they are completed.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://code.metoffice.gov.uk/trac/jules/browser/main/trunk/src/control/standalone/check_unavailable_options_mod.F90">src/control/standalone/check_unavailable_options_mod.F90</a></p></li>
+<li><p><a class="reference external" href="https://code.metoffice.gov.uk/trac/jules/browser/main/trunk/src/control/um/check_jules_unavailable_options_mod.F90">src/control/um/check_jules_unavailable_options_mod.F90</a></p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_MODEL_ENVIRONMENT::lsm_id">
+<span class="sig-prename descclassname"><span class="pre">JULES_MODEL_ENVIRONMENT::</span></span><span class="sig-name descname"><span class="pre">lsm_id</span></span><a class="headerlink" href="#JULES_MODEL_ENVIRONMENT::lsm_id" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>MDI</p>
+</dd>
+</dl>
+<p>Switch for land surface model flavour.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>JULES land surface model</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>CABLE land surface model</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The CABLE model has not yet been implemented within the JULES repository.</p>
+</div>
+</dd></dl>
+
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo of Joint UK Land Environment Simulator (JULES)"/>
+            </a></p><h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="cable_surface_types.nml.html"
+                          title="previous chapter"><span class="section-number">6.4. </span><code class="docutils literal notranslate"><span class="pre">cable_surface_types.nml</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="jules_surface.nml.html"
+                          title="next chapter"><span class="section-number">6.6. </span><code class="docutils literal notranslate"><span class="pre">jules_surface.nml</span></code></a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_surface.nml.html" title="6.6. jules_surface.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="cable_surface_types.nml.html" title="6.4. cable_surface_types.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.5. </span><code class="docutils literal notranslate"><span class="pre">model_environment.nml</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.0.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6.13. jules_deposition.nml &#8212; Joint UK Land Environment Simulator (JULES) v7.9 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css?v=c7813d96" />
+    <script src="../_static/documentation_options.js?v=8ac13f20"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6.14. jules_snow.nml" href="jules_snow.nml.html" />
+    <link rel="prev" title="6.12. jules_soil_ecosse.nml" href="jules_soil_ecosse.nml.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_snow.nml.html" title="6.14. jules_snow.nml"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="jules_soil_ecosse.nml.html" title="6.12. jules_soil_ecosse.nml"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" accesskey="U"><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.13. </span><code class="docutils literal notranslate"><span class="pre">jules_deposition.nml</span></code></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="jules-deposition-nml">
+<h1><span class="section-number">6.13. </span><code class="docutils literal notranslate"><span class="pre">jules_deposition.nml</span></code><a class="headerlink" href="#jules-deposition-nml" title="Link to this heading">¶</a></h1>
+<p>This file contains options and parameters for modelling of dry deposition of atmospheric trace constituents. It contains a variable number of namelists depending on the required model configuration. The namelist <a class="reference internal" href="#namelist-JULES_DEPOSITION"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code></a> is always required, the namelist <a class="reference internal" href="#namelist-JULES_DEPOSITION_SPECIES_SPECIFIC"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC</span></code></a> and one or more instances of the namelist <a class="reference internal" href="#namelist-JULES_DEPOSITION_SPECIES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES</span></code></a> is required if dry deposition has been selected.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Atmospheric deposition in JULES is still in development. In this version, two options are provided: (1) <a class="reference internal" href="#JULES_DEPOSITION::dry_dep_model" title="JULES_DEPOSITION::dry_dep_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dry_dep_model</span></code></a> = 1, which implements the existing UKCA interactive gas-phase dry deposition routines in JULES. The parameters are hard-wired in the code and only 4 surface tile configurations are permitted; and (2) <a class="reference internal" href="#JULES_DEPOSITION::dry_dep_model" title="JULES_DEPOSITION::dry_dep_model"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dry_dep_model</span></code></a> = 2, which removes the surface tile restrictions and uses namelists to define the various deposition parameters. Deposition parameters specific to a single deposited species are input on <a class="reference internal" href="#namelist-JULES_DEPOSITION_SPECIES_SPECIFIC"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC</span></code></a> namelist. There is a separate <a class="reference internal" href="#namelist-JULES_DEPOSITION_SPECIES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES</span></code></a> namelist for each deposited species for deposition parameters common to more than one deposited species. To activate the deposition code: set <a class="reference internal" href="#JULES_DEPOSITION::l_deposition" title="JULES_DEPOSITION::l_deposition"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_deposition</span></code></a> to TRUE.</p>
+</div>
+<section id="jules-deposition-namelist-members">
+<h2><span class="section-number">6.13.1. </span><code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code> namelist members<a class="headerlink" href="#jules-deposition-namelist-members" title="Link to this heading">¶</a></h2>
+<dl class="nml member" id="namelist-JULES_DEPOSITION">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::l_deposition">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_deposition</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_deposition" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>FALSE</p>
+</dd>
+</dl>
+<p>Switch to activate deposition code in JULES.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Model deposition in JULES.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Do not model deposition in JULES.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is now a requirement to specify all surface types in <a class="reference internal" href="jules_surface_types.nml.html#namelist-JULES_SURFACE_TYPES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_SURFACE_TYPES</span></code></a> (the plant functional types need to be defined, e.g. <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::brd_leaf" title="JULES_SURFACE_TYPES::brd_leaf"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">brd_leaf</span></code></a> =1, <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::ndl_leaf" title="JULES_SURFACE_TYPES::ndl_leaf"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ndl_leaf</span></code></a> =2, <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::c3_grass" title="JULES_SURFACE_TYPES::c3_grass"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">c3_grass</span></code></a> =3, <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::c4_grass" title="JULES_SURFACE_TYPES::c4_grass"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">c4_grass</span></code></a> =4, <a class="reference internal" href="jules_surface_types.nml.html#JULES_SURFACE_TYPES::shrub" title="JULES_SURFACE_TYPES::shrub"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">shrub</span></code></a> =5 for the 5-pft configuration).</p>
+</div>
+</dd></dl>
+
+<div class="admonition-only-used-if-nml-mem-l-deposition-true admonition">
+<p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION::l_deposition" title="JULES_DEPOSITION::l_deposition"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_deposition</span></code></a> = TRUE.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::dry_dep_model">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">dry_dep_model</span></span><a class="headerlink" href="#JULES_DEPOSITION::dry_dep_model" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1, 2</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>none</p>
+</dd>
+</dl>
+<p>Choice for model of dry deposition.</p>
+<p>Possible values are:</p>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line">Parameterisation based on the interactive dry deposition scheme in the UKCA.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Parameterisation based on the interactive dry deposition scheme in the UKCA, with the restriction on the allowable surface tile configuration removed.</div>
+</div>
+</li>
+</ol>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::dep_h2_soil_scheme">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">dep_h2_soil_scheme</span></span><a class="headerlink" href="#JULES_DEPOSITION::dep_h2_soil_scheme" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>1, 2</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>none</p>
+</dd>
+</dl>
+<p>Choice for scheme for soil uptake of H2 from the atmosphere.</p>
+<p>Possible values are:</p>
+<ol class="arabic">
+<li><div class="line-block">
+<div class="line">Parameterisation based on Conrad &amp; Seiler uptake scheme in the UKCA.</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line">Parameterisation based on Paulot et al. scheme.</div>
+</div>
+</li>
+</ol>
+<p>Note: The Paulot et al. scheme is currently not available in UM-coupled JULES applications.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::l_deposition_flux">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_deposition_flux</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_deposition_flux" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>FALSE</p>
+</dd>
+</dl>
+<p>Switch for calculation of deposition fluxes as opposed to deposition velocities.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Calculate deposition fluxes. This requires that the concentrations of atmopsheric tracer species are provided as prescribed data (see <a class="reference internal" href="prescribed_data.nml.html#supported-prescribed-variables"><span class="std std-ref">List of supported variables</span></a>).</p>
+</dd>
+<dt>FALSE</dt><dd><p>Calculate deposition velocities.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::ndry_dep_species">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">ndry_dep_species</span></span><a class="headerlink" href="#JULES_DEPOSITION::ndry_dep_species" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>integer</p>
+</dd>
+<dt class="field-even">Permitted<span class="colon">:</span></dt>
+<dd class="field-even"><p>&gt;= 1 and &lt;= 200 (ndep_species_max)</p>
+</dd>
+<dt class="field-odd">Default<span class="colon">:</span></dt>
+<dd class="field-odd"><p>none</p>
+</dd>
+</dl>
+<p>Number of species for which dry deposition is calculated.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::tundra_s_limit">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">tundra_s_limit</span></span><a class="headerlink" href="#JULES_DEPOSITION::tundra_s_limit" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Latitude of southern limit of tundra (radians). This is used to alter the calculation of deposition of certain species in the tundra region (actually for all points north of this limit). Only used if the list of species (see <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a>) includes one or more of ‘CO’, ‘NO2’, ‘O3’, ‘PAN’, ‘PPAN’, ‘MPAN’ or ‘ONITU’.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::dzl_const">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">dzl_const</span></span><a class="headerlink" href="#JULES_DEPOSITION::dzl_const" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Constant value for separation of boundary layer levels (m). All layer thicknesses are set to this value. This is used as a simple way to prescribe the layer thicknesses in standalone mode. This value can be overriden by prescribed data - see <a class="reference internal" href="prescribed_data.nml.html#namelist-JULES_PRESCRIBED"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_PRESCRIBED</span></code></a>. This can be considered as the representative depth for tracer concentration and the depth over which the deposition flux is removed.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::l_deposition_from_ukca">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_deposition_from_ukca</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_deposition_from_ukca" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>FALSE</p>
+</dd>
+</dl>
+<p>Switch to determine calling routine for the JULES-based interactive deposition routines.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Calls the JULES-based deposition routines from the same UKCA routine ukca_chemistry_ctl (or the equivalents: ukca_chemistry_ctl_BE or ukca_chemistry_ctl_col), which is used to call the UKCA-based interactive deposition routines.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Calls the JULES-based deposition routines from the JULES routine surf_couple_extra.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For JULES standalone applications, the JULES-based deposition routines can only be called from surf_couple_extra() and <a class="reference internal" href="#JULES_DEPOSITION::l_deposition_from_ukca" title="JULES_DEPOSITION::l_deposition_from_ukca"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_deposition_from_ukca</span></code></a> is false and not enabled. For UM-coupled JULES applications, the JULES-based deposition routines can currently only be called from the UKCA and <a class="reference internal" href="#JULES_DEPOSITION::l_deposition_from_ukca" title="JULES_DEPOSITION::l_deposition_from_ukca"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_deposition_from_ukca</span></code></a> should be set to true.</p>
+</div>
+</div>
+<div class="admonition-switches-that-are-only-available-for-use-in-standalone-jules-applications admonition">
+<p class="admonition-title">(1) Switches that are only available for use in standalone JULES applications.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::l_deposition_gc_corr">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_deposition_gc_corr</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_deposition_gc_corr" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>FALSE</p>
+</dd>
+</dl>
+<p>Switch to use stomatal conductances with or without bare soil evaporation.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use calculation of stomatal conductance without bare soil evaporation.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Use calculation of stomatal conductance with bare soil evaporation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="admonition-for-um-coupled-jules-applications-the-following-switches-are-set-during-the-run-to-be-equivalent-to-the-corresponding-switches-in-the-ukca-which-are-set-in-the-um-run-ukca-namelist admonition">
+<p class="admonition-title">(2) For UM-coupled JULES applications, the following switches are set during the run to be equivalent to the corresponding switches in the UKCA (which are set in the UM run_ukca namelist).</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::l_ukca_ddep_lev1">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_ukca_ddep_lev1</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_ukca_ddep_lev1" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>FALSE</p>
+</dd>
+</dl>
+<p>Switch from the UKCA controlling which atmospheric levels in the boundary layer are used for dry deposition. For UM-coupled JULES applications, the UKCA interactive dry deposition switch (l_ukca_intdd in the run_ukca namelist) needs to be true.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Deposition occurs only from the lowest level in the atmospheric boundary layer.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Deposition occurs from all levels within the atmospheric boundary layer.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::l_ukca_emsdrvn_ch4">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_ukca_emsdrvn_ch4</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_ukca_emsdrvn_ch4" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>FALSE</p>
+</dd>
+</dl>
+<p>Switch from the UKCA in which the UKCA chemistry scheme uses methane (CH<sub>4</sub>) emissions instead of prescribed CH<sub>4</sub> surface mole fractions.</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>UKCA chemistry scheme uses methane (CH<sub>4</sub>) emissions.</p>
+</dd>
+<dt>FALSE</dt><dd><p>UKCA chemistry scheme uses prescribed CH<sub>4</sub> surface mole fractions.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="admonition-switches-that-are-only-available-for-um-coupled-jules-applications-the-following-switches-are-set-during-the-run-to-be-equivalent-to-the-corresponding-switches-in-the-ukca-which-are-set-in-the-um-run-ukca-namelist admonition">
+<p class="admonition-title">(3) Switches that are only available for UM-coupled JULES applications. The following switches are set during the run to be equivalent to the corresponding switches in the UKCA (which are set in the UM run_ukca namelist).</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::l_ukca_ddepo3_ocean">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_ukca_ddepo3_ocean</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_ukca_ddepo3_ocean" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>FALSE</p>
+</dd>
+</dl>
+<p>Switch from the UKCA to use a mechanistic calculation for deposition of ozone to the ocean from Luhar et al. (2018).</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Use the mechanistic calculation of Luhar et al. (2018).</p>
+</dd>
+<dt>FALSE</dt><dd><p>Use the surface resistance term for water provided in rsurf_std_io.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION::l_ukca_dry_dep_so2wet">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION::</span></span><span class="sig-name descname"><span class="pre">l_ukca_dry_dep_so2wet</span></span><a class="headerlink" href="#JULES_DEPOSITION::l_ukca_dry_dep_so2wet" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>logical</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>FALSE</p>
+</dd>
+</dl>
+<p>Switch from the UKCA to account for surface wetness in the dry deposition for SO<sub>2</sub>. The calculation uses the parameterisation in Erisman, Pul and Wyers (1994).</p>
+<dl class="simple">
+<dt>TRUE</dt><dd><p>Account for surface wetness in the dry deposition for SO<sub>2</sub>.</p>
+</dd>
+<dt>FALSE</dt><dd><p>Do not account for surface wetness in the dry deposition for SO<sub>2</sub>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</section>
+<section id="notes-on-the-jules-deposition-namelist">
+<h2><span class="section-number">6.13.2. </span>Notes on the <code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code> namelist<a class="headerlink" href="#notes-on-the-jules-deposition-namelist" title="Link to this heading">¶</a></h2>
+<p>The height of the atmospheric boundary layer is required and is set to a default constant value of 1000 m. This value can be overridden via the namelist variable <a class="reference internal" href="drive.nml.html#JULES_DRIVE::bl_height" title="JULES_DRIVE::bl_height"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">bl_height</span></code></a>, or can be prescribed (i.e. allowed to vary in time and/or space) by providing <code class="docutils literal notranslate"><span class="pre">bl_height</span></code> as prescribed data (see <a class="reference internal" href="prescribed_data.nml.html#supported-prescribed-variables"><span class="std std-ref">List of supported variables</span></a>).</p>
+<p>The number of model levels in the boundary layer is required and is set to a default balues of 1. This can be overridden via the namelist variable <a class="reference internal" href="model_grid.nml.html#JULES_NLSIZES::bl_levels" title="JULES_NLSIZES::bl_levels"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">bl_levels</span></code></a>. The number of levels is only used to communicate with the atmospheric model (e.g. UKCA).</p>
+<p>The separation of the model levels in the boundary layer is required and is set to a constant value via <a class="reference internal" href="#JULES_DEPOSITION::dzl_const" title="JULES_DEPOSITION::dzl_const"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dzl_const</span></code></a>. The separation can be prescribed (i.e. allowed to vary in time and/or space) by providing <code class="docutils literal notranslate"><span class="pre">level_separation</span></code> as prescribed data (see <a class="reference internal" href="prescribed_data.nml.html#supported-prescribed-variables"><span class="std std-ref">List of supported variables</span></a>). This can be considered as the representative depth for tracer concentration and the depth over which the deposition flux is removed.</p>
+<p>If deposition fluxes (rather than deposition velocities) are to be calculated (see <a class="reference internal" href="#JULES_DEPOSITION::l_deposition_flux" title="JULES_DEPOSITION::l_deposition_flux"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_deposition_flux</span></code></a>), the concentrations of atmospheric tracer species need to be prescribed (see <code class="docutils literal notranslate"><span class="pre">tracer_field</span></code> in <a class="reference internal" href="prescribed_data.nml.html#supported-prescribed-variables"><span class="std std-ref">List of supported variables</span></a>).</p>
+</section>
+<section id="jules-deposition-species-namelist-members">
+<h2><span class="section-number">6.13.3. </span><code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES</span></code> namelist members<a class="headerlink" href="#jules-deposition-species-namelist-members" title="Link to this heading">¶</a></h2>
+<p id="namelist-JULES_DEPOSITION_SPECIES">This namelist should occur <a class="reference internal" href="#JULES_DEPOSITION::ndry_dep_species" title="JULES_DEPOSITION::ndry_dep_species"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">ndry_dep_species</span></code></a> times, with each occurence containing parameters for an atmospheric tracer species that is to be considered in dry deposition.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::dep_species_name_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">dep_species_name_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>character</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Name of an atmospheric tracer species to be included in deposition modelling.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::dep_species_rmm_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">dep_species_rmm_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::dep_species_rmm_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Relative molecular mass (g mol<sup>-1</sup>), as used in the UKCA. It is used in the calculation of the quasi-laminar resistance term (R<sub>b</sub>), if no diffusion coefficient is provided.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::diffusion_coeff_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">diffusion_coeff_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::diffusion_coeff_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Diffusion coefficient (m<sup>-2</sup> s<sup>-1</sup>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If there is no measured value of the diffusion coefficient for any chemical species in the chemical mechanism, the diffusion coefficient for those species should be set to -1.0. This will be used to indicate that the diffusion coefficient will be calculated from the diffusion coefficient of water and the relative molecular masses of water and the chemical species.</p>
+</div>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::rsurf_std_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">rsurf_std_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::rsurf_std_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(ntype)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Standard value of surface resistance for each surface type (s m<sup>-1</sup>).</p>
+</dd></dl>
+
+<div class="admonition-only-used-if-nml-mem-dep-species-name-io-no2-o3-pan-ppan-mpan-or-onitu-values-provided-for-other-species-will-be-ignored admonition">
+<p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">NO2</span></code>, <code class="docutils literal notranslate"><span class="pre">O3</span></code>, <code class="docutils literal notranslate"><span class="pre">PAN</span></code>, <code class="docutils literal notranslate"><span class="pre">PPAN</span></code>, <code class="docutils literal notranslate"><span class="pre">MPAN</span></code> or <code class="docutils literal notranslate"><span class="pre">ONITU</span></code>. Values provided for other species will be ignored.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::diffusion_corr_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">diffusion_corr_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::diffusion_corr_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Diffusion correction factor for stomatal resistance, accounting for the different diffusivities of water and other species (dimensionless).</p>
+</dd></dl>
+
+</div>
+<div class="admonition-only-used-if-nml-mem-dep-species-name-io-co-no2-o3-pan-ppan-mpan-or-onitu-values-provided-for-other-species-will-be-ignored admonition">
+<p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">CO</span></code>, <code class="docutils literal notranslate"><span class="pre">NO2</span></code>, <code class="docutils literal notranslate"><span class="pre">O3</span></code>, <code class="docutils literal notranslate"><span class="pre">PAN</span></code>, <code class="docutils literal notranslate"><span class="pre">PPAN</span></code>, <code class="docutils literal notranslate"><span class="pre">MPAN</span></code> or <code class="docutils literal notranslate"><span class="pre">ONITU</span></code>. Values provided for other species will be ignored.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::r_tundra_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">r_tundra_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::r_tundra_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Surface resistance used in tundra region (s m<sup>-1</sup>).</p>
+</dd></dl>
+
+</div>
+<div class="admonition-only-used-if-nml-mem-dep-species-name-io-hno3-hono2-ison-and-if-nml-mem-jules-temp-fixes-l-fix-improve-drydep-true-also-for-hcl-hocl-hbr-or-hobr admonition">
+<p class="admonition-title">Only used if <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">HNO3</span></code>, <code class="docutils literal notranslate"><span class="pre">HONO2</span></code>, <code class="docutils literal notranslate"><span class="pre">ISON</span></code> and if <a class="reference internal" href="science_fixes.nml.html#JULES_TEMP_FIXES::l_fix_improve_drydep" title="JULES_TEMP_FIXES::l_fix_improve_drydep"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_fix_improve_drydep</span></code></a> = true, also for <code class="docutils literal notranslate"><span class="pre">HCl</span></code>, <code class="docutils literal notranslate"><span class="pre">HOCl</span></code>, <code class="docutils literal notranslate"><span class="pre">HBr</span></code> or <code class="docutils literal notranslate"><span class="pre">HOBr</span></code>.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES::dd_ice_coeff_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES::</span></span><span class="sig-name descname"><span class="pre">dd_ice_coeff_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES::dd_ice_coeff_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(3)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Coefficients in quadratic function relating dry deposition over ice to temperature.</p>
+</dd></dl>
+
+</div>
+</section>
+<section id="jules-deposition-species-specific-namelist-members">
+<h2><span class="section-number">6.13.4. </span><code class="docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC</span></code> namelist members<a class="headerlink" href="#jules-deposition-species-specific-namelist-members" title="Link to this heading">¶</a></h2>
+<p id="namelist-JULES_DEPOSITION_SPECIES_SPECIFIC">This namelist is used for deposition parameters specific to a single deposited species. This namelist is used to avoid redundant entries on the <a class="reference internal" href="#namelist-JULES_DEPOSITION_SPECIES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES</span></code></a> namelists.</p>
+<div class="admonition-deposition-parameters-specific-to-nml-mem-jules-deposition-species-dep-species-name-io-ch4 admonition">
+<p class="admonition-title">Deposition parameters specific to <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">CH4</span></code>.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES_SPECIFIC::ch4_scaling_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC::</span></span><span class="sig-name descname"><span class="pre">ch4_scaling_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES_SPECIFIC::ch4_scaling_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Scaling applied to methane soil uptake (dimensionless). (Originally this was used to match the value from the IPCC Third Assessment Report.)</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES_SPECIFIC::ch4_mml_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC::</span></span><span class="sig-name descname"><span class="pre">ch4_mml_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES_SPECIFIC::ch4_mml_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Factor used in UKCA to convert the methane soil uptake flux in (μg m<sup>-2</sup> h<sup>-1</sup>) to a dry dep velocity (in m s<sup>-1</sup>). The current value of ch4_mml_io = 3600.0 * 0.016 * 1.0 x 10<sup>9</sup> * 1.75 x 10<sup>-6</sup> = 1.008 x 10<sup>5</sup>, where 0.016 is the relative molecular mass of methane (kg), 1.0 x 10<sup>9</sup> converts μg to kg, and 1.75 x 10<sup>-6</sup> ppmv is the assumed mean global atmospheric volume mixing ratio of methane.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES_SPECIFIC::ch4dd_tundra_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC::</span></span><span class="sig-name descname"><span class="pre">ch4dd_tundra_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES_SPECIFIC::ch4dd_tundra_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(4)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Coefficients of cubic polynomial relating methane loss for tundra to temperature. Flux is in units of μg (CH<sub>4</sub>) m<sup>-2</sup> s<sup>-1</sup>.</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES_SPECIFIC::ch4_up_flux_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC::</span></span><span class="sig-name descname"><span class="pre">ch4_up_flux_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES_SPECIFIC::ch4_up_flux_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(ntype)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Value of uptake flux for methane for each surface type (μg (CH<sub>4</sub>) m<sup>-2</sup> s<sup>-1</sup>).</p>
+</dd></dl>
+
+</div>
+<div class="admonition-deposition-parameters-specific-to-nml-mem-jules-deposition-species-dep-species-name-io-h2 admonition">
+<p class="admonition-title">Deposition parameters specific to <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">H2</span></code>.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES_SPECIFIC::h2dd_c_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC::</span></span><span class="sig-name descname"><span class="pre">h2dd_c_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES_SPECIFIC::h2dd_c_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(ntype)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Constant in quadratic function relating hydrogen deposition to soil moisture (s m<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES_SPECIFIC::h2dd_m_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC::</span></span><span class="sig-name descname"><span class="pre">h2dd_m_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES_SPECIFIC::h2dd_m_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(ntype)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Coefficient of first order term in quadratic function relating hydrogen deposition to soil moisture (s m<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES_SPECIFIC::h2dd_q_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC::</span></span><span class="sig-name descname"><span class="pre">h2dd_q_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES_SPECIFIC::h2dd_q_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real(ntype)</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Coefficient of second order term in quadratic function relating hydrogen deposition to soil moisture (s m<sup>-1</sup>).</p>
+</dd></dl>
+
+</div>
+<div class="admonition-deposition-parameters-specific-to-nml-mem-jules-deposition-species-dep-species-name-io-o3 admonition">
+<p class="admonition-title">Deposition parameters specific to <a class="reference internal" href="#JULES_DEPOSITION_SPECIES::dep_species_name_io" title="JULES_DEPOSITION_SPECIES::dep_species_name_io"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">dep_species_name_io</span></code></a> = <code class="docutils literal notranslate"><span class="pre">O3</span></code>.</p>
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES_SPECIFIC::cuticle_o3_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC::</span></span><span class="sig-name descname"><span class="pre">cuticle_o3_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES_SPECIFIC::cuticle_o3_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Constant for calculation of cuticular resistance for ozone (s m<sup>-1</sup>).</p>
+</dd></dl>
+
+<dl class="nml member">
+<dt class="sig sig-object nml" id="JULES_DEPOSITION_SPECIES_SPECIFIC::r_wet_soil_o3_io">
+<span class="sig-prename descclassname"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC::</span></span><span class="sig-name descname"><span class="pre">r_wet_soil_o3_io</span></span><a class="headerlink" href="#JULES_DEPOSITION_SPECIES_SPECIFIC::r_wet_soil_o3_io" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>real</p>
+</dd>
+<dt class="field-even">Default<span class="colon">:</span></dt>
+<dd class="field-even"><p>none</p>
+</dd>
+</dl>
+<p>Wet soil surface resistance for ozone (s m<sup>-1</sup>).</p>
+</dd></dl>
+
+</div>
+<section id="example">
+<h3><span class="section-number">6.13.4.1. </span>Example<a class="headerlink" href="#example" title="Link to this heading">¶</a></h3>
+<p>The following gives an example of how you would set up the <a class="reference internal" href="#namelist-JULES_DEPOSITION"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION</span></code></a> namelist for atmospheric deposition for a JULES standalone run.</p>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="nn">&amp;JULES_DEPOSITION</span>
+  <span class="nv">dep_h2_soil_scheme</span><span class="o">=</span><span class="mi">1</span>
+  <span class="nv">dry_dep_model</span><span class="o">=</span><span class="mi">2</span>
+  <span class="nv">dzl_const</span><span class="o">=</span><span class="mf">50.0</span>
+  <span class="nv">l_deposition</span><span class="o">=</span><span class="ss">.true.</span>
+  <span class="nv">l_deposition_flux</span><span class="o">=</span><span class="ss">.false.</span>
+  <span class="nv">l_deposition_from_ukca</span><span class="o">=</span><span class="ss">.false.</span>
+  <span class="nv">l_deposition_gc_corr</span><span class="o">=</span><span class="ss">.false.</span>
+  <span class="nv">l_ukca_ddep_lev1</span><span class="o">=</span><span class="ss">.false.</span>
+  <span class="c1">!!l_ukca_ddepo3_ocean=.false.</span>
+  <span class="c1">!!l_ukca_dry_dep_so2wet=.false.</span>
+  <span class="nv">l_ukca_emsdrvn_ch4</span><span class="o">=</span><span class="ss">.false.</span>
+  <span class="nv">ndry_dep_species</span><span class="o">=</span><span class="mi">1</span>
+  <span class="nv">tundra_s_limit</span><span class="o">=</span><span class="mf">0.866</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+<p>Note: <a class="reference internal" href="#JULES_DEPOSITION::l_deposition_from_ukca" title="JULES_DEPOSITION::l_deposition_from_ukca"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_deposition_from_ukca</span></code></a> should be false for JULES standalone and true for UM-coupled JULES. <a class="reference internal" href="#JULES_DEPOSITION::l_ukca_ddepo3_ocean" title="JULES_DEPOSITION::l_ukca_ddepo3_ocean"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ukca_ddepo3_ocean</span></code></a> and <a class="reference internal" href="#JULES_DEPOSITION::l_ukca_dry_dep_so2wet" title="JULES_DEPOSITION::l_ukca_dry_dep_so2wet"><code class="xref nml nml-mem docutils literal notranslate"><span class="pre">l_ukca_dry_dep_so2wet</span></code></a> are not available for JULES standalone applications.</p>
+<p>The following gives an example of how to set-up the <a class="reference internal" href="#namelist-JULES_DEPOSITION_SPECIES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES</span></code></a> and <a class="reference internal" href="#namelist-JULES_DEPOSITION_SPECIES_SPECIFIC"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES_SPECIFIC</span></code></a> for the standard 5 pft/9 tile configuration for a single chemical species ‘O3’. In general, ndry_dep_species will be greater than 1 and there will be <a class="reference internal" href="#namelist-JULES_DEPOSITION_SPECIES"><code class="xref nml nml-lst docutils literal notranslate"><span class="pre">JULES_DEPOSITION_SPECIES</span></code></a> namelists, one for each atmospheric species that is deposited. Some deposition parameters are required for all chemical species, others are species specific and not available (e.g. dd_ice_coeff_io for <code class="docutils literal notranslate"><span class="pre">O3</span></code>).</p>
+<div class="highlight-nml notranslate"><div class="highlight"><pre><span></span><span class="nn">&amp;JULES_DEPOSITION_SPECIES</span>
+  <span class="nv">dep_species_name_io</span><span class="o">=</span><span class="s1">&#39;O3&#39;</span>
+  <span class="nv">dep_species_rmm_io</span><span class="o">=</span><span class="mf">48.0</span>
+  <span class="nv">diffusion_coeff_io</span><span class="o">=</span><span class="mf">1.400000e-05</span>
+  <span class="nv">diffusion_corr_io</span><span class="o">=</span><span class="mf">1.6</span>
+  <span class="nv">r_tundra_io</span><span class="o">=</span><span class="mf">800.0</span>
+  <span class="nv">rsurf_std_io</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span><span class="mf">200.0</span><span class="p">,</span><span class="mf">200.0</span><span class="p">,</span><span class="mf">200.0</span><span class="p">,</span><span class="mf">400.0</span><span class="p">,</span><span class="mf">800.0</span><span class="p">,</span><span class="mf">2200.0</span><span class="p">,</span><span class="mf">800.0</span><span class="p">,</span><span class="mf">2500.0</span>
+<span class="nn">/</span>
+
+<span class="nn">&amp;JULES_DEPOSITION_SPECIES_SPECIFIC</span>
+  <span class="nv">ch4_mml_io</span><span class="o">=</span><span class="mf">1.008e5</span>
+  <span class="nv">ch4_scaling_io</span><span class="o">=</span><span class="mf">15.0</span>
+  <span class="nv">ch4_up_flux_io</span><span class="o">=</span><span class="mf">39.5</span><span class="p">,</span><span class="mf">50.0</span><span class="p">,</span><span class="mf">30.0</span><span class="p">,</span><span class="mf">37.0</span><span class="p">,</span><span class="mf">27.5</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">27.5</span><span class="p">,</span><span class="mf">0.0</span>
+  <span class="nv">ch4dd_tundra_io</span><span class="o">=</span><span class="mf">-4.757e-6</span><span class="p">,</span><span class="mf">4.0288e-3</span><span class="p">,</span><span class="mf">-1.13592</span><span class="p">,</span><span class="mf">106.636</span>
+  <span class="nv">cuticle_o3_io</span><span class="o">=</span><span class="mf">5000.0</span>
+  <span class="nv">h2dd_c_io</span><span class="o">=</span><span class="mf">0.00197</span><span class="p">,</span><span class="mf">0.00197</span><span class="p">,</span><span class="mf">0.00177</span><span class="p">,</span><span class="mf">1.2346</span><span class="p">,</span><span class="mf">0.0001</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span>
+  <span class="nv">h2dd_m_io</span><span class="o">=</span><span class="mf">-0.00419</span><span class="p">,</span><span class="mf">-0.00419</span><span class="p">,</span><span class="mf">-0.00414</span><span class="p">,</span><span class="mf">-0.472</span><span class="p">,</span><span class="mi">5</span><span class="o">*</span><span class="mf">0.0</span>
+  <span class="nv">h2dd_q_io</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.27</span><span class="p">,</span><span class="mi">5</span><span class="o">*</span><span class="mf">0.0</span>
+  <span class="nv">r_wet_soil_o3_io</span><span class="o">=</span><span class="mf">500.0</span>
+<span class="nn">/</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo of Joint UK Land Environment Simulator (JULES)"/>
+            </a></p><h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../building-and-running/intro.html">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="jules_soil_ecosse.nml.html"
+                          title="previous chapter"><span class="section-number">6.12. </span><code class="docutils literal notranslate"><span class="pre">jules_soil_ecosse.nml</span></code></a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="jules_snow.nml.html"
+                          title="next chapter"><span class="section-number">6.14. </span><code class="docutils literal notranslate"><span class="pre">jules_snow.nml</span></code></a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="jules_snow.nml.html" title="6.14. jules_snow.nml"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="jules_soil_ecosse.nml.html" title="6.12. jules_soil_ecosse.nml"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="contents.html" ><span class="section-number">6. </span>The JULES namelist files</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">6.13. </span><code class="docutils literal notranslate"><span class="pre">jules_deposition.nml</span></code></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.0.
+    </div>
+  </body>
+</html>

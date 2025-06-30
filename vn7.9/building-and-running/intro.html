@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>3. Building and running JULES &#8212; Joint UK Land Environment Simulator (JULES) v7.9 User Guide</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=279e0f84" />
+    <link rel="stylesheet" type="text/css" href="../_static/jules-tweaks.css?v=c7813d96" />
+    <script src="../_static/documentation_options.js?v=8ac13f20"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.1. Considerations" href="considerations.html" />
+    <link rel="prev" title="2.2. Some key switches" href="../overview/key-switches.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="considerations.html" title="3.1. Considerations"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../overview/key-switches.html" title="2.2. Some key switches"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>Building and running JULES</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="building-and-running-jules">
+<h1><span class="section-number">3. </span>Building and running JULES<a class="headerlink" href="#building-and-running-jules" title="Link to this heading">¶</a></h1>
+<p>This section details the options available for compiling and running JULES.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="considerations.html">3.1. Considerations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="considerations.html#do-i-need-netcdf">3.1.1. Do I need NetCDF?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="considerations.html#do-i-need-parallel-processing">3.1.2. Do I need parallel processing?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="required-software.html">3.2. Required software</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="required-software.html#building-jules-with-netcdf">3.2.1. Building JULES with NetCDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="required-software.html#building-and-running-jules-with-mpi">3.2.2. Building and running JULES with MPI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fcm.html">3.3. Building JULES using FCM</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fcm.html#environment-variables-used-when-building-jules-using-fcm-make">3.3.1. Environment variables used when building JULES using FCM make</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fcm.html#example-fcm-make-commands">3.3.2. Example FCM make commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fcm.html#tips-for-effective-use-of-fcm-make">3.3.3. Tips for effective use of FCM make</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="running-jules.html">3.4. Running JULES</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="running-jules.html#general-example-of-running-jules-from-the-command-line">3.4.1. General example of running JULES from the command line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-jules.html#running-jules-with-openmp">3.4.2. Running JULES with OpenMP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="running-jules.html#running-jules-with-mpi">3.4.3. Running JULES with MPI</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rose.html">3.5. Automatic upgrading and GUI using Rose</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rose.html#creating-a-rose-suite-from-existing-namelists">3.5.1. Creating a Rose suite from existing namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rose.html#using-rose-to-upgrade-existing-namelists">3.5.2. Using Rose to upgrade existing namelists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rose.html#upgrading-an-existing-jules-rose-suite">3.5.3. Upgrading an existing JULES Rose suite</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rose.html#configuring-jules-with-a-graphical-interface">3.5.4. Configuring JULES with a graphical interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rose.html#running-a-jules-rose-suite">3.5.5. Running a JULES Rose suite</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/jules_logo_html.png" alt="Logo of Joint UK Land Environment Simulator (JULES)"/>
+            </a></p><h3><a href="../index.html">Table Of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../release_notes/contents.html">1. Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview/intro.html">2. Overview of JULES</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Building and running JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../input/overview.html">4. Input files for JULES</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">5. JULES output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../namelists/contents.html">6. The JULES namelist files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples.html">7. JULES examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../code/contents.html">8. Aspects of the code</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../output-variables.html">9. JULES Output variables</a></li>
+</ul>
+
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../overview/key-switches.html"
+                          title="previous chapter"><span class="section-number">2.2. </span>Some key switches</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="considerations.html"
+                          title="next chapter"><span class="section-number">3.1. </span>Considerations</a></p>
+  </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../nml-modindex.html" title="Fortran Namelist Index"
+             >namelists</a> |</li>
+        <li class="right" >
+          <a href="considerations.html" title="3.1. Considerations"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../overview/key-switches.html" title="2.2. Some key switches"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Joint UK Land Environment Simulator (JULES) v7.9 User Guide</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="section-number">3. </span>Building and running JULES</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2025.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.0.
+    </div>
+  </body>
+</html>
