@@ -383,7 +383,7 @@ Examples of how to specify the model domain using through this namelist are prov
 
 .. nml:namelist:: JULES_LAND_FRAC
 
-Land fraction is the fraction of each gridbox that is land. Currently, JULES considers any gridbox with land fraction > 0 to be 100% land, and all others to be 100% sea (or sea-ice). Land fraction data can be used to select only land points from the full input grid (see below).
+Land fraction is the fraction of each gridbox that is land. By default, JULES considers any gridbox with land fraction > 0 to be 100% land, and all others to be 100% sea (or sea-ice). To keep land fractions as fractions then set l_use_land_fraction to True. Land fraction data can be used to select only land points from the full input grid (see below).
 
 .. warning::
    When the input grid consists of a single location (1D and :nml:mem:`JULES_INPUT_GRID::npoints` = 1 or 2D and :nml:mem:`JULES_INPUT_GRID::nx` = :nml:mem:`JULES_INPUT_GRID::ny` = 1), that single location is assumed to be 100% land.
@@ -410,6 +410,18 @@ For any input grid with more than a single location, the following are used:
    The name of the variable containing the land fraction data.                 
 
    In the file, the variable must have no levels dimensions and no time dimension.
+
+
+.. nml:member:: l_use_land_fraction
+
+   :type: logical
+   :default: F
+
+   TRUE
+       Supply land fractions (as fractions) to both the main grid and the rivers grid (if grids are compatible). This is needed for water conservation when using inland basin flow (l_inland = True).
+
+   FALSE
+       Land fractions are not used and the land fraction field is set to either 1.0 (any land) or 0.0.
 
 
 
