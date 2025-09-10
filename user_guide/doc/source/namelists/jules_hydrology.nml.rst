@@ -87,6 +87,7 @@ This file sets the hydrology options. It contains one namelist called :nml:lst:`
    .. note::
        Setting :nml:mem:`JULES_HYDROLOGY::l_top` = FALSE and :nml:mem:`JULES_HYDROLOGY::l_pdm` = FALSE selects a more basic runoff production scheme. In this scheme, surface runoff comes only from infiltration excess runoff (no saturation excess runoff), and subsurface runoff comes only from free drainage from the deepest soil layer (no lateral flow from mid-layers), as described in Essery et al. (2001, HCTN 30).
 
+
 .. nml:member:: l_limit_gsoil
 
    :type: logical
@@ -97,6 +98,18 @@ This file sets the hydrology options. It contains one namelist called :nml:lst:`
 
    FALSE
        Allow the soil conductance to increase as the top layer soil moisture goes above the critical soil moisture, as in Best et al. (2011) equation 7.
+
+
+.. nml:member:: l_inland
+
+   :type: logical
+   :default: F
+
+   TRUE
+       Some rivers end at inland basin flow points. This inland basin flow is used to increase soil moisture at these locations.
+
+   FALSE
+       No inland basin flow.
 
 
 .. nml:group:: Only used if :nml:mem:`JULES_HYDROLOGY::l_top` = TRUE
