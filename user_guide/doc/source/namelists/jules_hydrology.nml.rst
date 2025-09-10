@@ -106,7 +106,8 @@ This file sets the hydrology options. It contains one namelist called :nml:lst:`
    :default: F
 
    TRUE
-       Some rivers end at inland basin flow points. This inland basin flow is used to increase soil moisture at these locations.
+       Some rivers end at inland basin flow points. This inland basin flow is used to increase soil moisture at these locations. For this to work JULES rivers_standalone needs
+       to be run as a separate executable and the inland basin flow needs to be passed into this land surface component via OASIS using :nml:mem:`OASIS_RIVERS::send_fields`.
 
    FALSE
        No inland basin flow.

@@ -40,12 +40,16 @@ This file contains a single namelists called :nml:lst:`OASIS_RIVERS`, which indi
 .. nml:member:: send_fields
 
    :type: character(:)
-   :permitted: 'outflow_per_river'
+   :permitted: 'outflow_per_river','inland_outflow'
    :default: ''
 
    List of fields to be sent via coupling from the river executable to other models. Names are case sensitive.
 
-.. note::  The only field that can be sent via coupling is the total river runoff (`outflow_per_river`).
+.. note::  The fields that can be sent via coupling are:
+
+           1. The total river runoff (`outflow_per_river`) which is sent to the ocean.
+
+           2. The inland basin flow (`inland_outflow`) which is sent to the land surface hydrology scheme. Turn on :nml:mem:`JULES_HYDROLOGY::l_inland` (in the land surface side of the coupler) to pass this inland basin flow into soil moisture.  
 
 .. nml:member:: receive_fields
 
