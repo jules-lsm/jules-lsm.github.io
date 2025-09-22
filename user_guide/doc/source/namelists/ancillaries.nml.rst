@@ -1660,14 +1660,11 @@ The following table summarises ancillary fields for the water resources code, sp
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
 | Name                       | Description                                                                                               |
 +============================+===========================================================================================================+
-| ``conveyance_loss``        | Fraction of water that is lost during conveyance from source to user.                                     |
-|                            |                                                                                                           |
-+----------------------------+-----------------------------------------------------------------------------------------------------------+
-| ``irrig_eff``              | Irrigation efficiency.                                                                                    |
-|                            | This is only used if :nml:mem:`JULES_WATER_RESOURCES::l_water_irrigation` = TRUE.                         |
+| ``conv_loss_frac``         | Fraction of water that is lost during conveyance from source to user.                                     |
 |                            |                                                                                                           |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
 | ``sfc_water_frac``         | Target for the fraction of demand that will be met from surface water (rather than groundwater).          |
+|                            | This is only used if :nml:mem:`JULES_WATER_RESOURCES::partition_method` = 1.                              |
 |                            |                                                                                                           |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
 

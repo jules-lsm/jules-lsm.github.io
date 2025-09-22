@@ -261,25 +261,25 @@ The use of the following variables is explicitly supported:
 |                           | The levels are listed starting at the surface and working up.     | :nml:mem:`JULES_NLSIZES::bl_levels` using         |
 |                           |                                                                   | :nml:mem:`JULES_INPUT_GRID::bl_level_dim_name`.   |
 +---------------------------+-------------------------------------------------------------------+---------------------------------------------------+
-| ``demand_rate_domestic``  | Demand for water for domestic use (kg kg :sup:`-1`)               | None                                              |
+| ``demand_rate_domestic``  | Demand for water for domestic use (kg s :sup:`-1`)                | None                                              |
 |                           |                                                                   |                                                   |
 |                           | .. note::                                                         |                                                   |
 |                           |   Required if :nml:mem:`JULES_WATER_RESOURCES::l_water_domestic`  |                                                   |
 |                           |   = TRUE.                                                         |                                                   |
 +---------------------------+-------------------------------------------------------------------+---------------------------------------------------+
-| ``demand_rate_industry``  | Demand for water for industrial use (kg kg :sup:`-1`)             | None                                              |
+| ``demand_rate_industry``  | Demand for water for industrial use (kg s :sup:`-1`)              | None                                              |
 |                           |                                                                   |                                                   |
 |                           | .. note::                                                         |                                                   |
 |                           |   Required if :nml:mem:`JULES_WATER_RESOURCES::l_water_industry`  |                                                   |
 |                           |   = TRUE.                                                         |                                                   |
 +---------------------------+-------------------------------------------------------------------+---------------------------------------------------+
-| ``demand_rate_livestock`` | Demand for water for livestock (kg kg :sup:`-1`)                  | None                                              |
+| ``demand_rate_livestock`` | Demand for water for livestock (kg s :sup:`-1`)                   | None                                              |
 |                           |                                                                   |                                                   |
 |                           | .. note::                                                         |                                                   |
 |                           |   Required if :nml:mem:`JULES_WATER_RESOURCES::l_water_livestock` |                                                   |
 |                           |   = TRUE.                                                         |                                                   |
 +---------------------------+-------------------------------------------------------------------+---------------------------------------------------+
-| ``demand_rate_trasnfers`` | Demand for water for transfers (kg kg :sup:`-1`)                  | None                                              |
+| ``demand_rate_transfers`` | Demand for water for transfers (kg s :sup:`-1`)                   | None                                              |
 |                           |                                                                   |                                                   |
 |                           | .. note::                                                         |                                                   |
 |                           |   Required if :nml:mem:`JULES_WATER_RESOURCES::l_water_transfers` |                                                   |
