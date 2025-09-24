@@ -10,7 +10,7 @@ This file sets the irrigation options. It contains one namelist called :nml:lst:
 
 .. nml:namelist:: JULES_IRRIG
 
-This namelist specifies the different options available for setting up the irrigation.
+This namelist specifies the different options available for setting up the fraction-based irrigation scheme.
 
 .. note::
 
@@ -26,7 +26,11 @@ This namelist specifies the different options available for setting up the irrig
    :type: logical
    :default: F
 
-   Switch controlling the implementation of irrigation demand code.
+   Switch controlling the implementation of fraction-based irrigation demand code.
+   This scheme can only be used if :nml:mem:`JULES_PFTPARM::irrig_pft_io` = npft*0 and :nml:mem:`JULES_NVEGPARM::irrig_nvg_io` = nnvg*0
+
+   For setting up the tile-based irrigation scheme please see :nml:mem:`JULES_PFTPARM::irrig_pft_io` and :nml:mem:`JULES_NVEGPARM::irrig_nvg_io`.
+   
 
    TRUE
       Tiles are irrigated.
