@@ -1660,7 +1660,7 @@ The following table summarises ancillary fields for the water resources code, sp
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
 | Name                       | Description                                                                                               |
 +============================+===========================================================================================================+
-| ``conv_loss_frac``         | Fraction of water that is lost during conveyance from source to user.                                     |
+| ``conv_loss_frac``         | Fraction of abstracted water that is lost during conveyance from source to user.                          |
 |                            |                                                                                                           |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
 | ``sfc_water_frac``         | Target for the fraction of demand that will be met from surface water (rather than groundwater).          |

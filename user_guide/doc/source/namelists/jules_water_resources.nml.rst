@@ -183,7 +183,7 @@ This file sets options for water resource modelling. It contains a single nameli
    :permitted: 0,1,2
    :default: none
 
-   Choice for the model of non-renewable groundwater. Non-renewable groundwater is water that is not otherwise explicitly included in the model. It is an idealised, infinite source of water which is typically intended to allow consideration of pumping of grounwater from deep reserves that are difficult to quantify.
+   Choice for the model of non-renewable groundwater. Non-renewable groundwater as define dhere is water that is not otherwise explicitly included in the model. It is an idealised, infinite source of water which is typically intended to allow consideration of pumping of groundwater from deep reserves that are difficult to quantify.
 
    Possible values are:
 
