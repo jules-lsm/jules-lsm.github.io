@@ -4,7 +4,7 @@
 This file sets options for water resource modelling. It contains a single namelist called :nml:lst:`JULES_WATER_RESOURCES`.
 
 .. warning::
-   The water resource code in JULES is still in development. A limited parameterisation exists but it should be used with caution while development continues. At present all demands for water can only be met by abstraction from the same gridbox as where the demand is, which can lead to unrealistically high estimates of water shortage hwere in reality water infrastructure is used to move water between locations. Consult the developers for further information.
+   The water resource code in JULES is still in development. A limited parameterisation exists but it should be used with caution while development continues. At present all demands for water can only be met by abstraction from the same gridbox as where the demand is, which can lead to unrealistically high estimates of water shortage where in reality water infrastructure is used to move water between locations. Consult the developers for further information.
 
 
 ``JULES_WATER_RESOURCES`` namelist members
@@ -183,7 +183,7 @@ This file sets options for water resource modelling. It contains a single nameli
    :permitted: 0,1,2
    :default: none
 
-   Choice for the model of non-renewable groundwater. Non-renewable groundwater as define dhere is water that is not otherwise explicitly included in the model. It is an idealised, infinite source of water which is typically intended to allow consideration of pumping of groundwater from deep reserves that are difficult to quantify.
+   Choice for the model of non-renewable groundwater. Non-renewable groundwater as defined here is water that is not otherwise explicitly included in the model. It is an idealised, infinite source of water which is typically intended to allow consideration of pumping of groundwater from deep reserves that are difficult to quantify.
 
    Possible values are:
 
