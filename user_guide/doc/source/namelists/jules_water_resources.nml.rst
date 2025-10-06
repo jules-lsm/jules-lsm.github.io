@@ -215,7 +215,7 @@ This file sets options for water resource modelling. It contains a single nameli
    .. nml:member:: sfc_water_factor
 
       :type: real
-      :permitted: > 0
+      :permitted: >= 0
       :default: none
 
       The weight (a factor) applied to surface water when calculating the target for the fraction of demand that will be met from surface water. The target is calculated as sfc_water_factor x surface_water_available / ( sfc_water_factor x surface_water_available + groundwater_available ). Values > 1 mean the target will increasingly be to use surface water rather than groundwater.
