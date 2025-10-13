@@ -200,12 +200,14 @@ This file sets options for water resource modelling. It contains a single nameli
    .. nml:member:: partition_method
 
       :type: integer
-      :permitted: 1,2
+      :permitted: 0,1,2
       :default: none
 
       Method used to calculate the target for the fraction of demand that will be met from surface water versus groundwater.
 
       Possible values are:
+
+      0. | No target required. This value is required when either or both of groundwater and surface water are not included in the model configuration.
 
       1. | The target will be read from an ancillary file (see :nml:lst:`JULES_WATER_RESOURCES_PROPS`).
 
