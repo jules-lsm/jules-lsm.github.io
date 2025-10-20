@@ -247,7 +247,7 @@ Tips for effective use of FCM make
     
 
 .. _JULES development virtual machine: https://code.metoffice.gov.uk/trac/jules/wiki/JULESVirtualMachine
-.. _GNU Fortran compiler: http://www.gnu.org/software/gcc/fortran/
+.. _GNU Fortran compiler: https://www.gnu.org/software/gcc/fortran/
 .. _Intel Fortran compiler: http://software.intel.com/en-us/articles/fortran-compilers/
 .. _NAG Fortran compiler: https://www.nag.co.uk/nag-compiler
 .. _Cray Compiler Environment: http://docs.cray.com/cgi-bin/craydoc.cgi?mode=SiteMap;f=xc_sitemap

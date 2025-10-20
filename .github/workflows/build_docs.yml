@@ -16,6 +16,7 @@ name: build_docs
 # Controls when the action will run
 on: 
     push:
+      branches: [master]
     pull_request:
 
     # Enables manual running from the Actions tab
@@ -45,10 +46,15 @@ jobs:
             pushd user_guide/doc
             # Add status of tests to the summary
             if make html; then
-              echo ":heavy_check_mark: Documentation tests passed" >> $GITHUB_STEP_SUMMARY
+              echo ":heavy_check_mark: Documentation build test passed" >> $GITHUB_STEP_SUMMARY
             else
-              echo ":x: Documentation tests failed" >> $GITHUB_STEP_SUMMARY
+              echo ":x: Documentation build test failed" >> $GITHUB_STEP_SUMMARY
               exit 1
+            fi
+            if make linkcheck; then
+              echo ":heavy_check_mark: Documentation link checking passed" >> $GITHUB_STEP_SUMMARY
+            else
+              echo ":x: Documentation link checking failed" >> $GITHUB_STEP_SUMMARY
             fi
             popd
           if: ${{ github.repository != 'jules-lsm/jules-lsm.github.io'
