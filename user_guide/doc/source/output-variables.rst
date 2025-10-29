@@ -1285,34 +1285,20 @@ Trace gas dry deposition parameters and fluxes
 Water resources
 -------------------------------------------------------------------
 
+These variables are only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_resources` = TRUE.
+
 .. tabularcolumns:: |p{4.5cm}|p{8.8cm}|p{2.2cm}|
 
 +---------------------------+--------------------------------------------------------------------------------+------------+
 | Name                      | Description                                                                    | Dimensions |
 +===========================+================================================================================+============+
-| ``water_demand``          | Demand for water across all water resource sectors (kg).                       |            |
-|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_resources` = TRUE.  |            |
+| ``conv_loss_frac``        | Fraction of abstracted water that is lost during conveyance from source to     |            |
+|                           | user.                                                                          |            |
 +---------------------------+--------------------------------------------------------------------------------+------------+
-| ``demand_domestic``       | Demand for water for domestic use (kg).                                        |            |
-|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_domestic` = TRUE.   |            |
-+---------------------------+--------------------------------------------------------------------------------+------------+
-| ``demand_environment``    | Demand for water for environmental use (kg).                                   |            |
-|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_environment` = TRUE.|            |
-+---------------------------+--------------------------------------------------------------------------------+------------+
-| ``demand_industry``       | Demand for water for industrial use (kg).                                      |            |
-|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_industry` = TRUE.   |            |
-+---------------------------+--------------------------------------------------------------------------------+------------+
-| ``demand_irrigation``     | Demand for water for irrigation (kg).                                          |            |
-|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_irrigation` = TRUE. |            |
-+---------------------------+--------------------------------------------------------------------------------+------------+
-| ``demand_livestock``      | Demand for water for livestock use (kg).                                       |            |
-|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_livestock` = TRUE.  |            |
-+---------------------------+--------------------------------------------------------------------------------+------------+
-| ``demand_transfers``      | Demand for water for transfers (kg).                                           |            |
-|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_transfers` = TRUE.  |            |
+| ``sfc_water_frac``        | Target for the fraction of demand to be met from surface water.                |            |
 +---------------------------+--------------------------------------------------------------------------------+------------+
 | ``demand_rate_domestic``  | Demand rate for water for domestic use (kg s\ :sup:`-1`).                      |            |
-|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_irrigation` = TRUE. |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_domestic` = TRUE.   |            |
 +---------------------------+--------------------------------------------------------------------------------+------------+
 | ``demand_rate_industry``  | Demand rate for water for industrial use (kg s\ :sup:`-1`).                    |            |
 |                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_industry` = TRUE.   |            |
@@ -1323,8 +1309,73 @@ Water resources
 | ``demand_rate_transfers`` | Demand rate for water for transfers (kg s\ :sup:`-1`).                         |            |
 |                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_transfers` = TRUE.  |            |
 +---------------------------+--------------------------------------------------------------------------------+------------+
+| ``water_demand``          | Demand for water across all water resource sectors (kg s\ :sup:`-1`), including|            |
+|                           | any allowance for conveyance loss.                                             |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``demand_domestic``       | Demand for water for domestic use (kg s\ :sup:`-1`), including any allowance   |            |
+|                           | for conveyance loss.                                                           |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_domestic` = TRUE.   |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``demand_environment``    | Demand for water for environmental use (kg s\ :sup:`-1`), including any        |            |
+|                           | allowance for conveyance loss.                                                 |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_environment` = TRUE.|            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``demand_industry``       | Demand for water for industrial use (kg s\ :sup:`-1`), including any allowance |            |
+|                           | for conveyance loss.                                                           |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_industry` = TRUE.   |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``demand_irrigation``     | Demand for water for irrigation (kg s\ :sup:`-1`), including any allowance for |            |
+|                           | conveyance loss.                                                               |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_irrigation` = TRUE. |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``demand_livestock``      | Demand for water for livestock use (kg s\ :sup:`-1`), including any allowance  |            |
+|                           | for conveyance loss.                                                           |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_livestock` = TRUE.  |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``demand_transfers``      | Demand for water for transfers (kg s\ :sup:`-1`), including any allowance for  |            |
+|                           | conveyance loss.                                                               |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_transfers` = TRUE.  |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``water_demand_unmet``    | The part of the total demand for water that is not satisfied (kg s\ :sup:`-1`).|            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``unmet_domestic``        | The part of the demand for water for domestic use that is not satisfied        |            |
+|                           | (kg s\ :sup:`-1`).                                                             |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_domestic` = TRUE.   |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``unmet_environment``     | The part of the demand for water for domestic use that is not satisfied        |            |
+|                           | (kg s\ :sup:`-1`).                                                             |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_environment` = TRUE.|            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``unmet_industry``        | The part of the demand for water for industrial use that is not satisfied      |            |
+|                           | (kg s\ :sup:`-1`).                                                             |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_industry` = TRUE.   |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``unmet_irrigation``      | The part of the demand for water for irrigation use that is not satisfied      |            |
+|                           | (kg s\ :sup:`-1`).                                                             |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_irrigation` = TRUE. |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``unmet_livestock``       | The part of the demand for water for livestock use that is not satisfied       |            |
+|                           | (kg s\ :sup:`-1`).                                                             |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_livestock` = TRUE.  |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``unmet_transfers``       | The part of the demand for water for transfers that is not satisfied           |            |
+|                           | (kg s\ :sup:`-1`).                                                             |            |
+|                           | Only available if :nml:mem:`JULES_WATER_RESOURCES::l_water_transfers` = TRUE.  |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
 | ``irrig_water``           | Water applied as irrigation (kg m\ :sup:`-2` s\ :sup:`-1`).                    |            |
 |                           | Only available if :nml:mem:`JULES_IRRIG::l_irrig_dmd` = TRUE.                  |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``gw_avail``              | Groundwater that is available for abstraction at start of timestep (kg) .      |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``sw_avail``              | Surface water that is available for abstraction at start of timestep (kg).     |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``gw_abstracted``         | Water abstracted from renewable groundwater sources (kg s\ :sup:`-1`).         |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``gw_nr_abstracted``      | Water abstracted from non-renewable groundwater sources (kg s\ :sup:`-1`).     |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``sw_abstracted``         | Water abstracted from surface water sources (kg s\ :sup:`-1`).                 |            |
++---------------------------+--------------------------------------------------------------------------------+------------+
+| ``water_removed``         | Water that is removed from the system during use (kg s\ :sup:`-1`).            |            |
 +---------------------------+--------------------------------------------------------------------------------+------------+
 
 
