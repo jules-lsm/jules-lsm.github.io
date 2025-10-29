@@ -1361,6 +1361,21 @@ Grids are considered consistent (and therefore regridding is not required) if th
          The variable will be set to a constant value everywhere using :nml:mem:`const_val` below.
 
 
+   .. nml:member:: is_climatology
+
+      :type: logical(nvars)
+      :default: F
+
+      For each JULES variable specified in :nml:mem:`var`, this indicates if the file is a 12-month climatology.
+
+      TRUE
+         The file is a 12-month climatology 16th January - 16th December.
+
+      FALSE
+         The file does not contain a time dimension.
+
+      .. note:: Currently this is only fully implemented for ``rivers_storage``. This allows ``rivers_sto_rp`` to be initialised from a 12-month climatology ancillary on the 2D Rivers grid. When ``rivers_storage`` is initialised in this way, ``rivers_sto_rp`` should not be read from the dump (i.e. should not be requested via :nml:lst:`JULES_INITIAL`). It can be extended to other variables, should this be desirable, but it requires some code changes.
+
    .. nml:member:: var_name
 
       :type: character(nvars)
@@ -1465,7 +1480,8 @@ The following table summarises river routing properties required to run RFM or T
 |                            | This is only used if :nml:mem:`JULES_OVERBANK::overbank_model` = 3.                                       |
 |                            |                                                                                                           |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
-| ``rivers_outflow_number``  | Number assigned to each river mouth on the Rivers grid, to identify the river which discharges into it.   |
+| ``rivers_outflow_number``  | Number assigned to each river mouth and inland basin on the Rivers grid, to identify the river which      |
+|                            | discharges into it.                                                                                       |
 |                            |                                                                                                           |
 |                            | The river outflow number is used in the calculation of                                                    |
 |                            | 'outflow_per_river' (River outflow into the ocean for each river; kg s\ :sup:`-1`)                        |
@@ -1476,7 +1492,14 @@ The following table summarises river routing properties required to run RFM or T
 |                            | via OASIS the river outflow is distributed over the corresponding river outflow points on the ocean grid. |
 |                            | This is to ensure that water is conserved and rivers discharge into the correct ocean grid points.        |
 +----------------------------+-----------------------------------------------------------------------------------------------------------+
-
+| ``rivers_storage``         | Water storage (kg) on the Rivers grid.                                                                    |
+|                            |                                                                                                           |
+|                            | This is only used if :nml:mem:`JULES_RIVERS::i_river_vn` = 3.                                             |
+|                            |                                                                                                           |
+|                            | This is only required if Rivers storage is to be initialised from an ancillary, including a 12-month      |
+|                            | climatology, rather than the dump. If Rivers storage is requested from an ancillary then                  |
+|                            | ``rivers_sto_rp`` should not be requested via :nml:lst:`JULES_INITIAL`.                                   |
++----------------------------+-----------------------------------------------------------------------------------------------------------+
 
 
 Example of how to set up the river grid

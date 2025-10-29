@@ -415,10 +415,14 @@ The required variables for a particular configuration, along with their 'type' a
 | :nml:mem:`JULES_INITIAL::dump_file` = TRUE                                                                                           |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``rivers_sto_rp``                | Water storage (kg)                                                                      | none    |
+|                                  |                                                                                         |         |
+|                                  | **Alternatively**, can be initialised from an ancillary file via                        |         |
+|                                  | :nml:lst:`JULES_RIVERS_PROPS`. It cannot be requested via :nml:lst:`JULES_INITIAL`      |         |
+|                                  | if it has already been initialised from an ancillary.                                   |         |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | Required if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '3',                                     |
 | :nml:mem:`JULES_INITIAL::dump_file` = TRUE and :nml:mem:`OASIS_RIVERS::send_fields` or                                               |
-| :nml:mem:`JULES_OUTPUT_PROFILE::var` contains 'outflow_per_river'                                                                    |
+| :nml:mem:`JULES_OUTPUT_PROFILE::var` contains ``outflow_per_river``.                                                                 |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
 | ``rivers_outflow_rp``            | River outflow on river routing points (kg s\ :sup:`-1`)                                 | none    |
 +----------------------------------+-----------------------------------------------------------------------------------------+---------+
@@ -430,11 +434,11 @@ The required variables for a particular configuration, along with their 'type' a
 
 .. warning::
   if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '2' and :nml:mem:`JULES_INITIAL::dump_file` = FALSE,
-    rfm_surfstore_rp, rfm_substore_rp, rfm_flowin_rp and rfm_bflowin are initialised to zero.
+    ``rfm_surfstore_rp``, ``rfm_substore_rp``, ``rfm_flowin_rp`` and ``rfm_bflowin`` are initialised to zero.
 
 .. warning::
   if :nml:mem:`JULES_RIVERS::l_rivers` = TRUE, :nml:mem:`JULES_RIVERS::i_river_vn` = '1,3' and :nml:mem:`JULES_INITIAL::dump_file` = FALSE,
-  rivers_sto_rp is initialised to zero.
+  ``rivers_sto_rp`` is initialised to zero **unless** it is initialised from an ancillary via :nml:lst:`JULES_RIVERS_PROPS`.
 
 .. |mu| unicode:: &#x03BC; .. u
 
