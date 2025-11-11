@@ -1,7 +1,8 @@
+``red_params.nml``
+==================
 
-
-This file contains a single namelist called :nml:lst:`JULES_RED` that sets parameters relevant to the Robust Ecosystem Demography submodel (RED version 1.0) <https://gmd.copernicus.org/articles/13/4067/2020/>`_.
-Activate RED in the :nml:mem:`JULES_VEGETATION::l_red`.
+This file contains a single namelist called :nml:lst:`JULES_RED` that sets parameters relevant to the `Robust Ecosystem Demography submodel (RED version 1.0) <https://gmd.copernicus.org/articles/13/4067/2020/>`_.
+Activate RED using the :nml:mem:`JULES_VEGETATION::l_red` switch in :nml:lst:`JULES_VEGETATION`.
 
 ``JULES_RED`` namelist members
 ----------------------------------
@@ -92,7 +93,7 @@ This namelist is used to read PFT parameters that are only needed by the Robust 
       :type: real(npft)
       :default: 0.50
 
-      The allometric/power scaling of PFT mass to PFT crown area (West, G. B., et al 2009 <https://doi.org/10.1073/pnas.0812294106>`_).
+      The allometric/power scaling of PFT mass to PFT crown area (`West, G. B., et al 2009 <https://doi.org/10.1073/pnas.0812294106>`_).
 
 
    .. nml:member:: phi_g
@@ -100,7 +101,7 @@ This namelist is used to read PFT parameters that are only needed by the Robust 
       :type: real(npft)
       :default: 0.75
 
-      The allometric/power scaling of PFT mass to PFT mass growth rate (West, G. B., et al., 1997 <https://www.science.org/doi/10.1126/science.276.5309.122>`_).
+      The allometric/power scaling of PFT mass to PFT mass growth rate (`West, G. B., et al., 1997 <https://www.science.org/doi/10.1126/science.276.5309.122>`_).
 
 
    .. nml:member:: phi_h
@@ -108,7 +109,7 @@ This namelist is used to read PFT parameters that are only needed by the Robust 
       :type: real(npft)
       :default: 0.25
 
-      The allometric/power scaling of PFT mass to PFT height (Niklas, K. J., et al., 2001 <https://doi.org/10.1073/pnas.041590298>`_).
+      The allometric/power scaling of PFT mass to PFT height (`Niklas, K. J., et al., 2001 <https://doi.org/10.1073/pnas.041590298>`_).
 
 
    .. nml:member:: phi_l
