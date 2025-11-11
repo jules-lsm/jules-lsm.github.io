@@ -18,7 +18,7 @@ General/Technical changes
 -------------------------
 
  *  Added a switch to allow interpretation of times in the model and the driving data as local solar time - see :nml:mem:`JULES_TIME::l_local_solar_time`. (#1327)
- *  Added a switch :nml:mem:`IMOGEN_RUN_LIST::l_drive_with_global_temps` so that JULES can be driven with global temperatures and climate patterns. (#1322)
+ *  Added a switch ``l_drive_with_global_temps`` so that JULES can be driven with global temperatures and climate patterns. (#1322)
  *  Made Medlyn stomatal conductance, Farquhar C\ :sub:`3` photosynthesis, and thermal acclimation available in the UM. (#1246)
  *  Further work towards allowing layered soil carbon (:nml:mem:`JULES_SOIL_BIOGEOCHEM::l_layeredc` = TRUE ) in the UM. (#1237)
  *  A varying grey tile emissivity has been passed in to JULES - currently only available if selected in LFRic. (#1247)
