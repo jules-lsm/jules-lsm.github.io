@@ -14,107 +14,107 @@ This namelist is used to read PFT parameters that are only needed by the Robust 
 
 .. nml:group:: Only used when :nml:mem:`JULES_VEGETATION::l_red` = TRUE.
 
-.. nml:member:: alpha_recrt
+   .. nml:member:: alpha_recrt
 
-   :type: real(npft)
-   :default: None
+      :type: real(npft)
+      :default: None
 
-   The fraction of PFT carbon assimilate devoted to reproduction.
-
-
-.. nml:member:: crwn_area0
-
-   :type: real(npft)
-   :default: None
-
-   The lowest PFT crown area, value corresponds to the mass0 class (m\ :sup:`2`).
+      The fraction of PFT carbon assimilate devoted to reproduction.
 
 
-.. nml:member:: dom_order
+   .. nml:member:: crwn_area0
 
-   :type: integer(npft)
-   :default: None
+      :type: real(npft)
+      :default: None
 
-   The value that describes the competitive hierarchy of PFTs competition in
-   JULES-RED, the higher the value the more dominant: 3 (trees), 2 (shrubs), 1 (grass).
-
-
-.. nml:member:: height0
-
-   :type: real(npft)
-   :default: None
-
-   The lowest PFT height, value corresponds to the mass0 class (m).
+      The lowest PFT crown area, value corresponds to the mass0 class (m\ :sup:`2`).
 
 
-.. nml:member:: lai_bal0
+   .. nml:member:: dom_order
 
-   :type: real(npft)
-   :default: None
+      :type: integer(npft)
+      :default: None
 
-   The lowest PFT balanced LAI, which corresponds to the mass0 class (m\ :sup:`2`/m\ :sup:`2`).
-
-
-.. nml:member:: mass0
-
-   :type: real(npft)
-   :default: None
-
-   The lowest PFT mass class (kg C).
+      The value that describes the competitive hierarchy of PFTs competition in
+      JULES-RED, the higher the value the more dominant: 3 (trees), 2 (shrubs), 1 (grass).
 
 
-.. nml:member:: massi
+   .. nml:member:: height0
 
-   :type: real(npft)
-   :default: None
+      :type: real(npft)
+      :default: None
 
-   The highest PFT mass class (kg C).
-
-
-.. nml:member:: mclass
-
-   :type: integer(npft)
-   :default: None
-
-   Number of mass classes for each PFT.
+      The lowest PFT height, value corresponds to the mass0 class (m).
 
 
-.. nml:member:: mort_base
+   .. nml:member:: lai_bal0
 
-   :type: real(npft)
-   :default: None
+      :type: real(npft)
+      :default: None
 
-   The baseline PFT mortality rate (/360 days).
-
-
-.. nml:member:: phi_a
-
-   :type: real(npft)
-   :default: 0.50
-
-   The allometric/power scaling of PFT mass to PFT crown area (West, G. B., et al 2009 <https://doi.org/10.1073/pnas.0812294106>`_).
+      The lowest PFT balanced LAI, which corresponds to the mass0 class (m\ :sup:`2`/m\ :sup:`2`).
 
 
-.. nml:member:: phi_g
+   .. nml:member:: mass0
 
-   :type: real(npft)
-   :default: 0.75
+      :type: real(npft)
+      :default: None
 
-   The allometric/power scaling of PFT mass to PFT mass growth rate (West, G. B., et al., 1997 <https://www.science.org/doi/10.1126/science.276.5309.122>`_).
-
-
-.. nml:member:: phi_h
-
-   :type: real(npft)
-   :default: 0.25
-
-   The allometric/power scaling of PFT mass to PFT height (Niklas, K. J., et al., 2001 <https://doi.org/10.1073/pnas.041590298>`_).
+      The lowest PFT mass class (kg C).
 
 
-.. nml:member:: phi_l
+   .. nml:member:: massi
 
-   :type: real(npft)
-   :default: 0.25
+      :type: real(npft)
+      :default: None
 
-   The allometric/power scaling of PFT mass to PFT leaf area index.
+      The highest PFT mass class (kg C).
+
+
+   .. nml:member:: mclass
+
+      :type: integer(npft)
+      :default: None
+
+      Number of mass classes for each PFT.
+
+
+   .. nml:member:: mort_base
+
+      :type: real(npft)
+      :default: None
+
+      The baseline PFT mortality rate (/360 days).
+
+
+   .. nml:member:: phi_a
+
+      :type: real(npft)
+      :default: 0.50
+
+      The allometric/power scaling of PFT mass to PFT crown area (West, G. B., et al 2009 <https://doi.org/10.1073/pnas.0812294106>`_).
+
+
+   .. nml:member:: phi_g
+
+      :type: real(npft)
+      :default: 0.75
+
+      The allometric/power scaling of PFT mass to PFT mass growth rate (West, G. B., et al., 1997 <https://www.science.org/doi/10.1126/science.276.5309.122>`_).
+
+
+   .. nml:member:: phi_h
+
+      :type: real(npft)
+      :default: 0.25
+
+      The allometric/power scaling of PFT mass to PFT height (Niklas, K. J., et al., 2001 <https://doi.org/10.1073/pnas.041590298>`_).
+
+
+   .. nml:member:: phi_l
+
+      :type: real(npft)
+      :default: 0.25
+
+      The allometric/power scaling of PFT mass to PFT leaf area index.
 
