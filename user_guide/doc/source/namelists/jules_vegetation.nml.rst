@@ -650,23 +650,6 @@ This file sets the vegetation options. It contains one namelist called :nml:lst:
    FALSE
        Do not use vegetative drag scheme.
 
-.. nml:member:: l_red
-
-   :type: logical
-   :default: F
-
-   Switch to use the Robust Ecosystem Demography (RED).
-   This is based on :ref:`Argles, Arthur PK, et al.
-   (2020)`.
-
-   Only use if any :nml:mem:`l_triffid` = TRUE.
-
-   TRUE
-       Use the Robust Ecosystem Demography.
-
-   FALSE
-       Do not use the Robust Ecosystem Demography.
-
 .. nml:member:: l_rsl_scalar
 
    :type: logical
