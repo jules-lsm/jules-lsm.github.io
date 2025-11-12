@@ -1,7 +1,7 @@
 JULES version 8.0 Release Notes
 ===============================
 
-The JULES vn8.0 release consists of approximately 10 tickets from 7 authors, including work by many other people.
+The JULES vn8.0 release consists of approximately 10 tickets from 7 authors, including work by many other people. This is the first release for which the JULES code is held on GitHub.
 
 Full details of the tickets committed for JULES vn8.0 can be found on the `JULES shared repository Trac system <https://code.metoffice.gov.uk/trac/jules/query?resolution=fixed&milestone=JULES+v8.0+(Oct-25)>`_.
 
