@@ -45,6 +45,20 @@ This file sets the soil options and parameters. It contains one namelist called 
       * van Genuchten, M.T., 1980, A Closed-form Equation for Predicting the Hydraulic Conductivity of Unsaturated Soils. Soil Science Society of America Journal, 44:892-898.
 
 
+.. nml:member:: l_satcon_decay
+
+   :type: logical
+   :default: F
+
+   Vary saturated conductivity exponentially through soil column.
+
+   TRUE
+       Reduce saturated conductivity exponentially with depth.
+
+   FALSE
+       Hydraulic conductivity constant with depth
+
+
 .. nml:member:: l_dpsids_dsdz
 
    :type: logical
@@ -186,6 +200,14 @@ This file sets the soil options and parameters. It contains one namelist called 
    :default: 1.0
 
    The depth (0.0->zst) to which the soil temperature is averaged for use in the calculation of wetland methane emissions (m).
+
+
+.. nml:member:: f_satcon
+
+   :type: real
+   :default: 1.0
+
+   Factor that multiplies satcon in ancillary to get surface value.
 
 
 .. nml:member:: confrac
