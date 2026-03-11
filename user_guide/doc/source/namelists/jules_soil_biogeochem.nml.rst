@@ -124,12 +124,12 @@ If using the ECOSSE soil model, most soil parameters are read from a separate fi
       Switch to include biogenic heating of soil carbon decomposition.
 
      TRUE
-         Include the release of heat associated with soil carbon decomposition on soil temperature.
+         Include the impact of the release of heat associated with soil carbon decomposition on soil temperature.
 
      FALSE
-         Not releasing the heat associated with soil carbon decomposition on soil temperature.
+         Impact of the heat associated with soil carbon decomposition on soil temperature.
 
-     .. note:: If (:nml:mem:`l_q10` = TRUE) the a peak in the dependence of respiration on soil temperature (Equation 4.4 and Figure 4.1, Catherine Luke PhD thesis) will be included eliminating the problem of unrealistic high soil temperature. Representing the reduction in microbial respiration when the temperatures are very high.
+     .. note:: If (:nml:mem:`l_q10` = TRUE) then a peak in the dependence of respiration on soil temperature (Equation 4.4 and Figure 4.1, Catherine Luke PhD thesis) will be included. As the soil temperature increases above this peak the microbial respiration begins to reduce with any additional increase.
 
      .. seealso::
         References:
@@ -143,7 +143,7 @@ If using the ECOSSE soil model, most soil parameters are read from a separate fi
       :type: real
       :default: 3.9e7
 
-      Specifuc heat of the respiration reaction J (kgC)\ :sup:`-1`. 
+      Specific heat of the respiration reaction J (kgC)\ :sup:`-1`. Only required if (:nml:mem:`l_bgc_heat` = TRUE).
 
 .. nml:group:: Parameters for the 4-pool model (only used if :nml:mem:`soil_bgc_model` = 2)
 
