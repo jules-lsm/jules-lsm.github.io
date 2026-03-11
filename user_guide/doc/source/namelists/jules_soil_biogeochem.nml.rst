@@ -116,6 +116,34 @@ If using the ECOSSE soil model, most soil parameters are read from a separate fi
           .. note:: If layered soil C is used (:nml:mem:`l_layeredc` = TRUE) the temperature and moisture of each soil layer is used to calculation respiration from that layer.
 
 
+   .. nml:member:: l_bgc_heat
+
+      :type: logical
+      :default: F
+
+      Switch to include biogenic heating of soil carbon decomposition.
+
+     TRUE
+         Include the release of heat associated with soil carbon decomposition on soil temperature.
+
+     FALSE
+         Not releasing the heat associated with soil carbon decomposition on soil temperature.
+
+     .. note:: If (:nml:mem:`l_q10` = TRUE) the a peak in the dependence of respiration on soil temperature (Equation 4.4 and Figure 4.1, Catherine Luke PhD thesis) will be included eliminating the problem of unrealistic high soil temperature. Representing the reduction in microbial respiration when the temperatures are very high.
+
+     .. seealso::
+        References:
+
+         * Catherine Luke PhD thesis: Modelling Aspects of Land-Atmosphere Interaction: Thermal Instability in Peatland Soils and Land Parameter Estimation Through Data Assimilation. Available from `University of Exeter library <https://ore.exeter.ac.uk/articles/thesis/Modelling_Aspects_of_Land-Atmosphere_Interaction_Thermal_Instability_in_Peatland_Soils_and_Land_Parameter_Estimation_Through_Data_Assimilation/29696525>`_.
+
+         * Luke, C.M. and Cox, P.M. (2011), Soil carbon and climate change: from the Jenkinson effect to the compost-bomb instability. European Journal of Soil Science, 62: 5-12. https://doi.org/10.1111/j.1365-2389.2010.01312.x
+
+   .. nml:member:: heat_of_respiration
+
+      :type: real
+      :default: 3.9e7
+
+      Specifuc heat of the respiration reaction J (kgC)\ :sup:`-1`. 
 
 .. nml:group:: Parameters for the 4-pool model (only used if :nml:mem:`soil_bgc_model` = 2)
 
