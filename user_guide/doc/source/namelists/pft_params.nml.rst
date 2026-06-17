@@ -389,6 +389,17 @@ ease the direct links to these documents are:
 
    See HCTN30 p14 for full details.
 
+.. nml:member:: irrig_pft_io
+
+   :type: integer(npft)
+   :default: npft*0
+
+   Switch for the tile-based irrigaton scheme only. 
+   Value indicates whether the vegetated surface tile is irrigated or not, where 0 = Not irrigated and 1 = Irrigated. 
+   Can only be set to 1 if :nml:mem:`JULES_IRRIG::l_irrig_dmd` = F.
+    
+   For the fraction-based irrigation demand code please set up your namelists using the instructions in the :nml:lst:`JULES_IRRIG` namelist.
+
 .. nml:member:: gsoil_f_io
 
    :type: real(npft)
